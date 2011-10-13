@@ -1,0 +1,28 @@
++trash  "Trash"
++draft  "Drafts"
+Gmail {
+  %Inbox: "Inbox"
+  %[Gmail]/Starred: "Starred"
+  %[Gmail]/Important: "Important"
+  %[Gmail]/Sent Mail: "Sent Mail"
+  %[Gmail]/Drafts: "Drafts"
+  %[Gmail]/All Mail: "All Mail"
+  %[Gmail]/Trash: "Trash"
+
+  Clojure {
+    %Clojure: "_"
+    %Clojure/Group: "Group"
+    %Clojure/GA: "GA"
+  }
+
+  cogini {
+    %cogini: "_"
+    %cogini/BnB: "BnB"
+    %cogini/Click: "Click"
+  }
+
+  %Facebook: "Facebook"
+  %Conkeror: "Conkeror"
+  %Factor: "Factor"
+
+}
