@@ -102,10 +102,10 @@
 (defun turn-on-hl-paren ()
   (interactive)
   (highlight-parentheses-mode +1))
-;; (add-hook 'coding-hook 'turn-on-hl-paren t)
+;; (add-hook 'prog-mode-hook 'turn-on-hl-paren t)
 ;; Work-around for a bug in highlight-parentheses-mode which messes up
 ;; the overlays, making the colors off if the mode is turned on twice
-;; (e.g. by coding-hook and by desktop-mode, which keeps track of
+;; (e.g. by prog-mode-hook and by desktop-mode, which keeps track of
 ;; active minor modes from last session)
 (defadvice highlight-parentheses-mode (around work-around-hl-bug activate)
   (unless (and highlight-parentheses-mode
@@ -123,7 +123,7 @@
   (hs-minor-mode 1)
   (fold-dwim-org/minor-mode 1)
   (hideshowvis-enable))
-(add-hook 'coding-hook 'ublt/code-folding-setup)
+(add-hook 'prog-mode-hook 'ublt/code-folding-setup)
 
 (ublt/set-up 'hideshowvis
   (define-fringe-bitmap 'hs-marker [0 24 24 126 126 24 24 0])
