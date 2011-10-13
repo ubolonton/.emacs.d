@@ -341,4 +341,10 @@
 ;; 70-char column width
 (setq-default fill-column 70)
 
+;;; XXX: Make this customizable
+(defun esk-add-watchwords ()
+  (font-lock-add-keywords
+   nil '(("\\<\\(FIXME\\|TODO\\|FIX\\|XXX\\|HACK\\|REFACTOR\\|NOCOMMIT\\|NTA\\)"
+          1 font-lock-warning-face t))))
+
 (provide 'ublt-appearance)
