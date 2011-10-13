@@ -568,7 +568,7 @@ all of the sources."
     (interactive)
     (call-interactively 'erlang-compile)
     (call-interactively 'erlang-compile-display))
-  (add-hook 'erlang-mode-hook 'run-coding-hook)
+  (add-hook 'erlang-mode-hook 'esk-prog-mode-hook)
   )
 
 ;;; SLIME, Common Lisp, Clojure --------------------------------------
@@ -853,7 +853,7 @@ prompt returned to comint."
        (add-hook 'python-mode-hook 'ublt/set-python-tab)
        (add-hook 'python-mode-hook 'ublt/turn-on-ropemacs-mode)
        (add-hook 'python-mode-hook 'ublt/flymake-python-enable)
-       (add-hook 'python-mode-hook 'run-coding-hook t)
+       (add-hook 'python-mode-hook 'esk-prog-mode-hook t)
        (add-hook 'python-mode-hook 'enable-paredit-mode t)
        ;; python.el use `semantic' to provide `imenu' support, we need to override
        (add-hook 'python-mode-hook 'ublt/use-py-imenu-support t)
@@ -894,7 +894,7 @@ prompt returned to comint."
                   'ublt/paredit-space-for-open?))
   )
 
-(add-to-list 'Info-directory-list (concat esk-user-dir "/python"))
+(add-to-list 'Info-directory-list "~/.emacs.d/lib/python")
 (require 'info-look)
 (info-lookup-add-help
  :mode 'python-mode
