@@ -1,0 +1,5 @@
+#name : #+begin_src
+# --
+#+begin_src $1
+$0
+#+end_src

@@ -1,0 +1,4 @@
+#key : .
+#name : [org-time]
+# --
+`(format-time-string "<%Y-%m-%d %a>")`
