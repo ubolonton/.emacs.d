@@ -1,0 +1,42 @@
+[submodule "git-emacs"]
+	path = lib/git-emacs
+	url = http://github.com/tsgates/git-emacs.git
+[submodule "anything/anything-config"]
+	path = lib/anything/anything-config
+	url = git://repo.or.cz/anything-config.git
+[submodule "ac-slime"]
+	path = lib/ac-slime
+	url = http://github.com/purcell/ac-slime.git
+[submodule "twittering-mode"]
+	path = lib/twittering-mode
+	url = http://github.com/hayamiz/twittering-mode.git
+[submodule "textmate.el"]
+	path = lib/textmate.el
+	url = http://github.com/defunkt/textmate.el.git
+[submodule "pylookup"]
+	path = lib/pylookup
+	url = http://github.com/tsgates/pylookup.git
+[submodule "magit"]
+	path = lib/magit
+	url = http://github.com/philjackson/magit.git
+[submodule "emms"]
+	path = lib/emms
+	url = git://git.sv.gnu.org/emms.git
+[submodule "bookmark-plus"]
+	path = lib/bookmark-plus
+	url = https://github.com/emacsmirror/bookmark-plus.git
+[submodule "find-file-in-project"]
+	path = lib/find-file-in-project
+	url = https://github.com/technomancy/find-file-in-project.git
+[submodule "eproject"]
+	path = lib/eproject
+	url = ./eproject
+[submodule "epresent"]
+	path = lib/epresent
+	url = ./epresent/
+[submodule "slime"]
+	path = lib/slime
+	url = ./slime
+[submodule "swank-clojure-extra"]
+	path = lib/swank-clojure-extra
+	url = ./swank-clojure-extra/
