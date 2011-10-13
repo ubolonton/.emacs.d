@@ -21,3 +21,15 @@ session*
 tramp
 \#*
 history
+/.org-id-locations
+/.smex-items
+/abbrev_defs
+/ac-comphist.dat
+/anything-c-adaptive-history
+/cmd_frequencies
+/custom.el.before_ecb_2.40
+/ede-projects.el
+/workgroups
+/savehist
+/filesets-cache.el
+/eproject.lst
