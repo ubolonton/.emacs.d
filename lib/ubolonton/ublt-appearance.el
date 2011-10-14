@@ -236,12 +236,9 @@
 ;; Uncluttered shell prompt
 (setq eshell-prompt-function (lambda ()
                                (concat
-                                (format-time-string "%R")
-                                " [" (car (last (split-string
-                                                 (abbreviate-file-name
-                                                  (eshell/pwd)) "/")))
-                                "] " (if (= (user-uid) 0)
-                                        "# " "$ "))))
+                                "\n❄" (if (= (user-uid) 0)
+                                         "# " "  ")
+                                (eshell/pwd) "\n")))
 
 
 ;;; mode-line appearance
