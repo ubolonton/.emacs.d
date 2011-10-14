@@ -8,6 +8,10 @@
   (add-to-list 'package-archives source t))
 (package-initialize)
 
+;;; XXX: Some starter-kit packages are broken
+(defalias 'run-coding-hook 'esk-prog-mode-hook)
+(defalias 'esk-run-coding-hook 'esk-prog-mode-hook)
+
 ;;; NOTE: As my stuffs may depend on packages loaded after
 ;;; starter-kit, it does not make sense to let starter-kit load my
 ;;; stuffs. Thus my config is in ~/.emacs.d/init.el, not

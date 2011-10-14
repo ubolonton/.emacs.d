@@ -223,6 +223,7 @@
  "S-s-SPC"       'whitespace-mode
  ;; "M-x"           'anything-M-x          ; C-x C-m for the original
  "C-h C-a"       'apropos-command
+ "C-x C-b"       'ibuffer
 
  "M-<left>"      'backward-list
  "M-<right>"     'forward-list
