@@ -236,9 +236,9 @@
 ;; Uncluttered shell prompt
 (setq eshell-prompt-function (lambda ()
                                (concat
-                                "\n❄" (if (= (user-uid) 0)
-                                         "# " "  ")
-                                (eshell/pwd) "\n")))
+                                "\n╭─ " (eshell-user-name)
+                                "  " (abbreviate-file-name (eshell/pwd))
+                                "\n╰─ ")))
 
 
 ;;; mode-line appearance
