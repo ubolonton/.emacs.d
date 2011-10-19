@@ -520,6 +520,9 @@
          (flymake-errline
           ((t (:background "Firebrick4"))))
 
+         (nxml-tag-delimiter
+          ((t (:inherit esk-paren-face))))
+
          ;; My own custom faces
          (ublt-twitter-meta-face
           ((t (:height 0.9 :foreground ,bg+3))))
