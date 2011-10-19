@@ -213,7 +213,8 @@ user if not found."
 (ublt/set-up 'dired-details+
   (setq dired-details-hide-link-targets nil)
   ;; Hide unimportant files
-  (setq-default dired-omit-mode t))
+  (setq-default dired-omit-mode t
+                dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\."))
 
 ;; Directories first by default. "s d" to change locally
 (require 'dired-sort-map)
