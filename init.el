@@ -1,7 +1,9 @@
 ;;; This is the first thing to get loaded.
 
-;;; Emacs is not a text editor, and here we load its package manager!
+;;; XXX: elnode depends on this
+(add-to-list 'load-path "~/.emacs.d/lib/apel")
 
+;;; Emacs is not a text editor, and here we load its package manager!
 (require 'package)
 (dolist (source '(("marmalade" . "http://marmalade-repo.org/packages/")
                   ("elpa" . "http://tromey.com/elpa/")))
