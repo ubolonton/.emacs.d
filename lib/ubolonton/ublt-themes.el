@@ -219,11 +219,13 @@
 
          ;; SLIME REPL
          (slime-repl-input-face
-          ((t (:foreground ,green-3 :bold t))))
+          ((nil (:foreground ,fg-3))))
+         (slime-repl-output-face
+          ((t (:foreground ,green-1))))
          (slime-repl-result-face
-          ((t (:foreground ,cyan :bold t))))
+          ((t (:foreground ,cyan))))
          (slime-highlight-edits-face
-          ((t (:background ,bg+3))))
+          ((t (:background ,bg+2))))
          (slime-repl-prompt-face
           ((t (:inherit font-lock-keyword-face))))
 
@@ -350,7 +352,7 @@
 
          ;; erc
          (erc-notice-face
-          ((t (:foreground ,bg+1))))
+          ((t (:foreground ,bg+3))))
          (erc-nick-default-face
           ((t (:inherit font-lock-string-face))))
          (erc-timestamp-face
@@ -522,6 +524,8 @@
 
          (nxml-tag-delimiter
           ((t (:inherit esk-paren-face))))
+         ;; (nxml-element-local-name
+         ;;  ((t (:foreground "#009900"))))
 
          ;; My own custom faces
          (ublt-twitter-meta-face
