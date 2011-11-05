@@ -139,7 +139,7 @@
  "M-s-˙"         'textmate-shift-left           ; OS X
  "M-s-˜"         'textmate-shift-right          ; OS X
  ;; "s-/"        'comment-or-uncomment-region-or-line
- "s-\\"          'align
+ ;; "s-\\"          'align
 
  ;; Windows manipulation
  "s-1"           'delete-other-windows
@@ -163,6 +163,7 @@
  "s-<backspace>" 'ublt/toggle-alpha
  "s-<return>"    'ublt/toggle-fullscreen
  "s-/"           'find-file-in-project
+ "s-\\"          'align-regexp
 
  ;; These should be translated
  "s-["           'backward-page   "s-]" 'forward-page
@@ -395,6 +396,11 @@
     slime-mode-map
     "C-c v"   'slime-load-file
     "C-c C-s" 'slime-switch-to-output-buffer
+    ))
+(eval-after-load "slime-repl"
+  '(ublt/define-keys
+    slime-repl-mode-map
+    "M-I" 'slime-repl-delete-from-input-history
     ))
 (eval-after-load "woman"
   '(ublt/define-keys
