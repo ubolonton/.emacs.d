@@ -90,7 +90,9 @@ user if not found."
 ;; nxhtml seems to byte-compile a lot while running, and uses some
 ;; obsolete stuffs. This is to prevent warning pop-ups (especially in
 ;; mako files)
-(setq byte-compile-warnings '(not obsolete))
+(setq byte-compile-warnings '(not obsolete free-vars))
+(eval-after-load "js"
+  '(defvar javascript-mode-syntax-table js-mode-syntax-table))
 
 ;; `http://www.emacswiki.org/emacs/DeskTop#toc6'
 ;; (desktop-save-mode +1)
