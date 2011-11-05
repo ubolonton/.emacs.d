@@ -509,7 +509,8 @@ all of the sources."
   '(progn
      ;; Extra features (contrib)
      (slime-setup
-      '(slime-repl slime-fuzzy slime-highlight-edits))
+      '(slime-repl slime-fuzzy ;; slime-highlight-edits
+                   ))
      (setq slime-net-coding-system 'utf-8-unix
            slime-complete-symbol-function 'slime-fuzzy-complete-symbol
            common-lisp-hyperspec-root
@@ -552,15 +553,16 @@ all of the sources."
        (using 'defun)
        (with 'defun)
        (it 'defun)
-       (do-it 'defun))))
+       (do-it 'defun))
+     (add-hook 'slime-repl-mode-hook
+               'swank-clojure-slime-repl-modify-syntax t)))
 
 ;; swank-clojure customization
 (eval-after-load "swank-clojure"
   '(progn
      ;; Add a hook to modify repl making it more Clojure-friendly
      ;; (I haven't seen this used anywhere somehow!?!)
-     (add-hook 'slime-repl-mode-hook
-               'swank-clojure-slime-repl-modify-syntax t)
+
      ;; Don't use swank-clojure-project
      ;; (add-hook 'swank-clojure-project-hook
      ;;           (lambda ()
