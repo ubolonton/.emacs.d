@@ -496,6 +496,8 @@ all of the sources."
   (add-hook 'erlang-mode-hook 'esk-prog-mode-hook)
   )
 
+(add-to-list 'auto-mode-alist '("\\.m$" . octave-mode))
+
 ;;; SLIME, Common Lisp, Clojure --------------------------------------
 
 ;; technomancy's SLIME
