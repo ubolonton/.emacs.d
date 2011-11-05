@@ -535,6 +535,19 @@
          (ublt/mode-line-major-mode
           ((t (:bold t))))
 
+         (skype--face-my-message
+          ((t (:background ,bg))))
+         (skype--face-other-message
+          ((t (:background ,bg))))
+         (skype--face-my-time-field
+          ((t (:foreground ,bg+2 :height 0.8))))
+         (skype--face-other-time-field
+          ((t (:foreground ,bg+2 :height 0.8))))
+         (skype--face-optional-field
+          ((t (:foreground ,bg+1))))
+         (skype--face-user-field
+          ((t (:foreground ,blue :bold t))))
+
          ))
 
       ;; Color theme seems to mix this up, restore it

@@ -85,6 +85,11 @@ user if not found."
 (ublt/in '(gnu/linux)
   (setq find-ls-option '("-print0 | xargs -0 ls -ld" . "-ld")))
 
+(ublt/add-path "emacs-skype")
+(require 'skype)
+(skype--init)
+(setq skype--my-user-handle "ubolonton")
+
 (setq stack-trace-on-error t)
 
 ;; nxhtml seems to byte-compile a lot while running, and uses some

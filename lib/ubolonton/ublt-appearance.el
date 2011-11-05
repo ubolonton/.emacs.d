@@ -55,7 +55,8 @@
                 lyric-mode-hook
                 Man-mode-hook woman-mode-hook
                 twittering-mode-hook
-                emms-playlist-mode-hook))
+                emms-playlist-mode-hook
+                skype--chat-mode-hook))
   (add-hook hook 'turn-on-variable-pitch-mode))
 
 ;;; Ubolonton's theme
