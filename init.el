@@ -448,7 +448,8 @@ all of the sources."
 
 (ublt/set-up 'yasnippet
   (setq yas/root-directory  "~/.emacs.d/data/snippets"
-        yas/prompt-functions '(yas/dropdown-prompt yas/ido-prompt yas/no-prompt)
+        yas/prompt-functions '(yas/dropdown-prompt ;; yas/ido-prompt yas/no-prompt
+                                                   )
         yas/trigger-key nil)
   (add-to-list 'hippie-expand-try-functions-list 'yas/hippie-try-expand)
   (yas/load-directory yas/root-directory)
