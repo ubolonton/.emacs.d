@@ -18,7 +18,7 @@
 	url = http://github.com/tsgates/pylookup.git
 [submodule "magit"]
 	path = lib/magit
-	url = http://github.com/philjackson/magit.git
+	url = http://github.com/magit/magit.git
 [submodule "emms"]
 	path = lib/emms
 	url = git://git.sv.gnu.org/emms.git
@@ -40,9 +40,6 @@
 [submodule "swank-clojure-extra"]
 	path = lib/swank-clojure-extra
 	url = ./swank-clojure-extra/
-[submodule "emacs-skype"]
-	path = lib/emacs-skype
-	url = ./emacs-skype/
 [submodule "lib/emacs-skype"]
 	path = lib/emacs-skype
 	url = https://github.com/kiwanami/emacs-skype.git
