@@ -282,8 +282,16 @@
           ((t (:inherit whitespace-space))))
 
          ;; Parentheses highlighting
-         (show-paren-mismatch ((t (:inherit font-lock-warning))))
-         (show-paren-match ((t (:foreground ,fg+1 :bold t))))
+         (show-paren-mismatch
+          ((t (:inherit font-lock-warning))))
+         (show-paren-match
+          ((t (:foreground ,fg+1 :bold t))))
+         (paren-face-mismatch
+          ((t (:inherit show-paren-mismatch))))
+         (paren-face-match
+          ((t (:inherit show-paren-match))))
+         (paren-face-no-match
+          ((t (:background ,yellow))))
          ;; Parentheses dimming in Lisp modes
          (esk-paren-face
           ((t (:foreground ,bg+3))))
@@ -400,7 +408,6 @@
           ((t (:inherit font-lock-type-face))))
          (anything-match
           ((t (:foreground ,fg+1 :background ,bg+2 :bold t))))
-
          (anything-overlay-line-face
           ((t (:background ,bg+2))))
          (anything-ff-directory         ; anything-dir-priv
@@ -539,6 +546,7 @@
          (ublt/mode-line-major-mode
           ((t (:bold t))))
 
+         ;; Skype
          (skype--face-my-message
           ((t (:background ,bg))))
          (skype--face-other-message
