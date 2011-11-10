@@ -76,7 +76,7 @@ user if not found."
 ;;; management stuffs
 (ublt/add-path "eproject")
 (setq eproject-completing-read-function 'eproject--ido-completing-read
-      eproject-todo-expressions '("TODO" "XXX" "FIX" "FIXME" "HACK"))
+      eproject-todo-expressions '("TODO" "XXX" "FIX" "FIXME" "HACK" "NTA"))
 (require 'eproject-ido-imenu)
 
 ;;; Misc customization
@@ -87,7 +87,8 @@ user if not found."
 
 (ublt/add-path "emacs-skype")
 (require 'skype)
-(skype--init)
+;;; XXX: Disable for now, since Skype is f**king unstable
+;; (skype--init)
 (setq skype--my-user-handle "ubolonton")
 
 (setq stack-trace-on-error t)
