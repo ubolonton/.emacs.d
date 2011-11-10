@@ -86,8 +86,8 @@ user if not found."
   (setq find-ls-option '("-print0 | xargs -0 ls -ld" . "-ld")))
 
 (ublt/add-path "emacs-skype")
-(require 'skype)
 ;;; XXX: Disable for now, since Skype is f**king unstable
+;; (require 'skype)
 ;; (skype--init)
 (setq skype--my-user-handle "ubolonton")
 
@@ -196,6 +196,19 @@ user if not found."
 ;;; TODO: Set this up
 (ublt/add-path "find-file-in-project")
 (require 'find-file-in-project)
+
+;;; Paredit ----------------------------------------------------------
+(defun ublt/enable-paredit-mode ()
+  "Enable paredit-mode without checking paren balance."
+  (let ((current-prefix-arg t))
+    (paredit-mode +1)))
+(defun ublt/paredit-space-for-open? (endp delimiter)
+  "Don't always insert space."
+  (not (and (member major-mode '(python-mode javascript-mode js-mode))
+            (member delimiter '(?\( ?\[ ?\")))))
+(eval-after-load "paredit"
+  '(add-to-list 'paredit-space-for-delimiter-predicates
+                'ublt/paredit-space-for-open?))
 
 ;;; Dired ------------------------------------------------------------
 
@@ -525,8 +538,8 @@ all of the sources."
            common-lisp-hyperspec-root
            "file:///Users/ubolonton/Programming/Tools/HyperSpec/")
      ;; Use parentheses editting mode paredit
-     (add-hook 'slime-mode-hook 'enable-paredit-mode t)
-     (add-hook 'slime-repl-mode-hook 'enable-paredit-mode t)
+     (add-hook 'slime-mode-hook 'ublt/enable-paredit-mode t)
+     (add-hook 'slime-repl-mode-hook 'ublt/enable-paredit-mode t)
      ;; Steel Bank CL
      (add-to-list 'slime-lisp-implementations
                   '(sbcl ("sbcl")))
@@ -554,7 +567,7 @@ all of the sources."
 ;; clojure-mode customization
 (eval-after-load "clojure-mode"
   '(progn
-     (add-hook 'clojure-mode-hook 'enable-paredit-mode t)
+     (add-hook 'clojure-mode-hook 'ublt/enable-paredit-mode t)
      (define-clojure-indent
        (describe 'defun)
        (testing 'defun)
@@ -588,7 +601,7 @@ all of the sources."
 ;;   (add-to-list 'swank-clojure-classpath (concat ublt/clojurescript-home path)))
 
 ;;;; ielm settings ---------------
-(add-hook 'ielm-mode-hook 'enable-paredit-mode)
+(add-hook 'ielm-mode-hook 'ublt/enable-paredit-mode)
 
 ;; ac-slime
 (ublt/add-path "ac-slime")
@@ -792,7 +805,7 @@ prompt returned to comint."
        (add-hook 'python-mode-hook 'ublt/turn-on-ropemacs-mode)
        (add-hook 'python-mode-hook 'ublt/flymake-python-enable)
        (add-hook 'python-mode-hook 'esk-prog-mode-hook t)
-       (add-hook 'python-mode-hook 'enable-paredit-mode t)
+       (add-hook 'python-mode-hook 'ublt/enable-paredit-mode t)
        ;; python.el use `semantic' to provide `imenu' support, we need to override
        (add-hook 'python-mode-hook 'ublt/use-py-imenu-support t)
        (setq py-python-command-args (list "-colors" "Linux")
@@ -824,12 +837,6 @@ prompt returned to comint."
        (autoload 'pylookup-update "pylookup"
          "Run pylookup-update and create the database at `pylookup-db-file'." t)
        ))
-  (defun ublt/paredit-space-for-open? (endp delimiter)
-    (not (and (member major-mode '(python-mode javascript-mode js-mode))
-              (member delimiter '(?\( ?\[ ?\")))))
-  (eval-after-load "paredit"
-    '(add-to-list 'paredit-space-for-delimiter-predicates
-                  'ublt/paredit-space-for-open?))
   )
 
 ;;; XXX HACK: This is a bug since 23.1!!!
