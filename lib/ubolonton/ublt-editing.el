@@ -34,56 +34,33 @@ arg lines down."
 arg lines up."
   (interactive "*p")
   (ublt/move-text-internal (- arg)))
-
-;; ;;; `http://www.emacswiki.org/emacs/MoveLine'
-;; (defun ublt/move-line (n)
-;;   "Move the current line up or down by N lines."
-;;   (interactive "p")
-;;   (let (col (current-column))
-;;     (beginning-of-line) (setq start (point))
-;;     (end-of-line) (forward-char) (setq end (point))
-;;     (let ((line-text (delete-and-extract-region start end)))
-;;       (forward-line n)
-;;       (insert line-text)
-;;       ;; restore point to original column in moved line
-;;       (forward-line -1)
-;;       (forward-char col))))
-;; (defun ublt/move-line-up (n)
-;;   "Move the current line up by N lines."
-;;   (interactive "p")
-;;   (ublt/move-line (if (null n) -1 (- n))))
-;; (defun ublt/move-line-down (n)
-;;   "Move the current line down by N lines."
-;;   (interactive "p")
-;;   (ublt/move-line (if (null n) 1 n)))
 
 ;;; Cycling and extending selection
 ;; TODO: Make `defun' selection work with non-Lisp
 
-(require 'thing-opt)
-(require 'thing-cmds)
-;; Use `mark-enclosing-sexp' for Lisp languages
-(defun ublt/cycle-prose-region ()
-  "Cycle selection for prose (non-programming text)."
-  (interactive)
-  (let ((thing-types '("word" "sentence" "paragraph" "page")))
-    (call-interactively 'cycle-thing-region)))
-(defun ublt/cycle-code-region ()
-  "Cycle selection for code of line-based languages."
-  (interactive)
-  (let ((thing-types '("symbol" "string" "line" "defun")))
-    (call-interactively 'cycle-thing-region)))
+(ublt/set-up 'thing-cmds
+  ;; Use `mark-enclosing-sexp' for Lisp languages
+  (defun ublt/cycle-prose-region ()
+    "Cycle selection for prose (non-programming text)."
+    (interactive)
+    (let ((thing-types '("word" "sentence" "paragraph" "page")))
+      (call-interactively 'cycle-thing-region)))
+  (defun ublt/cycle-code-region ()
+    "Cycle selection for code of line-based languages."
+    (interactive)
+    (let ((thing-types '("symbol" "string" "line" "defun")))
+      (call-interactively 'cycle-thing-region)))
 
-(defun ublt/restore-thing-cmds-point ()
-  "Restore caret position after upon quiting cycling
+  (defun ublt/restore-thing-cmds-point ()
+    "Restore caret position after upon quiting cycling
 selection. Works on `mark-enclosing-sexp'."
-  (cond
-   ((and (member last-command '(ublt/cycle-code-region ublt/cycle-prose-region))
-         cycle-thing-region-point)
-    (goto-char cycle-thing-region-point))
-   ((member last-command '(mark-enclosing-sexp))
-    (goto-char (car mark-ring)))))
-(add-hook 'deactivate-mark-hook 'ublt/restore-thing-cmds-point)
+    (cond
+     ((and (member last-command '(ublt/cycle-code-region ublt/cycle-prose-region))
+           cycle-thing-region-point)
+      (goto-char cycle-thing-region-point))
+     ((member last-command '(mark-enclosing-sexp))
+      (goto-char (car mark-ring)))))
+  (add-hook 'deactivate-mark-hook 'ublt/restore-thing-cmds-point))
 
 ;;; Toggle CUA mode, starting CUA rect if turning on
 (defun ublt/toggle-cua-rect (&optional reopen)
@@ -126,7 +103,7 @@ selection. Works on `mark-enclosing-sexp'."
 ;;; Misc
 
 ;;; Obfuscate URL at point
-(require 'obfusurl)
+(ublt/set-up 'obfusurl)
 
 ;; Kill region by DEL/delete (Emacs 24)
 (setq delete-active-region 'kill)
@@ -148,5 +125,7 @@ selection. Works on `mark-enclosing-sexp'."
 ;; Automatically update files whose contents were changed
 (global-auto-revert-mode 1)
 ;; (setq auto-revert-check-vc-info t)
+
+(setq skeleton-pair t)
 
 (provide 'ublt-editing)
