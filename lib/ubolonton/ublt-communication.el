@@ -4,6 +4,10 @@
 ;;; Basic settings
 (require 'twittering-mode)
 (twittering-icon-mode +1)
+
+(defgroup ubolonton nil ""
+  :group 'personal)
+
 (defface ublt-twitter-meta-face
    '((t (:inherit font-lock-comment-face)))
    "Twitter face for important text")

@@ -306,11 +306,13 @@
   '(progn
      (ublt/define-keys
       ac-complete-mode-map
-      "M-n" 'ac-next
-      "M-p" 'ac-previous
+      "M-n"   'ac-next
+      "M-p"   'ac-previous
       "M-TAB" 'ac-complete
-      "TAB" 'ac-expand
-      "RET" 'ac-expand)
+      "C-SPC" 'ac-complete
+      "SPC" 'ac-complete
+      "TAB"   'ac-expand
+      "RET"   'ac-expand)
      (ac-set-trigger-key "M-TAB")))
 
 (eval-after-load "dired"
