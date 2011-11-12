@@ -233,6 +233,8 @@
  "<XF86Forward>" 'emms-next
  "<XF86Back>"    'emms-previous
  "<XF86Reload>"  'emms-pause
+
+ "M-TAB"         nil                    ; Don't use completion-at-point
  )
 
 ;;; Mode-specific key maps -------------------------------------------
@@ -268,21 +270,26 @@
       "M-n"     'flymake-goto-next-error
       "M-p"     'flymake-goto-prev-error
       "C-c h"   'pylookup-lookup
-      "M-TAB"   'anything-ipython-complete
+      "M-TAB"   'ac-trigger-key-command
+      ;; "M-TAB"   'anything-ipython-complete
       "C-c C-c" 'py-execute-def-or-class ; was py-execute-buffer
       "C-c C-r" 'py-execute-region       ; was py-shift-region-right
       "C-c C-l" 'py-execute-buffer       ; was py-shift-region-left
       "C-c v"   'py-execute-buffer
       "C-c C-s" 'py-shell                ; was py-execute-string
+      "'"       'skeleton-pair-insert-maybe
       )
      (ublt/define-keys
       py-shell-map
       "C-c h" 'pylookup-lookup
-      "M-TAB" 'anything-ipython-complete)
+      "M-TAB" 'ac-trigger-key-command
+      )
      ))
 (eval-after-load "paredit"
   '(ublt/define-keys
     paredit-mode-map
+    "{"             'paredit-open-curly
+    "}"             'paredit-close-curly
     "M-["           'paredit-wrap-square
     "M-{"           'paredit-wrap-curly
     "M-r"           nil                           ; was paredit-raise-sexp
@@ -295,6 +302,17 @@
     "M-<left>"      'paredit-backward
     "M-<right>"     'paredit-forward
     ))
+(eval-after-load "auto-complete"
+  '(progn
+     (ublt/define-keys
+      ac-complete-mode-map
+      "M-n" 'ac-next
+      "M-p" 'ac-previous
+      "M-TAB" 'ac-complete
+      "TAB" 'ac-expand
+      "RET" 'ac-expand)
+     (ac-set-trigger-key "M-TAB")))
+
 (eval-after-load "dired"
   '(ublt/define-keys
     dired-mode-map
