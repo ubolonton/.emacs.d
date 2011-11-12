@@ -203,7 +203,7 @@ user if not found."
   (let ((current-prefix-arg t))
     (paredit-mode +1)))
 (defun ublt/paredit-space-for-open? (endp delimiter)
-  "Don't always insert space."
+  "Don't insert space for ( [ \" in these modes."
   (not (and (member major-mode '(python-mode javascript-mode js-mode))
             (member delimiter '(?\( ?\[ ?\")))))
 (eval-after-load "paredit"
@@ -538,8 +538,8 @@ all of the sources."
            common-lisp-hyperspec-root
            "file:///Users/ubolonton/Programming/Tools/HyperSpec/")
      ;; Use parentheses editting mode paredit
-     (add-hook 'slime-mode-hook 'ublt/enable-paredit-mode t)
-     (add-hook 'slime-repl-mode-hook 'ublt/enable-paredit-mode t)
+     (add-hook 'slime-mode-hook 'enable-paredit-mode t)
+     (add-hook 'slime-repl-mode-hook 'enable-paredit-mode t)
      ;; Steel Bank CL
      (add-to-list 'slime-lisp-implementations
                   '(sbcl ("sbcl")))
@@ -567,7 +567,7 @@ all of the sources."
 ;; clojure-mode customization
 (eval-after-load "clojure-mode"
   '(progn
-     (add-hook 'clojure-mode-hook 'ublt/enable-paredit-mode t)
+     (add-hook 'clojure-mode-hook 'enable-paredit-mode t)
      (define-clojure-indent
        (describe 'defun)
        (testing 'defun)
@@ -601,7 +601,7 @@ all of the sources."
 ;;   (add-to-list 'swank-clojure-classpath (concat ublt/clojurescript-home path)))
 
 ;;;; ielm settings ---------------
-(add-hook 'ielm-mode-hook 'ublt/enable-paredit-mode)
+(add-hook 'ielm-mode-hook 'enable-paredit-mode)
 
 ;; ac-slime
 (ublt/add-path "ac-slime")
