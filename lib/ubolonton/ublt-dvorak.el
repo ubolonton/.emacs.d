@@ -310,9 +310,8 @@
       "M-p"   'ac-previous
       "M-TAB" 'ac-complete
       "C-SPC" 'ac-complete
-      "SPC" 'ac-complete
-      "TAB"   'ac-expand
-      "RET"   'ac-expand)
+      "SPC"   'ac-complete
+      "TAB"   'ac-expand)
      (ac-set-trigger-key "M-TAB")))
 
 (eval-after-load "dired"
@@ -416,11 +415,13 @@
     slime-mode-map
     "C-c v"   'slime-load-file
     "C-c C-s" 'slime-switch-to-output-buffer
+    "M-TAB"   'ac-trigger-key-command
     ))
 (eval-after-load "slime-repl"
   '(ublt/define-keys
     slime-repl-mode-map
     "M-I" 'slime-repl-delete-from-input-history
+    "M-TAB" 'ac-trigger-key-command
     ))
 (eval-after-load "woman"
   '(ublt/define-keys
