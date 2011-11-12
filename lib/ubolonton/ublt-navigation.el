@@ -1,3 +1,4 @@
+(eval-when-compile (require 'cl))
 
 ;;; Better C-a
 (defun ublt/back-to-indentation-or-line-beginning ()
@@ -44,18 +45,11 @@ of line."
 (defun ublt/switch-to-last-buffer ()
   (interactive)
   (switch-to-buffer (other-buffer)))
-;; (defun ublt/switch-to-last-buffer ()
-;;   (require 'anything-config)
-;;   (interactive)
-;;   (let* ((bs (anything-c-buffer-list))
-;;          (bs (anything-c-skip-boring-buffers bs)))
-;;     (switch-to-buffer (car bs))))
 
 ;;; Make ^L stay at the same place while scrolling by page
 (defadvice forward-page (after advice-recenter-top activate)
   (recenter 1))
 
-(require 'cl)
 (defun ublt/browse-url-at-point ()
   (interactive)
   (case major-mode
