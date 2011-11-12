@@ -204,7 +204,7 @@ user if not found."
     (paredit-mode +1)))
 (defun ublt/paredit-space-for-open? (endp delimiter)
   "Don't insert space for ( [ \" in these modes."
-  (not (and (member major-mode '(python-mode javascript-mode js-mode))
+  (not (and (member major-mode '(comint-mode python-mode javascript-mode js-mode))
             (member delimiter '(?\( ?\[ ?\")))))
 (eval-after-load "paredit"
   '(add-to-list 'paredit-space-for-delimiter-predicates
@@ -456,6 +456,9 @@ all of the sources."
 (require 'auto-complete)
 (require 'auto-complete-config)
 (global-auto-complete-mode +1)
+(ac-config-default)
+(add-hook 'eshell-mode-hook 'ac-eshell-mode-setup)
+(setq-default ac-auto-start 3)
 
 ;;; Yasnippet --------------------------------------------------------
 
@@ -657,38 +660,114 @@ all of the sources."
 ;; initialization is very slow.
 ;; Try to install stuffs from official pages instead of from
 ;; apt (use easy_install)
-
-(ublt/in '(darwin gnu/linux)
-  ;; `http://hide1713.wordpress.com/2009/01/30/setup-perfect-python-environment-in-emacs/'
-  (ublt/add-path "python")
-  (autoload 'python-mode "python-mode" "Python editing mode." t)
+(ublt/in '(gnu/linux darwin)
+  (setq-default py-shell-name          "ipython"
+                py-python-command      py-shell-name
+                py-jpython-command     py-shell-name
+                py-jython-command      py-shell-name
+                py-default-interpreter py-shell-name
+                python-command         py-shell-name
+                py-python-command-args (list "-colors" "Linux")
+                py-shell-switch-buffers-on-execute nil)
+  (require 'ipython)
+  (require 'python-mode)
+  (require 'pymacs)
+  ;; Bug in `python-mode'. They use defalias which is intended for
+  ;; functions, not variables
   (add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
   (add-to-list 'interpreter-mode-alist'("python" . python-mode))
-  ;; FIXME: How can we override the built-in mode? I have to load it
-  ;; up by hand currently!?!
-  ;; (require 'python-mode)
-  (load "~/.emacs.d/lib/python/python-mode")
-  ;; pymacs
-  (require 'pymacs)
-  ;; (autoload 'pymacs-apply "pymacs")
-  ;; (autoload 'pymacs-call "pymacs")
-  ;; (autoload 'pymacs-eval "pymacs" nil t)
-  ;; (autoload 'pymacs-exec "pymacs" nil t)
-  ;; (autoload 'pymacs-load "pymacs" nil t)
-  ;; (eval-after-load "pymacs"
-  ;;  '(add-to-list 'pymacs-load-path "/usr/local/lib/python2.6/dist-packages/"))
 
-  ;; FIXME: this does not work during initialization, but works if
-  ;; eval'ed afterward, or if we increase timeout. Something's wrong
-  ;; here though since it signals error almost immediately upon
-  ;; calling, not after 30 seconds.
-  (let ((pymacs-timeout-at-start 300))
-    (pymacs-load "ropemacs" "rope-"))
-  ;; (add-hook 'after-init-hook (lambda ()
-  ;;                              (pymacs-load "ropemacs" "rope-"))
-  ;;           t)
+  (pymacs-load "ropemacs" "rope-")
   (setq ropemacs-enable-autoimport t
         ropemacs-guess-project t)
+  (ac-ropemacs-setup)
+  (setq )
+
+  (defun flymake-pyflakes-init ()
+    (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                       'flymake-create-temp-inplace))
+           (local-file (file-relative-name
+                        temp-file
+                        (file-name-directory buffer-file-name))))
+      (list "pyflakes" (list local-file))))
+  ;; (add-hook 'find-file-hook 'flymake-find-file-hook)
+  ;; From `starter-kit-ruby.el'
+  (defun ublt/flymake-python-enable ()
+    (when (and buffer-file-name
+               ;; flymake and mumamo are at odds
+               (string-match "\\.py$" buffer-file-name)
+               (file-writable-p
+                (file-name-directory buffer-file-name))
+               (file-writable-p buffer-file-name)
+               (if (fboundp 'tramp-list-remote-buffers)
+                   (not (subsetp
+                         (list (current-buffer))
+                         (tramp-list-remote-buffers)))
+                 t))
+      (flymake-mode t)))
+  (defun ublt/comint-preoutput-clear-^A^B (string)
+    "Clears the ^A^B strings that somehow get into ipython input
+prompt returned to comint."
+    (replace-regexp-in-string "[]" "" string))
+  (defun ublt/use-py-imenu-support ()
+    (setq imenu-create-index-function #'py-imenu-create-index-function))
+  (defun ublt/turn-on-ropemacs-mode ()
+    (when (and buffer-file-name
+               (string-match "\\.py$" buffer-file-name))
+      (ropemacs-mode +1)))
+  (defun ublt/set-python-tab ()
+    (setq tab-width 4))
+  (defadvice py-shell (around set-path activate)
+    (let ((env (getenv "PYTHONPATH"))
+          (project-root (eproject-root)))
+      (when project-root
+        (setenv "PYTHONPATH" (format "%s:%s" project-root env)))
+      ad-do-it
+      (setenv "PYTHONPATH" env)))
+
+  (require 'flymake)
+  (add-to-list 'flymake-allowed-file-name-masks
+               '("\\.py\\'" flymake-pyflakes-init))
+  (remove-hook 'python-mode-hook 'ropemacs-mode)
+  (add-hook 'python-mode-hook 'ublt/set-python-tab)
+  (add-hook 'python-mode-hook 'ublt/turn-on-ropemacs-mode)
+  (add-hook 'python-mode-hook 'ublt/flymake-python-enable)
+  (add-hook 'python-mode-hook 'esk-prog-mode-hook t)
+  (add-hook 'python-mode-hook 'ublt/enable-paredit-mode t)
+  ;; python.el use `semantic' to provide `imenu' support, we need to override
+  (add-hook 'python-mode-hook 'ublt/use-py-imenu-support t)
+  (add-hook 'comint-preoutput-filter-functions
+            'ublt/comint-preoutput-clear-^A^B)
+
+  ;; To use this, import things into ipython
+  ;; (require 'anything-ipython)
+  ;; ;; Additionally show compeletion in-place
+  ;; (when (require 'anything-show-completion nil t)
+  ;;   (use-anything-show-completion 'anything-ipython-complete
+  ;;                                 '(length initial-pattern)))
+  ;; ============================================================
+  ;; `http://taesoo.org/Opensource/Pylookup'
+  ;; add pylookup to your loadpath, ex) "~/.lisp/addons/pylookup"
+  (setq pylookup-dir "~/.emacs.d/lib/pylookup")
+  (add-to-list 'load-path pylookup-dir)
+  ;; load pylookup when compile time
+  (eval-when-compile (require 'pylookup))
+
+  ;; ;; set executable file and db file
+  (setq pylookup-program (concat pylookup-dir "/pylookup.py"))
+  (setq pylookup-db-file (concat pylookup-dir "/pylookup.db"))
+
+  ;; ;; to speedup, just load it on demand
+  (autoload 'pylookup-lookup "pylookup"
+    "Lookup SEARCH-TERM in the Python HTML indexes." t)
+  (autoload 'pylookup-update "pylookup"
+    "Run pylookup-update and create the database at `pylookup-db-file'." t)
+
+  )
+
+
+
+(ublt/in '()
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Auto-completion
 ;;;  Integrates:
@@ -761,83 +840,6 @@ all of the sources."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; End Auto Completion
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; Auto Syntax Error Hightlight
-  (defun flymake-pyflakes-init ()
-    (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                       'flymake-create-temp-inplace))
-           (local-file (file-relative-name
-                        temp-file
-                        (file-name-directory buffer-file-name))))
-      (list "pyflakes" (list local-file))))
-  ;; (add-hook 'find-file-hook 'flymake-find-file-hook)
-  ;; From `starter-kit-ruby.el'
-  (defun ublt/flymake-python-enable ()
-    (when (and buffer-file-name
-               ;; flymake and mumamo are at odds
-               (string-match "\\.py$" buffer-file-name)
-               (file-writable-p
-                (file-name-directory buffer-file-name))
-               (file-writable-p buffer-file-name)
-               (if (fboundp 'tramp-list-remote-buffers)
-                   (not (subsetp
-                         (list (current-buffer))
-                         (tramp-list-remote-buffers)))
-                 t))
-      (flymake-mode t)))
-  (defun ublt/comint-preoutput-clear-^A^B (string)
-    "Clears the ^A^B strings that somehow get into ipython input
-prompt returned to comint."
-    (replace-regexp-in-string "[]" "" string))
-  (defun ublt/use-py-imenu-support ()
-    (setq imenu-create-index-function #'py-imenu-create-index-function))
-  (defun ublt/turn-on-ropemacs-mode ()
-    (when (and buffer-file-name
-               (string-match "\\.py$" buffer-file-name))
-      (ropemacs-mode +1)))
-  (defun ublt/set-python-tab ()
-    (setq tab-width 4))
-  (eval-after-load 'python-mode
-    '(progn
-       (require 'flymake)
-       (add-to-list 'flymake-allowed-file-name-masks
-                    '("\\.py\\'" flymake-pyflakes-init))
-       (remove-hook 'python-mode-hook 'ropemacs-mode)
-       (add-hook 'python-mode-hook 'ublt/set-python-tab)
-       (add-hook 'python-mode-hook 'ublt/turn-on-ropemacs-mode)
-       (add-hook 'python-mode-hook 'ublt/flymake-python-enable)
-       (add-hook 'python-mode-hook 'esk-prog-mode-hook t)
-       (add-hook 'python-mode-hook 'ublt/enable-paredit-mode t)
-       ;; python.el use `semantic' to provide `imenu' support, we need to override
-       (add-hook 'python-mode-hook 'ublt/use-py-imenu-support t)
-       (setq py-python-command-args (list "-colors" "Linux")
-             py-shell-switch-buffers-on-execute nil)
-       (add-hook 'comint-preoutput-filter-functions
-                 'ublt/comint-preoutput-clear-^A^B)
-       (require 'ipython)
-       ;; To use this, import things into ipython
-       ;; (require 'anything-ipython)
-       ;; ;; Additionally show compeletion in-place
-       ;; (when (require 'anything-show-completion nil t)
-       ;;   (use-anything-show-completion 'anything-ipython-complete
-       ;;                                 '(length initial-pattern)))
-       ;; ============================================================
-       ;; `http://taesoo.org/Opensource/Pylookup'
-       ;; add pylookup to your loadpath, ex) "~/.lisp/addons/pylookup"
-       (setq pylookup-dir "~/.emacs.d/lib/pylookup")
-       (add-to-list 'load-path pylookup-dir)
-       ;; load pylookup when compile time
-       (eval-when-compile (require 'pylookup))
-
-       ;; set executable file and db file
-       (setq pylookup-program (concat pylookup-dir "/pylookup.py"))
-       (setq pylookup-db-file (concat pylookup-dir "/pylookup.db"))
-
-       ;; to speedup, just load it on demand
-       (autoload 'pylookup-lookup "pylookup"
-         "Lookup SEARCH-TERM in the Python HTML indexes." t)
-       (autoload 'pylookup-update "pylookup"
-         "Run pylookup-update and create the database at `pylookup-db-file'." t)
-       ))
   )
 
 ;;; XXX HACK: This is a bug since 23.1!!!
