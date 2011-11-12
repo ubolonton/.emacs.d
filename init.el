@@ -479,6 +479,7 @@ all of the sources."
 ;; Might be useful for f*cks like PHP, JSP, ASP.NET, mako, rhtml, django
 (ublt/add-path "nxhtml/")
 (load "autostart.el")
+(add-hook 'nxhtml-mode-hook (lambda () (rng-validate-mode -1)))
 
 ;; Javascript (it seems js-mode in Emacs is newer than espresso)
 ;; MozRepl integration
