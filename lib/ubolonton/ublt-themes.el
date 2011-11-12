@@ -229,6 +229,18 @@
          (slime-repl-prompt-face
           ((t (:inherit font-lock-keyword-face))))
 
+         ;; Auto-complete
+         (ac-completion-face
+          ((t (:inherit hl-line :foreground ,fg-2))))
+         (ac-candidate-face
+          ((t (:foreground ,fg :background ,bg+2 :slant normal :weight normal))))
+         (ac-selection-face
+          ((t (:foreground ,fg+1 :background ,bg+3 :slant normal :bold t))))
+         (ac-slime-menu-face
+          ((t (:inherit ac-candidate-face))))
+         (ac-slime-selection-face
+          ((t (:inherit ac-selection-face))))
+
          ;; ido mini-buffer
          (ido-first-match
           ((t (:foreground ,gold))))
