@@ -235,7 +235,7 @@ converted to a form that `eproject--ido-symbols' can use."
 (define-project-type warp (generic)
   (or (look-for "warpconfig.py") (look-for "warpconfig.py.sample"))
   :symbol-separators ("." ".")
-  :relevant-files (".*\.py$" ".*\.mak$" ".*\.css$")
+  :relevant-files (".*\.py$" ".*\.mak$" ".*\.css$" ".*\html$")
   :irrelevant-files (".*__init__\.py"))
 (define-project-type clojure (generic)
   (look-for "project.clj")
