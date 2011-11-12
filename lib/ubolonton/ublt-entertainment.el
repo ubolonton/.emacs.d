@@ -51,6 +51,10 @@ use Emacs 21?!?!"
                          emms-player-mpg321-remote
                          emms-player-mplayer-playlist
                          ))
+
+(defgroup ubolonton nil ""
+  :group 'personal)
+
 ;;; TODO: Windows?
 (defface ublt/emms-mode-line-face
    '((t (:font "DejaVu Sans Condensed")))
@@ -77,14 +81,14 @@ use Emacs 21?!?!"
 (add-hook 'emms-player-started-hook 'emms-show)
 ;; TODO: Remove this?
 ;; Notifications
-(defadvice emms-start (after notify)
-  (run-at-time "0 sec" nil 'ublt/emms-notify))
-(defun ublt/emms-notify ()
-  (let ((todochiku-timeout 2))
-    (todochiku-message "EMMS" (emms-track-description
-                               (emms-playlist-current-selected-track))
-                       (todochiku-icon 'music))))
-(ad-activate 'emms-start)
+(ublt/set-up 'todochiku
+  (defun ublt/emms-notify ()
+    (let ((todochiku-timeout 2))
+      (todochiku-message "EMMS" (emms-track-description
+                                 (emms-playlist-current-selected-track))
+                         (todochiku-icon 'music))))
+  (defadvice emms-start (after notify activate)
+    (run-at-time "0 sec" nil 'ublt/emms-notify)))
 
 ;; Don't confirm saving tag info
 (defadvice emms-tag-editor-submit (around no-question activate)
