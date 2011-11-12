@@ -82,6 +82,12 @@
 (require 'imenu)
 (require 'eproject-extras)
 
+(eval-when-compile
+  (require 'cl))
+
+(defgroup ubolonton nil ""
+  :group 'personal)
+
 (defface eproject-ido-imenu-file-path
   `((t (:inherit font-lock-builtin-face)))
   "Face used to display the file paths associated with symbols in
@@ -248,8 +254,7 @@ converted to a form that `eproject--ido-symbols' can use."
   :relevant-files (".*\.php$")
   :irrelevant-files ("vendors" "extensions" "tests"))
 
-(provide 'eproject-ido-imenu)
-
+;;; XXX: ???
 (defun eproject-find--combine-regexps (regexp-list)
   (format "\(%s\)"
           (reduce (lambda (a b) (concat a "\|" b))
@@ -260,3 +265,5 @@ Argument REGEXP-LIST is a list of regexps to combine."
   (format "\\(?:%s\\)"
           (reduce (lambda (a b) (concat a "\\|" b))
                   (mapcar (lambda (f) (format "\\(?:%s\\)" f)) regexp-list))))
+
+(provide 'eproject-ido-imenu)
