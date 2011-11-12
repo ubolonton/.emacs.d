@@ -814,11 +814,11 @@ prompt returned to comint."
                  'ublt/comint-preoutput-clear-^A^B)
        (require 'ipython)
        ;; To use this, import things into ipython
-       (require 'anything-ipython)
-       ;; Additionally show compeletion in-place
-       (when (require 'anything-show-completion nil t)
-         (use-anything-show-completion 'anything-ipython-complete
-                                       '(length initial-pattern)))
+       ;; (require 'anything-ipython)
+       ;; ;; Additionally show compeletion in-place
+       ;; (when (require 'anything-show-completion nil t)
+       ;;   (use-anything-show-completion 'anything-ipython-complete
+       ;;                                 '(length initial-pattern)))
        ;; ============================================================
        ;; `http://taesoo.org/Opensource/Pylookup'
        ;; add pylookup to your loadpath, ex) "~/.lisp/addons/pylookup"
