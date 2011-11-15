@@ -20,43 +20,17 @@
 ;;; ~/.emacs.d/ubolonton/init.el. And don't ever choose "elpa" as your
 ;;; user name =))
 
-;;; Some convenient functions
-
-;; To help separating OS-specific stuffs
-(defmacro ublt/in (systems &rest body)
-  "Run BODY if `system-type' is in the list of SYSTEMS."
-  (declare (indent 1))
-  `(when (member system-type ,systems)
-     ,@body))
-
 (defun ublt/add-path (path)
+  "Add to load-path a path relative to ~/.emacs.d/lib/"
   (add-to-list 'load-path (concat "~/.emacs.d/lib/" path)))
 
-(defun ublt/status-message (&rest args)
-  "Show a message in the minibuffer without logging. Useful for
-transient messages like error messages when hovering over syntax
-errors."
-  (let ((message-log-max nil))
-    (apply #'message args)))
-
-(defvar ublt/set-up-features ())
-(defvar ublt/failed-features ())
-(defmacro ublt/set-up (feature &rest body)
-  "Try to load the feature, running BODY afterward, notifying
-user if not found."
-  (declare (indent 1))
-  `(if (not (require ,feature nil t))
-       (progn (message "ublt/customize: `%s' not found" ,feature)
-              (add-to-list 'ublt/failed-features ,feature t))
-     (add-to-list 'ublt/set-up-features ,feature t)
-     ,@body))
-
-
+(ublt/add-path "ubolonton")
 ;;; Path to stuffs that come from single files
 (ublt/add-path "single-file-modes")
 
+(require 'ublt-util)
+
 ;;; General usability
-(ublt/add-path "ubolonton")
 (require 'ublt-dvorak)
 (require 'ublt-appearance)
 (require 'ublt-navigation)
