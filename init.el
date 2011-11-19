@@ -639,15 +639,16 @@ all of the sources."
 ;; Try to install stuffs from official pages instead of from
 ;; apt (use easy_install)
 (ublt/in '(gnu/linux darwin)
-  (setq-default py-shell-name          "ipython"
-                py-python-command      py-shell-name
-                py-jpython-command     py-shell-name
-                py-jython-command      py-shell-name
-                py-default-interpreter py-shell-name
-                python-command         py-shell-name
-                py-python-command-args (list "-colors" "Linux")
+  (ublt/add-path "python")
+  (setq-default ;; py-shell-name          "ipython"
+                ;; py-python-command      py-shell-name
+                ;; py-jpython-command     py-shell-name
+                ;; py-jython-command      py-shell-name
+                ;; py-default-interpreter py-shell-name
+                ;; python-command         py-shell-name
                 py-shell-switch-buffers-on-execute nil)
   (require 'ipython)
+  (setq-default py-python-command-args (list "-colors" "Linux"))
   (require 'python-mode)
   (require 'pymacs)
   ;; Bug in `python-mode'. They use defalias which is intended for
@@ -655,11 +656,11 @@ all of the sources."
   (add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
   (add-to-list 'interpreter-mode-alist'("python" . python-mode))
 
-  (pymacs-load "ropemacs" "rope-")
+  (let ((pymacs-timeout-at-start 300))
+    (pymacs-load "ropemacs" "rope-"))
   (setq ropemacs-enable-autoimport t
         ropemacs-guess-project t)
   (ac-ropemacs-setup)
-  (setq )
 
   (defun flymake-pyflakes-init ()
     (let* ((temp-file (flymake-init-create-temp-buffer-copy
@@ -741,6 +742,13 @@ prompt returned to comint."
   (autoload 'pylookup-update "pylookup"
     "Run pylookup-update and create the database at `pylookup-db-file'." t)
 
+  (defvar ac-source-rope
+    '((candidates . (lambda () (prefix-list-elements (rope-completions) ac-target))))
+    "Source for Rope")
+  (defun set-up-rope-ac ()
+    (interactive)
+    (setq ac-sources (add-to-list 'ac-sources 'ac-source-yasnippet)))
+  (add-hook 'python-mode-hook 'set-up-rope-ac)
   )
 
 
