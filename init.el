@@ -584,7 +584,11 @@ all of the sources."
 ;; ac-slime
 (ublt/add-path "ac-slime")
 (require 'ac-slime)
-(add-hook 'slime-mode-hook '(lambda () (set-up-slime-ac t)))
+(setq ac-delay 0.5
+      ac-auto-show-menu 1
+      ac-quick-help-delay 0.8)
+(add-hook 'slime-mode-hook 'set-up-slime-ac)
+(add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
 
 (require 'hippie-expand-slime)
 
