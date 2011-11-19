@@ -24,6 +24,17 @@
   "Add to load-path a path relative to ~/.emacs.d/lib/"
   (add-to-list 'load-path (concat "~/.emacs.d/lib/" path)))
 
+;;; TODO: Use this (from Emacs prelude)
+;; (defun prelude-add-subfolders-to-load-path (parent-dir)
+;;   "Adds all first level `parent-dir' subdirs to the
+;; Emacs load path."
+;;   (dolist (f (directory-files parent-dir))
+;;     (let ((name (concat parent-dir f)))
+;;       (when (and (file-directory-p name)
+;;                  (not (equal f ".."))
+;;                  (not (equal f ".")))
+;;         (add-to-list 'load-path name)))))
+
 (ublt/add-path "ubolonton")
 ;;; Path to stuffs that come from single files
 (ublt/add-path "single-file-modes")
@@ -172,6 +183,7 @@
 (require 'find-file-in-project)
 
 ;;; Paredit ----------------------------------------------------------
+(require 'paredit)
 (defun ublt/enable-paredit-mode ()
   "Enable paredit-mode without checking paren balance."
   (let ((current-prefix-arg t))

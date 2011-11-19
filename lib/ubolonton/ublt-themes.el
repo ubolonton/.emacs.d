@@ -17,6 +17,7 @@
 ;;; TODO: Font-lock-type-face is too bright
 ;;; TODO: Background is a bit dull
 ;;; TODO: Info color distribution is not appropriate
+;;; TODO: More grayscale colors for stuffs like (setq show-paren-style 'expression)
 
 ;;; XXX: color-theme's old versions' bug
 ;; (defun color-theme-alist (plist)
