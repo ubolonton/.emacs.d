@@ -731,7 +731,8 @@ prompt returned to comint."
     (setq tab-width 4))
   (defadvice py-shell (around set-path activate)
     (let ((env (getenv "PYTHONPATH"))
-          (project-root (eproject-root)))
+          (project-root (condition-case nil (eproject-root)
+                          (error default-directory))))
       (when project-root
         (setenv "PYTHONPATH" (format "%s:%s" project-root env)))
       ad-do-it
@@ -745,7 +746,7 @@ prompt returned to comint."
   (add-hook 'python-mode-hook 'ublt/turn-on-ropemacs-mode)
   (add-hook 'python-mode-hook 'ublt/flymake-python-enable)
   (add-hook 'python-mode-hook 'esk-prog-mode-hook t)
-  (add-hook 'python-mode-hook 'ublt/enable-paredit-mode t)
+  (add-hook 'python-mode-hook 'enable-paredit-mode t)
   ;; python.el use `semantic' to provide `imenu' support, we need to override
   (add-hook 'python-mode-hook 'ublt/use-py-imenu-support t)
   (add-hook 'comint-preoutput-filter-functions
