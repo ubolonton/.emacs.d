@@ -465,7 +465,7 @@ all of the sources."
 (global-auto-complete-mode +1)
 (ac-config-default)
 (add-hook 'eshell-mode-hook 'ac-eshell-mode-setup)
-(setq-default ac-auto-start 3)
+(setq-default ac-auto-start nil)
 
 ;;; Yasnippet --------------------------------------------------------
 
