@@ -973,6 +973,10 @@ and source-file directory for your debugger."
 ;;    (get-buffers-matching-mode major-mode)
 ;;    (car (occur-read-primary-args)))
 
+
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file)
+
 ;; Interops (with Terminal, Conkeror...) -----------------------------
 (condition-case err
     (server-start)
