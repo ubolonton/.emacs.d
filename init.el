@@ -199,10 +199,16 @@
 
 ;;; Paredit ----------------------------------------------------------
 (require 'paredit)
-(defun ublt/enable-paredit-mode ()
-  "Enable paredit-mode without checking paren balance."
+;; (defun ublt/enable-paredit-mode ()
+;;   "Enable paredit-mode without checking paren balance."
+;;   (let ((current-prefix-arg t))
+;;     (paredit-mode +1)))
+;; XXX: Seems unclean
+(defadvice paredit-mode (around force activate)
+  (if (eq major-mode 'python-mode)
   (let ((current-prefix-arg t))
-    (paredit-mode +1)))
+        ad-do-it)
+    ad-do-it))
 (defun ublt/paredit-space-for-open? (endp delimiter)
   "Don't insert space for ( [ \" in these modes."
   (not (and (member major-mode '(comint-mode python-mode javascript-mode js-mode))
