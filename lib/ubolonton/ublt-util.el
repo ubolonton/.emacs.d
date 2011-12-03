@@ -27,4 +27,11 @@ files."
      (add-to-list 'ublt/set-up-features ,feature t)
      ,@body))
 
+;;; TODO: Use this
+(defun ublt/isearch-other-window ()
+  (interactive)
+  (save-selected-window
+    (other-window 1)
+    (isearch-forward-regexp)))
+
 (provide 'ublt-util)
