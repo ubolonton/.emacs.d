@@ -343,6 +343,8 @@
 ;; 70-char column width
 (setq-default fill-column 70)
 
+(which-func-mode +1)
+
 ;;; XXX: Make this customizable
 (defun esk-add-watchwords ()
   (font-lock-add-keywords

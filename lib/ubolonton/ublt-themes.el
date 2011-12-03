@@ -17,7 +17,9 @@
 ;;; TODO: Font-lock-type-face is too bright
 ;;; TODO: Background is a bit dull
 ;;; TODO: Info color distribution is not appropriate
-;;; TODO: More grayscale colors for stuffs like (setq show-paren-style 'expression)
+;;; TODO: More grayscale colors for stuffs like (setq show-paren-style
+;;; 'expression)
+;;; TODO: +/- names sometimes implies saturation, sometimes implies blackness
 
 ;;; XXX: color-theme's old versions' bug
 ;; (defun color-theme-alist (plist)
@@ -209,6 +211,8 @@
           ((t (:inherit mode-line))))
          (mode-line-inactive
           ((t (:inherit mode-line :background ,bg+2))))
+         (which-func
+          ((t (:foreground "Blue" :height 1.2 :weight normal))))
 
          ;; SLIME debug buffer
          (sldb-topline-face
