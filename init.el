@@ -10,6 +10,21 @@
   (add-to-list 'package-archives source t))
 (package-initialize)
 
+;;; Required packages
+(when (not package-archive-contents)
+  (package-refresh-contents))
+(defvar ublt/packages
+  '(color-theme org paredit smex undo-tree pp-c-l yasnippet
+                dired-details dired-details+
+                fold-dwim fold-dwim-org hideshowvis
+                idle-highlight-mode
+                php-mode clojure-mode
+                starter-kit starter-kit-bindings starter-kit-eshell
+                starter-kit-lisp starter-kit-js starter-kit-ruby))
+(dolist (p ublt/packages)
+  (when (not (package-installed-p p))
+    (package-install p)))
+
 ;;; XXX: Some starter-kit packages are broken
 (defalias 'run-coding-hook 'esk-prog-mode-hook)
 (defalias 'esk-run-coding-hook 'esk-prog-mode-hook)
