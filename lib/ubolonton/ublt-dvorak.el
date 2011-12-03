@@ -198,6 +198,7 @@
  ;; ido-mode
  "C-x C-d"       'ido-dired
  "C-x d"         'ido-list-directory
+ "C-x C-i"       'ido-imenu
  "s-D"           'eproject-ido-imenu
 
  ;; Ubuntu
@@ -234,7 +235,7 @@
  "<XF86Back>"    'emms-previous
  "<XF86Reload>"  'emms-pause
 
- "M-TAB"         nil                    ; Don't use completion-at-point
+ "M-TAB"         'auto-complete        ; Don't use completion-at-point
  )
 
 ;;; Mode-specific key maps -------------------------------------------
@@ -270,7 +271,7 @@
       "M-n"     'flymake-goto-next-error
       "M-p"     'flymake-goto-prev-error
       "C-c h"   'pylookup-lookup
-      "M-TAB"   'ac-trigger-key-command
+      "M-TAB"   'auto-complete
       ;; "M-TAB"   'anything-ipython-complete
       "C-c C-c" 'py-execute-def-or-class ; was py-execute-buffer
       "C-c C-r" 'py-execute-region       ; was py-shift-region-right
@@ -282,7 +283,7 @@
      (ublt/define-keys
       py-shell-map
       "C-c h" 'pylookup-lookup
-      "M-TAB" 'ac-trigger-key-command
+      "M-TAB" 'auto-complete
       )
      ))
 (eval-after-load "paredit"
@@ -312,7 +313,11 @@
       "C-SPC" 'ac-complete
       "SPC"   'ac-complete
       "TAB"   'ac-expand)
-     (ac-set-trigger-key "M-TAB")))
+     (ublt/define-keys
+      ac-mode-map
+      "M-TAB" 'auto-complete)
+     (ac-set-trigger-key nil ;; "M-TAB"
+                         )))
 
 (eval-after-load "dired"
   '(ublt/define-keys
@@ -415,13 +420,13 @@
     slime-mode-map
     "C-c v"   'slime-load-file
     "C-c C-s" 'slime-switch-to-output-buffer
-    "M-TAB"   'ac-trigger-key-command
+    "M-TAB"   'auto-complete
     ))
 (eval-after-load "slime-repl"
   '(ublt/define-keys
     slime-repl-mode-map
     "M-I" 'slime-repl-delete-from-input-history
-    "M-TAB" 'ac-trigger-key-command
+    "M-TAB" 'auto-complete
     ))
 (eval-after-load "woman"
   '(ublt/define-keys
