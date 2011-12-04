@@ -428,6 +428,13 @@
     "M-I" 'slime-repl-delete-from-input-history
     "M-TAB" 'auto-complete
     ))
+(eval-after-load "octave-mod"
+  '(ublt/define-keys
+    octave-mode-map
+    "C-c C-s" 'octave-show-process-buffer
+    "C-c C-r" 'octave-send-region
+    "C-c C-c" 'actove-send-defun
+    ))
 (eval-after-load "woman"
   '(ublt/define-keys
     woman-mode-map
