@@ -216,6 +216,13 @@
 (eval-after-load "paredit"
   '(add-to-list 'paredit-space-for-delimiter-predicates
                 'ublt/paredit-space-for-open?))
+;;; Since I use paredit in many modes, it's better to use its
+;;; comment-dwim only in lisp modes
+(defadvice comment-dwim (around lisp-specific activate)
+  (if (member major-mode '(lisp-mode emacs-lisp-mode clojure-mode scheme-mode))
+      (call-interactively 'paredit-comment-dwim)
+    (message "normal")
+    ad-do-it))
 
 ;;; Dired ------------------------------------------------------------
 

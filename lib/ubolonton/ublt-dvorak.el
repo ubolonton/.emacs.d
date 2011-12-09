@@ -133,12 +133,18 @@
  "s-k"           'kill-this-buffer
  "s-l"           'goto-line
 
- ;; Textmatey
+ ;; Line/region movement
  "M-s-h"         'textmate-shift-left
  "M-s-n"         'textmate-shift-right
+ "M-s-c"         'ublt/move-text-up
+ "M-s-t"         'ublt/move-text-down
  "M-s-˙"         'textmate-shift-left           ; OS X
  "M-s-˜"         'textmate-shift-right          ; OS X
- ;; "s-/"        'comment-or-uncomment-region-or-line
+ "M-s-ç"         'ublt/move-text-up             ; OS X
+ "M-s-†"         'ublt/move-text-down           ; OS X
+ ;; "s-<up>"        'ublt/move-text-up
+ ;; "s-<down>"      'ublt/move-text-down
+ ;; "s-/"        'comment-or-uncomment-region
  ;; "s-\\"          'align
 
  ;; Windows manipulation
@@ -175,14 +181,6 @@
  "<kp-delete>"   'delete-char
  "M-<kp-delete>" 'kill-word
  "M-I"           'kill-whole-line
-
- ;; Line manipulation
- "M-s-c"  'ublt/move-text-up
- "M-s-t"  'ublt/move-text-down
- "M-s-ç"  'ublt/move-text-up
- "M-s-†"  'ublt/move-text-down
- ;; "s-<up>"        'ublt/move-text-up
- ;; "s-<down>"      'ublt/move-text-down
 
  ;; Zooming in/out (consistent with other Mac apps)
  "s-+"           'text-scale-increase
@@ -302,6 +300,7 @@
     "C-<right>"     nil
     "M-<left>"      'paredit-backward
     "M-<right>"     'paredit-forward
+    "M-;"           nil                 ; advice comment-dwim instead
     ))
 (eval-after-load "auto-complete"
   '(progn
