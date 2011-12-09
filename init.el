@@ -951,6 +951,8 @@ and source-file directory for your debugger."
   (setq browse-url-browser-function 'browse-url-generic
         browse-url-generic-program "conkeror"))
 
+(add-hook 'sql-interactive-mode-hook (lambda () (setq truncate-lines t)))
+
 (setq sql-connection-alist
       '(("bnb" (sql-product 'mysql) (sql-database "bnb")
          (sql-user "bnb") (sql-server "localhost"))
