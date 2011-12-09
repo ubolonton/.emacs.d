@@ -164,7 +164,7 @@
  "s-r"           'org-remember "s-R" 'org-agenda
  "s-f"           'ublt/anything-occur-at-point
  "s-b"           'ublt/browse-url-at-point
- "s-p"           'server-edit
+ "s-p"           'pop-global-mark
  "s-F"           'find-grep
  "s-<backspace>" 'ublt/toggle-alpha
  "s-<return>"    'ublt/toggle-fullscreen
