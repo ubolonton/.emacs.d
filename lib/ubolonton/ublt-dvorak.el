@@ -22,9 +22,8 @@
 ;;; Custom global bindings -------------------------------------------
 ;; TODO:
 ;; M-f
-;; M-b TAB
 ;; M-y
-;; M-o 'hippie-expand
+;; M-o
 ;; M-a
 ;; M-j
 ;; M-k
@@ -55,6 +54,9 @@
 ;; "M-r"     'move-to-window-line-top-bottom 'paredit-raise-sexp
 ;; "M-l"     'downcase-word
 
+;;; These are translated so that they can be pervasive, as most modes
+;;; rebind them (syntactically override), instead of remapping the
+;;; original command (semantically override).
 (ublt/define-keys
  key-translation-map
  ;; OSX goodness
@@ -69,11 +71,7 @@
  "s-z"    "C-_"                         ; undo
  "s-Z"    "M-_"                         ; redo
 
- ;; TODO: experimental, the underlying commands might be remapped by
- ;; some modes. But if this works then there's no need to redefine
- ;; numerous keymaps
- ;; Maybe mapping at the OS level is better? But maybe hard to do in
- ;; Ubuntu, and other apps might use them.
+ ;; Movement keys (right hand)
  "M-c"    "<up>"
  "M-t"    "<down>"
  "M-h"    "<left>"
@@ -87,6 +85,7 @@
  "M-G"    "M-<"                         ; beginning
  "M-R"    "M->"                         ; end
 
+ ;; Deletion (left hand)
  "M-e"    "DEL"
  "M-u"    "<kp-delete>"
  "M-."    "M-DEL"
@@ -96,18 +95,12 @@
  "M-d"    "C-a"
  "M-D"    "C-e"
 
- ;; Move current line
- ;; "M-s-c"  "s-<up>"
- ;; "M-s-t"  "s-<down>"
- ;; "M-s-ç"  "s-<up>"
- ;; "M-s-†"  "s-<down>"
-
  ;; Nut!!! But seriously much more effective
  "M-SPC"  "C-SPC"
  "C-SPC"  "M-SPC"
  ;; More obsession, but C-t is actually unavailable this way
  ;; though. And another problem is that C-x is a prefix that's kinda
- ;; mnemonic.
+ ;; mnemonic. So it's not used until I find a workaround
  ;; "C-t" "C-x"
  ;; "C-x" "C-t"
 
@@ -116,11 +109,11 @@
  "C-M-c"  "M-<up>"                      ; <- paredit splice-kill, org up
  "C-M-t"  "M-<down>"                    ; -> paredit splice-kill, org down
 
- "M-m"    "M-p"                         ; <- special (history, errors)
- "M-v"    "M-n"                         ; -> special (history, errors)
-
  "M-M"    "C-M-u"                       ; <- up list
  "M-V"    "C-M-d"                       ; -> down list
+
+ "M-m"    "M-p"                         ; <- special (history, errors)
+ "M-v"    "M-n"                         ; -> special (history, errors)
 
  "s-t"    "M-."                         ; push reference
  "s-T"    "M-,"                         ; pop reference
@@ -142,21 +135,16 @@
  "M-s-˜"         'textmate-shift-right          ; OS X
  "M-s-ç"         'ublt/move-text-up             ; OS X
  "M-s-†"         'ublt/move-text-down           ; OS X
- ;; "s-<up>"        'ublt/move-text-up
- ;; "s-<down>"      'ublt/move-text-down
- ;; "s-/"        'comment-or-uncomment-region
- ;; "s-\\"          'align
 
  ;; Windows manipulation
  "s-1"           'delete-other-windows
  "s-2"           'split-window-vertically
  "s-3"           'split-window-horizontally
  "s-0"           'delete-window
- ;; "M-s-æ"      'ublt/swap-windows
  "s-w"           'other-window
  "s-W"           'ublt/swap-windows
 
- ;; super
+ ;; Utilities, super-
  "s-h"           'anything
  "s-d"           'anything-command-map
  "s-n"           'ublt/switch-to-last-buffer
@@ -222,6 +210,7 @@
  "C-x C-h"       nil                    ; bad emacs-starter-kit
  "S-s-SPC"       'whitespace-mode
  ;; "M-x"           'anything-M-x          ; C-x C-m for the original
+ "M-X"           'smex-major-mode-commands
  "C-h C-a"       'apropos-command
  "C-x C-b"       'ibuffer
  "C-S-s"         'ublt/isearch-other-window
@@ -239,8 +228,8 @@
 
 ;;; Mode-specific key maps -------------------------------------------
 
-;;; TODO: sql, ruby, factor, haskell
-;;; For mode with a REPL: lisps, python, js (c r l are adjacent on Dvorak):
+;;; TODO: sql, ruby, factor, haskell, octave
+;;; For mode with a REPL: lisps, python, js (c r l are adjacent on Dvorak!!!):
 ;; C-c C-c                                 ; eval defun
 ;; C-c C-r                                 ; eval region
 ;; C-c C-l                                 ; eval buffer

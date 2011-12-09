@@ -1,3 +1,4 @@
+;;; Extra navigation functions
 (eval-when-compile (require 'cl))
 
 ;;; Better C-a
