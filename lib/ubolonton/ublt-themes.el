@@ -313,6 +313,9 @@
          (esk-paren-face
           ((t (:foreground ,bg+3))))
 
+         (eval-sexp-fu-flash
+          ((t (:background ,bg+2))))
+
          ;; flyspell
          (flyspell-incorrect
           ((t (:underline ,red))))
