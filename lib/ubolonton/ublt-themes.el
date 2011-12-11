@@ -562,6 +562,14 @@
           ((t (:font ,variable-pitch-font :height 1.2))))
          (ublt/mode-line-major-mode
           ((t (:bold t))))
+         (ublt/evil-emacs-tag
+          ((t (:inherit font-lock-builtin-face :height 1.2))))
+         (ublt/evil-normal-tag
+          ((t (:foreground ,red-4 :bold t :height 1.2))))
+         (ublt/evil-insert-tag
+          ((t (:foreground ,bg :bold t :height 1.2))))
+         (ublt/evil-visual-tag
+          ((t (:foreground ,red :bold t :height 1.2))))
 
          ;; Skype
          (skype--face-my-message

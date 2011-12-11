@@ -46,3 +46,6 @@
 [submodule "lib/mark-multiple"]
 	path = lib/mark-multiple
 	url = https://github.com/magnars/mark-multiple.el.git
+[submodule "lib/evil"]
+	path = lib/evil
+	url = git://gitorious.org/evil/evil.git

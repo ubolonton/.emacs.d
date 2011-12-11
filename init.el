@@ -197,6 +197,36 @@
 (ublt/add-path "find-file-in-project")
 (require 'find-file-in-project)
 
+;;; Evil -------------------------------------------------------------
+(ublt/add-path "evil")
+(defface ublt/evil-insert-tag
+  `((t (:inherit font-lock-variable-name-face)))
+  "Evil insert mode indicator face")
+(defface ublt/evil-normal-tag
+  `((t (:inherit font-lock-warning-face)))
+  "Evil normal mode indicator face")
+(defface ublt/evil-emacs-tag
+  `((t (:inherit font-lock-builtin-face)))
+  "Evil emacs mode indicator face")
+(defface ublt/evil-visual-tag
+  `((t (:inherit font-lock-preprocessor-face)))
+  "Evil visual mode indicator face")
+(setq evil-mode-line-format 'before
+      evil-normal-state-tag (propertize "(-N-)" 'face 'ublt/evil-normal-tag)
+      evil-insert-state-tag (propertize "( I )" 'face 'ublt/evil-insert-tag)
+      evil-emacs-state-tag  (propertize "( E )" 'face 'ublt/evil-emacs-tag)
+      evil-visual-state-tag (propertize "( V )" 'face 'ublt/evil-visual-tag)
+      evil-normal-state-cursor '(box "#F86155")
+      evil-insert-state-cursor '(bar "yellow")
+      evil-emacs-state-cursor  '(bar "yellow")
+      evil-visual-state-cursor '(bar "yellow")
+      )
+
+(require 'evil)
+(dolist (mode '(sql-interactive-mode magit-log-edit-mode))
+  (add-to-list 'evil-emacs-state-modes mode))
+(evil-mode +1)
+
 ;;; Paredit ----------------------------------------------------------
 (require 'paredit)
 ;; (defun ublt/enable-paredit-mode ()

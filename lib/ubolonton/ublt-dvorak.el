@@ -226,6 +226,56 @@
  "M-TAB"         'auto-complete        ; Don't use completion-at-point
  )
 
+;;; Evil -------------------------------------------------------------
+(eval-after-load "evil"
+  '(progn
+     (ublt/define-keys
+      evil-normal-state-map
+      ;; Used for positional movements instead (below)
+      "h" nil "H" nil
+      "n" nil "N" nil
+      "c" nil "C" nil
+      "t" nil "T" nil
+      "g" nil "G" nil
+      "r" nil "R" nil
+      "C-r" nil
+      "l" nil "L" nil)
+     (ublt/define-keys
+      evil-motion-state-map
+      "h"     'evil-backward-char
+      "n"     'evil-forward-char
+      "c"     'evil-previous-line
+      "t"     'evil-next-line
+      "g"     'evil-backward-WORD-begin
+      "r"     'evil-forward-WORD-end
+      "H"     'evil-window-top
+      "N"     'evil-window-bottom
+      "C"     'evil-scroll-line-up
+      "T"     'evil-scroll-line-down
+      "G"     'evil-backward-word-begin
+      "R"     'evil-forward-word-end
+      "SPC"   'evil-scroll-page-down
+      "S-SPC" 'evil-scroll-page-up
+      ;; "l" nil
+      ;; "ld" 'evil-goto-definition
+      ;; "le" 'evil-backward-word-end
+      ;; "lE" 'evil-backward-WORD-end
+      ;; "ll" 'evil-goto-first-line
+      "C-b" nil
+      "C-d" nil
+      "C-e" nil
+      "C-f" nil
+      "C-o" nil
+      "C-y" nil
+      )
+     (ublt/define-keys
+      evil-insert-state-map
+      "C-k" nil
+      "C-o" nil
+      "C-e" nil
+      "C-y" nil
+      )))
+
 ;;; Mode-specific key maps -------------------------------------------
 
 ;;; TODO: sql, ruby, factor, haskell, octave
