@@ -212,7 +212,9 @@
          (mode-line-inactive
           ((t (:inherit mode-line :background ,bg+2))))
          (which-func
-          ((t (:foreground "Blue" :height 1.2 :weight normal))))
+          ((t (:foreground ,red-4 :height 1.2 :bold t))))
+         ;; (which-func
+         ;;  ((t (:foreground "#124800" :height 1.2 :bold t))))
 
          ;; SLIME debug buffer
          (sldb-topline-face
@@ -536,9 +538,6 @@
           ((t (:inherit mode-line))))
          (sml-modeline-end-face
           ((t (:background ,bg+3 :foreground ,fg))))
-
-         (which-func
-          ((t (:foreground ,red-4 :bold t))))
 
          (compilation-info
           ((t (:inherit font-lock-function-name-face))))

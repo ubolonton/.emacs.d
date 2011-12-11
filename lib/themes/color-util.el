@@ -1,3 +1,4 @@
+;;; XXX: Don't look here
 (defconst WR 0.299)
 (defconst WB 0.114)
 (defconst WG (- 1 WR WB))

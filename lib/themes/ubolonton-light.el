@@ -1,3 +1,4 @@
+;;; XXX: Don't look here, obsolete & not maintained
 ;; Ubolonton's personal light color theme for Emacs.
 ;;
 ;; A mix of Blackboard and Succulent themes.
@@ -132,7 +133,7 @@
       ((t (:foreground ,ublt/light-cyan :bold t))))
      (slime-highlight-edits-face
       ((t (:background "Gray20"))))
-     
+
      ;; ido mini-buffer
      (ido-first-match
       ((t (:foreground "Green" :bold t))))
@@ -249,7 +250,7 @@
       ((t (:inherit diredp-dir-priv :background ,ublt/light-background-2))))
      (anything-file-name
       ((t (:inherit font-lock-type-face))))
-     
+
      (escape-glyph
       ((t (:foreground "Cyan" :bold t))))
 
