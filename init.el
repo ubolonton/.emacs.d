@@ -695,12 +695,10 @@ all of the sources."
                                     (ublt/flymake-err-at (point)) "\n")
                          'face 'ublt/flymake-message-face)))
 
-(defadvice flymake-goto-next-error (after display-message)
+(defadvice flymake-goto-next-error (after display-message activate)
   (ublt/flymake-err-echo))
-(defadvice flymake-goto-prev-error (after display-message)
+(defadvice flymake-goto-prev-error (after display-message activate)
   (ublt/flymake-err-echo))
-(ad-activate 'flymake-goto-next-error t)
-(ad-activate 'flymake-goto-prev-error t)
 
 ;;; Python -----------------------------------------------------------
 ;; The length of this section proves python support in Emacs is weak,
