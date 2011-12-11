@@ -49,3 +49,6 @@
 [submodule "lib/evil"]
 	path = lib/evil
 	url = git://gitorious.org/evil/evil.git
+[submodule "lib/nxhtml"]
+	path = lib/nxhtml
+	url = https://github.com/emacsmirror/nxhtml.git
