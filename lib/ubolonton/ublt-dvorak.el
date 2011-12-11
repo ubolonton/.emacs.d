@@ -212,7 +212,8 @@
  ;; "M-x"           'anything-M-x          ; C-x C-m for the original
  "M-X"           'smex-major-mode-commands
  "C-h C-a"       'apropos-command
- "C-x C-b"       'ibuffer
+ "C-x C-b"       'ido-switch-buffer     ; Because it's to easy to mis-press
+ "C-x B"         'ibuffer
  "C-S-s"         'ublt/isearch-other-window
 
  "M-<left>"      'backward-list
