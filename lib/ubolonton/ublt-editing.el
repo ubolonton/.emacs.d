@@ -87,6 +87,13 @@ selection. Works on `mark-enclosing-sexp'."
        (if (use-region-p)
            (list (region-beginning) (region-end))
          (list (line-beginning-position) (line-beginning-position 2)))))
+;;; Because they set mark if the region is not active
+(defadvice kill-ring-save (after pop-spurious-mark activate)
+  (unless (use-region-p)
+    (pop-mark)))
+(defadvice kill-region (after pop-spurious-mark activate)
+  (unless (use-region-p)
+    (pop-mark)))
 
 ;; Prefer UTF-8
 (prefer-coding-system 'utf-8)
