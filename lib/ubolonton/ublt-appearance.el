@@ -324,6 +324,9 @@
 ;; Limit minibuffer to 20% frame height
 (setq max-mini-window-height 0.2)
 
+;; Echo keystrokes faster
+(setq echo-keystrokes 0.2)
+
 ;; Technicolor
 (require 'info+)
 
@@ -343,6 +346,7 @@
 ;; 70-char column width
 (setq-default fill-column 70)
 
+;;; Show current function name in mode-line
 (which-func-mode +1)
 
 ;;; XXX: Make this customizable
