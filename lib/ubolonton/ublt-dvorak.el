@@ -425,12 +425,20 @@
            "C-c C-s" 'ielm
            )
           (ublt/define-keys
+           lisp-mode-map
+           "C-c C-s" 'switch-to-lisp
+           )
+          (ublt/define-keys
            lisp-interaction-mode-map
            "C-c C-c" 'eval-defun
            "C-c C-r" 'eval-region
            "C-c C-l" 'eval-buffer
            "C-c C-s" 'ielm
            )))
+(eval-after-load "clojure-mode"
+  '(ublt/define-keys
+    clojure-mode-map
+    "C-c C-s" 'run-lisp))
 (eval-after-load "info"
   '(ublt/define-keys
     Info-mode-map
@@ -467,6 +475,8 @@
     slime-repl-mode-map
     "M-I" 'slime-repl-delete-from-input-history
     "M-TAB" 'auto-complete
+    "DEL" nil
+    "M-s" nil
     ))
 (eval-after-load "octave-mod"
   '(ublt/define-keys
