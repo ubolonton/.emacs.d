@@ -3,6 +3,10 @@
 ;;; XXX: elnode depends on this
 (add-to-list 'load-path "~/.emacs.d/lib/apel")
 
+;;; XXX: FLIM breaks this (no mailcap-parse-mailcaps)
+(if (eql system-type 'gnu/linux)
+  (load-file "/usr/local/share/emacs/24.0.50/lisp/gnus/mailcap.elc"))
+
 ;;; Emacs is not a text editor, and here we load its package manager!
 (require 'package)
 (dolist (source '(("marmalade" . "http://marmalade-repo.org/packages/")
@@ -14,11 +18,15 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 (defvar ublt/packages
-  '(color-theme org paredit smex undo-tree pp-c-l yasnippet
+  '(color-theme org paredit smex undo-tree pp-c-l yasnippet idle-highlight-mode
+                ;; Dired
                 dired-details dired-details+
+                ;; Code folding
                 fold-dwim fold-dwim-org hideshowvis
-                idle-highlight-mode
-                php-mode clojure-mode
+                ;; Languages
+                php-mode
+                clojure-mode clojurescript-mode durendal
+                ;; Starter kit
                 starter-kit starter-kit-bindings starter-kit-eshell
                 starter-kit-lisp starter-kit-js starter-kit-ruby))
 (dolist (p ublt/packages)
@@ -63,8 +71,6 @@
 (require 'ublt-editing)
 
 ;;; Personal stuffs
-(ublt/in '(gnu/linux)
-  (load-file "/usr/local/share/emacs/24.0.50/lisp/gnus/mailcap.elc")) ; FLIM breaks this
 (ublt/add-path "twittering-mode/")
 (ublt/add-path "emms/lisp/")
 (ublt/add-path "org2blog/")
@@ -360,16 +366,16 @@
                  nil require-match initial-input hist def))
         ad-do-it))))
 
-;;; Magit ------------------------------------------------------------
+;;; Git --------------------------------------------------------------
 ;; TODO: Submit this to emacs-starter-kit. Older versions of magit
 ;; seem to ignore this option. Version 1 uses it as a list. I don't
 ;; understand why emacs-starter-kit set it as a string.
 (ublt/add-path "magit")
 (require 'magit)
 (setq magit-diff-options '("-w"))
-;; magit status buffer is not a pop-up (in the sense of not volatile
-;; or temporary like anything buffer). This is important for small
-;; screen such as mine.
+;; magit status buffer should not be a pop-up (in the sense of not
+;; volatile or temporary like anything buffer). This is important for
+;; small screen such as mine.
 (setq magit-status-buffer-switch-function 'switch-to-buffer)
 
 ;; ;;; Messages all the sync git invocations
@@ -390,6 +396,10 @@
      (mapconcat 'identity cmd-args " ")
      (todochiku-icon 'social))
     ad-do-it))
+
+;; git-emacs
+(ublt/add-path "git-emacs/")
+(require 'git-emacs)
 
 ;;; Quicksilver/Spotlight for Emacs ----------------------------------
 ;;; TODO: Clean up
@@ -570,7 +580,6 @@ all of the sources."
 
 ;;; SLIME, Common Lisp, Clojure --------------------------------------
 
-;; technomancy's SLIME
 (ublt/add-path "slime/")
 (ublt/add-path "slime/contrib/")
 
@@ -579,7 +588,8 @@ all of the sources."
   '(progn
      ;; Extra features (contrib)
      (slime-setup
-      '(slime-repl slime-fuzzy ;; slime-highlight-edits
+      '(slime-repl ;; slime-fuzzy
+                   ;; slime-highlight-edits
                    ))
      (setq slime-net-coding-system 'utf-8-unix
            slime-complete-symbol-function 'slime-fuzzy-complete-symbol
@@ -966,10 +976,6 @@ and source-file directory for your debugger."
 
 ;; FIXME: Make it support mp3 not only ogg
 (require 'lyric-mode)
-
-;; git-emacs
-(ublt/add-path "git-emacs/")
-(require 'git-emacs)
 
 ;; Devilspie's config
 (add-to-list 'auto-mode-alist '("\\.ds$" . lisp-mode))
