@@ -657,6 +657,10 @@ all of the sources."
 (defvar ublt/clojurescript-home "/home/ubolonton/Programming/Tools/clojurescript/")
 ;; (dolist (path '("src/clj" "src/cljs" "test/cljs"))
 ;;   (add-to-list 'swank-clojure-classpath (concat ublt/clojurescript-home path)))
+;;; XXX: Make this customizable
+(when (> (display-color-cells) 8)
+  (font-lock-add-keywords 'clojurescript-mode
+                          '(("(\\|)" . 'esk-paren-face))))
 
 ;;;; ielm settings ---------------
 (add-hook 'ielm-mode-hook 'enable-paredit-mode)
