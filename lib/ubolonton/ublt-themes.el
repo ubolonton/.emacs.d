@@ -462,7 +462,7 @@
          (mumamo-background-chunk-major
           ((t (:background ,bg))))
          (mumamo-background-chunk-submode1
-          ((t (:background ,bg))))
+          ((t (:background ,bg+1))))
          (mumamo-background-chunk-submode2
           ((t (:background ,bg+1))))
          (mumamo-border-face-in
@@ -550,8 +550,8 @@
 
          (nxml-tag-delimiter
           ((t (:inherit esk-paren-face))))
-         ;; (nxml-element-local-name
-         ;;  ((t (:foreground "#009900"))))
+         (nxml-element-local-name
+          ((t (:foreground ,cyan+3))))
 
          ;; My own custom faces
          (ublt-twitter-meta-face
