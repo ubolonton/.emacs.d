@@ -536,8 +536,8 @@ all of the sources."
 
 ;; Might be useful for f*cks like PHP, JSP, ASP.NET, mako, rhtml, django
 (ublt/add-path "nxhtml/")
-(load "autostart.el")
 (add-hook 'nxhtml-mode-hook (lambda () (rng-validate-mode -1)))
+(load "autostart.el")
 
 ;; Javascript (it seems js-mode in Emacs is newer than espresso)
 ;; MozRepl integration
@@ -978,6 +978,8 @@ and source-file directory for your debugger."
 ;; TODO: move to corresponding mode sections
 ;; .rjs file is ruby file
 (add-to-list 'auto-mode-alist '("\\.rjs$" . ruby-mode))
+
+(add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
 
 ;; FIXME: Make it support mp3 not only ogg
 (require 'lyric-mode)
