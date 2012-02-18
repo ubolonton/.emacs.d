@@ -117,6 +117,8 @@
 
  "s-t"    "M-."                         ; push reference
  "s-T"    "M-,"                         ; pop reference
+
+ "s-4"    "C-x 4"
  )
 
 (ublt/define-keys
@@ -145,7 +147,7 @@
  "s-W"           'ublt/swap-windows
 
  ;; Utilities, super-
- "s-h"           'anything
+ "s-h"           'ido-switch-buffer
  "s-d"           'anything-command-map
  "s-n"           'ublt/switch-to-last-buffer
  "s-g"           'magit-status
@@ -212,7 +214,9 @@
  ;; "M-x"           'anything-M-x          ; C-x C-m for the original
  "M-X"           'smex-major-mode-commands
  "C-h C-a"       'apropos-command
- "C-x C-b"       'ido-switch-buffer     ; Because it's to easy to mis-press
+ ;; "C-x C-b"       'ido-switch-buffer     ; Because it's to easy to mis-press
+ "C-x C-b"       'anything     ; Because it's to easy to mis-press
+ "C-x b"         'anything
  "C-x B"         'ibuffer
  "C-S-s"         'ublt/isearch-other-window
 
@@ -356,7 +360,8 @@
      (ublt/define-keys
       ac-mode-map
       "M-TAB" 'auto-complete)
-     (ac-set-trigger-key nil ;; "M-TAB"
+     (ac-set-trigger-key "M-k";; nil
+                         ;; "M-TAB"
                          )))
 
 (eval-after-load "dired"
