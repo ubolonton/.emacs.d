@@ -1,7 +1,15 @@
 ;;; This is the first thing to get loaded.
 
-;;; XXX: elnode depends on this
-(add-to-list 'load-path "~/.emacs.d/lib/apel")
+;;; nxhtml is having troubles with emacs 24, so I have to use both 24
+;;; & 23 now
+(defun ublt/legacy? ()
+  (< emacs-major-version 24))
+
+(when (ublt/legacy?)
+ (load-file "~/.emacs.d/emacs23/package.el"))
+
+;; ;;; XXX: elnode depends on this
+;; (add-to-list 'load-path "~/.emacs.d/lib/apel")
 
 ;;; XXX: FLIM breaks this (no mailcap-parse-mailcaps)
 (if (eql system-type 'gnu/linux)
@@ -97,7 +105,9 @@
 ;; (skype--init)
 (setq skype--my-user-handle "ubolonton")
 
-(setq stack-trace-on-error t)
+(unless (ublt/legacy?)
+  ;; Uhm but why do we need it turned on on 24?
+  (setq stack-trace-on-error t))
 
 ;; nxhtml seems to byte-compile a lot while running, and uses some
 ;; obsolete stuffs. This is to prevent warning pop-ups (especially in
