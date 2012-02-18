@@ -214,34 +214,34 @@
 (require 'find-file-in-project)
 
 ;;; Evil -------------------------------------------------------------
-(ublt/add-path "evil")
-(defface ublt/evil-insert-tag
-  `((t (:inherit font-lock-variable-name-face)))
-  "Evil insert mode indicator face")
-(defface ublt/evil-normal-tag
-  `((t (:inherit font-lock-warning-face)))
-  "Evil normal mode indicator face")
-(defface ublt/evil-emacs-tag
-  `((t (:inherit font-lock-builtin-face)))
-  "Evil emacs mode indicator face")
-(defface ublt/evil-visual-tag
-  `((t (:inherit font-lock-preprocessor-face)))
-  "Evil visual mode indicator face")
-(setq evil-mode-line-format 'before
-      evil-normal-state-tag (propertize "(-N-)" 'face 'ublt/evil-normal-tag)
-      evil-insert-state-tag (propertize "( I )" 'face 'ublt/evil-insert-tag)
-      evil-emacs-state-tag  (propertize "( E )" 'face 'ublt/evil-emacs-tag)
-      evil-visual-state-tag (propertize "( V )" 'face 'ublt/evil-visual-tag)
-      evil-normal-state-cursor '(box "#F86155")
-      evil-insert-state-cursor '(bar "yellow")
-      evil-emacs-state-cursor  '(bar "yellow")
-      evil-visual-state-cursor '(bar "yellow")
-      )
+;; (ublt/add-path "evil")
+;; (defface ublt/evil-insert-tag
+;;   `((t (:inherit font-lock-variable-name-face)))
+;;   "Evil insert mode indicator face")
+;; (defface ublt/evil-normal-tag
+;;   `((t (:inherit font-lock-warning-face)))
+;;   "Evil normal mode indicator face")
+;; (defface ublt/evil-emacs-tag
+;;   `((t (:inherit font-lock-builtin-face)))
+;;   "Evil emacs mode indicator face")
+;; (defface ublt/evil-visual-tag
+;;   `((t (:inherit font-lock-preprocessor-face)))
+;;   "Evil visual mode indicator face")
+;; (setq evil-mode-line-format 'before
+;;       evil-normal-state-tag (propertize "(-N-)" 'face 'ublt/evil-normal-tag)
+;;       evil-insert-state-tag (propertize "( I )" 'face 'ublt/evil-insert-tag)
+;;       evil-emacs-state-tag  (propertize "( E )" 'face 'ublt/evil-emacs-tag)
+;;       evil-visual-state-tag (propertize "( V )" 'face 'ublt/evil-visual-tag)
+;;       evil-normal-state-cursor '(box "#F86155")
+;;       evil-insert-state-cursor '(bar "yellow")
+;;       evil-emacs-state-cursor  '(bar "yellow")
+;;       evil-visual-state-cursor '(bar "yellow")
+;;       )
 
-(require 'evil)
-(dolist (mode '(sql-interactive-mode magit-log-edit-mode))
-  (add-to-list 'evil-emacs-state-modes mode))
-(evil-mode +1)
+;; (require 'evil)
+;; (dolist (mode '(sql-interactive-mode magit-log-edit-mode))
+;;   (add-to-list 'evil-emacs-state-modes mode))
+;; (evil-mode +1)
 
 ;;; Paredit ----------------------------------------------------------
 (require 'paredit)
@@ -252,7 +252,7 @@
 ;; XXX: Seems unclean
 (defadvice paredit-mode (around force activate)
   (if (eq major-mode 'python-mode)
-  (let ((current-prefix-arg t))
+      (let ((current-prefix-arg t))
         ad-do-it)
     ad-do-it))
 (defun ublt/paredit-space-for-open? (endp delimiter)
@@ -407,7 +407,7 @@
      (mapconcat 'identity cmd-args " ")
      (todochiku-icon 'social))
     ad-do-it))
-
+
 ;; git-emacs
 (ublt/add-path "git-emacs/")
 (require 'git-emacs)
@@ -552,7 +552,8 @@ all of the sources."
 ;; Javascript (it seems js-mode in Emacs is newer than espresso)
 ;; MozRepl integration
 ;; (defalias 'javascript-mode 'espresso-mode)
-(setq js-mode-hook '())
+;; (setq js-mode-hook '())
+(setq flymake-jslint-command "jslint")
 (add-hook 'js-mode-hook 'moz-minor-mode)
 (autoload 'moz-minor-mode "moz" "Mozilla Minor and Inferior Mozilla Modes" t)
 ;; Factor
@@ -586,7 +587,7 @@ all of the sources."
     (call-interactively 'erlang-compile-display))
   (add-hook 'erlang-mode-hook 'esk-prog-mode-hook)
   )
-
+
 (add-to-list 'auto-mode-alist '("\\.m$" . octave-mode))
 
 ;;; SLIME, Common Lisp, Clojure --------------------------------------
@@ -1007,12 +1008,12 @@ and source-file directory for your debugger."
 (ublt/in '(gnu/linux)
   (setenv "PYTHONPATH" "/home/ubolonton/Programming/Tools/warp")
   (setenv "CLOJURESCRIPT_HOME" "/home/ubolonton/Programming/Tools/clojurescript")
-(setq sql-connection-alist
-      '(("bnb" (sql-product 'mysql) (sql-database "bnb")
-         (sql-user "bnb") (sql-server "localhost"))
-        ("academy" (sql-product 'postgres) (sql-database "academy")
-         (sql-user "academy") (sql-server "localhost"))
-        ("postgres" (sql-product 'postgres)
+  (setq sql-connection-alist
+        '(("bnb" (sql-product 'mysql) (sql-database "bnb")
+           (sql-user "bnb") (sql-server "localhost"))
+          ("academy" (sql-product 'postgres) (sql-database "academy")
+           (sql-user "academy") (sql-server "localhost"))
+          ("postgres" (sql-product 'postgres)
            (sql-user "postgres") (sql-server "localhost")))))
 
 ;;; `http://www.masteringemacs.org/articles/2011/07/20/searching-buffers-occur-mode/'
@@ -1035,7 +1036,7 @@ and source-file directory for your debugger."
 ;;   (multi-occur
 ;;    (get-buffers-matching-mode major-mode)
 ;;    (car (occur-read-primary-args)))
-
+
 
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
