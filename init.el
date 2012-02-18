@@ -372,6 +372,7 @@
 ;; understand why emacs-starter-kit set it as a string.
 (ublt/add-path "magit")
 (require 'magit)
+(require 'magit-svn)
 (setq magit-diff-options '("-w"))
 ;; magit status buffer should not be a pop-up (in the sense of not
 ;; volatile or temporary like anything buffer). This is important for
