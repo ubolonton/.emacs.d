@@ -992,13 +992,16 @@ and source-file directory for your debugger."
 
 (add-hook 'sql-interactive-mode-hook (lambda () (setq truncate-lines t)))
 
+(ublt/in '(gnu/linux)
+  (setenv "PYTHONPATH" "/home/ubolonton/Programming/Tools/warp")
+  (setenv "CLOJURESCRIPT_HOME" "/home/ubolonton/Programming/Tools/clojurescript")
 (setq sql-connection-alist
       '(("bnb" (sql-product 'mysql) (sql-database "bnb")
          (sql-user "bnb") (sql-server "localhost"))
         ("academy" (sql-product 'postgres) (sql-database "academy")
          (sql-user "academy") (sql-server "localhost"))
         ("postgres" (sql-product 'postgres)
-         (sql-user "postgres") (sql-server "localhost"))))
+           (sql-user "postgres") (sql-server "localhost")))))
 
 ;;; `http://www.masteringemacs.org/articles/2011/07/20/searching-buffers-occur-mode/'
 
