@@ -227,13 +227,13 @@
 
 ;;; Sometimes buffers have the same names
 ;; from `http://trey-jackson.blogspot.com/2008/01/emacs-tip-11-uniquify.html'
-(require 'uniquify)
+(ublt/set-up 'uniquify
 (setq uniquify-buffer-name-style 'reverse
       uniquify-separator "  "
       ;; Rename after killing uniquified
       uniquify-after-kill-buffer-p t
       ;; Don't muck with special buffers
-      uniquify-ignore-buffers-re "^\\*")
+        uniquify-ignore-buffers-re "^\\*"))
 
 ;; Uncluttered shell prompt
 (setq eshell-prompt-function (lambda ()
@@ -354,5 +354,8 @@
   (font-lock-add-keywords
    nil '(("\\<\\(FIXME\\|TODO\\|FIX\\|XXX\\|HACK\\|REFACTOR\\|NOCOMMIT\\|NTA\\)"
           1 font-lock-warning-face t))))
+
+(ublt/set-up 'eval-sexp-fu
+  (setq eval-sexp-fu-flash-duration 0.5))
 
 (provide 'ublt-appearance)
