@@ -767,7 +767,9 @@ all of the sources."
   ;; From `starter-kit-ruby.el'
   (defun ublt/flymake-python-enable ()
     (when (and buffer-file-name
-               ;; flymake and mumamo are at odds
+               ;; flymake and mumamo are at odds, so look at buffer
+               ;; name instead of `major-mode' when deciding whether
+               ;; to turn this on
                (string-match "\\.py$" buffer-file-name)
                (file-writable-p
                 (file-name-directory buffer-file-name))
@@ -923,34 +925,36 @@ prompt returned to comint."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   )
 
-;;; XXX HACK: This is a bug since 23.1!!!
-(eval-after-load "gud"
-  '(defun pdb (command-line)
-     "Run pdb on program FILE in buffer `*gud-FILE*'.
+;;; XXX HACK: This is a bug since 23.1 which seemed to have been fixed
+;;; in 24
+(when (ublt/legacy?)
+  (eval-after-load "gud"
+    '(defun pdb (command-line)
+       "Run pdb on program FILE in buffer `*gud-FILE*'.
 The directory containing FILE becomes the initial working directory
 and source-file directory for your debugger."
-     (interactive
-      (list (gud-query-cmdline 'pdb)))
+       (interactive
+        (list (gud-query-cmdline 'pdb)))
 
-     (gud-common-init command-line nil 'gud-pdb-marker-filter)
-     (set (make-local-variable 'gud-minor-mode) 'pdb)
+       (gud-common-init command-line nil 'gud-pdb-marker-filter)
+       (set (make-local-variable 'gud-minor-mode) 'pdb)
 
-     (gud-def gud-break  "break %d%f:%l"  "\C-b" "Set breakpoint at current line.")
-     (gud-def gud-remove "clear %d%f:%l"  "\C-d" "Remove breakpoint at current line")
-     (gud-def gud-step   "step"         "\C-s" "Step one source line with display.")
-     (gud-def gud-next   "next"         "\C-n" "Step one line (skip functions).")
-     (gud-def gud-cont   "continue"     "\C-r" "Continue with display.")
-     (gud-def gud-finish "return"       "\C-f" "Finish executing current function.")
-     (gud-def gud-up     "up"           "<" "Up one stack frame.")
-     (gud-def gud-down   "down"         ">" "Down one stack frame.")
-     (gud-def gud-print  "p %e"         "\C-p" "Evaluate Python expression at point.")
-     ;; Is this right?
-     (gud-def gud-statement "! %e"      "\C-e" "Execute Python statement at point.")
+       (gud-def gud-break  "break %d%f:%l"  "\C-b" "Set breakpoint at current line.")
+       (gud-def gud-remove "clear %d%f:%l"  "\C-d" "Remove breakpoint at current line")
+       (gud-def gud-step   "step"         "\C-s" "Step one source line with display.")
+       (gud-def gud-next   "next"         "\C-n" "Step one line (skip functions).")
+       (gud-def gud-cont   "continue"     "\C-r" "Continue with display.")
+       (gud-def gud-finish "return"       "\C-f" "Finish executing current function.")
+       (gud-def gud-up     "up"           "<" "Up one stack frame.")
+       (gud-def gud-down   "down"         ">" "Down one stack frame.")
+       (gud-def gud-print  "p %e"         "\C-p" "Evaluate Python expression at point.")
+       ;; Is this right?
+       (gud-def gud-statement "! %e"      "\C-e" "Execute Python statement at point.")
 
-     ;; (setq comint-prompt-regexp "^(.*pdb[+]?) *")
-     (setq comint-prompt-regexp "^(Pdb) *")
-     (setq paragraph-start comint-prompt-regexp)
-     (run-hooks 'pdb-mode-hook)))
+       ;; (setq comint-prompt-regexp "^(.*pdb[+]?) *")
+       (setq comint-prompt-regexp "^(Pdb) *")
+       (setq paragraph-start comint-prompt-regexp)
+       (run-hooks 'pdb-mode-hook))))
 
 (add-to-list 'Info-directory-list "~/.emacs.d/lib/python")
 (require 'info-look)
