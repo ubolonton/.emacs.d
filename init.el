@@ -26,7 +26,7 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 (defvar ublt/packages
-  '(color-theme org paredit smex undo-tree pp-c-l yasnippet idle-highlight-mode
+  '(color-theme org paredit smex undo-tree pp-c-l yasnippet idle-highlight-mode auto-complete
                 ;; Dired
                 dired-details dired-details+
                 ;; Code folding
@@ -520,10 +520,27 @@ all of the sources."
 ;; auto-complete
 (require 'auto-complete)
 (require 'auto-complete-config)
-(global-auto-complete-mode +1)
 (ac-config-default)
-(add-hook 'eshell-mode-hook 'ac-eshell-mode-setup)
-(setq-default ac-auto-start nil)
+(ac-flyspell-workaround)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/data/auto-complete/dict")
+(global-auto-complete-mode +1)
+;; (add-hook 'eshell-mode-hook 'ac-eshell-mode-setup)
+(setq-default ac-auto-start nil
+              ac-sources '(ac-source-abbrev
+                           ac-source-dictionary
+                           ac-source-words-in-buffer
+                           ac-source-words-in-same-mode-buffers
+                           ac-source-words-in-all-buffer))
+(setq ac-delay 0.5
+      ac-auto-show-menu 1
+      ac-quick-help-delay 0.8)
+
+(dolist (mode '(magit-log-edit-mode log-edit-mode org-mode text-mode haml-mode
+                sass-mode yaml-mode csv-mode espresso-mode haskell-mode
+                html-mode nxml-mode sh-mode smarty-mode clojure-mode
+                lisp-mode textile-mode markdown-mode tuareg-mode))
+  (add-to-list 'ac-modes mode))
+
 
 ;;; Yasnippet --------------------------------------------------------
 
@@ -678,11 +695,8 @@ all of the sources."
 (add-hook 'ielm-mode-hook 'enable-paredit-mode)
 
 ;; ac-slime
-(ublt/add-path "ac-slime")
+;; (ublt/add-path "ac-slime")
 (require 'ac-slime)
-(setq ac-delay 0.5
-      ac-auto-show-menu 1
-      ac-quick-help-delay 0.8)
 (add-hook 'slime-mode-hook 'set-up-slime-ac)
 (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
 
