@@ -528,7 +528,7 @@ all of the sources."
 ;;; Yasnippet --------------------------------------------------------
 
 (ublt/set-up 'yasnippet
-  (setq yas/root-directory  "~/.emacs.d/data/snippets"
+  (setq yas/root-directory  "~/.emacs.d/data/yasnippet/snippets"
         yas/prompt-functions '(yas/dropdown-prompt ;; yas/ido-prompt yas/no-prompt
                                                    )
         yas/trigger-key nil)

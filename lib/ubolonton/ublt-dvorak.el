@@ -353,6 +353,7 @@
       ac-complete-mode-map
       "M-n"   'ac-next
       "M-p"   'ac-previous
+      "C-h"   'ac-help
       "M-TAB" 'ac-complete
       "C-SPC" 'ac-complete
       "SPC"   'ac-complete
