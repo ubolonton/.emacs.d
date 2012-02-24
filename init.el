@@ -408,7 +408,7 @@
      (todochiku-icon 'social))
     ad-do-it))
 
-;; git-emacs
+;; git-emacs (some complementary features)
 (ublt/add-path "git-emacs/")
 (require 'git-emacs)
 
@@ -526,11 +526,12 @@ all of the sources."
 (global-auto-complete-mode +1)
 ;; (add-hook 'eshell-mode-hook 'ac-eshell-mode-setup)
 (setq-default ac-auto-start nil
-              ac-sources '(ac-source-abbrev
+              ac-sources '(ac-source-yasnippet
                            ac-source-dictionary
                            ac-source-words-in-buffer
                            ac-source-words-in-same-mode-buffers
-                           ac-source-words-in-all-buffer))
+                           ac-source-words-in-all-buffer
+                           ac-source-abbrev))
 (setq ac-delay 0.5
       ac-auto-show-menu 1
       ac-quick-help-delay 0.8)
