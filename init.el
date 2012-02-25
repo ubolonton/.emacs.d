@@ -213,6 +213,13 @@
 (ublt/add-path "find-file-in-project")
 (require 'find-file-in-project)
 
+;; (require 'key-chord)
+;; (key-chord-mode +1)
+;; (key-chord-define-global "dd" 'kill-whole-line)
+
+(require 'volatile-highlights)
+(volatile-highlights-mode +1)
+
 ;;; Evil -------------------------------------------------------------
 ;; (ublt/add-path "evil")
 ;; (defface ublt/evil-insert-tag
