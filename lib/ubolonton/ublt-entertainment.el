@@ -59,9 +59,9 @@ use Emacs 21?!?!"
 (defface ublt/emms-mode-line-face
    '((t (:font "DejaVu Sans Condensed")))
    "EMMS mode-line string face")
-(setq emms-source-file-directory-tree-function
-      'emms-source-file-directory-tree-find
+(setq emms-source-file-directory-tree-function 'emms-source-file-directory-tree-find
       later-do-interval 0.001
+      emms-directory "~/.emacs.d/data/emms"
       emms-source-file-default-directory "~/Music/"
       emms-lyrics-dir "~/Music/Lyrics/"
       emms-show-format (propertize "  %s" 'face 'variable-pitch)
