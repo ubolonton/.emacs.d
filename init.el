@@ -68,7 +68,7 @@
 ;;                  (not (equal f ".")))
 ;;         (add-to-list 'load-path name)))))
 
-(ublt/add-path "ubolonton")
+(add-to-list 'load-path "~/.emacs.d/config")
 ;;; Path to stuffs that come from single files
 (ublt/add-path "single-file-modes")
 
