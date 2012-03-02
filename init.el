@@ -28,17 +28,20 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 (defvar ublt/packages
-  '(color-theme org paredit smex undo-tree pp-c-l yasnippet idle-highlight-mode auto-complete
-                ;; Dired
-                dired-details dired-details+
-                ;; Code folding
-                fold-dwim fold-dwim-org hideshowvis
-                ;; Languages
-                php-mode
-                clojure-mode clojurescript-mode durendal
-                ;; Starter kit
-                starter-kit starter-kit-bindings starter-kit-eshell
-                starter-kit-lisp starter-kit-js starter-kit-ruby))
+  '(smex auto-complete ac-slime ido-ubiquitous yasnippet
+         color-theme hl-line+ rainbow-mode pp-c-l idle-highlight-mode
+         org paredit undo-tree whole-line-or-region
+         ;; Dired
+         dired-details dired-details+
+         ;; Code folding
+         fold-dwim fold-dwim-org hideshowvis
+         ;; Languages
+         php-mode
+         clojure-mode clojurescript-mode durendal swank-clojure
+         elisp-slime-nav
+         ;; Starter kit
+         starter-kit starter-kit-bindings starter-kit-eshell
+         starter-kit-lisp starter-kit-js starter-kit-ruby))
 (dolist (p ublt/packages)
   (when (not (package-installed-p p))
     (package-install p)))
