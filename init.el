@@ -30,13 +30,15 @@
 (defvar ublt/packages
   '(smex auto-complete ac-slime ido-ubiquitous yasnippet
          color-theme hl-line+ rainbow-mode pp-c-l idle-highlight-mode
-         org paredit undo-tree whole-line-or-region
+         org textmate paredit undo-tree whole-line-or-region
+         ;; Don't actually use these themes, just to learn some ideas
+         color-theme-solarized color-theme-zenburn
          ;; Dired
          dired-details dired-details+
          ;; Code folding
          fold-dwim fold-dwim-org hideshowvis
          ;; Languages
-         php-mode
+         markdown-mode php-mode
          clojure-mode clojurescript-mode durendal swank-clojure
          elisp-slime-nav
          ;; Starter kit
