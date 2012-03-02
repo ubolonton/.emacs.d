@@ -18,7 +18,7 @@
       twittering-use-master-password t
       twittering-use-icon-storage t
       twittering-display-remaining t
-      twittering-new-tweets-count 300
+      twittering-number-of-tweets-on-retrieval 100
       )
 (add-hook 'twittering-mode-hook 'esk-turn-on-hl-line-mode)
 (add-hook 'twittering-edit-mode-hook '(lambda () (auto-fill-mode -1)))

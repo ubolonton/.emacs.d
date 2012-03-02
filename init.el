@@ -11,9 +11,11 @@
 ;; ;;; XXX: elnode depends on this
 ;; (add-to-list 'load-path "~/.emacs.d/lib/apel")
 
-;;; XXX: FLIM breaks this (no mailcap-parse-mailcaps)
-(if (eql system-type 'gnu/linux)
-  (load-file "/usr/local/share/emacs/24.0.50/lisp/gnus/mailcap.elc"))
+;;; HACK XXX: FLIM breaks this (no mailcap-parse-mailcaps)
+(when (eql system-type 'gnu/linux)
+  (if (ublt/legacy?)
+      (load-file "/usr/share/emacs/23.1/lisp/gnus/mailcap.elc")
+    (load-file "/usr/local/share/emacs/24.0.94/lisp/gnus/mailcap.elc")))
 
 ;;; Emacs is not a text editor, and here we load its package manager!
 (require 'package)
@@ -212,7 +214,7 @@
 ;;; TODO: Set this up
 (ublt/add-path "find-file-in-project")
 (require 'find-file-in-project)
-
+
 ;; (require 'key-chord)
 ;; (key-chord-mode +1)
 ;; (key-chord-define-global "dd" 'kill-whole-line)
@@ -351,7 +353,8 @@
 
 ;; (setq ido-decorations '( "(" ")" " | " " | ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]"))
 (setq ido-decorations (quote ("\n=> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]"))
-      ido-use-virtual-buffers t)
+      ido-use-virtual-buffers t
+      ido-max-directory-size 100000)
 (defun ido-disable-line-trucation () (set (make-local-variable 'truncate-lines) nil))
 (add-hook 'ido-minibuffer-setup-hook 'ido-disable-line-trucation)
 
@@ -546,7 +549,8 @@ all of the sources."
 (dolist (mode '(magit-log-edit-mode log-edit-mode org-mode text-mode haml-mode
                 sass-mode yaml-mode csv-mode espresso-mode haskell-mode
                 html-mode nxml-mode sh-mode smarty-mode clojure-mode
-                lisp-mode textile-mode markdown-mode tuareg-mode))
+                lisp-mode textile-mode markdown-mode tuareg-mode
+                nxhtml-mode))
   (add-to-list 'ac-modes mode))
 
 
@@ -626,7 +630,9 @@ all of the sources."
      ;; Extra features (contrib)
      (slime-setup
       '(slime-repl ;; slime-fuzzy
-                   ;; slime-highlight-edits
+        ;; slime-highlight-edits
+        slime-scratch
+        slime-editing-commands
                    ))
      (setq slime-net-coding-system 'utf-8-unix
            slime-complete-symbol-function 'slime-fuzzy-complete-symbol
@@ -763,9 +769,9 @@ all of the sources."
                 ;; py-default-interpreter py-shell-name
                 ;; python-command         py-shell-name
                 py-shell-switch-buffers-on-execute nil)
+  (require 'python-mode)
   (require 'ipython)
   (setq-default py-python-command-args (list "-colors" "Linux"))
-  (require 'python-mode)
   (require 'pymacs)
   ;; Bug in `python-mode'. They use defalias which is intended for
   ;; functions, not variables
