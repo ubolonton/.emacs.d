@@ -1,43 +1,40 @@
-[submodule "git-emacs"]
+[submodule "lib/git-emacs"]
 	path = lib/git-emacs
 	url = http://github.com/tsgates/git-emacs.git
-[submodule "anything/anything-config"]
-	path = lib/anything/anything-config
-	url = git://repo.or.cz/anything-config.git
-[submodule "ac-slime"]
+[submodule "lib/ac-slime"]
 	path = lib/ac-slime
 	url = http://github.com/purcell/ac-slime.git
-[submodule "twittering-mode"]
+[submodule "lib/twittering-mode"]
 	path = lib/twittering-mode
 	url = http://github.com/hayamiz/twittering-mode.git
-[submodule "textmate.el"]
+[submodule "lib/textmate.el"]
 	path = lib/textmate.el
 	url = http://github.com/defunkt/textmate.el.git
-[submodule "pylookup"]
+[submodule "lib/pylookup"]
 	path = lib/pylookup
 	url = http://github.com/tsgates/pylookup.git
-[submodule "magit"]
+[submodule "lib/magit"]
 	path = lib/magit
 	url = http://github.com/magit/magit.git
-[submodule "emms"]
+[submodule "lib/emms"]
 	path = lib/emms
 	url = git://git.sv.gnu.org/emms.git
-[submodule "bookmark-plus"]
+[submodule "lib/bookmark-plus"]
 	path = lib/bookmark-plus
 	url = https://github.com/emacsmirror/bookmark-plus.git
-[submodule "find-file-in-project"]
+[submodule "lib/find-file-in-project"]
 	path = lib/find-file-in-project
 	url = https://github.com/technomancy/find-file-in-project.git
-[submodule "eproject"]
+[submodule "lib/eproject"]
 	path = lib/eproject
 	url = ./eproject
-[submodule "epresent"]
+[submodule "lib/epresent"]
 	path = lib/epresent
 	url = ./epresent/
-[submodule "slime"]
+[submodule "lib/slime"]
 	path = lib/slime
 	url = ./slime
-[submodule "swank-clojure-extra"]
+[submodule "lib/swank-clojure-extra"]
 	path = lib/swank-clojure-extra
 	url = ./swank-clojure-extra/
 [submodule "lib/emacs-skype"]
@@ -52,3 +49,6 @@
 [submodule "lib/nxhtml"]
 	path = lib/nxhtml
 	url = https://github.com/emacsmirror/nxhtml.git
+[submodule "lib/anything-config"]
+	path = lib/anything-config
+	url = git://repo.or.cz/anything-config.git

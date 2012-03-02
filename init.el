@@ -425,9 +425,8 @@
 ;;; Quicksilver/Spotlight for Emacs ----------------------------------
 ;;; TODO: Clean up
 
-(ublt/add-path "anything/")
-(ublt/add-path "anything/anything-config/")
-(ublt/add-path "anything/anything-config/extensions")
+(ublt/add-path "anything-config/")
+(ublt/add-path "anything-config/extensions")
 ;; (require 'anything)
 ;; (require 'anything-etags)
 ;; I don't use `anything-startup' since some of the packages there are
