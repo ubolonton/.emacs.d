@@ -27,16 +27,16 @@
 	url = https://github.com/technomancy/find-file-in-project.git
 [submodule "lib/eproject"]
 	path = lib/eproject
-	url = ./eproject
+	url = https://github.com/jrockway/eproject.git
 [submodule "lib/epresent"]
 	path = lib/epresent
-	url = ./epresent/
+	url = https://github.com/technomancy/epresent.git
 [submodule "lib/slime"]
 	path = lib/slime
-	url = ./slime
+	url = https://github.com/technomancy/slime.git
 [submodule "lib/swank-clojure-extra"]
 	path = lib/swank-clojure-extra
-	url = ./swank-clojure-extra/
+	url = https;//github.com/vu3rdd/swank-clojure-extra.git
 [submodule "lib/emacs-skype"]
 	path = lib/emacs-skype
 	url = https://github.com/kiwanami/emacs-skype.git
