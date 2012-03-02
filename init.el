@@ -294,7 +294,7 @@
      (case system-type
        ('darwin "open")
        ;; XXX: Why doesn't 'gnome-open' work?
-       ('gnu/linux "~/.emacs.d/ubolonton/open.sh"))
+       ('gnu/linux "~/.emacs.d/config/open.sh"))
      current-prefix-arg
      (dired-get-marked-files t current-prefix-arg))))
 
