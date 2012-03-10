@@ -29,7 +29,7 @@
   (package-refresh-contents))
 (defvar ublt/packages
   '(smex auto-complete ac-slime ido-ubiquitous yasnippet
-         color-theme hl-line+ rainbow-mode pp-c-l idle-highlight-mode
+         color-theme hl-line+ rainbow-mode pp-c-l idle-highlight-mode diminish
          org textmate paredit undo-tree whole-line-or-region
          ;; Don't actually use these themes, just to learn some ideas
          color-theme-solarized color-theme-zenburn

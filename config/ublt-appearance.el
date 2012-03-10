@@ -228,11 +228,11 @@
 ;;; Sometimes buffers have the same names
 ;; from `http://trey-jackson.blogspot.com/2008/01/emacs-tip-11-uniquify.html'
 (ublt/set-up 'uniquify
-(setq uniquify-buffer-name-style 'reverse
-      uniquify-separator "  "
-      ;; Rename after killing uniquified
-      uniquify-after-kill-buffer-p t
-      ;; Don't muck with special buffers
+  (setq uniquify-buffer-name-style 'reverse
+        uniquify-separator "  "
+        ;; Rename after killing uniquified
+        uniquify-after-kill-buffer-p t
+        ;; Don't muck with special buffers
         uniquify-ignore-buffers-re "^\\*"))
 
 ;; Uncluttered shell prompt
@@ -241,7 +241,16 @@
                                 "\n╭─ " (eshell-user-name)
                                 "  " (abbreviate-file-name (eshell/pwd))
                                 "\n╰─ ")))
-
+
+;;; Make mode-line uncluttered by changing how minor modes are shown
+(ublt/set-up 'diminish
+  (diminish 'paredit-mode "()")
+  (diminish 'elisp-slime-nav-mode)
+  (diminish 'eproject-mode "Pro")
+  (diminish 'undo-tree-mode "Undo")
+  (diminish 'yas/minor-mode "Yas")
+  (diminish 'flymake-mode " !")
+  (diminish 'flyspell-mode " !"))
 
 ;;; mode-line appearance
 (defgroup ubolonton nil ""
