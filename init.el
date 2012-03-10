@@ -242,10 +242,10 @@
 ;;   `((t (:inherit font-lock-preprocessor-face)))
 ;;   "Evil visual mode indicator face")
 ;; (setq evil-mode-line-format 'before
-;;       evil-normal-state-tag (propertize "(-N-)" 'face 'ublt/evil-normal-tag)
-;;       evil-insert-state-tag (propertize "( I )" 'face 'ublt/evil-insert-tag)
+;;       evil-normal-state-tag (propertize "« ☢ »" 'face 'ublt/evil-normal-tag)
+;;       evil-insert-state-tag (propertize "( | )" 'face 'ublt/evil-insert-tag)
 ;;       evil-emacs-state-tag  (propertize "( E )" 'face 'ublt/evil-emacs-tag)
-;;       evil-visual-state-tag (propertize "( V )" 'face 'ublt/evil-visual-tag)
+;;       evil-visual-state-tag (propertize "( ∞ )" 'face 'ublt/evil-visual-tag)
 ;;       evil-normal-state-cursor '(box "#F86155")
 ;;       evil-insert-state-cursor '(bar "yellow")
 ;;       evil-emacs-state-cursor  '(bar "yellow")
