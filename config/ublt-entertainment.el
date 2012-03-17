@@ -99,4 +99,9 @@ use Emacs 21?!?!"
 (defadvice emms-play-playlist (after shuffle activate)
   (emms-shuffle) (emms-next) (emms-shuffle))
 
+(defun ublt/start-or-pause ()
+  (if emms-player-playing-p
+      (emms-pause)
+    (call-interactively 'emms-play-native-playlist)))
+
 (provide 'ublt-entertainment)
