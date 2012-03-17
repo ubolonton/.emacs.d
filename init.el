@@ -588,12 +588,28 @@ all of the sources."
 (load "autostart.el")
 
 ;; Javascript (it seems js-mode in Emacs is newer than espresso)
+;; v8: scons via apt-get (not pip or easy_install; among other things,
+;; build tool & package manager is what clojure gets absolutely right,
+;; whereas python sucks ass).
+;; Actually screw that, use virtualenv and easy_install scons, as
+;; described here https://github.com/koansys/jshint-v8. But remember
+;; to do
+;;
+;; export SCONS_LIB_DIR=/path/to/virtual-scons-egg/scons-sth
+;;
+;; scons console=readline snapshot=on library=shared d8
+;;
+;; Well it's still complains about missing libv8.so. Just install
+;; "node" then.
+;;
 ;; MozRepl integration
+;;
 ;; (defalias 'javascript-mode 'espresso-mode)
 ;; (setq js-mode-hook '())
 (setq flymake-jslint-command "jslint")
 (add-hook 'js-mode-hook 'moz-minor-mode)
 (autoload 'moz-minor-mode "moz" "Mozilla Minor and Inferior Mozilla Modes" t)
+
 ;; Factor
 (ublt/in '(darwin)
   (load-file "/Applications/factor/misc/fuel/fu.el"))
@@ -762,6 +778,27 @@ all of the sources."
   (ublt/flymake-err-echo))
 (defadvice flymake-goto-prev-error (after display-message activate)
   (ublt/flymake-err-echo))
+
+(eval-after-load "js"
+  '(progn
+     (defun flymake-jshint-init ()
+       (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                          'flymake-create-temp-inplace))
+              (local-file (file-relative-name
+                           temp-file
+                           (file-name-directory buffer-file-name))))
+         (list "jshint" (list "--jquery" local-file))))
+     (setq flymake-allowed-file-name-masks
+           (cons '(".+\\.js$"
+                   flymake-jshint-init
+                   flymake-simple-cleanup
+                   flymake-get-real-file-name)
+                 flymake-allowed-file-name-masks))
+     (setq flymake-err-line-patterns
+           (cons '("^Lint at line \\([[:digit:]]+\\) character \\([[:digit:]]+\\): \\(.+\\)$"
+                   nil 1 2 3)
+                 flymake-err-line-patterns))
+     ))
 
 ;;; Python -----------------------------------------------------------
 ;; The length of this section proves python support in Emacs is weak,
@@ -769,15 +806,18 @@ all of the sources."
 ;; initialization is very slow.
 ;; Try to install stuffs from official pages instead of from
 ;; apt (use easy_install)
+
+;; pymacs, ropemode, ropemacs
+
 (ublt/in '(gnu/linux darwin)
   (ublt/add-path "python")
   (setq-default ;; py-shell-name          "ipython"
-                ;; py-python-command      py-shell-name
-                ;; py-jpython-command     py-shell-name
-                ;; py-jython-command      py-shell-name
-                ;; py-default-interpreter py-shell-name
-                ;; python-command         py-shell-name
-                py-shell-switch-buffers-on-execute nil)
+   ;; py-python-command      py-shell-name
+   ;; py-jpython-command     py-shell-name
+   ;; py-jython-command      py-shell-name
+   ;; py-default-interpreter py-shell-name
+   ;; python-command         py-shell-name
+   py-shell-switch-buffers-on-execute nil)
   (require 'python-mode)
   (require 'ipython)
   (setq-default py-python-command-args (list "-colors" "Linux"))
@@ -822,6 +862,8 @@ all of the sources."
 prompt returned to comint."
     (replace-regexp-in-string "[]" "" string))
   (defun ublt/use-py-imenu-support ()
+    ;; py-imenu-create-index-function =>
+    ;; py-imenu-create-index-new some where between 5 & 6
     (setq imenu-create-index-function #'py-imenu-create-index-function))
   (defun ublt/turn-on-ropemacs-mode ()
     (when (and buffer-file-name
