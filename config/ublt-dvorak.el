@@ -223,7 +223,7 @@
  "M-<left>"      'backward-list
  "M-<right>"     'forward-list
 
- ;; Multimedia keys
+ ;; XXX: Multimedia keys
  "<XF86Forward>" 'emms-next
  "<XF86Back>"    'emms-previous
  "<XF86Reload>"  'emms-pause
@@ -329,6 +329,12 @@
       "M-TAB" 'auto-complete
       )
      ))
+(eval-after-load "js"
+  '(ublt/define-keys
+    js-mode-map
+    "M-n"     'flymake-goto-next-error
+    "M-p"     'flymake-goto-prev-error
+    ))
 (eval-after-load "paredit"
   '(ublt/define-keys
     paredit-mode-map
@@ -445,6 +451,16 @@
   '(ublt/define-keys
     clojure-mode-map
     "C-c C-s" 'run-lisp))
+(eval-after-load "factor-mode"
+  '(progn
+     (ublt/define-keys
+      factor-mode-map
+      "C-c C-c" 'fuel-eval-definition
+      "C-c C-s" 'run-factor)
+     (ublt/define-keys
+      fuel-mode-map
+      "C-c C-c" 'fuel-eval-definition
+      "C-c C-s" 'run-factor)))
 (eval-after-load "info"
   '(ublt/define-keys
     Info-mode-map
