@@ -195,6 +195,7 @@
   (setenv "PATH" (concat "/opt/local/bin:/usr/local/bin:" (getenv "PATH")))
   (push "/usr/local/bin" exec-path)
   (push "/opt/local/bin" exec-path))
+(setenv "PATH" (concat "/home/ubolonton/bin:" (getenv "PATH")))
 
 ;; TextMate minor mode
 (require 'textmate)
