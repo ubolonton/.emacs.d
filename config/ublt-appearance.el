@@ -36,6 +36,8 @@
                  ;; (screen-gamma . 2.205)
                  ;; And this, my new monitor, even after calibration?!?
                  (screen-gamma . 2.7)
+                 ;; Daylight adaptation
+                 ;; (screen-gamma . 4)
                  (font . "DejaVu Sans Mono-10")))))
 
 ;; TODO: Enable this except for twitter buffers

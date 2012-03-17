@@ -14,13 +14,17 @@
 ;;; HACK XXX: FLIM breaks this (no mailcap-parse-mailcaps)
 (when (eql system-type 'gnu/linux)
   (if (ublt/legacy?)
-      (load-file "/usr/share/emacs/23.1/lisp/gnus/mailcap.elc")
+      (load-file "/usr/share/emacs/23.2/lisp/gnus/mailcap.elc")
     (load-file "/usr/local/share/emacs/24.0.94/lisp/gnus/mailcap.elc")))
 
 ;;; Emacs is not a text editor, and here we load its package manager!
 (require 'package)
 (dolist (source '(("marmalade" . "http://marmalade-repo.org/packages/")
-                  ("elpa" . "http://tromey.com/elpa/")))
+                  ("elpa" . "http://tromey.com/elpa/")
+                  ;; TODO: Maybe, use this after emacs24 is released
+                  ;; (development versions of packages)
+                  ;; ("melpa" . "http://melpa.milkbox.net/packages/")
+                  ))
   (add-to-list 'package-archives source t))
 (package-initialize)
 
