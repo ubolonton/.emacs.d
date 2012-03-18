@@ -244,16 +244,6 @@
                                 "  " (abbreviate-file-name (eshell/pwd))
                                 "\n╰─ ")))
 
-;;; Make mode-line uncluttered by changing how minor modes are shown
-(ublt/set-up 'diminish
-  (diminish 'paredit-mode "()")
-  (diminish 'elisp-slime-nav-mode)
-  (diminish 'eproject-mode "Pro")
-  (diminish 'undo-tree-mode "Undo")
-  (diminish 'yas/minor-mode "Yas")
-  (diminish 'flymake-mode " !")
-  (diminish 'flyspell-mode " !"))
-
 ;;; mode-line appearance
 (defgroup ubolonton nil ""
   :group 'personal)
@@ -310,6 +300,17 @@
 ;;        '(:eval (propertize "%m" 'face 'ublt/mode-line-major-mode))
 ;;        minor-mode-alist
 ;;        ")")
+
+;;; Make mode-line uncluttered by changing how minor modes are shown
+(ublt/set-up 'diminish
+  (diminish 'paredit-mode "()")
+  (diminish 'elisp-slime-nav-mode)
+  (diminish 'eproject-mode "Proj")
+  (diminish 'undo-tree-mode "⌘-Z")
+  (diminish 'yas/minor-mode "Yas")
+  (diminish 'flymake-mode " !")
+  (diminish 'flyspell-mode " !")
+  )
 
 ;;; Misc
 
