@@ -77,16 +77,14 @@ selection. Works on `mark-enclosing-sexp'."
 
 ;;; Copy/cut whole line if no region is selected
 ;; `http://www.emacswiki.org/emacs/WholeLineOrRegion'
-(put 'kill-ring-save 'interactive-form
+(dolist (command (list 'kill-ring-save 'kill-region
+                       'clipboard-kill-ring-save
+                       'clipboard-kill-region))
+  (put command 'interactive-form
      '(interactive
        (if (use-region-p)
            (list (region-beginning) (region-end))
-         (list (line-beginning-position) (line-beginning-position 2)))))
-(put 'kill-region 'interactive-form
-     '(interactive
-       (if (use-region-p)
-           (list (region-beginning) (region-end))
-         (list (line-beginning-position) (line-beginning-position 2)))))
+           (list (line-beginning-position) (line-beginning-position 2))))))
 ;;; Because they set mark if the region is not active
 (defadvice kill-ring-save (after pop-spurious-mark activate)
   (unless (use-region-p)

@@ -62,6 +62,15 @@
 ;;; ~/.emacs.d/ubolonton/init.el. And don't ever choose "elpa" as your
 ;;; user name =))
 
+;;; Clipboard integration for old version
+(when (ublt/legacy?)
+  (ublt/define-keys
+   global-map
+   "M-w" 'clipboard-kill-ring-save
+   "C-w" 'clipboard-kill-region
+   "C-y" 'clipboard-yank))
+
+
 (defun ublt/add-path (path)
   "Add to load-path a path relative to ~/.emacs.d/lib/"
   (add-to-list 'load-path (concat "~/.emacs.d/lib/" path)))
