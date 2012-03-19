@@ -102,6 +102,6 @@ use Emacs 21?!?!"
 (defun ublt/start-or-pause ()
   (if emms-player-playing-p
       (emms-pause)
-    (call-interactively 'emms-play-native-playlist)))
+    (call-interactively 'emms-play-playlist)))
 
 (provide 'ublt-entertainment)
