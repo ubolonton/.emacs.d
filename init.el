@@ -762,7 +762,6 @@ all of the sources."
 ;; (add-to-list 'flymake-err-line-patterns
 ;;   '("\\(Parse\\|Fatal\\) error: +\\(.*?\\) in \\(.*?\\) on line \\([0-9]+\\)$" 3 4 nil 2))
 ;; (add-to-list 'flymake-allowed-file-name-masks '("\\.php$" flymake-php-init))
-;; (defun enable-flymake () (flymake-mode 1))
 ;; (add-hook 'php-mode-hook 'enable-flymake)
 
 (defun ublt/flymake-err-at (pos)
@@ -808,6 +807,10 @@ all of the sources."
                    nil 1 2 3)
                  flymake-err-line-patterns))
      ))
+
+(defun enable-flymake () (flymake-mode 1))
+(dolist (hook '(emacs-lisp-mode-hook))
+  (add-hook hook #'enable-flymake))
 
 ;;; Python -----------------------------------------------------------
 ;; The length of this section proves python support in Emacs is weak,

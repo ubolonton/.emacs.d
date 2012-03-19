@@ -435,6 +435,8 @@
            "C-c C-r" 'eval-region
            "C-c C-l" 'eval-buffer
            "C-c C-s" 'ielm
+           "M-p" 'flymake-goto-prev-error
+           "M-n" 'flymake-goto-next-error
            )
           (ublt/define-keys
            lisp-mode-map
