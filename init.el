@@ -507,19 +507,23 @@ font (fixed-pitch is still preferable)."
                          ;; helm-c-source-helm-commands
                          )))
          sources))
-(defun ublt/helm-setup-variable-pitch-font ()
+(defun ublt/helm-tweak-appearance ()
   "Use variable-pitched font for helm if it's suitable for
 all of the sources."
   (with-current-buffer helm-buffer
     (when (ublt/helm-should-use-variable-pitch? helm-sources)
-      (variable-pitch-mode +1))))
-(add-hook 'helm-after-initialize-hook 'ublt/helm-setup-variable-pitch-font)
+      (variable-pitch-mode +1))
+    (setq line-spacing 0.5)
+    (text-scale-increase 2)))
+(add-hook 'helm-after-initialize-hook 'ublt/helm-tweak-appearance)
 ;;; XXX: Big hack!
 ;;; TODO: Move to ublt-appearance?
-(defadvice helm-initialize-overlays (after use-variable-pitch-font activate)
+(defadvice helm-initialize-overlays (after tweak-appearance activate)
   (condition-case nil
       (with-current-buffer helm-action-buffer
-        (variable-pitch-mode +1))
+        (variable-pitch-mode +1)
+        (setq line-spacing 0.5)
+        (text-scale-increase 2))
     (error nil)))
 
 ;; auto-complete
