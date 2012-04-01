@@ -466,6 +466,8 @@
       ;; helm-c-source-git-project-files
       ;; helm-c-source-emacs-process
       )
+(ublt/in '(gnu/linux)
+  (setq helm-c-locate-command "locate -i -r '%s'"))
 
 (defun ublt/helm ()
   (interactive)
