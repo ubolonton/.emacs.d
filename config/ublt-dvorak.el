@@ -133,10 +133,10 @@
  "M-s-n"         'textmate-shift-right
  "M-s-c"         'ublt/move-text-up
  "M-s-t"         'ublt/move-text-down
- "M-s-˙"         'textmate-shift-left           ; OS X
- "M-s-˜"         'textmate-shift-right          ; OS X
- "M-s-ç"         'ublt/move-text-up             ; OS X
- "M-s-†"         'ublt/move-text-down           ; OS X
+ "M-s-˙"         'textmate-shift-left   ; OS X
+ "M-s-˜"         'textmate-shift-right  ; OS X
+ "M-s-ç"         'ublt/move-text-up     ; OS X
+ "M-s-†"         'ublt/move-text-down   ; OS X
 
  ;; Windows manipulation
  "s-1"           'delete-other-windows
@@ -215,8 +215,8 @@
  "M-X"           'smex-major-mode-commands
  "C-h C-a"       'apropos-command
  ;; "C-x C-b"       'ido-switch-buffer     ; Because it's to easy to mis-press
- "C-x C-b"       'anything     ; Because it's to easy to mis-press
- "C-x b"         'anything
+ "C-x C-b"       'ublt/helm        ; Because it's to easy to mis-press
+ "C-x b"         'ublt/helm
  "C-x B"         'ibuffer
  "C-S-s"         'ublt/isearch-other-window
 
