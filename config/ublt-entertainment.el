@@ -62,6 +62,7 @@ use Emacs 21?!?!"
 (setq emms-source-file-directory-tree-function 'emms-source-file-directory-tree-find
       later-do-interval 0.001
       emms-directory "~/.emacs.d/data/emms"
+      emms-stream-bookmarks-file "~/.emacs.d/data/emms/streams"
       emms-source-file-default-directory "~/Music/"
       emms-lyrics-dir "~/Music/Lyrics/"
       emms-show-format (propertize "  %s" 'face 'variable-pitch)
