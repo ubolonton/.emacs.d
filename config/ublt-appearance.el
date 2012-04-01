@@ -303,14 +303,36 @@
 
 ;;; Make mode-line uncluttered by changing how minor modes are shown
 (ublt/set-up 'diminish
-  (diminish 'paredit-mode "()")
-  (diminish 'elisp-slime-nav-mode)
-  (diminish 'eproject-mode "Proj")
-  (diminish 'undo-tree-mode "⌘-Z")
-  (diminish 'yas/minor-mode "Yas")
-  (diminish 'flymake-mode " !")
-  (diminish 'flyspell-mode " !")
+  ;; (diminish 'paredit-mode "()")
+  ;; (diminish 'elisp-slime-nav-mode)
+  ;; (diminish 'eproject-mode "Proj")
+  ;; (diminish 'undo-tree-mode "⌘-Z")
+  ;; (diminish 'yas/minor-mode "Yas")
+  ;; (diminish 'flymake-mode " !")
+  ;; (diminish 'flyspell-mode " !")
   )
+;;; `diminish' is limited to text, so I just roll my own, plus it
+;; seems to have problem with modes not loaded yet (so it would
+;; involve `eval-after-load').
+(defun ublt/minor-mode-display (&rest mappings)
+  (let ((i 0))
+    (while (< i (length mappings))
+      (if (= (mod i 2) 0)
+          (let ((mode (elt mappings i))
+                (display (elt mappings (1+ i))))
+            (set-nested-alist (list mode) display
+                              minor-mode-alist)))
+      (setq i (+ i 2)))))
+;;; TODO: Use images (propertize "mode" 'display (find-images ...))
+(ublt/minor-mode-display
+ 'yas/minor-mode " Yas"
+ 'paredit-mode   " ()"
+ 'undo-tree-mode " ⌘-Z"
+ 'flyspell-mode  " !"
+ 'flymake-mode   " !"
+ 'eproject-mode  " Proj"
+ )
+
 
 ;;; Misc
 
