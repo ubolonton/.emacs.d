@@ -64,7 +64,7 @@
 ;; - Show namespace/module not buffer name, e.g. "clojure.core/map",
 ;;   highlight in using appropriate color.
 ;;
-;; - Follow-mode à la `anything'.
+;; - Follow-mode à la `helm'.
 ;;
 ;; - Highlight based on symbol types (seems impossible since imenu does
 ;;   not give that info).

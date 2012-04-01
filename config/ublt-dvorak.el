@@ -148,11 +148,11 @@
 
  ;; Utilities, super-
  "s-h"           'ido-switch-buffer
- "s-d"           'anything-command-map
+ "s-d"           'helm-command-prefix
  "s-n"           'ublt/switch-to-last-buffer
  "s-g"           'magit-status
  "s-r"           'org-remember "s-R" 'org-agenda
- "s-f"           'ublt/anything-occur-at-point
+ "s-f"           'ublt/helm-occur-at-point
  "s-b"           'ublt/browse-url-at-point
  "s-p"           'pop-global-mark
  "s-F"           'find-grep
@@ -211,7 +211,7 @@
  "C-z"           nil                    ; who needs suspend-frame?
  "C-x C-h"       nil                    ; bad emacs-starter-kit
  "S-s-SPC"       'whitespace-mode
- ;; "M-x"           'anything-M-x          ; C-x C-m for the original
+ ;; "M-x"           'helm-M-x          ; C-x C-m for the original
  "M-X"           'smex-major-mode-commands
  "C-h C-a"       'apropos-command
  ;; "C-x C-b"       'ido-switch-buffer     ; Because it's to easy to mis-press
@@ -293,17 +293,19 @@
 ;;; TODO:
 ;; C-M-x
 
-(eval-after-load "anything"
+(eval-after-load "helm"
   '(ublt/define-keys
-    anything-map
+    helm-map
     "s-h"         'minibuffer-keyboard-quit
     "s-<return> " 'minibuffer-keyboard-quit
     ))
-(eval-after-load "anything-config"
+(eval-after-load "helm-config"
   '(ublt/define-keys
-    anything-command-map
-    "s-r" 'anything-emms
-    "g"   'anything-google-suggest
+    helm-command-map
+    "s-r" 'helm-emms
+    "g"   'helm-google-suggest
+    "l"   'helm-locate
+    "p"   'helm-list-emacs-process
     ))
 (eval-after-load "python-mode"
   '(progn
@@ -315,7 +317,6 @@
       "M-p"     'flymake-goto-prev-error
       "C-c h"   'pylookup-lookup
       "M-TAB"   'auto-complete
-      ;; "M-TAB"   'anything-ipython-complete
       "C-c C-c" 'py-execute-def-or-class ; was py-execute-buffer
       "C-c C-r" 'py-execute-region       ; was py-shift-region-right
       "C-c C-l" 'py-execute-buffer       ; was py-shift-region-left
@@ -526,8 +527,5 @@
     sql-mode-map
     "C-c C-s" 'sql-product-interactive  ; was sql-send-string
     ))
-
-;; (ublt/in '(windows-nt)
-;;   (global-set-key (kbd "C-M-<return>") 'anything))
 
 (provide 'ublt-dvorak)

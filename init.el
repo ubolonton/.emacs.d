@@ -414,7 +414,7 @@
 (require 'magit-svn)
 (setq magit-diff-options '("-w"))
 ;; magit status buffer should not be a pop-up (in the sense of not
-;; volatile or temporary like anything buffer). This is important for
+;; volatile or temporary like helm buffer). This is important for
 ;; small screen such as mine.
 (setq magit-status-buffer-switch-function 'switch-to-buffer)
 
@@ -444,104 +444,81 @@
 ;;; Quicksilver/Spotlight for Emacs ----------------------------------
 ;;; TODO: Clean up
 
-(ublt/add-path "anything-config/")
-(ublt/add-path "anything-config/extensions")
-;; (require 'anything)
-;; (require 'anything-etags)
-;; I don't use `anything-startup' since some of the packages there are
-;; not suitable. For example, `anything-match-plugin' is slow.
-(require 'anything-config)
-(require 'anything-match-plugin)
-(setq anything-mp-highlight-delay 0.5
-      anything-mp-highlight-threshold 4)
-
-;; http://www.emacswiki.org/emacs/AnythingSources#toc62
-(require 'magit)
-(defvar anything-c-source-git-project-files
-  '((name . "Files from Current GIT Project")
-    (init . (lambda ()
-              (setq anything-git-top-dir
-                    (magit-get-top-dir
-                     (if (buffer-file-name)
-                         (file-name-directory (buffer-file-name))
-                       default-directory)))))
-    (candidates
-     . (lambda ()
-         (if anything-git-top-dir
-             (let ((default-directory anything-git-top-dir))
-               (mapcar (lambda (file) (concat default-directory file))
-                       (magit-shell-lines
-                        (magit-format-git-command
-                         "ls-files" nil)))))))
-    (type . file)))
-
-(eval-after-load "anything"
-  '(progn
-     (setq anything-sources
-           '( ;; Adapt from `anything-for-files-prefered-list'
-             anything-c-source-ffap-line
-             anything-c-source-ffap-guesser
-             anything-c-source-buffers-list
-             anything-c-source-files-in-current-dir+
-             anything-c-source-bookmarks
-             anything-c-source-recentf
-             anything-c-source-file-cache
-             anything-c-source-locate
+(ublt/add-path "helm")
+(require 'helm-config)
+(require 'helm-match-plugin)
+(require 'helm-regexp)
+(require 'helm-buffers)
+(require 'helm-files)
+(setq helm-mp-highlight-delay 0.7
+      helm-mp-highlight-threshold 4)
+(setq ublt/helm-sources
+      '(helm-c-source-ffap-line
+        helm-c-source-ffap-guesser
+        helm-c-source-buffers-list
+      ;; helm-c-source-files-in-current-dir+
+        helm-c-source-bookmarks
+        helm-c-source-recentf
+        helm-c-source-file-cache
+        helm-c-source-locate)
              ;; Additions
-             ;; anything-c-source-semantic
-             ;; anything-c-source-git-project-files
-             anything-c-source-emacs-process
-             ))))
+      ;; helm-c-source-semantic
+      ;; helm-c-source-git-project-files
+      ;; helm-c-source-emacs-process
+      )
+
+(defun ublt/helm ()
+  (interactive)
+  (helm-other-buffer ublt/helm-sources "*ublt/helm*"))
 
 ;; Find occurences of current symbol
 ;; TODO: turn on follow-mode by default for this
 (require 'thingatpt)
-(defun ublt/anything-occur-at-point ()
+(defun ublt/helm-occur-at-point ()
   (interactive)
-  (let ((anything-follow-mode t))
-    (anything :sources anything-c-source-occur
+  (let ((helm-follow-mode t))
+    (helm :sources helm-c-source-occur
               :input (thing-at-point 'symbol))))
 
-;;; TODO: Maybe customize faces is better?
-;;; XXX: `anything-M-x' does not define a source
-(defun ublt/anything-should-use-variable-pitch? (sources)
+;;; TODO: Maybe customize faces is better (per-source selection of
+;;; fixed-pitch/variable-pitched font)?
+;;; XXX: `helm-M-x' does not define a source
+(defun ublt/helm-should-use-variable-pitch? (sources)
   "Determine whether all of SOURCES should use variable-pitch
 font (fixed-pitch is still preferable)."
-  (reduce (lambda (a b) (and a b))
-          (mapcar
-           (lambda (x)
-             (member x '(;; anything-c-source-ffap-line
-                         ;; anything-c-source-ffap-guesser
-                         ;; anything-c-source-buffers-list
-                         anything-c-source-bookmarks
-                         ;; anything-c-source-recentf
-                         ;; anything-c-source-file-cache
-                         ;; anything-c-source-filelist
-                         ;; anything-c-source-files-in-current-dir+
-                         ;; anything-c-source-files-in-all-dired
-                         ;; anything-c-source-locate
-                         anything-c-source-emacs-process
-                         anything-c-source-org-headline
-                         anything-c-source-emms-streams
-                         anything-c-source-emms-files
-                         anything-c-source-emms-dired
-                         anything-c-source-google-suggest
-                         anything-c-source-apt
-                         ;; anything-c-source-anything-commands
+  (every (lambda (x)
+             (member x '(;; helm-c-source-ffap-line
+                         ;; helm-c-source-ffap-guesser
+                         ;; helm-c-source-buffers-list
+                         helm-c-source-bookmarks
+                         ;; helm-c-source-recentf
+                         ;; helm-c-source-file-cache
+                         ;; helm-c-source-filelist
+                         ;; helm-c-source-files-in-current-dir+
+                         ;; helm-c-source-files-in-all-dired
+                         ;; helm-c-source-locate
+                         helm-c-source-emacs-process
+                         helm-c-source-org-headline
+                         helm-c-source-emms-streams
+                         helm-c-source-emms-files
+                         helm-c-source-emms-dired
+                         helm-c-source-google-suggest
+                         helm-c-source-apt
+                         ;; helm-c-source-helm-commands
                          )))
-           sources)))
-(defun ublt/anything-setup-variable-pitch-font ()
-  "Use variable-pitched font for anything if it's suitable for
+         sources))
+(defun ublt/helm-setup-variable-pitch-font ()
+  "Use variable-pitched font for helm if it's suitable for
 all of the sources."
-  (with-current-buffer anything-buffer
-    (when (ublt/anything-should-use-variable-pitch? anything-sources)
+  (with-current-buffer helm-buffer
+    (when (ublt/helm-should-use-variable-pitch? helm-sources)
       (variable-pitch-mode +1))))
-(add-hook 'anything-after-initialize-hook 'ublt/anything-setup-variable-pitch-font)
+(add-hook 'helm-after-initialize-hook 'ublt/helm-setup-variable-pitch-font)
 ;;; XXX: Big hack!
 ;;; TODO: Move to ublt-appearance?
-(defadvice anything-initialize-overlays (after use-variable-pitch-font activate)
+(defadvice helm-initialize-overlays (after use-variable-pitch-font activate)
   (condition-case nil
-      (with-current-buffer anything-action-buffer
+      (with-current-buffer helm-action-buffer
         (variable-pitch-mode +1))
     (error nil)))
 
@@ -906,12 +883,6 @@ prompt returned to comint."
   (add-hook 'comint-preoutput-filter-functions
             'ublt/comint-preoutput-clear-^A^B)
 
-  ;; To use this, import things into ipython
-  ;; (require 'anything-ipython)
-  ;; ;; Additionally show compeletion in-place
-  ;; (when (require 'anything-show-completion nil t)
-  ;;   (use-anything-show-completion 'anything-ipython-complete
-  ;;                                 '(length initial-pattern)))
   ;; ============================================================
   ;; `http://taesoo.org/Opensource/Pylookup'
   ;; add pylookup to your loadpath, ex) "~/.lisp/addons/pylookup"
@@ -1074,7 +1045,6 @@ and source-file directory for your debugger."
 ;;                                     ">>>>")
 ;;                     nil))))))
 
-;; TODO: integrate with anything
 ;; Kill processes
 (ublt/in '(darwin gnu/linux)
   (require 'vkill)

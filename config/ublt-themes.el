@@ -184,7 +184,7 @@
          (hl-sexp-face
           ((t (:inherit hl-line))))
          (highlight
-          ((t (:background ,bg+2))))    ; highlighting (& line in anything)
+          ((t (:background ,bg+2))))    ; highlighting (& line in helm)
          (highline-face
           ((t (:background ,green-2)))) ; What's this?
          (zmacs-region
@@ -201,8 +201,12 @@
 
          ;; Mode line
          (mode-line
-          ((t (:background ,cyan+3 :foreground ,bg :height 0.8
-                           :box (:line-width 1 :color ,cyan+3)))))
+          ((t (:background ,cyan+3 :foreground ,bg
+                           :box (:line-width 1 :color ,cyan+3)
+                           :font ,variable-pitch-font
+                           :height 0.9
+                           ;; :height 0.8
+                           ))))
          (mode-line-inactive
           ((t (:inherit mode-line :background ,bg+3 :foreground ,fg+1))))
          (mode-line-buffer-id
@@ -374,8 +378,12 @@
          (info-command-ref-item
           ((t (:inherit font-lock-type-face))))
 
+         ;; Null out most attributes, because it seems to inherit
+         ;; the face of each line's first character.
          (linum
-          ((t (:inherit fringe :foreground ,bg+3 :slant normal :bold t))))
+          ((t (:inherit fringe :foreground ,bg+3 :slant normal :bold t
+                        :underline nil :strike-through nil :overline nil
+                        :box nil))))
 
          (eshell-prompt
           ((t (:foreground ,cyan))))
@@ -423,24 +431,24 @@
          (diredp-ignored-file-name
           ((t (:inherit font-lock-comment-face))))
 
-         ;; anything
-         (anything-header
+         ;; helm
+         (helm-header
           ((t (:foreground ,gold-1 :bold t))))
-         (anything-file-name
+         (helm-file-name
           ((t (:inherit font-lock-type-face))))
-         (anything-match
+         (helm-match
           ((t (:foreground ,fg+1 :background ,bg+2 :bold t))))
-         (anything-overlay-line-face
+         (helm-overlay-line-face
           ((t (:background ,bg+2))))
-         (anything-ff-directory         ; anything-dir-priv
+         (helm-ff-directory         ; helm-dir-priv
           ((t (:inherit diredp-dir-priv :background ,bg+1))))
-         (anything-ff-symlink
+         (helm-ff-symlink
           ((t (:inherit diredp-symlink))))
-         (anything-ff-file
+         (helm-ff-file
           ((t (:inherit font-lock-type-face))))
-         (anything-ff-executable
+         (helm-ff-executable
           ((t (:inherit diredp-exec-priv))))
-         (anything-candidate-number
+         (helm-candidate-number
           ((t (:inherit isearch-fail, :foreground ,bg :bold t))))
 
          (escape-glyph
@@ -547,6 +555,8 @@
          ;; XXX: FIX:
          (flymake-errline
           ((t (:background "Firebrick4"))))
+         (flymake-warnline
+          ((t (:underline ,yellow-1))))
 
          (nxml-tag-delimiter
           ((t (:inherit esk-paren-face))))
@@ -561,17 +571,17 @@
          (eproject-ido-imenu-file-path
           ((t (:inherit 'org-meta-line))))
          (ublt/emms-mode-line-face
-          ((t (:font ,variable-pitch-font :height 1.2))))
+          ((t (:height 1.0))))
          (ublt/mode-line-major-mode
           ((t (:bold t))))
-         (ublt/evil-emacs-tag
-          ((t (:inherit font-lock-builtin-face :height 1.2))))
-         (ublt/evil-normal-tag
-          ((t (:foreground ,red-4 :bold t :height 1.2))))
-         (ublt/evil-insert-tag
-          ((t (:foreground ,bg :bold t :height 1.2))))
-         (ublt/evil-visual-tag
-          ((t (:foreground ,red :bold t :height 1.2))))
+         ;; (ublt/evil-emacs-tag
+         ;;  ((t (:inherit font-lock-builtin-face :height 1.2))))
+         ;; (ublt/evil-normal-tag
+         ;;  ((t (:foreground ,red-4 :bold t :height 1.2))))
+         ;; (ublt/evil-insert-tag
+         ;;  ((t (:foreground ,bg :bold t :height 1.2))))
+         ;; (ublt/evil-visual-tag
+         ;;  ((t (:foreground ,red :bold t :height 1.2))))
 
          ;; Skype
          (skype--face-my-message
@@ -592,11 +602,7 @@
       ;; Color theme seems to mix this up, restore it
       (set-face-font 'variable-pitch variable-pitch-font)
 
-      ;; FIX: Change anything-config to make these `defcustom' instead,
-      ;; and why the hell does a `defcustom' not work?
       (setq
-       anything-c-buffers-face2 'font-lock-builtin-face
-       anything-c-buffers-face3 'italic
        hl-paren-colors `("Orange" ,yellow "Greenyellow"
                          ,green "Springgreen" "Cyan"
                          ,blue-1 "Magenta" "Purple"
