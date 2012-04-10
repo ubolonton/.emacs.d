@@ -417,10 +417,15 @@
     "M-n" 'flymake-goto-next-error
     ))
 (eval-after-load "magit"
-  '(ublt/define-keys
-    magit-mode-map
-    "S-SPC" 'magit-show-item-or-scroll-down
-    ))
+  '(progn
+     (ublt/define-keys
+      magit-mode-map
+      "S-SPC" 'magit-show-item-or-scroll-down
+      )
+     (ublt/define-keys
+      magit-log-edit-mode-map
+      "s-s"     'magit-log-edit-commit
+      "C-x C-s" 'magit-log-edit-commit)))
 (eval-after-load "ido"
   '(add-hook 'ido-setup-hook
              (lambda ()

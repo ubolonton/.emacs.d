@@ -81,9 +81,9 @@ selection. Works on `mark-enclosing-sexp'."
                        'clipboard-kill-ring-save
                        'clipboard-kill-region))
   (put command 'interactive-form
-     '(interactive
-       (if (use-region-p)
-           (list (region-beginning) (region-end))
+       '(interactive
+         (if (use-region-p)
+             (list (region-beginning) (region-end))
            (list (line-beginning-position) (line-beginning-position 2))))))
 ;;; Because they set mark if the region is not active
 (defadvice kill-ring-save (after pop-spurious-mark activate)
