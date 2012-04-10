@@ -70,5 +70,8 @@ of line."
       scroll-preserve-screen-position 1
       ;; Number of overlapped lines to keep when scrolling by page
       next-screen-context-lines 5)
+
+(ublt/set-up 'ace-jump-mode
+  (setq ace-jump-mode-case-sensitive-search nil))
 
 (provide 'ublt-navigation)

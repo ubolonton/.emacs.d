@@ -160,6 +160,7 @@
  "s-<return>"    'ublt/toggle-fullscreen
  "s-/"           'find-file-in-project
  "s-\\"          'align-regexp
+ "s-m"           'ace-jump-mode
 
  ;; These should be translated
  "s-["           'backward-page   "s-]" 'forward-page
