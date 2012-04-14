@@ -434,6 +434,12 @@
          ;; helm
          (helm-header
           ((t (:foreground ,gold-1 :bold t))))
+         (helm-source-header
+          ((t (:foreground ,gold-1 :bold t))))
+         ;; XXX: Maybe I just don't believe in themes with narrow
+         ;; selection of colors
+         (helm-selection
+          ((t (:background "#22083397778B"))))
          (helm-file-name
           ((t (:inherit font-lock-type-face))))
          (helm-match

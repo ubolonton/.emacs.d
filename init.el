@@ -23,7 +23,7 @@
                   ("elpa" . "http://tromey.com/elpa/")
                   ;; TODO: Maybe, use this after emacs24 is released
                   ;; (development versions of packages)
-                  ;; ("melpa" . "http://melpa.milkbox.net/packages/")
+                  ("melpa" . "http://melpa.milkbox.net/packages/")
                   ))
   (add-to-list 'package-archives source t))
 (package-initialize)
@@ -32,9 +32,11 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 (defvar ublt/packages
-  '(smex auto-complete ac-slime ido-ubiquitous yasnippet
-         color-theme hl-line+ rainbow-mode pp-c-l idle-highlight-mode diminish
+  '(smex auto-complete ac-slime ido-ubiquitous yasnippet helm
          org textmate paredit undo-tree whole-line-or-region
+         bookmark+ evil ace-jump-mode htmlize twittering-mode keyfreq
+         ;; Appearance
+         color-theme hl-line+ rainbow-mode pp-c-l idle-highlight-mode diminish volatile-highlights
          ;; Don't actually use these themes, just to learn some ideas
          color-theme-solarized color-theme-zenburn
          ;; Dired
@@ -42,7 +44,7 @@
          ;; Code folding
          fold-dwim fold-dwim-org hideshowvis
          ;; Languages
-         markdown-mode php-mode
+         markdown-mode php-mode haskell-mode
          clojure-mode clojurescript-mode durendal swank-clojure
          elisp-slime-nav
          ;; Starter kit
@@ -99,7 +101,6 @@
 (require 'ublt-editing)
 
 ;;; Personal stuffs
-(ublt/add-path "twittering-mode/")
 (ublt/add-path "emms/lisp/")
 (ublt/add-path "org2blog/")
 (require 'ublt-communication)
@@ -170,9 +171,9 @@
 ;; (command-frequency-table-load)
 ;; (command-frequency-mode 1)
 ;; (command-frequency-autosave-mode 1)
-(require 'keyfreq)
+(ublt/set-up 'keyfreq
 (keyfreq-mode 1)
-(keyfreq-autosave-mode 1)
+  (keyfreq-autosave-mode 1))
 
 ;; Some modes do not need those
 (defun turn-off-auto-fill-mode ()
@@ -230,16 +231,12 @@
 ;; (ublt/add-path "bookmark-plus")
 ;; (require 'bookmark+)
 
-;;; TODO: Set this up
-(ublt/add-path "find-file-in-project")
-(require 'find-file-in-project)
-
 ;; (require 'key-chord)
 ;; (key-chord-mode +1)
 ;; (key-chord-define-global "dd" 'kill-whole-line)
 
-(require 'volatile-highlights)
-(volatile-highlights-mode +1)
+(ublt/set-up 'volatile-highlights
+  (volatile-highlights-mode +1))
 
 ;;; Evil -------------------------------------------------------------
 ;; (ublt/add-path "evil")
@@ -444,7 +441,6 @@
 ;;; Quicksilver/Spotlight for Emacs ----------------------------------
 ;;; TODO: Clean up
 
-(ublt/add-path "helm")
 (require 'helm-config)
 (require 'helm-match-plugin)
 (require 'helm-regexp)
@@ -609,11 +605,9 @@ all of the sources."
   (load-file "~/Programming/factor/misc/fuel/fu.el"))
 
 ;; Haskell
-(ublt/add-path "haskell-mode-2.8.0")
-(load "haskell-site-file")
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-(add-to-list 'auto-mode-alist '("\\.mak$" . html-mode))
+(add-to-list 'auto-mode-alist '("\\.hs$" . haskell-mode))
 ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 
