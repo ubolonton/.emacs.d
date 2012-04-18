@@ -63,14 +63,14 @@
 ;;; stuffs. Thus my config is in ~/.emacs.d/init.el, not
 ;;; ~/.emacs.d/ubolonton/init.el. And don't ever choose "elpa" as your
 ;;; user name =))
-
+
 ;;; Clipboard integration for old version
 (when (ublt/legacy?)
   (eval-after-load "ublt/dvorak"
     '(ublt/define-keys
-   global-map
-   "M-w" 'clipboard-kill-ring-save
-   "C-w" 'clipboard-kill-region
+      global-map
+      "M-w" 'clipboard-kill-ring-save
+      "C-w" 'clipboard-kill-region
       "C-y" 'clipboard-yank)))
 
 
@@ -173,7 +173,7 @@
 ;; (command-frequency-mode 1)
 ;; (command-frequency-autosave-mode 1)
 (ublt/set-up 'keyfreq
-(keyfreq-mode 1)
+  (keyfreq-mode 1)
   (keyfreq-autosave-mode 1))
 
 ;; Some modes do not need those
@@ -449,12 +449,12 @@
       '(helm-c-source-ffap-line
         helm-c-source-ffap-guesser
         helm-c-source-buffers-list
-      ;; helm-c-source-files-in-current-dir+
+        ;; helm-c-source-files-in-current-dir+
         helm-c-source-bookmarks
         helm-c-source-recentf
         helm-c-source-file-cache
         helm-c-source-locate)
-             ;; Additions
+      ;; Additions
       ;; helm-c-source-semantic
       ;; helm-c-source-git-project-files
       ;; helm-c-source-emacs-process
@@ -473,7 +473,7 @@
   (interactive)
   (let ((helm-follow-mode t))
     (helm :sources helm-c-source-occur
-              :input (thing-at-point 'symbol))))
+          :input (thing-at-point 'symbol))))
 
 ;;; TODO: Maybe customize faces is better (per-source selection of
 ;;; fixed-pitch/variable-pitched font)?
@@ -508,8 +508,8 @@ all of the sources."
   (with-current-buffer helm-buffer
     (when (ublt/helm-should-use-variable-pitch? helm-sources)
       (variable-pitch-mode +1))
-    (setq line-spacing 0.5)
-    (text-scale-increase 2)))
+    (setq line-spacing 0.6)
+    (text-scale-increase 1)))
 (add-hook 'helm-after-initialize-hook 'ublt/helm-tweak-appearance)
 ;;; XXX: Big hack!
 ;;; TODO: Move to ublt-appearance?
@@ -517,8 +517,8 @@ all of the sources."
   (condition-case nil
       (with-current-buffer helm-action-buffer
         (variable-pitch-mode +1)
-        (setq line-spacing 0.5)
-        (text-scale-increase 2))
+        (setq line-spacing 0.6)
+        (text-scale-increase 1))
     (error nil)))
 
 ;; auto-complete
@@ -778,7 +778,7 @@ all of the sources."
                    nil 1 2 3)
                  flymake-err-line-patterns))
      ))
-
+
 (defun enable-flymake () (flymake-mode 1))
 (dolist (hook '(emacs-lisp-mode-hook))
   (add-hook hook #'enable-flymake))

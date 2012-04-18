@@ -440,6 +440,8 @@
          ;; selection of colors
          (helm-selection
           ((t (:background "#22083397778B"))))
+         (helm-selection-line
+          ((t (:background "#22083397778B"))))
          (helm-file-name
           ((t (:inherit font-lock-type-face))))
          (helm-match
