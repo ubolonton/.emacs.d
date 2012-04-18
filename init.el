@@ -200,13 +200,6 @@
       savehist-file "~/.emacs.savehist")
 (savehist-mode t)
 
-;; Additional packages are installed in these directories
-(ublt/in '(darwin)
-  (setenv "PATH" (concat "/opt/local/bin:/usr/local/bin:" (getenv "PATH")))
-  (push "/usr/local/bin" exec-path)
-  (push "/opt/local/bin" exec-path))
-(setenv "PATH" (concat "/home/ubolonton/bin:" (getenv "PATH")))
-
 ;; TextMate minor mode
 (require 'textmate)
 ;; (textmate-mode)
@@ -647,8 +640,9 @@ all of the sources."
                    ))
      (setq slime-net-coding-system 'utf-8-unix
            slime-complete-symbol-function 'slime-fuzzy-complete-symbol
-           common-lisp-hyperspec-root
-           "file:///Users/ubolonton/Programming/Tools/HyperSpec/")
+           ;; common-lisp-hyperspec-root
+           ;; "file:///Users/ubolonton/Programming/Tools/HyperSpec/"
+           )
      ;; Use parentheses editting mode paredit
      (add-hook 'slime-mode-hook 'enable-paredit-mode t)
      (add-hook 'slime-repl-mode-hook 'enable-paredit-mode t)
@@ -707,10 +701,6 @@ all of the sources."
 (ublt/add-path "swank-clojure-extra")
 (require 'swank-clojure-extra)
 
-;;; ClojureScript
-(defvar ublt/clojurescript-home "/home/ubolonton/Programming/Tools/clojurescript/")
-;; (dolist (path '("src/clj" "src/cljs" "test/cljs"))
-;;   (add-to-list 'swank-clojure-classpath (concat ublt/clojurescript-home path)))
 ;;; XXX: Make this customizable
 (when (> (display-color-cells) 8)
   (font-lock-add-keywords 'clojurescript-mode
@@ -1070,16 +1060,9 @@ and source-file directory for your debugger."
 
 (add-hook 'sql-interactive-mode-hook (lambda () (setq truncate-lines t)))
 
-(ublt/in '(gnu/linux)
-  (setenv "PYTHONPATH" "/home/ubolonton/Programming/Tools/warp")
-  (setenv "CLOJURESCRIPT_HOME" "/home/ubolonton/Programming/Tools/clojurescript")
-  (setq sql-connection-alist
-        '(("bnb" (sql-product 'mysql) (sql-database "bnb")
-           (sql-user "bnb") (sql-server "localhost"))
-          ("academy" (sql-product 'postgres) (sql-database "academy")
-           (sql-user "academy") (sql-server "localhost"))
-          ("postgres" (sql-product 'postgres)
-           (sql-user "postgres") (sql-server "localhost")))))
+(condition-case nil
+    (load-file "~/.emacs.d/config/ublt-personal.el")
+  (error nil))
 
 ;;; `http://www.masteringemacs.org/articles/2011/07/20/searching-buffers-occur-mode/'
 
