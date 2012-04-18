@@ -721,7 +721,7 @@ all of the sources."
 
 (require 'hippie-expand-slime)
 
-(add-to-list 'auto-mode-alist '("\\.cljs$" . clojure-mode))
+;; (add-to-list 'auto-mode-alist '("\\.cljs$" . clojurescript-mode))
 
 ;;; Flymake ----------------------------------------------------------
 
@@ -766,7 +766,7 @@ all of the sources."
               (local-file (file-relative-name
                            temp-file
                            (file-name-directory buffer-file-name))))
-         (list "jshint" (list "--jquery" local-file))))
+         (list "jshint" (list "--jquery" "--eqeqeq" "--indent" "--immed" "--undef" "--predef" local-file))))
      (setq flymake-allowed-file-name-masks
            (cons '(".+\\.js$"
                    flymake-jshint-init
