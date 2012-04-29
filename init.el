@@ -66,12 +66,14 @@
 
 ;;; Clipboard integration for old version
 (when (ublt/legacy?)
-  (eval-after-load "ublt/dvorak"
-    '(ublt/define-keys
-      global-map
-      "M-w" 'clipboard-kill-ring-save
-      "C-w" 'clipboard-kill-region
-      "C-y" 'clipboard-yank)))
+  (eval-after-load "ublt-dvorak"
+    '(progn
+       (ublt/define-keys
+        global-map
+        "M-w" 'clipboard-kill-ring-save
+        "C-w" 'clipboard-kill-region
+        "C-y" 'clipboard-yank)
+       (setq x-select-enable-clipboard t))))
 
 
 (defun ublt/add-path (path)

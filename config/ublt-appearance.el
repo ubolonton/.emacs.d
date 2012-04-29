@@ -169,7 +169,7 @@
   (pretty-control-l-mode +1)
   (setq pp^L-^L-string "❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄ Section ❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄"
         pp^L-^L-string-pre "\n"
-        pp^L-^L-string-post ""))
+        pp^L-^L-string-post "\n"))
 
 ;;; Prevent modes that list stuffs from wrapping lines
 (defun ublt/listing-settings ()
