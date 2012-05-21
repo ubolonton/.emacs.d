@@ -593,7 +593,9 @@ all of the sources."
 ;;
 ;; (defalias 'javascript-mode 'espresso-mode)
 ;; (setq js-mode-hook '())
-(setq flymake-jslint-command "jslint")
+;; (setq flymake-jslint-command "jslint")
+(when (ublt/legacy?)
+  (add-hook 'js-mode-hook 'esk-prog-mode-hook))
 (add-hook 'js-mode-hook 'moz-minor-mode)
 (autoload 'moz-minor-mode "moz" "Mozilla Minor and Inferior Mozilla Modes" t)
 
@@ -604,9 +606,10 @@ all of the sources."
   (load-file "~/Programming/factor/misc/fuel/fu.el"))
 
 ;; Haskell
+(ublt/set-up 'haskell-mode
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-(add-to-list 'auto-mode-alist '("\\.hs$" . haskell-mode))
+  (add-to-list 'auto-mode-alist '("\\.hs$" . haskell-mode)))
 ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 
@@ -651,7 +654,7 @@ all of the sources."
            )
      ;; Use parentheses editting mode paredit
      (add-hook 'slime-mode-hook 'enable-paredit-mode t)
-     (add-hook 'slime-repl-mode-hook 'enable-paredit-mode t)
+     ;; (add-hook 'slime-repl-mode-hook 'enable-paredit-mode t)
      ;; Steel Bank CL
      (add-to-list 'slime-lisp-implementations
                   '(sbcl ("sbcl")))
@@ -688,8 +691,9 @@ all of the sources."
        (with 'defun)
        (it 'defun)
        (do-it 'defun))
-     (add-hook 'slime-repl-mode-hook
-               'swank-clojure-slime-repl-modify-syntax t)))
+     ;; (add-hook 'slime-repl-mode-hook
+     ;;           'swank-clojure-slime-repl-modify-syntax t)
+     ))
 
 ;; swank-clojure customization
 (eval-after-load "swank-clojure"
@@ -706,6 +710,9 @@ all of the sources."
      ))
 (ublt/add-path "swank-clojure-extra")
 (require 'swank-clojure-extra)
+
+(ublt/set-up 'durendal
+  (durendal-enable))
 
 ;;; XXX: Make this customizable
 (when (> (display-color-cells) 8)
@@ -804,8 +811,13 @@ all of the sources."
    ;; python-command         py-shell-name
    py-shell-switch-buffers-on-execute nil)
   (require 'python-mode)
+
   (require 'ipython)
-  (setq-default py-python-command-args (list "-colors" "Linux"))
+  (setq-default py-python-command "ipython"
+                py-python-command-args (list "-colors" "Linux"))
+  (setq ipython-completion-command-string
+        "print(';'.join(__IP.Completer.all_completions('%s')))\n")
+
   (require 'pymacs)
   ;; Bug in `python-mode'. They use defalias which is intended for
   ;; functions, not variables
@@ -1050,6 +1062,7 @@ and source-file directory for your debugger."
 ;; TODO: move to corresponding mode sections
 ;; .rjs file is ruby file
 (add-to-list 'auto-mode-alist '("\\.rjs$" . ruby-mode))
+(setq-default ruby-indent-level 4)
 
 (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
 
