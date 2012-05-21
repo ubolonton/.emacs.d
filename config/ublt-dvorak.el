@@ -342,6 +342,7 @@
     paredit-mode-map
     "{"             'paredit-open-curly
     "}"             'paredit-close-curly
+    "M-("           'paredit-wrap-round
     "M-["           'paredit-wrap-square
     "M-{"           'paredit-wrap-curly
     "M-r"           nil                           ; was paredit-raise-sexp
@@ -497,6 +498,8 @@
 (eval-after-load "slime"
   '(ublt/define-keys
     slime-mode-map
+    "C-c C-l" 'slime-compile-and-load-file
+    "C-c C-k" 'slime-load-file
     "C-c v"   'slime-load-file
     "C-c C-s" 'slime-switch-to-output-buffer
     "M-TAB"   'auto-complete
