@@ -47,6 +47,7 @@
          markdown-mode php-mode haskell-mode
          clojure-mode clojurescript-mode durendal swank-clojure
          elisp-slime-nav
+         js2-mode
          ;; Starter kit
          starter-kit starter-kit-bindings starter-kit-eshell
          starter-kit-lisp starter-kit-js starter-kit-ruby))
@@ -281,7 +282,7 @@
     ad-do-it))
 (defun ublt/paredit-space-for-open? (endp delimiter)
   "Don't insert space for ( [ \" in these modes."
-  (not (and (member major-mode '(comint-mode python-mode javascript-mode js-mode))
+  (not (and (member major-mode '(comint-mode python-mode javascript-mode js-mode js2-mode))
             (member delimiter '(?\( ?\[ ?\")))))
 (eval-after-load "paredit"
   '(add-to-list 'paredit-space-for-delimiter-predicates
@@ -596,6 +597,23 @@ all of the sources."
 ;; (setq flymake-jslint-command "jslint")
 (when (ublt/legacy?)
   (add-hook 'js-mode-hook 'esk-prog-mode-hook))
+(eval-after-load "js2-mode"
+  '(progn
+     (add-hook 'js2-mode-hook 'esk-prog-mode-hook)
+     (add-hook 'js2-mode-hook 'esk-paredit-nonlisp)
+     (add-hook 'js2-mode-hook 'moz-minor-mode)
+     (defalias 'javascript-mode 'js2-mode)
+     ;; XXX: Copied from starter-kit-js
+     ;; fixes problem with pretty function font-lock
+     (define-key js-mode-map (kbd ",") 'self-insert-command)
+     (font-lock-add-keywords
+      'js2-mode `(("\\(function *\\)("
+                   (0 (progn (compose-region (match-beginning 1)
+                                             (match-end 1) "\u0192")
+                             nil)))))
+     (setcdr (assoc "\\.js\\'" auto-mode-alist)
+             'js2-mode)
+     ))
 (add-hook 'js-mode-hook 'moz-minor-mode)
 (autoload 'moz-minor-mode "moz" "Mozilla Minor and Inferior Mozilla Modes" t)
 
