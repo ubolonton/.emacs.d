@@ -119,6 +119,8 @@
  "s-T"    "M-,"                         ; pop reference
 
  "s-4"    "C-x 4"
+
+ "M-f"    "<escape>"                    ; use evil-mode
  )
 
 (ublt/define-keys
@@ -242,31 +244,39 @@
       "n" nil "N" nil
       "c" nil "C" nil
       "t" nil "T" nil
-      "g" nil "G" nil
-      "r" nil "R" nil
+
+      "j"     'evil-change
+      "J"     'evil-change-line
+
+      "U"     'undo-tree-redo
+
       "C-r" nil
-      "l" nil "L" nil)
+      "l" nil "L" nil
+      "<escape>" 'evil-force-normal-state
+      )
      (ublt/define-keys
       evil-motion-state-map
       "h"     'evil-backward-char
       "n"     'evil-forward-char
       "c"     'evil-previous-line
       "t"     'evil-next-line
-      "g"     'evil-backward-WORD-begin
-      "r"     'evil-forward-WORD-end
       "H"     'evil-window-top
       "N"     'evil-window-bottom
+
       "C"     'evil-scroll-line-up
       "T"     'evil-scroll-line-down
-      "G"     'evil-backward-word-begin
-      "R"     'evil-forward-word-end
       "SPC"   'evil-scroll-page-down
       "S-SPC" 'evil-scroll-page-up
-      ;; "l" nil
-      ;; "ld" 'evil-goto-definition
-      ;; "le" 'evil-backward-word-end
-      ;; "lE" 'evil-backward-WORD-end
-      ;; "ll" 'evil-goto-first-line
+      "l"     'evil-search-next
+      "L"     'evil-search-previous
+      "j"     'evil-change
+      "J"     'evil-change-line
+      "k"     'evil-find-char-to
+      "K"     'evil-find-char-to-backward
+
+      "*"     'highlight-symbol-next
+      "#"     'highlight-symbol-prev
+
       "C-b" nil
       "C-d" nil
       "C-e" nil
@@ -274,6 +284,12 @@
       "C-o" nil
       "C-y" nil
       )
+     (ublt/define-keys evil-insert-state-map
+                       "<escape>" 'evil-normal-state)
+     (ublt/define-keys evil-visual-state-map
+                       "<escape>" 'evil-exit-visual-state)
+     (ublt/define-keys evil-replace-state-map
+                       "<escape>" 'evil-normal-state)
      (ublt/define-keys
       evil-insert-state-map
       "C-k" nil
@@ -337,6 +353,12 @@
     "M-n"     'flymake-goto-next-error
     "M-p"     'flymake-goto-prev-error
     ))
+(eval-after-load "js2-mode"
+  '(ublt/define-keys
+    js2-mode-map
+    "M-n" 'js2-next-error
+    "{"   'paredit-open-curly
+    "}"   'paredit-close-curly-and-newline))
 (eval-after-load "paredit"
   '(ublt/define-keys
     paredit-mode-map
