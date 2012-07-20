@@ -34,11 +34,13 @@
 (defvar ublt/packages
   '(smex auto-complete ac-slime ido-ubiquitous yasnippet helm
          org textmate paredit undo-tree whole-line-or-region
-         bookmark+ evil ace-jump-mode htmlize twittering-mode keyfreq
+         bookmark+ ace-jump-mode htmlize twittering-mode keyfreq
+         highlight-symbol
+         evil surround
          ;; Appearance
          color-theme hl-line+ rainbow-mode pp-c-l idle-highlight-mode diminish volatile-highlights
          ;; Don't actually use these themes, just to learn some ideas
-         color-theme-solarized color-theme-zenburn
+         color-theme-solarized zenburn
          ;; Dired
          dired-details dired-details+
          ;; Code folding
@@ -257,16 +259,33 @@
       evil-normal-state-cursor '(box "#F86155")
       evil-insert-state-cursor '(bar "yellow")
       evil-emacs-state-cursor  '(bar "yellow")
-      evil-visual-state-cursor '(box "yellow")
+      evil-visual-state-cursor '(box "YellowGreen")
       )
 
-;; (require 'evil)
-;; (dolist (mode '(sql-interactive-mode magit-log-edit-mode))
-;;   (add-to-list 'evil-emacs-state-modes mode))
-;; (setcdr evil-insert-state-map nil)
-;; (define-key evil-insert-state-map
-;;   (read-kbd-macro evil-toggle-key) 'evil-emacs-state)
-;; (evil-mode +1)
+(require 'evil)
+(dolist (mode '(sql-interactive-mode magit-log-edit-mode))
+  (add-to-list 'evil-emacs-state-modes mode))
+(setcdr evil-insert-state-map nil)
+(define-key evil-insert-state-map
+  (read-kbd-macro evil-toggle-key) 'evil-emacs-state)
+(evil-mode +1)
+(ublt/set-up 'surround
+  (setq-default surround-pairs-alist
+                '((?\( . ("(" . ")"))
+                  (?\[ . ("[" . "]"))
+                  (?\{ . ("{" . "}"))
+
+                  (?\) . ("( " . " )"))
+                  (?\] . ("[ " . " ]"))
+                  (?\} . ("{ " . " }"))
+
+                  (?# . ("#{" . "}"))
+                  (?b . ("(" . ")"))
+                  (?B . ("{" . "}"))
+                  (?> . ("<" . ">"))
+                  (?t . surround-read-tag)
+                  (?< . surround-read-tag))
+                ))
 
 ;;; Paredit ----------------------------------------------------------
 (require 'paredit)
