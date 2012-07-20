@@ -70,7 +70,7 @@
       (let ((hour (string-to-number (format-time-string "%H"))))
         (if (and (<= 8 hour) (<= hour 17)
                  (y-or-n-p "Use solarized light theme?"))
-            (color-theme-sanityinc-solarized-light)
+            (color-theme-solarized-light)
           (color-theme-ubolonton-dark)))
     (error (color-theme-ubolonton-dark)))
   (setq
