@@ -1106,7 +1106,9 @@ and source-file directory for your debugger."
 
 
 (setq custom-file "~/.emacs.d/custom.el")
+(condition-case err
 (load custom-file)
+  (error (message "Error loading custom file")))
 
 ;; Interops (with Terminal, Conkeror...) -----------------------------
 (condition-case err
