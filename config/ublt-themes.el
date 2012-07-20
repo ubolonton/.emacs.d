@@ -172,6 +172,9 @@
          (font-lock-constant-face
           ((t (:inherit font-lock-builtin-face))))
 
+         (js2-function-param-face
+          ((t (:inherit font-lock-variable-name-face))))
+
          ;; Misc
          (isearch-fail
           ((t (:foreground ,red :background ,yellow-1))))
