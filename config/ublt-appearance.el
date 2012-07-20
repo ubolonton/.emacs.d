@@ -121,13 +121,16 @@
 ;; Like org-mode TAB and S-TAB
 ;; XXX: I uncomment the region at the end of `hideshowvis' instead
 ;; of copying it here. Should fix that.
+;;; XXX: This makes terminal Emacs hang, so only uses if there's a
+;; window system
+(when window-system
 (ublt/set-up 'fold-dwim-org
   (setq fold-dwim-org/trigger-keys-block '((kbd "TAB")))
   (defun ublt/code-folding-setup ()
     (hs-minor-mode 1)
     (fold-dwim-org/minor-mode 1)
     (hideshowvis-enable))
-  (add-hook 'prog-mode-hook 'ublt/code-folding-setup))
+    (add-hook 'prog-mode-hook 'ublt/code-folding-setup)))
 
 (ublt/set-up 'hideshowvis
   (define-fringe-bitmap 'hs-marker [0 24 24 126 126 24 24 0])
