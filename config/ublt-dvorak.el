@@ -284,8 +284,17 @@
       "C-o" nil
       "C-y" nil
       )
-     (ublt/define-keys evil-insert-state-map
-                       "<escape>" 'evil-normal-state)
+     (ublt/define-keys
+      evil-insert-state-map
+      "<escape>" 'evil-normal-state
+
+      "C-n" nil     ; evil-complete-next
+      "C-p" nil     ; evil-complete-previous
+      "C-r" nil     ; evil-paste-from-register
+      "C-w" nil     ; evil-delete-backward-word
+      "C-x C-n" nil ; evil-complete-next-line
+      "C-x C-p" nil ; evil-complete-previous-line
+      )
      (ublt/define-keys evil-visual-state-map
                        "<escape>" 'evil-exit-visual-state)
      (ublt/define-keys evil-replace-state-map
