@@ -276,6 +276,7 @@
 
       "*"     'highlight-symbol-next
       "#"     'highlight-symbol-prev
+      "G"     'ace-jump-mode
 
       "C-b" nil
       "C-d" nil

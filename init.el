@@ -667,6 +667,13 @@ all of the sources."
   (add-hook 'erlang-mode-hook 'esk-prog-mode-hook)
   )
 
+(ublt/set-up 'less-css-mode
+  (add-hook 'less-css-mode-hook 'esk-prog-mode-hook)
+  (add-hook 'less-css-mode-hook 'enable-paredit-mode))
+(ublt/set-up 'css-mode
+  (add-hook 'css-mode-hook 'esk-prog-mode-hook)
+  (add-hook 'css-mode-hook 'enable-paredit-mode))
+
 (add-to-list 'auto-mode-alist '("\\.m$" . octave-mode))
 
 ;;; SLIME, Common Lisp, Clojure --------------------------------------
@@ -719,6 +726,7 @@ all of the sources."
 ;; clojure-mode customization
 (eval-after-load "clojure-mode"
   '(progn
+     (add-to-list 'auto-mode-alist '("\\.dtm$" . clojure-mode))
      (add-hook 'clojure-mode-hook 'enable-paredit-mode t)
      (define-clojure-indent
        (describe 'defun)
