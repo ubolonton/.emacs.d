@@ -770,10 +770,12 @@ all of the sources."
     (remove-hook 'slime-repl-mode-hook 'ublt/slime-repl-clojure-font-lock))
   (durendal-enable))
 
+(ublt/set-up "clojure-script"
 ;;; XXX: Make this customizable
 (when (> (display-color-cells) 8)
   (font-lock-add-keywords 'clojurescript-mode
                           '(("(\\|)" . 'esk-paren-face))))
+  (add-hook 'clojurescript-mode-hook 'enable-paredit-mode))
 
 ;;;; ielm settings ---------------
 (add-hook 'ielm-mode-hook 'enable-paredit-mode)
