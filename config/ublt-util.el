@@ -21,11 +21,12 @@ don't want a feature failing to load to affect other features in
 the same file. Splitting everything out would result in too many
 files."
   (declare (indent 1))
-  `(if (not (require ,feature nil t))
-       (progn (message "ublt/customize: `%s' not found" ,feature)
-              (add-to-list 'ublt/failed-features ,feature t))
-     (add-to-list 'ublt/set-up-features ,feature t)
-     ,@body))
+  `(let ((f (if (stringp ,feature) (intern ,feature) ,feature)))
+    (if (not (require f nil t))
+        (progn (message "ublt/customize: `%s' not found" f)
+               (add-to-list 'ublt/failed-features f t))
+      (add-to-list 'ublt/set-up-features f t)
+      ,@body)))
 
 ;;; TODO: Use this
 (defun ublt/isearch-other-window ()
