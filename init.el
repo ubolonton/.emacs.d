@@ -756,7 +756,18 @@ all of the sources."
 (ublt/add-path "swank-clojure-extra")
 (require 'swank-clojure-extra)
 
+;;; XXX: Fix durendal instead
 (ublt/set-up 'durendal
+  ;; For REPL font-lock trick to work in Emacs 24
+  (defun ublt/slime-repl-clojure-font-lock ()
+    (font-lock-mode -1)
+    (clojure-mode-font-lock-setup)
+    (font-lock-mode +1))
+  (defadvice durendal-enable-slime-repl-font-lock (after hack activate)
+    (remove-hook 'slime-repl-mode-hook 'clojure-mode-font-lock-setup)
+    (add-hook 'slime-repl-mode-hook 'ublt/slime-repl-clojure-font-lock t))
+  (defadvice durendal-disable-slime-repl-font-lock (before hack activate)
+    (remove-hook 'slime-repl-mode-hook 'ublt/slime-repl-clojure-font-lock))
   (durendal-enable))
 
 ;;; XXX: Make this customizable
