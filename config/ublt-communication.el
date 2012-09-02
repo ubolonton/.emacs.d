@@ -25,24 +25,24 @@
 
 ;;; Notifications
 ;; `http://www.emacswiki.org/emacs/TwitteringMode'
-(require 'todochiku)
-(defun ublt/notify-tweets ()
-  (let ((n twittering-new-tweets-count)
-        (todochiku-timeout 2))
-    (if (> n 10)
-        (todochiku-message
-         (twittering-timeline-spec-to-string twittering-new-tweets-spec)
-         (format "You have %d new tweet%s"
-                 n (if (> n 1) "s" ""))
-         (todochiku-icon 'social))
-      (dolist (el twittering-new-tweets-statuses)
-        (todochiku-message
-         (twittering-timeline-spec-to-string twittering-new-tweets-spec)
-         (concat (cdr (assoc 'user-screen-name el))
-                 " said: "
-                 (cdr (assoc 'text el)))
-         (todochiku-icon 'social))))))
-(add-hook 'twittering-new-tweets-hook 'ublt/notify-tweets)
+(when window-system (require 'todochiku)
+      (defun ublt/notify-tweets ()
+        (let ((n twittering-new-tweets-count)
+              (todochiku-timeout 2))
+          (if (> n 10)
+              (todochiku-message
+               (twittering-timeline-spec-to-string twittering-new-tweets-spec)
+               (format "You have %d new tweet%s"
+                       n (if (> n 1) "s" ""))
+               (todochiku-icon 'social))
+            (dolist (el twittering-new-tweets-statuses)
+              (todochiku-message
+               (twittering-timeline-spec-to-string twittering-new-tweets-spec)
+               (concat (cdr (assoc 'user-screen-name el))
+                       " said: "
+                       (cdr (assoc 'text el)))
+               (todochiku-icon 'social))))))
+      (add-hook 'twittering-new-tweets-hook 'ublt/notify-tweets))
 
 ;;; ERC
 

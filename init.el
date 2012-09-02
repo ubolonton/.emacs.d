@@ -109,9 +109,9 @@
 ;;; Personal stuffs
 (ublt/add-path "emms/lisp/")
 (ublt/add-path "org2blog/")
-(require 'ublt-communication)
-(require 'ublt-entertainment)
-(require 'ublt-organization)
+(ublt/set-up 'ublt-communication)
+(when window-system (ublt/set-up 'ublt-entertainment))
+(ublt/set-up 'ublt-organization)
 
 ;;; Might grow into a project on its own, adding more project
 ;;; management stuffs
@@ -444,14 +444,15 @@
 
 ;;; Growl async git invocations (in Ubuntu libnotify is used, which
 ;;; sucks)
-(defadvice magit-run* (around show-async-cmd activate)
+(eval-after-load "todochiku"
+  '(defadvice magit-run* (around show-async-cmd activate)
   (let ((cmd-args (ad-get-arg 0))
         (todochiku-timeout 1))
     (todochiku-message
      "Magit"
      (mapconcat 'identity cmd-args " ")
      (todochiku-icon 'social))
-    ad-do-it))
+       ad-do-it)))
 
 ;; git-emacs (some complementary features)
 (ublt/add-path "git-emacs/")
@@ -637,10 +638,13 @@ all of the sources."
 (autoload 'moz-minor-mode "moz" "Mozilla Minor and Inferior Mozilla Modes" t)
 
 ;; Factor
+(condition-case err
+    (progn
 (ublt/in '(darwin)
   (load-file "/Applications/factor/misc/fuel/fu.el"))
 (ublt/in '(gnu/linux)
-  (load-file "~/Programming/factor/misc/fuel/fu.el"))
+        (load-file "~/Programming/factor/misc/fuel/fu.el")))
+  (error (message "No Factor")))
 
 ;; Haskell
 (ublt/set-up 'haskell-mode
@@ -659,7 +663,7 @@ all of the sources."
   (add-to-list 'load-path "/usr/share/emacs/site-lisp/erlang")
   (setq erlang-root-dir "/usr/lib/erlang")
   (setq exec-path (cons "/usr/lib/erlang/bin" exec-path))
-  (require 'erlang-start)
+  (require 'erlang-start nil t)
   (defun ublt/erlang-compile-and-display ()
     (interactive)
     (call-interactively 'erlang-compile)
@@ -860,6 +864,7 @@ all of the sources."
 
 ;; pymacs, ropemode, ropemacs
 
+(condition-case err
 (ublt/in '(gnu/linux darwin)
   (ublt/add-path "python")
   (setq-default ;; py-shell-name          "ipython"
@@ -976,6 +981,7 @@ prompt returned to comint."
     (setq ac-sources (add-to-list 'ac-sources 'ac-source-yasnippet)))
   (add-hook 'python-mode-hook 'set-up-rope-ac)
   )
+  (error (message "No python")))
 
 
 
@@ -1116,7 +1122,7 @@ and source-file directory for your debugger."
 (ublt/in '(darwin gnu/linux)
   (require 'vkill)
   ;; Notifications
-  (require 'todochiku))
+  (ublt/set-up 'todochiku))
 
 ;; TODO: move to corresponding mode sections
 ;; .rjs file is ruby file
