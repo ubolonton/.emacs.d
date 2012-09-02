@@ -151,8 +151,6 @@
           ((t (:foreground ,green))))
          (font-lock-keyword-face
           ((t (:foreground ,red-1))))
-         (font-lock-preprocessor-face
-          ((t (:foreground ,red-3))))
          (font-lock-reference-face
           ((t (:foreground ,blue-1))))  ; What's this?
          (font-lock-regexp-grouping-backslash
@@ -165,6 +163,9 @@
           ((t (:inherit font-lock-string-face))))
          (font-lock-type-face
           ((t (:foreground ,cyan+1))))
+         (font-lock-preprocessor-face
+          ((t (:inherit font-lock-type-face :foreground ,red-3
+                        ))))
          (font-lock-variable-name-face
           ((t (:foreground ,gold-1))))
          (font-lock-warning-face

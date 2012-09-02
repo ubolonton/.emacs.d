@@ -247,7 +247,7 @@ converted to a form that `eproject--ido-symbols' can use."
   (look-for "project.clj")
   :symbol-separators ("." "/")
   :relevant-files (".*\.clj$" ".*\.cljs$")
-  :irrelevant-files (".*\.jar$" ".*\.js$"))
+  :irrelevant-files (".*\.jar$" ".*\.js$" "^resources" "^target"))
 (define-project-type yii (generic)
   (or (look-for "yiic") (look-for "yiic.bat")(look-for "yiic.php"))
   :symbol-separators ("." "/")

@@ -253,6 +253,8 @@
       "C-r" nil
       "l" nil "L" nil
       "<escape>" 'evil-force-normal-state
+
+      "M-."   nil ; evil-repeat-pop-next
       )
      (ublt/define-keys
       evil-motion-state-map
@@ -299,6 +301,8 @@
      (ublt/define-keys evil-visual-state-map
                        "<escape>" 'evil-exit-visual-state)
      (ublt/define-keys evil-replace-state-map
+                       "<escape>" 'evil-normal-state)
+     (ublt/define-keys evil-emacs-state-map
                        "<escape>" 'evil-normal-state)
      (ublt/define-keys
       evil-insert-state-map
@@ -543,6 +547,8 @@
     "M-TAB" 'auto-complete
     "DEL" nil
     "M-s" nil
+    "C-c p" 'slime-repl-set-package
+    "C-c n" 'slime-repl-set-package
     ))
 (eval-after-load "octave-mod"
   '(ublt/define-keys
