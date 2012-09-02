@@ -675,6 +675,7 @@ all of the sources."
   (add-hook 'css-mode-hook 'enable-paredit-mode))
 
 (add-to-list 'auto-mode-alist '("\\.m$" . octave-mode))
+(add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
 
 ;;; SLIME, Common Lisp, Clojure --------------------------------------
 
