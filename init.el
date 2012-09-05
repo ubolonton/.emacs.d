@@ -49,7 +49,7 @@
          markdown-mode php-mode haskell-mode
          clojure-mode clojurescript-mode durendal swank-clojure
          elisp-slime-nav
-         js2-mode
+         js2-mode flymake-jshint
          ;; Starter kit
          starter-kit starter-kit-bindings starter-kit-eshell
          starter-kit-lisp starter-kit-js starter-kit-ruby))
@@ -831,25 +831,8 @@ all of the sources."
   (ublt/flymake-err-echo))
 
 (eval-after-load "js"
-  '(progn
-     (defun flymake-jshint-init ()
-       (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                          'flymake-create-temp-inplace))
-              (local-file (file-relative-name
-                           temp-file
-                           (file-name-directory buffer-file-name))))
-         (list "jshint" (list "--jquery" "--eqeqeq" "--indent" "--immed" "--undef" "--predef" local-file))))
-     (setq flymake-allowed-file-name-masks
-           (cons '(".+\\.js$"
-                   flymake-jshint-init
-                   flymake-simple-cleanup
-                   flymake-get-real-file-name)
-                 flymake-allowed-file-name-masks))
-     (setq flymake-err-line-patterns
-           (cons '("^Lint at line \\([[:digit:]]+\\) character \\([[:digit:]]+\\): \\(.+\\)$"
-                   nil 1 2 3)
-                 flymake-err-line-patterns))
-     ))
+  '(ublt/set-up 'flymake-jshint
+     (setq jshint-configuration-path "~/.jshint.json")))
 
 (defun enable-flymake () (flymake-mode 1))
 (dolist (hook '(emacs-lisp-mode-hook))
