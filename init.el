@@ -36,6 +36,7 @@
          org textmate paredit undo-tree whole-line-or-region
          bookmark+ ace-jump-mode htmlize twittering-mode keyfreq
          highlight-symbol
+         ;; Vim emulation
          evil surround
          ;; Appearance
          color-theme hl-line+ rainbow-mode pp-c-l idle-highlight-mode diminish volatile-highlights
@@ -263,8 +264,10 @@
       )
 
 (require 'evil)
-(dolist (mode '(sql-interactive-mode magit-log-edit-mode))
-  (add-to-list 'evil-emacs-state-modes mode))
+(dolist (mode '(sql-interactive-mode
+                magit-log-edit-mode erlang-shell-mode
+                dired-mode))
+  (add-to-list 'evil-insert-state-modes mode))
 ;; (setcdr evil-insert-state-map nil)
 (define-key evil-insert-state-map
   (read-kbd-macro evil-toggle-key) 'evil-emacs-state)
@@ -284,8 +287,8 @@
                   (?B . ("{" . "}"))
                   (?> . ("<" . ">"))
                   (?t . surround-read-tag)
-                  (?< . surround-read-tag))
-                ))
+                  (?< . surround-read-tag)))
+  (global-surround-mode +1))
 
 ;;; Paredit ----------------------------------------------------------
 (require 'paredit)
@@ -773,9 +776,12 @@ all of the sources."
     (add-hook 'slime-repl-mode-hook 'ublt/slime-repl-clojure-font-lock t))
   (defadvice durendal-disable-slime-repl-font-lock (before hack activate)
     (remove-hook 'slime-repl-mode-hook 'ublt/slime-repl-clojure-font-lock))
-  (durendal-enable))
+  (durendal-enable)
 
-(ublt/set-up "clojure-script"
+  (setq durendal-auto-compile? nil)
+  )
+
+(ublt/set-up "clojurescript-mode"
 ;;; XXX: Make this customizable
 (when (> (display-color-cells) 8)
   (font-lock-add-keywords 'clojurescript-mode
