@@ -838,7 +838,13 @@ all of the sources."
 
 (eval-after-load "js"
   '(ublt/set-up 'flymake-jshint
-     (setq jshint-configuration-path "~/.jshint.json")))
+     (setq jshint-configuration-path "~/.jshint.json")
+     (defun ublt/flymake-js-enable ()
+       (when (and buffer-file-name
+                  (string-match "\\.js$" buffer-file-name))
+         (flymake-mode +1)))
+     (remove-hook 'js-mode-hook 'flymake-mode)
+     (add-hook 'js-mode-hook 'ublt/flymake-js-enable)))
 
 (defun enable-flymake () (flymake-mode 1))
 (dolist (hook '(emacs-lisp-mode-hook))
