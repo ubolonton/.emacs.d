@@ -309,15 +309,17 @@
 ;;; TODO: Use images (propertize "mode" 'display (find-images ...))
 (ublt/set-up 'diminish
   (defun ublt/diminish (mode-name display-text &optional feature)
+    (condition-case err
     (if feature
         (eval-after-load feature
           `(diminish ',mode-name ,display-text))
-      (diminish mode-name display-text)))
+          (diminish mode-name display-text))
+      (error (message (format "Error diminishing \"%s\": %s" mode-name err)))))
   (dolist (m '((paredit-mode         "()"   paredit)
                (elisp-slime-nav-mode ""     elisp-slime-nav)
                (eproject-mode        " Π" eproject)
                (undo-tree-mode       "⌘-Z"  undo-tree)
-               (yas/minor-mode       "yas"  yasnippet)
+               (yas-minor-mode       "yas"  yasnippet)
                (flymake-mode         " !"   flymake)
                (flyspell-mode        " !"   flyspell)
                (hs-minor-mode        " [+]" hideshow)

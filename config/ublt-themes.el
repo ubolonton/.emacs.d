@@ -470,6 +470,11 @@
           ((t (:bold t :background ,bg+2))))
 
          ;; yasnippet
+         (yas--field-debug-face
+          ((t (:underline ,yellow))))
+         (yas-field-highlight-face
+          ((t (:background ,bg+3))))
+         ;; For compatibility
          (yas/field-debug-face
           ((t (:underline ,yellow))))
          (yas/field-highlight-face
