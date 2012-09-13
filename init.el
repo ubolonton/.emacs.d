@@ -50,7 +50,7 @@
          markdown-mode php-mode haskell-mode
          clojure-mode clojurescript-mode durendal swank-clojure
          elisp-slime-nav
-         js2-mode flymake-jshint
+         js2-mode flymake flymake-jshint flymake-php
          ;; Starter kit
          starter-kit starter-kit-bindings starter-kit-eshell
          starter-kit-lisp starter-kit-js starter-kit-ruby))
@@ -266,7 +266,8 @@
 (require 'evil)
 (dolist (mode '(sql-interactive-mode
                 magit-log-edit-mode erlang-shell-mode
-                dired-mode))
+                dired-mode inferior-moz-mode
+                grep-mode))
   (add-to-list 'evil-insert-state-modes mode))
 ;; (setcdr evil-insert-state-map nil)
 (define-key evil-insert-state-map
@@ -845,6 +846,10 @@ all of the sources."
          (flymake-mode +1)))
      (remove-hook 'js-mode-hook 'flymake-mode)
      (add-hook 'js-mode-hook 'ublt/flymake-js-enable)))
+
+(eval-after-load "php-mode"
+  '(ublt/set-up 'flymake-php
+     (add-hook 'php-mode-hook 'flymake-php-load)))
 
 (defun enable-flymake () (flymake-mode 1))
 (dolist (hook '(emacs-lisp-mode-hook))
