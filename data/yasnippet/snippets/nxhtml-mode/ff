@@ -1,0 +1,6 @@
+#name: ff
+# --
+<tr>
+  <td><?= $form->labelEx($info, '${0}') ?></td>
+  <td><?= $form->textField($info, '${0}') ?></td>
+</tr>

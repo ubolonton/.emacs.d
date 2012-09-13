@@ -1,0 +1,1 @@
+Yii::t('app', '${1:source}')
