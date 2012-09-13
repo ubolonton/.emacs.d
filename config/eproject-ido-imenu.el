@@ -253,6 +253,11 @@ converted to a form that `eproject--ido-symbols' can use."
   :symbol-separators ("." "/")
   :relevant-files (".*\.php$")
   :irrelevant-files ("vendors" "extensions" "tests"))
+(define-project-type erlang-rebar (generic)
+  (look-for "rebar.config")
+  :symbol-separators ("." " ")
+  :relevant-files (".*\.[h|e]rl$")
+  :irrelevant-files (".*\.beam$" "rel" "deps" "ebin" "priv"))
 
 ;;; XXX: ???
 (defun eproject-find--combine-regexps (regexp-list)
