@@ -49,7 +49,7 @@
          ;; Code folding
          fold-dwim fold-dwim-org hideshowvis
          ;; Languages
-         markdown-mode php-mode haskell-mode
+         markdown-mode php-mode haskell-mode yaml-mode
          clojure-mode clojurescript-mode durendal swank-clojure
          elisp-slime-nav
          js2-mode flymake flymake-jshint flymake-php

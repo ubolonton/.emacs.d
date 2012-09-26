@@ -16,7 +16,8 @@
          font)
     (setq cur-pos (if cur-pos (% cur-pos N) 0))
     (setq font (nth cur-pos fonts))
-    (modify-all-frames-parameters (list (cons 'font font) (cons 'height 100)))
+    (modify-all-frames-parameters (list (cons 'font font) ;; (cons 'height 100)
+                                        ))
     (message "Font: %s" font)
     (put this-command 'pos (% (1+ cur-pos) N))))
 
@@ -347,7 +348,7 @@
 ;; Visible bell on GTK sucks
 (setq visible-bell (case system-type
                      ('gnu/linux nil)
-                     (t t)))
+                     ('darwin nil)))
 
 ;; No show-paren delay
 (setq show-paren-delay 0)
@@ -372,7 +373,7 @@
       woman-default-indent 7)
 
 ;; Fringe
-(set-fringe-mode '(8 . 0))
+;; (set-fringe-mode '(8 . 0))
 
 ;; 70-char column width
 (setq-default fill-column 70)
