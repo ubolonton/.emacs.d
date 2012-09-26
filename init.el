@@ -36,6 +36,8 @@
          org textmate paredit undo-tree whole-line-or-region
          bookmark+ ace-jump-mode htmlize twittering-mode keyfreq
          highlight-symbol
+         ;; Uhm, f*ck shell
+         exec-path-from-shell
          ;; Vim emulation
          evil surround
          ;; Appearance
@@ -57,6 +59,8 @@
 (dolist (p ublt/packages)
   (when (not (package-installed-p p))
     (package-install p)))
+
+(exec-path-from-shell-initialize)
 
 ;;; XXX: Some starter-kit packages are broken
 (defalias 'run-coding-hook 'esk-prog-mode-hook)
@@ -321,6 +325,7 @@
 ;;; Dired ------------------------------------------------------------
 
 (require 'dired+)
+
 ;; `http://blog.nguyenvq.com/2009/12/01/file-management-emacs-dired-to-replace-finder-in-mac-os-x-and-other-os/'
 ;; linux;; multiple files
 ;; "nohup xdg-open" current-prefix-arg ;; linux can open multiple files, but one at a time
