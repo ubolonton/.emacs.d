@@ -60,8 +60,6 @@
   (when (not (package-installed-p p))
     (package-install p)))
 
-(exec-path-from-shell-initialize)
-
 ;;; XXX: Some starter-kit packages are broken
 (defalias 'run-coding-hook 'esk-prog-mode-hook)
 (defalias 'esk-run-coding-hook 'esk-prog-mode-hook)
@@ -104,6 +102,10 @@
 (ublt/add-path "single-file-modes")
 
 (require 'ublt-util)
+
+(ublt/set-up 'exec-path-from-shell
+  (exec-path-from-shell-initialize)
+  (exec-path-from-shell-copy-env "CLOJURESCRIPT_HOME"))
 
 ;;; General usability
 (require 'ublt-dvorak)
