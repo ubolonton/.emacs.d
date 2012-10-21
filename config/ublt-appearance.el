@@ -345,10 +345,12 @@
 ;; Sparse lines
 (setq-default line-spacing 0.2)
 
-;; Visible bell on GTK sucks
+;; Visible bell sucks
 (setq visible-bell (case system-type
                      ('gnu/linux nil)
                      ('darwin nil)))
+;;; So does audible bell
+(setq ring-bell-function (lambda ()))
 
 ;; No show-paren delay
 (setq show-paren-delay 0)
