@@ -35,24 +35,29 @@
   '(smex auto-complete ac-slime ido-ubiquitous yasnippet helm
          org textmate paredit undo-tree whole-line-or-region
          bookmark+ ace-jump-mode htmlize twittering-mode keyfreq
-         highlight-symbol
          ;; Uhm, f*ck shell
          exec-path-from-shell
+         info+ pabbrev
          ;; Vim emulation
          evil surround
          ;; Appearance
-         color-theme hl-line+ rainbow-mode pp-c-l idle-highlight-mode diminish volatile-highlights
+         color-theme rainbow-mode pp-c-l diminish whitespace
+         highlight highlight-symbol hl-line+ idle-highlight-mode volatile-highlights
          ;; Don't actually use these themes, just to learn some ideas
          color-theme-solarized zenburn
          ;; Dired
          dired-details dired-details+
+         dired+
          ;; Code folding
          fold-dwim fold-dwim-org hideshowvis
          ;; Languages
-         markdown-mode php-mode haskell-mode yaml-mode
+         flymake
+         haskell-mode quack
+         markdown-mode less-css-mode yaml-mode
          clojure-mode clojurescript-mode durendal swank-clojure
          elisp-slime-nav
-         js2-mode flymake flymake-jshint flymake-php
+         js2-mode flymake-jshint
+         php-mode flymake-php
          ;; Starter kit
          starter-kit starter-kit-bindings starter-kit-eshell
          starter-kit-lisp starter-kit-js starter-kit-ruby))
@@ -272,7 +277,7 @@
 (require 'evil)
 (dolist (mode '(sql-interactive-mode
                 magit-log-edit-mode erlang-shell-mode
-                dired-mode inferior-moz-mode
+                dired-mode inferior-moz-mode inferior-octave-mode
                 grep-mode))
   (add-to-list 'evil-insert-state-modes mode))
 ;; (setcdr evil-insert-state-map nil)
