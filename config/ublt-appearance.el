@@ -308,27 +308,30 @@
 ;;; Make mode-line uncluttered by changing how minor modes are shown
 
 ;;; TODO: Use images (propertize "mode" 'display (find-images ...))
+;;; XXX: This looks so weird
 (ublt/set-up 'diminish
   (defun ublt/diminish (mode-name display-text &optional feature)
     (condition-case err
-    (if feature
-        (eval-after-load feature
-          `(diminish ',mode-name ,display-text))
+        (if feature
+            (eval-after-load feature
+              `(condition-case err
+                   (diminish ',mode-name ,display-text)
+                 (error (message (format "Error diminishing \"%s\": %s" ,mode-name err)))))
           (diminish mode-name display-text))
       (error (message (format "Error diminishing \"%s\": %s" mode-name err)))))
-  (dolist (m '((paredit-mode         "()"   paredit)
-               (elisp-slime-nav-mode ""     elisp-slime-nav)
-               (eproject-mode        " Π" eproject)
-               (undo-tree-mode       "⌘-Z"  undo-tree)
-               (yas-minor-mode       "yas"  yasnippet)
-               (flymake-mode         " !"   flymake)
-               (flyspell-mode        " !"   flyspell)
-               (hs-minor-mode        " [+]" hideshow)
-               (auto-complete-mode   " α" auto-complete)
-               (volatile-highlights-mode " ω" volatile-highlights)
-               (hi-lock-mode         "" hi-lock)
-               ;; (isearch-mode         " Σ" isearch)
-               (auto-fill-function   " φ")))
+  (dolist (m '((paredit-mode             "()"   paredit)
+               (elisp-slime-nav-mode     ""     elisp-slime-nav)
+               (eproject-mode            " Π" eproject)
+               (undo-tree-mode           "⌘-Z"  undo-tree)
+               (yas-minor-mode           "yas"  yasnippet)
+               (flymake-mode             " !"   flymake)
+               (flyspell-mode            " !"   flyspell)
+               (hs-minor-mode            " [+]" hideshow)
+               (auto-complete-mode       " α" auto-complete)
+               ;; (volatile-highlights-mode " ω" volatile-highlights)
+               (hi-lock-mode             "" hi-lock)
+               ;; (isearch-mode             " Σ" isearch)
+               (auto-fill-function       " φ")))
     (destructuring-bind (mode display &optional feature) m
       (ublt/diminish mode display feature))))
 
