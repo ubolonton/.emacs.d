@@ -41,7 +41,7 @@
          ;; Vim emulation
          evil surround
          ;; Appearance
-         color-theme rainbow-mode pp-c-l diminish whitespace
+         color-theme rainbow-mode pp-c-l diminish ;; whitespace
          highlight highlight-symbol hl-line+ idle-highlight-mode volatile-highlights
          ;; Don't actually use these themes, just to learn some ideas
          color-theme-solarized zenburn

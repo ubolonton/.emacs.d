@@ -85,23 +85,23 @@
 ;;; Whitespaces
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-;; (FIX: currently not showing in Emacs 24) whitespace-mode
-;; `http://xahlee.org/emacs/whitespace-mode.html'
-(setq whitespace-style
-      '(face spaces tabs newline space-mark tab-mark newline-mark))
-(setq whitespace-display-mappings
-      '(
-        (space-mark 32 [?\ ] [46])           ; whitespace
-        (space-mark 160 [164] [95])
-        (space-mark 2208 [2212] [95])
-        (space-mark 2336 [2340] [95])
-        (space-mark 3616 [3620] [95])
-        (space-mark 3872 [3876] [95])
-                                        ;   (newline-mark ?\n [8629 ?\n] [182 ?\n]) ; new-line
-        (newline-mark ?\n [?¶ ?\n] [182 ?\n]) ; new-line
-                                        ;   (tab-mark ?\t [9654 ?\t] [92 ?\t])         ; tab
-        (tab-mark ?\t [?» ?\t] [92 ?\t])         ; tab
-      ))
+;; ;; (FIX: currently not showing in Emacs 24) whitespace-mode
+;; ;; `http://xahlee.org/emacs/whitespace-mode.html'
+;; (setq whitespace-style
+;;       '(face spaces tabs newline space-mark tab-mark newline-mark))
+;; (setq whitespace-display-mappings
+;;       '(
+;;         (space-mark 32 [?\ ] [46])           ; whitespace
+;;         (space-mark 160 [164] [95])
+;;         (space-mark 2208 [2212] [95])
+;;         (space-mark 2336 [2340] [95])
+;;         (space-mark 3616 [3620] [95])
+;;         (space-mark 3872 [3876] [95])
+;;                                         ;   (newline-mark ?\n [8629 ?\n] [182 ?\n]) ; new-line
+;;         (newline-mark ?\n [?¶ ?\n] [182 ?\n]) ; new-line
+;;                                         ;   (tab-mark ?\t [9654 ?\t] [92 ?\t])         ; tab
+;;         (tab-mark ?\t [?» ?\t] [92 ?\t])         ; tab
+;;       ))
 
 ;;; Rainbow parentheses for coding modes
 (defun turn-on-hl-paren ()
