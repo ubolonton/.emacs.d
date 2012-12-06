@@ -11,11 +11,11 @@
 ;; ;;; XXX: elnode depends on this
 ;; (add-to-list 'load-path "~/.emacs.d/lib/apel")
 
-;;; HACK XXX: FLIM breaks this (no mailcap-parse-mailcaps)
-(when (eql system-type 'gnu/linux)
-  (if (ublt/legacy?)
-      (load-file "/usr/share/emacs/23.2/lisp/gnus/mailcap.elc")
-    (load-file "/usr/local/share/emacs/24.0.94/lisp/gnus/mailcap.elc")))
+;; ;;; HACK XXX: FLIM breaks this (no mailcap-parse-mailcaps)
+;; (when (eql system-type 'gnu/linux)
+;;   (if (ublt/legacy?)
+;;       (load-file "/usr/share/emacs/23.3/lisp/gnus/mailcap.elc")
+;;     (load-file "/usr/local/share/emacs/24.0.93/lisp/gnus/mailcap.elc")))
 
 ;;; Emacs is not a text editor, and here we load its package manager!
 (require 'package)
@@ -992,8 +992,9 @@ prompt returned to comint."
     (interactive)
     (setq ac-sources (add-to-list 'ac-sources 'ac-source-yasnippet)))
   (add-hook 'python-mode-hook 'set-up-rope-ac)
+
   )
-  (error (message "No python")))
+  (error (message "No python: %s" err)))
 
 
 
