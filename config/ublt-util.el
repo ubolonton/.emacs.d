@@ -46,4 +46,9 @@ files."
     (other-window 1)
     (isearch-forward-regexp)))
 
+;;; TODO: Mode-specific rules?
+(defun ublt/set-indent-level (chars)
+  (setq c-basic-offset chars)
+  (setq tab-width chars))
+
 (provide 'ublt-util)
