@@ -99,9 +99,9 @@ selection. Works on `mark-enclosing-sexp'."
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 (set-selection-coding-system 'utf-8)
-(setq default-coding-system 'utf-8)
-(setq locale-coding-system 'utf-8)
-(setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
+(setq default-coding-system 'utf-8
+      locale-coding-system 'utf-8
+      x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
 ;;; TODO: Test this in Windows. If it works, use `ublt/in'
 ;;(set-clipboard-coding-system 'utf-16le-dos)
 
