@@ -102,6 +102,8 @@ selection. Works on `mark-enclosing-sexp'."
 (setq default-coding-system 'utf-8
       locale-coding-system 'utf-8
       x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
+(ublt/set-up 'htmlize
+  (setq htmlize-html-charset "utf-8"))
 ;;; TODO: Test this in Windows. If it works, use `ublt/in'
 ;;(set-clipboard-coding-system 'utf-16le-dos)
 
