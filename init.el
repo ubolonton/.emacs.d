@@ -35,6 +35,7 @@
   '(smex auto-complete ac-slime ido-ubiquitous yasnippet helm
          org textmate paredit undo-tree whole-line-or-region
          bookmark+ ace-jump-mode htmlize twittering-mode keyfreq
+         scpaste
          ;; Uhm, f*ck shell
          exec-path-from-shell
          info+ pabbrev
