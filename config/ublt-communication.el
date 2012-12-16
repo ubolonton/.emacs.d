@@ -1,3 +1,5 @@
+(require 'ublt-util)
+
 
 ;;; Twitter
 
@@ -48,7 +50,7 @@
 
 (ublt/set-up 'erc
   (setq erc-autojoin-channels-alist
-        '(("freenode.net" "#emacs" "#conkeror" "#clojure" "#git")
+        '(("freenode.net" "#emacs" "#conkeror" "#clojure" "#concatenative")
           ("cogini.org" "#cogini"))
         erc-nick "ubolonton"
         erc-hide-list '("JOIN" "PART" "QUIT" "NICK")

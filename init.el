@@ -236,23 +236,20 @@
 
 (ublt/set-up 'volatile-highlights
   (volatile-highlights-mode +1))
-
-;;; Evil -------------------------------------------------------------
+
 (require 'ublt-evil)
-
-;;; Dired ------------------------------------------------------------
-(require ublt-dired)
-
-;;; ido --------------------------------------------------------------
+(require 'ublt-dired)
 (require 'ublt-ido)
-
-;;; Git --------------------------------------------------------------
+(require 'ublt-helm)
+
 (ublt/add-path "magit")
 (ublt/add-path "git-emacs")
 (require 'ublt-git)
-
-;;; Quicksilver/Spotlight for Emacs ----------------------------------
-(require 'ublt-helm)
+
+(ublt/add-path "python")
+(require 'ublt-python)
+
+
 
 ;;; Languages support ------------------------------------------------
 
@@ -365,6 +362,7 @@
 (ublt/add-path "slime")
 (ublt/add-path "slime/contrib")
 (ublt/add-path "swank-clojure-extra")
+(ublt/add-path "ac-slime")
 (require 'ublt-lisp)
 
 
@@ -421,9 +419,6 @@
 (dolist (hook '(emacs-lisp-mode-hook))
   (add-hook hook #'enable-flymake))
 
-;;; Python -----------------------------------------------------------
-(require 'ublt-python)
-
 ;; Who the hell set it to t?
 (setq debug-on-error nil)
 

@@ -22,19 +22,19 @@
      ,@body))
 
 
-(defvar ublt/set-up-features ())
-(defvar ublt/failed-features ())
+(defvar ublt/ok-features ())
+(defvar ublt/error-features ())
 ;;; XXX: Hmm
 (defun ublt/require (feature &optional filename noerror)
   (if noerror
       (condition-case err
           (progn
             (let ((name (require feature filename)))
-              (add-to-list 'ublt/set-up-features feature t)
+              (add-to-list 'ublt/ok-features feature t)
               (message "Feature `%s' ok" feature)
               name))
         (error
-         (setq ublt/failed-features (plist-put ublt/failed-features feature err))
+         (setq ublt/error-features (plist-put ublt/error-features feature err))
          (message "Feature `%s' failed" feature)
          nil))
     (require feature filename)))

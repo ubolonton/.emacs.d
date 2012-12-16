@@ -1,3 +1,5 @@
+(require 'ublt-util)
+
 ;; The length of this section proves python support in Emacs is weak,
 ;; since all these are just for basic stuffs. Also Pymacs
 ;; initialization is very slow.
@@ -8,7 +10,6 @@
 
 (condition-case err
     (ublt/in '(gnu/linux darwin)
-      (ublt/add-path "python")
       (setq-default ;; py-shell-name          "ipython"
        ;; py-python-command      py-shell-name
        ;; py-jpython-command     py-shell-name

@@ -1,3 +1,5 @@
+(require 'ublt-util)
+
 ;; SLIME customization
 (eval-after-load "slime"
   '(progn
@@ -100,7 +102,6 @@
 (add-hook 'ielm-mode-hook 'enable-paredit-mode)
 
 ;; ac-slime
-;; (ublt/add-path "ac-slime")
 (require 'ac-slime)
 (add-hook 'slime-mode-hook 'set-up-slime-ac)
 (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)

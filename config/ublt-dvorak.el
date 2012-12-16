@@ -1,3 +1,5 @@
+(require 'ublt-util)
+
 ;;; My Dvorak key map for Dvorak. Keys are extensively remapped and
 ;;; translated.
 ;;   ' , . p y    f g c r l   / = \

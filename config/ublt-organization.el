@@ -1,3 +1,5 @@
+(require 'ublt-util)
+
 (add-to-list 'auto-mode-alist '("\\.\\(org\\)$" . org-mode))
 (setq org-log-done nil
       org-use-fast-todo-selection t

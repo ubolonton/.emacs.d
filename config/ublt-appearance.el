@@ -1,3 +1,5 @@
+(require 'ublt-util)
+
 ;;; Font, colors, text appearance
 (eval-when-compile
   (require 'cl))
@@ -125,12 +127,12 @@
 ;;; XXX: This makes terminal Emacs hang, so only uses if there's a
 ;; window system
 (when window-system
-(ublt/set-up 'fold-dwim-org
-  (setq fold-dwim-org/trigger-keys-block '((kbd "TAB")))
-  (defun ublt/code-folding-setup ()
-    (hs-minor-mode 1)
-    (fold-dwim-org/minor-mode 1)
-    (hideshowvis-enable))
+  (ublt/set-up 'fold-dwim-org
+    (setq fold-dwim-org/trigger-keys-block '((kbd "TAB")))
+    (defun ublt/code-folding-setup ()
+      (hs-minor-mode 1)
+      (fold-dwim-org/minor-mode 1)
+      (hideshowvis-enable))
     (add-hook 'prog-mode-hook 'ublt/code-folding-setup)))
 
 (ublt/set-up 'hideshowvis
@@ -375,32 +377,40 @@
 
 ;;; Misc
 
-;; 2x70 instead of the default 2x80 so that side-by-side is preferable
-(setq split-width-threshold 140)
+(setq
+ ;; 2x70 instead of the default 2x80 so that side-by-side is preferable
+ split-width-threshold 140
 
-;; TODO: move to corresponding mode sections
-;; Tile ediff windows horizontally
-(setq ediff-split-window-function 'split-window-horizontally)
+ ;; Tile ediff windows horizontally
+ ediff-split-window-function 'split-window-horizontally
 
+ ;; Bells suck, both visible and audible
+ visible-bell (case system-type
+                ('gnu/linux nil)
+                ('darwin nil))
 
-;; Sparse lines
-(setq-default line-spacing 0.2)
+ show-paren-delay 0
 
-;; Visible bell sucks
-(setq visible-bell (case system-type
-                     ('gnu/linux nil)
-                     ('darwin nil)))
-;;; So does audible bell
-(setq ring-bell-function (lambda ()))
+ ;; Limit minibuffer to 20% frame height
+ max-mini-window-height 0.2
 
-;; No show-paren delay
-(setq show-paren-delay 0)
+ ;; Echo keystrokes faster
+ echo-keystrokes 0.2
 
-;; Limit minibuffer to 20% frame height
-(setq max-mini-window-height 0.2)
+ ;; woman settings
+ woman-fill-column 80
+ woman-fill-frame t
+ woman-default-indent 7
+ )
 
-;; Echo keystrokes faster
-(setq echo-keystrokes 0.2)
+(setq-default
+ ;; Sparse lines
+ line-spacing 0.2
+
+ ;; 70-char column width
+ fill-column 70
+ )
+
 
 ;; Technicolor
 (require 'info+)
@@ -410,21 +420,14 @@
 (require 'help+)
 (require 'help-fns+)
 
-;; woman settings
-(setq woman-fill-column 80
-      woman-fill-frame t
-      woman-default-indent 7)
+;;; Show current function name in mode-line
+(which-func-mode +1)
 
 ;; Fringe
 ;; (set-fringe-mode '(8 . 0))
 
-;; 70-char column width
-(setq-default fill-column 70)
-
-;;; Show current function name in mode-line
-(which-func-mode +1)
-
 ;;; XXX: Make this customizable
+;;; XXX: It was removed from emacs-starter-kit?
 (defun esk-add-watchwords ()
   (font-lock-add-keywords
    nil '(("\\<\\(FIXME\\|TODO\\|FIX\\|XXX\\|HACK\\|REFACTOR\\|NOCOMMIT\\|NTA\\)"

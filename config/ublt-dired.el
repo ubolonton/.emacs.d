@@ -1,3 +1,5 @@
+(require 'ublt-util)
+
 (require 'dired+)
 
 ;; `http://blog.nguyenvq.com/2009/12/01/file-management-emacs-dired-to-replace-finder-in-mac-os-x-and-other-os/'

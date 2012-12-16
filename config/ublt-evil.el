@@ -1,3 +1,5 @@
+(require 'ublt-util)
+
 (defface ublt/evil-insert-tag
   `((t (:inherit font-lock-comment-delimiter-face :slant normal :weight bold)))
   "Evil insert mode indicator face")

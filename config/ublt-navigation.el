@@ -1,3 +1,5 @@
+(require 'ublt-util)
+
 ;;; Extra navigation functions
 (eval-when-compile (require 'cl))
 

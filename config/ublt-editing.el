@@ -1,3 +1,4 @@
+(require 'ublt-util)
 
 ;;; Move line/region up/down
 

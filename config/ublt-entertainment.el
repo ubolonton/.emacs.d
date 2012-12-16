@@ -1,3 +1,4 @@
+(require 'ublt-util)
 
 ;;; EMMS -------------------------------------------------------------
 ;;; Needs mpg312, ogg123, mplayer, vlc; mp3info, id3v2, ogginfo
