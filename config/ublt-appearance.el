@@ -255,49 +255,87 @@
 (defface ublt/mode-line-major-mode
   '((t :bold t))
   "Face for mode-line major mode string")
-(setq mode-line-modes
-      '(
-        #("%[" 0 2
-          (help-echo "Recursive edit, type C-M-c to get out"))
-        #("(" 0 1
-          (help-echo "mouse-1: Select (drag to resize)\nmouse-2: Make current window occupy the whole frame\nmouse-3: Remove current window from display"))
-        (:propertize
-         ("" mode-name)
-         face ublt/mode-line-major-mode
-         mouse-face mode-line-highlight
-         help-echo "Major mode\nmouse-1: Display major mode menu\nmouse-2: Show help for major mode\nmouse-3: Toggle minor modes"
-         local-map (keymap (mode-line keymap
-                                      (mouse-2 . describe-mode)
-                                      (down-mouse-1 menu-item "Menu Bar" ignore :filter
-                                                    (lambda
-                                                      (_)
-                                                      (mouse-menu-major-mode-map))))))
-        ("" mode-line-process)
-        #("%n" 0 2
-          (local-map (keymap
-                      (mode-line keymap
-                                 (mouse-2 . mode-line-widen)))
-                     mouse-face mode-line-highlight help-echo "mouse-2: Remove narrowing from the current buffer"))
-        (:propertize
-         ("" minor-mode-alist)
-         mouse-face mode-line-highlight
-         help-echo "Minor mode\nmouse-1: Display minor mode menu\nmouse-2: Show help for minor mode\nmouse-3: Toggle minor modes"
-         local-map (keymap (mode-line keymap
-                                      (mouse-2 . mode-line-minor-mode-help)
-                                      (down-mouse-1 . mouse-minor-mode-menu))))
 
-        #(")" 0 1
-          (help-echo "mouse-1: Select (drag to resize)\nmouse-2: Make current window occupy the whole frame\nmouse-3: Remove current window from display"))
-        #("%]" 0 2
-          (help-echo "Recursive edit, type C-M-c to get out"))
-        #(" " 0 1
-          (help-echo "mouse-1: Select (drag to resize)\nmouse-2: Make current window occupy the whole frame\nmouse-3: Remove current window from display"))
-        ;; XXX: Not really about modes
-        (:eval (propertize (format-time-string "[%H:%M %d/%m]")
-                           'face 'bold
-                           'help-echo (concat (format-time-string "%c; ") (emacs-uptime "Uptime: %hh"))))
+(ublt/set-up 'powerline
+  (defpowerline buffer-id (propertize (car (propertized-buffer-identification "%12b"))
+                                      'face 'ublt/mode-line-major-mode))
+  (defun ublt/pwml-buffer-id (side color1 &optional color2)
+    (propertize (powerline-buffer-id side color1 color2)
+                'face 'ublt/mode-line-major-mode))
+  (defpowerline row "%l")
+  (defpowerline column "%c")
+  (defpowerline narrow "%n")
 
-        ))
+  (setq-default mode-line-format
+                (list "%e"
+                      '(:eval (concat
+                               ;; mode-line-mule-info
+                               (powerline-rmw            'left   nil  )
+                               (ublt/pwml-buffer-id      'left   nil  powerline-color1  )
+                               (powerline-major-mode     'left        powerline-color1  )
+                               (powerline-minor-modes    'left        powerline-color1  )
+                               (powerline-narrow         'left        powerline-color1  powerline-color2  )
+
+                               (powerline-vc             'center                        powerline-color2  )
+                               (powerline-make-fill                                     powerline-color2  )
+
+                               (powerline-row            'right       powerline-color1  powerline-color2  )
+                               (powerline-make-text      " : "        powerline-color1  )
+                               (powerline-column         'right       powerline-color1  )
+                               (powerline-percent        'right  nil  powerline-color1  )
+                               (powerline-buffer-size    'right  nil)
+                               (powerline-make-text      "  "    nil  )))
+                      mode-line-mule-info
+                      ;; mode-line-client
+                      mode-line-modified
+                      mode-line-remote
+                      ;; mode-line-frame-identification
+                      ))
+  )
+
+;; (setq mode-line-modes
+;;       '(
+;;         #("%[" 0 2
+;;           (help-echo "Recursive edit, type C-M-c to get out"))
+;;         #("(" 0 1
+;;           (help-echo "mouse-1: Select (drag to resize)\nmouse-2: Make current window occupy the whole frame\nmouse-3: Remove current window from display"))
+;;         (:propertize
+;;          ("" mode-name)
+;;          face ublt/mode-line-major-mode
+;;          mouse-face mode-line-highlight
+;;          help-echo "Major mode\nmouse-1: Display major mode menu\nmouse-2: Show help for major mode\nmouse-3: Toggle minor modes"
+;;          local-map (keymap (mode-line keymap
+;;                                       (mouse-2 . describe-mode)
+;;                                       (down-mouse-1 menu-item "Menu Bar" ignore :filter
+;;                                                     (lambda
+;;                                                       (_)
+;;                                                       (mouse-menu-major-mode-map))))))
+;;         ("" mode-line-process)
+;;         #("%n" 0 2
+;;           (local-map (keymap
+;;                       (mode-line keymap
+;;                                  (mouse-2 . mode-line-widen)))
+;;                      mouse-face mode-line-highlight help-echo "mouse-2: Remove narrowing from the current buffer"))
+;;         (:propertize
+;;          ("" minor-mode-alist)
+;;          mouse-face mode-line-highlight
+;;          help-echo "Minor mode\nmouse-1: Display minor mode menu\nmouse-2: Show help for minor mode\nmouse-3: Toggle minor modes"
+;;          local-map (keymap (mode-line keymap
+;;                                       (mouse-2 . mode-line-minor-mode-help)
+;;                                       (down-mouse-1 . mouse-minor-mode-menu))))
+
+;;         #(")" 0 1
+;;           (help-echo "mouse-1: Select (drag to resize)\nmouse-2: Make current window occupy the whole frame\nmouse-3: Remove current window from display"))
+;;         #("%]" 0 2
+;;           (help-echo "Recursive edit, type C-M-c to get out"))
+;;         #(" " 0 1
+;;           (help-echo "mouse-1: Select (drag to resize)\nmouse-2: Make current window occupy the whole frame\nmouse-3: Remove current window from display"))
+;;         ;; XXX: Not really about modes
+;;         (:eval (propertize (format-time-string "[%H:%M %d/%m]")
+;;                            'face 'bold
+;;                            'help-echo (concat (format-time-string "%c; ") (emacs-uptime "Uptime: %hh"))))
+
+;;         ))
 
 ;; (list
 ;;        "("
