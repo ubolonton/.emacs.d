@@ -30,7 +30,7 @@
 (defvar ublt/packages
   '(smex auto-complete ac-slime ido-ubiquitous yasnippet helm
          org textmate paredit undo-tree whole-line-or-region
-         bookmark+ ace-jump-mode htmlize twittering-mode keyfreq
+         ace-jump-mode htmlize twittering-mode keyfreq
          scpaste
          ;; Uhm, f*ck shell
          exec-path-from-shell
@@ -226,7 +226,7 @@
 (ublt/add-path "epresent")
 (require 'epresent)
 
-;; TODO: This makes python setup unhappy. Figure out why
+;; XXX: This makes python setup unhappy. (Both use C-x p)
 ;; (ublt/add-path "bookmark-plus")
 ;; (require 'bookmark+)
 
