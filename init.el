@@ -1,9 +1,5 @@
-;;; This is the first thing to get loaded.
-
-;;; nxhtml is having troubles with emacs 24, so I have to use both 24
-;;; & 23 now
-(defun ublt/legacy? ()
-  (< emacs-major-version 24))
+(add-to-list 'load-path "~/.emacs.d/config")
+(require 'ublt-util)
 
 (when (ublt/legacy?)
  (load-file "~/.emacs.d/emacs23/package.el"))
@@ -88,9 +84,6 @@
        (setq x-select-enable-clipboard t))))
 
 
-(defun ublt/add-path (path)
-  "Add to load-path a path relative to ~/.emacs.d/lib/"
-  (add-to-list 'load-path (concat "~/.emacs.d/lib/" path)))
 
 ;;; TODO: Use this (from Emacs prelude)
 ;; (defun prelude-add-subfolders-to-load-path (parent-dir)
@@ -103,11 +96,8 @@
 ;;                  (not (equal f ".")))
 ;;         (add-to-list 'load-path name)))))
 
-(add-to-list 'load-path "~/.emacs.d/config")
 ;;; Path to stuffs that come from single files
 (ublt/add-path "single-file-modes")
-
-(require 'ublt-util)
 
 (ublt/set-up 'exec-path-from-shell
   (exec-path-from-shell-initialize)
@@ -203,9 +193,6 @@
 ;; (add-hook 'html-mode-hook 'turn-off-flyspell-mode)
 
 ;; These should be disabled for new users, not me.
-(defun ublt/enable (funcs)
-  (dolist (f funcs)
-          (put f 'disabled nil)))
 (ublt/enable '(narrow-to-region set-goal-column upcase-region downcase-region))
 
 ;; Save positions in visited files
@@ -369,37 +356,6 @@
 
 ;; Make find-name-dired ignore case
 (setq find-name-arg "-iname")
-
-;;; Source - `http://sites.google.com/site/steveyegge2/my-dot-emacs-file'
-(defun rename-file-and-buffer (new-name)
-  "Renames both current buffer and file it's visiting to NEW-NAME."
-  (interactive "sNew name: ")
-  (let ((name (buffer-name))
-        (filename (buffer-file-name)))
-    (if (not filename)
-        (message "Buffer '%s' is not visiting a file!" name)
-      (if (get-buffer new-name)
-          (message "A buffer named '%s' already exists!" new-name)
-        (progn (rename-file name new-name 1)
-               (rename-buffer new-name)
-               (set-visited-file-name new-name)
-               (set-buffer-modified-p nil))))))
-(defun move-buffer-file (dir)
-  "Moves both current buffer and file it's visiting to DIR."
-  (interactive "DNew directory: ")
-  (let* ((name (buffer-name))
-         (filename (buffer-file-name))
-         (dir
-          (if (string-match dir "\\(?:/\\|\\\\)$")
-              (substring dir 0 -1) dir))
-         (newname (concat dir "/" name)))
-    (if (not filename)
-        (message "Buffer '%s' is not visiting a file!" name)
-      (progn (copy-file filename newname 1)
-             (delete-file filename)
-             (set-visited-file-name newname)
-             (set-buffer-modified-p nil)
-             t))))
 
 ;;; ido --------------------------------------------------------------
 
