@@ -33,53 +33,10 @@
 (defadvice flymake-goto-prev-error (after display-message activate)
   (ublt/flymake-err-echo))
 
-(eval-after-load "js"
-  '(ublt/set-up 'flymake-jshint
-     (setq jshint-configuration-path "~/.jshint.json")
-     (defun ublt/flymake-js-enable ()
-       (when (and buffer-file-name
-                  (string-match "\\.js$" buffer-file-name))
-         (flymake-mode +1)))
-     (remove-hook 'js-mode-hook 'flymake-mode)
-     (add-hook 'js-mode-hook 'ublt/flymake-js-enable)))
-
 (eval-after-load "php-mode"
   '(ublt/set-up 'flymake-php
      (add-hook 'php-mode-hook 'flymake-php-load)))
 
-
-
-(eval-after-load "ublt-python"
-  (defun flymake-pyflakes-init ()
-    (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                       'flymake-create-temp-inplace))
-           (local-file (file-relative-name
-                        temp-file
-                        (file-name-directory buffer-file-name))))
-      (list "pyflakes" (list local-file))))
-
-  ;; From `starter-kit-ruby.el'
-  (defun ublt/flymake-python-enable ()
-    (when (and buffer-file-name
-               ;; flymake and mumamo are at odds, so look at buffer
-               ;; name instead of `major-mode' when deciding whether
-               ;; to turn this on
-               (string-match "\\.py$" buffer-file-name)
-               (file-writable-p
-                (file-name-directory buffer-file-name))
-               (file-writable-p buffer-file-name)
-               (if (fboundp 'tramp-list-remote-buffers)
-                   (not (subsetp
-                         (list (current-buffer))
-                         (tramp-list-remote-buffers)))
-                 t))
-      (flymake-mode t)))
-
-  (add-to-list 'flymake-allowed-file-name-masks
-               '("\\.py\\'" flymake-pyflakes-init))
-
-  (add-hook 'python-mode-hook 'ublt/flymake-python-enable)
-  )
 
 (dolist (hook '(emacs-lisp-mode-hook))
   (add-hook hook (ublt/on-fn 'flymake-mode)))

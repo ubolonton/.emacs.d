@@ -143,8 +143,6 @@
 ;; obsolete stuffs. This is to prevent warning pop-ups (especially in
 ;; mako files)
 (setq byte-compile-warnings '(not obsolete free-vars))
-(eval-after-load "js"
-  '(defvar javascript-mode-syntax-table js-mode-syntax-table))
 
 ;; `http://www.emacswiki.org/emacs/DeskTop#toc6'
 ;; (desktop-save-mode +1)
@@ -249,14 +247,15 @@
 (ublt/add-path "python")
 (require 'ublt-python)
 
+(require 'ublt-js)
+
+(require 'ublt-flymake)
 
 
 ;;; Languages support ------------------------------------------------
 
 ;; Indentation in some modes
 (setq css-indent-offset 2)
-(setq espresso-indent-level 2)
-(setq js-indent-level 2)
 (add-hook 'php-mode-hook (lambda () (setq c-basic-offset 4)))
 
 ;; Might be useful for f*cks like PHP, JSP, ASP.NET, mako, rhtml, django
@@ -269,49 +268,6 @@
 (add-hook 'mako-nxhtml-mumamo-mode-hook 'esk-turn-on-hl-line-mode)
 (add-hook 'nxhtml-mode-hook 'turn-off-auto-fill-mode)
 ;; (add-hook 'nxhtml-mode-hook 'turn-off-flyspell-mode)
-
-
-;; Javascript (it seems js-mode in Emacs is newer than espresso)
-;; v8: scons via apt-get (not pip or easy_install; among other things,
-;; build tool & package manager is what clojure gets absolutely right,
-;; whereas python sucks ass).
-;; Actually screw that, use virtualenv and easy_install scons, as
-;; described here https://github.com/koansys/jshint-v8. But remember
-;; to do
-;;
-;; export SCONS_LIB_DIR=/path/to/virtual-scons-egg/scons-sth
-;;
-;; scons console=readline snapshot=on library=shared d8
-;;
-;; Well it's still complains about missing libv8.so. Just install
-;; "node" then.
-;;
-;; MozRepl integration
-;;
-;; (defalias 'javascript-mode 'espresso-mode)
-;; (setq js-mode-hook '())
-;; (setq flymake-jslint-command "jslint")
-(when (ublt/legacy?)
-  (add-hook 'js-mode-hook 'esk-prog-mode-hook))
-(eval-after-load "js2-mode"
-  '(progn
-     (add-hook 'js2-mode-hook 'esk-prog-mode-hook)
-     (add-hook 'js2-mode-hook 'esk-paredit-nonlisp)
-     (add-hook 'js2-mode-hook 'moz-minor-mode)
-     (defalias 'javascript-mode 'js2-mode)
-     ;; XXX: Copied from starter-kit-js
-     ;; fixes problem with pretty function font-lock
-     (define-key js-mode-map (kbd ",") 'self-insert-command)
-     (font-lock-add-keywords
-      'js2-mode `(("\\(function *\\)("
-                   (0 (progn (compose-region (match-beginning 1)
-                                             (match-end 1) "\u0192")
-                             nil)))))
-     (setcdr (assoc "\\.js\\'" auto-mode-alist)
-             'js2-mode)
-     ))
-(add-hook 'js-mode-hook 'moz-minor-mode)
-(autoload 'moz-minor-mode "moz" "Mozilla Minor and Inferior Mozilla Modes" t)
 
 ;; Factor
 (condition-case err

@@ -64,6 +64,42 @@ prompt returned to comint."
 (add-hook 'comint-preoutput-filter-functions
           'ublt/comint-preoutput-clear-^A^B)
 
+
+;;; Syntax checking
+(eval-after-load "flymake"
+  '(progn
+     (defun flymake-pyflakes-init ()
+       (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                          'flymake-create-temp-inplace))
+              (local-file (file-relative-name
+                           temp-file
+                           (file-name-directory buffer-file-name))))
+         (list "pyflakes" (list local-file))))
+     (add-to-list 'flymake-allowed-file-name-masks
+                  '("\\.py\\'" flymake-pyflakes-init))
+
+     ;; From `starter-kit-ruby.el'
+     (defun ublt/flymake-python-maybe-enable ()
+       (when (and buffer-file-name
+                  ;; flymake and mumamo are at odds, so look at buffer
+                  ;; name instead of `major-mode' when deciding whether
+                  ;; to turn this on
+                  (string-match "\\.py$" buffer-file-name)
+                  (file-writable-p
+                   (file-name-directory buffer-file-name))
+                  (file-writable-p buffer-file-name)
+                  (if (fboundp 'tramp-list-remote-buffers)
+                      (not (subsetp
+                            (list (current-buffer))
+                            (tramp-list-remote-buffers)))
+                    t))
+         (flymake-mode +1)))
+
+     (remove-hook 'python-mode-hook 'flymake-mode)
+     (add-hook 'python-mode-hook 'ublt/flymake-python-maybe-enable)))
+
+
+
 ;; ============================================================
 ;; `http://taesoo.org/Opensource/Pylookup'
 ;; add pylookup to your loadpath, ex) "~/.lisp/addons/pylookup"
