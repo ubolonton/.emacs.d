@@ -428,10 +428,11 @@
 
 ;;; XXX: Make this customizable
 ;;; XXX: It was removed from emacs-starter-kit?
-(defun esk-add-watchwords ()
-  (font-lock-add-keywords
-   nil '(("\\<\\(FIXME\\|TODO\\|FIX\\|XXX\\|HACK\\|REFACTOR\\|NOCOMMIT\\|NTA\\)"
-          1 font-lock-warning-face t))))
+(unless (function 'esk-add-watchwords)
+  (defun esk-add-watchwords ()
+    (font-lock-add-keywords
+     nil '(("\\<\\(FIXME\\|TODO\\|FIX\\|XXX\\|HACK\\|REFACTOR\\|NOCOMMIT\\|NTA\\)"
+            1 font-lock-warning-face t)))))
 
 (ublt/set-up 'eval-sexp-fu
   (setq eval-sexp-fu-flash-duration 0.5))

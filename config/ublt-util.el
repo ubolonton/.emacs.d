@@ -14,6 +14,15 @@
   (add-to-list 'load-path (concat "~/.emacs.d/lib/" path)))
 
 
+(defvar ublt/on-fns (make-hash-table))
+(defun ublt/on-fn (minor-mode-fn)
+  (let ((fn (gethash minor-mode-fn ublt/on-fns)))
+    (if fn fn
+      (puthash minor-mode-fn
+               `(lambda () (funcall ,(symbol-function minor-mode-fn) +1))
+               ublt/on-fns))))
+
+
 ;; To help separating OS-specific stuffs
 (defmacro ublt/in (systems &rest body)
   "Run BODY if `system-type' is in the list of SYSTEMS."

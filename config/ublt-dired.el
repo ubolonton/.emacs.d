@@ -13,13 +13,14 @@
     (dired-do-async-shell-command
      (case system-type
        ('darwin "open")
-       ;; XXX: Why doesn't 'gnome-open' work?
+       ;; XXX: Why doesn't 'gnome-open' work? And this stopped working
+       ;; recently
        ('gnu/linux "~/.emacs.d/config/open.sh"))
      current-prefix-arg
      (dired-get-marked-files t current-prefix-arg))))
 
 ;; Highlight current line
-(add-hook 'dired-mode-hook 'esk-turn-on-hl-line-mode)
+(add-hook 'dired-mode-hook (ublt/on-fn 'hl-line-mode))
 
 ;; Hide details
 (ublt/set-up 'dired-details+
@@ -29,13 +30,14 @@
                 dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\."))
 
 ;; Directories first by default. "s d" to change locally
-(require 'dired-sort-map)
-(setq dired-listing-switches "--group-directories-first -al")
+(ublt/set-up 'dired-sort-map
+  (setq dired-listing-switches "--group-directories-first -al"))
 
-;; Offer the other window's path as default when copying
-(setq dired-dwim-target t)
+(setq
+ ;; Offer the other window's path as default when copying
+ dired-dwim-target t
 
-;; Make find-name-dired ignore case
-(setq find-name-arg "-iname")
+ ;; Make find-name-dired ignore case
+ find-name-arg "-iname")
 
 (provide 'ublt-dired)
