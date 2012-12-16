@@ -240,33 +240,6 @@
 ;;; Evil -------------------------------------------------------------
 (require 'ublt-evil)
 
-;;; Paredit ----------------------------------------------------------
-(require 'paredit)
-;; (defun ublt/enable-paredit-mode ()
-;;   "Enable paredit-mode without checking paren balance."
-;;   (let ((current-prefix-arg t))
-;;     (paredit-mode +1)))
-;; XXX: Seems unclean
-(defadvice paredit-mode (around force activate)
-  (if (eq major-mode 'python-mode)
-      (let ((current-prefix-arg t))
-        ad-do-it)
-    ad-do-it))
-(defun ublt/paredit-space-for-open? (endp delimiter)
-  "Don't insert space for ( [ \" in these modes."
-  (not (and (member major-mode '(comint-mode python-mode javascript-mode js-mode js2-mode))
-            (member delimiter '(?\( ?\[ ?\")))))
-(eval-after-load "paredit"
-  '(add-to-list 'paredit-space-for-delimiter-predicates
-                'ublt/paredit-space-for-open?))
-;;; Since I use paredit in many modes, it's better to use its
-;;; comment-dwim only in lisp modes
-(defadvice comment-dwim (around lisp-specific activate)
-  (if (member major-mode '(lisp-mode emacs-lisp-mode clojure-mode scheme-mode))
-      (call-interactively 'paredit-comment-dwim)
-    (message "normal")
-    ad-do-it))
-
 ;;; Dired ------------------------------------------------------------
 (require ublt-dired)
 
@@ -280,44 +253,6 @@
 
 ;;; Quicksilver/Spotlight for Emacs ----------------------------------
 (require 'ublt-helm)
-
-;; auto-complete
-(require 'auto-complete)
-(require 'auto-complete-config)
-(ac-config-default)
-(ac-flyspell-workaround)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/data/auto-complete/dict")
-(global-auto-complete-mode +1)
-;; (add-hook 'eshell-mode-hook 'ac-eshell-mode-setup)
-(setq-default ac-auto-start nil
-              ac-sources '(ac-source-yasnippet
-                           ac-source-dictionary
-                           ac-source-words-in-buffer
-                           ac-source-words-in-same-mode-buffers
-                           ac-source-words-in-all-buffer
-                           ac-source-abbrev))
-(setq ac-delay 0.5
-      ac-auto-show-menu 1
-      ac-quick-help-delay 0.8)
-
-(dolist (mode '(magit-log-edit-mode log-edit-mode org-mode text-mode haml-mode
-                sass-mode yaml-mode csv-mode espresso-mode haskell-mode
-                html-mode nxml-mode sh-mode smarty-mode clojure-mode
-                lisp-mode textile-mode markdown-mode tuareg-mode
-                nxhtml-mode))
-  (add-to-list 'ac-modes mode))
-
-
-;;; Yasnippet --------------------------------------------------------
-
-(ublt/set-up 'yasnippet
-  (setq yas/root-directory  "~/.emacs.d/data/yasnippet/snippets"
-        yas/prompt-functions '(yas/dropdown-prompt ;; yas/ido-prompt yas/no-prompt
-                                                   )
-        yas/trigger-key nil)
-  (add-to-list 'hippie-expand-try-functions-list 'yas/hippie-try-expand)
-  (yas/load-directory yas/root-directory)
-  (yas/global-mode +1))
 
 ;;; Languages support ------------------------------------------------
 
