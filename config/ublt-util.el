@@ -19,7 +19,7 @@
   (let ((fn (gethash minor-mode-fn ublt/on-fns)))
     (if fn fn
       (puthash minor-mode-fn
-               `(lambda () (funcall ,(symbol-function minor-mode-fn) +1))
+               `(lambda () (,minor-mode-fn +1))
                ublt/on-fns))))
 
 
