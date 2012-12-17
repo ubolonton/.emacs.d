@@ -526,13 +526,14 @@
 ;;                "C-c C-s" 'erlang-shell-display ; was erlang-show-syntactic-information
 ;;                ))))
 (eval-after-load "erlang"
-  '(defadvice erlang-keymap-init (after customize-keys activate)
-     (ublt/define-keys
+  '(ublt/define-keys
       erlang-mode-map
       "C-c v"   'erlang-compile
       "C-c C-l" 'ublt/erlang-compile-and-display ; was erlang-compile-display
       "C-c C-s" 'erlang-shell-display ; was erlang-show-syntactic-information
-      )))
+    "M-n"     'flymake-goto-next-error
+    "M-p"     'flymake-goto-prev-error
+    ))
 (eval-after-load "slime"
   '(ublt/define-keys
     slime-mode-map
