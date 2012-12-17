@@ -20,8 +20,6 @@
 ;; (setq js-mode-hook '())
 ;; (setq flymake-jslint-command "jslint")
 
-(when (ublt/legacy?)
-  (add-hook 'js-mode-hook 'esk-prog-mode-hook))
 
 (eval-after-load "js2-mode"
   '(progn
@@ -38,10 +36,23 @@
                                              (match-end 1) "\u0192")
                              nil)))))
      (setcdr (assoc "\\.js\\'" auto-mode-alist)
-             'js2-mode)
-     ))
+             'js2-mode)))
 
-(defvar javascript-mode-syntax-table js-mode-syntax-table)
+
+(ublt/set-up 'js-mode
+  (when (ublt/legacy?)
+    (add-hook 'js-mode-hook 'esk-prog-mode-hook))
+
+  ;; XXX: What is this for?
+  (defvar javascript-mode-syntax-table js-mode-syntax-table)
+
+  ;; MozRepl integration
+  (add-hook 'js-mode-hook 'moz-minor-mode)
+  (autoload 'moz-minor-mode "moz" "Mozilla Minor and Inferior Mozilla Modes" t)
+
+  (setq js-indent-level 2
+        espresso-indent-level 2))
+
 
 ;;; Syntax checking
 (eval-after-load "flymake"
@@ -56,12 +67,5 @@
        (remove-hook 'js-mode-hook 'flymake-mode)
        (add-hook 'js-mode-hook 'ublt/flymake-js-maybe-enable))))
 
-
-;; MozRepl integration
-(add-hook 'js-mode-hook 'moz-minor-mode)
-(autoload 'moz-minor-mode "moz" "Mozilla Minor and Inferior Mozilla Modes" t)
-
-(setq js-indent-level 2
-      espresso-indent-level 2)
 
 (provide 'ublt-js)
