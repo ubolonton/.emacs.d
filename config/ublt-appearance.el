@@ -437,4 +437,7 @@
 (ublt/set-up 'eval-sexp-fu
   (setq eval-sexp-fu-flash-duration 0.5))
 
+(ublt/set-up 'volatile-highlights
+  (volatile-highlights-mode +1))
+
 (provide 'ublt-appearance)

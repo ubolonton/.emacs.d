@@ -32,8 +32,7 @@
          org textmate paredit undo-tree whole-line-or-region
          ace-jump-mode htmlize twittering-mode keyfreq
          scpaste
-         ;; Uhm, f*ck shell
-         exec-path-from-shell
+         exec-path-from-shell           ; Uhm, f*ck shell
          info+ pabbrev
          ;; Vim emulation
          evil surround
@@ -231,9 +230,6 @@
 ;; (require 'key-chord)
 ;; (key-chord-mode +1)
 ;; (key-chord-define-global "dd" 'kill-whole-line)
-
-(ublt/set-up 'volatile-highlights
-  (volatile-highlights-mode +1))
 
 (require 'ublt-evil)
 (require 'ublt-dired)
