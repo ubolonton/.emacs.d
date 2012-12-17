@@ -287,17 +287,7 @@
 (setq quack-fontify-style nil)
 
 ;; Erlang
-(ublt/in '(gnu/linux)
-  (add-to-list 'load-path "/usr/share/emacs/site-lisp/erlang")
-  (setq erlang-root-dir "/usr/lib/erlang")
-  (setq exec-path (cons "/usr/lib/erlang/bin" exec-path))
-  (require 'erlang-start nil t)
-  (defun ublt/erlang-compile-and-display ()
-    (interactive)
-    (call-interactively 'erlang-compile)
-    (call-interactively 'erlang-compile-display))
-  (add-hook 'erlang-mode-hook 'esk-prog-mode-hook)
-  )
+(require 'ublt-erlang)
 
 (ublt/set-up 'less-css-mode
   (add-hook 'less-css-mode-hook 'esk-prog-mode-hook)
