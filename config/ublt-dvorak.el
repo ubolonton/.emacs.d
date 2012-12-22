@@ -201,6 +201,7 @@
  ;; Right, use C-u if you want digit args
  "M-5"           'query-replace
  "M-%"           'query-replace-regexp
+ "M-6"           'ublt/toggle-letter-case
  "M-7"           'ublt/toggle-cua-rect
  "M-8"           'ublt/cycle-prose-region
  "M-9"           'mark-enclosing-sexp
