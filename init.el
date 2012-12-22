@@ -4,15 +4,6 @@
 (when (ublt/legacy?)
  (load-file "~/.emacs.d/emacs23/package.el"))
 
-;; ;;; XXX: elnode depends on this
-;; (add-to-list 'load-path "~/.emacs.d/lib/apel")
-
-;; ;;; HACK XXX: FLIM breaks this (no mailcap-parse-mailcaps)
-;; (when (eql system-type 'gnu/linux)
-;;   (if (ublt/legacy?)
-;;       (load-file "/usr/share/emacs/23.3/lisp/gnus/mailcap.elc")
-;;     (load-file "/usr/local/share/emacs/24.0.93/lisp/gnus/mailcap.elc")))
-
 ;;; Emacs is not a text editor, and here we load its package manager!
 (require 'package)
 (dolist (source '(("marmalade" . "http://marmalade-repo.org/packages/")
