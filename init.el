@@ -125,6 +125,8 @@
 ;;; Misc customization
 ;;; TODO: add case toggling
 
+(setq tramp-default-method "ssh")
+
 (ublt/in '(gnu/linux)
   (setq find-ls-option '("-print0 | xargs -0 ls -ld" . "-ld")))
 
