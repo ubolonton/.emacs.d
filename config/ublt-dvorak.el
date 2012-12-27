@@ -565,6 +565,14 @@
 
 ;;; Misc
 
+(eval-after-load "isearch"
+  '(ublt/define-keys
+    isearch-mode-map
+    "M-o"        'isearch-occur
+    "M-z"        'ublt/zap-to-isearch
+    "C-<return>" 'ublt/isearch-exit-other-end
+    "C-M-w"      'ublt/isearch-yank-symbol))
+
 (eval-after-load "dired"
   '(ublt/define-keys
     dired-mode-map
