@@ -8,7 +8,9 @@
 (require 'helm-buffers)
 (require 'helm-files)
 (setq helm-mp-highlight-delay 0.7
-      helm-mp-highlight-threshold 4)
+      helm-mp-highlight-threshold 4
+      ;; So C-w put the current symbol in helm's prompt
+      helm-yank-symbol-first t)
 (setq ublt/helm-sources
       '(helm-c-source-ffap-line
         helm-c-source-ffap-guesser

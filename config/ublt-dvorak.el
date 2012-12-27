@@ -333,7 +333,8 @@
     "s-r" 'helm-emms
     "g"   'helm-google-suggest
     "l"   'helm-locate
-    "p"   'helm-list-emacs-process))
+    "p"   'helm-list-emacs-process
+    "o"   'helm-occur))
 
 
 ;;; HTML
