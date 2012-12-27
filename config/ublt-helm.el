@@ -23,8 +23,10 @@
       ;; helm-c-source-git-project-files
       ;; helm-c-source-emacs-process
       )
+
+;;; Quote the the search string
 (ublt/in '(gnu/linux)
-  (setq helm-c-locate-command "locate -i -r '%s'"))
+  (setq helm-c-locate-command "locate %s -r '%s'"))
 
 (defun ublt/helm ()
   (interactive)
