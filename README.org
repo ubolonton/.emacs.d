@@ -1,0 +1,5 @@
+My Emacs config
+
+Some parts are reusable, but highly customized and hard to use out-of-the-box.
+
+git clone --recursive https://github.com/ubolonton/.emacs.d
