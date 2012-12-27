@@ -5,6 +5,9 @@
 ;;   ' , . p y    f g c r l   / = \
 ;;   a o e u i    d h t n s   -
 ;;   ; q j k x    b m w v z
+
+;;; TODO: remap
+
 
 ;; TODO: Make it a macro so that indentation can be customized.
 ;; Helper to define keys
@@ -20,6 +23,7 @@
                                        (read-kbd-macro dst)
                                      dst))))
       (setq i (+ i 2)))))
+
 
 ;;; Custom global bindings -------------------------------------------
 ;; TODO:
@@ -236,6 +240,7 @@
 
  "M-TAB"         'auto-complete        ; Don't use completion-at-point
  )
+
 
 ;;; Evil -------------------------------------------------------------
 (eval-after-load "evil"
@@ -314,68 +319,110 @@
       "C-e" nil
       "C-y" nil
       )))
+
 
-;;; Mode-specific key maps -------------------------------------------
-
-;;; TODO: sql, ruby, factor, haskell, octave
-;;; For mode with a REPL: lisps, python, js (c r l are adjacent on Dvorak!!!):
-;; C-c C-c                                 ; eval defun
-;; C-c C-r                                 ; eval region
-;; C-c C-l                                 ; eval buffer
-;; C-c v                                   ; eval buffer
-;; C-c C-s                                 ; go to REPL
-;;; TODO:
-;; C-M-x
-
+;;; Helm
 (eval-after-load "helm"
   '(ublt/define-keys
     helm-map
     "s-h"         'minibuffer-keyboard-quit
-    "s-<return> " 'minibuffer-keyboard-quit
-    ))
+    "s-<return> " 'minibuffer-keyboard-quit))
 (eval-after-load "helm-config"
   '(ublt/define-keys
     helm-command-map
     "s-r" 'helm-emms
     "g"   'helm-google-suggest
     "l"   'helm-locate
-    "p"   'helm-list-emacs-process
-    ))
-(eval-after-load "python-mode"
+    "p"   'helm-list-emacs-process))
+
+
+;;; HTML
+(eval-after-load "nxhtml-mumamo"
+  '(ublt/define-keys
+    nxhtml-mumamo-mode-map
+    "s-<right>" 'sgml-skip-tag-forward
+    "s-<left>"  'sgml-skip-tag-backward))
+(eval-after-load "html-mode"
+  '(ublt/define-keys
+    html-mode-map
+    "s-<right>" 'sgml-skip-tag-forward
+    "s-<left>"  'sgml-skip-tag-backward))
+(eval-after-load "nxml-mode"
+  '(ublt/define-keys
+    nxml-mode-map
+    "s-<right>" 'sgml-skip-tag-forward
+    "s-<left>"  'sgml-skip-tag-backward))
+
+
+;;; auto-complete and yasnippet
+(eval-after-load "auto-complete"
   '(progn
      (ublt/define-keys
-      py-mode-map
-      "{"       'paredit-open-curly
-      "}"       'paredit-close-curly
-      "M-n"     'flymake-goto-next-error
-      "M-p"     'flymake-goto-prev-error
-      "C-c h"   'pylookup-lookup
-      "M-TAB"   'auto-complete
-      "C-c C-c" 'py-execute-def-or-class ; was py-execute-buffer
-      "C-c C-r" 'py-execute-region       ; was py-shift-region-right
-      "C-c C-l" 'py-execute-buffer       ; was py-shift-region-left
-      "C-c v"   'py-execute-buffer
-      "C-c C-s" 'py-shell                ; was py-execute-string
-      "'"       'skeleton-pair-insert-maybe
-      )
+      ac-complete-mode-map
+      "M-n"   'ac-next
+      "M-p"   'ac-previous
+      "C-h"   'ac-help
+      "M-TAB" 'ac-complete
+      "C-SPC" 'ac-complete
+      "SPC"   'ac-complete
+      "TAB"   'ac-expand)
+     (ublt/define-keys
+      ac-mode-map
+      "M-TAB" 'auto-complete)
+     (ac-set-trigger-key "M-TAB" ;; "M-k"
+                         )))
+(eval-after-load "yasnippet"
+  '(ublt/define-keys
+    yas-minor-mode-map
+    "TAB" nil
+    "<tab>" nil
+    "M-B" 'yas-expand))
+(eval-after-load "slime"
+  '(ublt/define-keys
+    slime-mode-map
+    "M-TAB"   'auto-complete))
+(eval-after-load "python-mode"
+  '(progn
+     (ublt/define-keys py-mode-map
+      "M-TAB" 'auto-complete)
      (ublt/define-keys
       py-shell-map
-      "C-c h" 'pylookup-lookup
-      "M-TAB" 'auto-complete
-      )
-     ))
+      "M-TAB" 'auto-complete)))
+
+
+;;; Error navigation
+(eval-after-load "js2-mode"
+  '(ublt/define-keys
+    js2-mode-map
+    "M-n" 'js2-next-error))
 (eval-after-load "js"
   '(ublt/define-keys
     js-mode-map
     "M-n"     'flymake-goto-next-error
-    "M-p"     'flymake-goto-prev-error
-    ))
-(eval-after-load "js2-mode"
+    "M-p"     'flymake-goto-prev-error))
+(eval-after-load "python-mode"
   '(ublt/define-keys
-    js2-mode-map
-    "M-n" 'js2-next-error
-    "{"   'paredit-open-curly
-    "}"   'paredit-close-curly-and-newline))
+    py-mode-map
+    "M-n"     'flymake-goto-next-error
+    "M-p"     'flymake-goto-prev-error))
+(eval-after-load "php-mode"
+  '(ublt/define-keys
+    php-mode-map
+    "M-p" 'flymake-goto-prev-error
+    "M-n" 'flymake-goto-next-error))
+(eval-after-load "lisp-mode"
+  '(ublt/define-keys
+    emacs-lisp-mode-map
+    "M-p" 'flymake-goto-prev-error
+    "M-n" 'flymake-goto-next-error))
+(eval-after-load "erlang"
+  '(ublt/define-keys
+    erlang-mode-map
+    "M-n"     'flymake-goto-next-error
+    "M-p"     'flymake-goto-prev-error))
+
+
+;;; Paredit
 (eval-after-load "paredit"
   '(ublt/define-keys
     paredit-mode-map
@@ -393,113 +440,58 @@
     "C-<right>"     nil
     "M-<left>"      'paredit-backward
     "M-<right>"     'paredit-forward
-    "M-;"           nil                 ; advice comment-dwim instead
-    ))
-(eval-after-load "auto-complete"
-  '(progn
-     (ublt/define-keys
-      ac-complete-mode-map
-      "M-n"   'ac-next
-      "M-p"   'ac-previous
-      "C-h"   'ac-help
-      "M-TAB" 'ac-complete
-      "C-SPC" 'ac-complete
-      "SPC"   'ac-complete
-      "TAB"   'ac-expand)
-     (ublt/define-keys
-      ac-mode-map
-      "M-TAB" 'auto-complete)
-     (ac-set-trigger-key "M-k";; nil
-                         ;; "M-TAB"
-                         )))
+    ;; TODO: advice comment-dwim instead
+    "M-;"           nil))
+(eval-after-load "python-mode"
+  '(ublt/define-keys
+    py-mode-map
+    "{"       'paredit-open-curly
+    "}"       'paredit-close-curly))
+(eval-after-load "js2-mode"
+  '(ublt/define-keys
+    js2-mode-map
+    "{"   'paredit-open-curly
+    "}"   'paredit-close-curly-and-newline))
 
-(eval-after-load "dired"
-  '(ublt/define-keys
-    dired-mode-map
-    "M-RET"      'ublt/dired-open-native
-    ;; It makes more sense to search in filenames by default
-    "C-s"        'dired-isearch-filenames-regexp
-    "C-S-s"      'isearch-forward-regexp
-    "C-M-s"      'dired-isearch-filenames
-    "C-M-S-s"    'isearch-forward
-    "M-l"        'move-to-window-line-top-bottom
-    "C-c C-c"    'dired-toggle-read-only
-    ))
-(eval-after-load "erc"
-  '(ublt/define-keys
-    erc-mode-map
-    "RET" nil
-    "C-c RET"   'erc-send-current-line
-    "C-c C-RET" 'erc-send-current-line
-    ))
-(eval-after-load "nxhtml-mumamo"
-  '(ublt/define-keys
-    nxhtml-mumamo-mode-map
-    "s-<right>" 'sgml-skip-tag-forward
-    "s-<left>"  'sgml-skip-tag-backward
-    ))
-(eval-after-load "html-mode"
-  '(ublt/define-keys
-    html-mode-map
-    "s-<right>" 'sgml-skip-tag-forward
-    "s-<left>"  'sgml-skip-tag-backward
-    ))
-(eval-after-load "nxml-mode"
-  '(ublt/define-keys
-    nxml-mode-map
-    "s-<right>" 'sgml-skip-tag-forward
-    "s-<left>"  'sgml-skip-tag-backward
-    ))
-(eval-after-load "php-mode"
-  '(ublt/define-keys
-    php-mode-map
-    "M-p" 'flymake-goto-prev-error
-    "M-n" 'flymake-goto-next-error
-    ))
-(eval-after-load "magit"
+
+;;; Languages with interactive REPL
+;;; TODO: sql, ruby, factor, haskell, octave
+;;; For mode with a REPL: lisps, python, js (c r l are adjacent on Dvorak!!!):
+;; C-c C-c                                 ; eval defun
+;; C-c C-r                                 ; eval region
+;; C-c C-l                                 ; eval buffer
+;; C-c v                                   ; eval buffer
+;; C-c C-s                                 ; go to REPL
+;;; TODO:
+;; C-M-x
+(eval-after-load "lisp-mode"
   '(progn
      (ublt/define-keys
-      magit-mode-map
-      "S-SPC" 'magit-show-item-or-scroll-down
-      )
+      emacs-lisp-mode-map
+      "C-c C-c" 'eval-defun
+      "C-c C-r" 'eval-region
+      "C-c C-l" 'eval-buffer
+      "C-c C-s" 'ielm)
      (ublt/define-keys
-      magit-log-edit-mode-map
-      "s-s"     'magit-log-edit-commit
-      "C-x C-s" 'magit-log-edit-commit)))
-(eval-after-load "ido"
-  '(add-hook 'ido-setup-hook
-             (lambda ()
-               (ublt/define-keys
-                ido-completion-map
-                "<tab>"  'ido-complete
-                "<down>" 'ido-next-match
-                "<up>"   'ido-prev-match
-                ))))
-(eval-after-load "lisp-mode"
-  '(progn (ublt/define-keys
-           emacs-lisp-mode-map
-           "C-c C-c" 'eval-defun
-           "C-c C-r" 'eval-region
-           "C-c C-l" 'eval-buffer
-           "C-c C-s" 'ielm
-           "M-p" 'flymake-goto-prev-error
-           "M-n" 'flymake-goto-next-error
-           )
-          (ublt/define-keys
-           lisp-mode-map
-           "C-c C-s" 'switch-to-lisp
-           )
-          (ublt/define-keys
-           lisp-interaction-mode-map
-           "C-c C-c" 'eval-defun
-           "C-c C-r" 'eval-region
-           "C-c C-l" 'eval-buffer
-           "C-c C-s" 'ielm
-           )))
+      lisp-mode-map
+      "C-c C-s" 'switch-to-lisp)
+     (ublt/define-keys
+      lisp-interaction-mode-map
+      "C-c C-c" 'eval-defun
+      "C-c C-r" 'eval-region
+      "C-c C-l" 'eval-buffer
+      "C-c C-s" 'ielm)))
 (eval-after-load "clojure-mode"
   '(ublt/define-keys
     clojure-mode-map
     "C-c C-s" 'run-lisp))
+(eval-after-load "slime"
+  '(ublt/define-keys
+    slime-mode-map
+    "C-c C-l" 'slime-compile-and-load-file
+    "C-c C-k" 'slime-load-file
+    "C-c v"   'slime-load-file
+    "C-c C-s" 'slime-switch-to-output-buffer))
 (eval-after-load "factor-mode"
   '(progn
      (ublt/define-keys
@@ -510,11 +502,24 @@
       fuel-mode-map
       "C-c C-c" 'fuel-eval-definition
       "C-c C-s" 'run-factor)))
-(eval-after-load "info"
+(eval-after-load "octave-mode"
   '(ublt/define-keys
-    Info-mode-map
-    "<kp-delete>" 'Info-scroll-up
-    "S-SPC"       'Info-scroll-down
+    octave-mode-map
+    "C-c C-c" 'octave-send-defun
+    "C-c C-r" 'octave-send-region
+    "C-c C-s" 'octave-show-process-buffer))
+(eval-after-load "python-mode"
+  '(ublt/define-keys
+    py-mode-map
+    "C-c C-c" 'py-execute-def-or-class  ; was py-execute-buffer
+    "C-c C-r" 'py-execute-region        ; was py-shift-region-right
+    "C-c C-l" 'py-execute-buffer        ; was py-shift-region-left
+    "C-c C-s" 'py-shell                 ; was py-execute-string
+    "C-c v"   'py-execute-buffer))
+(eval-after-load "sql"
+  '(ublt/define-keys
+    sql-mode-map
+    "C-c C-s" 'sql-product-interactive  ; was sql-send-string
     ))
 ;;; XXX: Why doesn't this work???
 ;; (eval-after-load "erlang"
@@ -528,22 +533,25 @@
 ;;                ))))
 (eval-after-load "erlang"
   '(ublt/define-keys
-      erlang-mode-map
-      "C-c v"   'erlang-compile
-      "C-c C-l" 'ublt/erlang-compile-and-display ; was erlang-compile-display
-      "C-c C-s" 'erlang-shell-display ; was erlang-show-syntactic-information
-    "M-n"     'flymake-goto-next-error
-    "M-p"     'flymake-goto-prev-error
-    ))
-(eval-after-load "slime"
-  '(ublt/define-keys
-    slime-mode-map
-    "C-c C-l" 'slime-compile-and-load-file
-    "C-c C-k" 'slime-load-file
-    "C-c v"   'slime-load-file
-    "C-c C-s" 'slime-switch-to-output-buffer
-    "M-TAB"   'auto-complete
-    ))
+    erlang-mode-map
+    "C-c C-l" 'ublt/erlang-compile-and-display ; was erlang-compile-display
+    "C-c C-s" 'erlang-shell-display ; was erlang-show-syntactic-information
+    "C-c v"   'erlang-compile))
+
+
+;;; Other bindings specific to language modes
+(eval-after-load "python-mode"
+  '(progn
+     (ublt/define-keys
+      py-mode-map
+      "s-t" 'pylookup-lookup
+      "C-c h" 'pylookup-lookup
+      "'"     'skeleton-pair-insert-maybe)
+     (ublt/define-keys
+      py-shell-map
+      "C-c h" 'pylookup-lookup
+      "s-t" 'pylookup-lookup)))
+
 (eval-after-load "slime-repl"
   '(ublt/define-keys
     slime-repl-mode-map
@@ -552,31 +560,67 @@
     "DEL" nil
     "M-s" nil
     "C-c p" 'slime-repl-set-package
-    "C-c n" 'slime-repl-set-package
-    ))
-(eval-after-load "octave-mod"
+    "C-c n" 'slime-repl-set-package))
+
+
+;;; Misc
+
+(eval-after-load "dired"
   '(ublt/define-keys
-    octave-mode-map
-    "C-c C-s" 'octave-show-process-buffer
-    "C-c C-r" 'octave-send-region
-    "C-c C-c" 'actove-send-defun
-    ))
+    dired-mode-map
+    "M-RET"      'ublt/dired-open-native
+    ;; It makes more sense to search in filenames by default
+    "C-s"        'dired-isearch-filenames-regexp
+    "C-S-s"      'isearch-forward-regexp
+    "C-M-s"      'dired-isearch-filenames
+    "C-M-S-s"    'isearch-forward
+    "M-l"        'move-to-window-line-top-bottom
+    "C-c C-c"    'dired-toggle-read-only))
+
+(eval-after-load "erc"
+  '(ublt/define-keys
+    erc-mode-map
+    "RET" nil
+    "C-c RET"   'erc-send-current-line
+    "C-c C-RET" 'erc-send-current-line))
+
+(eval-after-load "magit"
+  '(progn
+     (ublt/define-keys
+      magit-mode-map
+      "S-SPC" 'magit-show-item-or-scroll-down
+      )
+     (ublt/define-keys
+      magit-log-edit-mode-map
+      "s-s"     'magit-log-edit-commit
+      "C-x C-s" 'magit-log-edit-commit)))
+
+(eval-after-load "ido"
+  '(add-hook 'ido-setup-hook
+             (lambda ()
+               (ublt/define-keys
+                ido-completion-map
+                "<tab>"  'ido-complete
+                "<down>" 'ido-next-match
+                "<up>"   'ido-prev-match))))
+
+(eval-after-load "info"
+  '(ublt/define-keys
+    Info-mode-map
+    "<kp-delete>" 'Info-scroll-up
+    "S-SPC"       'Info-scroll-down))
+
 (eval-after-load "woman"
   '(ublt/define-keys
     woman-mode-map
     "<kp-delete>" 'scroll-up
-    "S-SPC"       'scroll-down
-    ))
+    "S-SPC"       'scroll-down))
+
 ;;; XXX: Why not working?
 (eval-after-load "twittering-mode"
   '(ublt/define-keys
     twittering-mode-map
-    "S-SPC" 'twittering-scroll-down
-    ))
-(eval-after-load "sql"
-  '(ublt/define-keys
-    sql-mode-map
-    "C-c C-s" 'sql-product-interactive  ; was sql-send-string
-    ))
+    "S-SPC" 'twittering-scroll-down))
+
 
 (provide 'ublt-dvorak)
