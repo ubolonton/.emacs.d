@@ -462,6 +462,8 @@
           ((t (:inherit diredp-exec-priv))))
          (helm-candidate-number
           ((t (:inherit isearch-fail, :foreground ,bg :bold t))))
+         (helm-separator
+          ((t (:inherit font-lock-comment-delimiter-face))))
 
          (escape-glyph
           ((t (:foreground ,cyan :bold t))))

@@ -9,6 +9,9 @@
 (require 'helm-files)
 (setq helm-mp-highlight-delay 0.7
       helm-mp-highlight-threshold 4
+      helm-maybe-use-default-as-input t
+      ;; Better-looking separator for multi-line sources
+      helm-candidate-separator "────────────────────────────────────────"
       ;; So C-w put the current symbol in helm's prompt
       helm-yank-symbol-first t)
 (setq ublt/helm-sources
@@ -34,14 +37,7 @@
   (interactive)
   (helm-other-buffer ublt/helm-sources "*ublt/helm*"))
 
-;; Find occurences of current symbol
-;; TODO: turn on follow-mode by default for this
-(require 'thingatpt)
-(defun ublt/helm-occur-at-point ()
-  (interactive)
-  (let ((helm-follow-mode t))
-    (helm :sources helm-c-source-occur
-          :input (thing-at-point 'symbol))))
+;; TODO: Turn on follow-mode by default for helm-occur
 
 ;;; TODO: Maybe customize faces is better (per-source selection of
 ;;; fixed-pitch/variable-pitched font)?

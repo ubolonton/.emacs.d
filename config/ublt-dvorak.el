@@ -76,6 +76,7 @@
  "s-S"    "C-x s"                       ; save some buffers
  "s-z"    "C-_"                         ; undo
  "s-Z"    "M-_"                         ; redo
+ "s-a"    "C-x h"                       ; mark all
 
  ;; Movement keys (right hand)
  "M-c"    "<up>"
@@ -155,20 +156,25 @@
  "s-W"           'ublt/swap-windows
 
  ;; Utilities, super-
- "s-h"           'ido-switch-buffer
  "s-d"           'helm-command-prefix
- "s-n"           'ublt/switch-to-last-buffer
+ "s-D"           'eproject-ido-imenu
+ "s-f"           'helm-occur
+ "s-F"           'helm-do-grep
  "s-g"           'magit-status
- "s-r"           'org-remember "s-R" 'org-agenda
- "s-f"           'ublt/helm-occur-at-point
+ "s-G"           'find-grep
+ "s-m"           'ace-jump-mode
+ "s-M"           'ace-jump-word-mode
+ "s-r"           'org-remember
+ "s-R"           'org-agenda
+
+ "s-h"           'ido-switch-buffer
+ "s-n"           'ublt/switch-to-last-buffer
  "s-b"           'ublt/browse-url-at-point
  "s-p"           'pop-global-mark
- "s-F"           'find-grep
  "s-<backspace>" 'ublt/toggle-alpha
  "s-<return>"    'ublt/toggle-fullscreen
  "s-/"           'find-file-in-project
  "s-\\"          'align-regexp
- "s-m"           'ace-jump-mode
 
  ;; These should be translated
  "s-["           'backward-page   "s-]" 'forward-page
@@ -196,7 +202,6 @@
  "C-x C-d"       'ido-dired
  "C-x d"         'ido-list-directory
  "C-x C-i"       'ido-imenu
- "s-D"           'eproject-ido-imenu
 
  ;; Ubuntu
  "M-<f4>"        'kmacro-start-macro-or-insert-counter ; F3 is taken by xbindkeys
@@ -326,7 +331,10 @@
   '(ublt/define-keys
     helm-map
     "s-h"         'minibuffer-keyboard-quit
-    "s-<return> " 'minibuffer-keyboard-quit))
+    "s-<return> " 'minibuffer-keyboard-quit
+    "C-x h"       'helm-toggle-all-marks
+    "C-f"         'helm-follow-mode
+    ))
 (eval-after-load "helm-config"
   '(ublt/define-keys
     helm-command-map
@@ -334,7 +342,12 @@
     "g"   'helm-google-suggest
     "l"   'helm-locate
     "p"   'helm-list-emacs-process
-    "o"   'helm-occur))
+    "M-o" 'helm-occur
+    "M-O" 'helm-multi-occur
+    "o"   'helm-occur
+    "O"   'helm-multi-occur
+    "SPC" 'helm-global-mark-ring
+    ))
 
 
 ;;; HTML
