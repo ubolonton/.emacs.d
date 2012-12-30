@@ -19,7 +19,9 @@
 ;;; TODO: Info color distribution is not appropriate
 ;;; TODO: More grayscale colors for stuffs like (setq show-paren-style
 ;;; 'expression)
-;;; TODO: +/- names sometimes implies saturation, sometimes implies blackness
+;;; TODO: +/- names sometimes implies saturation, sometimes implies
+;;; blackness
+;;; TODO: More saturation level
 
 ;;; XXX: color-theme's old versions' bug
 ;; (defun color-theme-alist (plist)
@@ -46,9 +48,10 @@
     (fg+1        "#B8C1C9" "#a8a8a8")
 
     (red         "#FF0000" "#FF0000")                 ; Red
-    (red-1       "#F86155" "#FF5F5F")
+    (red-1       "#F86155" "#FF5F5F")   ; Salmon
     (red-3       "#D98D54" "#D7875F")   ; Skin
     (red-4       "#8B0000" "#870000")   ; Dried blood
+    (red-5       "#8B1A1A" "#870000")
 
     (orange      "#FF8C00" "#FF8700")          ; DarkOrange
     (orange-1    "#FF4500" "#FF5F00")           ; OrangeRed
@@ -71,6 +74,7 @@
 
     (blue        "#0084CF" "#0087AF")
     (blue-1      "#6A5ACD" "#5F5FD7")
+    (blue-2      "#223360" "#005F87")
 
     (purple      "#805DBB" "#875F87")
     ))
@@ -99,6 +103,7 @@
           (red-1       (find-color 'red-1))
           (red-3       (find-color 'red-3))
           (red-4       (find-color 'red-4))
+          (red-5       (find-color 'red-5))
           (orange      (find-color 'orange))
           (orange-1    (find-color 'orange-1))
           (gold        (find-color 'gold))
@@ -115,6 +120,7 @@
           (cyan+3      (find-color 'cyan+3))
           (blue        (find-color 'blue))
           (blue-1      (find-color 'blue-1))
+          (blue-2      (find-color 'blue-2))
           (purple      (find-color 'purple))
           )
       (color-theme-install
@@ -146,7 +152,7 @@
          (font-lock-comment-delimiter-face
           ((t (:inherit font-lock-comment-face :foreground ,bg+2))))
          (font-lock-doc-string-face
-          ((t (:foreground ,green-3))))
+          ((t (:foreground ,green-2))))
          (font-lock-function-name-face
           ((t (:foreground ,green))))
          (font-lock-keyword-face
@@ -164,17 +170,17 @@
          (font-lock-type-face
           ((t (:foreground ,cyan+1))))
          (font-lock-preprocessor-face
-          ((t (:inherit font-lock-type-face :foreground ,red-3
-                        ))))
+          ((t (:foreground ,red-3))))
          (font-lock-variable-name-face
           ((t (:foreground ,gold-1))))
          (font-lock-warning-face
           ((t (:foreground ,red))))
+         ;; TODO: Different shade
          (font-lock-constant-face
-          ((t (:inherit font-lock-builtin-face))))
+          ((t (:foreground ,blue))))
 
          (js2-function-param-face
-          ((t (:inherit font-lock-variable-name-face))))
+          ((t (:foreground ,orange))))
 
          ;; Misc
          (isearch-fail
@@ -212,17 +218,46 @@
                            ;; :height 0.8
                            ))))
          (mode-line-inactive
-          ((t (:inherit mode-line :background ,bg+3 :foreground ,fg+1))))
+          ((t (:inherit mode-line :background ,bg+3 :foreground ,fg+1
+                        :box (:color ,bg+3)))))
          (mode-line-buffer-id
           ((t (:bold t :height 1.2))))
          (mode-line-highlight
           ((t (:inherit mode-line))))
-         (mode-line-inactive
-          ((t (:inherit mode-line :background ,bg+2))))
          (which-func
           ((t (:foreground ,red-4 :height 1.2 :bold t))))
-         ;; (which-func
-         ;;  ((t (:foreground "#124800" :height 1.2 :bold t))))
+
+         ;; dired+
+         (diredp-file-name
+          ((t (:inherit default))))
+         (diredp-dir-heading
+          ((t (:foreground ,gold :bold t))))
+         (diredp-symlink
+          ((t (:foreground ,red-1))))
+         (diredp-no-priv
+          ((t (:foreground ,bg+2 :background ,bg+1))))
+         (diredp-read-priv
+          ((t (:background ,green-2))))
+         (diredp-write-priv
+          ((t (:background ,red-3))))
+         (diredp-exec-priv
+          ((t (:background ,red-3))))
+         (diredp-dir-priv
+          ((t (:foreground ,green))))
+         (diredp-number
+          ((t (:foreground ,green-2))))
+         (diredp-flag-mark-line
+          ((t (:foreground ,cyan))))
+         (diredp-deletion
+          ((t (:foreground ,bg :background ,red))))
+         (diredp-deletion-file-name
+          ((t (:foreground ,red))))
+         (diredp-compressed-file-suffix
+          ((t (:foreground ,blue))))
+         (diredp-file-suffix
+          ((t (:foreground ,cyan))))
+         (diredp-ignored-file-name
+          ((t (:foreground ,purple :italic t))))
 
          ;; SLIME debug buffer
          (sldb-topline-face
@@ -242,7 +277,7 @@
          (slime-highlight-edits-face
           ((t (:background ,bg+2))))
          (slime-repl-prompt-face
-          ((t (:inherit font-lock-keyword-face))))
+          ((t (:foreground ,red-1))))
 
          ;; Auto-complete
          (ac-completion-face
@@ -262,7 +297,7 @@
          (ido-only-match
           ((t (:inherit ido-first-match :bold t))))
          (ido-subdir
-          ((t (:foreground ,green))))
+          ((t (:inherit diredp-dir-priv))))
 
          ;; org-mode
          (org-level-1
@@ -288,7 +323,7 @@
          (org-code
           ((t (:foreground ,fg-2))))
          (org-meta-line
-          ((t (:foreground ,bg+2))))
+          ((t (:foreground ,bg+3))))
          (org-mode-line-clock
           ((t (:foreground ,red-4 :bold t))))
          (org-link
@@ -338,15 +373,15 @@
          (magit-section-title
           ((t (:foreground ,gold-1 :bold t))))
          (magit-branch
-          ((t (:inherit font-lock-function-name-face))))
+          ((t (:foreground ,green))))
          (magit-diff-file-header
           ((t (:foreground ,cyan+1))))
          (magit-diff-hunk-header
-          ((t (:inherit font-lock-builtin-face :italic t))))
+          ((t (:foreground ,blue :italic t))))
          (magit-log-head-label-default
           ((t (:inherit magit-log-head-label-remote :foreground ,yellow-1))))
          (magit-log-sha1
-          ((t (:inherit font-lock-keyword-face))))
+          ((t (:foreground ,red-1))))
          (magit-diff-add
           ((t (:foreground ,green))))
          (magit-diff-del
@@ -354,7 +389,7 @@
          (magit-diff-none
           ((t (:foreground ,fg-3))))
          (magit-menu-selected-option
-          ((t (:inherit font-lock-function-name-face))))
+          ((t (:foreground ,green))))
 
          ;; info
          (info-xref
@@ -372,7 +407,7 @@
          (info-function-ref-item
           ((t (:inherit font-lock-function-name-face))))
          (info-user-option-ref-item
-          ((t (:inherit font-lock-variable-name-face))))
+          ((t (:inherit js2-function-param-face))))
          (info-variable-ref-item
           ((t (:inherit font-lock-variable-name-face))))
          (info-macro-ref-item
@@ -396,44 +431,12 @@
          (erc-notice-face
           ((t (:foreground ,bg+3))))
          (erc-nick-default-face
-          ((t (:inherit font-lock-string-face))))
+          ((t (:foreground ,green-1))))
          (erc-timestamp-face
-          ((t (:inherit font-lock-comment-face :slant normal))))
+          ((t (:foreground ,purple))))
 
          (comint-highlight-input
           ((t (:foreground ,green-3))))
-
-         ;; dired+
-         (diredp-file-name
-          ((t (:inherit default))))
-         (diredp-dir-heading
-          ((t (:foreground ,gold :bold t))))
-         (diredp-symlink
-          ((t (:foreground ,red-1))))
-         (diredp-no-priv
-          ((t (:foreground ,bg+2 :background ,bg+1))))
-         (diredp-read-priv
-          ((t (:background ,green-2))))
-         (diredp-write-priv
-          ((t (:background ,red-3))))
-         (diredp-exec-priv
-          ((t (:background ,red-3))))
-         (diredp-dir-priv
-          ((t (:foreground ,green))))
-         (diredp-number
-          ((t (:foreground ,green-2))))
-         (diredp-flag-mark-line
-          ((t (:foreground ,cyan))))
-         (diredp-deletion
-          ((t (:foreground ,bg :background ,red))))
-         (diredp-deletion-file-name
-          ((t (:foreground ,red))))
-         (diredp-compressed-file-suffix
-          ((t (:foreground ,blue))))
-         (diredp-file-suffix
-          ((t (:foreground ,cyan))))
-         (diredp-ignored-file-name
-          ((t (:inherit font-lock-comment-face))))
 
          ;; helm
          (helm-header
@@ -443,27 +446,31 @@
          ;; XXX: Maybe I just don't believe in themes with narrow
          ;; selection of colors
          (helm-selection
-          ((t (:background "#22083397778B"))))
+          ((t (:background ,blue-2))))
          (helm-selection-line
-          ((t (:background "#22083397778B"))))
-         (helm-file-name
-          ((t (:inherit font-lock-type-face))))
+          ((t (:background ,blue-2))))
          (helm-match
           ((t (:foreground ,fg+1 :background ,bg+2 :bold t))))
          (helm-overlay-line-face
           ((t (:background ,bg+2))))
+         (helm-file-name
+          ((t (:foreground ,cyan+3))))
+         (helm-ff-file
+          ((t (:inherit helm-file-name))))
          (helm-ff-directory         ; helm-dir-priv
           ((t (:inherit diredp-dir-priv :background ,bg+1))))
          (helm-ff-symlink
           ((t (:inherit diredp-symlink))))
-         (helm-ff-file
-          ((t (:inherit font-lock-type-face))))
          (helm-ff-executable
           ((t (:inherit diredp-exec-priv))))
          (helm-candidate-number
-          ((t (:inherit isearch-fail, :foreground ,bg :bold t))))
+          ((t (:background ,yellow-1 :foreground ,bg :bold t))))
          (helm-separator
-          ((t (:inherit font-lock-comment-delimiter-face))))
+          ((t (:foreground ,bg+2))))
+         (helm-grep-file
+          ((t (:foreground ,blue-1))))
+         (helm-moccur-buffer
+          ((t (:foreground ,blue-1))))
 
          (escape-glyph
           ((t (:foreground ,cyan :bold t))))
@@ -501,20 +508,20 @@
           ((t (:foreground ,purple :bold t))))
 
          (help-argument-name
-          ((t (:inherit font-lock-builtin-face))))
+          ((t (:foreground ,blue))))
 
          (highlight-symbol-face
           ((t (:background ,bg+3))))
 
          ;; Manual pages
          (woman-bold
-          ((t (:inherit font-lock-builtin-face :bold t))))
+          ((t (:foreground ,blue :bold t))))
          (woman-italic
-          ((t (:inherit font-lock-type-face))))
+          ((t (:foreground ,cyan+1))))
          (woman-addition
-          ((t (:inherit font-lock-variable-name-face))))
+          ((t (:foreground ,gold-1))))
          (woman-unknown
-          ((t (:inherit font-lock-keyword-face))))
+          ((t (:foreground ,red-1))))
 
          ;; undo-tree
          (undo-tree-visualizer-default-face
@@ -567,13 +574,13 @@
           ((t (:background ,bg+3 :foreground ,fg))))
 
          (compilation-info
-          ((t (:inherit font-lock-function-name-face))))
+          ((t (:foreground ,green))))
          (compilation-error
-          ((t (:foreground ,red))))
+          ((t (:foreground ,red-1))))
 
          ;; XXX: FIX:
          (flymake-errline
-          ((t (:background "Firebrick4"))))
+          ((t (:background ,red-5))))
          (flymake-warnline
           ((t (:underline ,yellow-1))))
 
@@ -588,13 +595,13 @@
          (ublt/flymake-message-face
           ((t (:foreground ,red-1 :bold t))))
          (eproject-ido-imenu-file-path
-          ((t (:inherit 'org-meta-line))))
+          ((t (:foreground ,bg+2))))
          (ublt/emms-mode-line-face
           ((t (:height 1.0))))
          (ublt/mode-line-major-mode
           ((t (:bold t))))
          ;; (ublt/evil-emacs-tag
-         ;;  ((t (:inherit font-lock-builtin-face :height 1.2))))
+         ;;  ((t (:foreground ,blue :height 1.2))))
          ;; (ublt/evil-normal-tag
          ;;  ((t (:foreground ,red-4 :bold t :height 1.2))))
          ;; (ublt/evil-insert-tag

@@ -11,7 +11,7 @@
       helm-mp-highlight-threshold 4
       helm-maybe-use-default-as-input t
       ;; Better-looking separator for multi-line sources
-      helm-candidate-separator "────────────────────────────────────────"
+      helm-candidate-separator "────────────────────────────────────────────────────────────────────────────────"
       ;; So C-w put the current symbol in helm's prompt
       helm-yank-symbol-first t)
 (setq ublt/helm-sources
