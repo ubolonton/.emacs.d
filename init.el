@@ -151,6 +151,9 @@
   (add-to-list 'desktop-modes-not-to-save 'highlight-parentheses-mode))
 ;; Ask user whether to restore desktop at start-up
 (add-hook 'after-init-hook 'ublt/session-restore t)
+(eval-after-load "desktop"
+  '(setq desktop-restore-eager 100
+         desktop-lazy-idle-delay 3))
 
 ;; Use IBus for input method `http://www.emacswiki.org/emacs/IBusMode'
 ;; Gần được nhưng hầu hết các font fixed-width không hiện được một số chữ
