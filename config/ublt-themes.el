@@ -92,7 +92,7 @@
     (cyan        "#00CDCD" "#00D7D7")               ; cyan3
     ;; Whitespace
     (cyan-1      "#66CDAA" "#5FD7AF")         ; aquamarine3
-    ;; Mode line
+    ;; Mode line, link
     (cyan-2      "#89A1F3" "#87AFFF")
 
     ;; Bult-in, constant
@@ -116,41 +116,79 @@
   (flet ((find-color (name)
                      (nth (if window-system 1 2)
                           (assoc name ublt/colors))))
-    (let ((variable-pitch-font (face-attribute 'variable-pitch :font))
-          (bg          (find-color 'bg))
-          (bg+1        (find-color 'bg+1))
-          (bg+2        (find-color 'bg+2))
-          (bg+3        (find-color 'bg+3))
-          (fg          (find-color 'fg))
-          (fg+1        (find-color 'fg+1))
-          (fg-1        (find-color 'fg-1))
-          (fg-2        (find-color 'fg-2))
-          (fg-3        (find-color 'fg-3))
-          (red         (find-color 'red))
-          (red-1       (find-color 'red-1))
-          (red-2       (find-color 'red-2))
-          (red-3       (find-color 'red-3))
-          (red-4       (find-color 'red-4))
-          (red-5       (find-color 'red-5))
-          (orange      (find-color 'orange))
-          (orange+1    (find-color 'orange+1))
-          (gold-1      (find-color 'gold-1))
-          (gold+1      (find-color 'gold+1))
-          (yellow      (find-color 'yellow))
-          (yellow-1    (find-color 'yellow-1))
-          (green       (find-color 'green))
-          (green-1     (find-color 'green-1))
-          (green-2     (find-color 'green-2))
-          (green-3     (find-color 'green-3))
-          (cyan        (find-color 'cyan))
-          (cyan+1      (find-color 'cyan+1))
-          (cyan-1      (find-color 'cyan-1))
-          (cyan-2      (find-color 'cyan-2))
-          (blue        (find-color 'blue))
-          (blue-1      (find-color 'blue-1))
-          (blue-2      (find-color 'blue-2))
-          (purple      (find-color 'purple))
-          )
+    (let* ((variable-pitch-font (face-attribute 'variable-pitch :font))
+           (bg          (find-color 'bg))
+           (bg+1        (find-color 'bg+1))
+           (bg+2        (find-color 'bg+2))
+           (bg+3        (find-color 'bg+3))
+           (fg          (find-color 'fg))
+           (fg+1        (find-color 'fg+1))
+           (fg-1        (find-color 'fg-1))
+           (fg-2        (find-color 'fg-2))
+           (fg-3        (find-color 'fg-3))
+           (red         (find-color 'red))
+           (red-1       (find-color 'red-1))
+           (red-2       (find-color 'red-2))
+           (red-3       (find-color 'red-3))
+           (red-4       (find-color 'red-4))
+           (red-5       (find-color 'red-5))
+           (orange      (find-color 'orange))
+           (orange+1    (find-color 'orange+1))
+           (gold-1      (find-color 'gold-1))
+           (gold+1      (find-color 'gold+1))
+           (yellow      (find-color 'yellow))
+           (yellow-1    (find-color 'yellow-1))
+           (green       (find-color 'green))
+           (green-1     (find-color 'green-1))
+           (green-2     (find-color 'green-2))
+           (green-3     (find-color 'green-3))
+           (cyan        (find-color 'cyan))
+           (cyan+1      (find-color 'cyan+1))
+           (cyan-1      (find-color 'cyan-1))
+           (cyan-2      (find-color 'cyan-2))
+           (blue        (find-color 'blue))
+           (blue-1      (find-color 'blue-1))
+           (blue-2      (find-color 'blue-2))
+           (purple      (find-color 'purple))
+
+           (warning      `(:foreground ,red))
+           (error-hl     `(:background ,red-3))
+           (power        `(:foreground ,red-4))
+           (raw          `(:foreground ,red-5))
+
+           (minus        `(:foreground ,red-1))
+           (plus         `(:foreground ,green-1))
+           (context      `(:foreground ,fg-3))
+           (dimmed       `(:foreground ,bg+3))
+
+           (param        `(:foreground ,orange))
+           (mutable      `(:foreground ,gold+1))
+           (exception-hl `(:background ,yellow-1))
+
+           (essence      `(:foreground ,green))
+           (more         `(:foreground ,green))
+           (structured   `(:foreground ,green))
+
+           (name         `(:foreground ,green-1))
+           (doc          `(:foreground ,green-2))
+
+           (type         `(:foreground ,cyan+1))
+           (portal       `(:foreground ,cyan-2))
+           (teleport     `(:foreground ,cyan))
+           (prompt       `(:foreground ,cyan))
+
+           (built-in     `(:foreground ,blue))
+
+           (reference    `(:foreground ,blue-1))
+
+           (dimmed-hl    `(:background ,bg+1))
+           (normal-hl    `(:background ,bg+2 :weight normal))
+           (special-hl   `(:background ,blue-2))
+
+           (note         `(:foreground ,purple)) ; meta?
+
+           (status       `(:background ,cyan-2))
+           )
       (color-theme-install
        `(color-theme-ubolonton-dark
 
@@ -178,11 +216,11 @@
          (font-lock-comment-delimiter-face
           ((t (:inherit font-lock-comment-face :foreground ,bg+2))))
          (font-lock-doc-string-face
-          ((t (:foreground ,green-2))))
+          ((t ,doc)))
          (font-lock-function-name-face
-          ((t (:foreground ,green))))
+          ((t ,essence)))
          (font-lock-keyword-face
-          ((t (:foreground ,red-4))))
+          ((t ,power)))
          (font-lock-reference-face
           ((t (:foreground ,blue-1))))  ; What's this?
          (font-lock-regexp-grouping-backslash
@@ -196,46 +234,50 @@
          (font-lock-type-face
           ((t (:foreground ,cyan+1))))
          (font-lock-preprocessor-face
-          ((t (:foreground ,red-5))))
+          ((t ,raw)))
          (font-lock-variable-name-face
-          ((t (:foreground ,gold+1))))
+          ((t ,mutable)))
          (font-lock-warning-face
-          ((t (:foreground ,red))))
+          ((t ,warning)))
          ;; TODO: Different shade
          (font-lock-constant-face
           ((t (:foreground ,blue))))
 
          (js2-function-param-face
-          ((t (:foreground ,orange))))
+          ((t ,param)))
+         (js2-jsdoc-type-face
+          ((t (:inherit font-lock-type-face))))
+         (js2-jsdoc-tag-face
+          ((t (:inherit font-lock-builtin-face))))
 
          ;; Misc
          (isearch-fail
-          ((t (:foreground ,red :background ,yellow-1))))
+          ((t (,@warning ,@exception-hl))))
          (gui-element
           ((t (:background ,fg+1 :foreground ,bg)))) ; What's this?
          (text-cursor
           ((t (:background ,yellow :foreground ,bg)))) ; What's this?
          (minibuffer-prompt
-          ((t (:foreground ,cyan :bold t ))))
+          ((t (,@prompt :bold t ))))
          (left-margin ((t (nil))))
          (toolbar ((t (nil))))
-         (fringe ((t (:background ,bg+1 :foreground ,fg-3))))
-         (link ((t (:foreground ,cyan-2 :underline t))))
+         (fringe ((t (,@context ,@dimmed-hl))))
+         (link ((t ,portal)))
          (match ((t (:background ,bg+3))))
          (escape-glyph
           ((t (:foreground ,cyan :bold t))))
 
          ;; Highlighting
          (region
-          ((t (:background ,bg+2))))    ; selection
+          ((t ,normal-hl)))             ; selection
          (secondary-selection
-          ((t (:background ,blue-2))))
+          ((t ,special-hl)))
          (hl-line
-          ((t (:background ,bg+1))))    ; line highlighting
+          ((t ,dimmed-hl)))                ; line highlighting
          (hl-sexp-face
           ((t (:inherit hl-line))))
          (highlight
-          ((t (:background ,bg+2))))    ; highlighting
+          ((t ,normal-hl)))             ; highlighting
          (highline-face
           ((t (:background ,green-2)))) ; What's this?
          (zmacs-region
@@ -247,19 +289,19 @@
          (pp^L-highlight
           ((t (:foreground ,purple :bold t))))
          (lazy-highlight
-          ((t (:background ,bg+2))))
+          ((t ,normal-hl)))
 
          (eval-sexp-fu-flash
-          ((t (:background ,bg+2))))
+          ((t ,normal-hl)))
 
          ;; Mode line
          (mode-line
-          ((t (:background ,cyan-2 :foreground ,bg
-                           :box (:line-width 1 :color ,cyan-2)
-                           :font ,variable-pitch-font
-                           :height 0.9
-                           ;; :height 0.8
-                           ))))
+          ((t (,@status :foreground ,bg
+                        :box (:line-width 1 :color ,cyan-2)
+                        :font ,variable-pitch-font
+                        :height 0.9
+                        ;; :height 0.8
+                        ))))
          (mode-line-inactive
           ((t (:inherit mode-line :background ,bg+3 :foreground ,fg+1
                         :box (:color ,bg+3)))))
@@ -270,27 +312,29 @@
          (which-func
           ((t (:foreground ,red-2 :height 1.2 :bold t))))
 
-         ;; dired+
+         ;; dired, dired+
          (diredp-file-name
           ((t (:inherit default))))
          (diredp-dir-heading
           ((t (:foreground ,gold-1 :bold t))))
+         (dired-symlink
+          ((t ,teleport)))
          (diredp-symlink
-          ((t (:foreground ,red-4))))
+          ((t ,teleport)))
          (diredp-no-priv
-          ((t (:foreground ,bg+2 :background ,bg+1))))
+          ((t (:foreground ,bg+2 ,@dimmed-hl))))
          (diredp-read-priv
-          ((t (:background ,green-2))))
+          ((t (,@more ,@dimmed-hl))))
          (diredp-write-priv
-          ((t (:background ,red-5))))
+          ((t (,@raw ,@dimmed-hl))))
          (diredp-exec-priv
-          ((t (:background ,red-5))))
+          ((t (,@power ,@dimmed-hl))))
          (diredp-dir-priv
-          ((t (:foreground ,green))))
+          ((t ,more)))
          (diredp-number
           ((t (:foreground ,green-2))))
          (diredp-flag-mark-line
-          ((t (:foreground ,cyan))))
+          ((t ,special-hl)))
          (diredp-deletion
           ((t (:foreground ,bg :background ,red))))
          (diredp-deletion-file-name
@@ -298,7 +342,7 @@
          (diredp-compressed-file-suffix
           ((t (:foreground ,blue))))
          (diredp-file-suffix
-          ((t (:foreground ,cyan))))
+          ((t ,context)))
          (diredp-ignored-file-name
           ((t (:foreground ,purple :italic t))))
 
@@ -308,17 +352,17 @@
          (sldb-condition-face
           ((t (:foreground ,cyan :bold t))))
          (sldb-section-face
-          ((t (:foreground ,green :bold t))))
+          ((t (,@more :bold t))))
 
          ;; SLIME REPL
          (slime-repl-input-face
-          ((nil (:foreground ,fg-3))))
+          ((nil ,context)))
          (slime-repl-output-face
           ((t (:foreground ,green-1))))
          (slime-repl-result-face
           ((t (:foreground ,cyan))))
          (slime-highlight-edits-face
-          ((t (:background ,bg+2))))
+          ((t ,normal-hl)))
          (slime-repl-prompt-face
           ((t (:foreground ,red-4))))
 
@@ -326,7 +370,7 @@
          (ac-completion-face
           ((t (:inherit hl-line :foreground ,fg-2))))
          (ac-candidate-face
-          ((t (:foreground ,fg :background ,bg+2 :slant normal :weight normal))))
+          ((t (:foreground ,fg ,@normal-hl :slant normal :weight normal))))
          (ac-selection-face
           ((t (:foreground ,fg+1 :background ,bg+3 :slant normal :bold t))))
          (ac-slime-menu-face
@@ -366,7 +410,7 @@
          (org-code
           ((t (:foreground ,fg-2))))
          (org-meta-line
-          ((t (:foreground ,bg+3))))
+          ((t ,dimmed)))
          (org-mode-line-clock
           ((t (:foreground ,red-2 :bold t))))
          (org-link
@@ -409,11 +453,11 @@
 
          ;; diff
          (diff-added
-          ((t (:foreground ,green-1))))
+          ((t ,plus)))
          (diff-removed
-          ((t (:foreground ,red-1))))
+          ((t ,minus)))
          (diff-context
-          ((t (:foreground ,fg-3))))
+          ((t ,context)))
          (diff-indicator-added
           ((t (:inherit diff-added))))
          (diff-indicator-removed
@@ -427,9 +471,9 @@
 
          ;; ediff
          (ediff-current-diff-A
-          ((t (:background "#2C1320"))))       ; #2C1320
+          ((t (:background "#2C1320")))) ; #2C1320
          (ediff-current-diff-B
-          ((t (:background "#0C3320"))))       ; #002200
+          ((t (:background "#0C3320")))) ; #002200
          (ediff-current-diff-C
           ((t (:background "#2C3320"))))
          (ediff-current-diff-Ancestor
@@ -443,9 +487,9 @@
          (ediff-fine-diff-Ancestor
           ((t (:background "#1C2360" :foreground ,fg+1))))
          (ediff-even-diff-A
-          ((t (:background ,bg+2))))
+          ((t ,normal-hl)))
          (ediff-even-diff-B
-          ((t (:background ,bg+2))))
+          ((t ,normal-hl)))
          (ediff-even-diff-C
           ((t (:background ,bg+3))))
          (ediff-even-diff-Ancestor
@@ -455,17 +499,17 @@
          (ediff-odd-diff-B
           ((t (:background ,bg+3))))
          (ediff-odd-diff-C
-          ((t (:background ,bg+2))))
+          ((t ,normal-hl)))
          (ediff-odd-diff-Ancestor
-          ((t (:background ,bg+2))))
+          ((t ,normal-hl)))
 
          ;; magit
          (magit-item-highlight
-          ((t (:background ,bg+1))))
+          ((t ,dimmed-hl)))
          (magit-section-title
           ((t (:foreground ,gold+1 :bold t))))
          (magit-branch
-          ((t (:foreground ,green))))
+          ((t ,more)))
          (magit-diff-file-header
           ((t (:inherit diff-file-header))))
          (magit-diff-hunk-header
@@ -487,7 +531,7 @@
 
          ;; info
          (info-xref
-          ((t (:foreground ,cyan :bold t))))
+          ((t (,@portal :bold t))))
          (info-xref-visited
           ((t (:inherit font-lock-comment-face :bold t :slant normal))))
          (info-quoted-name
@@ -501,13 +545,13 @@
          (info-function-ref-item
           ((t (:inherit font-lock-function-name-face))))
          (info-user-option-ref-item
-          ((t (:inherit js2-function-param-face))))
+          ((t ,param)))
          (info-variable-ref-item
-          ((t (:inherit font-lock-variable-name-face))))
+          ((t ,mutable)))
          (info-macro-ref-item
           ((t (:inherit font-lock-keyword-face))))
          (info-special-form-ref-item
-          ((t (:inherit font-lock-preprocessor-face))))
+          ((t ,raw)))
          (info-command-ref-item
           ((t (:inherit font-lock-type-face))))
 
@@ -527,7 +571,7 @@
           ((t (:foreground ,purple))))
 
          (eshell-prompt
-          ((t (:foreground ,cyan))))
+          ((t ,prompt)))
 
          (comint-highlight-input
           ((t (:foreground ,green-3))))
@@ -544,15 +588,15 @@
          (helm-selection-line
           ((t (:inherit secondary-selection))))
          (helm-match
-          ((t (:foreground ,fg+1 :background ,bg+2 :bold t))))
+          ((t (:foreground ,fg+1 ,@normal-hl :bold t))))
          (helm-overlay-line-face
-          ((t (:background ,bg+2))))
+          ((t ,normal-hl)))
          (helm-file-name
           ((t (:foreground ,cyan-2))))
          (helm-ff-file
           ((t (:inherit helm-file-name))))
-         (helm-ff-directory         ; helm-dir-priv
-          ((t (:inherit diredp-dir-priv :background ,bg+1))))
+         (helm-ff-directory             ; helm-dir-priv
+          ((t (:inherit diredp-dir-priv ,dimmed-hl))))
          (helm-ff-symlink
           ((t (:inherit diredp-symlink))))
          (helm-ff-executable
@@ -562,14 +606,14 @@
          (helm-separator
           ((t (:foreground ,bg+2))))
          (helm-grep-file
-          ((t (:foreground ,blue-1))))
+          ((t ,special-hl)))
          (helm-moccur-buffer
           ((t (:foreground ,blue-1))))
          (helm-grep-finish
           ((t (:foreground ,green-2))))
 
          (ecb-default-highlight-face
-          ((t (:bold t :background ,bg+2))))
+          ((t (:bold t ,@normal-hl))))
 
          ;; yasnippet
          (yas--field-debug-face
@@ -586,9 +630,9 @@
          (mumamo-background-chunk-major
           ((t (:background ,bg))))
          (mumamo-background-chunk-submode1
-          ((t (:background ,bg+1))))
+          ((t ,dimmed-hl)))
          (mumamo-background-chunk-submode2
-          ((t (:background ,bg+1))))
+          ((t ,dimmed-hl)))
          (mumamo-border-face-in
           ((t (:foreground ,bg+3 :bold t))))
          (mumamo-border-face-out
@@ -611,7 +655,7 @@
          (undo-tree-visualizer-default-face
           ((t (:foreground ,bg+3))))
          (undo-tree-visualizer-current-face
-          ((t (:foreground ,green))))
+          ((t ,essence)))
          (undo-tree-visualizer-active-branch-face
           ((t (:foreground ,green-1))))
 
@@ -645,7 +689,7 @@
          (hideshowvis-hidable-face
           ((t (:foreground ,bg+2))))
          (hs-fringe-face
-          ((t (:foreground ,green :box (:line-width 2 :color ,fg+1 :style released-button)))))
+          ((t (,@more :box (:line-width 2 :color ,fg+1 :style released-button)))))
          (hs-face
           ((t (:background ,bg+3))))
 
@@ -655,14 +699,14 @@
           ((t (:background ,bg+3 :foreground ,fg))))
 
          (compilation-info
-          ((t (:foreground ,green))))
+          ((t ,essence)))
          (compilation-error
           ((t (:foreground ,red))))
          (compilation-line-number
           ((t (:foreground ,orange))))
 
          (flymake-errline
-          ((t (:background ,red-3))))
+          ((t ,error-hl)))
          (flymake-warnline
           ((t (:underline ,yellow-1))))
 
