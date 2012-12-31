@@ -154,12 +154,14 @@
            (warning      `(:foreground ,red))
            (error-hl     `(:background ,red-3))
            (power        `(:foreground ,red-4))
+           (commitment   `(:foreground ,red-4))
            (raw          `(:foreground ,red-5))
 
            (minus        `(:foreground ,red-1))
            (plus         `(:foreground ,green-1))
            (context      `(:foreground ,fg-3))
            (dimmed       `(:foreground ,bg+3))
+           (shadowed     `(:foreground ,bg+2))
 
            (param        `(:foreground ,orange))
            (mutable      `(:foreground ,gold+1))
@@ -169,7 +171,7 @@
            (more         `(:foreground ,green))
            (structured   `(:foreground ,green))
 
-           (name         `(:foreground ,green-1))
+           (string       `(:foreground ,green-1))
            (doc          `(:foreground ,green-2))
 
            (type         `(:foreground ,cyan+1))
@@ -177,17 +179,23 @@
            (teleport     `(:foreground ,cyan))
            (prompt       `(:foreground ,cyan))
 
-           (built-in     `(:foreground ,blue))
+           (constant     `(:foreground ,blue))
 
            (reference    `(:foreground ,blue-1))
 
            (dimmed-hl    `(:background ,bg+1))
            (normal-hl    `(:background ,bg+2 :weight normal))
+           (strong-hl    `(:background ,bg+3))
            (special-hl   `(:background ,blue-2))
+
+           (strong       `(:foreground ,fg+1))
 
            (note         `(:foreground ,purple)) ; meta?
 
            (status       `(:background ,cyan-2))
+
+           (reset        `(:weight normal :slant normal :underline nil :box nil
+                           :strike-through nil :inverse-video nil :overline nil))
            )
       (color-theme-install
        `(color-theme-ubolonton-dark
@@ -206,15 +214,15 @@
          (variable-pitch ((t (:background ,bg :foreground ,fg))))
          (border-glyph ((t (nil))))     ; What's this?
          (buffers-tab ((t (:background ,bg :foreground ,fg)))) ; What's this?
-         (shadow ((t (:foreground ,bg+3))))
+         (shadow ((t ,dimmed)))
 
          ;; Code highlighting
          (font-lock-builtin-face
-          ((t (:foreground ,blue))))
+          ((t ,constant)))
          (font-lock-comment-face
-          ((t (:foreground ,purple :italic t))))
+          ((t (,@note :italic t))))
          (font-lock-comment-delimiter-face
-          ((t (:inherit font-lock-comment-face :foreground ,bg+2))))
+          ((t (:inherit font-lock-comment-face ,@shadowed))))
          (font-lock-doc-string-face
           ((t ,doc)))
          (font-lock-function-name-face
@@ -222,26 +230,25 @@
          (font-lock-keyword-face
           ((t ,power)))
          (font-lock-reference-face
-          ((t (:foreground ,blue-1))))  ; What's this?
+          ((t ,reference)))  ; TODO What's this?
          (font-lock-regexp-grouping-backslash
           ((t (:foreground ,bg+1))))
          (font-lock-regexp-grouping-construct
           ((t (:foreground ,orange+1))))
          (font-lock-string-face
-          ((t (:foreground ,green-1))))
+          ((t ,string)))
          (font-lock-doc-face
-          ((t (:inherit font-lock-string-face))))
+          ((t ,string)))
          (font-lock-type-face
-          ((t (:foreground ,cyan+1))))
+          ((t ,type)))
          (font-lock-preprocessor-face
           ((t ,raw)))
          (font-lock-variable-name-face
           ((t ,mutable)))
          (font-lock-warning-face
           ((t ,warning)))
-         ;; TODO: Different shade
          (font-lock-constant-face
-          ((t (:foreground ,blue))))
+          ((t ,constant)))              ; TODO: Different shade
 
          (js2-function-param-face
           ((t ,param)))
@@ -262,10 +269,10 @@
          (left-margin ((t (nil))))
          (toolbar ((t (nil))))
          (fringe ((t (,@context ,@dimmed-hl))))
-         (link ((t ,portal)))
-         (match ((t (:background ,bg+3))))
-         (escape-glyph
-          ((t (:foreground ,cyan :bold t))))
+         (link ((t (,@portal :underline t))))
+         (match ((t ,strong-hl)))
+         (escape-glyph                  ; Special characters
+          ((t (,@prompt :bold t))))     ; TODO
 
          ;; Highlighting
          (region
@@ -275,19 +282,19 @@
          (hl-line
           ((t ,dimmed-hl)))                ; line highlighting
          (hl-sexp-face
-          ((t (:inherit hl-line))))
+          ((t ,dimmed-hl)))
          (highlight
           ((t ,normal-hl)))             ; highlighting
          (highline-face
-          ((t (:background ,green-2)))) ; What's this?
+          ((t (:background ,green-2)))) ; TODO What's this?
          (zmacs-region
-          ((t (:inherit region))))      ; What's this?
+          ((t (:inherit region))))      ; TODO What's this?
          (highlight-changes
-          ((t (:background ,bg+3))))
+          ((t ,strong-hl)))
          (highlight-symbol-face
-          ((t (:background ,bg+3))))
+          ((t ,strong-hl)))
          (pp^L-highlight
-          ((t (:foreground ,purple :bold t))))
+          ((t (,@note :bold t))))
          (lazy-highlight
           ((t ,normal-hl)))
 
@@ -303,7 +310,7 @@
                         ;; :height 0.8
                         ))))
          (mode-line-inactive
-          ((t (:inherit mode-line :background ,bg+3 :foreground ,fg+1
+          ((t (:inherit mode-line ,@strong-hl ,@strong
                         :box (:color ,bg+3)))))
          (mode-line-buffer-id
           ((t (:bold t :height 1.2))))
@@ -314,65 +321,65 @@
 
          ;; dired, dired+
          (diredp-file-name
-          ((t (:inherit default))))
+          ((t (:inherit default))))     ; TODO
          (diredp-dir-heading
-          ((t (:foreground ,gold-1 :bold t))))
+          ((t (:foreground ,gold-1 :bold t))))  ; TODO
          (dired-symlink
           ((t ,teleport)))
          (diredp-symlink
           ((t ,teleport)))
          (diredp-no-priv
-          ((t (:foreground ,bg+2 ,@dimmed-hl))))
+          ((t (,@dimmed-hl ,@shadowed))))
          (diredp-read-priv
-          ((t (,@more ,@dimmed-hl))))
+          ((t (,@dimmed-hl ,@more))))
          (diredp-write-priv
-          ((t (,@raw ,@dimmed-hl))))
+          ((t (,@dimmed-hl ,@raw))))
          (diredp-exec-priv
-          ((t (,@power ,@dimmed-hl))))
+          ((t (,@dimmed-hl ,@power))))
          (diredp-dir-priv
           ((t ,more)))
          (diredp-number
-          ((t (:foreground ,green-2))))
+          ((t ,doc)))                   ; TODO
          (diredp-flag-mark-line
-          ((t ,special-hl)))
+          ((t ,special-hl)))            ; Selection mark
          (diredp-deletion
-          ((t (:foreground ,bg :background ,red))))
+          ((t ,error-hl)))              ; Deletion mark
          (diredp-deletion-file-name
-          ((t (:foreground ,red))))
+          ((t ,warning)))
          (diredp-compressed-file-suffix
-          ((t (:foreground ,blue))))
+          ((t ,constant)))              ; TODO
          (diredp-file-suffix
           ((t ,context)))
          (diredp-ignored-file-name
-          ((t (:foreground ,purple :italic t))))
+          ((t (,@note :italic t))))
 
          ;; SLIME debug buffer
          (sldb-topline-face
-          ((t (:foreground ,red :bold t))))
+          ((t (:foreground ,red :bold t)))) ; TODO
          (sldb-condition-face
-          ((t (:foreground ,cyan :bold t))))
+          ((t (:foreground ,cyan :bold t)))) ; TODO
          (sldb-section-face
-          ((t (,@more :bold t))))
+          ((t (,@more :bold t))))       ; TODO
 
          ;; SLIME REPL
          (slime-repl-input-face
           ((nil ,context)))
          (slime-repl-output-face
-          ((t (:foreground ,green-1))))
+          ((t ,string)))
          (slime-repl-result-face
-          ((t (:foreground ,cyan))))
+          ((t (:foreground ,cyan))))    ; TODO
          (slime-highlight-edits-face
           ((t ,normal-hl)))
          (slime-repl-prompt-face
-          ((t (:foreground ,red-4))))
+          ((t ,commitment)))
 
          ;; Auto-complete
          (ac-completion-face
-          ((t (:inherit hl-line :foreground ,fg-2))))
+          ((t (,@dimmed-hl :foreground ,fg-2 :slant normal :weight normal))))
          (ac-candidate-face
-          ((t (:foreground ,fg ,@normal-hl :slant normal :weight normal))))
+          ((t (,@normal-hl :foreground ,fg :slant normal :weight normal))))
          (ac-selection-face
-          ((t (:foreground ,fg+1 :background ,bg+3 :slant normal :bold t))))
+          ((t (,@strong-hl ,@strong :slant normal :bold t))))
          (ac-slime-menu-face
           ((t (:inherit ac-candidate-face))))
          (ac-slime-selection-face
@@ -380,51 +387,52 @@
 
          ;; ido mini-buffer
          (ido-first-match
-          ((t (:foreground ,gold-1))))
+          ((t (:foreground ,gold-1))))  ; TODO
          (ido-only-match
           ((t (:inherit ido-first-match :bold t))))
          (ido-subdir
-          ((t (:inherit diredp-dir-priv))))
+          ((t ,more)))
 
          ;; org-mode
+         ;; TODO: levels
          (org-level-1
-          ((t (:foreground ,green))))
+          ((t ,essence)))
          (org-level-2
-          ((t (:foreground ,blue))))
+          ((t ,constant)))
          (org-level-3
-          ((t (:foreground ,green-1))))
+          ((t ,string)))
          (org-level-4
-          ((t (:foreground ,purple))))
+          ((t ,note)))
          (org-level-5
-          ((t (:foreground ,red-4))))
+          ((t ,commitment)))
          (org-level-6
-          ((t (:foreground ,orange))))
+          ((t ,param)))
          (org-level-7
-          ((t (:foreground ,gold+1))))
+          ((t ,mutable)))
          (org-level-8
           ((t (:foreground ,yellow-1))))
          (org-table
-          ((t (:foreground ,green-3))))
+          ((t (:foreground ,green-3)))) ; TODO
          (org-hide
           ((t (:foreground ,bg))))
          (org-code
-          ((t (:foreground ,fg-2))))
+          ((t (:foreground ,fg-2))))    ; TODO
          (org-meta-line
           ((t ,dimmed)))
          (org-mode-line-clock
-          ((t (:foreground ,red-2 :bold t))))
+          ((t (:foreground ,red-2 :bold t)))) ; TODO
          (org-link
           ((t (:inherit link))))
          (org-date
-          ((t (:foreground ,cyan :underline t))))
+          ((t (:foreground ,cyan :underline t))))  ; TODO
          (org-todo
-          ((t (:foreground ,red-4))))
+          ((t ,commitment)))
          (org-done
-          ((t (:foreground ,green-3))))
+          ((t (:foreground ,green-3))))  ; TODO
 
          ;; Whitespaces
          (whitespace-space
-          ((t (:background ,bg :foreground ,cyan-1))))
+          ((t (:background ,bg :foreground ,cyan-1)))) ; TODO
          (whitespace-tab
           ((t (:inherit whitespace-space))))
          (whitespace-newline
@@ -434,16 +442,16 @@
          (show-paren-mismatch
           ((t (:inherit font-lock-warning))))
          (show-paren-match
-          ((t (:foreground ,fg+1 :bold t))))
+          ((t (,@strong :bold t))))
          (paren-face-mismatch
           ((t (:inherit show-paren-mismatch))))
          (paren-face-match
           ((t (:inherit show-paren-match))))
          (paren-face-no-match
-          ((t (:background ,yellow))))
+          ((t (:background ,yellow))))  ; TODO
          ;; Parentheses dimming in Lisp modes
          (esk-paren-face
-          ((t (:foreground ,bg+3))))
+          ((t ,dimmed)))
 
          ;; flyspell
          (flyspell-incorrect
@@ -465,9 +473,9 @@
          (diff-header
           ((t (:inherit header-line))))
          (diff-file-header
-          ((t (:foreground ,cyan+1))))
+          ((t (:foreground ,cyan+1))))  ; TODO
          (diff-hunk-header
-          ((t (:foreground ,blue :italic t))))
+          ((t (,@constant :italic t)))) ; TODO
 
          ;; ediff
          (ediff-current-diff-A
@@ -479,25 +487,25 @@
          (ediff-current-diff-Ancestor
           ((t (:background "#0C1350"))))
          (ediff-fine-diff-A
-          ((t (:background "#5C3340" :foreground ,fg+1))))
+          ((t (:background "#5C3340" ,@strong))))
          (ediff-fine-diff-B
-          ((t (:background "#1C6340" :foreground ,fg+1))))
+          ((t (:background "#1C6340" ,@strong))))
          (ediff-fine-diff-C
-          ((t (:background "#5C6340" :foreground ,fg+1))))
+          ((t (:background "#5C6340" ,@strong))))
          (ediff-fine-diff-Ancestor
-          ((t (:background "#1C2360" :foreground ,fg+1))))
+          ((t (:background "#1C2360" ,@strong))))
          (ediff-even-diff-A
           ((t ,normal-hl)))
          (ediff-even-diff-B
           ((t ,normal-hl)))
          (ediff-even-diff-C
-          ((t (:background ,bg+3))))
+          ((t ,strong-hl)))
          (ediff-even-diff-Ancestor
-          ((t (:background ,bg+3))))
+          ((t ,strong-hl)))
          (ediff-odd-diff-A
-          ((t (:background ,bg+3))))
+          ((t ,strong-hl)))
          (ediff-odd-diff-B
-          ((t (:background ,bg+3))))
+          ((t ,strong-hl)))
          (ediff-odd-diff-C
           ((t ,normal-hl)))
          (ediff-odd-diff-Ancestor
@@ -507,7 +515,7 @@
          (magit-item-highlight
           ((t ,dimmed-hl)))
          (magit-section-title
-          ((t (:foreground ,gold+1 :bold t))))
+          ((t (,@mutable :bold t)))) ; TODO
          (magit-branch
           ((t ,more)))
          (magit-diff-file-header
@@ -521,11 +529,11 @@
          (magit-diff-none
           ((t (:inherit diff-context))))
          (magit-log-head-label-default
-          ((t (:inherit magit-log-head-label-remote :foreground ,yellow-1))))
+          ((t (:inherit magit-log-head-label-remote :foreground ,yellow-1)))) ; TODO WHat is this?
          (magit-log-sha1
-          ((t (:foreground ,red-4))))
+          ((t ,commitment)))
          (magit-menu-selected-option
-          ((t (:foreground ,green))))
+          ((t (:foreground ,green))))   ; TODO What is this?
          (magit-item-mark
           ((t (:inherit secondary-selection))))
 
@@ -533,54 +541,64 @@
          (info-xref
           ((t (,@portal :bold t))))
          (info-xref-visited
-          ((t (:inherit font-lock-comment-face :bold t :slant normal))))
+          ((t (,@note :bold t))))
          (info-quoted-name
-          ((t (:inherit font-lock-constant-face))))
+          ((t ,constant)))
          (info-single-quote
-          ((t (:inherit font-lock-builtin-face))))
+          ((t ,constant)))
          (info-string
-          ((t (:inherit font-lock-doc-string-face))))
+          ((t ,doc)))
          (info-reference-item
-          ((t (:inherit font-lock-constant-face))))
+          ((t ,constant)))
          (info-function-ref-item
-          ((t (:inherit font-lock-function-name-face))))
+          ((t ,essence)))
          (info-user-option-ref-item
           ((t ,param)))
          (info-variable-ref-item
           ((t ,mutable)))
          (info-macro-ref-item
-          ((t (:inherit font-lock-keyword-face))))
+          ((t ,power)))
          (info-special-form-ref-item
           ((t ,raw)))
          (info-command-ref-item
-          ((t (:inherit font-lock-type-face))))
+          ((t ,type)))
 
          ;; Null out most attributes, because it seems to inherit
          ;; the face of each line's first character.
          (linum
-          ((t (:inherit fringe :foreground ,bg+3 :slant normal :bold t
+          ((t (:inherit fringe ,@dimmed :slant normal :bold t
                         :underline nil :strike-through nil :overline nil
                         :box nil))))
 
          ;; erc
          (erc-notice-face
-          ((t (:foreground ,bg+3))))
+          ((t ,dimmed)))
          (erc-nick-default-face
-          ((t (:foreground ,green-1))))
+          ((t ,string)))              ; TODO
+         (erc-current-nick-face
+          ((t ,constant)))
+         (erc-my-nick-face
+          ((t ,constant)))
          (erc-timestamp-face
-          ((t (:foreground ,purple))))
+          ((t ,note)))
+         (erc-prompt-face
+          ((t (,@prompt :bold t))))
+         (erc-command-indicator-face
+          ((t (:slant italic :weight normal))))
+         (erc-button
+          ((t (:slant normal))))
 
          (eshell-prompt
           ((t ,prompt)))
 
          (comint-highlight-input
-          ((t (:foreground ,green-3))))
+          ((t (:foreground ,green-3)))) ; TODO
 
          ;; helm
          (helm-header
-          ((t (:foreground ,gold+1 :bold t))))
+          ((t (,@mutable :bold t))))    ; TODO
          (helm-source-header
-          ((t (:foreground ,gold+1 :bold t))))
+          ((t (,@mutable :bold t))))    ; TODO
          ;; XXX: Maybe I just don't believe in themes with narrow
          ;; selection of colors
          (helm-selection
@@ -588,11 +606,11 @@
          (helm-selection-line
           ((t (:inherit secondary-selection))))
          (helm-match
-          ((t (:foreground ,fg+1 ,@normal-hl :bold t))))
+          ((t (,@strong ,@normal-hl :bold t))))
          (helm-overlay-line-face
           ((t ,normal-hl)))
          (helm-file-name
-          ((t (:foreground ,cyan-2))))
+          ((t ,portal)))                ; TODO
          (helm-ff-file
           ((t (:inherit helm-file-name))))
          (helm-ff-directory             ; helm-dir-priv
@@ -602,15 +620,15 @@
          (helm-ff-executable
           ((t (:inherit diredp-exec-priv))))
          (helm-candidate-number
-          ((t (:background ,yellow-1 :foreground ,bg :bold t))))
+          ((t (:background ,yellow-1 :foreground ,bg :bold t)))) ; TODO
          (helm-separator
-          ((t (:foreground ,bg+2))))
+          ((t ,shadowed)))
          (helm-grep-file
           ((t ,special-hl)))
          (helm-moccur-buffer
-          ((t (:foreground ,blue-1))))
+          ((t ,reference)))  ; TODO
          (helm-grep-finish
-          ((t (:foreground ,green-2))))
+          ((t ,doc)))                   ; TODO
 
          (ecb-default-highlight-face
           ((t (:bold t ,@normal-hl))))
@@ -619,12 +637,12 @@
          (yas--field-debug-face
           ((t (:underline ,yellow))))
          (yas-field-highlight-face
-          ((t (:background ,bg+3))))
+          ((t ,strong-hl)))
          ;; For compatibility
          (yas/field-debug-face
           ((t (:underline ,yellow))))
          (yas/field-highlight-face
-          ((t (:background ,bg+3))))
+          ((t ,strong-hl)))
 
          ;; mumamo-mode
          (mumamo-background-chunk-major
@@ -634,42 +652,42 @@
          (mumamo-background-chunk-submode2
           ((t ,dimmed-hl)))
          (mumamo-border-face-in
-          ((t (:foreground ,bg+3 :bold t))))
+          ((t (,@dimmed :bold t))))
          (mumamo-border-face-out
-          ((t (:foreground ,bg+3 :bold t))))
+          ((t (,@dimmed :bold t))))
 
          (help-argument-name
-          ((t (:foreground ,blue))))
+          ((t (:foreground ,blue))))    ; TODO
 
          ;; Manual pages
          (woman-bold
-          ((t (:foreground ,blue :bold t))))
+          ((t (:foreground ,blue :bold t)))) ; TODO
          (woman-italic
           ((t (:foreground ,cyan+1))))
          (woman-addition
-          ((t (:foreground ,gold+1))))
+          ((t ,mutable)))               ; TODO
          (woman-unknown
-          ((t (:foreground ,red-4))))
+          ((t (:foreground ,red-4))))   ; TODO
 
          ;; undo-tree
          (undo-tree-visualizer-default-face
-          ((t (:foreground ,bg+3))))
+          ((t ,dimmed)))
          (undo-tree-visualizer-current-face
           ((t ,essence)))
          (undo-tree-visualizer-active-branch-face
-          ((t (:foreground ,green-1))))
+          ((t ,string)))                ; TODO
 
          ;; ???
          (hexl-address-region
-          ((t (:foreground ,blue))))
+          ((t (:foreground ,blue))))    ; TODO
          (hexl-ascii-region
-          ((t (:foreground ,blue))))
+          ((t (:foreground ,blue))))    ; TODO
 
          ;; Twitter
          (twittering-uri-face
           ((t (:inherit link))))
          (twittering-username-face
-          ((t (:foreground ,green-1))))
+          ((t ,string)))                ; TODO
 
          ;; Python
          (py-exception-name-face
@@ -687,23 +705,23 @@
 
          ;; Code folding
          (hideshowvis-hidable-face
-          ((t (:foreground ,bg+2))))
+          ((t ,shadowed)))
          (hs-fringe-face
           ((t (,@more :box (:line-width 2 :color ,fg+1 :style released-button)))))
          (hs-face
-          ((t (:background ,bg+3))))
+          ((t ,strong-hl)))
 
          (sml-modeline-vis-face
           ((t (:inherit mode-line))))
          (sml-modeline-end-face
-          ((t (:background ,bg+3 :foreground ,fg))))
+          ((t (,@strong-hl :foreground ,fg))))
 
          (compilation-info
           ((t ,essence)))
          (compilation-error
-          ((t (:foreground ,red))))
+          ((t ,warning)))
          (compilation-line-number
-          ((t (:foreground ,orange))))
+          ((t ,param)))                 ; TODO
 
          (flymake-errline
           ((t ,error-hl)))
@@ -713,15 +731,15 @@
          (nxml-tag-delimiter
           ((t (:inherit esk-paren-face))))
          (nxml-element-local-name
-          ((t (:foreground ,cyan-2))))
+          ((t ,portal)))                ; TODO
 
          ;; My own custom faces
          (ublt-twitter-meta-face
-          ((t (:height 0.9 :foreground ,bg+3))))
+          ((t (:height 0.9 ,@dimmed))))
          (ublt/flymake-message-face
-          ((t (:foreground ,red-4 :bold t))))
+          ((t (,commitment :bold t))))  ; TODO
          (eproject-ido-imenu-file-path
-          ((t (:foreground ,bg+2))))
+          ((t ,shadowed)))
          (ublt/emms-mode-line-face
           ((t (:height 1.0))))
          (ublt/mode-line-major-mode
@@ -735,15 +753,15 @@
          ;; (ublt/evil-visual-tag
          ;;  ((t (:foreground ,red :bold t :height 1.2))))
 
-         ;; Skype
+         ;; Skype TODO
          (skype--face-my-message
           ((t (:background ,bg))))
          (skype--face-other-message
           ((t (:background ,bg))))
          (skype--face-my-time-field
-          ((t (:foreground ,bg+2 :height 0.8))))
+          ((t (,@shadowed :height 0.8))))
          (skype--face-other-time-field
-          ((t (:foreground ,bg+2 :height 0.8))))
+          ((t (,@shadowed :height 0.8))))
          (skype--face-optional-field
           ((t (:foreground ,bg+1))))
          (skype--face-user-field
