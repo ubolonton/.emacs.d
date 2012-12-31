@@ -171,11 +171,16 @@
 
 ;;; ^L visualization
 ;; (require 'pp-c-l)
-(ublt/set-up 'pp-c-l
-  (pretty-control-l-mode +1)
-  (setq pp^L-^L-string "❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄ Section ❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄❄"
-        pp^L-^L-string-pre "\n"
-        pp^L-^L-string-post "\n"))
+
+;; (ublt/set-up 'pp-c-l
+;;   (pretty-control-l-mode +1)
+;;   (setq pp^L-^L-string "────────────────────────────── Section ───────────────────────────────"
+;;         pp^L-^L-string-pre "\n"
+;;         pp^L-^L-string-post "\n"))
+
+(ublt/set-up 'page-break-lines
+  (global-page-break-lines-mode +1))
+
 
 ;;; Prevent modes that list stuffs from wrapping lines
 (defun ublt/listing-settings ()
@@ -199,6 +204,7 @@
     (modify-frame-parameters nil (list (cons 'fullscreen (nth i types))))
     (message "Fullscreen: %s" (nth i types))
     (put this-command 'pos (% (1+ i) N))))
+
 
 ;;; Sometimes we need to see through
 (defun ublt/toggle-alpha ()
