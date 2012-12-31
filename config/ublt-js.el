@@ -39,7 +39,7 @@
              'js2-mode)))
 
 
-(ublt/set-up 'js-mode
+(ublt/set-up 'js
   (when (ublt/legacy?)
     (add-hook 'js-mode-hook 'esk-prog-mode-hook))
 
