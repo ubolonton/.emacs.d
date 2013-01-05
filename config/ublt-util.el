@@ -48,7 +48,7 @@
          nil))
     (require feature filename)))
 (defmacro ublt/set-up (feature &rest body)
-  "Try to load the feature, running BODY afterward, notifying
+  "Try loading the feature, running BODY afterward, notifying
 user if not found. This is mostly for my customizations, since I
 don't want a feature failing to load to affect other features in
 the same file. Splitting everything out would result in too many

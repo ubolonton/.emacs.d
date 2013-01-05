@@ -4,7 +4,7 @@
   `((t (:inherit font-lock-comment-delimiter-face :slant normal :weight bold)))
   "Evil insert mode indicator face")
 (defface ublt/evil-normal-tag
-  `((t (:inherit which-func)))
+  `((t (:inherit diredp-mode-line-flagged)))
   "Evil normal mode indicator face")
 (defface ublt/evil-emacs-tag
   `((t (:inherit font-lock-builtin-face :bold t)))

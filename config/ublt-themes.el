@@ -95,12 +95,13 @@
     ;; Mode line, link
     (cyan-2      "#89A1F3" "#87AFFF")
 
+    (blue        "#0000cc" "#0000ff")
     ;; Bult-in, constant
-    (blue        "#0084CF" "#0087AF")
+    (blue-1      "#0084CF" "#0087AF")
     ;; Reference, file, buffer
-    (blue-1      "#6A5ACD" "#5F5FD7")
+    (blue-2      "#6A5ACD" "#5F5FD7")
     ;; Secondary selection
-    (blue-2      "#223360" "#005F87")
+    (blue-3      "#223360" "#005F87")
 
     ;; Comment, ignored, visited
     (purple      "#805DBB" "#875F87")
@@ -149,6 +150,7 @@
            (blue        (find-color 'blue))
            (blue-1      (find-color 'blue-1))
            (blue-2      (find-color 'blue-2))
+           (blue-3      (find-color 'blue-3))
            (purple      (find-color 'purple))
 
            (warning      `(:foreground ,red))
@@ -179,14 +181,14 @@
            (teleport     `(:foreground ,cyan))
            (prompt       `(:foreground ,cyan))
 
-           (constant     `(:foreground ,blue))
+           (constant     `(:foreground ,blue-1))
 
-           (reference    `(:foreground ,blue-1))
+           (reference    `(:foreground ,blue-2))
 
            (dimmed-hl    `(:background ,bg+1))
            (normal-hl    `(:background ,bg+2 :weight normal))
            (strong-hl    `(:background ,bg+3))
-           (special-hl   `(:background ,blue-2))
+           (special-hl   `(:background ,blue-3))
 
            (strong       `(:foreground ,fg+1))
 
@@ -306,7 +308,7 @@
           ((t (,@status :foreground ,bg
                         :box (:line-width 1 :color ,cyan-2)
                         :font ,variable-pitch-font
-                        :height 0.9
+                        :height 1.0
                         ;; :height 0.8
                         ))))
          (mode-line-inactive
@@ -317,7 +319,7 @@
          (mode-line-highlight
           ((t (:inherit mode-line))))
          (which-func
-          ((t (:foreground ,red-2 :height 1.2 :bold t))))
+          ((t (:foreground ,red-2 :height 1.1 :bold t))))
 
          ;; dired, dired+
          (diredp-file-name
@@ -352,6 +354,10 @@
           ((t ,context)))
          (diredp-ignored-file-name
           ((t (,@note :italic t))))
+         (diredp-mode-line-marked
+          ((t (:bold t :foreground ,blue))))
+         (diredp-mode-line-flagged
+          ((t (:bold t :foreground ,red-2))))
 
          ;; SLIME debug buffer
          (sldb-topline-face
@@ -657,11 +663,11 @@
           ((t (,@dimmed :bold t))))
 
          (help-argument-name
-          ((t (:foreground ,blue))))    ; TODO
+          ((t (:foreground ,blue-1))))    ; TODO
 
          ;; Manual pages
          (woman-bold
-          ((t (:foreground ,blue :bold t)))) ; TODO
+          ((t (:foreground ,blue-1 :bold t)))) ; TODO
          (woman-italic
           ((t (:foreground ,cyan+1))))
          (woman-addition
@@ -679,9 +685,9 @@
 
          ;; ???
          (hexl-address-region
-          ((t (:foreground ,blue))))    ; TODO
+          ((t (:foreground ,blue-1))))    ; TODO
          (hexl-ascii-region
-          ((t (:foreground ,blue))))    ; TODO
+          ((t (:foreground ,blue-1))))    ; TODO
 
          ;; Twitter
          (twittering-uri-face
@@ -745,7 +751,7 @@
          (ublt/mode-line-major-mode
           ((t (:bold t))))
          ;; (ublt/evil-emacs-tag
-         ;;  ((t (:foreground ,blue :height 1.2))))
+         ;;  ((t (:foreground ,blue-1 :height 1.2))))
          ;; (ublt/evil-normal-tag
          ;;  ((t (:foreground ,red-2 :bold t :height 1.2))))
          ;; (ublt/evil-insert-tag
@@ -765,7 +771,7 @@
          (skype--face-optional-field
           ((t (:foreground ,bg+1))))
          (skype--face-user-field
-          ((t (:foreground ,blue :bold t))))
+          ((t (:foreground ,blue-1 :bold t))))
 
          ))
 
@@ -775,10 +781,10 @@
       (setq
        hl-paren-colors `("Orange" ,yellow "Greenyellow"
                          ,green "Springgreen" "Cyan"
-                         ,blue-1 "Magenta" "Purple"
+                         ,blue-2 "Magenta" "Purple"
                          "Orange" ,yellow "Greenyellow"
                          ,green "Springgreen" "Cyan"
-                         ,blue-1 "Magenta" "Purple"))
+                         ,blue-2 "Magenta" "Purple"))
       )))
 
 (provide 'ublt-themes)
