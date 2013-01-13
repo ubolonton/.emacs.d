@@ -106,6 +106,8 @@
     ;; Comment, ignored, visited
     (purple      "#805DBB" "#875F87")
     ))
+
+(defvar ublt/fixed-width-font "DejaVu Sans Mono-10")
 
 ;;;###autoload
 (defun color-theme-ubolonton-dark ()
@@ -197,7 +199,12 @@
            (status       `(:background ,cyan-2))
 
            (reset        `(:weight normal :slant normal :underline nil :box nil
-                           :strike-through nil :inverse-video nil :overline nil))
+                                   :strike-through nil :inverse-video nil :overline nil))
+
+           ;; Fixed-width font
+           (fw           `(:font ,ublt/fixed-width-font))
+           ;; Variable-width font
+           (vw           `(:font ,variable-pitch-font))
            )
       (color-theme-install
        `(color-theme-ubolonton-dark
@@ -220,37 +227,37 @@
 
          ;; Code highlighting
          (font-lock-builtin-face
-          ((t ,constant)))
+          ((t (,@fw ,@constant))))
          (font-lock-comment-face
-          ((t (,@note :italic t))))
+          ((t (,@fw ,@note :italic t))))
          (font-lock-comment-delimiter-face
           ((t (:inherit font-lock-comment-face ,@shadowed))))
          (font-lock-doc-string-face
-          ((t ,doc)))
+          ((t (,@fw ,@doc))))
          (font-lock-function-name-face
-          ((t ,essence)))
+          ((t (,@fw ,@essence))))
          (font-lock-keyword-face
-          ((t ,power)))
+          ((t (,@fw ,@power))))
          (font-lock-reference-face
-          ((t ,reference)))  ; TODO What's this?
+          ((t (,@fw ,@reference))))           ; TODO What's this?
          (font-lock-regexp-grouping-backslash
-          ((t (:foreground ,bg+1))))
+          ((t (,@fw :foreground ,bg+1))))
          (font-lock-regexp-grouping-construct
-          ((t (:foreground ,orange+1))))
+          ((t (,@fw :foreground ,orange+1))))
          (font-lock-string-face
-          ((t ,string)))
+          ((t (,@fw ,@string))))
          (font-lock-doc-face
-          ((t ,string)))
+          ((t (,@fw ,@string))))
          (font-lock-type-face
-          ((t ,type)))
+          ((t (,@fw ,@type))))
          (font-lock-preprocessor-face
-          ((t ,raw)))
+          ((t (,@fw ,@raw))))
          (font-lock-variable-name-face
-          ((t ,mutable)))
+          ((t (,@fw ,@mutable))))
          (font-lock-warning-face
-          ((t ,warning)))
+          ((t (,@fw ,@warning))))
          (font-lock-constant-face
-          ((t ,constant)))              ; TODO: Different shade
+          ((t (,@fw ,@constant))))            ; TODO: Different shade
 
          (js2-function-param-face
           ((t ,param)))
@@ -402,19 +409,19 @@
          ;; org-mode
          ;; TODO: levels
          (org-level-1
-          ((t ,essence)))
+          ((t (,@fw ,@essence :height 1.1))))
          (org-level-2
-          ((t ,constant)))
+          ((t (,@fw ,@constant :height 1.05))))
          (org-level-3
-          ((t ,string)))
+          ((t (,@fw ,@string))))
          (org-level-4
-          ((t ,note)))
+          ((t (,@fw ,@note))))
          (org-level-5
-          ((t ,commitment)))
+          ((t (,@fw ,@commitment))))
          (org-level-6
-          ((t ,param)))
+          ((t (,@fw ,@param))))
          (org-level-7
-          ((t ,mutable)))
+          ((t (,@fw ,@mutable))))
          (org-level-8
           ((t (:foreground ,yellow-1))))
          (org-table
@@ -424,7 +431,7 @@
          (org-code
           ((t (:foreground ,fg-2))))    ; TODO
          (org-meta-line
-          ((t ,dimmed)))
+          ((t (,@fw ,@context))))
          (org-mode-line-clock
           ((t (:foreground ,red-2 :bold t)))) ; TODO
          (org-link
@@ -435,6 +442,21 @@
           ((t ,commitment)))
          (org-done
           ((t (:foreground ,green-3))))  ; TODO
+         (org-block-background
+          ((t (,@fw))))
+         (org-table
+          ((t (,@fw))))
+         (org-block-begin-line
+          ((t (,@fw ,@shadowed))))
+         (org-block-end-line
+          ((t (,@fw ,@shadowed))))
+
+         (markdown-link-face
+          ((t (,@vw ,@power))))
+         (markdown-url-face
+          ((t (,@vw :inherit link))))
+         (markdown-url-face
+          ((t (,@vw :inherit link))))
 
          ;; Whitespaces
          (whitespace-space
@@ -448,7 +470,7 @@
          (show-paren-mismatch
           ((t (:inherit font-lock-warning))))
          (show-paren-match
-          ((t (,@strong :bold t))))
+          ((t (,@strong))))
          (paren-face-mismatch
           ((t (:inherit show-paren-mismatch))))
          (paren-face-match
@@ -521,7 +543,7 @@
          (magit-item-highlight
           ((t ,dimmed-hl)))
          (magit-section-title
-          ((t (,@mutable :bold t)))) ; TODO
+          ((t (,@mutable :weight bold)))) ; TODO
          (magit-branch
           ((t ,more)))
          (magit-diff-file-header
@@ -741,7 +763,7 @@
 
          ;; My own custom faces
          (ublt-twitter-meta-face
-          ((t (:height 0.9 ,@dimmed))))
+          ((t (:height 0.9 ,@shadowed))))
          (ublt/flymake-message-face
           ((t (,commitment :bold t))))  ; TODO
          (eproject-ido-imenu-file-path

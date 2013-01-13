@@ -10,8 +10,7 @@
   (let* ((fonts (case system-type
                   ('darwin '("DejaVu Sans Mono-14" "Menlo-14" "Monaco-14"
                              "Consolas-15"))
-                  ('gnu/linux '("DejaVu Sans Mono-10" "Inconsolata-12"
-                                "DejaVu Sans Condensed-11"))
+                  ('gnu/linux '("DejaVu Sans Mono-10" "Inconsolata-12"))
                   (t '("Courier New-12" "Arial-12"))))
          (cur-pos (get this-command 'pos))
          (N (length fonts))
@@ -20,6 +19,7 @@
     (setq font (nth cur-pos fonts))
     (modify-all-frames-parameters (list (cons 'font font) ;; (cons 'height 100)
                                         ))
+    (setq ublt/fixed-width-font font)
     (message "Font: %s" font)
     (put this-command 'pos (% (1+ cur-pos) N))))
 
@@ -62,7 +62,9 @@
                 Man-mode-hook woman-mode-hook
                 twittering-mode-hook
                 emms-playlist-mode-hook
-                skype--chat-mode-hook))
+                skype--chat-mode-hook
+                org-mode-hook
+                ))
   (add-hook hook 'turn-on-variable-pitch-mode))
 
 ;;; Ubolonton's theme
