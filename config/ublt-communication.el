@@ -51,9 +51,13 @@
         '(("freenode.net" "#emacs" "#conkeror" "#clojure" "#concatenative")
           ("cogini.org" "#cogini"))
         erc-nick "ubolonton"
+
         erc-hide-list '("JOIN" "PART" "QUIT" "NICK")
         erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
                                   "324" "329" "332" "333" "353" "477")
+
+        erc-auto-query 'buffer
+
         erc-log-channels-directory "~/erc_logs/"
         erc-save-buffer-on-part t
         erc-save-queries-on-quit t

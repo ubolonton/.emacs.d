@@ -599,13 +599,6 @@
     "M-l"        'move-to-window-line-top-bottom
     "C-c C-c"    'dired-toggle-read-only))
 
-(eval-after-load "erc"
-  '(ublt/define-keys
-    erc-mode-map
-    "RET" nil
-    "C-c RET"   'erc-send-current-line
-    "C-c C-RET" 'erc-send-current-line))
-
 (eval-after-load "magit"
   '(progn
      (ublt/define-keys
