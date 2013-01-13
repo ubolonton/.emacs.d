@@ -4,10 +4,10 @@
   `((t (:inherit font-lock-comment-delimiter-face :slant normal :weight bold)))
   "Evil insert mode indicator face")
 (defface ublt/evil-normal-tag
-  `((t (:inherit diredp-mode-line-flagged)))
+  `((t (:inherit diredp-mode-line-flagged :weight bold)))
   "Evil normal mode indicator face")
 (defface ublt/evil-emacs-tag
-  `((t (:inherit font-lock-builtin-face :bold t)))
+  `((t (:inherit diredp-mode-line-marked :weight bold)))
   "Evil emacs mode indicator face")
 (defface ublt/evil-visual-tag
   `((t (:inherit font-lock-preprocessor-face)))
@@ -48,6 +48,19 @@
                   (?b . ("(" . ")"))
                   (?B . ("{" . "}"))
                   (?> . ("<" . ">"))
+
+                  (?\/ . ("/* " . " */"))
+
+                  ;; Single-quoted strings
+                  (?\' . ("'" . "'"))
+
+                  ;; Emacs-style quotes
+                  (?\` . ("`" . "'"))
+
+                  ;; Python multi-line strings
+                  (?d . ("\"\"\"" . "\"\"\""))
+                  (?D . ("'''" . "'''"))
+
                   (?t . surround-read-tag)
                   (?< . surround-read-tag)))
   (global-surround-mode +1))
