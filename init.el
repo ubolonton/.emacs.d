@@ -165,7 +165,7 @@
 ;; Use IBus for input method `http://www.emacswiki.org/emacs/IBusMode'
 ;; Gần được nhưng hầu hết các font fixed-width không hiện được một số chữ
 (ublt/in '(gnu/linux)
-  (ublt/add-path "ibus-el-0.2.1")
+  (ublt/add-path "ibus-el-0.3.2")
   (require 'ibus)
   (add-hook 'after-init-hook 'ibus-mode-on)
   ;; Use C-SPC for Set Mark command

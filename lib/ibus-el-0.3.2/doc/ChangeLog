@@ -1,3 +1,41 @@
+2012-02-29  IRIE Shinsuke <irieshinsuke@yahoo.co.jp>
+	* Version0.3.2
+	* Added option `ibus-agent-search-paths' to fix problem that ibus-el-agent
+	cannot be found automatically if it has been moved to another directory
+	after loading ibus.el
+	* Fixed problem: Message of Xlib's BadWindow error sometimes is displayed
+	in particular environments (LP #932517)
+	* Changed command line options for ibus-daemon automatically launched
+	to start XIM server together ("-d" -> "-dx")
+2012-02-14  IRIE Shinsuke <irieshinsuke@yahoo.co.jp>
+	* Version0.3.1
+	* Fixed bug: An error occurs when using old version of IBus (< 1.4.0) which
+	doesn't support surrounding text (LP #930015)
+	* Fixed bug: ibus-mode aborts if newly created buffer is immediately
+	killed before receiving IMContext ID from IBus daemon (LP #930820)
+	* Fixed inappropriate error message "Couldn't receive data from agent."
+	in the synchronous communication
+	* Fixed bug: Prefix argument doesn't work for unhandled key events
+	* Fixed echo area's display for multiple strokes key sequence
+	* Changed to execute Emacs command directly as fallback for unhandled key
+	events, except for partial key sequences such as C-x
+	* Removed README.Debian file (Debian #648596)
+2011-12-24  IRIE Shinsuke <irieshinsuke@yahoo.co.jp>
+	* Version0.3.0
+	* Added support for surrounding text
+	* Added option `ibus-candidate-window-h-offset'
+	* Added option `ibus-prediction-window-h-offset'
+	* Added command `ibus-enable-specified-engine'
+	* Changed to enable setting of ibus-prediction-window-position=0 even in
+	minibuffer if IBus version is 1.3.8 or later
+	* Changed to show underlines even if their thicknesses are zero
+	* Fixed problem: Table created by `table-insert' command might corrupt
+	when preediting aborts
+	* Fixed problem: Preediting may abort when using some engines such as m17n
+	* Fixed problem: Input focus cannot be detected on Ubuntu Unity desktop
+	because get_input_focus() often returns root window incorrectly
+	* Fixed bug: auto-fill-mode doesn't work (LP #784452)
+	* Fixed bug: Input focus cannot be obtained correctly in StumpWM (LP #856358)
 2010-11-03  IRIE Shinsuke <irieshinsuke@yahoo.co.jp>
 	* Version0.2.1
 	* Added support for vim-mode
