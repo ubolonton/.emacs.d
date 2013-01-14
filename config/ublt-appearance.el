@@ -181,6 +181,9 @@
 ;;         pp^L-^L-string-post "\n"))
 
 (ublt/set-up 'page-break-lines
+  (dolist (mode '(sh-mode
+                  js-mode js2-mode))
+    (add-to-list 'page-break-lines-modes mode))
   (global-page-break-lines-mode +1))
 
 
