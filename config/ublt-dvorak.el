@@ -412,13 +412,13 @@
 (eval-after-load "js"
   '(ublt/define-keys
     js-mode-map
-    "M-n"     'flymake-goto-next-error
-    "M-p"     'flymake-goto-prev-error))
+    "M-n" 'flymake-goto-next-error
+    "M-p" 'flymake-goto-prev-error))
 (eval-after-load "python-mode"
   '(ublt/define-keys
     py-mode-map
-    "M-n"     'flymake-goto-next-error
-    "M-p"     'flymake-goto-prev-error))
+    "M-n" 'flymake-goto-next-error
+    "M-p" 'flymake-goto-prev-error))
 (eval-after-load "php-mode"
   '(ublt/define-keys
     php-mode-map
@@ -432,13 +432,14 @@
 (eval-after-load "erlang"
   '(ublt/define-keys
     erlang-mode-map
-    "M-n"     'flymake-goto-next-error
-    "M-p"     'flymake-goto-prev-error))
+    "M-n" 'flymake-goto-next-error
+    "M-p" 'flymake-goto-prev-error))
 
 
 ;;; Paredit
 (eval-after-load "paredit"
-  '(ublt/define-keys
+  '(progn
+     (ublt/define-keys
     paredit-mode-map
     "{"             'paredit-open-curly
     "}"             'paredit-close-curly
@@ -455,7 +456,19 @@
     "M-<left>"      'paredit-backward
     "M-<right>"     'paredit-forward
     ;; TODO: advice comment-dwim instead
-    "M-;"           nil))
+      "M-;"           nil)
+(eval-after-load "starter-kit-lisp"
+  '(ublt/define-keys
+    paredit-mode-map
+    "M-(" 'paredit-wrap-round
+    "M-)" 'paredit-forward-slurp-sexp))
+(eval-after-load "starter-kit-lisp-autoloads"
+  '(ublt/define-keys
+    paredit-mode-map
+    "M-(" 'paredit-wrap-round
+         "M-)" 'paredit-forward-slurp-sexp))))
+;;; XXX starter-kit
+
 (eval-after-load "python-mode"
   '(ublt/define-keys
     py-mode-map
