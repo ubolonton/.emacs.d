@@ -31,7 +31,7 @@
 
 ;; Directories first by default. "s d" to change locally
 (ublt/set-up 'dired-sort-map
-  (setq dired-listing-switches "--group-directories-first -al"))
+  (setq dired-listing-switches "--group-directories-first -alh"))
 
 (setq
  ;; Offer the other window's path as default when copying
