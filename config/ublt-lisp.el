@@ -47,6 +47,7 @@
   '(progn
      (add-to-list 'auto-mode-alist '("\\.dtm$" . clojure-mode))
      (add-hook 'clojure-mode-hook 'enable-paredit-mode t)
+     (add-hook 'clojure-mode-hook 'slime-lisp-mode-hook)
      (define-clojure-indent
        (describe 'defun)
        (testing 'defun)
