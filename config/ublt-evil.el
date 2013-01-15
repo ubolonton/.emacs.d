@@ -25,11 +25,24 @@
       )
 
 (require 'evil)
+
+;;; Modes that should be insert state by default
 (dolist (mode '(sql-interactive-mode
                 magit-log-edit-mode erlang-shell-mode
                 dired-mode inferior-moz-mode inferior-octave-mode
                 grep-mode))
   (add-to-list 'evil-insert-state-modes mode))
+
+;;; REPL modes: go to prompt on switching to insert mode
+(defun ublt/repl-goto-prompt ()
+  (when (member major-mode
+                '(sql-interactive-mode eshell-mode
+                  erlang-shell-mode slime-repl-mode
+                  inferior-moz-mode inferior-octave-mode
+                  inferior-emacs-lisp-mode))
+    (goto-char (point-max))))
+(add-hook 'evil-insert-state-entry-hook 'ublt/repl-goto-prompt)
+
 ;; (setcdr evil-insert-state-map nil)
 (define-key evil-insert-state-map
   (read-kbd-macro evil-toggle-key) 'evil-emacs-state)
