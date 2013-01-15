@@ -9,15 +9,11 @@
 ;; "open" current-prefix-arg ;; mac os x
 (defun ublt/dired-open-native ()
   (interactive)
-  (save-window-excursion
-    (dired-do-async-shell-command
-     (case system-type
-       ('darwin "open")
-       ;; XXX: Why doesn't 'gnome-open' work? And this stopped working
-       ;; recently
-       ('gnu/linux "~/.emacs.d/config/open.sh"))
-     current-prefix-arg
-     (dired-get-marked-files t current-prefix-arg))))
+  (dolist (file (dired-get-marked-files t current-prefix-arg))
+    (call-process (case system-type
+                    ('darwin "open")
+                    ('gnu/linux "gnome-open"))
+                  nil 0 nil file)))
 
 ;; Highlight current line
 (add-hook 'dired-mode-hook (ublt/on-fn 'hl-line-mode))
