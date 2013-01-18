@@ -574,7 +574,7 @@
   '(progn
      (ublt/define-keys
       py-mode-map
-      "s-t" 'pylookup-lookup
+      "M-." 'pylookup-lookup
       "C-c h" 'pylookup-lookup
       "'"     'skeleton-pair-insert-maybe)
      (ublt/define-keys

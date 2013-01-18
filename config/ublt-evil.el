@@ -30,7 +30,7 @@
 (dolist (mode '(sql-interactive-mode
                 magit-log-edit-mode erlang-shell-mode
                 dired-mode inferior-moz-mode inferior-octave-mode
-                grep-mode))
+                grep-mode pylookup-mode))
   (add-to-list 'evil-insert-state-modes mode))
 
 ;;; REPL modes: go to prompt on switching to insert mode
