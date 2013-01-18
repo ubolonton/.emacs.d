@@ -73,7 +73,18 @@ of line."
       ;; Number of overlapped lines to keep when scrolling by page
       next-screen-context-lines 5)
 
+(ublt/set-up 'grep
+  ;; XXX
+  (when (equal grep-find-command '("find . -type f -exec grep -nH -e {} +" . 34))
+    (grep-apply-setting 'grep-find-command
+                        '("find . -type f -exec grep -nH -e '' {} +" . 35))))
+
 (ublt/set-up 'ace-jump-mode
-  (setq ace-jump-mode-case-sensitive-search nil))
+  (setq ace-jump-mode-case-sensitive-search nil
+        ace-jump-mode-submode-list '(ace-jump-word-mode
+                                     ace-jump-line-mode
+                                     ace-jump-char-mode)
+        ace-jump-word-mode-use-query-char t
+        ace-jump-mode-move-keys (loop for i from ?a to ?z collect i)))
 
 (provide 'ublt-navigation)

@@ -163,7 +163,7 @@
  "s-g"           'magit-status
  "s-G"           'find-grep
  "s-m"           'ace-jump-mode
- "s-M"           'ace-jump-word-mode
+ "s-M"           'ace-jump-char-mode
  "s-r"           'org-remember
  "s-R"           'org-agenda
 
