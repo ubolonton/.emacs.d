@@ -126,7 +126,7 @@
 ;; Like org-mode TAB and S-TAB
 ;; XXX: I uncomment the region at the end of `hideshowvis' instead
 ;; of copying it here. Should fix that.
-;;; XXX: This makes terminal Emacs hang, so only uses if there's a
+;;; XXX: This makes terminal Emacs hang, so only use if there's a
 ;; window system
 (when window-system
   (ublt/set-up 'fold-dwim-org
@@ -370,24 +370,25 @@
                  (error (message (format "Error diminishing \"%s\": %s" ,mode-name err)))))
           (diminish mode-name display-text))
       (error (message (format "Error diminishing \"%s\": %s" mode-name err)))))
-  (dolist (m '((paredit-mode             "  (Π)"   paredit)
-               (eproject-mode            "  Πρ" eproject)
-               (undo-tree-mode           "  ⌘-Z"  undo-tree)
-               (yas-minor-mode           "  γas"  yasnippet)
-               (flymake-mode             "  !"   flymake)
-               (flyspell-mode            "  !"   flyspell)
-               (hs-minor-mode            "  ⊕" hideshow)
-               (auto-fill-function       "  ⏎")
-               (auto-complete-mode       "  αc" auto-complete)
-               (isearch-mode             "  Σ" isearch)
-               (slime-mode               "SLIME")
-               ;; (narrow                   " η")
-               (buffer-face-mode         "")
-               (volatile-highlights-mode "" volatile-highlights)
-               (elisp-slime-nav-mode     ""     elisp-slime-nav)
-               (hi-lock-mode             "" hi-lock)
-               (eldoc-mode               "")
-               (page-break-lines-mode    "")
+  (dolist (m '((paredit-mode              "  (Π)"   paredit)
+               (eproject-mode             "  Πρ" eproject)
+               (undo-tree-mode            "  ⌘-Z"  undo-tree)
+               (yas-minor-mode            "  γas"  yasnippet)
+               (flymake-mode              "  !"   flymake)
+               (flyspell-mode             "  !"   flyspell)
+               (hs-minor-mode             "  ⊕" hideshow)
+               (auto-fill-function        "  ⏎")
+               (auto-complete-mode        "  αc" auto-complete)
+               (isearch-mode              "  Σ" isearch)
+               (slime-mode                "SLIME")
+               ;; (narrow                    " η")
+               (whole-line-or-region-mode "")
+               (buffer-face-mode          "")
+               (volatile-highlights-mode  "" volatile-highlights)
+               (elisp-slime-nav-mode      "" elisp-slime-nav)
+               (hi-lock-mode              "" hi-lock)
+               (eldoc-mode                "")
+               (page-break-lines-mode     "")
                ))
     (destructuring-bind (mode display &optional feature) m
       (ublt/diminish mode display feature))))

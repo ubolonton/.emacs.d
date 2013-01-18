@@ -78,6 +78,8 @@
  "s-Z"    "M-_"                         ; redo
  "s-a"    "C-x h"                       ; mark all
 
+ "s-C"    'ublt/duplicate-line
+
  ;; Movement keys (right hand)
  "M-c"    "<up>"
  "M-t"    "<down>"
@@ -185,8 +187,9 @@
  ;; Deletion
  "<kp-delete>"   'delete-char
  "M-<kp-delete>" 'kill-word
- "M-I"           'kill-whole-line
+ ;; "M-I"           'kill-whole-line
 
+ "M-I"           'whole-line-or-region-kill-region
  ;; Zooming in/out (consistent with other Mac apps)
  "s-+"           'text-scale-increase
  "s-="           'text-scale-increase

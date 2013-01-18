@@ -126,6 +126,13 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
 (defadvice kill-region (after pop-spurious-mark activate)
   (unless (use-region-p)
     (pop-mark)))
+
+;;; Maybe this is enough, and the above is not needed anymore?
+(ublt/set-up 'whole-line-or-region
+  (defun ublt/duplicate-line (prefix)
+    (interactive "p")
+    (whole-line-or-region-kill-ring-save)
+    (call-interactively 'whole-line-or-region-yank)))
 
 ;; Prefer UTF-8
 (prefer-coding-system 'utf-8)
