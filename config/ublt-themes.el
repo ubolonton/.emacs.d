@@ -397,6 +397,8 @@
           ((t (:inherit ac-candidate-face))))
          (ac-slime-selection-face
           ((t (:inherit ac-selection-face))))
+         (popup-tip-face
+          ((t (,@dimmed-hl ,@string))))
 
          ;; ido mini-buffer
          (ido-first-match
@@ -425,7 +427,7 @@
          (org-level-8
           ((t (:foreground ,yellow-1))))
          (org-table
-          ((t (:foreground ,green-3)))) ; TODO
+          ((t (,@fw :foreground ,green-3)))) ; TODO
          (org-hide
           ((t (:foreground ,bg))))
          (org-code
@@ -750,6 +752,9 @@
           ((t ,warning)))
          (compilation-line-number
           ((t ,param)))                 ; TODO
+
+         (ace-jump-face-foreground
+          ((t (,@reset ,@warning))))
 
          (flymake-errline
           ((t ,error-hl)))
