@@ -16,9 +16,6 @@
 [submodule "lib/magit"]
 	path = lib/magit
 	url = http://github.com/magit/magit.git
-[submodule "lib/emms"]
-	path = lib/emms
-	url = git://git.sv.gnu.org/emms.git
 [submodule "lib/bookmark-plus"]
 	path = lib/bookmark-plus
 	url = https://github.com/emacsmirror/bookmark-plus.git

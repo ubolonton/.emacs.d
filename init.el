@@ -8,8 +8,6 @@
 (require 'package)
 (dolist (source '(("marmalade" . "http://marmalade-repo.org/packages/")
                   ("elpa" . "http://tromey.com/elpa/")
-                  ;; TODO: Maybe, use this after emacs24 is released
-                  ;; (development versions of packages)
                   ("melpa" . "http://melpa.milkbox.net/packages/")
                   ))
   (add-to-list 'package-archives source t))
@@ -19,7 +17,7 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 (defvar ublt/packages
-  '(smex auto-complete ac-slime ido-ubiquitous yasnippet ;; helm
+  '(smex auto-complete ac-slime ido-ubiquitous yasnippet emms ;; helm
          org textmate paredit undo-tree whole-line-or-region
          ace-jump-mode htmlize twittering-mode keyfreq
          scpaste
@@ -100,7 +98,6 @@
 (require 'ublt-editing)
 
 ;;; Personal stuffs
-(ublt/add-path "emms/lisp/")
 (ublt/add-path "org2blog/")
 (ublt/set-up 'ublt-communication)
 (when window-system (ublt/set-up 'ublt-entertainment))
