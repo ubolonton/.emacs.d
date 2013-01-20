@@ -250,6 +250,15 @@
  )
 
 
+;;; Help
+(eval-after-load "help"
+  '(ublt/define-keys
+    help-mode-map
+    "M-s-h" 'help-go-back
+    "M-s-n" 'help-go-forward
+    "C-f"   'help-follow-symbol))
+
+
 ;;; Evil -------------------------------------------------------------
 (eval-after-load "evil"
   '(progn
