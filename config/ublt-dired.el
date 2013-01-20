@@ -17,6 +17,17 @@
                         ('gnu/linux "gnome-open"))
                       nil 0 nil file)))))
 
+;;; TODO: Improve & use
+(defun ublt/dired-rsync (dest)
+  (interactive
+   (list (expand-file-name (read-file-name "Rsync to:"))))
+
+  (let ((files (dired-get-marked-files nil current-prefix-arg)))
+    (dolist (file files)
+      (message "%s => %s" file dest)
+      (start-process "rsync" "*rsync*" "rsync"
+                     "-rvz" file dest))))
+
 ;; Highlight current line
 (add-hook 'dired-mode-hook (ublt/on-fn 'hl-line-mode))
 
