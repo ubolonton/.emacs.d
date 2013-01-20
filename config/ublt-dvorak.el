@@ -334,8 +334,14 @@
       "C-k" nil
       "C-o" nil
       "C-e" nil
-      "C-y" nil
-      )))
+      "C-y" nil)
+     (ublt/define-keys
+      evil-inner-text-objects-map
+      "d" 'evil-inner-defun)
+     (ublt/define-keys
+      evil-outer-text-objects-map
+      "d" 'evil-a-defun
+      "S" 'evil-a-symbol)))
 
 
 ;;; Helm
@@ -452,32 +458,32 @@
 (eval-after-load "paredit"
   '(progn
      (ublt/define-keys
-    paredit-mode-map
-    "{"             'paredit-open-curly
-    "}"             'paredit-close-curly
-    "M-("           'paredit-wrap-round
-    "M-["           'paredit-wrap-square
-    "M-{"           'paredit-wrap-curly
-    "M-r"           nil                           ; was paredit-raise-sexp
-    "M-<backspace>" 'paredit-backward-kill-word
-    "M-<kp-delete>" 'paredit-forward-kill-word
-    "<backspace>"   'paredit-backward-delete
-    "<kp-delete>"   'paredit-forward-delete
-    "C-<left>"      nil
-    "C-<right>"     nil
-    "M-<left>"      'paredit-backward
-    "M-<right>"     'paredit-forward
-    ;; TODO: advice comment-dwim instead
+      paredit-mode-map
+      "{"             'paredit-open-curly
+      "}"             'paredit-close-curly
+      "M-("           'paredit-wrap-round
+      "M-["           'paredit-wrap-square
+      "M-{"           'paredit-wrap-curly
+      "M-r"           nil               ; was paredit-raise-sexp
+      "M-<backspace>" 'paredit-backward-kill-word
+      "M-<kp-delete>" 'paredit-forward-kill-word
+      "<backspace>"   'paredit-backward-delete
+      "<kp-delete>"   'paredit-forward-delete
+      "C-<left>"      nil
+      "C-<right>"     nil
+      "M-<left>"      'paredit-backward
+      "M-<right>"     'paredit-forward
+      ;; TODO: advice comment-dwim instead
       "M-;"           nil)
-(eval-after-load "starter-kit-lisp"
-  '(ublt/define-keys
-    paredit-mode-map
-    "M-(" 'paredit-wrap-round
-    "M-)" 'paredit-forward-slurp-sexp))
-(eval-after-load "starter-kit-lisp-autoloads"
-  '(ublt/define-keys
-    paredit-mode-map
-    "M-(" 'paredit-wrap-round
+     (eval-after-load "starter-kit-lisp"
+       '(ublt/define-keys
+         paredit-mode-map
+         "M-(" 'paredit-wrap-round
+         "M-)" 'paredit-forward-slurp-sexp))
+     (eval-after-load "starter-kit-lisp-autoloads"
+       '(ublt/define-keys
+         paredit-mode-map
+         "M-(" 'paredit-wrap-round
          "M-)" 'paredit-forward-slurp-sexp))))
 ;;; XXX starter-kit
 
@@ -503,6 +509,14 @@
 ;; C-c C-s                                 ; go to REPL
 ;;; TODO:
 ;; C-M-x
+
+;;; Talking about bad defaults!!! (These are like 100 times better)
+(eval-after-load "comint"
+  '(ublt/define-keys
+    comint-mode-map
+    "M-p" 'comint-previous-matching-input-from-input
+    "M-n" 'comint-next-matching-input-from-input))
+
 (eval-after-load "lisp-mode"
   '(progn
      (ublt/define-keys
@@ -661,6 +675,5 @@
   '(ublt/define-keys
     twittering-mode-map
     "S-SPC" 'twittering-scroll-down))
-
 
 (provide 'ublt-dvorak)
