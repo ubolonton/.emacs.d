@@ -382,7 +382,7 @@
                (isearch-mode              "  Σ" isearch)
                (slime-mode                "SLIME")
                ;; (narrow                    " η")
-               (whole-line-or-region-mode "")
+               (whole-line-or-region-mode "" whole-line-or-region)
                (buffer-face-mode          "")
                (volatile-highlights-mode  "" volatile-highlights)
                (elisp-slime-nav-mode      "" elisp-slime-nav)
