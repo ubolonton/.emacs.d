@@ -34,3 +34,5 @@ history
 /filesets-cache.el
 /eproject.lst
 /elpa
+/.savehist
+/.saveplace

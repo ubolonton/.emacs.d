@@ -198,12 +198,12 @@
 ;; Save positions in visited files
 (setq-default save-place t)
 (require 'saveplace)
-(setq save-place-file "~/.emacs.places")
+(setq save-place-file "~/.emacs.d/.saveplace")
 
 ;; Save history
 (setq savehist-additional-variables
       '(search-ring regexp-search-ring)
-      savehist-file "~/.emacs.savehist")
+      savehist-file "~/.emacs.d/.savehist")
 (savehist-mode t)
 
 ;; TextMate minor mode

@@ -46,11 +46,11 @@ use Emacs 21?!?!"
 ;;; TODO: Find out optimal order
 (setq emms-player-list '(
                          emms-player-mplayer
+                         emms-player-mplayer-playlist
                          emms-player-vlc
                          emms-player-mpg321
                          emms-player-ogg123
                          emms-player-mpg321-remote
-                         emms-player-mplayer-playlist
                          ))
 
 (defgroup ubolonton nil ""
@@ -66,9 +66,9 @@ use Emacs 21?!?!"
       emms-stream-bookmarks-file "~/.emacs.d/data/emms/streams"
       emms-source-file-default-directory "~/Music/"
       emms-lyrics-dir "~/Music/Lyrics/"
-      emms-show-format (propertize "  %s" 'face 'variable-pitch)
+      emms-show-format (propertize "%s" 'face 'variable-pitch)
       emms-info-functions '(emms-info-id3v2)
-      emms-cache-file "~/.emacs.emms-cache"
+      emms-cache-file "~/.emacs.d/.emms-cache"
       emms-playlist-buffer-name "*EMMS Playlist*")
 
 ;; Hmm, explicit defined face must be used, anonymous face does not
