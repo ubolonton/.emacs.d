@@ -161,6 +161,16 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
           ad-do-it)
       ad-do-it))
 
+  ;; Making paredit work with delete-selection-mode
+  ;; `http://whattheemacsd.com//setup-paredit.el-03.html'
+  (put 'paredit-forward-delete 'delete-selection 'supersede)
+  (put 'paredit-backward-delete 'delete-selection 'supersede)
+  (put 'paredit-open-round 'delete-selection t)
+  (put 'paredit-open-square 'delete-selection t)
+  (put 'paredit-open-curly 'delete-selection t)
+  (put 'paredit-doublequote 'delete-selection t)
+  (put 'paredit-newline 'delete-selection t)
+
   (defun ublt/paredit-space-for-open? (endp delimiter)
     "Don't insert space for ( [ \" in these modes."
     (not (and (member major-mode '(comint-mode python-mode javascript-mode js-mode js2-mode))
