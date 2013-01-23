@@ -2,6 +2,9 @@
 
 (require 'dired+)
 
+(eval-when-compile
+  (require 'cl))
+
 ;;; Apparently this works much better than dired-do-async-shell-command and
 ;; nohup trickeries
 (defun ublt/dired-open-native ()
