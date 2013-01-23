@@ -251,7 +251,7 @@
 
 
 ;;; Help
-(eval-after-load "help"
+(eval-after-load "help-mode"
   '(ublt/define-keys
     help-mode-map
     "M-s-h" 'help-go-back
