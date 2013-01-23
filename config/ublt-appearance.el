@@ -3,6 +3,7 @@
 ;;; Font, colors, text appearance
 (eval-when-compile
   (require 'cl))
+
 
 ;;; Fonts
 (defun ublt/toggle-fonts ()
@@ -66,6 +67,7 @@
                 org-mode-hook
                 ))
   (add-hook hook 'turn-on-variable-pitch-mode))
+
 
 ;;; Ubolonton's theme
 (ublt/set-up 'ublt-themes
@@ -85,6 +87,7 @@
                      "Orange" "Yellow" "Greenyellow"
                      "Green" "Springgreen" "Cyan"
                      "#6A5ACD" "Magenta" "Purple")))
+
 
 ;;; Whitespaces
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -106,6 +109,7 @@
 ;;                                         ;   (tab-mark ?\t [9654 ?\t] [92 ?\t])         ; tab
 ;;         (tab-mark ?\t [?» ?\t] [92 ?\t])         ; tab
 ;;       ))
+
 
 ;;; Rainbow parentheses for coding modes
 (defun turn-on-hl-paren ()
@@ -120,6 +124,7 @@
   (unless (and highlight-parentheses-mode
                (= 1 (ad-get-arg 0)))
     ad-do-it))
+
 
 ;;; Code folding
 
@@ -187,17 +192,6 @@
   (global-page-break-lines-mode +1))
 
 
-;;; Prevent modes that list stuffs from wrapping lines
-(defun ublt/listing-settings ()
-  (setq truncate-lines t
-        word-wrap nil
-        visual-line-mode nil))
-(dolist (hook '(emms-browser-show-display-hook
-                archive-zip-mode-hook
-                dired-mode-hook
-                org-agenda-mode-hook))  ; XXX: not working
-  (add-hook hook 'ublt/listing-settings t))
-
 (defun ublt/toggle-fullscreen ()
   "Tested only in X."
   (interactive)
@@ -218,31 +212,33 @@
     (if (or (not (numberp a)) (= a  100))
         (set-frame-parameter nil 'alpha 88)
       (set-frame-parameter nil 'alpha 100))))
+
 
-;;; TODO: Still don't understand this line-wrapping business
-(put 'ublt/toggle-line-wrap 'state 'wrap)
-(toggle-truncate-lines +1)
-(setq-default truncate-lines t)
-(setq-default word-wrap nil)
+;;; Looks like only tweaking visual-line-mode is needed (I was
+;;; probably confused by global/local variables)
+
+;;; This affects how lines are wrapped (we want wrapping at word
+;;; boundary not in the middle of a word)
+(setq-default word-wrap t)
+
+;;; This seems to be a superset of word-wrap?
 (global-visual-line-mode -1)
 
-(defun ublt/toggle-line-wrap ()
-  (interactive)
-  (case (get 'ublt/toggle-line-wrap 'state)
-    ('long (progn
-             (put 'ublt/toggle-line-wrap 'state 'wrap)
-             (toggle-truncate-lines +1)
-             (setq-default truncate-lines t)
-             (setq-default word-wrap nil)
-             (global-visual-line-mode -1)
-             (visual-line-mode -1)))
-    ('wrap (progn
-             (put 'ublt/toggle-line-wrap 'state 'long)
-             (toggle-truncate-lines -1)
-             (setq-default truncate-lines nil)
-             (setq-default word-wrap t)
-             (global-visual-line-mode +1)
-             (visual-line-mode +1)))))
+;;; Is this really necessary? (maybe, because visual-line-mode is off
+;;; by default)
+(setq-default truncate-lines t)
+
+;;; No wrap please
+(dolist (hook '(emms-browser-show-display-hook
+                archive-zip-mode-hook
+                dired-mode-hook
+                org-agenda-mode-hook))  ; XXX: not working
+  (add-hook hook (ublt/off-fn 'visual-line-mode)))
+
+;;; Always wrap please
+(dolist (hook '(twittering-mode-hook))
+  (add-hook hook (ublt/on-fn 'visual-line-mode)))
+
 
 ;;; Sometimes buffers have the same names
 ;; from `http://trey-jackson.blogspot.com/2008/01/emacs-tip-11-uniquify.html'
@@ -253,6 +249,7 @@
         uniquify-after-kill-buffer-p t
         ;; Don't muck with special buffers
         uniquify-ignore-buffers-re "^\\*"))
+
 
 ;; Uncluttered shell prompt
 (setq eshell-prompt-function (lambda ()
@@ -260,6 +257,7 @@
                                 "\n╭─ " (eshell-user-name)
                                 "  " (abbreviate-file-name (eshell/pwd))
                                 "\n╰─ ")))
+
 
 ;;; mode-line appearance
 (defgroup ubolonton nil ""
@@ -355,6 +353,7 @@
 ;;        '(:eval (propertize "%m" 'face 'ublt/mode-line-major-mode))
 ;;        minor-mode-alist
 ;;        ")")
+
 
 ;;; Make mode-line uncluttered by changing how minor modes are shown
 
@@ -392,6 +391,7 @@
                ))
     (destructuring-bind (mode display &optional feature) m
       (ublt/diminish mode display feature))))
+
 
 ;;; Misc
 

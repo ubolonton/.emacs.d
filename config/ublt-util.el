@@ -22,6 +22,13 @@
                `(lambda () (,minor-mode-fn +1))
                ublt/on-fns))))
 
+(defvar ublt/off-fns (make-hash-table))
+(defun ublt/off-fn (minor-mode-fn)
+  (let ((fn (gethash minor-mode-fn ublt/off-fns)))
+    (if fn fn
+      (puthash minor-mode-fn
+               `(lambda () (,minor-mode-fn -1))
+               ublt/off-fns))))
 
 ;; To help separating OS-specific stuffs
 (defmacro ublt/in (systems &rest body)
