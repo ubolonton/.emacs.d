@@ -30,6 +30,7 @@
 (dolist (mode '(sql-interactive-mode
                 magit-log-edit-mode erlang-shell-mode
                 dired-mode inferior-moz-mode inferior-octave-mode
+                inferior-ess-mode
                 grep-mode pylookup-mode))
   (add-to-list 'evil-insert-state-modes mode))
 
@@ -47,6 +48,7 @@
 (define-key evil-insert-state-map
   (read-kbd-macro evil-toggle-key) 'evil-emacs-state)
 (evil-mode +1)
+
 (ublt/set-up 'surround
   (setq-default surround-pairs-alist
                 '((?\( . ("(" . ")"))
@@ -77,5 +79,20 @@
                   (?t . surround-read-tag)
                   (?< . surround-read-tag)))
   (global-surround-mode +1))
+
+;;; TODO: inner?
+(ublt/set-up 'thingatpt
+  (defun ublt/backward-defun (&optional arg)
+    (forward-thing 'defun (- arg)))
+  (defun ublt/forward-defun (&optional arg)
+    (forward-thing 'defun arg))
+  (evil-define-text-object evil-a-defun (count &optional beg end type)
+    "Select a defun."
+    (evil-an-object-range
+     count beg end type #'ublt/forward-defun #'ublt/backward-defun))
+  (evil-define-text-object evil-a-symbol (count &optional beg end type)
+    "Select a symbol."
+    (evil-an-object-range
+     count beg end type #'forward-symbol)))
 
 (provide 'ublt-evil)

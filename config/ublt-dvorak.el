@@ -264,53 +264,104 @@
   '(progn
      (ublt/define-keys
       evil-normal-state-map
-      ;; Used for positional movements instead (below)
+      ;; Preparation for motion map
       "h" nil "H" nil
       "n" nil "N" nil
       "c" nil "C" nil
       "t" nil "T" nil
-
-      "j"     'evil-change
-      "J"     'evil-change-line
-
-      "U"     'undo-tree-redo
-
-      "C-r" nil
+      "g" nil "G" nil
+      "r" nil "R" nil
       "l" nil "L" nil
+
+      ;; (c)hange => (j)ab
+      "j"        'evil-change
+      "J"        'evil-change-line
+
+      "U"        'undo-tree-redo
+
+      "C-r"      nil
+      "M-."      nil ; evil-repeat-pop-next
       "<escape>" 'evil-force-normal-state
 
-      "M-."   nil ; evil-repeat-pop-next
+      ;; (r)eplace => (b)
+      "b"        'evil-replace
+      "B"        'evil-replace-state
+
+      ;; g => e
+      "e"  nil
+      "e&"       'evil-ex-repeat-global-substitute
+      "e8"       'what-cursor-position
+      "ea"       'what-cursor-position
+      "ei"       'evil-insert-resume
+      "eJ"       'evil-join-whitespace
+      "eq"       'evil-fill-and-move
+      "ew"       'evil-fill
+      "eu"       'evil-downcase
+      "eU"       'evil-upcase
+      "ef"       'find-file-at-point
+      "eF"       'evil-find-file-at-point-with-line
+      "e?"       'evil-rot13
+      "e~"       'evil-invert-case
+      "e;"       'goto-last-change
+      "e,"       'goto-last-change-reverse
+
       )
      (ublt/define-keys
       evil-motion-state-map
+
+      ;; Dvorak, positional
       "h"     'evil-backward-char
       "n"     'evil-forward-char
-      "c"     'evil-previous-line
-      "t"     'evil-next-line
       "H"     'evil-window-top
       "N"     'evil-window-bottom
-
+      ;; Dvorak, positional (line)
+      "c"     'evil-previous-line
+      "t"     'evil-next-line
       "C"     'evil-scroll-line-up
       "T"     'evil-scroll-line-down
+      ;; Dvorak, positional (word)
+      "g"     'evil-backward-word-begin
+      "G"     'evil-backward-WORD-begin
+      "r"     'evil-forward-word-end
+      "R"     'evil-forward-WORD-end
+
       "SPC"   'evil-scroll-page-down
       "S-SPC" 'evil-scroll-page-up
+
+      ;; (n)ext => (l)ook
       "l"     'evil-search-next
       "L"     'evil-search-previous
+      ;; (c)hange => (j)ab
       "j"     'evil-change
       "J"     'evil-change-line
+      ;; (t)o => к (Russian)
       "k"     'evil-find-char-to
       "K"     'evil-find-char-to-backward
 
+      ;; g => (e)vil do
+      "e"     nil
+      "ed"    'evil-goto-definition
+      "ee"    'evil-backward-word-end
+      "eE"    'evil-backward-WORD-end
+      "eg"    'evil-goto-first-line
+      "ej"    'evil-next-visual-line
+      "ek"    'evil-previous-visual-line
+      "e0"    'evil-beginning-of-visual-line
+      "e_"    'evil-last-non-blank
+      "e^"    'evil-first-non-blank-of-visual-line
+      "e$"    'evil-end-of-visual-line
+      "e\C-]" 'find-tag
+      "ev"    'evil-visual-restore
+
       "*"     'highlight-symbol-next
       "#"     'highlight-symbol-prev
-      "G"     'ace-jump-mode
 
-      "C-b" nil
-      "C-d" nil
-      "C-e" nil
-      "C-f" nil
-      "C-o" nil
-      "C-y" nil
+      "C-b"    nil
+      "C-d"    nil
+      "C-e"    nil
+      "C-f"    nil
+      "C-o"    nil
+      "C-y"    nil
       )
      (ublt/define-keys
       evil-insert-state-map
@@ -335,9 +386,6 @@
       "C-o" nil
       "C-e" nil
       "C-y" nil)
-     (ublt/define-keys
-      evil-inner-text-objects-map
-      "d" 'evil-inner-defun)
      (ublt/define-keys
       evil-outer-text-objects-map
       "d" 'evil-a-defun
