@@ -49,7 +49,7 @@
 ;; Non-code text reads better in proportional font
 (when (member window-system '(x ns w32))
   (set-face-font 'variable-pitch (case system-type
-                                   ('gnu/linux "DejaVu Sans Condensed-11")
+                                   ('gnu/linux "DejaVu Sans 11")
                                    ('darwin "Helvetica-16")
                                    (t "Arial"))))
 (defun turn-on-variable-pitch-mode ()
