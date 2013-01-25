@@ -53,9 +53,7 @@
                                    ('gnu/linux "DejaVu Sans 11")
                                    ('darwin "Helvetica-16")
                                    (t "Arial"))))
-(defun turn-on-variable-pitch-mode ()
-  (interactive)
-  (variable-pitch-mode +1))
+
 (dolist (hook '(erc-mode-hook
                 Info-mode-hook
                 help-mode-hook
@@ -65,8 +63,9 @@
                 emms-playlist-mode-hook
                 skype--chat-mode-hook
                 org-mode-hook
+                markdown-mode-hook
                 ))
-  (add-hook hook 'turn-on-variable-pitch-mode))
+  (add-hook hook (ublt/on-fn 'variable-pitch-mode)))
 
 
 ;;; Ubolonton's theme
