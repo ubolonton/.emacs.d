@@ -46,9 +46,6 @@
 [submodule "lib/nxhtml"]
 	path = lib/nxhtml
 	url = https://github.com/emacsmirror/nxhtml.git
-[submodule "lib/helm"]
-	path = lib/helm
-	url = https://github.com/emacs-helm/helm
 [submodule "lib/org-html-slideshow"]
 	path = lib/org-html-slideshow
 	url = https://github.com/relevance/org-html-slideshow

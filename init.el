@@ -17,7 +17,7 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 (defvar ublt/packages
-  '(smex auto-complete ac-slime ido-ubiquitous yasnippet emms ;; helm
+  '(smex auto-complete ac-slime ido-ubiquitous yasnippet emms helm
          org textmate paredit undo-tree whole-line-or-region
          ace-jump-mode htmlize twittering-mode keyfreq
          scpaste
@@ -234,7 +234,7 @@
 (require 'ublt-evil)
 (require 'ublt-dired)
 (require 'ublt-ido)
-(ublt/add-path "helm")
+;; (ublt/add-path "helm")
 (require 'ublt-helm)
 
 (ublt/add-path "magit")
