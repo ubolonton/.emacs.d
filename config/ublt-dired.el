@@ -50,6 +50,20 @@
  dired-dwim-target t
 
  ;; Make find-name-dired ignore case
- find-name-arg "-iname")
+ find-name-arg "-iname"
+
+ ;;
+ dired-guess-shell-alist-user
+ (list
+  (list "\\.t\\(ar\\.bz2\\|bz\\)\\'"
+        "tar xvjf"
+        "bunzip2 -c * | tar xvf -"
+        ;; Extract files into a separate subdirectory
+        '(concat "mkdir " (file-name-sans-extension file)
+                 "; bunzip2 -c * | tar -C "
+                 (file-name-sans-extension file) " -xvf -")
+        ;; Optional decompression.
+        "bunzip2"))
+ )
 
 (provide 'ublt-dired)
