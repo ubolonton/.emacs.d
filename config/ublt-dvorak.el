@@ -337,6 +337,9 @@
       ;; (t)o => к (Russian)
       "k"     'evil-find-char-to
       "K"     'evil-find-char-to-backward
+      ;; (r)eplace => (b)
+      "b"     'evil-replace
+      "B"     'evil-replace-state
 
       ;; g => (e)vil do
       "e"     nil
@@ -374,8 +377,11 @@
       "C-x C-n" nil ; evil-complete-next-line
       "C-x C-p" nil ; evil-complete-previous-line
       )
-     (ublt/define-keys evil-visual-state-map
-                       "<escape>" 'evil-exit-visual-state)
+     (ublt/define-keys
+      evil-visual-state-map
+      "<escape>" 'evil-exit-visual-state
+      "R" nil
+      )
      (ublt/define-keys evil-replace-state-map
                        "<escape>" 'evil-normal-state)
      (ublt/define-keys evil-emacs-state-map
@@ -472,9 +478,15 @@
 
 ;;; Error navigation
 (eval-after-load "js2-mode"
-  '(ublt/define-keys
-    js2-mode-map
-    "M-n" 'js2-next-error))
+  '(progn
+     (unless (functionp 'js-prev-error)
+       (defun js2-prev-error (&optional arg reset)
+         (interactive "p")
+         (js2-next-error (- arg) reset)))
+     (ublt/define-keys
+      js2-mode-map
+      "M-p" 'js2-prev-error
+      "M-n" 'js2-next-error)))
 (eval-after-load "js"
   '(ublt/define-keys
     js-mode-map
@@ -723,5 +735,10 @@
   '(ublt/define-keys
     twittering-mode-map
     "S-SPC" 'twittering-scroll-down))
+(eval-after-load "ess-mode"
+  '(ublt/define-keys
+    ess-mode-map
+    ;; NTA XXX: Their "yank" variation is not as good
+    "C-y" nil))
 
 (provide 'ublt-dvorak)
