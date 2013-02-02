@@ -395,7 +395,18 @@
      (ublt/define-keys
       evil-outer-text-objects-map
       "d" 'evil-a-defun
-      "S" 'evil-a-symbol)))
+      "S" 'evil-a-symbol)
+     (ublt/define-keys
+      evil-inner-text-objects-map
+      "d" 'evil-inner-defun
+      "S" 'evil-inner-symbol
+      "*" 'evil-inner-symbol
+      )
+     (ublt/define-keys
+      evil-outer-text-objects-map
+      "d" 'evil-a-defun
+      "S" 'evil-a-symbol
+      "*" 'evil-a-symbol)))
 
 
 ;;; Helm

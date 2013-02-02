@@ -90,9 +90,17 @@
     "Select a defun."
     (evil-an-object-range
      count beg end type #'ublt/forward-defun #'ublt/backward-defun))
+  (evil-define-text-object evil-inner-defun (count &optional beg end type)
+    "Select inner defun."
+    (evil-inner-object-range
+     count beg end type #'ublt/forward-defun #'ublt/backward-defun))
   (evil-define-text-object evil-a-symbol (count &optional beg end type)
     "Select a symbol."
     (evil-an-object-range
+     count beg end type #'forward-symbol))
+  (evil-define-text-object evil-inner-symbol (count &optional beg end type)
+    "Select a symbol."
+    (evil-inner-object-range
      count beg end type #'forward-symbol)))
 
 (provide 'ublt-evil)
