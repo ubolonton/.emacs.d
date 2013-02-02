@@ -251,11 +251,17 @@
 
 
 ;; Uncluttered shell prompt
-(setq eshell-prompt-function (lambda ()
-                               (concat
-                                "\n╭─ " (eshell-user-name)
-                                "  " (abbreviate-file-name (eshell/pwd))
-                                "\n╰─ ")))
+;; (setq eshell-prompt-function (lambda ()
+;;                                (concat
+;;                                 (eshell-user-name)
+;;                                 (abbreviate-file-name (eshell/pwd))
+;;                                 "")
+;;                                ;; (concat
+;;                                ;;  "\n╭─ " (eshell-user-name)
+;;                                ;;  "  " (abbreviate-file-name (eshell/pwd))
+;;                                ;;  "\n╰─ ")
+;;                                )
+;;       eshell-prompt-regexp "^╭─ .*\\(?:\n\\).*╰─ $")
 
 
 ;;; mode-line appearance
