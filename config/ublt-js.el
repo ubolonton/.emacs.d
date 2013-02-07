@@ -51,7 +51,8 @@
   (autoload 'moz-minor-mode "moz" "Mozilla Minor and Inferior Mozilla Modes" t)
 
   (setq js-indent-level 2
-        espresso-indent-level 2))
+        espresso-indent-level 2)
+  (setq-default js2-basic-offset 2))
 
 
 ;;; Syntax checking
