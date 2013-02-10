@@ -400,6 +400,11 @@
          (popup-tip-face
           ((t (,@dimmed-hl ,@string))))
 
+         (dropdown-list-face
+          ((t (:inherit ac-completion-face))))
+         (dropdown-list-selection-face
+          ((t (:inherit ac-selection-face))))
+
          ;; ido mini-buffer
          (ido-first-match
           ((t (:foreground ,gold-1))))  ; TODO

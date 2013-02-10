@@ -226,6 +226,7 @@
  "C-c C-x C-o"   'org-clock-out
  "M-l"           'move-to-window-line-top-bottom
  "M-b"           'hippie-expand         ; more convenient here
+ "M-B"           'yas-expand
  "C-z"           nil                    ; who needs suspend-frame?
  "C-x C-h"       nil                    ; bad emacs-starter-kit
  "S-s-SPC"       'whitespace-mode
@@ -260,6 +261,7 @@
 
 
 ;;; Evil -------------------------------------------------------------
+;;; TODO: Swap WORD & word
 (eval-after-load "evil"
   '(progn
      (ublt/define-keys

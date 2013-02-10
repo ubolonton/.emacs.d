@@ -215,13 +215,11 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
 ;;; Yasnippet --------------------------------------------------------
 
 (ublt/set-up 'yasnippet
-  (setq yas/root-directory  "~/.emacs.d/data/yasnippet/snippets"
-        yas/prompt-functions '(yas/dropdown-prompt ;; yas/ido-prompt yas/no-prompt
-                                                   )
-        yas/trigger-key nil)
-  (add-to-list 'hippie-expand-try-functions-list 'yas/hippie-try-expand)
-  (yas/load-directory yas/root-directory)
-  (yas/global-mode +1))
+  (setq yas-prompt-functions '(yas-ido-prompt yas-no-prompt)
+        yas-choose-keys-first t)
+  (add-to-list 'hippie-expand-try-functions-list 'yas-hippie-try-expand)
+  (add-to-list 'yas-snippet-dirs "~/.emacs.d/data/yasnippet/snippets")
+  (yas-global-mode +1))
 
 ;;; Misc
 
