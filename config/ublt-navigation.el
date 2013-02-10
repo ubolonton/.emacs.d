@@ -85,6 +85,7 @@ of line."
                                      ace-jump-line-mode
                                      ace-jump-char-mode)
         ace-jump-word-mode-use-query-char t
-        ace-jump-mode-move-keys (loop for i from ?a to ?z collect i)))
+        ace-jump-mode-move-keys (nconc (loop for i from ?a to ?z collect i)
+                                       (loop for i from ?A to ?Z collect i))))
 
 (provide 'ublt-navigation)
