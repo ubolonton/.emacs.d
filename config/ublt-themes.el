@@ -107,7 +107,9 @@
     (purple      "#805DBB" "#875F87")
     ))
 
-(defvar ublt/fixed-width-font "DejaVu Sans Mono-10")
+;; (defvar ublt/fixed-width-font "DejaVu Sans Mono-10")
+(defvar ublt/fixed-width-font-family "DejaVu Sans Mono")
+(defvar ublt/variable-width-font-family "DejaVu Sans")
 
 ;;;###autoload
 (defun color-theme-ubolonton-dark ()
@@ -119,7 +121,7 @@
   (flet ((find-color (name)
                      (nth (if window-system 1 2)
                           (assoc name ublt/colors))))
-    (let* ((variable-pitch-font (face-attribute 'variable-pitch :font))
+    (let* (;; (variable-pitch-family (face-attribute 'variable-pitch :family))
            (bg          (find-color 'bg))
            (bg+1        (find-color 'bg+1))
            (bg+2        (find-color 'bg+2))
@@ -202,9 +204,9 @@
                                    :strike-through nil :inverse-video nil :overline nil))
 
            ;; Fixed-width font
-           (fw           `(:font ,ublt/fixed-width-font))
+           (fw           `(:family ,ublt/fixed-width-font-family))
            ;; Variable-width font
-           (vw           `(:font ,variable-pitch-font))
+           (vw           `(:family ,ublt/variable-width-font-family))
            )
       (color-theme-install
        `(color-theme-ubolonton-dark
@@ -220,7 +222,8 @@
          ((ibus-cursor-color . (,green ,yellow ,yellow)))
 
          (default ((t (:background ,bg :foreground ,fg))))
-         (variable-pitch ((t (:background ,bg :foreground ,fg))))
+         (variable-pitch ((t (,@vw :height 110 :background ,bg :foreground ,fg))))
+
          (border-glyph ((t (nil))))     ; What's this?
          (buffers-tab ((t (:background ,bg :foreground ,fg)))) ; What's this?
          (shadow ((t ,dimmed)))
@@ -264,6 +267,20 @@
          (js2-jsdoc-type-face
           ((t (:inherit font-lock-type-face))))
          (js2-jsdoc-tag-face
+          ((t (:inherit font-lock-builtin-face))))
+
+         (js2-function-param
+          ((t ,param)))
+         (js2-jsdoc-type
+          ((t (:inherit font-lock-type-face))))
+         (js2-jsdoc-tag
+          ((t (:inherit font-lock-builtin-face))))
+
+         (js3-function-param-face
+          ((t ,param)))
+         (js3-jsdoc-type-face
+          ((t (:inherit font-lock-type-face))))
+         (js3-jsdoc-tag-face
           ((t (:inherit font-lock-builtin-face))))
 
          ;; Misc
@@ -312,9 +329,8 @@
 
          ;; Mode line
          (mode-line
-          ((t (,@status :foreground ,bg
+          ((t (,@status ,@vw :foreground ,bg
                         :box (:line-width 1 :color ,cyan-2)
-                        :font ,variable-pitch-font
                         :height 1.0
                         ;; :height 0.8
                         ))))
@@ -808,7 +824,7 @@
          ))
 
       ;; Color theme seems to mix this up, restore it
-      (set-face-font 'variable-pitch variable-pitch-font)
+      ;; (set-face-font 'variable-pitch variable-pitch-family)
 
       (setq
        hl-paren-colors `("Orange" ,yellow "Greenyellow"
