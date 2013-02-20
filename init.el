@@ -87,6 +87,10 @@
 ;;; Path to stuffs that come from single files
 (ublt/add-path "single-file-modes")
 
+(ublt/set-up 'auto-async-byte-compile
+  (setq auto-async-byte-compile-display-function 'bury-buffer)
+  (add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode))
+
 (ublt/set-up 'exec-path-from-shell
   (exec-path-from-shell-initialize)
   (exec-path-from-shell-copy-env "CLOJURESCRIPT_HOME"))
