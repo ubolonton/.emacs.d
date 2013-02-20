@@ -361,6 +361,14 @@
 ;;        ")")
 
 
+;;; Bigger minibuffer text
+(defun ublt/minibuffer-setup ()
+  (set (make-local-variable 'face-remapping-alist)
+       '((default :height 1.2)))
+  (setq line-spacing 0.3))
+(add-hook 'minibuffer-setup-hook 'ublt/minibuffer-setup)
+
+
 ;;; Make mode-line uncluttered by changing how minor modes are shown
 
 ;;; TODO: Use images (propertize "mode" 'display (find-images ...))
