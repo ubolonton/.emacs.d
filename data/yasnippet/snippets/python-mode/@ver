@@ -1,0 +1,8 @@
+#name : schemup-versioned storm model
+# --
+@stormSchema.versioned
+class $1(Storm):
+    __storm_table__ = '$2'
+    __version__ = '$3'
+
+    $0
