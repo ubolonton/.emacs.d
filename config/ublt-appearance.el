@@ -44,16 +44,16 @@
                  ;; (screen-gamma . 4)
                  (font . "DejaVu Sans Mono-10")))))
 
-;; TODO: Enable this except for twitter buffers
+;; Maybe TODO: Enable this except for twitter buffers
 ;; (blink-cursor-mode 1)
 
+;;; Maybe TODO: Integration with `ublt-themes'
 ;; Non-code text reads better in proportional font
 (when (member window-system '(x ns w32))
   (set-face-font 'variable-pitch (case system-type
                                    ('gnu/linux "DejaVu Sans 11")
                                    ('darwin "Helvetica-16")
                                    (t "Arial"))))
-
 (dolist (hook '(erc-mode-hook
                 Info-mode-hook
                 help-mode-hook
@@ -67,6 +67,10 @@
                 markdown-mode-hook
                 ))
   (add-hook hook (ublt/on-fn 'variable-pitch-mode)))
+(defun ublt/variable-pitch-if-fundamental ()
+  (when (eq major-mode 'fundamental-mode)
+    (variable-pitch-mode +1)))
+(add-hook 'find-file-hook 'ublt/variable-pitch-if-fundamental)
 
 
 ;;; Ubolonton's theme
