@@ -68,37 +68,41 @@
  ;; OSX goodness
  ;; TODO: Use sth like s-t instead of s-x, since s-x is not convenient
  ;; for Dvorak
- "s-c"    "M-w"                         ; copy
- "s-x"    "C-w"                         ; cut
- "s-v"    "C-y"                         ; paste
- "s-V"    "M-y"                         ; paste cycle
- "s-s"    "C-x C-s"                     ; save
- "s-S"    "C-x s"                       ; save some buffers
- "s-z"    "C-_"                         ; undo
- "s-Z"    "M-_"                         ; redo
- "s-a"    "C-x h"                       ; mark all
+ "s-c"    "M-w"                         ;   copy
+ "s-x"    "C-w"                         ; ✂ cut
+ "s-v"    "C-y"                         ;   paste
+ "s-V"    "M-y"                         ;   paste cycle
+ "s-s"    "C-x C-s"                     ;   save
+ "s-S"    "C-x s"                       ;   save some buffers
+ "s-z"    "C-_"                         ; ↺ undo
+ "s-Z"    "M-_"                         ; ↻ redo
+ "s-a"    "C-x h"                       ;   mark all
 
  "s-C"    'ublt/duplicate-line
 
+ ;; XXX: ⬅➡ WTF Unicode. There's no RIGHTWARDS BLACK ARROW
  ;; Movement keys (right hand)
- "M-c"    "<up>"
- "M-t"    "<down>"
- "M-h"    "<left>"
- "M-n"    "<right>"
- "M-C"    "<prior>"                     ; scroll
- "M-T"    "<next>"                      ; scroll
- "M-H"    "C-<up>"                      ; -> paragraph
- "M-N"    "C-<down>"                    ; <- paragraph
- "M-g"    "C-<left>"                    ; <- word
- "M-r"    "C-<right>"                   ; -> word
- "M-G"    "M-<"                         ; beginning
- "M-R"    "M->"                         ; end
+ "M-c"    "<up>"                        ; ⬆
+ "M-t"    "<down>"                      ; ⬇
+ "M-h"    "<left>"                      ; ⇚
+ "M-n"    "<right>"                     ; ⇛
+ "M-C"    "<prior>"                     ; ▲ scroll up
+ "M-T"    "<next>"                      ; ▼ scroll down
+ "M-H"    "C-<up>"                      ; ⬆ paragraph up
+ "M-N"    "C-<down>"                    ; ⬇ paragraph down
+ "M-g"    "C-<left>"                    ; ⇚ word left
+ "M-r"    "C-<right>"                   ; ⇛ word right
+ "M-G"    "M-<"                         ; ⇱ buffer home
+ "M-R"    "M->"                         ; ⇲ buffer end
+ "C-s-t"  "M-<next>"                    ; ▲ other window scroll up
+ "C-s-c"  "M-<prior>"                   ; ▼ other window scroll down
+
 
  ;; Deletion (left hand)
- "M-e"    "DEL"
- "M-u"    "<kp-delete>"
- "M-."    "M-DEL"
- "M-p"    "M-<kp-delete>"
+ "M-e"    "DEL"                         ; ⌫
+ "M-u"    "<kp-delete>"                 ; ⌦
+ "M-."    "M-DEL"                       ; ⌫ delete word
+ "M-p"    "M-<kp-delete>"               ; ⌦ delete word
 
  "M-i"    "C-k"
  "M-d"    "C-a"
@@ -113,16 +117,16 @@
  ;; "C-t" "C-x"
  ;; "C-x" "C-t"
 
- "C-M-h"  "M-<left>"                    ; -> list (except for org-mode)
- "C-M-n"  "M-<right>"                   ; <- list (except for org-mode)
- "C-M-c"  "M-<up>"                      ; <- paredit splice-kill, org up
- "C-M-t"  "M-<down>"                    ; -> paredit splice-kill, org down
+ "C-M-h"  "M-<left>"                    ; ⇚ list (except for org-mode)
+ "C-M-n"  "M-<right>"                   ; ⇛ list (except for org-mode)
+ "C-M-c"  "M-<up>"                      ; ⤂ paredit splice-kill, org up
+ "C-M-t"  "M-<down>"                    ; ⤃ paredit splice-kill, org down
 
- "M-M"    "C-M-u"                       ; <- up list
- "M-V"    "C-M-d"                       ; -> down list
+ "M-M"    "C-M-u"                       ; ⬉( up list
+ "M-V"    "C-M-d"                       ; ⬊( down list
 
- "M-m"    "M-p"                         ; <- special (history, errors)
- "M-v"    "M-n"                         ; -> special (history, errors)
+ "M-m"    "M-p"                         ; ⬁ special (history, errors)
+ "M-v"    "M-n"                         ; ⬂ special (history, errors)
 
  "s-t"    "M-."                         ; push reference
  "s-T"    "M-,"                         ; pop reference
@@ -135,7 +139,7 @@
 (ublt/define-keys
  global-map
  ;; OSX goodness
- "s-u"           'revert-buffer
+ "s-u"           'revert-buffer         ; ⟲
  "s-k"           'kill-this-buffer
  "s-l"           'goto-line
 
