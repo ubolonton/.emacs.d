@@ -36,6 +36,13 @@ arg lines up."
   (interactive "*p")
   (ublt/move-text-internal (- arg)))
 
+(defun ublt/unfill-paragraph ()
+  "Takes a multi-line paragraph and makes it into a single line of text."
+  (interactive)
+  (let ((fill-column (point-max)))
+    (fill-paragraph nil)))
+
+
 ;;; Cycling and extending selection
 ;; TODO: Make `defun' selection work with non-Lisp
 

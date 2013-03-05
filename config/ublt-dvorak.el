@@ -200,6 +200,8 @@
  "C-="           'text-scale-increase
  "s--"           'text-scale-decrease
 
+ "M-Q"           'ublt/unfill-paragraph
+
  ;; Toggling
  "<f9> l"        'global-linum-mode
  "<f9> <f9>"     'ublt/toggle-fonts
