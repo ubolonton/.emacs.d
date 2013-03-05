@@ -411,6 +411,57 @@
     (destructuring-bind (mode display &optional feature) m
       (ublt/diminish mode display feature))))
 
+
+(dolist (mode '(org-mode))
+  (font-lock-add-keywords
+   mode `(("\\(=>\\)"
+           (0 (progn (compose-region (match-beginning 1) (match-end 1)
+                                     ?⇒))))
+          ("\\(<=\\)"
+           (0 (progn (compose-region (match-beginning 1) (match-end 1)
+                                     ?⇐)))))))
+(dolist (mode '(php-mode))
+  (font-lock-add-keywords
+   mode `(("\\(-\\)>"
+           (0 (progn (compose-region (match-beginning 1) (match-end 1)
+                                     ?. 'decompose-region
+                                     ;; ?→
+                                     ))))
+          ("-\\(>\\)"
+           (0 (progn (compose-region (match-beginning 1) (match-end 1)
+                                     ?. 'decompose-regions))))
+          ("\\(array\\)("
+           (0 (progn (compose-region (match-beginning 1) (match-end 1)
+                                     ?⇛ 'decompose-regions))))
+          ;; ("->"
+          ;;  (0 (progn (compose-region (match-beginning 1) (match-end 1)
+          ;;                            ?⟶))))
+          ;; ("=\\(> *\\)"
+          ;;  (0 (progn (compose-region (match-beginning 1) (match-end 1)
+          ;;                            "\u0020"
+          ;;                            ;; ?→
+          ;;                            ))))
+          ;; ("\\( *=\\)>"
+          ;;  (0 (progn (compose-region (match-beginning 1) (match-end 1)
+          ;;                            ?:
+          ;;                            ))))
+          ("{\\|}\\|;\\|\\$" . 'esk-paren-face))))
+
+;;; Doesn't work. Magit does something special
+;; (defun ublt/prettify-magit-log ()
+;;   (font-lock-add-keywords
+;;    nil '(;; ("|"
+;;          ;;  (0 (progn (compose-region (match-beginning 1) (match-end 1)
+;;          ;;                            ?│))))
+;;          ("\\(*\\)"
+;;           (0 (progn (compose-region (match-beginning 1) (match-end 1)
+;;                                     ?∙)))))))
+;; (add-hook 'magit-log-mode-hook 'ublt/prettify-magit-log)
+
+;; (remove-hook 'magit-log-mode-hook 'ublt/prettify-magit-log)
+
+
+
 
 ;;; Misc
 
