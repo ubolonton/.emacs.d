@@ -259,16 +259,21 @@
 (setq css-indent-offset 2)
 (add-hook 'php-mode-hook (lambda () (setq c-basic-offset 4)))
 
-;; Might be useful for f*cks like PHP, JSP, ASP.NET, mako, rhtml, django
-(ublt/add-path "nxhtml/")
-(add-hook 'nxhtml-mode-hook (lambda () (rng-validate-mode -1)))
-(load "autostart.el")
 (defun turn-off-hl-line-mode ()
   (hl-line-mode nil))
-(add-to-list 'auto-mode-alist '("\\.mako?$" . mako-nxhtml-mumamo-mode))
-(add-hook 'mako-nxhtml-mumamo-mode-hook 'esk-turn-on-hl-line-mode)
-(add-hook 'nxhtml-mode-hook 'turn-off-auto-fill-mode)
+;; ;; Might be useful for f*cks like PHP, JSP, ASP.NET, mako, rhtml, django
+;; (ublt/add-path "nxhtml/")
+;; (add-hook 'nxhtml-mode-hook (lambda () (rng-validate-mode -1)))
+;; (load "autostart.el")
+;; (add-to-list 'auto-mode-alist '("\\.mako?$" . mako-nxhtml-mumamo-mode))
+;; (add-hook 'mako-nxhtml-mumamo-mode-hook 'esk-turn-on-hl-line-mode)
+;; (add-hook 'nxhtml-mode-hook 'turn-off-auto-fill-mode)
 ;; (add-hook 'nxhtml-mode-hook 'turn-off-flyspell-mode)
+(add-to-list 'auto-mode-alist '("\\.mako?$" . html-mode))
+
+;;; XXX
+(ublt/set-up 'php-mode
+  (setq php-mode-coding-style nil))
 
 ;; Factor
 (condition-case err
