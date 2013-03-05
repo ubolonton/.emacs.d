@@ -5,7 +5,7 @@
 ;;   ' , . p y    f g c r l   / = \
 ;;   a o e u i    d h t n s   -
 ;;   ; q j k x    b m w v z
-
+;;;
 ;;; TODO: remap
 
 
@@ -27,7 +27,6 @@
 
 ;;; Custom global bindings -------------------------------------------
 ;; TODO:
-;; M-f
 ;; M-y
 ;; M-o
 ;; M-a
@@ -97,7 +96,6 @@
  "C-s-t"  "M-<next>"                    ; ▲ other window scroll up
  "C-s-c"  "M-<prior>"                   ; ▼ other window scroll down
 
-
  ;; Deletion (left hand)
  "M-e"    "DEL"                         ; ⌫
  "M-u"    "<kp-delete>"                 ; ⌦
@@ -132,6 +130,8 @@
  "s-T"    "M-,"                         ; pop reference
 
  "s-4"    "C-x 4"
+ "s-r"    "C-x r"
+ "s-R"    "C-x r j"
 
  "M-f"    "<escape>"                    ; use evil-mode
  )
@@ -170,8 +170,8 @@
  "s-G"           'find-grep
  "s-m"           'ace-jump-mode
  "s-M"           'ace-jump-char-mode
- "s-r"           'org-remember
- "s-R"           'org-agenda
+ ;; "s-r"           'org-remember
+ ;; "s-R"           'org-agenda
 
  "s-h"           'ido-switch-buffer
  "s-n"           'ublt/switch-to-last-buffer
@@ -318,20 +318,20 @@
       evil-motion-state-map
 
       ;; Dvorak, positional
-      "h"     'evil-backward-char
-      "n"     'evil-forward-char
+      "h"     'evil-backward-char       ; ⇚
+      "n"     'evil-forward-char        ; ⇛
       "H"     'evil-window-top
       "N"     'evil-window-bottom
       ;; Dvorak, positional (line)
-      "c"     'evil-previous-line
-      "t"     'evil-next-line
+      "c"     'evil-previous-line       ; ⬆
+      "t"     'evil-next-line           ; ⬇
       "C"     'evil-scroll-line-up
       "T"     'evil-scroll-line-down
       ;; Dvorak, positional (word)
-      "g"     'evil-backward-word-begin
-      "G"     'evil-backward-WORD-begin
-      "r"     'evil-forward-word-end
-      "R"     'evil-forward-WORD-end
+      "g"     'evil-backward-word-begin ; -⇚
+      "G"     'evil-backward-WORD-begin ; |⇚
+      "r"     'evil-forward-word-end    ; ⇛-
+      "R"     'evil-forward-WORD-end    ; ⇛|
 
       "SPC"   'evil-scroll-page-down
       "S-SPC" 'evil-scroll-page-up
@@ -384,6 +384,7 @@
       "C-w" nil     ; evil-delete-backward-word
       "C-x C-n" nil ; evil-complete-next-line
       "C-x C-p" nil ; evil-complete-previous-line
+      "C-t" nil     ; evil-shift-right-line
       )
      (ublt/define-keys
       evil-visual-state-map
