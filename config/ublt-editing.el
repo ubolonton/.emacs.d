@@ -201,11 +201,10 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
   (global-auto-complete-mode +1)
   ;; (add-hook 'eshell-mode-hook 'ac-eshell-mode-setup)
   (setq-default ac-auto-start nil
-                ac-sources '(ac-source-yasnippet
-                             ac-source-dictionary
-                             ac-source-words-in-buffer
+                ac-sources '(ac-source-words-in-buffer
                              ac-source-words-in-same-mode-buffers
                              ac-source-words-in-all-buffer
+                             ac-source-dictionary
                              ac-source-abbrev))
   (setq ac-delay 0.5
         ac-auto-show-menu 1
@@ -224,7 +223,8 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
 (ublt/set-up 'yasnippet
   (setq yas-prompt-functions '(yas-ido-prompt yas-no-prompt)
         yas-choose-keys-first t)
-  (add-to-list 'hippie-expand-try-functions-list 'yas-hippie-try-expand)
+  ;; Don't, use a dedicate key binding for yas
+  ;; (add-to-list 'hippie-expand-try-functions-list 'yas-hippie-try-expand)
   (add-to-list 'yas-snippet-dirs "~/.emacs.d/data/yasnippet/snippets")
   (yas-global-mode +1))
 
