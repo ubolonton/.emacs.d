@@ -412,40 +412,35 @@
       (ublt/diminish mode display feature))))
 
 
-(dolist (mode '(org-mode))
-  (font-lock-add-keywords
-   mode `(("\\(=>\\)"
-           (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                     ?⇒))))
-          ("\\(<=\\)"
-           (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                     ?⇐)))))))
-(dolist (mode '(php-mode))
-  (font-lock-add-keywords
-   mode `(("\\(-\\)>"
-           (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                     ?. 'decompose-region
-                                     ;; ?→
-                                     ))))
-          ("-\\(>\\)"
-           (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                     ?. 'decompose-regions))))
-          ("\\(array\\)("
-           (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                     ?⇛ 'decompose-regions))))
-          ;; ("->"
-          ;;  (0 (progn (compose-region (match-beginning 1) (match-end 1)
-          ;;                            ?⟶))))
-          ;; ("=\\(> *\\)"
-          ;;  (0 (progn (compose-region (match-beginning 1) (match-end 1)
-          ;;                            "\u0020"
-          ;;                            ;; ?→
-          ;;                            ))))
-          ;; ("\\( *=\\)>"
-          ;;  (0 (progn (compose-region (match-beginning 1) (match-end 1)
-          ;;                            ?:
-          ;;                            ))))
-          ("{\\|}\\|;\\|\\$" . 'esk-paren-face))))
+
+(font-lock-add-keywords
+ 'org-mode `(("\\(=>\\)"
+              (0 (progn (compose-region (match-beginning 1) (match-end 1)
+                                        ?⇒))))
+             ("\\(<=\\)"
+              (0 (progn (compose-region (match-beginning 1) (match-end 1)
+                                        ?⇐))))))
+(font-lock-add-keywords
+ 'php-mode `(("\\(-\\)>"
+              (0 (progn (compose-region (match-beginning 1) (match-end 1)
+                                        ?. 'decompose-region
+                                        ;; ?→
+                                        ))))
+             ("-\\(>\\)"
+              (0 (progn (compose-region (match-beginning 1) (match-end 1)
+                                        ?. 'decompose-region))))
+             ("\\(=>\\)"
+              (0 (progn (compose-region (match-beginning 1) (match-end 1)
+                                        ?⇛ 'decompose-region))))
+             ("\\(array\\)("
+              (0 (progn (compose-region (match-beginning 1) (match-end 1)
+                                        ?► 'decompose-region))))
+             ;; ("\\(function\\)"
+             ;;  (0 (progn (compose-region (match-beginning 1) (match-end 1)
+             ;;                            ?ƒ nil))))
+             ("{\\|}\\|;\\|\\$" . 'esk-paren-face)))
+(font-lock-add-keywords
+ 'js2-mode `(("{\\|}\\|;" . 'esk-paren-face)))
 
 ;;; Doesn't work. Magit does something special
 ;; (defun ublt/prettify-magit-log ()
