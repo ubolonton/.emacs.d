@@ -397,6 +397,7 @@
                (hs-minor-mode             "  ⊕" hideshow)
                (auto-fill-function        "  ⏎")
                (auto-complete-mode        "  αc" auto-complete)
+               (rainbow-mode              "  ❂")
                (isearch-mode              "  Σ" isearch)
                (slime-mode                "SLIME")
                ;; (narrow                    " η")
@@ -434,10 +435,12 @@
                                         ?⇛ 'decompose-region))))
              ("\\(array\\)("
               (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                        ?► 'decompose-region))))
-             ;; ("\\(function\\)"
-             ;;  (0 (progn (compose-region (match-beginning 1) (match-end 1)
-             ;;                            ?ƒ nil))))
+                                        ?► 'decompose-region)
+                        nil)))
+             ("\\(function\\)"
+              (0 (progn (compose-region (match-beginning 1) (match-end 1)
+                                        ?ƒ 'decompose-region)
+                        nil)))
              ("{\\|}\\|;\\|\\$" . 'esk-paren-face)))
 (font-lock-add-keywords
  'js2-mode `(("{\\|}\\|;" . 'esk-paren-face)))
