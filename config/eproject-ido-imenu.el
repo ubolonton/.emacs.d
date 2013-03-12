@@ -252,12 +252,17 @@ converted to a form that `eproject--ido-symbols' can use."
   (or (look-for "yiic") (look-for "yiic.bat")(look-for "yiic.php"))
   :symbol-separators ("." "/")
   :relevant-files (".*\.php$")
-  :irrelevant-files ("vendors" "extensions" "tests"))
+  :irrelevant-files ("vendors" "extensions" "tests" "scripts"))
 (define-project-type erlang-rebar (generic)
   (look-for "rebar.config")
   :symbol-separators ("." " ")
   :relevant-files (".*\.[h|e]rl$")
   :irrelevant-files (".*\.beam$" "rel" "deps" "ebin" "priv"))
+;;; Not exactly type
+(define-project-type require.js (generic)
+  (look-for "require-jquery.js")
+  :symbol-separators ("." ".")
+  :irrelevant-files ("libs" "require-jquery\.js"))
 
 ;;; XXX: ???
 (defun eproject-find--combine-regexps (regexp-list)
