@@ -265,6 +265,12 @@
     "M-s-n" 'help-go-forward
     "C-f"   'help-follow-symbol))
 
+(eval-after-load "info"
+  '(ublt/define-keys
+    Info-mode-map
+    "M-s-h" 'Info-history-back
+    "M-s-n" 'Info-history-forward))
+
 
 ;;; Evil -------------------------------------------------------------
 ;;; TODO: Swap WORD & word
@@ -439,6 +445,7 @@
     "o"   'helm-occur
     "O"   'helm-multi-occur
     "SPC" 'helm-global-mark-ring
+    "i"   'helm-browse-code     ; helm-imenu
     ))
 
 
@@ -596,6 +603,10 @@
     comint-mode-map
     "M-p" 'comint-previous-matching-input-from-input
     "M-n" 'comint-next-matching-input-from-input))
+(eval-after-load "haskell-mode"
+  '(ublt/define-keys
+    haskell-mode-map
+    "C-x C-d" nil))
 
 (eval-after-load "lisp-mode"
   '(progn
