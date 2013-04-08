@@ -417,10 +417,12 @@
 (font-lock-add-keywords
  'org-mode `(("\\(=>\\)"
               (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                        ?⇒))))
+                                        ?⇒ 'decompose-region)
+                        nil)))
              ("\\(<=\\)"
               (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                        ?⇐))))))
+                                        ?⇐ 'decompose-region)
+                        nil)))))
 (font-lock-add-keywords
  'php-mode `(("\\(-\\)>"
               (0 (progn (compose-region (match-beginning 1) (match-end 1)
@@ -432,7 +434,8 @@
                                         ?. 'decompose-region))))
              ("\\(=>\\)"
               (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                        ?⇛ 'decompose-region))))
+                                        ?⇛ 'decompose-region)
+                        nil)))
              ("\\(array\\)("
               (0 (progn (compose-region (match-beginning 1) (match-end 1)
                                         ?► 'decompose-region)
@@ -465,7 +468,7 @@
 
 (setq
  ;; 2x70 instead of the default 2x80 so that side-by-side is preferable
- split-width-threshold 140
+ split-width-threshold 120
 
  ;; Tile ediff windows horizontally
  ediff-split-window-function 'split-window-horizontally
