@@ -35,9 +35,13 @@
                    (0 (progn (compose-region (match-beginning 1)
                                              (match-end 1) "\u0192")
                              nil)))))
+     ;; js-mode for now, js2-mode has been buggy recently (syntax
+     ;; highlighting not being updated correctly)
      (setcdr (assoc "\\.js\\'" auto-mode-alist)
-             'js2-mode)))
+             'js-mode)
 
+     (setq js2-highlight-level 3)
+     ))
 
 (ublt/set-up 'js
   (when (ublt/legacy?)
