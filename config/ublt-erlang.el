@@ -12,7 +12,7 @@
       (call-interactively 'erlang-compile-display))
     (add-hook 'erlang-mode-hook 'esk-prog-mode-hook)))
 
-;;; Syntax checking
+;; Syntax checking
 (eval-after-load "flymake"
   '(ublt/set-up 'erlang-flymake
 
@@ -22,12 +22,15 @@
              (erlang-flymake-get-include-dirs)))
 
      (defun ublt/erlang-flymake-get-code-path-dirs ()
-       (cons (concat (eproject-root) "deps")
-             (erlang-flymake-get-code-path-dirs)))
+       (let ((project-root (eproject-root)))
+         (append (list (concat project-root "deps/omlibrary/ebin")) ; XXX FIX
+                 (list (concat project-root "deps"))
+                 (erlang-flymake-get-code-path-dirs))))
 
-     (setq erlang-flymake-get-include-dirs 'ublt/erlang-flymake-get-include-dirs
-           erlang-flymake-get-code-path-dirs 'ublt/erlang-flymake-get-code-path-dirs)
+     (setq erlang-flymake-get-include-dirs-function 'ublt/erlang-flymake-get-include-dirs
+           erlang-flymake-get-code-path-dirs-function 'ublt/erlang-flymake-get-code-path-dirs)
 
-     ))
+     )
+  )
 
 (provide 'ublt-erlang)
