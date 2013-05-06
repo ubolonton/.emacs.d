@@ -69,9 +69,10 @@
                                   :tags-as-categories nil))
         org2blog/wp-confirm-post nil))
 
-(defun ublt/org-html-slideshow-decorate ()
-  (goto-char (point-max))
-  (insert "
+(ublt/set-up 'org-html-slideshow
+  (defun ublt/org-html-slideshow-decorate ()
+    (goto-char (point-max))
+    (insert "
 #+BEGIN_HTML
 <script type='text/javascript' src='js/org-html-slideshow.js'></script>
 #+END_HTML
@@ -80,18 +81,28 @@
 # org-export-html-style-include-default: nil
 # org-export-html-style-include-scripts: nil
 # End:
-")
-  )
+"))
 
-(defun ublt/org-html-slideshow-publish ()
-  (interactive)
-  (let ((org-export-preprocess-hook (cons 'ublt/org-html-slideshow-decorate org-export-preprocess-hook))
-        (org-export-html-style-extra "
+  (defun ublt/org-html-slideshow-publish ()
+    (interactive)
+    (let ((org-export-preprocess-hook (cons 'ublt/org-html-slideshow-decorate org-export-preprocess-hook))
+          (org-export-html-style-extra "
 <link rel='stylesheet' type='text/css' href='css/common.css' />
 <link rel='stylesheet' type='text/css' href='css/screen.css' media='screen' />
 <link rel='stylesheet' type='text/css' href='css/projection.css' media='projection' />
 <link rel='stylesheet' type='text/css' href='css/presenter.css' media='presenter' />
 "))
-    (call-interactively 'org-export-as-html)))
+      (call-interactively 'org-export-as-html))))
+
+(ublt/set-up 'o-blog)
+
+(setq org-publish-project-alist
+      '(("blog"
+         :base-directory "~/Programming/projects/blog/src/"
+         :publishing-directory "~/Programming/projects/blog/public")
+        ("o-blog"
+         :base-directory "/home/ubolonton/.emacs.d/lib/o-blog/example/"
+         :publishing-directory "/home/ubolonton/.emacs.d/lib/o-blog/example/out"))
+      org-export-htmlize-output-type 'css)
 
 (provide 'ublt-organization)

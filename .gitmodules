@@ -52,3 +52,6 @@
 [submodule "lib/powerline"]
 	path = lib/powerline
 	url = https://github.com/milkypostman/powerline
+[submodule "lib/o-blog"]
+	path = lib/o-blog
+	url = https://github.com/renard/o-blog
