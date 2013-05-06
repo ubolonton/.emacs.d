@@ -257,7 +257,7 @@ converted to a form that `eproject--ido-symbols' can use."
   (look-for "rebar.config")
   :symbol-separators ("." " ")
   :relevant-files (".*\.[h|e]rl$")
-  :irrelevant-files (".*\.beam$" "rel" "deps" "ebin" "priv"))
+  :irrelevant-files (".*\.beam$" "rel" "test" "ebin" "priv"))
 ;;; Not exactly type
 (define-project-type require.js (generic)
   (look-for "require-jquery.js")
