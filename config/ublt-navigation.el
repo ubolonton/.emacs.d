@@ -88,4 +88,7 @@ of line."
         ace-jump-mode-move-keys (nconc (loop for i from ?a to ?z collect i)
                                        (loop for i from ?A to ?Z collect i))))
 
+;;; Whitespace-only diffs are not interesting most of the time
+(setq-default ediff-ignore-similar-regions t)
+
 (provide 'ublt-navigation)
