@@ -444,9 +444,35 @@
               (0 (progn (compose-region (match-beginning 1) (match-end 1)
                                         ?ƒ 'decompose-region)
                         nil)))
-             ("{\\|}\\|;\\|\\$" . 'esk-paren-face)))
+             ("{\\|}\\|;\\|\\$" . 'esk-paren-face)
+             ("\\(ret\\)urn"
+              (0 (progn (compose-region (match-beginning 1) (match-end 1)
+                                        ?> 'decompose-region)
+                        nil)))
+             ("ret\\(urn\\)"
+              (0 (progn (compose-region (match-beginning 1) (match-end 1)
+                                        ?⇛ 'decompose-region)
+                        nil)))))
 (font-lock-add-keywords
- 'js2-mode `(("{\\|}\\|;" . 'esk-paren-face)))
+ 'js2-mode `(("{\\|}\\|;" . 'esk-paren-face)
+             ("\\(ret\\)urn"
+              (0 (progn (compose-region (match-beginning 1) (match-end 1)
+                                        ?> 'decompose-region)
+                        nil)))
+             ("ret\\(urn\\)"
+              (0 (progn (compose-region (match-beginning 1) (match-end 1)
+                                        ?⇛ 'decompose-region)
+                        nil)))))
+(font-lock-add-keywords
+ 'js-mode `(("{\\|}\\|;" . 'esk-paren-face)
+            ("\\(ret\\)urn"
+             (0 (progn (compose-region (match-beginning 1) (match-end 1)
+                                       ?> 'decompose-region)
+                       nil)))
+            ("ret\\(urn\\)"
+             (0 (progn (compose-region (match-beginning 1) (match-end 1)
+                                       ?⇛ 'decompose-region)
+                       nil)))))
 
 ;;; Doesn't work. Magit does something special
 ;; (defun ublt/prettify-magit-log ()
