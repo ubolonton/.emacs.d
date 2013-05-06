@@ -110,6 +110,7 @@
 ;; (defvar ublt/fixed-width-font "DejaVu Sans Mono-10")
 (defvar ublt/fixed-width-font-family "DejaVu Sans Mono")
 (defvar ublt/variable-width-font-family "DejaVu Sans")
+;; (defvar ublt/variable-width-font-family "Andika")
 
 ;;;###autoload
 (defun color-theme-ubolonton-dark ()
@@ -232,7 +233,7 @@
          (font-lock-builtin-face
           ((t (,@fw ,@constant))))
          (font-lock-comment-face
-          ((t (,@fw ,@note :italic t))))
+          ((t (,@fw ,@note :slant italic))))
          (font-lock-comment-delimiter-face
           ((t (:inherit font-lock-comment-face ,@shadowed))))
          (font-lock-doc-string-face
@@ -431,22 +432,24 @@
 
          ;; org-mode
          ;; TODO: levels
+         (org-document-title
+          ((t (,@vw ,@string :height 2.0 :bold t))))
+         (org-special-keyword
+          ((t (,@vw ,@constant))))
          (org-level-1
-          ((t (,@fw ,@essence :height 1.1))))
+          ((t (,@vw ,@essence :height 1.6))))
          (org-level-2
-          ((t (,@fw ,@constant :height 1.05))))
+          ((t (,@vw ,@mutable :height 1.4))))
          (org-level-3
-          ((t (,@fw ,@string))))
+          ((t (,@vw ,@commitment :height 1.2))))
          (org-level-4
-          ((t (,@fw ,@note))))
+          ((t (,@vw ,@note))))
          (org-level-5
-          ((t (,@fw ,@commitment))))
+          ((t (,@vw ,@param))))
          (org-level-6
-          ((t (,@fw ,@param))))
+          ((t (,@vw ,@param))))
          (org-level-7
-          ((t (,@fw ,@mutable))))
-         (org-level-8
-          ((t (:foreground ,yellow-1))))
+          ((t (,@vw :foreground ,yellow-1))))
          (org-table
           ((t (,@fw :foreground ,green-3)))) ; TODO
          (org-hide
