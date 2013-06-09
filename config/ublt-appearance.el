@@ -453,18 +453,9 @@
               (0 (progn (compose-region (match-beginning 1) (match-end 1)
                                         ?⇛ 'decompose-region)
                         nil)))))
+(dolist (mode '(js-mode js2-mode))
 (font-lock-add-keywords
- 'js2-mode `(("{\\|}\\|;" . 'esk-paren-face)
-             ("\\(ret\\)urn"
-              (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                        ?> 'decompose-region)
-                        nil)))
-             ("ret\\(urn\\)"
-              (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                        ?⇛ 'decompose-region)
-                        nil)))))
-(font-lock-add-keywords
- 'js-mode `(("{\\|}\\|;" . 'esk-paren-face)
+   mode `(("{\\|}\\|;" . 'esk-paren-face)
             ("\\(ret\\)urn"
              (0 (progn (compose-region (match-beginning 1) (match-end 1)
                                        ?> 'decompose-region)
@@ -472,7 +463,7 @@
             ("ret\\(urn\\)"
              (0 (progn (compose-region (match-beginning 1) (match-end 1)
                                        ?⇛ 'decompose-region)
-                       nil)))))
+                     nil))))))
 
 ;;; Doesn't work. Magit does something special
 ;; (defun ublt/prettify-magit-log ()
