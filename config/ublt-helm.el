@@ -1,3 +1,5 @@
+(eval-when-compile
+  (require 'cl))
 (require 'ublt-util)
 
 ;;; TODO: Clean up
@@ -15,23 +17,27 @@
       ;; So C-w put the current symbol in helm's prompt
       helm-yank-symbol-first t)
 (setq ublt/helm-sources
-      '(helm-c-source-ffap-line
-        helm-c-source-ffap-guesser
-        helm-c-source-buffers-list
-        ;; helm-c-source-files-in-current-dir+
-        helm-c-source-bookmarks
-        helm-c-source-recentf
-        helm-c-source-file-cache
-        helm-c-source-locate)
+      '(;; helm-c-source-ffap-line
+        ;; helm-c-source-ffap-guesser
+        helm-source-buffers-list
+        helm-source-ido-virtual-buffers
+        ;; helm-source-files-in-current-dir ; use ido
+        helm-source-pp-bookmarks
+        helm-source-recentf
+        helm-source-file-cache
+        helm-source-locate)
       ;; Additions
       ;; helm-c-source-semantic
       ;; helm-c-source-git-project-files
       ;; helm-c-source-emacs-process
       )
 
+(dolist (pattern '("\\.pyc$" "\\.elc$"))
+  (add-to-list 'helm-boring-file-regexp-list pattern))
+
 ;;; Quote the the search string
 (ublt/in '(gnu/linux)
-  (setq helm-c-locate-command "locate %s -r '%s'"))
+  (setq helm-locate-command "locate %s -r '%s'"))
 
 (defun ublt/helm ()
   (interactive)
@@ -49,21 +55,22 @@ font (fixed-pitch is still preferable)."
              (member x '(;; helm-c-source-ffap-line
                          ;; helm-c-source-ffap-guesser
                          ;; helm-c-source-buffers-list
-                         helm-c-source-bookmarks
-                         ;; helm-c-source-recentf
-                         ;; helm-c-source-file-cache
-                         ;; helm-c-source-filelist
-                         ;; helm-c-source-files-in-current-dir+
-                         ;; helm-c-source-files-in-all-dired
-                         ;; helm-c-source-locate
-                         helm-c-source-emacs-process
-                         helm-c-source-org-headline
-                         helm-c-source-emms-streams
-                         helm-c-source-emms-files
-                         helm-c-source-emms-dired
-                         helm-c-source-google-suggest
-                         helm-c-source-apt
-                         ;; helm-c-source-helm-commands
+                         helm-source-bookmarks
+                         helm-source-pp-bookmarks
+                         ;; helm-source-recentf
+                         ;; helm-source-file-cache
+                         ;; helm-source-filelist
+                         ;; helm-source-files-in-current-dir+
+                         ;; helm-source-files-in-all-dired
+                         ;; helm-source-locate
+                         helm-source-emacs-process
+                         helm-source-org-headline
+                         helm-source-emms-streams
+                         helm-source-emms-files
+                         helm-source-emms-dired
+                         ;; helm-source-google-suggest
+                         helm-source-apt
+                         ;; helm-source-helm-commands
                          )))
          sources))
 (defun ublt/helm-tweak-appearance ()
