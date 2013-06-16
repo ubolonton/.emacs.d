@@ -209,6 +209,8 @@
       savehist-file "~/.emacs.d/.savehist")
 (savehist-mode t)
 
+(setq bookmark-default-file "~/.emacs.d/.bookmarks")
+
 ;; TextMate minor mode
 (require 'textmate)
 ;; (textmate-mode)
