@@ -36,8 +36,8 @@
  ("KRUU-LP - Fairfield, Iowa Community Radio" "http://kruufm.com/live.pls" 1 streamlist)
  ("WBCR-LP - Berkshire Community Radio" "http://nyc01.egihosting.com:6232/listen.pls" 1 streamlist)
 
- ("Voice of HCM City People, FM" "mms://221.132.37.15/fm" 1 url)
- ("Voice of HCM City People, AM" "mms://221.132.37.15/am" 1 url)
+ ("Voice of HCM City People, FM" "rtsp://221.132.37.15/fm" 1 url)
+ ("Voice of HCM City People, AM" "rtsp://221.132.37.15/am" 1 url)
  ("NDR Info" "http://ndr.ic.llnwd.net/stream/ndr_ndrinfo_hi_mp3" 1 url)
  ("NDR Kultur" "http://ndr.ic.llnwd.net/stream/ndr_ndrkultur_hi_mp3" 1 url)
  ("BBC Radio 1" "mms://wmlive.bbc.net.uk/wms/bbc_ami/radio1/radio1_bb_live_int_eq1_sl0?BBC-UID=e44a970b22ffbda06a4e058b91802eba1c90682640d091dff269e685b0547800&SSO2-UID=" 1 url)
