@@ -532,6 +532,9 @@
           ((t (,@constant :italic t)))) ; TODO
 
          ;; ediff
+         ;; I think I lost my vision of "small semantic color set"
+         ;; here. Semantic maybe but small, probably not. So how do we
+         ;; actually organize them?
          (ediff-current-diff-A
           ((t (:background "#2C1320")))) ; #2C1320
          (ediff-current-diff-B
@@ -590,6 +593,16 @@
           ((t (:foreground ,green))))   ; TODO What is this?
          (magit-item-mark
           ((t (:inherit secondary-selection))))
+         (magit-tag
+          ((t (:foreground ,green-2 :box ,bg+3)))) ; TODO
+         (magit-log-head-label-tags
+          ((t (:inherit magit-tag))))
+         (magit-log-author
+          ((t ,context)))
+         (magit-log-date
+          ((t ,dimmed)))
+         (magit-log-author-date-cutoff
+          ((t (:inherit magit-log-author :weight bold))))
 
          ;; info
          (info-xref
