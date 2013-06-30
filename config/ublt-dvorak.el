@@ -767,6 +767,8 @@
 (eval-after-load "ess-mode"
   '(ublt/undefine-keys ess-mode-map
      ("C-y")))
-
+(eval-after-load "org-mode"
+  '(ublt/undefine-keys org-mode-map
+     ("C-y")))
 
 (provide 'ublt-dvorak)
