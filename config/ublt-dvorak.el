@@ -143,6 +143,9 @@
  "s-k"           'kill-this-buffer
  "s-l"           'goto-line
 
+ "M-w"           'whole-line-or-region-kill-ring-save
+ "C-y"           'whole-line-or-region-yank
+
  ;; Line/region movement
  "M-s-h"         'textmate-shift-left
  "M-s-n"         'textmate-shift-right
@@ -194,7 +197,6 @@
  ;; "M-I"           'kill-whole-line
 
  "M-I"           'whole-line-or-region-kill-region
- ;; Zooming in/out (consistent with other Mac apps)
  "s-+"           'text-scale-increase
  "s-="           'text-scale-increase
  "C-="           'text-scale-increase

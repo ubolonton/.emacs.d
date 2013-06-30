@@ -116,30 +116,14 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
       (downcase-region p1 p2) (put this-command 'state "all lower")))))
 
 
-;;; Copy/cut whole line if no region is selected
-;; `http://www.emacswiki.org/emacs/WholeLineOrRegion'
-(dolist (command (list 'kill-ring-save 'kill-region
-                       'clipboard-kill-ring-save
-                       'clipboard-kill-region))
-  (put command 'interactive-form
-       '(interactive
-         (if (use-region-p)
-             (list (region-beginning) (region-end))
-           (list (line-beginning-position) (line-beginning-position 2))))))
-;;; Because they set mark if the region is not active
-(defadvice kill-ring-save (after pop-spurious-mark activate)
-  (unless (use-region-p)
-    (pop-mark)))
-(defadvice kill-region (after pop-spurious-mark activate)
-  (unless (use-region-p)
-    (pop-mark)))
-
-;;; Maybe this is enough, and the above is not needed anymore?
+;;; Copy/cut/duplicate whole line if no region is selected
 (ublt/set-up 'whole-line-or-region
   (defun ublt/duplicate-line (prefix)
     (interactive "p")
-    (whole-line-or-region-kill-ring-save)
+    ;; FIX: This looks dirty
+    (call-interactively 'whole-line-or-region-kill-ring-save)
     (call-interactively 'whole-line-or-region-yank)))
+
 
 ;; Prefer UTF-8
 (prefer-coding-system 'utf-8)
