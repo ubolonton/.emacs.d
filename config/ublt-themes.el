@@ -403,7 +403,7 @@
          (slime-repl-prompt-face
           ((t ,commitment)))
 
-         ;; Auto-complete
+         ;; Auto-complete & popup
          (ac-completion-face
           ((t (,@dimmed-hl :foreground ,fg-2 :slant normal :weight normal))))
          (ac-candidate-face
@@ -414,8 +414,12 @@
           ((t (:inherit ac-candidate-face))))
          (ac-slime-selection-face
           ((t (:inherit ac-selection-face))))
+         (popup-face
+          ((t (:inherit ac-candidate-face))))
          (popup-tip-face
           ((t (,@dimmed-hl ,@string))))
+         (popup-summary-face
+          ((t (:inherit popup-face ,@note))))
 
          (dropdown-list-face
           ((t (:inherit ac-completion-face))))
