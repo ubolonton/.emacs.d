@@ -303,6 +303,8 @@
 ;; Erlang
 (require 'ublt-erlang)
 
+(require 'ublt-sql)
+
 (ublt/set-up 'less-css-mode
   (add-hook 'less-css-mode-hook 'esk-prog-mode-hook)
   (add-hook 'less-css-mode-hook 'enable-paredit-mode))
