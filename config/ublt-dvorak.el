@@ -1,3 +1,4 @@
+(require 'cl)
 (require 'ublt-util)
 
 ;;; My Dvorak key map for Dvorak. Keys are extensively remapped and
@@ -9,10 +10,10 @@
 ;;; TODO: remap
 
 
-;; TODO: Make it a macro so that indentation can be customized.
 ;; Helper to define keys
 (defun ublt/define-keys (key-map &rest ps)
   "Define key binding pairs for KEY-MAP."
+  (declare (indent 1))
   (let ((i 0))
     (while (< i (length ps))
       (if (= (mod i 2) 0)
@@ -23,6 +24,11 @@
                                        (read-kbd-macro dst)
                                      dst))))
       (setq i (+ i 2)))))
+
+(defun ublt/undefine-keys (key-map keys)
+  (declare (indent 1))
+  (dolist (key keys)
+    (define-key key-map (read-kbd-macro key) nil)))
 
 
 ;;; Custom global bindings -------------------------------------------
@@ -259,7 +265,7 @@
  )
 
 
-;;; Help
+;;; Help navigation
 (eval-after-load "help-mode"
   '(ublt/define-keys
     help-mode-map
@@ -516,31 +522,19 @@
       js2-mode-map
       "M-p" 'js2-prev-error
       "M-n" 'js2-next-error)))
-(eval-after-load "js"
-  '(ublt/define-keys
-    js-mode-map
+;;; NTA FIX: This is because flymake doesn't have its own map
+(dolist (fms '(("js" js-mode-map)
+               ("python-mode" py-mode-map)
+               ("php-mode" php-mode-map)
+               ("lisp-mode" emacs-lisp-mode-map)
+               ("erlang" erlang-mode-map)
+               ("ruby-mode" ruby-mode-map)))
+  (destructuring-bind (file map) fms
+    (eval-after-load file
+      `(ublt/define-keys
+        ,map
     "M-n" 'flymake-goto-next-error
-    "M-p" 'flymake-goto-prev-error))
-(eval-after-load "python-mode"
-  '(ublt/define-keys
-    py-mode-map
-    "M-n" 'flymake-goto-next-error
-    "M-p" 'flymake-goto-prev-error))
-(eval-after-load "php-mode"
-  '(ublt/define-keys
-    php-mode-map
-    "M-p" 'flymake-goto-prev-error
-    "M-n" 'flymake-goto-next-error))
-(eval-after-load "lisp-mode"
-  '(ublt/define-keys
-    emacs-lisp-mode-map
-    "M-p" 'flymake-goto-prev-error
-    "M-n" 'flymake-goto-next-error))
-(eval-after-load "erlang"
-  '(ublt/define-keys
-    erlang-mode-map
-    "M-n" 'flymake-goto-next-error
-    "M-p" 'flymake-goto-prev-error))
+        "M-p" 'flymake-goto-prev-error))))
 
 
 ;;; Paredit
@@ -768,10 +762,11 @@
   '(ublt/define-keys
     twittering-mode-map
     "S-SPC" 'twittering-scroll-down))
+
+;; NTA XXX: Their "yank" variations are not as good
 (eval-after-load "ess-mode"
-  '(ublt/define-keys
-    ess-mode-map
-    ;; NTA XXX: Their "yank" variation is not as good
-    "C-y" nil))
+  '(ublt/undefine-keys ess-mode-map
+     ("C-y")))
+
 
 (provide 'ublt-dvorak)
