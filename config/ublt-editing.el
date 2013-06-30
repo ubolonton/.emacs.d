@@ -35,7 +35,7 @@ arg lines down."
 arg lines up."
   (interactive "*p")
   (ublt/move-text-internal (- arg)))
-
+
 (defun ublt/unfill-paragraph ()
   "Takes a multi-line paragraph and makes it into a single line of text."
   (interactive)
@@ -56,7 +56,9 @@ arg lines up."
   (defun ublt/cycle-code-region ()
     "Cycle selection for code of line-based languages."
     (interactive)
-    (let ((thing-types '("symbol" "string" "line" "defun")))
+    ;; TODO: "defun" is not stable. Fix it. Make it choose between
+    ;; symbol and string based on context
+    (let ((thing-types '("symbol" "string" "line" "paragraph")))
       (call-interactively 'cycle-thing-region)))
 
   (defun ublt/restore-thing-cmds-point ()
@@ -123,7 +125,7 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
     ;; FIX: This looks dirty
     (call-interactively 'whole-line-or-region-kill-ring-save)
     (call-interactively 'whole-line-or-region-yank)))
-
+
 
 ;; Prefer UTF-8
 (prefer-coding-system 'utf-8)
