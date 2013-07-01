@@ -35,10 +35,8 @@
                    (0 (progn (compose-region (match-beginning 1)
                                              (match-end 1) "\u0192")
                              nil)))))
-     ;; js-mode for now, js2-mode has been buggy recently (syntax
-     ;; highlighting not being updated correctly)
      (setcdr (assoc "\\.js\\'" auto-mode-alist)
-             'js-mode)
+             'js2-mode)
 
      (setq js2-highlight-level 3)
      ))
