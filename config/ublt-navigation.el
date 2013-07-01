@@ -91,4 +91,59 @@ of line."
 ;;; Whitespace-only diffs are not interesting most of the time
 (setq-default ediff-ignore-similar-regions t)
 
+
+;;; What's the point of jumping to a section's start but putting it at
+;;; the bottom of the window? This somewhat fixes it
+
+;;; TODO: Depend on window height in lines
+;;; (defun recenter-sensibly ())
+
+(defadvice ido-imenu (after bring-into-view activate)
+  (recenter 10))
+
+;;; Somehow button-get returns nil after the call, so "after" advice
+;;; does not work
+(defadvice help-button-action (around bring-into-view activate)
+  (let* ((button (ad-get-arg 0))
+         (type (button-get button 'type)))
+    ad-do-it
+    (when (eq type 'help-function-def)
+      (recenter 10))))
+
+;;; TODO: Test this extensively
+(defmacro ublt/save-window-view (&rest body)
+  `(let* ((window (get-buffer-window))
+          (pos (window-start window)))
+     ,@body
+     ;; TODO: Maybe just set this if we are still in the same buffer?
+     (set-window-start window pos)))
+
+;;; TODO: Are we sure magit-refresh is the one?
+;;; FIX: This doesn't fix window view jumping when changing hunk size
+;;; (I'm not sure if it's better or worse though). It does fix the
+;;; jumpiness when showing hunk for the first time after a refresh
+;;; though.
+(defadvice magit-refresh (around bring-into-view activate)
+  (ublt/save-window-view ad-do-it))
+
+;;; Try keeping window's view of the buffer the same
+(defadvice magit-status (around bring-into-view activate)
+  (let* ((buffer (current-buffer))
+         (window (get-buffer-window))
+         (pos (window-start window)))
+    ad-do-it
+    (when (eq buffer (current-buffer))
+      (set-window-start window pos))))
+
+;; (ad-deactivate 'magit-refresh)
+
+;; (defadvice magit-refresh (around bring-into-view activate)
+;;   (let* ((window (get-buffer-window))
+;;          (pos (window-start window)))
+;;     ad-do-it
+;;     (set-window-start window pos)))
+
+;; (ad-unadvise 'magit-refresh)
+;; (ad-deactivate 'help-button-action)
+
 (provide 'ublt-navigation)
