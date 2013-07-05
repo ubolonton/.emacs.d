@@ -37,10 +37,11 @@ arg lines up."
   (ublt/move-text-internal (- arg)))
 
 (defun ublt/unfill-paragraph ()
-  "Takes a multi-line paragraph and makes it into a single line of text."
+  "Does the inverse of `fill-paragraph', by calling it with
+`fill-column' set to a large number."
   (interactive)
   (let ((fill-column (point-max)))
-    (fill-paragraph nil)))
+    (call-interactively 'fill-paragraph)))
 
 
 ;;; Cycling and extending selection
