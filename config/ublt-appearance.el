@@ -20,7 +20,8 @@
     (setq font (nth cur-pos fonts))
     (modify-all-frames-parameters (list (cons 'font font) ;; (cons 'height 100)
                                         ))
-    (setq ublt/fixed-width-font font)
+    ;; TODO: Should be "current theme"
+    (color-theme-ubolonton-dark)
     (message "Font: %s" font)
     (put this-command 'pos (% (1+ cur-pos) N))))
 
@@ -38,11 +39,15 @@
                  (fullscreen . fullheight) (cursor-type . bar)
                  ;; FIX: This may be specific to my laptop
                  ;; (screen-gamma . 2.205)
+                 ;; Night
+                 ;; (screen-gamma . 2.5)
                  ;; And this, my new monitor, even after calibration?!?
                  (screen-gamma . 2.7)
                  ;; Daylight adaptation
                  ;; (screen-gamma . 4)
-                 (font . "DejaVu Sans Mono-10")))))
+                 ;; (font . "DejaVu Sans Mono-10")
+                 (font . "Inconsolata-12")
+                 ))))
 
 ;; Maybe TODO: Enable this except for twitter buffers
 ;; (blink-cursor-mode 1)
@@ -311,7 +316,7 @@
 ;;                   ;;         (powerline-buffer-size    'right  nil)
 ;;                   ;;         (powerline-make-text      "  "    nil  )))
 
-                               ;; mode-line-mule-info
+;;                   mode-line-mule-info
 ;;                   ;; mode-line-client
 ;;                   mode-line-modified
 ;;                   mode-line-remote
@@ -418,6 +423,7 @@
 
 
 
+;;; TODO: These should be font-dependent
 (font-lock-add-keywords
  'org-mode `(("\\(=>\\)"
               (0 (progn (compose-region (match-beginning 1) (match-end 1)
@@ -458,15 +464,15 @@
                                         ?⇛ 'decompose-region)
                         nil)))))
 (dolist (mode '(js-mode js2-mode))
-(font-lock-add-keywords
+  (font-lock-add-keywords
    mode `(("{\\|}\\|;" . 'esk-paren-face)
-            ("\\(ret\\)urn"
-             (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                       ?> 'decompose-region)
-                       nil)))
-            ("ret\\(urn\\)"
-             (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                       ?⇛ 'decompose-region)
+          ("\\(ret\\)urn"
+           (0 (progn (compose-region (match-beginning 1) (match-end 1)
+                                     ?> 'decompose-region)
+                     nil)))
+          ("ret\\(urn\\)"
+           (0 (progn (compose-region (match-beginning 1) (match-end 1)
+                                     ?⇛ 'decompose-region)
                      nil))))))
 
 ;;; Doesn't work. Magit does something special
@@ -515,7 +521,8 @@
 
 (setq-default
  ;; Sparse lines
- line-spacing 0.2
+ ;; TODO: 0.15 or 0.2?
+ line-spacing 0.15
 
  ;; 70-char column width
  fill-column 70
