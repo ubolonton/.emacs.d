@@ -65,6 +65,7 @@
                 skype--chat-mode-hook
                 org-mode-hook
                 markdown-mode-hook
+                html-mode-hook
                 ))
   (add-hook hook (ublt/on-fn 'variable-pitch-mode)))
 (defun ublt/variable-pitch-if-fundamental ()
@@ -74,23 +75,25 @@
 
 
 ;;; Ubolonton's theme
+;; (ublt/set-up 'ublt-themes
+;; ;;; TODO: Fix highlight-parentheses-mode so that switching theme
+;; ;;; switches parentheses' colors correctly.
+;;   (condition-case nil
+;;       (let ((hour (string-to-number (format-time-string "%H"))))
+;;         (if (and (<= 8 hour) (<= hour 17)
+;;                  (y-or-n-p "Use solarized light theme?"))
+;;             (color-theme-solarized-light)
+;;           (color-theme-ubolonton-dark)))
+;;     (error (color-theme-ubolonton-dark)))
+;;   (setq
+;;    hl-paren-colors `("Orange" "Yellow" "Greenyellow"
+;;                      "Green" "Springgreen" "Cyan"
+;;                      "#6A5ACD" "Magenta" "Purple"
+;;                      "Orange" "Yellow" "Greenyellow"
+;;                      "Green" "Springgreen" "Cyan"
+;;                      "#6A5ACD" "Magenta" "Purple")))
 (ublt/set-up 'ublt-themes
-;;; TODO: Fix highlight-parentheses-mode so that switching theme
-;;; switches parentheses' colors correctly.
-  (condition-case nil
-      (let ((hour (string-to-number (format-time-string "%H"))))
-        (if (and (<= 8 hour) (<= hour 17)
-                 (y-or-n-p "Use solarized light theme?"))
-            (color-theme-solarized-light)
-          (color-theme-ubolonton-dark)))
-    (error (color-theme-ubolonton-dark)))
-  (setq
-   hl-paren-colors `("Orange" "Yellow" "Greenyellow"
-                     "Green" "Springgreen" "Cyan"
-                     "#6A5ACD" "Magenta" "Purple"
-                     "Orange" "Yellow" "Greenyellow"
-                     "Green" "Springgreen" "Cyan"
-                     "#6A5ACD" "Magenta" "Purple")))
+  (color-theme-ubolonton-dark))
 
 
 ;;; Whitespaces

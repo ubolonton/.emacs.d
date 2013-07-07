@@ -12,6 +12,8 @@
 (require 'color-theme)
 
 
+;;; TODO: Light theme, font integration, version for all-bold faces
+;;; FIX: Don't base variable-width font size on fixed-width font size
 ;;; TODO: Use Emacs 24's deftheme
 ;;; TODO: Give better names e.g. +1 +2 -1 -2 or ++ --
 ;;; TODO: Font-lock-type-face is too bright
@@ -107,10 +109,6 @@
     (purple      "#805DBB" "#875F87")
     ))
 
-;; (defvar ublt/fixed-width-font "DejaVu Sans Mono-10")
-(defvar ublt/fixed-width-font-family "DejaVu Sans Mono")
-(defvar ublt/variable-width-font-family "DejaVu Sans")
-;; (defvar ublt/variable-width-font-family "Andika")
 
 ;;;###autoload
 (defun color-theme-ubolonton-dark ()
@@ -205,9 +203,11 @@
                                    :strike-through nil :inverse-video nil :overline nil))
 
            ;; Fixed-width font
-           (fw           `(:family ,ublt/fixed-width-font-family))
+           ;; (fw           `(:family ,ublt/fixed-width-font-family :height 120))
+           (fw           `(:font ,(face-attribute 'default :font)))
            ;; Variable-width font
-           (vw           `(:family ,ublt/variable-width-font-family))
+           ;; (vw           `(:family ,ublt/variable-width-font-family))
+           (vw           `(:font ,(face-attribute 'variable-pitch :font)))
            )
       (color-theme-install
        `(color-theme-ubolonton-dark
@@ -222,7 +222,7 @@
          ;; Variables
          ((ibus-cursor-color . (,green ,yellow ,yellow)))
 
-         (default ((t (:background ,bg :foreground ,fg))))
+         (default ((t (,@fw :background ,bg :foreground ,fg))))
          (variable-pitch ((t (,@vw :height 110 :background ,bg :foreground ,fg))))
 
          (border-glyph ((t (nil))))     ; What's this?
@@ -548,13 +548,13 @@
          (ediff-current-diff-Ancestor
           ((t (:background "#0C1350"))))
          (ediff-fine-diff-A
-          ((t (:background "#5C3340" ,@strong))))
+          ((t (:background "#5C3340" :weight bold))))
          (ediff-fine-diff-B
-          ((t (:background "#1C6340" ,@strong))))
+          ((t (:background "#1C6340" :weight bold))))
          (ediff-fine-diff-C
-          ((t (:background "#5C6340" ,@strong))))
+          ((t (:background "#5C6340" :weight bold))))
          (ediff-fine-diff-Ancestor
-          ((t (:background "#1C2360" ,@strong))))
+          ((t (:background "#1C2360" :weight bold))))
          (ediff-even-diff-A
           ((t ,normal-hl)))
          (ediff-even-diff-B
