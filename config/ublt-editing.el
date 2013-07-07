@@ -48,6 +48,9 @@ arg lines up."
 ;; TODO: Make `defun' selection work with non-Lisp
 
 (ublt/set-up 'thing-cmds
+  ;; FIX: this-command/last-command variables do not work well with
+  ;; interactive commands that use call-interactively. So set
+  ;; thing-types depending on major-mode instead
   ;; Use `mark-enclosing-sexp' for Lisp languages
   (defun ublt/cycle-prose-region ()
     "Cycle selection for prose (non-programming text)."
@@ -214,6 +217,16 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
   ;; (add-to-list 'hippie-expand-try-functions-list 'yas-hippie-try-expand)
   (add-to-list 'yas-snippet-dirs "~/.emacs.d/data/yasnippet/snippets")
   (yas-global-mode +1))
+
+
+;; Emmet (Zen-coding)
+(ublt/set-up 'emmet-mode
+  (setq emmet-preview-default nil)
+  ;; (make-variable-buffer-local 'emmet-indentation)
+  (defun ublt/set-emmet-indentation ()
+    (setq emmet-indentation tab-width))
+  (add-hook 'sgml-mode-hook 'ublt/set-emmet-indentation))
+
 
 ;;; Misc
 

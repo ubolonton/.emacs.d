@@ -43,6 +43,7 @@
          elisp-slime-nav
          js2-mode flymake-jshint
          php-mode flymake-php
+         emmet-mode                          ; html/css editing
          ;; Starter kit
          starter-kit starter-kit-bindings starter-kit-eshell
          starter-kit-lisp starter-kit-js starter-kit-ruby))

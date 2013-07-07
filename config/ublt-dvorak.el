@@ -453,7 +453,7 @@
   )
 
 
-;;; HTML
+;;; HTML/CSS
 
 ;;; TODO: Consistent bindings for tree-editing (HTML & Lisp)
 (dolist (fms '(("nxhtml-mumamo" nxhtml-mumamo-mode-map)
@@ -466,7 +466,14 @@
          "s-<right>" 'sgml-skip-tag-forward
          "s-<left>"  'sgml-skip-tag-backward
          "M-<right>" 'sgml-skip-tag-forward
-         "M-<left>"  'sgml-skip-tag-backward))))
+         "M-<left>"  'sgml-skip-tag-backward
+         ;; FIX: Hmm
+         "M-RET"     'emmet-expand-yas))))
+
+(ublt/keys 'css-mode css-mode-map
+  "M-RET" 'emmet-expand-yas)
+(ublt/keys 'less-css-mode less-css-mode-map
+  "M-RET" 'emmet-expand-yas)
 
 
 ;;; auto-complete and yasnippet

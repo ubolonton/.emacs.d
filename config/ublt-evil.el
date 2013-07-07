@@ -1,5 +1,8 @@
 (require 'ublt-util)
 
+;; evil & surround's tag support does not work well with idiosyncratic html tags like
+;; <meta ...> <br />
+
 (defface ublt/evil-insert-tag
   `((t (:inherit font-lock-comment-delimiter-face :slant normal :weight bold)))
   "Evil insert mode indicator face")
