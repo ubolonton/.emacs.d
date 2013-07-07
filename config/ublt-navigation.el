@@ -14,12 +14,21 @@ of line."
       (beginning-of-line))))
 
 ;;; Better C-x C-x
+;;; TODO: Shortcut for setting mark without activating region
+;;; TODO: Better shortcut than C-x C-x
 ;; `http://www.masteringemacs.org/articles/2010/12/22/fixing-mark-commands-transient-mark-mode/'
+;;; FIX: The desire behavior should be:
+;;; - Don't do anything special if region is active.
+;;; - Don't activate region if it's not active.
+;;; Basically keep region's activation state
+;;; TODO: Maybe it should be an advice?
 (defun ublt/exchange-point-and-mark-no-activate ()
   "Identical to \\[exchange-point-and-mark] but will not activate the region."
   (interactive)
-  (exchange-point-and-mark)
-  (deactivate-mark nil))
+  (let ((active (region-active-p)))
+    (exchange-point-and-mark)
+    (when (not active)
+      (deactivate-mark nil))))
 (define-key global-map [remap exchange-point-and-mark]
   'ublt/exchange-point-and-mark-no-activate)
 
