@@ -25,10 +25,27 @@
                                      dst))))
       (setq i (+ i 2)))))
 
+(font-lock-add-keywords
+ 'emacs-lisp-mode
+ '(("\\<\\(ublt/define-keys\\) \\(.*\\)\\>"
+    (1 font-lock-keyword-face)
+    (2 font-lock-variable-name-face))
+   ("\\<\\(ublt/keys\\) *\\(.*\\) *\\_<\\(.*\\)\\>"
+    (1 font-lock-keyword-face)
+    (2 font-lock-constant-face)
+    (3 font-lock-variable-name-face)))
+ 'append)
+
 (defun ublt/undefine-keys (key-map keys)
   (declare (indent 1))
   (dolist (key keys)
     (define-key key-map (read-kbd-macro key) nil)))
+
+(defmacro ublt/keys (package map &rest mappings)
+  (declare (indent 2))
+  `(eval-after-load ,package
+     (quote (ublt/define-keys ,map
+              ,@mappings))))
 
 
 ;;; Custom global bindings -------------------------------------------
@@ -264,183 +281,176 @@
 
 
 ;;; Help navigation
-(eval-after-load "help-mode"
-  '(ublt/define-keys help-mode-map
-     "M-s-h" 'help-go-back
-     "M-s-n" 'help-go-forward
-     "C-f"   'help-follow-symbol))
+(ublt/keys "help-mode" help-mode-map
+  "M-s-h" 'help-go-back
+  "M-s-n" 'help-go-forward
+  "C-f"   'help-follow-symbol)
 
-(eval-after-load "info"
-  '(ublt/define-keys Info-mode-map
-     "M-s-h" 'Info-history-back
-     "M-s-n" 'Info-history-forward))
+(ublt/keys "info" Info-mode-map
+  "M-s-h" 'Info-history-back
+  "M-s-n" 'Info-history-forward)
 
 
 ;;; Evil -------------------------------------------------------------
 ;;; TODO: Swap WORD & word
-(eval-after-load "evil"
-  '(progn
-     (ublt/define-keys evil-normal-state-map
-       ;; Preparation for motion map
-       "h" nil "H" nil
-       "n" nil "N" nil
-       "c" nil "C" nil
-       "t" nil "T" nil
-       "g" nil "G" nil
-       "r" nil "R" nil
-       "l" nil "L" nil
+(ublt/keys "evil" evil-normal-state-map
+  ;; Preparation for motion map
+  "h" nil "H" nil
+  "n" nil "N" nil
+  "c" nil "C" nil
+  "t" nil "T" nil
+  "g" nil "G" nil
+  "r" nil "R" nil
+  "l" nil "L" nil
 
-       ;; (c)hange => (j)ab
-       "j"        'evil-change
-       "J"        'evil-change-line
+  ;; (c)hange => (j)ab
+  "j"        'evil-change
+  "J"        'evil-change-line
 
-       "U"        'undo-tree-redo
+  "U"        'undo-tree-redo
 
-       "C-r"      nil
-       "M-."      nil                   ; evil-repeat-pop-next
-       "<escape>" 'evil-force-normal-state
+  "C-r"      nil
+  "M-."      nil                   ; evil-repeat-pop-next
+  "<escape>" 'evil-force-normal-state
 
-       ;; (r)eplace => (b)
-       "b"        'evil-replace
-       "B"        'evil-replace-state
+  ;; (r)eplace => (b)
+  "b"        'evil-replace
+  "B"        'evil-replace-state
 
-       ;; g => e
-       "e"  nil
-       "e&"       'evil-ex-repeat-global-substitute
-       "e8"       'what-cursor-position
-       "ea"       'what-cursor-position
-       "ei"       'evil-insert-resume
-       "eJ"       'evil-join-whitespace
-       "eq"       'evil-fill-and-move
-       "ew"       'evil-fill
-       "eu"       'evil-downcase
-       "eU"       'evil-upcase
-       "ef"       'find-file-at-point
-       "eF"       'evil-find-file-at-point-with-line
-       "e?"       'evil-rot13
-       "e~"       'evil-invert-case
-       "e;"       'goto-last-change
-       "e,"       'goto-last-change-reverse
+  ;; g => e
+  "e"  nil
+  "e&"       'evil-ex-repeat-global-substitute
+  "e8"       'what-cursor-position
+  "ea"       'what-cursor-position
+  "ei"       'evil-insert-resume
+  "eJ"       'evil-join-whitespace
+  "eq"       'evil-fill-and-move
+  "ew"       'evil-fill
+  "eu"       'evil-downcase
+  "eU"       'evil-upcase
+  "ef"       'find-file-at-point
+  "eF"       'evil-find-file-at-point-with-line
+  "e?"       'evil-rot13
+  "e~"       'evil-invert-case
+  "e;"       'goto-last-change
+  "e,"       'goto-last-change-reverse
+  )
+(ublt/keys "evil" evil-motion-state-map
 
-       )
-     (ublt/define-keys evil-motion-state-map
+  ;; Dvorak, positional
+  "h"     'evil-backward-char      ; ⇚
+  "n"     'evil-forward-char       ; ⇛
+  "H"     'evil-window-top
+  "N"     'evil-window-bottom
+  ;; Dvorak, positional (line)
+  "c"     'evil-previous-line      ; ⬆
+  "t"     'evil-next-line          ; ⬇
+  "C"     'evil-scroll-line-up
+  "T"     'evil-scroll-line-down
+  ;; Dvorak, positional (word)
+  "g"     'evil-backward-word-begin ; -⇚
+  "G"     'evil-backward-WORD-begin ; |⇚
+  "r"     'evil-forward-word-end    ; ⇛-
+  "R"     'evil-forward-WORD-end    ; ⇛|
 
-       ;; Dvorak, positional
-       "h"     'evil-backward-char      ; ⇚
-       "n"     'evil-forward-char       ; ⇛
-       "H"     'evil-window-top
-       "N"     'evil-window-bottom
-       ;; Dvorak, positional (line)
-       "c"     'evil-previous-line      ; ⬆
-       "t"     'evil-next-line          ; ⬇
-       "C"     'evil-scroll-line-up
-       "T"     'evil-scroll-line-down
-       ;; Dvorak, positional (word)
-       "g"     'evil-backward-word-begin ; -⇚
-       "G"     'evil-backward-WORD-begin ; |⇚
-       "r"     'evil-forward-word-end    ; ⇛-
-       "R"     'evil-forward-WORD-end    ; ⇛|
+  "SPC"   'evil-scroll-page-down
+  "S-SPC" 'evil-scroll-page-up
 
-       "SPC"   'evil-scroll-page-down
-       "S-SPC" 'evil-scroll-page-up
+  ;; (n)ext => (l)ook
+  "l"     'evil-search-next
+  "L"     'evil-search-previous
+  ;; (c)hange => (j)ab
+  "j"     'evil-change
+  "J"     'evil-change-line
+  ;; (t)o => к (Russian)
+  "k"     'evil-find-char-to
+  "K"     'evil-find-char-to-backward
+  ;; (r)eplace => (b)
+  "b"     'evil-replace
+  "B"     'evil-replace-state
 
-       ;; (n)ext => (l)ook
-       "l"     'evil-search-next
-       "L"     'evil-search-previous
-       ;; (c)hange => (j)ab
-       "j"     'evil-change
-       "J"     'evil-change-line
-       ;; (t)o => к (Russian)
-       "k"     'evil-find-char-to
-       "K"     'evil-find-char-to-backward
-       ;; (r)eplace => (b)
-       "b"     'evil-replace
-       "B"     'evil-replace-state
+  ;; g => (e)vil do
+  "e"     nil
+  "ed"    'evil-goto-definition
+  "ee"    'evil-backward-word-end
+  "eE"    'evil-backward-WORD-end
+  "eg"    'evil-goto-first-line
+  "ej"    'evil-next-visual-line
+  "ek"    'evil-previous-visual-line
+  "e0"    'evil-beginning-of-visual-line
+  "e_"    'evil-last-non-blank
+  "e^"    'evil-first-non-blank-of-visual-line
+  "e$"    'evil-end-of-visual-line
+  "e\C-]" 'find-tag
+  "ev"    'evil-visual-restore
 
-       ;; g => (e)vil do
-       "e"     nil
-       "ed"    'evil-goto-definition
-       "ee"    'evil-backward-word-end
-       "eE"    'evil-backward-WORD-end
-       "eg"    'evil-goto-first-line
-       "ej"    'evil-next-visual-line
-       "ek"    'evil-previous-visual-line
-       "e0"    'evil-beginning-of-visual-line
-       "e_"    'evil-last-non-blank
-       "e^"    'evil-first-non-blank-of-visual-line
-       "e$"    'evil-end-of-visual-line
-       "e\C-]" 'find-tag
-       "ev"    'evil-visual-restore
+  "*"     'highlight-symbol-next
+  "#"     'highlight-symbol-prev
 
-       "*"     'highlight-symbol-next
-       "#"     'highlight-symbol-prev
+  "C-b"    nil
+  "C-d"    nil
+  "C-e"    nil
+  "C-f"    nil
+  "C-o"    nil
+  "C-y"    nil
+  )
+(ublt/keys "evil" evil-insert-state-map
+  "<escape>" 'evil-normal-state
 
-       "C-b"    nil
-       "C-d"    nil
-       "C-e"    nil
-       "C-f"    nil
-       "C-o"    nil
-       "C-y"    nil
-       )
-     (ublt/define-keys evil-insert-state-map
-       "<escape>" 'evil-normal-state
-
-       "C-n" nil                        ; evil-complete-next
-       "C-p" nil                        ; evil-complete-previous
-       "C-r" nil                        ; evil-paste-from-register
-       "C-w" nil                        ; evil-delete-backward-word
-       "C-x C-n" nil                    ; evil-complete-next-line
-       "C-x C-p" nil                    ; evil-complete-previous-line
-       "C-t" nil                        ; evil-shift-right-line
-       )
-     (ublt/define-keys evil-visual-state-map
-       "<escape>" 'evil-exit-visual-state
-       "R" nil
-       )
-     (ublt/define-keys evil-replace-state-map
-       "<escape>" 'evil-normal-state)
-     (ublt/define-keys evil-emacs-state-map
-       "<escape>" 'evil-normal-state)
-     (ublt/define-keys evil-insert-state-map
-       "C-k" nil
-       "C-o" nil
-       "C-e" nil
-       "C-y" nil)
-     (ublt/define-keys evil-outer-text-objects-map
-       "d" 'evil-a-defun
-       "S" 'evil-a-symbol)
-     (ublt/define-keys evil-inner-text-objects-map
-       "d" 'evil-inner-defun
-       "S" 'evil-inner-symbol
-       "*" 'evil-inner-symbol
-       )
-     (ublt/define-keys evil-outer-text-objects-map
-       "d" 'evil-a-defun
-       "S" 'evil-a-symbol
-       "*" 'evil-a-symbol)))
+  "C-n" nil                        ; evil-complete-next
+  "C-p" nil                        ; evil-complete-previous
+  "C-r" nil                        ; evil-paste-from-register
+  "C-w" nil                        ; evil-delete-backward-word
+  "C-x C-n" nil                    ; evil-complete-next-line
+  "C-x C-p" nil                    ; evil-complete-previous-line
+  "C-t" nil                        ; evil-shift-right-line
+  )
+(ublt/keys "evil" evil-visual-state-map
+  "<escape>" 'evil-exit-visual-state
+  "R" nil
+  )
+(ublt/keys "evil" evil-replace-state-map
+  "<escape>" 'evil-normal-state)
+(ublt/keys "evil" evil-emacs-state-map
+  "<escape>" 'evil-normal-state)
+(ublt/keys "evil" evil-insert-state-map
+  "C-k" nil
+  "C-o" nil
+  "C-e" nil
+  "C-y" nil)
+(ublt/keys "evil" evil-outer-text-objects-map
+  "d" 'evil-a-defun
+  "S" 'evil-a-symbol)
+(ublt/keys "evil" evil-inner-text-objects-map
+  "d" 'evil-inner-defun
+  "S" 'evil-inner-symbol
+  "*" 'evil-inner-symbol
+  )
+(ublt/keys "evil" evil-outer-text-objects-map
+  "d" 'evil-a-defun
+  "S" 'evil-a-symbol
+  "*" 'evil-a-symbol)
 
 
 ;;; Helm
-(eval-after-load "helm"
-  '(ublt/define-keys helm-map
-     "s-h"         'minibuffer-keyboard-quit
-     "s-<return> " 'minibuffer-keyboard-quit
-     "C-x h"       'helm-toggle-all-marks
-     "C-f"         'helm-follow-mode
-     ))
-(eval-after-load "helm-config"
-  '(ublt/define-keys helm-command-map
-     "s-r" 'helm-emms
-     "g"   'helm-google-suggest
-     "l"   'helm-locate
-     "p"   'helm-list-emacs-process
-     "M-o" 'helm-occur
-     "M-O" 'helm-multi-occur
-     "o"   'helm-occur
-     "O"   'helm-multi-occur
-     "SPC" 'helm-global-mark-ring
-     "i"   'helm-browse-code            ; helm-imenu
-     ))
+(ublt/keys "helm" helm-map
+  "s-h"         'minibuffer-keyboard-quit
+  "s-<return> " 'minibuffer-keyboard-quit
+  "C-x h"       'helm-toggle-all-marks
+  "C-f"         'helm-follow-mode
+  )
+(ublt/keys "helm-config" helm-command-map
+  "s-r" 'helm-emms
+  "g"   'helm-google-suggest
+  "l"   'helm-locate
+  "p"   'helm-list-emacs-process
+  "M-o" 'helm-occur
+  "M-O" 'helm-multi-occur
+  "o"   'helm-occur
+  "O"   'helm-multi-occur
+  "SPC" 'helm-global-mark-ring
+  "i"   'helm-browse-code            ; helm-imenu
+  )
 
 
 ;;; HTML
@@ -452,42 +462,38 @@
                ("nxml-mode" nxml-mode-map)))
   (destructuring-bind (file map) fms
     (eval-after-load file
-      `(ublt/define-keys
-           "s-<right>" 'sgml-skip-tag-forward
-           "s-<left>"  'sgml-skip-tag-backward
-           "M-<right>" 'sgml-skip-tag-forward
-           "M-<left>"  'sgml-skip-tag-backward))))
+      `(ublt/define-keys ,map
+         "s-<right>" 'sgml-skip-tag-forward
+         "s-<left>"  'sgml-skip-tag-backward
+         "M-<right>" 'sgml-skip-tag-forward
+         "M-<left>"  'sgml-skip-tag-backward))))
 
 
 ;;; auto-complete and yasnippet
+(ublt/keys "auto-complete" ac-complete-mode-map
+  "M-n"   'ac-next
+  "M-p"   'ac-previous
+  "C-h"   'ac-help
+  "M-TAB" 'ac-complete
+  "C-SPC" 'ac-complete
+  "SPC"   'ac-complete
+  "TAB"   'ac-expand)
+(ublt/keys "auto-complete" ac-mode-map
+  "M-TAB" 'auto-complete)
 (eval-after-load "auto-complete"
-  '(progn
-     (ublt/define-keys ac-complete-mode-map
-       "M-n"   'ac-next
-       "M-p"   'ac-previous
-       "C-h"   'ac-help
-       "M-TAB" 'ac-complete
-       "C-SPC" 'ac-complete
-       "SPC"   'ac-complete
-       "TAB"   'ac-expand)
-     (ublt/define-keys ac-mode-map
-       "M-TAB" 'auto-complete)
-     (ac-set-trigger-key nil ;; "M-TAB" ;; "M-k"
-                         )))
-(eval-after-load "yasnippet"
-  '(ublt/define-keys yas-minor-mode-map
-     "TAB" nil
-     "<tab>" nil
-     "M-B" 'yas-expand))
-(eval-after-load "slime"
-  '(ublt/define-keys slime-mode-map
-     "M-TAB"   'auto-complete))
-(eval-after-load "python-mode"
-  '(progn
-     (ublt/define-keys py-mode-map
-       "M-TAB" 'auto-complete)
-     (ublt/define-keys py-shell-map
-       "M-TAB" 'auto-complete)))
+  '(ac-set-trigger-key "M-TAB"))
+
+(ublt/keys "yasnippet" yas-minor-mode-map
+  "TAB" nil
+  "<tab>" nil
+  "M-B" 'yas-expand)
+(ublt/keys "slime" slime-mode-map
+  "M-TAB"   'auto-complete)
+
+(ublt/keys "python-mode" py-mode-map
+  "M-TAB" 'auto-complete)
+(ublt/keys "python-mode" py-shell-map
+  "M-TAB" 'auto-complete)
 
 
 ;;; Error navigation
@@ -544,14 +550,12 @@
           "M-)" 'paredit-forward-slurp-sexp))))
 ;;; XXX starter-kit
 
-(eval-after-load "python-mode"
-  '(ublt/define-keys py-mode-map
-     "{"       'paredit-open-curly
-     "}"       'paredit-close-curly))
-(eval-after-load "js2-mode"
-  '(ublt/define-keys js2-mode-map
-     "{"   'paredit-open-curly
-     "}"   'paredit-close-curly-and-newline))
+(ublt/keys "python-mode" py-mode-map
+  "{"       'paredit-open-curly
+  "}"       'paredit-close-curly)
+(ublt/keys "js2-mode" js2-mode-map
+  "{"   'paredit-open-curly
+  "}"   'paredit-close-curly-and-newline)
 
 
 ;;; Languages with interactive REPL
@@ -566,61 +570,55 @@
 ;; C-M-x
 
 ;;; Talking about bad defaults!!! (These are like 100 times better)
-(eval-after-load "comint"
-  '(ublt/define-keys comint-mode-map
-     "M-p" 'comint-previous-matching-input-from-input
-     "M-n" 'comint-next-matching-input-from-input))
-(eval-after-load "haskell-mode"
-  '(ublt/define-keys haskell-mode-map
-     "C-x C-d" nil))
+(ublt/keys "comint" comint-mode-map
+  "M-p" 'comint-previous-matching-input-from-input
+  "M-n" 'comint-next-matching-input-from-input)
+(ublt/keys "haskell-mode" haskell-mode-map
+  "C-x C-d" nil)
 
-(eval-after-load "lisp-mode"
-  '(progn
-     (ublt/define-keys emacs-lisp-mode-map
-       "C-c C-c" 'eval-defun
-       "C-c C-r" 'eval-region
-       "C-c C-l" 'eval-buffer
-       "C-c C-s" 'ielm)
-     (ublt/define-keys lisp-mode-map
-       "C-c C-s" 'switch-to-lisp)
-     (ublt/define-keys lisp-interaction-mode-map
-       "C-c C-c" 'eval-defun
-       "C-c C-r" 'eval-region
-       "C-c C-l" 'eval-buffer
-       "C-c C-s" 'ielm)))
-(eval-after-load "clojure-mode"
-  '(ublt/define-keys clojure-mode-map
-     "C-c C-s" 'run-lisp))
-(eval-after-load "slime"
-  '(ublt/define-keys slime-mode-map
-     "C-c C-l" 'slime-compile-and-load-file
-     "C-c C-k" 'slime-load-file
-     "C-c v"   'slime-load-file
-     "C-c C-s" 'slime-switch-to-output-buffer))
-(eval-after-load "factor-mode"
-  '(progn
-     (ublt/define-keys factor-mode-map
-       "C-c C-c" 'fuel-eval-definition
-       "C-c C-s" 'run-factor)
-     (ublt/define-keys fuel-mode-map
-       "C-c C-c" 'fuel-eval-definition
-       "C-c C-s" 'run-factor)))
-(eval-after-load "octave-mode"
-  '(ublt/define-keys octave-mode-map
-     "C-c C-c" 'octave-send-defun
-     "C-c C-r" 'octave-send-region
-     "C-c C-s" 'octave-show-process-buffer))
-(eval-after-load "python-mode"
-  '(ublt/define-keys py-mode-map
-     "C-c C-c" 'py-execute-def-or-class ; was py-execute-buffer
-     "C-c C-r" 'py-execute-region       ; was py-shift-region-right
-     "C-c C-l" 'py-execute-buffer       ; was py-shift-region-left
-     "C-c C-s" 'py-shell                ; was py-execute-string
-     "C-c v"   'py-execute-buffer))
-(eval-after-load "sql"
-  '(ublt/define-keys sql-mode-map
-     "C-c C-s" 'sql-product-interactive ; was sql-send-string
-     ))
+(ublt/keys "lisp-mode" emacs-lisp-mode-map
+  "C-c C-c" 'eval-defun
+  "C-c C-r" 'eval-region
+  "C-c C-l" 'eval-buffer
+  "C-c C-s" 'ielm)
+(ublt/keys "lisp-mode" lisp-mode-map
+  "C-c C-s" 'switch-to-lisp)
+(ublt/keys "lisp-mode" lisp-interaction-mode-map
+  "C-c C-c" 'eval-defun
+  "C-c C-r" 'eval-region
+  "C-c C-l" 'eval-buffer
+  "C-c C-s" 'ielm)
+(ublt/keys "clojure-mode" clojure-mode-map
+  "C-c C-s" 'run-lisp)
+(ublt/keys "slime" slime-mode-map
+  "C-c C-l" 'slime-compile-and-load-file
+  "C-c C-k" 'slime-load-file
+  "C-c v"   'slime-load-file
+  "C-c C-s" 'slime-switch-to-output-buffer)
+
+(ublt/keys "factor-mode" factor-mode-map
+  "C-c C-c" 'fuel-eval-definition
+  "C-c C-s" 'run-factor)
+(ublt/keys "factor-mode" fuel-mode-map
+  "C-c C-c" 'fuel-eval-definition
+  "C-c C-s" 'run-factor)
+
+(ublt/keys "octave-mode" octave-mode-map
+  "C-c C-c" 'octave-send-defun
+  "C-c C-r" 'octave-send-region
+  "C-c C-s" 'octave-show-process-buffer)
+
+(ublt/keys "python-mode" py-mode-map
+  "C-c C-c" 'py-execute-def-or-class ; was py-execute-buffer
+  "C-c C-r" 'py-execute-region       ; was py-shift-region-right
+  "C-c C-l" 'py-execute-buffer       ; was py-shift-region-left
+  "C-c C-s" 'py-shell                ; was py-execute-string
+  "C-c v"   'py-execute-buffer)
+
+(ublt/keys "sql" sql-mode-map
+  "C-c C-s" 'sql-product-interactive ; was sql-send-string
+  )
+
 ;;; XXX: Why doesn't this work???
 ;; (eval-after-load "erlang"
 ;;   (add-hook 'erlang-mode-hook
@@ -630,62 +628,53 @@
 ;;                "C-c C-l" 'ublt/erlang-compile-and-display ; was erlang-compile-display
 ;;                "C-c C-s" 'erlang-shell-display ; was erlang-show-syntactic-information
 ;;                ))))
-(eval-after-load "erlang"
-  '(ublt/define-keys erlang-mode-map
-     "C-c C-l" 'ublt/erlang-compile-and-display ; was erlang-compile-display
-     "C-c C-s" 'erlang-shell-display ; was erlang-show-syntactic-information
-     "C-c v"   'erlang-compile))
+(ublt/keys "erlang" erlang-mode-map
+  "C-c C-l" 'ublt/erlang-compile-and-display ; was erlang-compile-display
+  "C-c C-s" 'erlang-shell-display ; was erlang-show-syntactic-information
+  "C-c v"   'erlang-compile)
 
 
 ;;; Other bindings specific to language modes
-(eval-after-load "python-mode"
-  '(progn
-     (ublt/define-keys py-mode-map
-       "M-."    'pylookup-lookup
-       "C-c h"  'pylookup-lookup
-       "'"      'skeleton-pair-insert-maybe)
-     (ublt/define-keys py-shell-map
-       "C-c h"  'pylookup-lookup
-       "s-t"    'pylookup-lookup)))
+(ublt/keys "python-mode" py-mode-map
+  "M-."    'pylookup-lookup
+  "C-c h"  'pylookup-lookup
+  "'"      'skeleton-pair-insert-maybe)
+(ublt/keys "python-mode" py-shell-map
+  "C-c h"  'pylookup-lookup
+  "s-t"    'pylookup-lookup)
 
-(eval-after-load "slime-repl"
-  '(ublt/define-keys slime-repl-mode-map
-     "M-I"   'slime-repl-delete-from-input-history
-     "M-TAB" 'auto-complete
-     "DEL"    nil
-     "M-s"    nil
-     "C-c p" 'slime-repl-set-package
-     "C-c n" 'slime-repl-set-package))
+(ublt/keys "slime-repl" slime-repl-mode-map
+  "M-I"   'slime-repl-delete-from-input-history
+  "M-TAB" 'auto-complete
+  "DEL"    nil
+  "M-s"    nil
+  "C-c p" 'slime-repl-set-package
+  "C-c n" 'slime-repl-set-package)
 
 
 ;;; Misc
 
-(eval-after-load "isearch"
-  '(ublt/define-keys isearch-mode-map
-     "M-o"        'isearch-occur
-     "M-z"        'ublt/zap-to-isearch
-     "C-<return>" 'ublt/isearch-exit-other-end
-     "C-M-w"      'ublt/isearch-yank-symbol))
+(ublt/keys "isearch" isearch-mode-map
+  "M-o"        'isearch-occur
+  "M-z"        'ublt/zap-to-isearch
+  "C-<return>" 'ublt/isearch-exit-other-end
+  "C-M-w"      'ublt/isearch-yank-symbol)
 
-(eval-after-load "dired"
-  '(ublt/define-keys dired-mode-map
-     "M-RET"      'ublt/dired-open-native
-     ;; It makes more sense to search in filenames by default
-     "C-s"        'dired-isearch-filenames-regexp
-     "C-S-s"      'isearch-forward-regexp
-     "C-M-s"      'dired-isearch-filenames
-     "C-M-S-s"    'isearch-forward
-     "M-l"        'move-to-window-line-top-bottom
-     "C-c C-c"    'dired-toggle-read-only))
+(ublt/keys "dired" dired-mode-map
+  "M-RET"      'ublt/dired-open-native
+  ;; It makes more sense to search in filenames by default
+  "C-s"        'dired-isearch-filenames-regexp
+  "C-S-s"      'isearch-forward-regexp
+  "C-M-s"      'dired-isearch-filenames
+  "C-M-S-s"    'isearch-forward
+  "M-l"        'move-to-window-line-top-bottom
+  "C-c C-c"    'dired-toggle-read-only)
 
-(eval-after-load "magit"
-  '(progn
-     (ublt/define-keys magit-mode-map
-       "S-SPC" 'magit-show-item-or-scroll-down
-       )
-     (ublt/define-keys magit-log-edit-mode-map
-       "s-s"     'magit-log-edit-commit
-       "C-x C-s" 'magit-log-edit-commit)))
+(ublt/keys "magit" magit-mode-map
+  "S-SPC" 'magit-show-item-or-scroll-down)
+(ublt/keys "magit" magit-log-edit-mode-map
+  "s-s"     'magit-log-edit-commit
+  "C-x C-s" 'magit-log-edit-commit)
 
 (eval-after-load "ido"
   '(add-hook 'ido-setup-hook
@@ -695,22 +684,17 @@
                  "<down>" 'ido-next-match
                  "<up>"   'ido-prev-match))))
 
-(eval-after-load "info"
-  '(ublt/define-keys Info-mode-map
-     "<kp-delete>" 'Info-scroll-up
-     "S-SPC"       'Info-scroll-down))
+(ublt/keys "info" Info-mode-map
+  "<kp-delete>" 'Info-scroll-up
+  "S-SPC"       'Info-scroll-down)
 
-(eval-after-load "woman"
-  '(ublt/define-keys woman-mode-map
-     "<kp-delete>" 'scroll-up
-     "S-SPC"       'scroll-down))
+(ublt/keys "woman" woman-mode-map
+  "<kp-delete>" 'scroll-up
+  "S-SPC"       'scroll-down)
 
 ;;; XXX: Why not working?
-(eval-after-load "twittering-mode"
-  '(ublt/define-keys twittering-mode-map
-     "S-SPC" 'twittering-scroll-down))
-;; (ublt/custom-keys "twittering-mode" twittering-mode-map
-;;   "S-SPC" 'twittering-scroll-down)
+(ublt/keys "twittering-mode" twittering-mode-map
+  "S-SPC" 'twittering-scroll-down)
 
 ;; NTA XXX: Their "yank" variations are not as good
 (eval-after-load "ess-mode"

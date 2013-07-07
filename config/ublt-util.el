@@ -30,6 +30,7 @@
                `(lambda () (,minor-mode-fn -1))
                ublt/off-fns))))
 
+
 ;; To help separating OS-specific stuffs
 (defmacro ublt/in (systems &rest body)
   "Run BODY if `system-type' is in the list of SYSTEMS."
@@ -54,6 +55,9 @@
          (message "Feature `%s' failed" feature)
          nil))
     (require feature filename)))
+
+
+
 (defmacro ublt/set-up (feature &rest body)
   "Try loading the feature, running BODY afterward, notifying
 user if not found. This is mostly for my customizations, since I
@@ -65,7 +69,12 @@ files."
      (when (ublt/require f nil t)
        ,@body)))
 
-
+;; TODO: Isn't this about appearance?
+(font-lock-add-keywords
+ 'emacs-lisp-mode
+ '(("\\<ublt/in\\>" . font-lock-keyword-face)
+   ("\\<ublt/set-up\\>" . font-lock-keyword-face)
+   ("\\<ublt/set-up *\\(.*\\)\\>" 1 font-lock-constant-face)) 'append)
 
 
 (defun ublt/status-message (&rest args)
