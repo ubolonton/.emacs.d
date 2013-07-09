@@ -53,6 +53,7 @@
 ;; (add-hook 'org-mode-hook 'esk-local-column-number-mode)
 (require 'org-install)
 (require 'remember)
+(require 'org-remember)
 (org-remember-insinuate)
 (require 'ob-scheme)
 
