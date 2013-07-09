@@ -510,6 +510,8 @@
          ;; Parentheses dimming in Lisp modes
          (esk-paren-face
           ((t ,dimmed)))
+         (sp-show-pair-match-face
+          ((t (:inherit show-paren-match))))
 
          ;; flyspell
          (flyspell-incorrect
