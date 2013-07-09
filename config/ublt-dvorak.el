@@ -420,16 +420,16 @@
   "C-y" nil)
 (ublt/keys "evil" evil-outer-text-objects-map
   "d" 'evil-a-defun
-  "S" 'evil-a-symbol)
-(ublt/keys "evil" evil-inner-text-objects-map
-  "d" 'evil-inner-defun
-  "S" 'evil-inner-symbol
-  "*" 'evil-inner-symbol
-  )
-(ublt/keys "evil" evil-outer-text-objects-map
-  "d" 'evil-a-defun
+  "t" 'evil-an-sgml-tag
+  "T" 'evil-a-tag
   "S" 'evil-a-symbol
   "*" 'evil-a-symbol)
+(ublt/keys "evil" evil-inner-text-objects-map
+  "T" 'evil-inner-tag)
+;; (ublt/keys "evil" evil-inner-text-objects-map
+;;   "d" 'evil-inner-defun
+;;   "S" 'evil-inner-symbol
+;;   "*" 'evil-inner-symbol)
 
 
 ;;; Helm
