@@ -246,7 +246,7 @@
   "M-7"           'ublt/toggle-cua-rect
   "M-8"           'ublt/cycle-prose-region
   "M-9"           'mark-enclosing-sexp
-  "M-0"           'ublt/cycle-code-region
+  "M-0"           'cycle-thing-region
 
   ;; TODO: more pervasive
   "C-a"           'ublt/back-to-indentation-or-line-beginning
