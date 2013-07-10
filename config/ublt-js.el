@@ -20,6 +20,7 @@
 ;; (setq js-mode-hook '())
 ;; (setq flymake-jslint-command "jslint")
 
+;;; TODO: Buffer-local/dir-local config for jshint
 
 (eval-after-load "js2-mode"
   '(progn
@@ -61,12 +62,13 @@
 (eval-after-load "flymake"
   '(progn
      (ublt/set-up 'flymake-jshint
+       ;; FIX: Somehow this does not work now?
        (setq jshint-configuration-path "~/.jshint.json")
 
        (defun ublt/flymake-js-maybe-enable ()
          (when (and buffer-file-name
                     (string-match "\\.js$" buffer-file-name))
-           (flymake-mode +1)))
+           (flymake-jshint-load)))
        (remove-hook 'js-mode-hook 'flymake-mode)
        (add-hook 'js-mode-hook 'ublt/flymake-js-maybe-enable))))
 
