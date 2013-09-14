@@ -22,7 +22,8 @@
      (add-to-list 'slime-lisp-implementations
                   '(sbcl ("sbcl")))
      ;; (ad-activate 'slime-read-interactive-args)
-     ))
+
+     (setq slime-repl-history-file "~/.emacs.d/.slime-repl.hist")))
 
 
 ;;;; clojure settings ------------------
@@ -90,7 +91,8 @@
   (durendal-enable)
 
   (setq durendal-auto-compile? nil)
-  )
+
+  (add-hook 'nrepl-mode-hook 'ublt/slime-repl-clojure-font-lock))
 
 (ublt/set-up "clojurescript-mode"
 ;;; XXX: Make this customizable
@@ -101,13 +103,24 @@
 
 ;;;; ielm settings ---------------
 (add-hook 'ielm-mode-hook 'enable-paredit-mode)
+(add-hook 'ielm-mode-hook
+          (lambda () (setq comint-input-ring-file-name "~/.emacs.d/.ielm-input.hist")))
 
 ;; ac-slime
-(require 'ac-slime)
-(add-hook 'slime-mode-hook 'set-up-slime-ac)
-(add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
+(ublt/set-up 'ac-slime
+  (add-hook 'slime-mode-hook 'set-up-slime-ac)
+  (add-hook 'slime-repl-mode-hook 'set-up-slime-ac))
 
-(require 'hippie-expand-slime)
+(ublt/set-up 'hippie-expand-slime)
+
+;;; TODO: `ublt/set-up' should accept a list of features
+(ublt/set-up 'nrepl
+  (ublt/set-up 'ac-nrepl
+    (add-hook 'nrepl-mode-hook 'ac-nrepl-setup)
+    (add-hook 'nrepl-interaction-mode-hook 'ac-nrepl-setup)
+    (add-hook 'nrepl-mode-hook 'enable-paredit-mode t)
+    (add-to-list 'ac-modes 'nrepl-mode)
+    (setq nrepl-history-file "~/.emacs.d/.nrepl.hist")))
 
 ;; (add-to-list 'auto-mode-alist '("\\.cljs$" . clojurescript-mode))
 
