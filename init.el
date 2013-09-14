@@ -216,6 +216,8 @@
 
 (setq bookmark-default-file "~/.emacs.d/.bookmarks")
 
+(setq recentf-save-file "~/.emacs.d/.recentf" )
+
 ;; TextMate minor mode
 (require 'textmate)
 ;; (textmate-mode)
