@@ -42,7 +42,7 @@
          clojure-mode clojurescript-mode durendal swank-clojure nrepl
          elisp-slime-nav
          js2-mode flymake-jshint
-         php-mode flymake-php
+         php-mode php-boris flymake-php
          emmet-mode                          ; html/css editing
          ;; Starter kit
          starter-kit starter-kit-bindings starter-kit-eshell

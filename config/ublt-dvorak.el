@@ -573,11 +573,11 @@
 
 ;; In source buffer (c r l are adjacent on Dvorak!!!):
 ;; C-c C-c  ; eval top-level expression at point
-;; C-c C-r                                 ; eval region
+;; C-c C-r  ; eval region
 ;; C-c C-l  ; eval buffer/file
 ;; C-c C-k  ; eval buffer/file (current)
 ;; C-c v    ; eval buffer/file (current)
-;; C-c C-s                                 ; go to REPL
+;; C-c C-s  ; go to REPL
 ;;; TODO:
 ;; C-M-x    ; eval top-level expression at point
 
@@ -699,9 +699,9 @@
 (eval-after-load "ido"
   '(progn
      (defun ublt/set-up-ido-keymaps ()
-               (ublt/define-keys ido-completion-map
-                 "<tab>"  'ido-complete
-                 "<down>" 'ido-next-match
+       (ublt/define-keys ido-completion-map
+         "<tab>"  'ido-complete
+         "<down>" 'ido-next-match
          "<up>"   'ido-prev-match
          "M-w"    'ido-fallback
          ;; Select first decide where to do later

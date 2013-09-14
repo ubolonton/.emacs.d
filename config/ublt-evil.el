@@ -40,7 +40,9 @@
                   magit-log-edit-mode erlang-shell-mode
                   dired-mode inferior-moz-mode inferior-octave-mode
                   inferior-ess-mode
-                  grep-mode pylookup-mode))
+                  grep-mode pylookup-mode
+                  nrepl-mode
+                  php-boris-mode))
     (add-to-list 'evil-insert-state-modes mode))
 
   (dolist (mode '())
@@ -49,10 +51,13 @@
   ;; REPL modes: go to prompt on switching to insert mode
   (defun ublt/repl-goto-prompt ()
     (when (member major-mode
-                  '(eshell-mode sql-interactive-mode
-                                erlang-shell-mode slime-repl-mode
-                                inferior-moz-mode inferior-octave-mode
-                                inferior-emacs-lisp-mode))
+                  '(eshell-mode
+                    sql-interactive-mode
+                    erlang-shell-mode slime-repl-mode
+                    inferior-moz-mode inferior-octave-mode
+                    inferior-emacs-lisp-mode
+                    nrepl-mode
+                    php-boris-mode))
       (goto-char (point-max))))
   (add-hook 'evil-insert-state-entry-hook 'ublt/repl-goto-prompt)
 
