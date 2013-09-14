@@ -106,4 +106,8 @@
          :publishing-directory "/home/ubolonton/.emacs.d/lib/o-blog/example/out"))
       org-export-htmlize-output-type 'css)
 
+(require 'org-compat)
+(require 'ob-exp)
+(require 'ox)
+
 (provide 'ublt-organization)
