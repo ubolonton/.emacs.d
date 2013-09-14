@@ -118,6 +118,9 @@
       eproject-todo-expressions '("TODO" "XXX" "FIX" "FIXME" "HACK" "NTA"))
 (require 'eproject-ido-imenu)
 
+(ublt/set-up 'projectile
+  (projectile-global-mode +1))
+
 ;;; Misc customization
 ;;; TODO: add case toggling
 
