@@ -95,7 +95,7 @@
     ;; Whitespace
     (cyan-1      "#66CDAA" "#5FD7AF")         ; aquamarine3
     ;; Mode line, link
-    (cyan-2      "#89A1F3" "#87AFFF")
+    (cyan-2      "#7991E3" "#87AFFF")
 
     (blue        "#0000cc" "#0000ff")
     ;; Bult-in, constant
