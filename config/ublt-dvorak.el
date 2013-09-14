@@ -99,8 +99,6 @@
   "s-Z"    "M-_"                        ; ↻ redo
   "s-a"    "C-x h"                      ;   mark all
 
-  "s-C"    'ublt/duplicate-line
-
   ;; XXX: ⬅➡ WTF Unicode. There's no RIGHTWARDS BLACK ARROW
   ;; Movement keys (right hand)
   "M-c"    "<up>"                       ; ⬆
@@ -155,6 +153,8 @@
   "s-r"    "C-x r"
   "s-R"    "C-x r j"
 
+  "s-P"    "C-c p"
+
   "M-f"    "<escape>"                   ; use evil-mode
   )
 
@@ -166,6 +166,8 @@
 
   "M-w"           'whole-line-or-region-kill-ring-save
   "C-y"           'whole-line-or-region-yank
+
+  "s-C"           'ublt/duplicate-line
 
   ;; Line/region movement
   "M-s-h"         'textmate-shift-left
@@ -196,7 +198,6 @@
   "s-M"           'ace-jump-char-mode
   ;; "s-r"           'org-remember
   ;; "s-R"           'org-agenda
-
   "s-h"           'ido-switch-buffer
   "s-n"           'ublt/switch-to-last-buffer
   "s-b"           'ublt/browse-url-at-point
@@ -205,6 +206,7 @@
   "s-<return>"    'ublt/toggle-fullscreen
   "s-/"           'find-file-in-project
   "s-\\"          'align-regexp
+  "s-i"           'ido-imenu
 
   ;; These should be translated
   "s-["           'backward-page   "s-]" 'forward-page
@@ -567,14 +569,22 @@
 
 ;;; Languages with interactive REPL
 ;;; TODO: sql, ruby, factor, haskell, octave
-;;; For mode with a REPL: lisps, python, js (c r l are adjacent on Dvorak!!!):
-;; C-c C-c                                 ; eval defun
+;;; For mode with a REPL: lisps, python, js
+
+;; In source buffer (c r l are adjacent on Dvorak!!!):
+;; C-c C-c  ; eval top-level expression at point
 ;; C-c C-r                                 ; eval region
-;; C-c C-l                                 ; eval buffer
-;; C-c v                                   ; eval buffer
+;; C-c C-l  ; eval buffer/file
+;; C-c C-k  ; eval buffer/file (current)
+;; C-c v    ; eval buffer/file (current)
 ;; C-c C-s                                 ; go to REPL
 ;;; TODO:
-;; C-M-x
+;; C-M-x    ; eval top-level expression at point
+
+;; In REPL buffer
+;; M-n      ; previous input matching current
+;; M-p      ; next input matching current
+
 
 ;;; Talking about bad defaults!!! (These are like 100 times better)
 (ublt/keys "comint" comint-mode-map
@@ -602,6 +612,9 @@
   "C-c C-k" 'slime-load-file
   "C-c v"   'slime-load-file
   "C-c C-s" 'slime-switch-to-output-buffer)
+(ublt/keys 'nrepl nrepl-interaction-mode-map
+  "C-c v"   'nrepl-load-current-buffer
+  "C-c C-s" 'nrepl-switch-to-repl-buffer)
 
 (ublt/keys "factor-mode" factor-mode-map
   "C-c C-c" 'fuel-eval-definition
@@ -684,12 +697,18 @@
   "C-x C-s" 'magit-log-edit-commit)
 
 (eval-after-load "ido"
-  '(add-hook 'ido-setup-hook
-             (lambda ()
+  '(progn
+     (defun ublt/set-up-ido-keymaps ()
                (ublt/define-keys ido-completion-map
                  "<tab>"  'ido-complete
                  "<down>" 'ido-next-match
-                 "<up>"   'ido-prev-match))))
+         "<up>"   'ido-prev-match
+         "M-w"    'ido-fallback
+         ;; Select first decide where to do later
+         "s-2"    'ido-invoke-in-vertical-split
+         "s-3"    'ido-invoke-in-horizontal-split
+         "s-w"    'ido-invoke-in-other-window))
+     (add-hook 'ido-setup-hook 'ublt/set-up-ido-keymaps)))
 
 (ublt/keys "info" Info-mode-map
   "<kp-delete>" 'Info-scroll-up
