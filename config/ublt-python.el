@@ -13,7 +13,7 @@
 
 (require 'ipython)
 (setq-default py-python-command "ipython"
-              py-python-command-args (list "-colors" "Linux"))
+              py-python-command-args (list "--colors" "Linux"))
 (setq ipython-completion-command-string
       "print(';'.join(__IP.Completer.all_completions('%s')))\n")
 
