@@ -36,3 +36,13 @@ history
 /elpa
 /.savehist
 /.saveplace
+/.bookmarks
+/.edbi-ds-history
+/.emacs.desktop
+/.emacs.desktop.lock
+/.emms-cache
+/.ido.last
+/.mc-lists.el
+/.nrepl.hist
+/.recentf
+/.slime-repl.hist
