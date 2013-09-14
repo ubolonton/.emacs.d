@@ -71,6 +71,7 @@
                 org-mode-hook
                 markdown-mode-hook
                 html-mode-hook
+                dired-mode-hook
                 ))
   (add-hook hook (ublt/on-fn 'variable-pitch-mode)))
 (defun ublt/variable-pitch-if-fundamental ()
