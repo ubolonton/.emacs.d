@@ -37,6 +37,10 @@
   '(ublt/set-up 'flymake-php
      (add-hook 'php-mode-hook 'flymake-php-load)))
 
+(eval-after-load "ruby-mode"
+  '(ublt/set-up 'flymake-ruby
+     (add-hook 'ruby-mode-hook 'flymake-ruby-load)))
+
 
 (dolist (hook '(emacs-lisp-mode-hook))
   (add-hook hook (ublt/on-fn 'flymake-mode)))
