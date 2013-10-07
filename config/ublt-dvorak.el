@@ -191,8 +191,11 @@
   "s-W"           'ublt/swap-windows
 
   ;; Utilities, super-
+  "s-i"           'ido-imenu
   "s-d"           'helm-command-prefix
   "s-D"           'eproject-ido-imenu
+  "s-h"           'ido-switch-buffer
+  "s-H"           'ublt/helm
   "s-f"           'helm-occur
   "s-F"           'helm-do-grep
   "s-g"           'magit-status
@@ -201,7 +204,6 @@
   "s-M"           'ace-jump-char-mode
   ;; "s-r"           'org-remember
   ;; "s-R"           'org-agenda
-  "s-h"           'ido-switch-buffer
   "s-n"           'ublt/switch-to-last-buffer
   "s-b"           'ublt/browse-url-at-point
   "s-p"           'pop-global-mark
@@ -209,7 +211,6 @@
   "s-<return>"    'ublt/toggle-fullscreen
   "s-/"           'find-file-in-project
   "s-\\"          'align-regexp
-  "s-i"           'ido-imenu
 
   ;; These should be translated
   "s-["           'backward-page   "s-]" 'forward-page
