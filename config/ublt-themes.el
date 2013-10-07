@@ -344,6 +344,8 @@
           ((t (:inherit mode-line))))
          (which-func
           ((t (:foreground ,red-2 :height 1.1 :bold t))))
+         (anzu-mode-line
+          ((t (:foreground ,red-2 :weight bold))))
 
          ;; dired, dired+
          (diredp-file-name

@@ -558,4 +558,7 @@
 (ublt/set-up 'volatile-highlights
   (volatile-highlights-mode +1))
 
+(ublt/set-up 'anzu
+  (global-anzu-mode +1))
+
 (provide 'ublt-appearance)

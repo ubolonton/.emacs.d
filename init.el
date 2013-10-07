@@ -17,16 +17,22 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 (defvar ublt/packages
-  '(smex auto-complete ac-slime ido-ubiquitous yasnippet emms helm
-         org textmate paredit undo-tree whole-line-or-region
+  '(smex auto-complete ac-slime yasnippet
+         org textmate undo-tree whole-line-or-region
          ace-jump-mode htmlize twittering-mode keyfreq
-         scpaste
+         helm ido-ubiquitous            ; List-narrowing UI
+         emms                           ; Music
+         paredit                        ; Structural editing with ()[]{}
+         scpaste                        ; Publish highlighted code fragments
          exec-path-from-shell           ; Uhm, f*ck shell
-         info+ pabbrev
+         anzu                           ; Match count for search
+         info+
+         pabbrev                        ; TODO: Find better alternative
          ;; Vim emulation
          evil surround
          ;; Appearance
-         color-theme rainbow-mode page-break-lines diminish ;; whitespace
+         color-theme rainbow-mode page-break-lines  ;; whitespace
+         diminish                       ; Mode names => symbols
          highlight highlight-symbol hl-line+ idle-highlight-mode volatile-highlights
          ;; Don't actually use these themes, just to learn some ideas
          color-theme-solarized zenburn
