@@ -11,7 +11,7 @@
   (let* ((fonts (case system-type
                   ('darwin '("DejaVu Sans Mono-14" "Menlo-14" "Monaco-14"
                              "Consolas-15"))
-                  ('gnu/linux '("DejaVu Sans Mono-10" "Inconsolata-12"))
+                  ('gnu/linux '("Inconsolata-12" "Fira Mono-11"))
                   (t '("Courier New-12" "Arial-12"))))
          (cur-pos (get this-command 'pos))
          (N (length fonts))
@@ -56,7 +56,10 @@
 ;; Non-code text reads better in proportional font
 (when (member window-system '(x ns w32))
   (set-face-font 'variable-pitch (case system-type
-                                   ('gnu/linux "DejaVu Sans 11")
+                                   ;; ('gnu/linux "Fira Sans-12")
+                                   ('gnu/linux "Fira Sans light-13")
+                                   ;; ('gnu/linux "DejaVu Sans-11")
+                                   ;; ('gnu/linux "Helvetica")
                                    ('darwin "Helvetica-16")
                                    (t "Arial"))))
 (dolist (hook '(erc-mode-hook

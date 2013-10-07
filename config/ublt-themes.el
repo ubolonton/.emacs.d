@@ -189,7 +189,7 @@
            (reference    `(:foreground ,blue-2))
 
            (dimmed-hl    `(:background ,bg+1))
-           (normal-hl    `(:background ,bg+2 :weight normal))
+           (normal-hl    `(:background ,bg+2 :weight light))
            (strong-hl    `(:background ,bg+3))
            (special-hl   `(:background ,blue-3))
 
@@ -223,7 +223,8 @@
          ((ibus-cursor-color . (,green ,yellow ,yellow)))
 
          (default ((t (,@fw :background ,bg :foreground ,fg))))
-         (variable-pitch ((t (,@vw :height 110 :background ,bg :foreground ,fg))))
+         ;; FIX: Height should be font-dependent in general
+         (variable-pitch ((t (,@vw :height 130 :background ,bg :foreground ,fg))))
 
          (border-glyph ((t (nil))))     ; What's this?
          (buffers-tab ((t (:background ,bg :foreground ,fg)))) ; What's this?
