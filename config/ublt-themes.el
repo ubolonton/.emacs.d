@@ -297,7 +297,7 @@
          (left-margin ((t (nil))))
          (toolbar ((t (nil))))
          (fringe ((t (,@context ,@dimmed-hl))))
-         (link ((t (,@portal :underline t))))
+         (link ((t (,@portal :underline ,bg+3))))
          (match ((t ,strong-hl)))
          (escape-glyph                  ; Special characters
           ((t (,@prompt :bold t))))     ; TODO
@@ -462,7 +462,7 @@
          (org-hide
           ((t (:foreground ,bg))))
          (org-code
-          ((t (:foreground ,fg-2))))    ; TODO
+          ((t (:inherit font-lock-builtin-face))))    ; TODO
          (org-meta-line
           ((t (,@fw ,@context))))
          (org-mode-line-clock
