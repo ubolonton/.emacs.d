@@ -169,6 +169,9 @@
 
   "s-C"           'ublt/duplicate-line
 
+  "C-_"           'undo-tree-undo
+  "M-_"           'undo-tree-redo
+
   ;; Line/region movement
   "M-s-h"         'textmate-shift-left
   "M-s-n"         'textmate-shift-right
