@@ -326,8 +326,6 @@
 
 (ublt/add-path "slime")
 (ublt/add-path "slime/contrib")
-(ublt/add-path "swank-clojure-extra")
-(ublt/add-path "ac-slime")
 (require 'ublt-lisp)
 
 
