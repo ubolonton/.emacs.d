@@ -522,6 +522,7 @@
 ;;; NTA FIX: This is because flymake doesn't have its own map
 (dolist (fms '(("js" js-mode-map)
                ("python-mode" py-mode-map)
+               ("python-mode" python-mode-map)
                ("php-mode" php-mode-map)
                ("lisp-mode" emacs-lisp-mode-map)
                ("erlang" erlang-mode-map)
