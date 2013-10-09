@@ -20,7 +20,8 @@
   '(smex auto-complete ac-slime yasnippet
          org textmate undo-tree whole-line-or-region
          ace-jump-mode htmlize twittering-mode keyfreq
-         helm ido-ubiquitous            ; List-narrowing UI
+         ido-ubiquitous                 ; List-narrowing UI
+         helm helm-cmd-t
          emms                           ; Music
          paredit                        ; Structural editing with ()[]{}
          scpaste                        ; Publish highlighted code fragments

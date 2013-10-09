@@ -16,8 +16,9 @@
       helm-candidate-separator "────────────────────────────────────────────────────────────────────────────────"
       ;; So C-w put the current symbol in helm's prompt
       helm-yank-symbol-first t)
-(setq ublt/helm-sources
-      '(;; helm-c-source-ffap-line
+
+(defun ublt/helm-sources ()
+  (let ((base '( ;; helm-c-source-ffap-line
         ;; helm-c-source-ffap-guesser
         helm-source-buffers-list
         helm-source-ido-virtual-buffers
@@ -25,12 +26,15 @@
         helm-source-pp-bookmarks
         helm-source-recentf
         helm-source-file-cache
-        helm-source-locate)
+                helm-source-locate
       ;; Additions
       ;; helm-c-source-semantic
       ;; helm-c-source-git-project-files
       ;; helm-c-source-emacs-process
-      )
+                )))
+    (if (featurep 'helm-cmd-t)
+        (cons (helm-cmd-t-get-create-source (helm-cmd-t-root-data)) base)
+      base)))
 
 (dolist (pattern '("\\.pyc$" "\\.elc$"))
   (add-to-list 'helm-boring-file-regexp-list pattern))
@@ -41,7 +45,7 @@
 
 (defun ublt/helm ()
   (interactive)
-  (helm-other-buffer ublt/helm-sources "*ublt/helm*"))
+  (helm-other-buffer (ublt/helm-sources) "*ublt/helm*"))
 
 ;; TODO: Turn on follow-mode by default for helm-occur
 
@@ -91,5 +95,8 @@ all of the sources."
         (setq line-spacing 0.6)
         (text-scale-increase 1))
     (error nil)))
+
+(ublt/set-up 'helm-cmd-t
+  (add-to-list 'ublt/helm-sources 'helm-c-source-cmd-t-caches))
 
 (provide 'ublt-helm)
