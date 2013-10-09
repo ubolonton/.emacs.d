@@ -406,6 +406,9 @@
          (slime-repl-prompt-face
           ((t ,commitment)))
 
+         (nrepl-input-face
+          ((t (:background ,bg+2))))
+
          ;; Auto-complete & popup
          (ac-completion-face
           ((t (,@dimmed-hl :foreground ,fg-2 :slant normal :weight normal))))
