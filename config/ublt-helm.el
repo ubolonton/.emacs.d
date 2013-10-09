@@ -19,18 +19,18 @@
 
 (defun ublt/helm-sources ()
   (let ((base '( ;; helm-c-source-ffap-line
-        ;; helm-c-source-ffap-guesser
-        helm-source-buffers-list
-        helm-source-ido-virtual-buffers
-        ;; helm-source-files-in-current-dir ; use ido
-        helm-source-pp-bookmarks
-        helm-source-recentf
-        helm-source-file-cache
+                ;; helm-c-source-ffap-guesser
+                helm-source-buffers-list
+                helm-source-ido-virtual-buffers
+                ;; helm-source-files-in-current-dir ; use ido
+                helm-source-pp-bookmarks
+                helm-source-recentf
+                helm-source-file-cache
                 helm-source-locate
-      ;; Additions
-      ;; helm-c-source-semantic
-      ;; helm-c-source-git-project-files
-      ;; helm-c-source-emacs-process
+                ;; Additions
+                ;; helm-c-source-semantic
+                ;; helm-c-source-git-project-files
+                ;; helm-c-source-emacs-process
                 )))
     (if (featurep 'helm-cmd-t)
         (cons (helm-cmd-t-get-create-source (helm-cmd-t-root-data)) base)
@@ -41,7 +41,7 @@
 
 ;;; Quote the the search string
 (ublt/in '(gnu/linux)
-  (setq helm-locate-command "locate %s -r '%s'"))
+  (setq helm-locate-command "locate %s -r %s"))
 
 (defun ublt/helm ()
   (interactive)
@@ -95,6 +95,15 @@ all of the sources."
         (setq line-spacing 0.6)
         (text-scale-increase 1))
     (error nil)))
+
+;;; FIX: Does not work
+;; (defun ublt/helm-exit-minibuffer-other-window ()
+;;   (interactive)
+;;   ;; (helm-quit-and-execute-action 'other-window)
+;;   (with-helm-window
+;;     (other-window 1)
+;;     (call-interactively 'helm-exit-minibuffer))
+;;   )
 
 (ublt/set-up 'helm-cmd-t
   (add-to-list 'ublt/helm-sources 'helm-c-source-cmd-t-caches))
