@@ -22,7 +22,7 @@
     (font-lock-mode +1))
   (durendal-enable)
   (setq durendal-auto-compile? nil)
-  (add-hook 'nrepl-mode-hook 'ublt/repl-clojure-font-lock))
+  (add-hook 'nrepl-repl-mode-hook 'ublt/repl-clojure-font-lock))
 
 (ublt/set-up "clojurescript-mode"
   ;; XXX: Make this customizable
@@ -38,10 +38,14 @@
 
 ;;; TODO: `ublt/set-up' should accept a list of features
 (ublt/set-up 'nrepl
+  (setq nrepl-popup-stacktraces nil
+        nrepl-popup-stacktraces-in-repl t
+        nrepl-use-pretty-printing t
+        nrepl-wrap-history t)
   (ublt/set-up 'ac-nrepl
-    (add-hook 'nrepl-mode-hook 'ac-nrepl-setup)
+    (add-hook 'nrepl-repl-mode-hook 'ac-nrepl-setup)
     (add-hook 'nrepl-interaction-mode-hook 'ac-nrepl-setup)
-    (add-hook 'nrepl-mode-hook 'enable-paredit-mode t)
+    (add-hook 'nrepl-repl-mode-hook 'enable-paredit-mode t)
     (add-to-list 'ac-modes 'nrepl-mode)
     (setq nrepl-history-file "~/.emacs.d/.nrepl.hist")))
 

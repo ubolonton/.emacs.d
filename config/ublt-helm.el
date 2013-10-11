@@ -27,6 +27,7 @@
                 helm-source-recentf
                 helm-source-file-cache
                 helm-source-locate
+                ;; helm-c-source-cmd-t-caches
                 ;; Additions
                 ;; helm-c-source-semantic
                 ;; helm-c-source-git-project-files
@@ -35,6 +36,8 @@
     (if (featurep 'helm-cmd-t)
         (cons (helm-cmd-t-get-create-source (helm-cmd-t-root-data)) base)
       base)))
+
+(ublt/set-up 'helm-cmd-t)
 
 (dolist (pattern '("\\.pyc$" "\\.elc$"))
   (add-to-list 'helm-boring-file-regexp-list pattern))
@@ -104,8 +107,5 @@ all of the sources."
 ;;     (other-window 1)
 ;;     (call-interactively 'helm-exit-minibuffer))
 ;;   )
-
-(ublt/set-up 'helm-cmd-t
-  (add-to-list 'ublt/helm-sources 'helm-c-source-cmd-t-caches))
 
 (provide 'ublt-helm)

@@ -48,7 +48,7 @@
 
 (ublt/set-up 'erc
   (setq erc-autojoin-channels-alist
-        '(("freenode.net" "#emacs" "#conkeror" "#clojure" "#concatenative")
+        '(("freenode.net" "#emacs" "#conkeror" "#clojure" "#concatenative" "#lisp")
           ("cogini.org" "#cogini"))
         erc-nick "ubolonton"
 

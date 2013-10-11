@@ -444,6 +444,7 @@
   "s-<return> " 'minibuffer-keyboard-quit
   "C-x h"       'helm-toggle-all-marks
   "C-f"         'helm-follow-mode
+  ;; "s-w"         'ublt/helm-exit-minibuffer-other-window
   )
 (ublt/keys "helm-config" helm-command-map
   "s-r" 'helm-emms
@@ -522,7 +523,7 @@
 ;;; NTA FIX: This is because flymake doesn't have its own map
 (dolist (fms '(("js" js-mode-map)
                ("python-mode" py-mode-map)
-               ("python-mode" python-mode-map)
+               ;; ("python-mode" python-mode-map)
                ("php-mode" php-mode-map)
                ("lisp-mode" emacs-lisp-mode-map)
                ("erlang" erlang-mode-map)

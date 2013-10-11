@@ -42,7 +42,7 @@
                   inferior-ess-mode
                   grep-mode pylookup-mode
                   inferior-lisp-mode
-                  nrepl-mode
+                  nrepl-mode nrepl-repl-mode
                   php-boris-mode))
     (add-to-list 'evil-insert-state-modes mode))
 
@@ -58,7 +58,7 @@
                     inferior-moz-mode inferior-octave-mode
                     inferior-emacs-lisp-mode
                     inferior-lisp-mode
-                    nrepl-mode
+                    nrepl-mode nrepl-repl-mode
                     php-boris-mode))
       (goto-char (point-max))))
   (add-hook 'evil-insert-state-entry-hook 'ublt/repl-goto-prompt)

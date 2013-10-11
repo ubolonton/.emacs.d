@@ -32,6 +32,6 @@
        ad-do-it)))
 
 ;; git-emacs (some complementary features)
-(require 'git-emacs)
+;; (require 'git-emacs)
 
 (provide 'ublt-git)

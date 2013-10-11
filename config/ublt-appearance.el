@@ -11,7 +11,7 @@
   (let* ((fonts (case system-type
                   ('darwin '("DejaVu Sans Mono-14" "Menlo-14" "Monaco-14"
                              "Consolas-15"))
-                  ('gnu/linux '("Inconsolata-12" "Fira Mono-11"))
+                  ('gnu/linux '("Inconsolata-12" "Fira Mono-11" "DejaVu Sans Mono-10"))
                   (t '("Courier New-12" "Arial-12"))))
          (cur-pos (get this-command 'pos))
          (N (length fonts))

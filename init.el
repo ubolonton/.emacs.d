@@ -2,7 +2,7 @@
 (require 'ublt-util)
 
 (when (ublt/legacy?)
- (load-file "~/.emacs.d/emacs23/package.el"))
+  (load-file "~/.emacs.d/emacs23/package.el"))
 
 ;;; Emacs is not a text editor, and here we load its package manager!
 (require 'package)
@@ -106,6 +106,7 @@
 
 ;;; General usability
 (require 'ublt-dvorak)
+(ublt/add-path "powerline")
 (require 'ublt-appearance)
 (require 'ublt-navigation)
 (require 'ublt-editing)
@@ -124,7 +125,7 @@
 (setq eproject-completing-read-function 'eproject--ido-completing-read
       eproject-todo-expressions '("TODO" "XXX" "FIX" "FIXME" "HACK" "NTA"))
 (require 'eproject-ido-imenu)
-
+
 (ublt/set-up 'projectile
   (projectile-global-mode +1))
 
@@ -173,9 +174,9 @@
   (add-to-list 'desktop-modes-not-to-save 'highlight-parentheses-mode))
 ;; Ask user whether to restore desktop at start-up
 (add-hook 'after-init-hook 'ublt/session-restore t)
-(eval-after-load "desktop"
-  '(setq desktop-restore-eager 100
-         desktop-lazy-idle-delay 3))
+;; (eval-after-load "desktop"
+;;   '(setq desktop-restore-eager 100
+;;          desktop-lazy-idle-delay 3))
 
 ;; Use IBus for input method `http://www.emacswiki.org/emacs/IBusMode'
 ;; Gần được nhưng hầu hết các font fixed-width không hiện được một số chữ
@@ -296,16 +297,17 @@
 ;; Factor
 (condition-case err
     (progn
-(ublt/in '(darwin)
-  (load-file "/Applications/factor/misc/fuel/fu.el"))
-(ublt/in '(gnu/linux)
+      (ublt/in '(darwin)
+        (load-file "/Applications/factor/misc/fuel/fu.el"))
+      (ublt/in '(gnu/linux)
         (load-file "~/Programming/factor/misc/fuel/fu.el")))
   (error (message "No Factor")))
 
+
 ;; Haskell
 (ublt/set-up 'haskell-mode
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+  (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+  (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
   (add-to-list 'auto-mode-alist '("\\.hs$" . haskell-mode)))
 ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
@@ -321,10 +323,12 @@
 
 (ublt/set-up 'less-css-mode
   (add-hook 'less-css-mode-hook 'esk-prog-mode-hook)
-  (add-hook 'less-css-mode-hook 'enable-paredit-mode))
+  ;; (add-hook 'less-css-mode-hook 'enable-paredit-mode)
+  )
 (ublt/set-up 'css-mode
   (add-hook 'css-mode-hook 'esk-prog-mode-hook)
-  (add-hook 'css-mode-hook 'enable-paredit-mode))
+  ;; (add-hook 'css-mode-hook 'enable-paredit-mode)
+  )
 
 (add-to-list 'auto-mode-alist '("\\.m$" . octave-mode))
 (add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
@@ -403,7 +407,7 @@
 
 (setq custom-file "~/.emacs.d/custom.el")
 (condition-case err
-(load custom-file)
+    (load custom-file)
   (error (message "Error loading custom file")))
 
 ;; Interops (with Terminal, Conkeror...) -----------------------------

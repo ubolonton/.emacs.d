@@ -166,4 +166,8 @@ and source-file directory for your debugger."
  :doc-spec
  '(("(python)Index" nil "")))
 
+;;; TODO: Remove pymacs/ropemacs/ropemode?
+;; (ublt/set-up 'jedi
+;;   (add-hook 'python-mode-hook 'jedi:setup))
+
 (provide 'ublt-python)
