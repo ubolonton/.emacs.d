@@ -22,6 +22,8 @@
          ace-jump-mode htmlize twittering-mode keyfreq
          ido-ubiquitous                 ; List-narrowing UI
          helm helm-cmd-t
+         ;; TODO: Use & combine with eproject
+         projectile                     ; Project management
          emms                           ; Music
          paredit                        ; Structural editing with ()[]{}
          scpaste                        ; Publish highlighted code fragments
