@@ -438,6 +438,11 @@
                                         ?⇐ 'decompose-region)
                         nil)))))
 (font-lock-add-keywords
+ 'web-mode `(("\\(function\\)"
+              (0 (progn (compose-region (match-beginning 1) (match-end 1)
+                                        ?ƒ 'decompose-region)
+                        nil)))))
+(font-lock-add-keywords
  'php-mode `(("\\(-\\)>"
               (0 (progn (compose-region (match-beginning 1) (match-end 1)
                                         ?. 'decompose-region
@@ -467,7 +472,7 @@
               (0 (progn (compose-region (match-beginning 1) (match-end 1)
                                         ?⇛ 'decompose-region)
                         nil)))))
-(dolist (mode '(js-mode js2-mode))
+(dolist (mode '(js-mode js2-mode web-mode))
   (font-lock-add-keywords
    mode `(("{\\|}\\|;" . 'esk-paren-face)
           ("\\(ret\\)urn"

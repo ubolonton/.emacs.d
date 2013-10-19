@@ -747,6 +747,10 @@
           ((t (:background ,bg+2))))
          (web-mode-css-selector-face
           ((t (:inherit font-lock-function-name-face))))
+         (web-mode-current-element-highlight-face
+          ((t (:inherit highlight))))
+         (web-mode-comment-keyword-face
+          ((t (:inherit font-lock-warning-face))))
 
          (help-argument-name
           ((t (:foreground ,blue-1))))    ; TODO

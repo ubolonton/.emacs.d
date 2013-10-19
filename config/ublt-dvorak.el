@@ -9,6 +9,30 @@
 ;;;
 ;;; TODO: remap
 
+;;; Special navigations
+
+;; C-s-t  M-<next>
+;; C-s-c  M-<prior>
+
+;;; C-M => M-
+;; C-M-h  M-<left>
+;; C-M-n  M-<right>
+;; C-M-c  M-<up>
+;; C-M-t  M-<down>
+
+;; M-M    C-M-u
+;; M-V    C-M-d
+
+;; M-m    M-p
+;; M-v    M-n
+
+;;; ?
+;; M-s-g
+;; M-s-r
+;; M-s-m
+;; M-s-v
+
+
 
 ;; Helper to define keys
 (defun ublt/define-keys (key-map &rest ps)
@@ -149,11 +173,11 @@
   "s-t"    "M-."                        ; push reference
   "s-T"    "M-,"                        ; pop reference
 
-  "s-4"    "C-x 4"
+  "s-4"    "C-x 4"                      ; do something other window
   "s-r"    "C-x r"
   "s-R"    "C-x r j"
 
-  "s-P"    "C-c p"
+  "s-P"    "C-c p"                      ; projectile
 
   "M-f"    "<escape>"                   ; use evil-mode
   )
@@ -466,7 +490,8 @@
 (dolist (fms '(("nxhtml-mumamo" nxhtml-mumamo-mode-map)
                ("sgml-mode" sgml-mode-map)
                ("html-mode" html-mode-map)
-               ("nxml-mode" nxml-mode-map)))
+               ("nxml-mode" nxml-mode-map)
+               ("web-mode"  web-mode-map)))
   (destructuring-bind (file map) fms
     (eval-after-load file
       `(ublt/define-keys ,map
@@ -475,12 +500,14 @@
          "M-<right>" 'sgml-skip-tag-forward
          "M-<left>"  'sgml-skip-tag-backward
          ;; FIX: Hmm
-         "M-RET"     'emmet-expand-yas))))
+         ))))
 
-(ublt/keys 'css-mode css-mode-map
+(ublt/keys 'emmet-mode emmet-mode-keymap
   "M-RET" 'emmet-expand-yas)
-(ublt/keys 'less-css-mode less-css-mode-map
-  "M-RET" 'emmet-expand-yas)
+
+(ublt/keys 'web-mode web-mode-map
+  "M-<up>"    'web-mode-element-previous
+  "M-<down>"  'web-mode-element-next)
 
 
 ;;; auto-complete and yasnippet
