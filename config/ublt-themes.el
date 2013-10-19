@@ -735,6 +735,19 @@
          (mumamo-border-face-out
           ((t (,@dimmed :bold t))))
 
+         (web-mode-preprocessor-face
+          ((t (:foreground ,fg-3))))
+         (web-mode-html-attr-name-face
+          ((t (:inherit font-lock-variable-name-face))))
+         (web-mode-html-tag-face
+          ((t (:inherit font-lock-builtin-face))))
+         (web-mode-part-face
+          ((t (:background ,bg+1))))
+         (web-mode-block-face
+          ((t (:background ,bg+2))))
+         (web-mode-css-selector-face
+          ((t (:inherit font-lock-function-name-face))))
+
          (help-argument-name
           ((t (:foreground ,blue-1))))    ; TODO
 

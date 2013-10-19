@@ -53,6 +53,7 @@
          js2-mode flymake-jshint
          php-mode php-boris flymake-php
          rvm flymake-ruby
+         web-mode
          emmet-mode                          ; html/css editing
          ;; Starter kit
          starter-kit starter-kit-bindings starter-kit-eshell
