@@ -20,5 +20,12 @@
 (ublt/set-up 'php-mode
   (setq php-mode-coding-style nil))
 
+;; Emmet (Zen-coding)
+(ublt/set-up 'emmet-mode
+  (setq emmet-preview-default nil)
+  ;; (make-variable-buffer-local 'emmet-indentation)
+  (defun ublt/set-emmet-indentation ()
+    (setq emmet-indentation tab-width))
+  (add-hook 'sgml-mode-hook 'ublt/set-emmet-indentation))
 
 (provide 'ublt-web)
