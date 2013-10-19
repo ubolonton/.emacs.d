@@ -453,11 +453,11 @@
                                         ?. 'decompose-region))))
              ("\\(=>\\)"
               (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                        ?⇛ 'decompose-region)
+                                        ?⇒ 'decompose-region)
                         nil)))
              ("\\(array\\)("
               (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                        ?► 'decompose-region)
+                                        ?▸ 'decompose-region)
                         nil)))
              ("\\(function\\)"
               (0 (progn (compose-region (match-beginning 1) (match-end 1)
@@ -466,22 +466,22 @@
              ("{\\|}\\|;\\|\\$" . 'esk-paren-face)
              ("\\(ret\\)urn"
               (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                        ?> 'decompose-region)
+                                        ?▸ 'decompose-region)
                         nil)))
              ("ret\\(urn\\)"
               (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                        ?⇛ 'decompose-region)
+                                        ?▸ 'decompose-region)
                         nil)))))
 (dolist (mode '(js-mode js2-mode web-mode))
   (font-lock-add-keywords
    mode `(("{\\|}\\|;" . 'esk-paren-face)
           ("\\(ret\\)urn"
            (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                     ?> 'decompose-region)
+                                     ?▸ 'decompose-region)
                      nil)))
           ("ret\\(urn\\)"
            (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                     ?⇛ 'decompose-region)
+                                     ?▸ 'decompose-region)
                      nil))))))
 
 ;;; Doesn't work. Magit does something special
