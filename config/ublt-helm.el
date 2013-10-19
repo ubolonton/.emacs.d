@@ -34,7 +34,10 @@
                 ;; helm-c-source-emacs-process
                 )))
     (if (featurep 'helm-cmd-t)
-        (cons (helm-cmd-t-get-create-source (helm-cmd-t-root-data)) base)
+        ;; FIX
+        (condition-case nil
+            (cons (helm-cmd-t-get-create-source (helm-cmd-t-root-data)) base)
+          (error base))
       base)))
 
 (ublt/set-up 'helm-cmd-t)
