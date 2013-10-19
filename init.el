@@ -207,7 +207,7 @@
   (auto-fill-mode -1))
 (defun turn-off-flyspell-mode ()
   (flyspell-mode -1))
-(add-hook 'html-mode-hook 'turn-off-auto-fill-mode)
+
 ;; (add-hook 'html-mode-hook 'turn-off-flyspell-mode)
 
 ;; These should be disabled for new users, not me.
@@ -290,11 +290,7 @@
 ;; (add-hook 'mako-nxhtml-mumamo-mode-hook 'esk-turn-on-hl-line-mode)
 ;; (add-hook 'nxhtml-mode-hook 'turn-off-auto-fill-mode)
 ;; (add-hook 'nxhtml-mode-hook 'turn-off-flyspell-mode)
-(add-to-list 'auto-mode-alist '("\\.mako?$" . html-mode))
 
-;;; XXX
-(ublt/set-up 'php-mode
-  (setq php-mode-coding-style nil))
 
 ;; Factor
 (condition-case err
@@ -323,14 +319,7 @@
 
 (require 'ublt-sql)
 
-(ublt/set-up 'less-css-mode
-  (add-hook 'less-css-mode-hook 'esk-prog-mode-hook)
-  ;; (add-hook 'less-css-mode-hook 'enable-paredit-mode)
-  )
-(ublt/set-up 'css-mode
-  (add-hook 'css-mode-hook 'esk-prog-mode-hook)
-  ;; (add-hook 'css-mode-hook 'enable-paredit-mode)
-  )
+(require 'ublt-web)
 
 (add-to-list 'auto-mode-alist '("\\.m$" . octave-mode))
 (add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
