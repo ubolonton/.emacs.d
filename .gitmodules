@@ -1,9 +1,6 @@
 [submodule "lib/git-emacs"]
 	path = lib/git-emacs
 	url = http://github.com/tsgates/git-emacs.git
-[submodule "lib/ac-slime"]
-	path = lib/ac-slime
-	url = http://github.com/purcell/ac-slime.git
 [submodule "lib/twittering-mode"]
 	path = lib/twittering-mode
 	url = http://github.com/hayamiz/twittering-mode.git
@@ -28,9 +25,6 @@
 [submodule "lib/epresent"]
 	path = lib/epresent
 	url = https://github.com/technomancy/epresent.git
-[submodule "lib/slime"]
-	path = lib/slime
-	url = https://github.com/technomancy/slime.git
 [submodule "lib/swank-clojure-extra"]
 	path = lib/swank-clojure-extra
 	url = https://github.com/vu3rdd/swank-clojure-extra.git

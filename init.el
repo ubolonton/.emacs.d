@@ -17,7 +17,7 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 (defvar ublt/packages
-  '(smex auto-complete ac-slime yasnippet
+  '(smex auto-complete yasnippet
          org textmate undo-tree whole-line-or-region
          ace-jump-mode htmlize twittering-mode keyfreq
          ido-ubiquitous                 ; List-narrowing UI
@@ -325,10 +325,8 @@
 (add-to-list 'auto-mode-alist '("\\.m$" . octave-mode))
 (add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
 
-;;; SLIME, Common Lisp, Clojure --------------------------------------
+;;; Lisp, Clojure --------------------------------------
 
-(ublt/add-path "slime")
-(ublt/add-path "slime/contrib")
 (require 'ublt-lisp)
 
 
