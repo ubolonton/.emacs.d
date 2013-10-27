@@ -13,7 +13,8 @@
         web-mode-enable-comment-keywords t
         web-mode-tag-auto-close-style 2)
   (add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.mako?$" . web-mode)))
+  (add-to-list 'auto-mode-alist '("\\.mako?$" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.underscore$" . web-mode)))
 
 (ublt/set-up 'less-css-mode
   (add-hook 'less-css-mode-hook 'esk-prog-mode-hook)
