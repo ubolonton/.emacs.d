@@ -708,6 +708,13 @@
           ((t ,reference)))  ; TODO
          (helm-grep-finish
           ((t ,doc)))                   ; TODO
+         (helm-swoop-target-line-face
+          ((t (:inherit secondary-selection))))
+         (helm-swoop-target-line-block-face
+          ((t (:inherit secondary-selection))))
+         ;; TODO
+         (helm-swoop-target-word-face
+          ((t ,normal-hl)))
 
          (ecb-default-highlight-face
           ((t (:bold t ,@normal-hl))))
