@@ -135,6 +135,9 @@
 ;;; Misc customization
 ;;; TODO: add case toggling
 
+;;; This stops the damned auto-pinging
+(setq ffap-machine-p-known 'reject)
+
 ;;; Old buffer clean up
 (ublt/set-up 'midnight
   (setq clean-buffer-list-delay-general 21            ; 3 weeks
