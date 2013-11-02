@@ -107,6 +107,9 @@
   (exec-path-from-shell-initialize)
   (exec-path-from-shell-copy-env "CLOJURESCRIPT_HOME"))
 
+(push "~/.virtualenvs/default/bin" exec-path)
+(setenv "PATH" (concat "~/.virtualenvs/default/bin" ":" (getenv "PATH")))
+
 ;;; General usability
 (require 'ublt-dvorak)
 (ublt/add-path "powerline")
