@@ -111,4 +111,6 @@ all of the sources."
 ;;     (call-interactively 'helm-exit-minibuffer))
 ;;   )
 
+(ublt/set-up 'helm-swoop)
+
 (provide 'ublt-helm)

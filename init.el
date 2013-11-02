@@ -21,7 +21,7 @@
          org textmate undo-tree whole-line-or-region
          ace-jump-mode htmlize twittering-mode keyfreq
          ido-ubiquitous                 ; List-narrowing UI
-         helm helm-cmd-t
+         helm helm-cmd-t helm-swoop
          ;; TODO: Use & combine with eproject
          projectile                     ; Project management
          emms                           ; Music
