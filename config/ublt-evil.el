@@ -37,10 +37,15 @@
 
   ;; Modes that should be insert state by default
   (dolist (mode '(sql-interactive-mode
-                  magit-log-edit-mode erlang-shell-mode
-                  dired-mode inferior-moz-mode inferior-octave-mode
+                  twittering-edit-mode
+                  magit-log-edit-mode
+                  erlang-shell-mode
+                  dired-mode
+                  inferior-moz-mode
+                  inferior-octave-mode
                   inferior-ess-mode
-                  grep-mode pylookup-mode
+                  grep-mode
+                  pylookup-mode
                   inferior-lisp-mode
                   nrepl-mode nrepl-repl-mode
                   php-boris-mode))
