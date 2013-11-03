@@ -21,7 +21,8 @@
         twittering-number-of-tweets-on-retrieval 100
         )
   (add-hook 'twittering-mode-hook (ublt/on-fn 'hl-line-mode))
-  (add-hook 'twittering-edit-mode-hook '(lambda () (auto-fill-mode -1)))
+  (add-hook 'twittering-edit-mode-hook (ublt/off-fn 'auto-fill-mode))
+  (add-hook 'twittering-edit-mode-hook (ublt/on-fn 'visual-line-mode))
 
   ;; Notifications
   ;; `http://www.emacswiki.org/emacs/TwitteringMode'

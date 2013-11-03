@@ -13,7 +13,12 @@
   "Add to load-path a path relative to ~/.emacs.d/lib/"
   (add-to-list 'load-path (concat "~/.emacs.d/lib/" path)))
 
-
+;;; This is for stuff like
+;;;
+;;; (add-hook 'css-mode-hook (ublt/on-fn 'paredit-mode))
+;;;
+;;; TODO: Maybe some sort of memoized anonymous function would be
+;;; better.
 (defvar ublt/on-fns (make-hash-table))
 (defun ublt/on-fn (minor-mode-fn)
   (let ((fn (gethash minor-mode-fn ublt/on-fns)))
