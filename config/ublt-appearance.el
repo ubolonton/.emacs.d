@@ -204,7 +204,9 @@
 (ublt/set-up 'page-break-lines
   (setq page-break-lines-char ?━)
   (dolist (mode '(sh-mode
-                  js-mode js2-mode))
+                  conf-mode
+                  js-mode
+                  js2-mode))
     (add-to-list 'page-break-lines-modes mode))
   (global-page-break-lines-mode +1))
 
