@@ -11,6 +11,8 @@
                   ("melpa" . "http://melpa.milkbox.net/packages/")
                   ))
   (add-to-list 'package-archives source t))
+;;; See the end of this file for explanation of this
+(defvar ublt/package-archives package-archives)
 (package-initialize)
 
 ;;; Required packages
@@ -405,8 +407,14 @@
 (condition-case err
     (load custom-file)
   (error (message "Error loading custom file")))
+
 
 ;; Interops (with Terminal, Conkeror...) -----------------------------
 (condition-case err
     (server-start)
   (error (message "Could not start server")))
+
+
+;; Some packages mess up `package-archives', so restore its value
+;; here. TODO: Find a better solution
+(setq package-archives ublt/package-archives)
