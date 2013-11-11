@@ -204,11 +204,17 @@
 
            ;; Fixed-width font
            (fw           `(:fontset ,(face-attribute 'default :fontset)
-                           :font ,(face-attribute 'default :font)))
+                           :font ,(face-attribute 'default :font)
+                           :height ,(face-attribute 'default :height)))
            ;; Variable-width font
            (vw           `(:fontset ,(face-attribute 'variable-pitch :fontset)
-                           :font ,(face-attribute 'variable-pitch :font)))
+                           :font ,(face-attribute 'variable-pitch :font)
+                           :height ,(face-attribute 'variable-pitch :height)))
+
+           (fheight      (face-attribute 'default :height))
            )
+      ;; (message "Before %s" (face-attribute 'default :height))
+
       (color-theme-install
        `(color-theme-ubolonton-dark
 
@@ -873,8 +879,12 @@
 
          ))
 
-      ;; Color theme seems to mix this up, restore it
+      ;; Color theme seems to mess this up, restore it
+      ;; (message "After %s" (face-attribute 'default :height))
+      ;; (message "%s" fw)
+      (set-face-attribute 'default nil :height fheight)
       ;; (set-face-font 'variable-pitch variable-pitch-family)
+      ;; (message "Done %s" (face-attribute 'default :height))
 
       (setq
        hl-paren-colors `("Orange" ,yellow "Greenyellow"
