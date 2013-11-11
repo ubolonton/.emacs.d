@@ -106,13 +106,18 @@
   "-unknown-Fira Sans-light-normal-normal--*-*-*-*-m-*-fontset-ubltv")
 (create-fontset-from-fontset-spec ublt/variable-width-fontset)
 (ublt/assign-font ublt/variable-width-fontset
-  '("DejaVu Sans"
+  `(
+    ,(font-spec :family "DejaVu Sans" :weight 'extra-light)
+    ;; ,(font-spec :family "Arial" :weight 'bold)
     vietnamese-viscii-upper
     vietnamese-viscii-lower
     viscii
     vscii
     vscii-2
-    tcvn-5712))
+    tcvn-5712)
+  `(
+    ,(font-spec :family "Fira Sans" :weight 'extra-light)
+    latin-iso8859-1))
 
 ;;; Don't set :font/:fontset/:family alone. See the long explanation
 ;;; section above
