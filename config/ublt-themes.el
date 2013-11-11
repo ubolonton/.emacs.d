@@ -203,8 +203,9 @@
                                    :strike-through nil :inverse-video nil :overline nil))
 
            ;; Fixed-width font
-           (fw           `(:fontset ,(face-attribute 'default :fontset)
+           (fw           `(
                            :font ,(face-attribute 'default :font)
+                           :fontset ,(face-attribute 'default :fontset)
                            :height ,(face-attribute 'default :height)))
            ;; Variable-width font
            (vw           `(:fontset ,(face-attribute 'variable-pitch :fontset)
@@ -212,6 +213,7 @@
                            :height ,(face-attribute 'variable-pitch :height)))
 
            (fheight      (face-attribute 'default :height))
+           (ffontset     (face-attribute 'default :fontset))
            )
       ;; (message "Before %s" (face-attribute 'default :height))
 
@@ -883,6 +885,10 @@
       ;; (message "After %s" (face-attribute 'default :height))
       ;; (message "%s" fw)
       (set-face-attribute 'default nil :height fheight)
+      ;; This does not work actually. Emacs is bad at handling default vs. normal
+      ;; face/font/fontset.
+      (set-face-attribute 'default nil :fontset ffontset)
+      ;; This does not seem to be messed up anymore
       ;; (set-face-font 'variable-pitch variable-pitch-family)
       ;; (message "Done %s" (face-attribute 'default :height))
 
