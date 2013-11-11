@@ -4,6 +4,20 @@
 (eval-when-compile
   (require 'cl))
 
+;; (defvar ublt/fixed-width-fontset
+;;   "-unknown-Fira Mono-medium-normal-normal--14-*-*-*-m-*-fontset-ubltf,
+;; cyrillic-iso8859-5:-unknown-DejaVu Sans Mono-medium-normal-normal--14-*-*-*-m-*-iso10646-1")
+;; (create-fontset-from-fontset-spec ublt/fixed-width-fontset)
+;; (dolist
+;;     (charset '(cyrillic-iso8859-5))
+;;   (set-fontset-font
+;;    ublt/fixed-width-fontset charset
+;;    "DejaVu Sans Mono"))
+;; ;; (set-face-font 'default "fontset-ubltf")
+;; (set-frame-font "fontset-ubltf")
+
+
+
 
 ;;; Fonts
 (defun ublt/toggle-fonts ()
@@ -54,14 +68,98 @@
 
 ;;; Maybe TODO: Integration with `ublt-themes'
 ;; Non-code text reads better in proportional font
-(when (member window-system '(x ns w32))
-  (set-face-font 'variable-pitch (case system-type
-                                   ;; ('gnu/linux "Fira Sans-12")
-                                   ('gnu/linux "Fira Sans light-13")
-                                   ;; ('gnu/linux "DejaVu Sans-11")
-                                   ;; ('gnu/linux "Helvetica")
-                                   ('darwin "Helvetica-16")
-                                   (t "Arial"))))
+;; (when (member window-system '(x ns w32))
+;;   (set-face-font 'variable-pitch (case system-type
+;;                                    ;; ('gnu/linux "Fira Sans-12")
+;;                                    ('gnu/linux "Fira Sans light-13")
+;;                                    ;; ('gnu/linux "DejaVu Sans-11")
+;;                                    ;; ('gnu/linux "Helvetica")
+;;                                    ('darwin "Helvetica-16")
+;;                                    (t "Arial"))))
+
+;;; TODO: What is the way to prioritize character sets?
+;; (set-language-environment "Vietnamese")
+
+(defvar ublt/variable-width-fontset
+  "-unknown-Fira Sans-light-normal-normal--*-*-*-*-m-*-fontset-ubltv")
+(create-fontset-from-fontset-spec ublt/variable-width-fontset)
+;; (set-fontset-font
+;;  ublt/variable-width-fontset 'unicode
+;;  "Fira Sans")
+(dolist
+    (charset '(
+               vietnamese-viscii-upper
+               vietnamese-viscii-lower
+               viscii
+               vscii
+               vscii-2
+               tcvn-5712
+               ))
+  (set-fontset-font
+   ublt/variable-width-fontset charset
+   "DejaVu Sans"))
+
+;; (set-fontset-font
+;;  ublt/variable-width-fontset 'unicode
+;;  "DejaVu Sans" nil)
+;; (set-fontset-font
+;;  ublt/variable-width-fontset 'ascii
+;;  "Fira Sans" nil 'prepend)
+
+;; ;; (set-face-font 'variable-pitch "DejaVu Sans")
+;; (set-face-font 'variable-pitch "fontset-ubltv")
+
+;;; XXX: Yes this must be :fontset, not :font, even though the
+;;; documentation says nothing about :fontset. Duh!
+
+;;; :family => invalid family => no font specified, => non-user-specified default
+
+;; ELISP> (face-attribute 'variable-pitch :font)
+;; unspecified
+;; ELISP> (face-attribute 'variable-pitch :family)
+;; "ubltv"
+;; ELISP> (face-attribute 'variable-pitch :fontset)
+;; unspecified
+
+;;; :font => weirdest one. The spec's default font is registered, but
+;; the overrides work in a funky way (ignored for Vietnamese (even if
+;; "preferred charset" is resolved to "viscii" not "unicode"), ok for
+;; Russian, (even if "preferred charset" is resolved to "unicode" not
+;; "cyrillic-iso8859-5")) (well actually the thing read "(Unicode
+;; (ISO10646))" which may explain it (no it does not, it's like that
+;; in both cases))
+
+;; ELISP> (face-attribute 'variable-pitch :font)
+;; #<font-object "-unknown-Fira Sans-light-normal-normal-*-16-*-*-*-*-0-iso10646-1">
+;; ELISP> (face-attribute 'variable-pitch :family)
+;; "Fira Sans"
+;; ELISP> (face-attribute 'variable-pitch :fontset)
+;; unspecified
+
+;;; :fontset => seems to work fine regardless of "preferred charset"
+;;; reported for each character. The import thing seems to be what
+;;; `fontset-font' reports instead
+
+;; ELISP> (face-attribute 'variable-pitch :font)
+;; unspecified
+;; ELISP> (face-attribute 'variable-pitch :family)
+;; "Sans Serif"
+;; ELISP> (face-attribute 'variable-pitch :fontset)
+;; "-unknown-fira sans-light-normal-normal--*-*-*-*-m-*-fontset-ubltv"
+;; ELISP> (face-attribute 'variable-pitch :fontspec)
+
+;;; (:font + :fontset) seem to work
+
+(set-face-attribute 'variable-pitch nil :fontset "fontset-ubltv")
+(set-face-attribute 'variable-pitch nil :font "Fira Sans light")
+(set-face-attribute 'variable-pitch nil :height 130)
+
+;;; Don't do this, it's the same as (set-face-attribute ... :font)
+;; which is weird, as described above (probably that's the reason
+;; fontsets are excluded from its completion list when calling
+;; interactively, duh)
+;; (set-frame-font "fontset-ubltf")
+
 (dolist (hook '(erc-mode-hook
                 Info-mode-hook
                 help-mode-hook
