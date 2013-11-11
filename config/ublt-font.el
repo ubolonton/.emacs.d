@@ -3,35 +3,34 @@
 (eval-when-compile
   (require 'cl))
 
+(defvar ublt/fixed-width-fonts
+  (case system-type
+    ('darwin '("DejaVu Sans Mono-14" "Menlo-14" "Monaco-14"
+               "Consolas-15"))
+    ('gnu/linux '("Inconsolata-12" "Fira Mono-11" "DejaVu Sans Mono-10"))
+    (t '("Courier New-12" "Arial-12"))))
+
+(defun ublt/default-fixed-width-font ()
+  (first ublt/fixed-width-fonts))
 
 ;;; TODO: Refactor
 (defun ublt/toggle-fonts ()
   (interactive)
-  (let* ((fonts (case system-type
-                  ('darwin '("DejaVu Sans Mono-14" "Menlo-14" "Monaco-14"
-                             "Consolas-15"))
-                  ('gnu/linux '("Inconsolata-12" "Fira Mono-11" "DejaVu Sans Mono-10"))
-                  (t '("Courier New-12" "Arial-12"))))
+  (let* ((fonts ublt/fixed-width-fonts)
          (cur-pos (get this-command 'pos))
          (N (length fonts))
          font)
     (setq cur-pos (if cur-pos (% cur-pos N) 0))
     (setq font (nth cur-pos fonts))
-    (modify-all-frames-parameters (list (cons 'font font) ;; (cons 'height 100)
-                                        ))
-    ;; TODO: Should be "current theme"
+    (modify-all-frames-parameters (list (cons 'font font)))
+    ;; FIX: Should be "current theme"
     (color-theme-ubolonton-dark)
     (message "Font: %s" font)
     (put this-command 'pos (% (1+ cur-pos) N))))
 
 ;;; Default font
-(case system-type
-  ('darwin (modify-all-frames-parameters
-            '((font . "DejaVu Sans Mono-14"))))
-  ('windows-nt (modify-all-frames-parameters
-                '((font . "Courier New-12"))))
-  ('gnu/linux (modify-all-frames-parameters
-               '((font . "Inconsolata-12")))))
+(let ((font (ublt/default-fixed-width-font)))
+  (modify-all-frames-parameters `((font . ,font))))
 
 
 (defun ublt/assign-font (fontset &rest mappings)
