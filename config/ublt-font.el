@@ -1,4 +1,5 @@
 ;;; TODO: Maybe functions/macros to create fontspec from scratch?
+;;; Maybe TODO: Integration with `ublt-themes'
 
 (eval-when-compile
   (require 'cl))
@@ -10,8 +11,17 @@
     ('gnu/linux '("Inconsolata-12" "Fira Mono-11" "DejaVu Sans Mono-10"))
     (t '("Courier New-12" "Arial-12"))))
 
+(defvar ublt/variable-width-fonts
+  (case system-type
+    ('darwin '("Helvetica-16"))
+    ('gnu/linux '("Fira Sans light-13"))
+    (t '("Arial-12"))))
+
 (defun ublt/default-fixed-width-font ()
   (first ublt/fixed-width-fonts))
+
+(defun ublt/default-variable-width-font ()
+  (first ublt/variable-width-fonts))
 
 ;;; TODO: Refactor
 (defun ublt/toggle-fonts ()
@@ -32,62 +42,13 @@
 (let ((font (ublt/default-fixed-width-font)))
   (modify-all-frames-parameters `((font . ,font))))
 
-
-(defun ublt/assign-font (fontset &rest mappings)
-  (declare (indent 1))
-  (dolist (mapping mappings)
-    (let ((font (car mapping))
-          (charsets (cdr mapping)))
-      (dolist (charset charsets)
-        (set-fontset-font fontset charset font)))))
-
-
-(defvar ublt/variable-width-fontset
-  "-unknown-Fira Sans-light-normal-normal--*-*-*-*-m-*-fontset-ubltv")
-(create-fontset-from-fontset-spec ublt/variable-width-fontset)
-(ublt/assign-font ublt/variable-width-fontset
-  '("DejaVu Sans"
-    vietnamese-viscii-upper
-    vietnamese-viscii-lower
-    viscii
-    vscii
-    vscii-2
-    tcvn-5712))
-
-
-
-
-;;; Maybe TODO: Integration with `ublt-themes'
-;; Non-code text reads better in proportional font
-;; (when (member window-system '(x ns w32))
-;;   (set-face-font 'variable-pitch (case system-type
-;;                                    ;; ('gnu/linux "Fira Sans-12")
-;;                                    ('gnu/linux "Fira Sans light-13")
-;;                                    ;; ('gnu/linux "DejaVu Sans-11")
-;;                                    ;; ('gnu/linux "Helvetica")
-;;                                    ('darwin "Helvetica-16")
-;;                                    (t "Arial"))))
-
 
 ;;; Fontsets
 
-
-;;; TODO: What is the way to prioritize character sets?
+;;; TODO: What is the way to prioritize character sets? This seems to
+;; have no effect if both :font/:fontset are set. The priority list
+;; must be somewhere else? Or are there 2 lists?
 ;; (set-language-environment "Vietnamese")
-
-
-;; (set-fontset-font
-;;  ublt/variable-width-fontset 'unicode
-;;  "DejaVu Sans" nil)
-;; (set-fontset-font
-;;  ublt/variable-width-fontset 'ascii
-;;  "Fira Sans" nil 'prepend)
-
-;; ;; (set-face-font 'variable-pitch "DejaVu Sans")
-;; (set-face-font 'variable-pitch "fontset-ubltv")
-
-;;; XXX: Yes this must be :fontset, not :font, even though the
-;;; documentation says nothing about :fontset. Duh!
 
 ;;; :family => invalid family => no font specified, => non-user-specified default
 
@@ -115,7 +76,7 @@
 
 ;;; :fontset => seems to work fine regardless of "preferred charset"
 ;;; reported for each character. The import thing seems to be what
-;;; `fontset-font' reports instead
+;;; `fontset-font' reports instead (TODO: not even sure about that)
 
 ;; ELISP> (face-attribute 'variable-pitch :font)
 ;; unspecified
@@ -125,18 +86,68 @@
 ;; "-unknown-fira sans-light-normal-normal--*-*-*-*-m-*-fontset-ubltv"
 ;; ELISP> (face-attribute 'variable-pitch :fontspec)
 
-;;; (:font + :fontset) seem to work
-
-(set-face-attribute 'variable-pitch nil
-                    :fontset "fontset-ubltv"
-                    :font "Fira Sans light"
-                    :height 130)
-
 ;;; Don't do this, it's the same as (set-face-attribute ... :font)
 ;; which is weird, as described above (probably that's the reason
 ;; fontsets are excluded from its completion list when calling
 ;; interactively, duh)
 ;; (set-frame-font "fontset-ubltf")
+
+
+(defun ublt/assign-font (fontset &rest mappings)
+  (declare (indent 1))
+  (dolist (mapping mappings)
+    (let ((font (car mapping))
+          (charsets (cdr mapping)))
+      (dolist (charset charsets)
+        (set-fontset-font fontset charset font nil)))))
+
+
+(defvar ublt/variable-width-fontset
+  "-unknown-Fira Sans-light-normal-normal--*-*-*-*-m-*-fontset-ubltv")
+(create-fontset-from-fontset-spec ublt/variable-width-fontset)
+(ublt/assign-font ublt/variable-width-fontset
+  '("DejaVu Sans"
+    vietnamese-viscii-upper
+    vietnamese-viscii-lower
+    viscii
+    vscii
+    vscii-2
+    tcvn-5712))
+
+;;; Don't set :font/:fontset/:family alone. See the long explanation
+;;; section above
+(set-face-attribute 'variable-pitch nil
+                    :fontset "fontset-ubltv"
+                    :font "Fira Sans light"
+                    :height 130)
+
+(dolist
+    (rescale '((".*DejaVu Sans-.*" . 0.9)))
+  (add-to-list 'face-font-rescale-alist rescale))
+
+
+;;; The non-uniformity of face/font/fontset handling (normal vs.
+;;; default) is so ugly
+
+(set-face-attribute 'default nil
+                    :font "Inconsolata"
+                    :height 120)
+
+(ublt/assign-font (face-attribute 'default :fontset)
+  '("Droid Sans Mono"
+    vietnamese-viscii-upper
+    vietnamese-viscii-lower
+    viscii
+    vscii
+    vscii-2
+    tcvn-5712)
+  '("Fira Mono"
+    cyrillic-iso8859-5))
+
+(dolist
+    (rescale '((".*Droid Sans Mono-.*" . 0.9)
+               (".*Fira Mono-.*" . 0.9)))
+  (add-to-list 'face-font-rescale-alist rescale))
 
 
 (provide 'ublt-font)
