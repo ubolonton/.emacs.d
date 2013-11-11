@@ -39,7 +39,10 @@
   (setq dired-details-hide-link-targets nil)
   ;; Hide unimportant files
   (setq-default dired-omit-mode t
-                dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\."))
+                dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\.")
+  ;;
+  (add-to-list 'dired-details-invisible-lines
+               "итого"))
 
 ;; Directories first by default. "s d" to change locally
 (ublt/set-up 'dired-sort-map
