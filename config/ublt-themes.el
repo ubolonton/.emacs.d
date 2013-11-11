@@ -203,11 +203,11 @@
                                    :strike-through nil :inverse-video nil :overline nil))
 
            ;; Fixed-width font
-           ;; (fw           `(:family ,ublt/fixed-width-font-family :height 120))
-           (fw           `(:font ,(face-attribute 'default :font)))
+           (fw           `(:fontset ,(face-attribute 'default :fontset)
+                           :font ,(face-attribute 'default :font)))
            ;; Variable-width font
-           ;; (vw           `(:family ,ublt/variable-width-font-family))
-           (vw           `(:font ,(face-attribute 'variable-pitch :font)))
+           (vw           `(:fontset ,(face-attribute 'variable-pitch :fontset)
+                           :font ,(face-attribute 'variable-pitch :font)))
            )
       (color-theme-install
        `(color-theme-ubolonton-dark
