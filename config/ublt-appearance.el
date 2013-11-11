@@ -7,9 +7,6 @@
 
 
 
-;;; Fonts
-(ublt/set-up 'ublt-font)
-
 ;; Default size, cursor
 (case system-type
   ('darwin (modify-all-frames-parameters
@@ -33,26 +30,28 @@
 ;; Maybe TODO: Enable this except for twitter buffers
 ;; (blink-cursor-mode 1)
 
-
-(dolist (hook '(erc-mode-hook
-                Info-mode-hook
-                help-mode-hook
-                ess-help-mode-hook
-                lyric-mode-hook
-                Man-mode-hook woman-mode-hook
-                twittering-mode-hook
-                emms-playlist-mode-hook
-                skype--chat-mode-hook
-                org-mode-hook
-                markdown-mode-hook
-                html-mode-hook
-                dired-mode-hook
-                twittering-edit-mode-hook))
-  (add-hook hook (ublt/on-fn 'variable-pitch-mode)))
-(defun ublt/variable-pitch-if-fundamental ()
-  (when (eq major-mode 'fundamental-mode)
-    (variable-pitch-mode +1)))
-(add-hook 'find-file-hook 'ublt/variable-pitch-if-fundamental)
+;;; Fonts
+(ublt/set-up 'ublt-font
+  ;; Non-code text reads better in proportional font
+  (dolist (hook '(erc-mode-hook
+                  Info-mode-hook
+                  help-mode-hook
+                  ess-help-mode-hook
+                  lyric-mode-hook
+                  Man-mode-hook woman-mode-hook
+                  twittering-mode-hook
+                  emms-playlist-mode-hook
+                  skype--chat-mode-hook
+                  org-mode-hook
+                  markdown-mode-hook
+                  html-mode-hook
+                  dired-mode-hook
+                  twittering-edit-mode-hook))
+    (add-hook hook (ublt/on-fn 'variable-pitch-mode)))
+  (defun ublt/variable-pitch-if-fundamental ()
+    (when (eq major-mode 'fundamental-mode)
+      (variable-pitch-mode +1)))
+  (add-hook 'find-file-hook 'ublt/variable-pitch-if-fundamental))
 
 
 ;;; Ubolonton's theme
