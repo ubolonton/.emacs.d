@@ -400,8 +400,6 @@
 
 
 
-;;; TODO: These should be font-dependent (or fontset should include
-;;; special cases for these :D)
 (font-lock-add-keywords
  'org-mode `(("\\(=>\\)"
               (0 (progn (compose-region (match-beginning 1) (match-end 1)

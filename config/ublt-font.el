@@ -101,13 +101,17 @@
       (dolist (charset charsets)
         (set-fontset-font fontset charset font nil)))))
 
+;;; TODO: find a way around the :size/:height distinction
 
 (defvar ublt/variable-width-fontset
   "-unknown-Fira Sans-light-normal-normal--*-*-*-*-m-*-fontset-ubltv")
 (create-fontset-from-fontset-spec ublt/variable-width-fontset)
 (ublt/assign-font ublt/variable-width-fontset
   `(
-    ,(font-spec :family "DejaVu Sans" :weight 'extra-light)
+    ,(font-spec :family "DejaVu Sans"
+                :weight 'extra-light
+                :size 11.0              ; points
+                )
     ;; ,(font-spec :family "Arial" :weight 'bold)
     vietnamese-viscii-upper
     vietnamese-viscii-lower
@@ -116,48 +120,64 @@
     vscii-2
     tcvn-5712)
   `(
-    ,(font-spec :family "Fira Sans" :weight 'extra-light)
-    latin-iso8859-1))
+    ,(font-spec :family "Fira Sans" :weight 'light)
+    latin-iso8859-1)
+  )
 
 ;;; Don't set :font/:fontset/:family alone. See the long explanation
 ;;; section above
 (set-face-attribute 'variable-pitch nil
                     :fontset "fontset-ubltv"
                     :font "Fira Sans"
-                    :height 130
-                    :weight 'extra-light
+                    :height 130         ; 1/10 points
+                    :weight 'light
                     ;; :font "Ubuntu Condensed"
                     ;; :height 135
                     ;; :weight 'extra-light
                     )
 
-(dolist
-    (rescale '((".*DejaVu Sans-.*" . 0.9)))
-  (add-to-list 'face-font-rescale-alist rescale))
+;; (delq (assoc ".*DejaVu Sans-.*" face-font-rescale-alist) face-font-rescale-alist)
+
+;; (dolist
+;;     (rescale '((".*DejaVu Sans-.*" . 0.9)))
+;;   (add-to-list 'face-font-rescale-alist rescale))
 
 
 ;;; The non-uniformity of face/font/fontset handling (normal vs.
-;;; default) is so ugly
+;;; default) is so ugly. TODO: Make sure applying theme does not
+;;; affect this (or somehow restore this after applying theme, or make
+;;; this part of the theme)
+
+;;; FIX: Does not work with zooming of face-remap.el (maybe switching
+;;; to `deftheme' would help?)
 
 (set-face-attribute 'default nil
                     :font "Inconsolata"
                     :height 120)
 
 (ublt/assign-font (face-attribute 'default :fontset)
-  '("Droid Sans Mono"
+  `(,(font-spec :family "Droid Sans Mono"
+                :size 10.8)
     vietnamese-viscii-upper
     vietnamese-viscii-lower
     viscii
     vscii
     vscii-2
     tcvn-5712)
-  '("Fira Mono"
-    cyrillic-iso8859-5))
-
-(dolist
-    (rescale '((".*Droid Sans Mono-.*" . 0.9)
-               (".*Fira Mono-.*" . 0.9)))
-  (add-to-list 'face-font-rescale-alist rescale))
+  `(,(font-spec :family "Fira Mono"
+                :size 10.8)
+    cyrillic-iso8859-5)
+  `(,(font-spec :family "Ume Mincho"
+                :size 12.0)
+    (?▸ . ?▸))
+  `(,(font-spec :family "Symbol"
+                :size 12.0)
+    (?⇒ . ?⇒)
+    (?⇐ . ?⇐))
+  `(,(font-spec :family "Droid Sans Mono"
+                :weight 'normal
+                :size 10.8)
+    (?λ . ?λ)))
 
 
 (provide 'ublt-font)

@@ -24,7 +24,21 @@
               ;; This is not even transliteration, it's for
               ;; comparing length (fixed-width)
               "Sirokay electrifikasia yjnyi gubernyi dast mosnyi toljok podyemu selsskovo kozaistva."
-              "\n"
               ))
-        (insert "\n")
-        (insert (propertize s 'font-lock-face f))))))
+        (insert "\n| ")
+        (insert (propertize s 'font-lock-face f)))
+      (insert "\n\n"))
+    (dolist (s (list
+                "<= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <="
+                "⇐ ⇐ ⇐ ⇐ ⇐ ⇐ ⇐ ⇐ ⇐ ⇐ ⇐ ⇐ ⇐ ⇐ ⇐ ⇐"
+                "=> => => => => => => => => => => => => => => =>"
+                "⇒ ⇒ ⇒ ⇒ ⇒ ⇒ ⇒ ⇒ ⇒ ⇒ ⇒ ⇒ ⇒ ⇒ ⇒ ⇒"
+                "return return return return return return"
+                "▸▸ ▸▸ ▸▸ ▸▸ ▸▸ ▸▸ ▸▸ ▸▸ ▸▸ ▸▸ ▸▸ ▸▸ ▸▸ ▸▸"
+                "function function function function"
+                "ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ"
+                "lambda lambda lambda lambda lambda lambda"
+                "λ λ λ λ λ λ λ λ λ λ λ λ λ λ λ λ λ λ λ λ λ"
+                ))
+      (insert "\n| ")
+      (insert (propertize s 'font-lock-face 'font-lock-keyword-face)))))
