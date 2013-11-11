@@ -203,12 +203,23 @@
                                    :strike-through nil :inverse-video nil :overline nil))
 
            ;; Fixed-width font
-           ;; (fw           `(:family ,ublt/fixed-width-font-family :height 120))
-           (fw           `(:font ,(face-attribute 'default :font)))
+           (fw           `(
+                           :font ,(face-attribute 'default :font)
+                           :fontset ,(face-attribute 'default :fontset)
+                           :weight ,(face-attribute 'default :weight)
+                           :height ,(face-attribute 'default :height)))
            ;; Variable-width font
-           ;; (vw           `(:family ,ublt/variable-width-font-family))
-           (vw           `(:font ,(face-attribute 'variable-pitch :font)))
+           (vw           `(
+                           :fontset ,(face-attribute 'variable-pitch :fontset)
+                           :font ,(face-attribute 'variable-pitch :font)
+                           :weight ,(face-attribute 'variable-pitch :weight)
+                           :height ,(face-attribute 'variable-pitch :height)))
+
+           (fheight      (face-attribute 'default :height))
+           (ffontset     (face-attribute 'default :fontset))
            )
+      ;; (message "Before %s" (face-attribute 'default :height))
+
       (color-theme-install
        `(color-theme-ubolonton-dark
 
@@ -224,7 +235,7 @@
 
          (default ((t (,@fw :background ,bg :foreground ,fg))))
          ;; FIX: Height should be font-dependent in general
-         (variable-pitch ((t (,@vw :height 130 :background ,bg :foreground ,fg))))
+         (variable-pitch ((t (,@vw :background ,bg :foreground ,fg))))
 
          (border-glyph ((t (nil))))     ; What's this?
          (buffers-tab ((t (:background ,bg :foreground ,fg)))) ; What's this?
@@ -333,8 +344,6 @@
          (mode-line
           ((t (,@status ,@vw :foreground ,bg
                         :box (:line-width 1 :color ,cyan-2)
-                        :height 1.0
-                        ;; :height 0.8
                         ))))
          (mode-line-inactive
           ((t (:inherit mode-line ,@strong-hl ,@strong
@@ -875,8 +884,16 @@
 
          ))
 
-      ;; Color theme seems to mix this up, restore it
+      ;; Color theme seems to mess this up, restore it
+      ;; (message "After %s" (face-attribute 'default :height))
+      ;; (message "%s" fw)
+      (set-face-attribute 'default nil :height fheight)
+      ;; This does not work actually. Emacs is bad at handling default vs. normal
+      ;; face/font/fontset.
+      (set-face-attribute 'default nil :fontset ffontset)
+      ;; This does not seem to be messed up anymore
       ;; (set-face-font 'variable-pitch variable-pitch-family)
+      ;; (message "Done %s" (face-attribute 'default :height))
 
       (setq
        hl-paren-colors `("Orange" ,yellow "Greenyellow"

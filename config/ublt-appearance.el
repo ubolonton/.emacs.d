@@ -4,36 +4,16 @@
 (eval-when-compile
   (require 'cl))
 
-
-;;; Fonts
-(defun ublt/toggle-fonts ()
-  (interactive)
-  (let* ((fonts (case system-type
-                  ('darwin '("DejaVu Sans Mono-14" "Menlo-14" "Monaco-14"
-                             "Consolas-15"))
-                  ('gnu/linux '("Inconsolata-12" "Fira Mono-11" "DejaVu Sans Mono-10"))
-                  (t '("Courier New-12" "Arial-12"))))
-         (cur-pos (get this-command 'pos))
-         (N (length fonts))
-         font)
-    (setq cur-pos (if cur-pos (% cur-pos N) 0))
-    (setq font (nth cur-pos fonts))
-    (modify-all-frames-parameters (list (cons 'font font) ;; (cons 'height 100)
-                                        ))
-    ;; TODO: Should be "current theme"
-    (color-theme-ubolonton-dark)
-    (message "Font: %s" font)
-    (put this-command 'pos (% (1+ cur-pos) N))))
 
-;; Font and size default
+
+
+;; Default size, cursor
 (case system-type
   ('darwin (modify-all-frames-parameters
             '((top . 0) (left . 0) ;(width . 1280) (height . 800)
-              (cursor-type . bar)
-              (font . "DejaVu Sans Mono-14"))))
+              (cursor-type . bar))))
   ('windows-nt (modify-all-frames-parameters
-                '((cursor-type . bar)
-                  (font . "Courier New-12"))))
+                '((cursor-type . bar))))
   ('gnu/linux (modify-all-frames-parameters
                '((top . 0) (left . 0) (width . 119)
                  (fullscreen . fullheight) (cursor-type . bar)
@@ -45,42 +25,33 @@
                  (screen-gamma . 2.7)
                  ;; Daylight adaptation
                  ;; (screen-gamma . 4)
-                 ;; (font . "DejaVu Sans Mono-10")
-                 (font . "Inconsolata-12")
                  ))))
 
 ;; Maybe TODO: Enable this except for twitter buffers
 ;; (blink-cursor-mode 1)
 
-;;; Maybe TODO: Integration with `ublt-themes'
-;; Non-code text reads better in proportional font
-(when (member window-system '(x ns w32))
-  (set-face-font 'variable-pitch (case system-type
-                                   ;; ('gnu/linux "Fira Sans-12")
-                                   ('gnu/linux "Fira Sans light-13")
-                                   ;; ('gnu/linux "DejaVu Sans-11")
-                                   ;; ('gnu/linux "Helvetica")
-                                   ('darwin "Helvetica-16")
-                                   (t "Arial"))))
-(dolist (hook '(erc-mode-hook
-                Info-mode-hook
-                help-mode-hook
-                ess-help-mode-hook
-                lyric-mode-hook
-                Man-mode-hook woman-mode-hook
-                twittering-mode-hook
-                emms-playlist-mode-hook
-                skype--chat-mode-hook
-                org-mode-hook
-                markdown-mode-hook
-                html-mode-hook
-                dired-mode-hook
-                twittering-edit-mode-hook))
-  (add-hook hook (ublt/on-fn 'variable-pitch-mode)))
-(defun ublt/variable-pitch-if-fundamental ()
-  (when (eq major-mode 'fundamental-mode)
-    (variable-pitch-mode +1)))
-(add-hook 'find-file-hook 'ublt/variable-pitch-if-fundamental)
+;;; Fonts
+(ublt/set-up 'ublt-font
+  ;; Non-code text reads better in proportional font
+  (dolist (hook '(erc-mode-hook
+                  Info-mode-hook
+                  help-mode-hook
+                  ess-help-mode-hook
+                  lyric-mode-hook
+                  Man-mode-hook woman-mode-hook
+                  twittering-mode-hook
+                  emms-playlist-mode-hook
+                  skype--chat-mode-hook
+                  org-mode-hook
+                  markdown-mode-hook
+                  html-mode-hook
+                  dired-mode-hook
+                  twittering-edit-mode-hook))
+    (add-hook hook (ublt/on-fn 'variable-pitch-mode)))
+  (defun ublt/variable-pitch-if-fundamental ()
+    (when (eq major-mode 'fundamental-mode)
+      (variable-pitch-mode +1)))
+  (add-hook 'find-file-hook 'ublt/variable-pitch-if-fundamental))
 
 
 ;;; Ubolonton's theme
@@ -429,7 +400,6 @@
 
 
 
-;;; TODO: These should be font-dependent
 (font-lock-add-keywords
  'org-mode `(("\\(=>\\)"
               (0 (progn (compose-region (match-beginning 1) (match-end 1)
