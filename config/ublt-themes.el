@@ -224,7 +224,7 @@
 
          (default ((t (,@fw :background ,bg :foreground ,fg))))
          ;; FIX: Height should be font-dependent in general
-         (variable-pitch ((t (,@vw :height 130 :background ,bg :foreground ,fg))))
+         (variable-pitch ((t (,@vw :background ,bg :foreground ,fg))))
 
          (border-glyph ((t (nil))))     ; What's this?
          (buffers-tab ((t (:background ,bg :foreground ,fg)))) ; What's this?
@@ -333,8 +333,6 @@
          (mode-line
           ((t (,@status ,@vw :foreground ,bg
                         :box (:line-width 1 :color ,cyan-2)
-                        :height 1.0
-                        ;; :height 0.8
                         ))))
          (mode-line-inactive
           ((t (:inherit mode-line ,@strong-hl ,@strong
