@@ -50,7 +50,7 @@
          flymake
          haskell-mode quack
          markdown-mode less-css-mode yaml-mode
-         clojure-mode clojurescript-mode durendal swank-clojure nrepl
+         clojure-mode clojurescript-mode durendal swank-clojure nrepl ac-nrepl
          elisp-slime-nav
          js2-mode flymake-jshint
          php-mode php-boris flymake-php
