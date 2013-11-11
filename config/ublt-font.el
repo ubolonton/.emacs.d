@@ -118,8 +118,13 @@
 ;;; section above
 (set-face-attribute 'variable-pitch nil
                     :fontset "fontset-ubltv"
-                    :font "Fira Sans light"
-                    :height 130)
+                    :font "Fira Sans"
+                    :height 130
+                    :weight 'extra-light
+                    ;; :font "Ubuntu Condensed"
+                    ;; :height 135
+                    ;; :weight 'extra-light
+                    )
 
 (dolist
     (rescale '((".*DejaVu Sans-.*" . 0.9)))

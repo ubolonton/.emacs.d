@@ -206,10 +206,13 @@
            (fw           `(
                            :font ,(face-attribute 'default :font)
                            :fontset ,(face-attribute 'default :fontset)
+                           :weight ,(face-attribute 'default :weight)
                            :height ,(face-attribute 'default :height)))
            ;; Variable-width font
-           (vw           `(:fontset ,(face-attribute 'variable-pitch :fontset)
+           (vw           `(
+                           :fontset ,(face-attribute 'variable-pitch :fontset)
                            :font ,(face-attribute 'variable-pitch :font)
+                           :weight ,(face-attribute 'variable-pitch :weight)
                            :height ,(face-attribute 'variable-pitch :height)))
 
            (fheight      (face-attribute 'default :height))
