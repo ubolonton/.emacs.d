@@ -274,6 +274,8 @@
           ((t (,@fw ,@warning))))
          (font-lock-constant-face
           ((t (,@fw ,@constant))))            ; TODO: Different shade
+         (number-font-lock-face
+          ((t (,@fw ,@mutable))))
 
          (js2-function-param-face
           ((t ,param)))

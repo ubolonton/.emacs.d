@@ -24,6 +24,7 @@
          ace-jump-mode htmlize twittering-mode keyfreq
          ido-ubiquitous                 ; List-narrowing UI
          helm helm-cmd-t helm-swoop
+         number-font-lock-mode          ; Color numbers in code
          ;; TODO: Use & combine with eproject
          projectile                     ; Project management
          emms                           ; Music

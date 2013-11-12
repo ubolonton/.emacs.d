@@ -526,6 +526,9 @@
 ;; Fringe
 ;; (set-fringe-mode '(8 . 0))
 
+(ublt/set-up 'number-font-lock-mode
+  (add-hook 'prog-mode-hook (ublt/on-fn 'number-font-lock-mode)))
+
 ;;; XXX: Make this customizable
 ;;; XXX: It was removed from emacs-starter-kit?
 (unless (function 'esk-add-watchwords)
