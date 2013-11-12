@@ -44,10 +44,12 @@
                   inferior-moz-mode
                   inferior-octave-mode
                   inferior-ess-mode
+                  inferior-lisp-mode
+                  inferior-haskell-mode
+                  haskell-interactive-mode
                   grep-mode
                   pylookup-mode
-                  inferior-lisp-mode
-                  nrepl-mode nrepl-repl-mode
+                  cider-repl-mode
                   php-boris-mode))
     (add-to-list 'evil-insert-state-modes mode))
 
@@ -60,10 +62,13 @@
                   '(eshell-mode
                     sql-interactive-mode
                     erlang-shell-mode slime-repl-mode
-                    inferior-moz-mode inferior-octave-mode
+                    inferior-moz-mode
+                    inferior-octave-mode
                     inferior-emacs-lisp-mode
                     inferior-lisp-mode
-                    nrepl-mode nrepl-repl-mode
+                    inferior-haskell-mode
+                    haskell-interactive-mode
+                    cider-repl-mode
                     php-boris-mode))
       (goto-char (point-max))))
   (add-hook 'evil-insert-state-entry-hook 'ublt/repl-goto-prompt)

@@ -417,7 +417,7 @@
          (slime-repl-prompt-face
           ((t ,commitment)))
 
-         (nrepl-input-face
+         (cider-repl-input-face
           ((t (:background ,bg+2))))
 
          ;; Auto-complete & popup

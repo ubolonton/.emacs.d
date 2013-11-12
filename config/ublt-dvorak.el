@@ -647,9 +647,6 @@
   "C-c C-k" 'slime-load-file
   "C-c v"   'slime-load-file
   "C-c C-s" 'slime-switch-to-output-buffer)
-(ublt/keys 'nrepl nrepl-interaction-mode-map
-  "C-c v"   'nrepl-load-current-buffer
-  "C-c C-s" 'nrepl-switch-to-repl-buffer)
 (ublt/keys 'cider-mode cider-mode-map
   "C-c v"   'cider-load-current-buffer
   "C-c C-z" 'cider-src
