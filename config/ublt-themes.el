@@ -275,7 +275,7 @@
          (font-lock-constant-face
           ((t (,@fw ,@constant))))            ; TODO: Different shade
          (number-font-lock-face
-          ((t (,@fw ,@mutable))))
+          ((t (,@fw ,@constant))))
 
          (js2-function-param-face
           ((t ,param)))
@@ -854,7 +854,7 @@
          (ublt-twitter-meta-face
           ((t (:height 0.9 ,@shadowed))))
          (ublt/flymake-message-face
-          ((t (,commitment :bold t))))  ; TODO
+          ((t (,@commitment :bold t))))  ; TODO
          (eproject-ido-imenu-file-path
           ((t ,shadowed)))
          (ublt/emms-mode-line-face
@@ -883,6 +883,9 @@
           ((t (:foreground ,bg+1))))
          (skype--face-user-field
           ((t (:foreground ,blue-1 :bold t))))
+
+         (haskell-interactive-face-prompt
+          ((t (,@commitment))))
 
          ))
 

@@ -625,9 +625,16 @@
 (ublt/keys "comint" comint-mode-map
   "M-p" 'comint-previous-matching-input-from-input
   "M-n" 'comint-next-matching-input-from-input)
-(ublt/keys "haskell-mode" haskell-mode-map
-  "C-x C-d" nil)
-
+(ublt/keys 'haskell-mode haskell-mode-map
+  "C-x C-d" nil
+  "C-c C-z" nil
+  "C-c C-s" 'haskell-interactive-switch
+  "C-c C-l" 'haskell-process-load-file
+  "C-c C-b" nil
+  "C-c C-t" 'haskell-process-do-type
+  "C-c C-i" 'haskell-process-do-info
+  "C-c M-." nil
+  "C-c C-d" nil)
 (ublt/keys "lisp-mode" emacs-lisp-mode-map
   "C-c C-c" 'eval-defun
   "C-c C-r" 'eval-region

@@ -107,11 +107,7 @@
   (add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode))
 
 (ublt/set-up 'exec-path-from-shell
-  (exec-path-from-shell-initialize)
-  (exec-path-from-shell-copy-env "CLOJURESCRIPT_HOME"))
-
-(push "~/.virtualenvs/default/bin" exec-path)
-(setenv "PATH" (concat "~/.virtualenvs/default/bin" ":" (getenv "PATH")))
+  (exec-path-from-shell-initialize))
 
 ;;; General usability
 (require 'ublt-dvorak)
@@ -311,21 +307,13 @@
         (load-file "~/Programming/factor/misc/fuel/fu.el")))
   (error (message "No Factor")))
 
-
-;; Haskell
-(ublt/set-up 'haskell-mode
-  (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-  (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-  (add-to-list 'auto-mode-alist '("\\.hs$" . haskell-mode)))
-;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
-;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
-
 ;; Scheme
 (require 'quack)
 (setq quack-fontify-style nil)
 
-;; Erlang
 (require 'ublt-erlang)
+
+(require 'ublt-haskell)
 
 (require 'ublt-sql)
 
