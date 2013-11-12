@@ -67,8 +67,13 @@
   "-unknown-Fira Sans-light-normal-normal--*-*-*-*-m-*-fontset-ubltv")
 (create-fontset-from-fontset-spec ublt/variable-width-fontset)
 (ublt/assign-font ublt/variable-width-fontset
-  `(
-    ,(font-spec :family "DejaVu Sans"
+  ;; ;; For a more programmatic manipulation, use this and leave the
+  ;; ;; FONTSET-NAME blank (see `create-fontset-from-fontset-spec')
+  ;; `(,(font-spec :family "Fira Sans"
+  ;;               :weight 'light
+  ;;               :size 13.0)
+  ;;   ascii)
+  `(,(font-spec :family "DejaVu Sans"
                 :weight 'extra-light
                 :size 11.0              ; points
                 )
@@ -79,18 +84,22 @@
     vscii
     vscii-2
     tcvn-5712)
-  `(
-    ,(font-spec :family "Fira Sans" :weight 'light)
-    latin-iso8859-1)
-  )
+  `(,(font-spec :family "Fira Sans"
+                :weight 'light
+                :size 13.0)
+    latin-iso8859-1))
 
 ;;; Don't set :font/:fontset/:family alone. See the long explanation
-;;; section above
+;;; section above. And contray to whet the doc says, `font-spec'
+;;; cannot take a fontset as its `:family', like `set-face-attribute'
 (set-face-attribute 'variable-pitch nil
                     :fontset "fontset-ubltv"
-                    :font (font-spec :family "Fira Sans"
-                                     :weight 'light
-                                     :size 13.0)
+                    ;; This is determined from FONTSET-NAME part (see
+                    ;; `create-fontset-from-fontset-spec')
+                    :font "fontset-ubltv"
+                    ;; :font (font-spec :family "Fira Sans"
+                    ;;                  :weight 'light
+                    ;;                  :size 13.0)
                     ;; :height 130         ; 1/10 points
                     ;; :font (font-spec :family "Ubuntu Condensed"
                     ;;                  :weight 'extra-light
@@ -105,16 +114,12 @@
 ;;; FIX: Does not work with zooming provided by `face-remap' (maybe
 ;;; switching to `deftheme' would help?)
 
-(progn
-  ;; NOTE: Use (modify-all-frames-parameters nil ...) to reset font if there
-  ;; is "invalid font" error. Such bizarre API.
-  (set-face-attribute 'default nil
-                      :font (font-spec :family "Inconsolata"
-                                       :weight 'normal
-                                       :size 12.0)
-                      :fontset "fontset-ubltv")
-  (color-theme-ubolonton-dark))
-
+;; NOTE: Use (modify-all-frames-parameters nil ...) to reset font if there
+;; is "invalid font" error. Such bizarre API.
+(set-face-attribute 'default nil
+                    :font (font-spec :family "Inconsolata"
+                                     :weight 'normal
+                                     :size 12.0))
 
 (ublt/assign-font (face-attribute 'default :fontset)
   `(,(font-spec :family "Droid Sans Mono"
