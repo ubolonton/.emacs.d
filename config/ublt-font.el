@@ -67,12 +67,13 @@
   "-unknown-Fira Sans-light-normal-normal--*-*-*-*-m-*-fontset-ubltv")
 (create-fontset-from-fontset-spec ublt/variable-width-fontset)
 (ublt/assign-font ublt/variable-width-fontset
-  ;; ;; For a more programmatic manipulation, use this and leave the
-  ;; ;; FONTSET-NAME blank (see `create-fontset-from-fontset-spec')
-  ;; `(,(font-spec :family "Fira Sans"
-  ;;               :weight 'light
-  ;;               :size 13.0)
-  ;;   ascii)
+  ;; For a more programmatic manipulation, use this and leave the
+  ;; FONTSET-NAME blank (see `create-fontset-from-fontset-spec')
+  `(,(font-spec :family "Fira Sans"
+                :weight 'light
+                :size 13.0)
+    ascii)
+  ;; Vietnamese charsets
   `(,(font-spec :family "DejaVu Sans"
                 :weight 'extra-light
                 :size 11.0              ; points
@@ -87,7 +88,10 @@
   `(,(font-spec :family "Fira Sans"
                 :weight 'light
                 :size 13.0)
-    latin-iso8859-1))
+    ;; For Vietnamese characters already covered by extended latin
+    latin-iso8859-1
+    ;; Russian
+    cyrillic-iso8859-5))
 
 ;;; Don't set :font/:fontset/:family alone. See the long explanation
 ;;; section above. And contray to whet the doc says, `font-spec'
@@ -113,6 +117,9 @@
 
 ;;; FIX: Does not work with zooming provided by `face-remap' (maybe
 ;;; switching to `deftheme' would help?)
+
+;;; TODO: More aggressive prettification and now that we get this
+;;; thing and large unicode fonts (Quivira, Gentium, Doulos, Charis...)
 
 ;; NOTE: Use (modify-all-frames-parameters nil ...) to reset font if there
 ;; is "invalid font" error. Such bizarre API.
