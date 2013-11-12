@@ -35,12 +35,18 @@
 
 (case ublt/action
   ('upgrade
-   (message "Upgrading")
+   (message "Upgrading packages")
    (epl-upgrade))
+
+  ('update
+   (message "Updating index")
+   (package-refresh-contents))
+
   ('install
    (dolist (p ublt/args)
      (message "Installing `%s'" p)
      (package-install (intern p))))
+
   ('installed?
    (let ((p (intern (nth 2 argv))))
      (message
