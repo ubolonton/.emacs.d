@@ -146,7 +146,7 @@
 
 ;;; Old buffer clean up
 (ublt/set-up 'midnight
-  (setq clean-buffer-list-delay-general 21            ; 3 weeks
+  (setq clean-buffer-list-delay-general 7             ; days
         clean-buffer-list-delay-special (* 3 24 3600) ; 3 days
         )
   (add-to-list 'desktop-locals-to-save 'buffer-display-time))
