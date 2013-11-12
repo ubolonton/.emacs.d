@@ -68,8 +68,10 @@
 (defmacro ublt/keys (package map &rest mappings)
   (declare (indent 2))
   `(eval-after-load ,package
-     (quote (ublt/define-keys ,map
-              ,@mappings))))
+     (quote (progn
+              (ublt/define-keys ,map
+                ,@mappings)
+              (message "Updated keymap `%s'" ',map)))))
 
 
 ;;; Custom global bindings -------------------------------------------
@@ -648,6 +650,10 @@
 (ublt/keys 'nrepl nrepl-interaction-mode-map
   "C-c v"   'nrepl-load-current-buffer
   "C-c C-s" 'nrepl-switch-to-repl-buffer)
+(ublt/keys 'cider-mode cider-mode-map
+  "C-c v"   'cider-load-current-buffer
+  "C-c C-z" 'cider-src
+  "C-c C-s" nil)
 
 (ublt/keys "factor-mode" factor-mode-map
   "C-c C-c" 'fuel-eval-definition

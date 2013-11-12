@@ -50,4 +50,8 @@
   ;;   (add-to-list 'ac-modes 'nrepl-mode))
   )
 
+;;; @cider: making a keymap available without the mode being provided
+;;; is just fucking insane
+(ublt/set-up 'cider)
+
 (provide 'ublt-lisp)
