@@ -41,12 +41,13 @@
   (setq nrepl-popup-stacktraces nil
         nrepl-popup-stacktraces-in-repl t
         nrepl-use-pretty-printing t
-        nrepl-wrap-history t)
-  (ublt/set-up 'ac-nrepl
-    (add-hook 'nrepl-repl-mode-hook 'ac-nrepl-setup)
-    (add-hook 'nrepl-interaction-mode-hook 'ac-nrepl-setup)
-    (add-hook 'nrepl-repl-mode-hook 'enable-paredit-mode t)
-    (add-to-list 'ac-modes 'nrepl-mode)
-    (setq nrepl-history-file "~/.emacs.d/.nrepl.hist")))
+        nrepl-wrap-history t
+        nrepl-history-file "~/.emacs.d/.nrepl.hist")
+  (add-hook 'nrepl-repl-mode-hook 'enable-paredit-mode t)
+  ;; (ublt/set-up 'ac-nrepl
+  ;;   (add-hook 'nrepl-repl-mode-hook 'ac-nrepl-setup)
+  ;;   (add-hook 'nrepl-interaction-mode-hook 'ac-nrepl-setup)
+  ;;   (add-to-list 'ac-modes 'nrepl-mode))
+  )
 
 (provide 'ublt-lisp)
