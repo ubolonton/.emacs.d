@@ -4,44 +4,6 @@
 (eval-when-compile
   (require 'cl))
 
-(defvar ublt/fixed-width-fonts
-  (case system-type
-    ('darwin '("DejaVu Sans Mono-14" "Menlo-14" "Monaco-14"
-               "Consolas-15"))
-    ('gnu/linux '("Inconsolata-12" "Fira Mono-11" "DejaVu Sans Mono-10"))
-    (t '("Courier New-12" "Arial-12"))))
-
-(defvar ublt/variable-width-fonts
-  (case system-type
-    ('darwin '("Helvetica-16"))
-    ('gnu/linux '("Fira Sans light-13"))
-    (t '("Arial-12"))))
-
-(defun ublt/default-fixed-width-font ()
-  (first ublt/fixed-width-fonts))
-
-(defun ublt/default-variable-width-font ()
-  (first ublt/variable-width-fonts))
-
-;;; TODO: Refactor
-(defun ublt/toggle-fonts ()
-  (interactive)
-  (let* ((fonts ublt/fixed-width-fonts)
-         (cur-pos (get this-command 'pos))
-         (N (length fonts))
-         font)
-    (setq cur-pos (if cur-pos (% cur-pos N) 0))
-    (setq font (nth cur-pos fonts))
-    (modify-all-frames-parameters (list (cons 'font font)))
-    ;; FIX: Should be "current theme"
-    (color-theme-ubolonton-dark)
-    (message "Font: %s" font)
-    (put this-command 'pos (% (1+ cur-pos) N))))
-
-;;; Default font
-(let ((font (ublt/default-fixed-width-font)))
-  (modify-all-frames-parameters `((font . ,font))))
-
 
 ;;; Fontsets
 
@@ -101,8 +63,6 @@
       (dolist (charset charsets)
         (set-fontset-font fontset charset font nil)))))
 
-;;; TODO: find a way around the :size/:height distinction
-
 (defvar ublt/variable-width-fontset
   "-unknown-Fira Sans-light-normal-normal--*-*-*-*-m-*-fontset-ubltv")
 (create-fontset-from-fontset-spec ublt/variable-width-fontset)
@@ -128,32 +88,33 @@
 ;;; section above
 (set-face-attribute 'variable-pitch nil
                     :fontset "fontset-ubltv"
-                    :font "Fira Sans"
-                    :height 130         ; 1/10 points
-                    :weight 'light
-                    ;; :font "Ubuntu Condensed"
-                    ;; :height 135
-                    ;; :weight 'extra-light
+                    :font (font-spec :family "Fira Sans"
+                                     :weight 'light
+                                     :size 13.0)
+                    ;; :height 130         ; 1/10 points
+                    ;; :font (font-spec :family "Ubuntu Condensed"
+                    ;;                  :weight 'extra-light
+                    ;;                  :size 13.5)
                     )
-
-;; (delq (assoc ".*DejaVu Sans-.*" face-font-rescale-alist) face-font-rescale-alist)
-
-;; (dolist
-;;     (rescale '((".*DejaVu Sans-.*" . 0.9)))
-;;   (add-to-list 'face-font-rescale-alist rescale))
-
 
 ;;; The non-uniformity of face/font/fontset handling (normal vs.
 ;;; default) is so ugly. TODO: Make sure applying theme does not
 ;;; affect this (or somehow restore this after applying theme, or make
 ;;; this part of the theme)
 
-;;; FIX: Does not work with zooming of face-remap.el (maybe switching
-;;; to `deftheme' would help?)
+;;; FIX: Does not work with zooming provided by `face-remap' (maybe
+;;; switching to `deftheme' would help?)
 
-(set-face-attribute 'default nil
-                    :font "Inconsolata"
-                    :height 120)
+(progn
+  ;; NOTE: Use (modify-all-frames-parameters nil ...) to reset font if there
+  ;; is "invalid font" error. Such bizarre API.
+  (set-face-attribute 'default nil
+                      :font (font-spec :family "Inconsolata"
+                                       :weight 'normal
+                                       :size 12.0)
+                      :fontset "fontset-ubltv")
+  (color-theme-ubolonton-dark))
+
 
 (ublt/assign-font (face-attribute 'default :fontset)
   `(,(font-spec :family "Droid Sans Mono"
