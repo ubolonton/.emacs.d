@@ -1,0 +1,50 @@
+#! /bin/sh
+":"; exec emacs -Q --script "$0" -- "$@" # -*-emacs-lisp-*-
+
+;;; This approach does not allow additional parameter
+;; #!emacs --script
+
+;;; Some packages have installation troubles when a full Emacs
+;;; environment is running (with buffer hooks, loaded packages...). So
+;;; this script helps with installing packages in a somewhat "cleaner"
+;;; environment.
+
+;;; Note to self: the existence of this script is in no way an
+;;; endorsement of your wanton package inclusion. Clean them up!
+
+(message "Initializing packages")
+(require 'package)
+(dolist (source '(("marmalade" . "http://marmalade-repo.org/packages/")
+                  ("elpa" . "http://tromey.com/elpa/")
+                  ("melpa" . "http://melpa.milkbox.net/packages/")))
+  (add-to-list 'package-archives source t))
+(defvar ublt/package-archives package-archives)
+(package-initialize)
+
+(when (not (package-installed-p 'epl))
+  (package-install 'epl))
+(require 'epl)
+(setq package-archives ublt/package-archives)
+
+(defvar ublt/action (nth 1 argv))
+
+(defvar ublt/args (rest (rest argv)))
+
+(when ublt/action
+  (setq ublt/action (intern ublt/action)))
+
+(case ublt/action
+  ('upgrade
+   (message "Upgrading")
+   (epl-upgrade))
+  ('install
+   (dolist (p ublt/args)
+     (message "Installing `%s'" p)
+     (package-install (intern p))))
+  ('installed?
+   (let ((p (intern (nth 2 argv))))
+     (message
+      (if (epl-package-installed-p p)
+          "Package `%s' is installed"
+        "No `%s' is not installed")
+      p))))
