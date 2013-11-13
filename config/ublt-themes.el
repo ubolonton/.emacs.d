@@ -688,7 +688,7 @@
          (helm-header
           ((t (,@mutable :bold t))))    ; TODO
          (helm-source-header
-          ((t (,@mutable :bold t))))    ; TODO
+          ((t (,@vw ,@mutable :weight bold :height 1.5))))    ; TODO
          ;; XXX: Maybe I just don't believe in themes with narrow
          ;; selection of colors
          (helm-selection
