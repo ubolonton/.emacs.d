@@ -3,7 +3,7 @@
 ;; clojure-mode customization
 (ublt/set-up 'clojure-mode
   (add-to-list 'auto-mode-alist '("\\.dtm$" . clojure-mode))
-  (add-hook 'clojure-mode-hook (ublt/on 'paredit-mode) t)
+  (add-hook 'clojure-mode-hook (ublt/on-fn 'paredit-mode) t)
   ;; (define-clojure-indent
   ;;   (describe 'defun)
   ;;   (testing 'defun)
