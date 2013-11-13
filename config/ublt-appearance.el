@@ -385,8 +385,9 @@
                (auto-fill-function        "  ⏎")
                (auto-complete-mode        "  αc" auto-complete)
                (rainbow-mode              "  ❂" rainbow-mode)
-               (isearch                   "  Σ")
                (anzu-mode                 "  Σ")
+               (global-anzu-mode          "  Σ")
+               (isearch                   "  Σ")
                (slime-mode                "SLIME")
                (haskell-indentation-mode  "･" haskell-indentation)
                ;; (narrow                    " η")
@@ -545,6 +546,8 @@
   (volatile-highlights-mode +1))
 
 (ublt/set-up 'anzu
+  (setq anzu-minimum-input-length 2
+        anzu-search-threshold 100)
   (global-anzu-mode +1))
 
 (provide 'ublt-appearance)
