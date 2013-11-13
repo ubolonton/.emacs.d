@@ -657,7 +657,10 @@
 (ublt/keys 'cider-mode cider-mode-map
   "C-c v"   'cider-load-current-buffer
   "C-c C-z" 'cider-src
-  "C-c C-s" nil)
+  "C-c C-s" 'cider-switch-to-relevant-repl-buffer)
+(ublt/keys 'cider-repl-mode cider-repl-mode-map
+  "C-c C-z" 'cider-src
+  "C-c C-s" 'cider-switch-to-last-clojure-buffer)
 
 (ublt/keys "factor-mode" factor-mode-map
   "C-c C-c" 'fuel-eval-definition
