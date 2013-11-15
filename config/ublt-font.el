@@ -4,6 +4,8 @@
 (eval-when-compile
   (require 'cl))
 
+(require 'ublt-util)
+
 
 ;;; Fontsets
 
@@ -63,6 +65,16 @@
       (dolist (charset charsets)
         (set-fontset-font fontset charset font nil)))))
 
+;;; XXX: When a fontset specifies sizes, Emacs ignores faces' relative
+;;; `:height' except for the default font in the fontset.
+;;; `face-font-rescale-alist' is used instead, which has the
+;;; disadvantage of not allowing rescaling individual characters. For
+;;; now this is acceptable, since I haven't needed to use 1 font at 2
+;;; different sizes yet.
+(dolist (rescale '((".*DejaVu Sans-.*" 0.95)))
+  (destructuring-bind (font size) rescale
+    (ublt/assoc! 'face-font-rescale-alist font size)))
+
 (defvar ublt/variable-width-fontset
   "-unknown-Fira Sans-light-normal-normal--*-*-*-*-m-*-fontset-ubltv")
 (create-fontset-from-fontset-spec ublt/variable-width-fontset)
@@ -71,12 +83,13 @@
   ;; FONTSET-NAME blank (see `create-fontset-from-fontset-spec')
   `(,(font-spec :family "Fira Sans"
                 :weight 'light
-                :size 13.0)
+                ;; :size 13.0
+                )
     ascii)
   ;; Vietnamese charsets
   `(,(font-spec :family "DejaVu Sans"
                 :weight 'extra-light
-                :size 11.0              ; points
+                ;; :size 11.0              ; points
                 )
     ;; ,(font-spec :family "Arial" :weight 'bold)
     vietnamese-viscii-upper
@@ -85,13 +98,20 @@
     vscii
     vscii-2
     tcvn-5712)
+  ;; ;; XXX WTF: This would not work, failing with "Can't set a font
+  ;; ;; for partial ASCII range"
+  ;; `(,(font-spec :family "DejaVu Sans")
+  ;;   (? . ? ))
   `(,(font-spec :family "Fira Sans"
                 :weight 'light
-                :size 13.0)
+                ;; :size 13.0
+                )
     ;; For Vietnamese characters already covered by extended latin
     latin-iso8859-1
     ;; Russian
     cyrillic-iso8859-5))
+
+
 
 ;;; Don't set :font/:fontset/:family alone. See the long explanation
 ;;; section above. And contray to whet the doc says, `font-spec'
@@ -128,9 +148,15 @@
                                      :weight 'normal
                                      :size 12.0))
 
+(dolist (rescale '((".*Fira Mono-.*" 0.9)
+                   (".*Droid Sans Mono-.*" 0.9)))
+  (destructuring-bind (font size) rescale
+    (ublt/assoc! 'face-font-rescale-alist font size)))
+
 (ublt/assign-font (face-attribute 'default :fontset)
   `(,(font-spec :family "Droid Sans Mono"
-                :size 10.8)
+                ;; :size 10.8
+                )
     vietnamese-viscii-upper
     vietnamese-viscii-lower
     viscii
@@ -138,18 +164,22 @@
     vscii-2
     tcvn-5712)
   `(,(font-spec :family "Fira Mono"
-                :size 10.8)
+                ;; :size 10.8
+                )
     cyrillic-iso8859-5)
   `(,(font-spec :family "Ume Mincho"
-                :size 12.0)
+                ;; :size 12.0
+                )
     (?▸ . ?▸))
   `(,(font-spec :family "Symbol"
-                :size 12.0)
+                ;; :size 12.0
+                )
     (?⇒ . ?⇒)
     (?⇐ . ?⇐))
   `(,(font-spec :family "Droid Sans Mono"
                 :weight 'normal
-                :size 10.8)
+                ;; :size 10.8
+                )
     (?λ . ?λ)))
 
 

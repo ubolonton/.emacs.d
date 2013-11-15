@@ -188,4 +188,14 @@ and the point, not include the isearch word."
       (ding)))
   (isearch-search-and-update))
 
+
+;;; FIX: Use `dash' library
+(defun ublt/assoc! (list-var key val)
+  (let* ((list (symbol-value list-var))
+         (entry (assoc key list)))
+    (if (null entry)
+        (add-to-list list-var (cons key val))
+      (setcdr entry val))))
+
+
 (provide 'ublt-util)
