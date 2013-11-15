@@ -109,6 +109,36 @@
     (purple      "#805DBB" "#875F87")
     ))
 
+(defface ublt/default-fixed-width
+  '((t (:inherit default)))
+   "")
+
+(defface ublt/default-variable-width
+  '((t (:inherit variable-pitch)))
+  "")
+
+(defvar ublt/text-scale-fw-remapping nil)
+(make-variable-buffer-local 'ublt/text-scale-fw-remapping)
+
+(defvar ublt/text-scale-vw-remapping nil)
+(make-variable-buffer-local 'ublt/text-scale-vw-remapping)
+
+(defadvice text-scale-mode (after scale-base-faces activate)
+  (let ((ratio (car (last text-scale-mode-remapping))))
+    (message "Scaling ratio: %s" ratio)
+    (when ublt/text-scale-fw-remapping
+      (face-remap-remove-relative ublt/text-scale-fw-remapping))
+    (when ublt/text-scale-vw-remapping
+      (face-remap-remove-relative ublt/text-scale-vw-remapping))
+    (when ratio
+      (setq ublt/text-scale-fw-remapping
+            (face-remap-add-relative 'ublt/default-fixed-width
+                                     :height ratio))
+      (setq ublt/text-scale-vw-remapping
+            (face-remap-add-relative 'ublt/default-variable-width
+                                     :height ratio)))
+    (force-window-update (current-buffer))))
+
 
 ;;;###autoload
 (defun color-theme-ubolonton-dark ()
@@ -202,21 +232,27 @@
            (reset        `(:weight normal :slant normal :underline nil :box nil
                                    :strike-through nil :inverse-video nil :overline nil))
 
+           ;; FIX: Using this make faces unscalable
            ;; Fixed-width font
-           (fw           `(
+           (fw0           `(
                            :font ,(face-attribute 'default :font)
                            :fontset ,(face-attribute 'default :fontset)
-                           :weight ,(face-attribute 'default :weight)
-                           :height ,(face-attribute 'default :height)))
+                           ;; :weight ,(face-attribute 'default :weight)
+                           ;; :height ,(face-attribute 'default :height)
+                           ))
            ;; Variable-width font
-           (vw           `(
+           (vw0           `(
                            :fontset ,(face-attribute 'variable-pitch :fontset)
                            :font ,(face-attribute 'variable-pitch :font)
-                           :weight ,(face-attribute 'variable-pitch :weight)
-                           :height ,(face-attribute 'variable-pitch :height)))
+                           ;; :weight ,(face-attribute 'variable-pitch :weight)
+                           ;; :height ,(face-attribute 'variable-pitch :height)
+                           ))
 
-           (fheight      (face-attribute 'default :height))
-           (ffontset     (face-attribute 'default :fontset))
+           (fw             '(:inherit ublt/default-fixed-width))
+           (vw             '(:inherit ublt/default-variable-width))
+
+           ;; (fheight      (face-attribute 'default :height))
+           ;; (ffontset     (face-attribute 'default :fontset))
            )
       ;; (message "Before %s" (face-attribute 'default :height))
 
@@ -233,9 +269,23 @@
          ;; Variables
          ((ibus-cursor-color . (,green ,yellow ,yellow)))
 
-         (default ((t (,@fw :background ,bg :foreground ,fg))))
+         (default ((t (,@fw0))))
          ;; FIX: Height should be font-dependent in general
-         (variable-pitch ((t (,@vw :background ,bg :foreground ,fg))))
+         (variable-pitch ((t (,@vw0))))
+
+         ;; Most faces that wish to always use
+         ;; fixed-width/variable-width font should inherit these, not
+         ;; `default', which gets font remapped. Because we do want
+         ;; these faces to participate in scale remapping, we use
+         ;; dynamic inheritance instead of static mixin, so that it's
+         ;; suffice to scale remap 2 faces. You may wonder where
+         ;; is is desirable to mix fixed-width/variable-width fonts;
+         ;; Org-mode, markdown, info... and to a lesser degree, html
+         ;; code. Basically places that mix prose and code.
+         (ublt/default-fixed-width
+          ((t (,@fw0))))
+         (ublt/default-variable-width
+          ((t (,@vw0))))
 
          (border-glyph ((t (nil))))     ; What's this?
          (buffers-tab ((t (:background ,bg :foreground ,fg)))) ; What's this?
@@ -889,16 +939,16 @@
 
          ))
 
-      ;; Color theme seems to mess this up, restore it
-      ;; (message "After %s" (face-attribute 'default :height))
-      ;; (message "%s" fw)
-      (set-face-attribute 'default nil :height fheight)
-      ;; This does not work actually. Emacs is bad at handling default vs. normal
-      ;; face/font/fontset.
-      (set-face-attribute 'default nil :fontset ffontset)
-      ;; This does not seem to be messed up anymore
-      ;; (set-face-font 'variable-pitch variable-pitch-family)
-      ;; (message "Done %s" (face-attribute 'default :height))
+      ;; ;; Color theme seems to mess this up, restore it
+      ;; ;; (message "After %s" (face-attribute 'default :height))
+      ;; ;; (message "%s" fw)
+      ;; (set-face-attribute 'default nil :height fheight)
+      ;; ;; This does not work actually. Emacs is bad at handling default vs. normal
+      ;; ;; face/font/fontset.
+      ;; (set-face-attribute 'default nil :fontset ffontset)
+      ;; ;; This does not seem to be messed up anymore
+      ;; ;; (set-face-font 'variable-pitch variable-pitch-family)
+      ;; ;; (message "Done %s" (face-attribute 'default :height))
 
       (setq
        hl-paren-colors `("Orange" ,yellow "Greenyellow"
