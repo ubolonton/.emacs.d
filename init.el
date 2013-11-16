@@ -271,7 +271,6 @@
 ;; (ublt/add-path "helm")
 (require 'ublt-helm)
 
-(ublt/add-path "magit")
 (ublt/add-path "git-emacs")
 (require 'ublt-git)
 
