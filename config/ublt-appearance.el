@@ -46,6 +46,7 @@
                   markdown-mode-hook
                   html-mode-hook
                   dired-mode-hook
+                  git-commit-mode-hook
                   twittering-edit-mode-hook))
     (add-hook hook (ublt/on-fn 'variable-pitch-mode)))
   (defun ublt/variable-pitch-if-fundamental ()
