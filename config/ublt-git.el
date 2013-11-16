@@ -31,7 +31,4 @@
         (todochiku-icon 'social))
        ad-do-it)))
 
-;; git-emacs (some complementary features)
-;; (require 'git-emacs)
-
 (provide 'ublt-git)

@@ -1,6 +1,3 @@
-[submodule "lib/git-emacs"]
-	path = lib/git-emacs
-	url = http://github.com/tsgates/git-emacs.git
 [submodule "lib/twittering-mode"]
 	path = lib/twittering-mode
 	url = http://github.com/hayamiz/twittering-mode.git
