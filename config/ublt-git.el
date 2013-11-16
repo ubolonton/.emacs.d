@@ -3,9 +3,10 @@
 ;; understand why emacs-starter-kit set it as a string.
 (require 'ublt-util)
 
-(require 'magit)
-(require 'magit-svn)
-(setq magit-diff-options '("-w"))
+(ublt/set-up 'magit
+  (setq magit-diff-options '("-w"))
+  (ublt/set-up 'magit-svn))
+
 ;; magit status buffer should not be a pop-up (in the sense of not
 ;; volatile or temporary like helm buffer). This is important for
 ;; small screen such as mine.

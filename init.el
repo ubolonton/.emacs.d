@@ -37,6 +37,8 @@
          anzu                           ; Match count for search
          info+
          pabbrev                        ; TODO: Find better alternative
+         ;; git
+         magit magit-svn
          ;; Vim emulation
          evil surround
          ;; Appearance
