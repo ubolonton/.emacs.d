@@ -1,3 +1,6 @@
+;;; For browsing Emacs's C source. This must be set early.
+(setq source-directory "~/Programming/Tools/emacs")
+
 (add-to-list 'load-path "~/.emacs.d/config")
 (require 'ublt-util)
 
