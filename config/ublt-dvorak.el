@@ -740,11 +740,11 @@
   "M-l"        'move-to-window-line-top-bottom
   "C-c C-c"    'dired-toggle-read-only)
 
-(ublt/keys "magit" magit-mode-map
+(ublt/keys 'magit magit-mode-map
   "S-SPC" 'magit-show-item-or-scroll-down)
-(ublt/keys "magit" magit-log-edit-mode-map
-  "s-s"     'magit-log-edit-commit
-  "C-x C-s" 'magit-log-edit-commit)
+(ublt/keys 'git-commit-mode git-commit-mode-map
+  "s-s"     'git-commit-commit
+  "C-x C-s" 'git-commit-commit)
 
 (eval-after-load "ido"
   '(progn
