@@ -19,9 +19,6 @@
 [submodule "lib/epresent"]
 	path = lib/epresent
 	url = https://github.com/technomancy/epresent.git
-[submodule "lib/swank-clojure-extra"]
-	path = lib/swank-clojure-extra
-	url = https://github.com/vu3rdd/swank-clojure-extra.git
 [submodule "lib/emacs-skype"]
 	path = lib/emacs-skype
 	url = https://github.com/kiwanami/emacs-skype.git
