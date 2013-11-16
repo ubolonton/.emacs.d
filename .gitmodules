@@ -1,6 +1,3 @@
-[submodule "lib/twittering-mode"]
-	path = lib/twittering-mode
-	url = http://github.com/hayamiz/twittering-mode.git
 [submodule "lib/textmate.el"]
 	path = lib/textmate.el
 	url = http://github.com/defunkt/textmate.el.git
