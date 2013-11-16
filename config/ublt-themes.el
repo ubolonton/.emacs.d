@@ -219,6 +219,7 @@
            (reference    `(:foreground ,blue-2))
 
            (dimmed-hl    `(:background ,bg+1))
+           ;; FIX: Why `:weight' `light'?
            (normal-hl    `(:background ,bg+2 :weight light))
            (strong-hl    `(:background ,bg+3))
            (special-hl   `(:background ,blue-3))
@@ -295,7 +296,7 @@
          (font-lock-builtin-face
           ((t (,@fw ,@constant))))
          (font-lock-comment-face
-          ((t (,@fw ,@note :slant italic))))
+          ((t (,@vw ,@note :slant italic))))
          (font-lock-comment-delimiter-face
           ((t (:inherit font-lock-comment-face ,@shadowed))))
          (font-lock-doc-string-face
@@ -313,7 +314,7 @@
          (font-lock-string-face
           ((t (,@fw ,@string))))
          (font-lock-doc-face
-          ((t (,@fw ,@string))))
+          ((t (,@vw ,@string :slant italic))))
          (font-lock-type-face
           ((t (,@fw ,@type))))
          (font-lock-preprocessor-face
@@ -387,6 +388,10 @@
          (pp^L-highlight
           ((t (,@note :bold t))))
          (lazy-highlight
+          ((t ,normal-hl)))
+         ;; FIX: `idle-highlight' uses `highlight-regexp' which sets
+         ;; instead of merging face. Fix that. Merging is better
+         (idle-highlight
           ((t ,normal-hl)))
 
          (eval-sexp-fu-flash
@@ -645,7 +650,7 @@
          (magit-item-highlight
           ((t ,dimmed-hl)))
          (magit-section-title
-          ((t (,@mutable :weight bold)))) ; TODO
+          ((t (,@vw ,@mutable :weight bold)))) ; TODO
          (magit-branch
           ((t ,more)))
          (magit-diff-file-header
@@ -671,11 +676,13 @@
          (magit-log-head-label-tags
           ((t (:inherit magit-tag))))
          (magit-log-author
-          ((t ,context)))
+          ((t (,@vw ,@context))))
          (magit-log-date
-          ((t ,dimmed)))
+          ((t (,@vw ,@dimmed :height 0.9))))
          (magit-log-author-date-cutoff
           ((t (:inherit magit-log-author :weight bold))))
+         (magit-log-message
+          ((t (,@vw :slant italic))))
 
          ;; info
          (info-xref
