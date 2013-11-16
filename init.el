@@ -252,13 +252,7 @@
 ;; (put 'python-mode 'pabbrev-global-mode-excluded-modes t)
 ;; (global-pabbrev-mode +1)
 
-;;; TODO: Hack on this project
-;; epresent
-(ublt/add-path "epresent")
-(require 'epresent)
-
 ;; XXX: This makes python setup unhappy. (Both use C-x p)
-;; (ublt/add-path "bookmark-plus")
 ;; (require 'bookmark+)
 
 ;; (require 'key-chord)

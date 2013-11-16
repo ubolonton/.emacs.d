@@ -1,21 +1,9 @@
-[submodule "lib/textmate.el"]
-	path = lib/textmate.el
-	url = http://github.com/defunkt/textmate.el.git
 [submodule "lib/pylookup"]
 	path = lib/pylookup
 	url = http://github.com/tsgates/pylookup.git
-[submodule "lib/bookmark-plus"]
-	path = lib/bookmark-plus
-	url = https://github.com/emacsmirror/bookmark-plus.git
-[submodule "lib/find-file-in-project"]
-	path = lib/find-file-in-project
-	url = https://github.com/technomancy/find-file-in-project.git
 [submodule "lib/eproject"]
 	path = lib/eproject
 	url = https://github.com/jrockway/eproject.git
-[submodule "lib/epresent"]
-	path = lib/epresent
-	url = https://github.com/technomancy/epresent.git
 [submodule "lib/emacs-skype"]
 	path = lib/emacs-skype
 	url = https://github.com/kiwanami/emacs-skype.git
