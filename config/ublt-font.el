@@ -71,7 +71,7 @@
 ;;; disadvantage of not allowing rescaling individual characters. For
 ;;; now this is acceptable, since I haven't needed to use 1 font at 2
 ;;; different sizes yet.
-(dolist (rescale '((".*DejaVu Sans-.*" 0.95)))
+(dolist (rescale '((".*DejaVu Sans-.*" 0.96)))
   (destructuring-bind (font size) rescale
     (ublt/assoc! 'face-font-rescale-alist font size)))
 
@@ -131,12 +131,9 @@
                     )
 
 ;;; The non-uniformity of face/font/fontset handling (normal vs.
-;;; default) is so ugly. TODO: Make sure applying theme does not
+;;; default) is so ugly. TODO FIX: Make sure applying theme does not
 ;;; affect this (or somehow restore this after applying theme, or make
 ;;; this part of the theme)
-
-;;; FIX: Does not work with zooming provided by `face-remap' (maybe
-;;; switching to `deftheme' would help?)
 
 ;;; TODO: More aggressive prettification and now that we get this
 ;;; thing and large unicode fonts (Quivira, Gentium, Doulos, Charis...)
@@ -146,13 +143,17 @@
 (set-face-attribute 'default nil
                     :font (font-spec :family "Inconsolata"
                                      :weight 'normal
-                                     :size 12.0))
+                                     :size 12.0
+                                     ))
 
 (dolist (rescale '((".*Fira Mono-.*" 0.9)
                    (".*Droid Sans Mono-.*" 0.9)))
   (destructuring-bind (font size) rescale
     (ublt/assoc! 'face-font-rescale-alist font size)))
 
+;;; FIX: Somehow variable-pitch font gets messed up after each theme
+;;; application as well, and either evaluation this or
+;;; `set-face-attribute' on `variable-pitch' again fixes that!?!?!
 (ublt/assign-font (face-attribute 'default :fontset)
   `(,(font-spec :family "Droid Sans Mono"
                 ;; :size 10.8
