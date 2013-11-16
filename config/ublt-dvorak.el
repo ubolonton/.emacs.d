@@ -309,6 +309,10 @@
   "<XF86Reload>"  'emms-pause
 
   "M-TAB"         'auto-complete       ; Don't use completion-at-point
+
+  ;; TODO: Something (were upcase/downcase region)
+  "C-x C-u"       'nil
+  "C-x C-l"       'nil
   )
 
 
