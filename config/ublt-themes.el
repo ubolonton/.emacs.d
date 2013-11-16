@@ -683,6 +683,28 @@
           ((t (:inherit magit-log-author :weight bold))))
          (magit-log-message
           ((t (,@vw :slant italic))))
+         (magit-key-mode-switch-face
+          ((t (:inherit font-lock-type-face))))
+         ;; TODO
+         (magit-blame-header
+          ((t (:inherit magit-header :background ,bg+2 :foreground ,fg))))
+         ;; (magit-blame-sha1
+         ;;  ((t ())))
+         ;; (magit-blame-culprit
+         ;;  ((t ())))
+         ;; (magit-blame-time
+         ;;  ((t ())))
+         ;; (magit-blame-subject
+         ;;  ((t ())))
+
+         ;; (git-commit-summary-face
+         ;;  ((t (:height 1.05 :weight bold))))
+         (git-commit-summary-face
+          ((t (:inherit magit-log-message))))
+         (git-commit-overlong-summary-face
+          ((t (:inherit git-commit-summary-face :foreground ,red))))
+         (git-commit-nonempty-second-line-face
+          ((t (:inherit flymake-errline))))
 
          ;; info
          (info-xref
