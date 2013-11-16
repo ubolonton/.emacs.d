@@ -4,13 +4,18 @@
 (require 'ublt-util)
 
 (ublt/set-up 'magit
-  (setq magit-diff-options '("-w"))
-  (ublt/set-up 'magit-svn))
+  (setq magit-diff-options '("-w")      ;TODO: Check git-diff options
+        magit-status-verbose-untracked nil
+        magit-remote-ref-format 'remote-slash-branch
+        magit-restore-window-configuration t
+        ;; magit status buffer should not be a pop-up (in the sense of
+        ;; not volatile or temporary like helm buffer). This is
+        ;; important for small screen such as mine.
+        magit-status-buffer-switch-function 'switch-to-buffer
+        ;; TODO: Face
+        magit-diff-refine-hunk 'all))
 
-;; magit status buffer should not be a pop-up (in the sense of not
-;; volatile or temporary like helm buffer). This is important for
-;; small screen such as mine.
-(setq magit-status-buffer-switch-function 'switch-to-buffer)
+(ublt/set-up 'magit-svn)
 
 ;; ;;; Messages all the sync git invocations
 ;; (defadvice magit-git-insert (around show-sync-cmd activate)

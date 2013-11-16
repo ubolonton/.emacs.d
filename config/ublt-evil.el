@@ -39,6 +39,7 @@
   (dolist (mode '(sql-interactive-mode
                   twittering-edit-mode
                   magit-log-edit-mode
+                  git-commit-mode
                   erlang-shell-mode
                   dired-mode
                   inferior-moz-mode
