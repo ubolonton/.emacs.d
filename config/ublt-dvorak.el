@@ -320,7 +320,8 @@
 (ublt/keys "help-mode" help-mode-map
   "M-s-h" 'help-go-back
   "M-s-n" 'help-go-forward
-  "C-f"   'help-follow-symbol)
+  "C-f"   'help-follow-symbol
+  "M-."   'elisp-slime-nav-find-elisp-thing-at-point)
 
 (ublt/keys "info" Info-mode-map
   "M-s-h" 'Info-history-back
