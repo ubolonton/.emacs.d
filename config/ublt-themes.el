@@ -230,7 +230,7 @@
 
            (status       `(:background ,cyan-2))
 
-           (reset        `(:weight unspecified :slant normal :underline nil :box nil
+           (reset        `(:weight normal :slant normal :underline nil :box nil
                                    :strike-through nil :inverse-video nil :overline nil))
 
            ;; FIX: Using this make faces unscalable
@@ -596,10 +596,6 @@
           ((t ,plus)))
          (diff-removed
           ((t ,minus)))
-         (diff-refine-added
-          ((t (:inherit diff-added :background ,bg+2))))
-         (diff-refine-removed
-          ((t (:inherit diff-removed :background ,bg+2))))
          (diff-context
           ((t ,context)))
          (diff-indicator-added
@@ -921,9 +917,7 @@
           ((t ,param)))                 ; TODO
 
          (ace-jump-face-foreground
-          ((t (,@warning ,@reset))))
-         (ace-jump-face-background
-          ((t (:foreground ,bg+3))))
+          ((t (,@reset ,@warning))))
 
          (flymake-errline
           ((t ,error-hl)))
