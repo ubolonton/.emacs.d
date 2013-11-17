@@ -265,94 +265,90 @@
 (defface ublt/mode-line-major-mode
   '((t :bold t))
   "Face for mode-line major mode string")
+(defface ublt/mode-line-clock
+  '((t :bold t))
+  "Face for mode-line clock")
 
-;; (ublt/set-up 'powerline
-;;   (defpowerline buffer-id (propertize (car (propertized-buffer-identification "%12b"))
-;;                                       'face 'ublt/mode-line-major-mode))
-;;   (defun ublt/pwml-buffer-id (side color1 &optional color2)
-;;     (propertize (powerline-buffer-id side color1 color2)
-;;                 'face 'ublt/mode-line-major-mode))
-;;   (defpowerline row "%l")
-;;   (defpowerline column "%c")
-;;   (defpowerline narrow "%n")
+(ublt/set-up 'powerline
+  ;; FIX: This code duplicates powerline, which duplicates Emacs'
+  (defpowerline ublt/powerline-narrow-indicator
+    (let (real-point-min real-point-max)
+      (save-excursion
+        (save-restriction
+          (widen)
+          (setq real-point-min (point-min)
+                real-point-max (point-max))))
+      (when (or (/= real-point-min (point-min))
+                (/= real-point-max (point-max)))
+        (propertize "η"
+                    'mouse-face 'mode-line-highlight
+                    'help-echo "mouse-1: Remove narrowing from the current buffer"
+                    'local-map (make-mode-line-mouse-map
+                                'mouse-1 'mode-line-widen)))))
 
-;;   (setq-default mode-line-format
-;;                 '("%e"
-;;                   ;; (:eval (concat
-;;                   ;;         ;; mode-line-mule-info
-;;                   ;;         (powerline-rmw            'left   nil  )
-;;                   ;;         (ublt/pwml-buffer-id      'left   nil  powerline-color1  )
-;;                   ;;         (powerline-major-mode     'left        powerline-color1  )
-;;                   ;;         (powerline-minor-modes    'left        powerline-color1  )
-;;                   ;;         (powerline-narrow         'left        powerline-color1  powerline-color2  )
+  (defpowerline ublt/powerline-clock
+    (propertize (format-time-string "[%H:%M %d/%m]")
+                'face 'ublt/mode-line-clock
+                'help-echo (concat (format-time-string "%c") "; "
+                                   (emacs-uptime "Uptime: %hh"))))
 
-;;                   ;;         (powerline-vc             'center                        powerline-color2  )
-;;                   ;;         (powerline-make-fill                                     powerline-color2  )
+  (defun ublt/powerline ()
+    (interactive)
+    (setq-default
+     mode-line-format
+     ;; ("%e" mode-line-front-space
+     ;;  mode-line-mule-info
+     ;;  mode-line-client
+     ;;  mode-line-modified
+     ;;  mode-line-remote
+     ;;  mode-line-frame-identification
+     ;;  mode-line-buffer-identification
+     ;;  "   " mode-line-position
+     ;;  (vc-mode vc-mode)
+     ;;  "  " mode-line-modes
+     ;;  mode-line-misc-info
+     ;;  mode-line-end-spaces)
+     '("%e"
+       (:eval
+        (let* ((active (powerline-selected-window-active))
+               (mode-line (if active 'mode-line 'mode-line-inactive)))
+          (list (powerline-raw mode-line-mule-info)
+                (powerline-raw mode-line-remote)
+                (powerline-raw mode-line-modified)
 
-;;                   ;;         (powerline-row            'right       powerline-color1  powerline-color2  )
-;;                   ;;         (powerline-make-text      " : "        powerline-color1  )
-;;                   ;;         (powerline-column         'right       powerline-color1  )
-;;                   ;;         (powerline-percent        'right  nil  powerline-color1  )
-;;                   ;;         (powerline-buffer-size    'right  nil)
-;;                   ;;         (powerline-make-text      "  "    nil  )))
+                (powerline-raw " ")
+                (powerline-buffer-size)
 
-;;                   mode-line-mule-info
-;;                   ;; mode-line-client
-;;                   mode-line-modified
-;;                   mode-line-remote
-;;                   ;; mode-line-frame-identification
-;;                   ))
-;;   )
+                (powerline-raw " ")
+                (powerline-raw mode-line-buffer-identification)
 
-(setq mode-line-modes
-      '(
-        #("%[" 0 2
-          (help-echo "Recursive edit, type C-M-c to get out"))
-        #("(" 0 1
-          (help-echo "mouse-1: Select (drag to resize)\nmouse-2: Make current window occupy the whole frame\nmouse-3: Remove current window from display"))
-        (:propertize
-         ("" mode-name)
-         face ublt/mode-line-major-mode
-         mouse-face mode-line-highlight
-         help-echo "Major mode\nmouse-1: Display major mode menu\nmouse-2: Show help for major mode\nmouse-3: Toggle minor modes"
-         local-map (keymap (mode-line keymap
-                                      (mouse-2 . describe-mode)
-                                      (down-mouse-1 menu-item "Menu Bar" ignore :filter
-                                                    (lambda
-                                                      (_)
-                                                      (mouse-menu-major-mode-map))))))
-        ("" mode-line-process)
-        #("%n" 0 2
-          (local-map (keymap
-                      (mode-line keymap
-                                 (mouse-2 . mode-line-widen)))
-                     mouse-face mode-line-highlight help-echo "mouse-2: Remove narrowing from the current buffer"))
-        (:propertize
-         ("" minor-mode-alist)
-         mouse-face mode-line-highlight
-         help-echo "Minor mode\nmouse-1: Display minor mode menu\nmouse-2: Show help for minor mode\nmouse-3: Toggle minor modes"
-         local-map (keymap (mode-line keymap
-                                      (mouse-2 . mode-line-minor-mode-help)
-                                      (down-mouse-1 . mouse-minor-mode-menu))))
+                (powerline-raw " ")
+                (ublt/powerline-narrow-indicator)
 
-        #(")" 0 1
-          (help-echo "mouse-1: Select (drag to resize)\nmouse-2: Make current window occupy the whole frame\nmouse-3: Remove current window from display"))
-        #("%]" 0 2
-          (help-echo "Recursive edit, type C-M-c to get out"))
-        #(" " 0 1
-          (help-echo "mouse-1: Select (drag to resize)\nmouse-2: Make current window occupy the whole frame\nmouse-3: Remove current window from display"))
-        ;; XXX: Not really about modes
-        (:eval (propertize (format-time-string "[%H:%M %d/%m]")
-                           'face 'bold
-                           'help-echo (concat (format-time-string "%c; ") (emacs-uptime "Uptime: %hh"))))
+                (powerline-raw " ")
+                (powerline-raw evil-mode-line-tag)
 
-        ))
+                (powerline-raw " ")
+                (powerline-raw "%4l" 'ublt/default-fixed-width) ; line
+                (powerline-raw ":" 'ublt/default-fixed-width)
+                (powerline-raw "%2c" 'ublt/default-fixed-width) ; column
+                (powerline-raw " " 'ublt/default-fixed-width)
+                (powerline-raw "%p" 'ublt/default-fixed-width) ; percent
 
-(list
-       "("
-       '(:eval (propertize "%m" 'face 'ublt/mode-line-major-mode))
-       minor-mode-alist
-       ")")
+                (powerline-raw " ")
+                (powerline-vc)
+
+                (powerline-raw " ")
+                (powerline-major-mode 'ublt/mode-line-major-mode)
+                (powerline-raw " ")
+                (powerline-minor-modes mode-line)
+
+                (powerline-raw " ")
+                (ublt/powerline-clock)
+
+                (powerline-raw mode-line-misc-info)))))))
+
+  (ublt/powerline))
 
 
 ;;; Bigger minibuffer text
@@ -377,6 +373,7 @@
                  (error (message (format "Error diminishing \"%s\": %s" ,mode-name err)))))
           (diminish mode-name display-text))
       (error (message (format "Error diminishing \"%s\": %s" mode-name err)))))
+  ;; mode name - displayed text - feature name (file name)
   (dolist (m '((paredit-mode              "  (Π)"   paredit)
                (eproject-mode             " ePj" eproject)
                (projectile-mode           "  Πρ" projectile)
@@ -388,14 +385,13 @@
                (auto-fill-function        "  ⏎")
                (auto-complete-mode        "  αc" auto-complete)
                (rainbow-mode              "  ❂" rainbow-mode)
-               (anzu-mode                 "  Σ")
-               (global-anzu-mode          "  Σ")
+               (anzu-mode                 "  Σ" anzu)
                (isearch                   "  Σ")
                (slime-mode                "SLIME")
                (haskell-indentation-mode  "･" haskell-indentation)
                ;; (narrow                    " η")
                (whole-line-or-region-mode "" whole-line-or-region)
-               (buffer-face-mode          "")
+               (buffer-face-mode          "" face-remap)
                (volatile-highlights-mode  "" volatile-highlights)
                (elisp-slime-nav-mode      "" elisp-slime-nav)
                (hi-lock-mode              "" hi-lock)
