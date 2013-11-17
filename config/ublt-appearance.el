@@ -21,6 +21,7 @@
                  ;; (screen-gamma . 2.205)
                  ;; Night
                  ;; (screen-gamma . 2.5)
+                 ;; (screen-gamma . nil)
                  ;; And this, my new monitor, even after calibration?!?
                  (screen-gamma . 2.7)
                  ;; Daylight adaptation
@@ -116,13 +117,14 @@
 
 ;;; Code folding
 
-;; Like org-mode TAB and S-TAB
-;; XXX: I uncomment the region at the end of `hideshowvis' instead
-;; of copying it here. Should fix that.
+;;; FIX: Figure out why `web-mode' does not highlight code if this
+;; section is not present, even though it complains about not
+;; supporting `hideshow'.
 ;;; XXX: This makes terminal Emacs hang, so only use if there's a
 ;; window system
 (when window-system
   (ublt/set-up 'fold-dwim-org
+    ;; Like org-mode TAB and S-TAB
     (setq fold-dwim-org/trigger-keys-block '((kbd "TAB")))
     (defun ublt/code-folding-setup ()
       (hs-minor-mode 1)
@@ -530,8 +532,13 @@
 ;; Fringe
 ;; (set-fringe-mode '(8 . 0))
 
+;;; FIX: Make them compatible
+(defun ublt/maybe-number-font-lock-mode ()
+  (when (not (eq major-mode 'web-mode))
+    (number-font-lock-mode +1)))
+
 (ublt/set-up 'number-font-lock-mode
-  (add-hook 'prog-mode-hook (ublt/on-fn 'number-font-lock-mode)))
+  (add-hook 'prog-mode-hook #'ublt/maybe-number-font-lock-mode))
 
 ;;; XXX: Make this customizable
 ;;; XXX: It was removed from emacs-starter-kit?
