@@ -104,20 +104,29 @@ of line."
 ;;; What's the point of jumping to a section's start but putting it at
 ;;; the bottom of the window? This somewhat fixes it
 
-;;; TODO: Depend on window height in lines
-;;; (defun recenter-sensibly ())
+(defun ublt/recenter-near-top ()
+  (recenter (max 5 (/ (window-height) 5))))
 
 (defadvice ido-imenu (after bring-into-view activate)
-  (recenter 10))
+  (ublt/recenter-near-top))
 
-;;; Somehow button-get returns nil after the call, so "after" advice
-;;; does not work
+;;; This can be achieved by setting `find-function-recenter-line'. But
+;;; we want it to be a little more dynamic, so use an advice instead.
+(defadvice find-function-do-it (after bring-into-view activate)
+  (ublt/recenter-near-top))
+
+;;; This is needed because the help buttons use `find-function'
+;;; library in a very weird way.
 (defadvice help-button-action (around bring-into-view activate)
+  ;; Somehow button-get returns nil after the call, so "after" advice
+  ;; does not work.
   (let* ((button (ad-get-arg 0))
          (type (button-get button 'type)))
     ad-do-it
-    (when (eq type 'help-function-def)
-      (recenter 10))))
+    (when (memq type '(help-function-def
+                       help-variable-def
+                       help-face-deff))
+      (ublt/recenter-near-top))))
 
 ;;; TODO: Test this extensively
 (defmacro ublt/save-window-view (&rest body)
