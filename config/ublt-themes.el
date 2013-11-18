@@ -513,19 +513,21 @@
          (org-special-keyword
           ((t (,@vw ,@constant))))
          (org-level-1
-          ((t (,@vw ,@essence :height 1.6))))
+          ((t (,@vw ,@mutable :weight bold :height 1.6))))
          (org-level-2
-          ((t (,@vw ,@mutable :height 1.4))))
+          ((t (,@vw ,@mutable :height 1.5))))
          (org-level-3
           ((t (,@vw ,@commitment :height 1.2))))
          (org-level-4
-          ((t (,@vw ,@note))))
+          ((t (,@vw ,@param :height 1.1))))
          (org-level-5
           ((t (,@vw ,@param))))
          (org-level-6
-          ((t (,@vw ,@param))))
-         (org-level-7
           ((t (,@vw :foreground ,yellow-1))))
+         (org-level-7
+          ((t (,@vw :foreground ,green-3))))
+         (org-level-8
+          ((t (,@vw ,@note))))
          (org-table
           ((t (,@fw :foreground ,green-3)))) ; TODO
          (org-hide
@@ -553,12 +555,27 @@
          (org-block-end-line
           ((t (,@fw ,@shadowed))))
 
+         ;; TODO: Make org/markdown share most faces
          (markdown-link-face
           ((t (,@vw ,@power))))
          (markdown-url-face
           ((t (,@vw :inherit link))))
          (markdown-url-face
           ((t (,@vw :inherit link))))
+         (markdown-header-delimiter-face
+          ((t (,@dimmed))))
+         (markdown-header-face-1
+          ((t (:inherit org-level-1))))
+         (markdown-header-face-2
+          ((t (:inherit org-level-2))))
+         (markdown-header-face-3
+          ((t (:inherit org-level-3))))
+         (markdown-header-face-4
+          ((t (:inherit org-level-4))))
+         (markdown-header-face-5
+          ((t (:inherit org-level-5))))
+         (markdown-header-face-6
+          ((t (:inherit org-level-6))))
 
          ;; Whitespaces
          (whitespace-space
@@ -596,6 +613,10 @@
           ((t ,plus)))
          (diff-removed
           ((t ,minus)))
+         (diff-refine-added
+          ((t (:inherit diff-added ,@normal-hl))))
+         (diff-refine-removed
+          ((t (:inherit diff-removed ,@normal-hl))))
          (diff-context
           ((t ,context)))
          (diff-indicator-added
