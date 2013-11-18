@@ -4,9 +4,9 @@
 (require 'ublt-util)
 
 (ublt/set-up 'magit
-  (setq magit-diff-options '("-w")      ;TODO: Check git-diff options
+  (setq magit-remote-ref-format 'remote-slash-branch
+        ;; Don't show content of untracked directory
         magit-status-verbose-untracked nil
-        magit-remote-ref-format 'remote-slash-branch
         magit-restore-window-configuration t
         ;; magit status buffer should not be a pop-up (in the sense of
         ;; not volatile or temporary like helm buffer). This is
