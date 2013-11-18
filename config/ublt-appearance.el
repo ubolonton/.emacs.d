@@ -287,10 +287,12 @@
                                 'mouse-1 'mode-line-widen)))))
 
   (defpowerline ublt/powerline-clock
-    (propertize (format-time-string "[%H:%M %d/%m]")
-                'face 'ublt/mode-line-clock
-                'help-echo (concat (format-time-string "%c") "; "
-                                   (emacs-uptime "Uptime: %hh"))))
+    (concat "["
+            (propertize (format-time-string "%H:%M %d/%m")
+                        'face 'ublt/mode-line-clock
+                        'help-echo (concat (format-time-string "%c") "; "
+                                           (emacs-uptime "Uptime: %hh")))
+            "]"))
 
   (defun ublt/powerline ()
     (interactive)
@@ -339,9 +341,11 @@
                 (powerline-vc)
 
                 (powerline-raw " ")
+                (powerline-raw "(")
                 (powerline-major-mode 'ublt/mode-line-major-mode)
                 (powerline-raw " ")
                 (powerline-minor-modes mode-line)
+                (powerline-raw ")")
 
                 (powerline-raw " ")
                 (ublt/powerline-clock)
