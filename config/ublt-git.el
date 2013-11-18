@@ -13,7 +13,9 @@
         ;; important for small screen such as mine.
         magit-status-buffer-switch-function 'switch-to-buffer
         ;; TODO: Face
-        magit-diff-refine-hunk 'all))
+        ;; FIX: 'all is currently buggy, throwing "Can't find the
+        ;; beginning of the file". When it's fixed use 'all instead.
+        magit-diff-refine-hunk t))
 
 (ublt/set-up 'magit-svn)
 
