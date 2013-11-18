@@ -83,7 +83,7 @@
   ;; FONTSET-NAME blank (see `create-fontset-from-fontset-spec')
   `(,(font-spec :family "Fira Sans"
                 :weight 'light
-                ;; :size 13.0
+                :size 13.0
                 )
     ascii)
   ;; Vietnamese charsets
