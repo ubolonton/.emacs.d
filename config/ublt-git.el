@@ -17,6 +17,9 @@
         ;; beginning of the file". When it's fixed use 'all instead.
         magit-diff-refine-hunk t))
 
+(ublt/set-up 'git-commit-mode
+  (setq git-commit-summary-max-length 70))
+
 (ublt/set-up 'magit-svn)
 
 ;; ;;; Messages all the sync git invocations
