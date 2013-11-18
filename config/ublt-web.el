@@ -1,6 +1,6 @@
 (require 'ublt-util)
 
-(add-hook 'html-mode-hook 'turn-off-auto-fill-mode)
+(add-hook 'html-mode-hook (ublt/off-fn 'auto-fill-mode))
 
 ;;; FIX: This must be before web-mode is loaded, which is weird
 (setq web-mode-extra-comment-keywords '("NTA" "FIX" "XXX"))

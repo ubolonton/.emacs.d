@@ -215,13 +215,7 @@
 ;;   (keyfreq-mode 1)
 ;;   (keyfreq-autosave-mode 1))
 
-;; Some modes do not need those
-(defun turn-off-auto-fill-mode ()
-  (auto-fill-mode -1))
-(defun turn-off-flyspell-mode ()
-  (flyspell-mode -1))
-
-;; (add-hook 'html-mode-hook 'turn-off-flyspell-mode)
+;; (add-hook 'html-mode-hook (ublt/off-fn 'flyspell-mode))
 
 ;; These should be disabled for new users, not me.
 (ublt/enable '(narrow-to-region set-goal-column upcase-region downcase-region))
@@ -293,8 +287,8 @@
 ;; (load "autostart.el")
 ;; (add-to-list 'auto-mode-alist '("\\.mako?$" . mako-nxhtml-mumamo-mode))
 ;; (add-hook 'mako-nxhtml-mumamo-mode-hook 'esk-turn-on-hl-line-mode)
-;; (add-hook 'nxhtml-mode-hook 'turn-off-auto-fill-mode)
-;; (add-hook 'nxhtml-mode-hook 'turn-off-flyspell-mode)
+;; (add-hook 'nxhtml-mode-hook (ublt/off-fn 'auto-fill-mode))
+;; (add-hook 'nxhtml-mode-hook (ublt/off-fn 'flyspell-mode))
 
 
 ;; Factor
