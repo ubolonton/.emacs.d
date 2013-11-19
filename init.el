@@ -25,6 +25,7 @@
   '(smex auto-complete yasnippet
          org textmate undo-tree whole-line-or-region
          ace-jump-mode htmlize twittering-mode keyfreq
+         adaptive-wrap
          ido-ubiquitous                 ; List-narrowing UI
          helm helm-cmd-t helm-swoop
          number-font-lock-mode          ; Color numbers in code

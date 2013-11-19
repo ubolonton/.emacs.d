@@ -379,7 +379,7 @@
       (error (message (format "Error diminishing \"%s\": %s" mode-name err)))))
   ;; mode name - displayed text - feature name (file name)
   (dolist (m '((paredit-mode              "  (Π)"   paredit)
-               (eproject-mode             " ePj" eproject)
+               (eproject-mode             "  eP" eproject)
                (projectile-mode           "  Πρ" projectile)
                (undo-tree-mode            "  ⌘-Z"  undo-tree)
                (yas-minor-mode            "  γas"  yasnippet)
@@ -558,5 +558,23 @@
   (setq anzu-minimum-input-length 2
         anzu-search-threshold 100)
   (global-anzu-mode +1))
+
+(ublt/set-up 'adaptive-wrap
+  ;; FIX: Don't overwrite, change the source
+  (defun adaptive-wrap-prefix-function (beg end)
+    "Indent the region between BEG and END with adaptive filling."
+    (goto-char beg)
+    (while (< (point) end)
+      (let ((lbp (line-beginning-position)))
+        (put-text-property (point)
+                           (progn (search-forward "\n" end 'move) (point))
+                           'wrap-prefix
+                           (propertize (adaptive-wrap-fill-context-prefix lbp (point))
+                                       ;; For it to work with `variable-pitch-mode'
+                                       'face 'default)))))
+  (defadvice visual-line-mode (after adaptive-wrap activate)
+    (if (and visual-line-mode adaptive-fill-mode)
+        (adaptive-wrap-prefix-mode +1)
+      (adaptive-wrap-prefix-mode -1))))
 
 (provide 'ublt-appearance)
