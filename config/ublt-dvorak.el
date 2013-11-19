@@ -129,14 +129,14 @@
   ;; Movement keys (right hand)
   "M-c"    "<up>"                       ; ⬆
   "M-t"    "<down>"                     ; ⬇
-  "M-h"    "<left>"                     ; ⇚
-  "M-n"    "<right>"                    ; ⇛
+  "M-h"    "<left>"                     ; ⬅
+  "M-n"    "<right>"                    ; ➡
   "M-C"    "<prior>"                    ; ▲ scroll up
   "M-T"    "<next>"                     ; ▼ scroll down
   "M-H"    "C-<up>"                     ; ⬆ paragraph up
   "M-N"    "C-<down>"                   ; ⬇ paragraph down
-  "M-g"    "C-<left>"                   ; ⇚ word left
-  "M-r"    "C-<right>"                  ; ⇛ word right
+  "M-g"    "C-<left>"                   ; ⬅ word left
+  "M-r"    "C-<right>"                  ; ➡ word right
   "M-G"    "M-<"                        ; ⇱ buffer home
   "M-R"    "M->"                        ; ⇲ buffer end
   "C-s-t"  "M-<next>"                   ; ▲ other window scroll up
@@ -161,8 +161,8 @@
   ;; "C-t" "C-x"
   ;; "C-x" "C-t"
 
-  "C-M-h"  "M-<left>"                ; ⇚ list (except for org-mode)
-  "C-M-n"  "M-<right>"               ; ⇛ list (except for org-mode)
+  "C-M-h"  "M-<left>"                ; ⬅ list (except for org-mode)
+  "C-M-n"  "M-<right>"               ; ➡ list (except for org-mode)
   "C-M-c"  "M-<up>"                  ; ⤂ paredit splice-kill, org up
   "C-M-t"  "M-<down>"                ; ⤃ paredit splice-kill, org down
 
@@ -313,6 +313,10 @@
   ;; TODO: Something (were upcase/downcase region)
   "C-x C-u"       'nil
   "C-x C-l"       'nil
+
+  ;; TODO: Rearrange the s- combos
+  "C-c p f"       'projectile-find-file
+
   )
 
 
@@ -375,20 +379,20 @@
 (ublt/keys "evil" evil-motion-state-map
 
   ;; Dvorak, positional
-  "h"     'evil-backward-char      ; ⇚
-  "n"     'evil-forward-char       ; ⇛
+  "h"     'evil-backward-char      ; ⬅
+  "n"     'evil-forward-char       ; ➡
   "H"     'evil-window-top
   "N"     'evil-window-bottom
   ;; Dvorak, positional (line)
-  "c"     'evil-previous-line      ; ⬆
-  "t"     'evil-next-line          ; ⬇
+  "c"     'evil-previous-visual-line      ; ⬆
+  "t"     'evil-next-visual-line          ; ⬇
   "C"     'evil-scroll-line-up
   "T"     'evil-scroll-line-down
   ;; Dvorak, positional (word)
-  "g"     'evil-backward-word-begin ; -⇚
-  "G"     'evil-backward-WORD-begin ; |⇚
-  "r"     'evil-forward-word-end    ; ⇛-
-  "R"     'evil-forward-WORD-end    ; ⇛|
+  "g"     'evil-backward-word-begin ; -⬅
+  "G"     'evil-backward-WORD-begin ; |⬅
+  "r"     'evil-forward-word-end    ; ➡-
+  "R"     'evil-forward-WORD-end    ; ➡|
 
   "SPC"   'evil-scroll-page-down
   "S-SPC" 'evil-scroll-page-up
