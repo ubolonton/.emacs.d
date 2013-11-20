@@ -210,7 +210,10 @@
   (add-hook hook (ublt/off-fn 'visual-line-mode)))
 
 ;;; Always wrap please
-(dolist (hook '(twittering-mode-hook))
+(dolist (hook '(twittering-mode-hook
+                markdown-mode-hook
+                org-mode-hook
+                html-mode-hook))
   (add-hook hook (ublt/on-fn 'visual-line-mode)))
 
 
