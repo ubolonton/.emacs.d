@@ -565,7 +565,9 @@
                                        'face 'default)))))
   (defadvice visual-line-mode (after adaptive-wrap activate)
     (if (and visual-line-mode adaptive-fill-mode)
-        (adaptive-wrap-prefix-mode +1)
+        (progn
+          (adaptive-wrap-prefix-mode +1)
+          (auto-fill-mode -1))
       (adaptive-wrap-prefix-mode -1))))
 
 (provide 'ublt-appearance)
