@@ -406,14 +406,10 @@
                                         ?ƒ 'decompose-region)
                         nil)))))
 (font-lock-add-keywords
- 'php-mode `(("\\(-\\)>"
+ 'php-mode `(("\\(->\\)"
               (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                        ?. 'decompose-region
-                                        ;; ?→
-                                        ))))
-             ("-\\(>\\)"
-              (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                        ?. 'decompose-region))))
+                                        ?➛ 'decompose-region)
+                        nil)))
              ("\\(=>\\)"
               (0 (progn (compose-region (match-beginning 1) (match-end 1)
                                         ?⇒ 'decompose-region)
