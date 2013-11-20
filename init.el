@@ -4,6 +4,7 @@
 (add-to-list 'load-path "~/.emacs.d/config")
 (require 'ublt-util)
 
+;;; FIX: Stop using Emacs 23
 (when (ublt/legacy?)
   (load-file "~/.emacs.d/emacs23/package.el"))
 

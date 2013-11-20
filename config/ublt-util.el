@@ -18,7 +18,7 @@
 ;;; (add-hook 'css-mode-hook (ublt/on-fn 'paredit-mode))
 ;;;
 ;;; TODO: Maybe some sort of memoized anonymous function would be
-;;; better.
+;;; better. This works, but only accidentally I think.
 (defvar ublt/on-fns (make-hash-table))
 (defun ublt/on-fn (minor-mode-fn)
   (let ((fn (gethash minor-mode-fn ublt/on-fns)))

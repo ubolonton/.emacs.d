@@ -92,18 +92,15 @@
 
 
 ;;; Rainbow parentheses for coding modes
-(defun turn-on-hl-paren ()
-  (interactive)
-  (highlight-parentheses-mode +1))
-;; (add-hook 'prog-mode-hook 'turn-on-hl-paren t)
-;; Work-around for a bug in highlight-parentheses-mode which messes up
-;; the overlays, making the colors off if the mode is turned on twice
-;; (e.g. by prog-mode-hook and by desktop-mode, which keeps track of
-;; active minor modes from last session)
-(defadvice highlight-parentheses-mode (around work-around-hl-bug activate)
-  (unless (and highlight-parentheses-mode
-               (= 1 (ad-get-arg 0)))
-    ad-do-it))
+(add-hook 'prog-mode-hook (ublt/on-fn 'highlight-parentheses-mode) t)
+;; ;; Work-around for a bug in highlight-parentheses-mode which messes up
+;; ;; the overlays, making the colors off if the mode is turned on twice
+;; ;; (e.g. by prog-mode-hook and by desktop-mode, which keeps track of
+;; ;; active minor modes from last session)
+;; (defadvice highlight-parentheses-mode (around work-around-hl-bug activate)
+;;   (unless (and highlight-parentheses-mode
+;;                (= 1 (ad-get-arg 0)))
+;;     ad-do-it))
 
 
 ;;; Code folding
@@ -158,13 +155,6 @@
 
 
 ;;; ^L visualization
-;; (require 'pp-c-l)
-
-;; (ublt/set-up 'pp-c-l
-;;   (pretty-control-l-mode +1)
-;;   (setq pp^L-^L-string "────────────────────────────── Section ───────────────────────────────"
-;;         pp^L-^L-string-pre "\n"
-;;         pp^L-^L-string-post "\n"))
 
 (ublt/set-up 'page-break-lines
   (setq page-break-lines-char ?━)
@@ -520,7 +510,7 @@
 ;;; Show current function name in mode-line
 (which-func-mode +1)
 
-;; Fringe
+;; ;; Fringe
 ;; (set-fringe-mode '(8 . 0))
 
 ;;; FIX: Make them compatible
