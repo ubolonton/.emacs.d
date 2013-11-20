@@ -1,16 +1,16 @@
 (require 'ublt-util)
 
 ;;; Font, colors, text appearance
+
 (eval-when-compile
   (require 'cl))
-
 
 
 
 ;; Default size, cursor
 (case system-type
   ('darwin (modify-all-frames-parameters
-            '((top . 0) (left . 0) ;(width . 1280) (height . 800)
+            '((top . 0) (left . 0)      ;(width . 1280) (height . 800)
               (cursor-type . bar))))
   ('windows-nt (modify-all-frames-parameters
                 '((cursor-type . bar))))
@@ -28,11 +28,10 @@
                  ;; (screen-gamma . 4)
                  ))))
 
-;; Maybe TODO: Enable this except for twitter buffers
-;; (blink-cursor-mode 1)
-
 ;;; Fonts
-(ublt/set-up 'ublt-font
+(when window-system
+  ;; Font-mixing obsession
+  (ublt/set-up 'ublt-font
   ;; Non-code text reads better in proportional font
   (dolist (hook '(erc-mode-hook
                   Info-mode-hook
@@ -50,30 +49,17 @@
                   git-commit-mode-hook
                   twittering-edit-mode-hook))
     (add-hook hook (ublt/on-fn 'variable-pitch-mode)))
+  ;; This isn't pretty, but the alternative is using a variable-pitch
+  ;; font as the default, and creating a `fixed-pitch-mode'.
   (defun ublt/variable-pitch-if-fundamental ()
     (when (eq major-mode 'fundamental-mode)
       (variable-pitch-mode +1)))
-  (add-hook 'find-file-hook 'ublt/variable-pitch-if-fundamental))
+  (add-hook 'find-file-hook 'ublt/variable-pitch-if-fundamental)))
 
 
 ;;; Ubolonton's theme
-;; (ublt/set-up 'ublt-themes
-;; ;;; TODO: Fix highlight-parentheses-mode so that switching theme
-;; ;;; switches parentheses' colors correctly.
-;;   (condition-case nil
-;;       (let ((hour (string-to-number (format-time-string "%H"))))
-;;         (if (and (<= 8 hour) (<= hour 17)
-;;                  (y-or-n-p "Use solarized light theme?"))
-;;             (color-theme-solarized-light)
-;;           (color-theme-ubolonton-dark)))
-;;     (error (color-theme-ubolonton-dark)))
-;;   (setq
-;;    hl-paren-colors `("Orange" "Yellow" "Greenyellow"
-;;                      "Green" "Springgreen" "Cyan"
-;;                      "#6A5ACD" "Magenta" "Purple"
-;;                      "Orange" "Yellow" "Greenyellow"
-;;                      "Green" "Springgreen" "Cyan"
-;;                      "#6A5ACD" "Magenta" "Purple")))
+;;; TODO: Fix highlight-parentheses-mode so that switching theme
+;;; switches parentheses' colors correctly.
 (ublt/set-up 'ublt-themes
   (color-theme-ubolonton-dark))
 
@@ -81,7 +67,12 @@
 ;;; Whitespaces
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-;; ;; (FIX: currently not showing in Emacs 24) whitespace-mode
+;; FIX: `whitespace-mode' faces inherit the default face, thus would
+;; not work with mixed fixed-width/variable-width fonts (which means
+;; most of my buffer now!). It's the same situation with
+;; `idle-highlight'. For these modes to be useful some workarounds are
+;; needed, probably using overlays.
+
 ;; ;; `http://xahlee.org/emacs/whitespace-mode.html'
 ;; (setq whitespace-style
 ;;       '(face spaces tabs newline space-mark tab-mark newline-mark))
