@@ -444,6 +444,19 @@
                                      ?▸ 'decompose-region)
                      nil))))))
 
+(defun ublt/pretty-org (on)
+  (funcall (if on #'font-lock-add-keywords
+             #'font-lock-remove-keywords)
+           'org-mode `(("\\(#\\+begin_src\\>\\)"
+                        (0 (progn (compose-region (match-beginning 1) (match-end 1)
+                                                  "➤")
+                                  nil)))
+                       ("\\(#\\+end_src\\>\\)"
+                        (0 (progn (compose-region (match-beginning 1) (match-end 1)
+                                                  "➤")
+                                  nil))))))
+(ublt/pretty-org t)
+
 ;;; Don't use. This destroys magit's fontification. Magit does something special
 ;; (defun ublt/prettify-magit-log ()
 ;;   (font-lock-add-keywords
