@@ -36,6 +36,7 @@
   (dolist (hook '(erc-mode-hook
                   Info-mode-hook
                   help-mode-hook
+                  apropos-mode-hook
                   ess-help-mode-hook
                   lyric-mode-hook
                   Man-mode-hook woman-mode-hook
