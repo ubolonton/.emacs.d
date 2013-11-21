@@ -109,6 +109,7 @@
     (purple      "#805DBB" "#875F87")
     ))
 
+;;; TODO: Check if the built-in face `fixed-pitch' can be used instead
 (defface ublt/default-fixed-width
   '((t (:inherit default)))
    "")
@@ -393,6 +394,8 @@
          ;; instead of merging face. Fix that. Merging is better
          (idle-highlight
           ((t ,normal-hl)))
+         (highlight-indentation-face
+          ((t (:strike-through ,bg+2))))
 
          (eval-sexp-fu-flash
           ((t ,normal-hl)))
@@ -515,9 +518,9 @@
          (org-level-1
           ((t (,@vw ,@mutable :weight bold :height 1.6))))
          (org-level-2
-          ((t (,@vw ,@mutable :height 1.5))))
+          ((t (,@vw ,@constant :weight bold :height 1.4))))
          (org-level-3
-          ((t (,@vw ,@commitment :height 1.2))))
+          ((t (,@vw ,@string :weight bold :height 1.2))))
          (org-level-4
           ((t (,@vw ,@param :height 1.1))))
          (org-level-5
@@ -546,6 +549,7 @@
           ((t ,commitment)))
          (org-done
           ((t (:foreground ,green-3))))  ; TODO
+         ;; FIX: This makes comment in code block fixed-width :(
          (org-block-background
           ((t (,@fw))))
          (org-table
@@ -576,6 +580,8 @@
           ((t (:inherit org-level-5))))
          (markdown-header-face-6
           ((t (:inherit org-level-6))))
+         (markdown-list-face
+          ((t (,@vw ,@mutable :weight bold))))
 
          ;; Whitespaces
          (whitespace-space
@@ -857,6 +863,8 @@
           ((t (:foreground ,fg-3))))
          (web-mode-html-attr-name-face
           ((t (:inherit font-lock-variable-name-face))))
+         (web-mode-html-attr-equal-face
+          ((t ,context)))
          (web-mode-html-tag-face
           ((t (:inherit font-lock-builtin-face))))
          (web-mode-part-face
