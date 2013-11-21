@@ -141,10 +141,17 @@
 ;; NOTE: Use (modify-all-frames-parameters nil ...) to reset font if there
 ;; is "invalid font" error. Such bizarre API.
 (set-face-attribute 'default nil
-                    :font (font-spec :family "Inconsolata"
+                    ;; :font (font-spec :family "Inconsolata"
+                    ;;                  :weight 'normal
+                    ;;                  :size 12.0
+                    ;;                  )
+                    :font (font-spec :family "CosmicSansNeueMono"
                                      :weight 'normal
-                                     :size 12.0
-                                     ))
+                                     :size 12.0)
+                    ;; :font (font-spec :family "Anonymous Pro"
+                    ;;                  :weight 'normal
+                    ;;                  :size 12.0)
+                    )
 
 (dolist (rescale '((".*Fira Mono-.*" 0.9)
                    (".*Droid Sans Mono-.*" 0.9)))
@@ -181,7 +188,9 @@
                 :weight 'normal
                 ;; :size 10.8
                 )
-    (?λ . ?λ)))
-
+    (?λ . ?λ))
+  `(,(font-spec :family "Inconsolata"
+                :weight 'normal)
+	(?ƒ . ?ƒ)))
 
 (provide 'ublt-font)
