@@ -15,7 +15,14 @@
         ;; TODO: Face
         ;; FIX: 'all is currently buggy, throwing "Can't find the
         ;; beginning of the file". When it's fixed use 'all instead.
-        magit-diff-refine-hunk t))
+        magit-diff-refine-hunk t)
+  ;; XXX: Make magit support customizing switches instead
+  (dolist (switch '(("-M" "No merge commits" "--no-merges")
+                    ("-t" "Topo Order" "--topo-order")))
+    (let* ((logging (assq 'logging magit-key-mode-groups))
+           (switches (assq 'switches logging)))
+      (setcdr (last switches)
+              (cons switch nil)))))
 
 (ublt/set-up 'git-commit-mode
   (setq git-commit-summary-max-length 70))
