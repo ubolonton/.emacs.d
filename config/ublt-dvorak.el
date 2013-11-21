@@ -326,10 +326,13 @@
   "M-s-n" 'help-go-forward
   "C-f"   'help-follow-symbol
   "M-."   'elisp-slime-nav-find-elisp-thing-at-point)
+(ublt/keys 'apropos apropos-mode-map
+  "M-."   'elisp-slime-nav-find-elisp-thing-at-point)
 
 (ublt/keys "info" Info-mode-map
   "M-s-h" 'Info-history-back
-  "M-s-n" 'Info-history-forward)
+  "M-s-n" 'Info-history-forward
+  "M-."   'elisp-slime-nav-find-elisp-thing-at-point)
 
 
 ;;; Evil -------------------------------------------------------------
