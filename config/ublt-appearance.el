@@ -557,6 +557,11 @@
         anzu-search-threshold 100)
   (global-anzu-mode +1))
 
+(ublt/set-up 'htmlize
+  (setq htmlize-ignore-face-size nil
+        htmlize-css-name-prefix "htmlize-"
+        htmlize-html-major-mode 'html-mode))
+
 (ublt/set-up 'adaptive-wrap
   ;; FIX: Don't overwrite, change the source
   (defun adaptive-wrap-prefix-function (beg end)
