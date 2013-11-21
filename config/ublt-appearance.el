@@ -118,7 +118,11 @@
     (defun ublt/code-folding-setup ()
       (hs-minor-mode 1)
       (fold-dwim-org/minor-mode 1)
-      (hideshowvis-enable))
+      ;; hideshowvis causes `htmlize-buffer' & `htmlize-file' to stop
+      ;; working, and `htmlize' output to contain *hideshowvis*
+      ;; garbage text
+      ;; (hideshowvis-enable)
+      )
     (add-hook 'prog-mode-hook 'ublt/code-folding-setup)))
 
 ;; (ublt/set-up 'hideshowvis
