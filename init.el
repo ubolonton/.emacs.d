@@ -292,6 +292,9 @@
 ;; (add-hook 'nxhtml-mode-hook (ublt/off-fn 'auto-fill-mode))
 ;; (add-hook 'nxhtml-mode-hook (ublt/off-fn 'flyspell-mode))
 
+;;; TODO: Enable this when there is a workaround for highlighted
+;;; symbols always being displayed in fixed-width font
+(remove-hook 'prog-mode-hook 'idle-highlight-mode)
 
 ;; Factor
 (condition-case err
