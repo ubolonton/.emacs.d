@@ -126,7 +126,6 @@
 
 (defadvice text-scale-mode (after scale-base-faces activate)
   (let ((ratio (car (last text-scale-mode-remapping))))
-    (message "Scaling ratio: %s" ratio)
     (when ublt/text-scale-fw-remapping
       (face-remap-remove-relative ublt/text-scale-fw-remapping))
     (when ublt/text-scale-vw-remapping
