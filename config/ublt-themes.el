@@ -515,9 +515,9 @@
          (org-special-keyword
           ((t (,@vw ,@constant))))
          (org-level-1
-          ((t (,@vw ,@mutable :weight bold :height 1.6))))
+          ((t (,@vw ,@constant :weight bold :height 1.8))))
          (org-level-2
-          ((t (,@vw ,@constant :weight bold :height 1.4))))
+          ((t (,@vw ,@mutable :weight bold :height 1.4))))
          (org-level-3
           ((t (,@vw ,@string :weight bold :height 1.2))))
          (org-level-4
@@ -730,33 +730,41 @@
          (git-commit-overlong-summary-face
           ((t (:inherit git-commit-summary-face :foreground ,red))))
          (git-commit-nonempty-second-line-face
-          ((t (:inherit flymake-errline))))
+          ((t (:inherit (git-commit-summary-face flymake-errline)))))
 
          ;; info
+         (info-title-1
+          ((t (:inherit org-level-1))))
+         (info-title-2
+          ((t (:inherit org-level-2))))
          (info-xref
-          ((t (,@portal :bold t))))
+          ((t (,@portal :weight bold))))
          (info-xref-visited
-          ((t (,@note :bold t))))
+          ((t (:inherit info-xref ,@note))))
          (info-quoted-name
-          ((t ,constant)))
+          ((t (,@fw ,@constant))))
          (info-single-quote
           ((t ,constant)))
          (info-string
-          ((t ,doc)))
+          ((t (,@doc :weight bold :slant italic))))
          (info-reference-item
-          ((t ,constant)))
+          ((t (,@fw ,@mutable :weight bold :height 1.1))))
+         (ublt/info-ref-item
+          ((t (:weight bold :slant italic :height 0.7))))
          (info-function-ref-item
-          ((t ,essence)))
+          ((t (,@essence :inherit ublt/info-ref-item))))
+         (info-constant-ref-item
+          ((t (,@constant :inherit ublt/info-ref-item))))
          (info-user-option-ref-item
-          ((t ,param)))
+          ((t (,@param :inherit ublt/info-ref-item :slant normal))))
          (info-variable-ref-item
-          ((t ,mutable)))
+          ((t (,@mutable :inherit ublt/info-ref-item))))
          (info-macro-ref-item
-          ((t ,power)))
+          ((t (,@power :inherit ublt/info-ref-item))))
          (info-special-form-ref-item
-          ((t ,raw)))
+          ((t (,@power :inherit ublt/info-ref-item :slant normal))))
          (info-command-ref-item
-          ((t ,type)))
+          ((t (,@type :inherit ublt/info-ref-item))))
 
          ;; Null out most attributes, because it seems to inherit
          ;; the face of each line's first character.
