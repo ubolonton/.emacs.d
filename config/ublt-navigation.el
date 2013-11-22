@@ -115,6 +115,10 @@ of line."
 (defadvice find-function-do-it (after bring-into-view activate)
   (ublt/recenter-near-top))
 
+;;; TODO: This is getting tiresome. There must be a more systematic way.
+(defadvice occur-mode-goto-occurrence (after bring-into-view activate)
+  (ublt/recenter-near-top))
+
 ;;; This is needed because the help buttons use `find-function'
 ;;; library in a very weird way.
 (defadvice help-button-action (around bring-into-view activate)
