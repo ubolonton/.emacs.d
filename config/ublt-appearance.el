@@ -589,4 +589,18 @@
         htmlize-css-name-prefix "htmlize-"
         htmlize-html-major-mode 'html-mode))
 
+;;; TODO: Tweak htmlize instead. `htmlfontify' does not work with org
+;;; blocks.
+(ublt/set-up 'htmlfontify
+  (defun ublt/hfy-page-header (file style)
+    ;; FIX: Escape file name???
+    (format "<!DOCTYPE html>
+<html>
+  <head>
+    <title>%s</title>
+    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">
+%s
+" file style))
+  (setq hfy-page-header 'ublt/hfy-page-header))
+
 (provide 'ublt-appearance)
