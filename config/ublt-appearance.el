@@ -477,6 +477,34 @@
 ;; (remove-hook 'magit-log-mode-hook 'ublt/prettify-magit-log)
 
 
+
+;;; Looks like `adaptive-wrap' degrades performance on large buffers (e.g. check
+;;; out draft.org). Disable it for now. TODO: Find out why
+;; (ublt/set-up 'adaptive-wrap
+;;   ;; FIX: Don't overwrite, change the source
+;;   (defun adaptive-wrap-prefix-function (beg end)
+;;     "Indent the region between BEG and END with adaptive filling."
+;;     (goto-char beg)
+;;     (while (< (point) end)
+;;       (let ((lbp (line-beginning-position)))
+;;         (put-text-property (point)
+;;                            (progn (search-forward "\n" end 'move) (point))
+;;                            'wrap-prefix
+;;                            (adaptive-wrap-fill-context-prefix lbp (point))
+;;                            ;; (propertize (adaptive-wrap-fill-context-prefix lbp (point))
+;;                            ;;             ;; For it to work with `variable-pitch-mode'
+;;                            ;;             'face 'default)
+;;                            ))))
+;;   (defadvice visual-line-mode (after adaptive-wrap activate)
+;;     (if (and visual-line-mode adaptive-fill-mode)
+;;         (progn
+;;           (adaptive-wrap-prefix-mode +1)
+;;           (auto-fill-mode -1))
+;;       (adaptive-wrap-prefix-mode -1))))
+
+(defadvice visual-line-mode (after no-hard-wrapping activate)
+  (when (and visual-line-mode adaptive-fill-mode)
+    (auto-fill-mode -1)))
 
 
 ;;; Misc
@@ -515,7 +543,6 @@
  ;; 70-char column width
  fill-column 70
  )
-
 
 ;; Technicolor
 (require 'info+)
@@ -561,25 +588,5 @@
   (setq htmlize-ignore-face-size nil
         htmlize-css-name-prefix "htmlize-"
         htmlize-html-major-mode 'html-mode))
-
-(ublt/set-up 'adaptive-wrap
-  ;; FIX: Don't overwrite, change the source
-  (defun adaptive-wrap-prefix-function (beg end)
-    "Indent the region between BEG and END with adaptive filling."
-    (goto-char beg)
-    (while (< (point) end)
-      (let ((lbp (line-beginning-position)))
-        (put-text-property (point)
-                           (progn (search-forward "\n" end 'move) (point))
-                           'wrap-prefix
-                           (propertize (adaptive-wrap-fill-context-prefix lbp (point))
-                                       ;; For it to work with `variable-pitch-mode'
-                                       'face 'default)))))
-  (defadvice visual-line-mode (after adaptive-wrap activate)
-    (if (and visual-line-mode adaptive-fill-mode)
-        (progn
-          (adaptive-wrap-prefix-mode +1)
-          (auto-fill-mode -1))
-      (adaptive-wrap-prefix-mode -1))))
 
 (provide 'ublt-appearance)
