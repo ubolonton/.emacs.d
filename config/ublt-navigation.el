@@ -58,9 +58,11 @@ of line."
   (interactive)
   (switch-to-buffer (other-buffer)))
 
-;;; Make ^L stay at the same place while scrolling by page
 (defadvice forward-page (after advice-recenter-top activate)
-  (recenter 1))
+  ;; Make ^L stay at the same place while scrolling by page
+  (ublt/recenter-near-top)
+  ;; To keep auto-hscroll from kicking in
+  (beginning-of-line))
 
 (defun ublt/browse-url-at-point ()
   (interactive)
