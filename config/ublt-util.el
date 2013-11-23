@@ -188,6 +188,15 @@ and the point, not include the isearch word."
       (ding)))
   (isearch-search-and-update))
 
+(defun ublt/maybe-unquote (s)
+  "XXX: This allow using both quoted and unquoted form (since a
+macro already has its parameters quoted). Because Lisp syntax is
+not regular enough. Uh huh."
+  (if (and (eq (type-of s) 'cons)
+           (eq (car s) 'quote))
+      (cadr s)
+    s))
+
 
 ;;; FIX: Use `dash' library
 (defun ublt/assoc! (list-var key val)

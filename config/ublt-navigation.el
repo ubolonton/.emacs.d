@@ -96,7 +96,7 @@ of line."
       ;; screenfull
       next-screen-context-lines 5)
 
-(defun ublt/get-out-of-scroll-margin ()
+(defun ublt/avoid-top-scroll-margin ()
   (let* ((start (window-start))
          (column (or goal-column (current-column)))
          (min (save-excursion
@@ -109,6 +109,20 @@ of line."
       (goto-char min)
       (move-to-column column))))
 
+;;; XXX: Don't scroll if not needed instead of actual scrolling (use
+;;; `save-excursion')
+(defun ublt/avoid-bottom-scroll-margin ()
+  (let ((initial (point)))
+    ;; Fix window-text, move cursor up
+    (move-to-window-line (- scroll-margin))
+    (let ((now (point)))
+      (if (< now initial)
+          ;; Fix window-cursor, move text up so that point is the same
+          (scroll-up (count-lines now initial))
+        ;; The initial point did not actually violate scroll margin,
+        ;; go back
+        (goto-char initial)))))
+
 ;;; FIX: Maybe advicing `scroll-up' or`goto-char' is better because
 ;;; `scroll-margin' affects other scroll functions, and other things
 ;;; as well. But they are low level, C functions!
@@ -119,23 +133,45 @@ created), caused by `scroll-preserve-screen-position' not taking
 `scroll-margin' into account."
   ;; FIX: Should find a way to calculate the current (line, column)
   ;; pair in window coordinate system and use that.
-  (ublt/get-out-of-scroll-margin))
+  (ublt/avoid-top-scroll-margin))
 
-(defmacro ublt/advice-scroller (f)
-  `(defadvice ,f (after play-nice-with-scroll-margin activate)
-     "Fix window jumping. See the same advice for `scroll-up-command'."
-     (ublt/get-out-of-scroll-margin)))
+;; (defmacro ublt/advice-scroller (f)
+;;   `(defadvice ,f (after play-nice-with-scroll-margin activate)
+;;      "Fix window jumping. See the same advice for `scroll-up-command'."
+;;      (ublt/avoid-top-scroll-margin)))
 
-(ublt/advice-scroller Info-scroll-up)
-(ublt/advice-scroller evil-scroll-page-down)
+;;; XXX: Generic for no reason. Duh!
+(defmacro ublt/advice-scroller (scroll-fn where)
+  (let ((fn (ublt/maybe-unquote scroll-fn)))
+    (case (ublt/maybe-unquote where)
+      ('top
+       `(defadvice ,fn (after avoid-top-scroll-margin activate)
+          "Fix window jumping. See the same advice for `scroll-up-command'."
+          (ublt/avoid-top-scroll-margin)))
+      ('bottom
+       `(defadvice ,fn (after avoid-bottom-scroll-margin activate)
+          "Fix window jumping. See the same advice for `scroll-up-command'."
+          (ublt/avoid-bottom-scroll-margin)))
+      ('both
+       `(progn
+          (ublt/advice-scroller ,fn 'top)
+          (ublt/advice-scroller ,fn 'bottom))))))
+
+(dolist
+    (wisdom '((top Info-scroll-up)
+              (top evil-scroll-page-down)
+              (bottom end-of-buffer)))
+  (destructuring-bind (where fn) wisdom
+    (eval `(ublt/advice-scroller ,fn ,where))))
 
 ;; ;;; XXX: Does not work. Seems to be ignored most of the time
 ;; (defvar ublt/is-avoiding-margin nil)
 ;; (defadvice goto-char (after play-nice-with-scroll-margin activate)
 ;;   (unless ublt/is-avoiding-margin
 ;;     (let ((ublt/is-avoiding-margin t))
-;;       (ublt/get-out-of-scroll-margin))))
+;;       (ublt/avoid-top-scroll-margin))))
 
+
 (defadvice move-to-window-line-top-bottom (around keep-column activate)
   "Try to keep the current column, or `goal-column'."
   (let ((column (or goal-column (current-column))))
@@ -169,7 +205,7 @@ created), caused by `scroll-preserve-screen-position' not taking
 
 (defun ublt/recenter-near-top ()
   (recenter (max 5
-                 (/ (window-height) 5)
+                 (/ (window-body-height) 5)
                  scroll-margin)))
 
 (defadvice ido-imenu (after bring-into-view activate)
