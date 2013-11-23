@@ -1,7 +1,10 @@
 (require 'ublt-util)
 
 ;;; Extra navigation functions
-(eval-when-compile (require 'cl))
+
+(eval-when-compile
+  (require 'cl))
+
 
 ;;; Better C-a
 (defun ublt/back-to-indentation-or-line-beginning ()
@@ -12,6 +15,7 @@ of line."
     (beginning-of-line-text)
     (when (eq pt (point))
       (beginning-of-line))))
+
 
 ;;; Better C-x C-x
 ;;; TODO: Shortcut for setting mark without activating region
@@ -31,6 +35,7 @@ of line."
       (deactivate-mark nil))))
 (define-key global-map [remap exchange-point-and-mark]
   'ublt/exchange-point-and-mark-no-activate)
+
 
 ;;; Swap windows
 ;;; `http://sites.google.com/site/steveyegge2/my-dot-emacs-file'
@@ -51,12 +56,14 @@ of line."
            (set-window-start w1 s2)
            (set-window-start w2 s1))))
   (other-window 1))
+
 
 ;;; Switch to last buffer
 ;; Often we want to switch back-n-forth between 2 buffers
 (defun ublt/switch-to-last-buffer ()
   (interactive)
   (switch-to-buffer (other-buffer)))
+
 
 (defadvice forward-page (after advice-recenter-top activate)
   ;; Make ^L stay at the same place while scrolling by page
@@ -64,11 +71,13 @@ of line."
   ;; To keep auto-hscroll from kicking in
   (beginning-of-line))
 
+
 (defun ublt/browse-url-at-point ()
   (interactive)
   (case major-mode
     ('org-mode (call-interactively 'org-open-at-point))
     (t (call-interactively 'browse-url-at-point))))
+
 
 ;;; Scrolling settings
 (setq redisplay-dont-pause t
@@ -87,12 +96,14 @@ of line."
       ;; Number of overlapped lines to keep when scrolling by
       ;; screenfull
       next-screen-context-lines 5)
+
 
 (ublt/set-up 'grep
   ;; XXX
   (when (equal grep-find-command '("find . -type f -exec grep -nH -e {} +" . 34))
     (grep-apply-setting 'grep-find-command
                         '("find . -type f -exec grep -nH -e '' {} +" . 35))))
+
 
 (ublt/set-up 'ace-jump-mode
   (setq ace-jump-mode-case-sensitive-search nil
@@ -103,6 +114,7 @@ of line."
         ace-jump-mode-move-keys (nconc (loop for i from ?a to ?z collect i)
                                        (loop for i from ?A to ?Z collect i))))
 
+
 ;;; Whitespace-only diffs are not interesting most of the time
 (setq-default ediff-ignore-similar-regions t)
 
