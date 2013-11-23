@@ -1,4 +1,5 @@
 (require 'ublt-util)
+
 
 ;;; Move line/region up/down
 
@@ -90,6 +91,7 @@ Works on `mark-enclosing-sexp'."
     (progn
       (cua-clear-rectangle-mark)
       (cua-mode -1))))
+
 
 (defun ublt/toggle-letter-case ()
   "Toggle the letter case of current symbol or text selection.
@@ -146,6 +148,7 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
   (setq htmlize-html-charset "utf-8"))
 ;;; TODO: Test this in Windows. If it works, use `ublt/in'
 ;;(set-clipboard-coding-system 'utf-16le-dos)
+
 
 ;;; Paredit ----------------------------------------------------------
 (ublt/set-up 'paredit
@@ -186,6 +189,7 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
         (call-interactively 'paredit-comment-dwim)
       (message "normal")
       ad-do-it)))
+
 
 ;; auto-complete
 (ublt/set-up 'auto-complete-config
@@ -197,9 +201,10 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
   (setq-default ac-auto-start nil
                 ac-sources '(ac-source-words-in-buffer
                              ac-source-words-in-same-mode-buffers
-                             ac-source-words-in-all-buffer
+                             ;; ac-source-words-in-all-buffer
                              ac-source-dictionary
-                             ac-source-abbrev))
+                             ;; ac-source-abbrev
+                             ))
   (setq ac-delay 0.5
         ac-auto-show-menu 1
         ac-quick-help-delay 0.8)
@@ -221,7 +226,6 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
   ;; (add-to-list 'hippie-expand-try-functions-list 'yas-hippie-try-expand)
   (add-to-list 'yas-snippet-dirs "~/.emacs.d/data/yasnippet/snippets")
   (yas-global-mode +1))
-
 
 
 ;;; Misc
