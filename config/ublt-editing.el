@@ -155,6 +155,7 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
   ;;     (paredit-mode +1)))
   ;; XXX: Seems unclean
   (defadvice paredit-mode (around force activate)
+    "Force turning on for `python-mode'."
     (if (eq major-mode 'python-mode)
         (let ((current-prefix-arg t))
           ad-do-it)
@@ -180,6 +181,7 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
   ;; Since I use paredit in many modes, it's better to use its
   ;; comment-dwim only in lisp modes
   (defadvice comment-dwim (around lisp-specific activate)
+    "Use `paredit-comment-dwim', but only in lisp code."
     (if (member major-mode '(lisp-mode emacs-lisp-mode clojure-mode scheme-mode))
         (call-interactively 'paredit-comment-dwim)
       (message "normal")

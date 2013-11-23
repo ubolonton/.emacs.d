@@ -84,7 +84,7 @@ font (fixed-pitch is still preferable)."
                          )))
          sources))
 (defun ublt/helm-tweak-appearance ()
-  "Use variable-pitched font for helm if it's suitable for
+  "Use `variable-pitch' font for helm if it's suitable for
 all of the sources."
   (with-current-buffer helm-buffer
     (when (ublt/helm-should-use-variable-pitch? helm-sources)
@@ -95,6 +95,7 @@ all of the sources."
 ;;; XXX: Big hack!
 ;;; TODO: Move to ublt-appearance?
 (defadvice helm-initialize-overlays (after tweak-appearance activate)
+  "Use big `variable-pitch' font to show actions."
   (condition-case nil
       (with-current-buffer helm-action-buffer
         (variable-pitch-mode +1)

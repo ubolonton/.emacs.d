@@ -512,7 +512,8 @@
 ;;       (adaptive-wrap-prefix-mode -1))))
 
 (defadvice visual-line-mode (after no-hard-wrapping activate)
-  (when (and visual-line-mode adaptive-fill-mode)
+  "Turn off `auto-fill-mode' (automatic hard wrapping)."
+  (when visual-line-mode
     (auto-fill-mode -1)))
 
 

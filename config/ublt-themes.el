@@ -125,6 +125,8 @@
 (make-variable-buffer-local 'ublt/text-scale-vw-remapping)
 
 (defadvice text-scale-mode (after scale-base-faces activate)
+  "Additionally scale other base faces so that all faces are
+scaled. This \"base face\" trick is used by `ublt-themes'."
   (let ((ratio (car (last text-scale-mode-remapping))))
     (when ublt/text-scale-fw-remapping
       (face-remap-remove-relative ublt/text-scale-fw-remapping))

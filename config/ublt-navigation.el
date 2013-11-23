@@ -66,6 +66,7 @@ of line."
 
 
 (defadvice forward-page (after advice-recenter-top activate)
+  "Eliminate possible jumpiness (both vertical & horizontal)."
   ;; Make ^L stay at the same place while scrolling by page
   (ublt/recenter-near-top)
   ;; To keep auto-hscroll from kicking in
@@ -95,16 +96,9 @@ of line."
       ;; screenfull
       next-screen-context-lines 5)
 
-(defadvice scroll-up-command (after play-nice-with-scroll-margin activate)
-  "Fix window jumping when the buffer is scrolled while the
-cursor is above the `scroll-margin' (e.g. when a buffer is first
-created), caused by `scroll-preserve-screen-position' not taking
-`scroll-margin' into account."
-  ;; FIX: Should find a way to calculate the current (line, column)
-  ;; pair in window coordinate system and use that.
+(defun ublt/get-out-of-scroll-margin ()
   (let* ((start (window-start))
          (column (or goal-column (current-column)))
-
          (min (save-excursion
                 (goto-char start)
                 ;; This means start scrolling right away if ⬆ now.
@@ -115,8 +109,24 @@ created), caused by `scroll-preserve-screen-position' not taking
       (goto-char min)
       (move-to-column column))))
 
+;;; FIX: Maybe advicing `scroll-up' or`goto-char' is better because
+;;; `scroll-margin' affects other scroll functions, and other things
+;;; as well. But they are low level, C functions!
+(defadvice scroll-up-command (after play-nice-with-scroll-margin activate)
+  "Fix window jumping when the buffer is scrolled while the
+cursor is above the `scroll-margin' (e.g. when a buffer is first
+created), caused by `scroll-preserve-screen-position' not taking
+`scroll-margin' into account."
+  ;; FIX: Should find a way to calculate the current (line, column)
+  ;; pair in window coordinate system and use that.
+  (ublt/get-out-of-scroll-margin))
+
+(defadvice evil-scroll-page-down (after play-nice-with-scroll-margin activate)
+  "Fix window jumping. See the same advice for `scroll-up-command'."
+  (ublt/get-out-of-scroll-margin))
+
 (defadvice move-to-window-line-top-bottom (around keep-column activate)
-  "Try to keep the current column, or `goal-column'"
+  "Try to keep the current column, or `goal-column'."
   (let ((column (or goal-column (current-column))))
     ad-do-it
     (move-to-column column)))
@@ -147,7 +157,9 @@ created), caused by `scroll-preserve-screen-position' not taking
 ;;; the bottom of the window? This somewhat fixes it
 
 (defun ublt/recenter-near-top ()
-  (recenter (max 5 (/ (window-height) 5))))
+  (recenter (max 5
+                 (/ (window-height) 5)
+                 scroll-margin)))
 
 (defadvice ido-imenu (after bring-into-view activate)
   (ublt/recenter-near-top))
