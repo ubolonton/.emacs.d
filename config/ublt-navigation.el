@@ -72,16 +72,20 @@ of line."
 
 ;;; Scrolling settings
 (setq redisplay-dont-pause t
-      ;; Scroll early (FIX: this cause flickering if the buffer is
-      ;; scrolled when the cursor is on the first line (when a buffer
-      ;; is first created))
-      ;; scroll-margin 0
+
+      ;; Scroll early when scrolling off-screen (FIX: this cause
+      ;; flickering if the buffer is scrolled when the cursor is on
+      ;; the first line (when a buffer is first created))
+      scroll-margin 4
       ;; Don't center when scrolling off-screen
       scroll-conservatively 10000
+      ;; 1-line-at-a-time when scrolling off-screen
       scroll-step 1
+
       ;; Preserve current line position relative to window
       scroll-preserve-screen-position 1
-      ;; Number of overlapped lines to keep when scrolling by page
+      ;; Number of overlapped lines to keep when scrolling by
+      ;; screenfull
       next-screen-context-lines 5)
 
 (ublt/set-up 'grep
@@ -159,15 +163,8 @@ of line."
     (when (eq buffer (current-buffer))
       (set-window-start window pos))))
 
-;; (ad-deactivate 'magit-refresh)
-
-;; (defadvice magit-refresh (around bring-into-view activate)
-;;   (let* ((window (get-buffer-window))
-;;          (pos (window-start window)))
-;;     ad-do-it
-;;     (set-window-start window pos)))
-
-;; (ad-unadvise 'magit-refresh)
-;; (ad-deactivate 'help-button-action)
+;;; Seems like the above issues were fixed in magit?
+(ad-deactivate 'magit-refresh)
+(ad-deactivate 'magit-status)
 
 (provide 'ublt-navigation)
