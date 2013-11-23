@@ -481,11 +481,11 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
 
          ;; Auto-complete & popup
          (ac-completion-face
-          ((t (,@dimmed-hl :foreground ,fg-2 :slant normal :weight normal))))
+          ((t (,@fw ,@dimmed-hl :foreground ,fg-2 :slant normal :weight normal))))
          (ac-candidate-face
-          ((t (,@normal-hl :foreground ,fg :slant normal :weight normal))))
+          ((t (,@fw ,@normal-hl :foreground ,fg :slant normal :weight normal))))
          (ac-selection-face
-          ((t (,@strong-hl ,@strong :slant normal :bold t))))
+          ((t (,@fw ,@strong-hl ,@strong :slant normal :bold t))))
          (ac-slime-menu-face
           ((t (:inherit ac-candidate-face))))
          (ac-slime-selection-face
@@ -493,7 +493,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (popup-face
           ((t (:inherit ac-candidate-face))))
          (popup-tip-face
-          ((t (,@dimmed-hl ,@string))))
+          ((t (,@fw ,@dimmed-hl ,@string))))
          (popup-summary-face
           ((t (:inherit popup-face ,@note))))
 
@@ -852,6 +852,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          ;; TODO
          (helm-swoop-target-word-face
           ((t ,normal-hl)))
+         (helm-action
+          ((t ())))
 
          (ecb-default-highlight-face
           ((t (:bold t ,@normal-hl))))
