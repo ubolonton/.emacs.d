@@ -737,6 +737,8 @@
           ((t (:inherit org-level-1))))
          (info-title-2
           ((t (:inherit org-level-2))))
+         (info-title-3
+          ((t (:inherit org-level-3))))
          (info-xref
           ((t (,@portal :weight bold))))
          (info-xref-visited
@@ -765,6 +767,15 @@
           ((t (,@power :inherit ublt/info-ref-item :slant normal))))
          (info-command-ref-item
           ((t (,@type :inherit ublt/info-ref-item))))
+
+         (apropos-symbol
+          ((t (:inherit info-reference-item))))
+         (apropos-function-button
+          ((t (:inherit info-function-ref-item))))
+         (apropos-variable-button
+          ((t (:inherit info-variable-ref-item))))
+         (apropos-misc-button
+          ((t (:inherit info-constant-ref-item))))
 
          ;; Null out most attributes, because it seems to inherit
          ;; the face of each line's first character.
