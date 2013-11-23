@@ -54,7 +54,7 @@
                   php-boris-mode))
     (add-to-list 'evil-insert-state-modes mode))
 
-  (dolist (mode '())
+  (dolist (mode '(Info-mode))
     (add-to-list 'evil-emacs-state-modes mode))
 
   ;; REPL modes: go to prompt on switching to insert mode
