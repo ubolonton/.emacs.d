@@ -308,6 +308,8 @@
   "<XF86Back>"    'emms-previous
   "<XF86Reload>"  'emms-pause
 
+  ;; FIX: Still have to override mode-specific bindings. There must
+  ;; be something better
   "M-TAB"         'auto-complete       ; Don't use completion-at-point
 
   ;; TODO: Something (were upcase/downcase region)
@@ -529,14 +531,19 @@
   "M-n"   'ac-next
   "M-p"   'ac-previous
   "C-h"   'ac-help
-  "M-TAB" 'ac-complete
-  "C-SPC" 'ac-complete
   "SPC"   'ac-complete
-  "TAB"   'ac-expand)
+  "TAB"   'ac-complete
+  "M-TAB" 'ac-expand
+  ;; Possibly because of some weird interaction with key translation,
+  ;; we need to set both C-SPC & M-SPC here.
+  "C-SPC" 'ac-expand
+  "M-SPC" nil
+  "<next>" 'ac-quick-help-scroll-down
+  "<prior>" 'ac-quick-help-scroll-up)
 (ublt/keys "auto-complete" ac-mode-map
   "M-TAB" 'auto-complete)
 (eval-after-load "auto-complete"
-  '(ac-set-trigger-key "M-TAB"))
+  '(ac-set-trigger-key nil))
 
 (ublt/keys "yasnippet" yas-minor-mode-map
   "TAB" nil
@@ -648,6 +655,7 @@
   "C-c M-." nil
   "C-c C-d" nil)
 (ublt/keys "lisp-mode" emacs-lisp-mode-map
+  "M-TAB"   nil
   "C-c C-c" 'eval-defun
   "C-c C-r" 'eval-region
   "C-c C-l" 'eval-buffer
@@ -655,22 +663,28 @@
 (ublt/keys "lisp-mode" lisp-mode-map
   "C-c C-s" 'switch-to-lisp)
 (ublt/keys "lisp-mode" lisp-interaction-mode-map
+  "M-TAB"   nil
   "C-c C-c" 'eval-defun
   "C-c C-r" 'eval-region
   "C-c C-l" 'eval-buffer
   "C-c C-s" 'ielm)
+(ublt/keys 'ielm ielm-map
+  "M-TAB"   nil)
 (ublt/keys "clojure-mode" clojure-mode-map
   "C-c C-s" 'run-lisp)
 (ublt/keys "slime" slime-mode-map
+  "M-TAB"   nil
   "C-c C-l" 'slime-compile-and-load-file
   "C-c C-k" 'slime-load-file
   "C-c v"   'slime-load-file
   "C-c C-s" 'slime-switch-to-output-buffer)
 (ublt/keys 'cider-mode cider-mode-map
+  "M-TAB"   nil
   "C-c v"   'cider-load-current-buffer
   "C-c C-z" 'cider-src
   "C-c C-s" 'cider-switch-to-relevant-repl-buffer)
 (ublt/keys 'cider-repl-mode cider-repl-mode-map
+  "M-TAB"   nil
   "C-c C-z" 'cider-src
   "C-c C-s" 'cider-switch-to-last-clojure-buffer)
 
