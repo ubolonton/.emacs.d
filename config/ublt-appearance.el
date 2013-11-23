@@ -6,7 +6,6 @@
   (require 'cl))
 
 
-
 ;; Default size, cursor
 (case system-type
   ('darwin (modify-all-frames-parameters
@@ -28,6 +27,7 @@
                  ;; (screen-gamma . 4)
                  ))))
 
+
 ;;; Fonts
 (when window-system
   ;; Font-mixing obsession
@@ -196,25 +196,25 @@
 ;;; Looks like only tweaking visual-line-mode is needed (I was
 ;;; probably confused by global/local variables)
 
-;;; This affects how lines are wrapped (we want wrapping at word
-;;; boundary not in the middle of a word)
-(setq-default word-wrap t)
+(setq-default
+ ;; This affects how lines are wrapped (we want wrapping at word
+ ;; boundary not in the middle of a word)
+ word-wrap t
+ ;; Is this really necessary? (maybe, because visual-line-mode is off
+ ;; by default)
+ truncate-lines t)
 
 ;;; This seems to be a superset of word-wrap?
 (global-visual-line-mode -1)
 
-;;; Is this really necessary? (maybe, because visual-line-mode is off
-;;; by default)
-(setq-default truncate-lines t)
-
-;;; No wrap please
+;;; Don't wrap where alignment is important
 (dolist (hook '(emms-browser-show-display-hook
                 archive-zip-mode-hook
                 dired-mode-hook
                 org-agenda-mode-hook))  ; XXX: not working
   (add-hook hook (ublt/off-fn 'visual-line-mode)))
 
-;;; Always wrap please
+;;; Always wrap where text should flow
 (dolist (hook '(twittering-mode-hook
                 markdown-mode-hook
                 org-mode-hook
@@ -344,14 +344,6 @@
   (ublt/powerline))
 
 
-;;; Bigger minibuffer text
-(defun ublt/minibuffer-setup ()
-  (set (make-local-variable 'face-remapping-alist)
-       '((default :height 1.2)))
-  (setq line-spacing 0.3))
-(add-hook 'minibuffer-setup-hook 'ublt/minibuffer-setup)
-
-
 ;;; Make mode-line uncluttered by changing how minor modes are shown
 
 ;;; TODO: Use images (propertize "mode" 'display (find-images ...))
@@ -396,7 +388,17 @@
       (ublt/diminish mode display feature))))
 
 
-
+'(∧∧∧∧∧
+  ∨∨∨∨∨
+  $this➞foo
+  $this➝foo
+  $this➜foo
+  $this➔foo
+  $this➛foo
+  $this→foo
+  ⟶⟶⟶
+  $this⇾foo
+  $this⤞foo)
 (font-lock-add-keywords
  'org-mode `(("\\(=>\\)"
               (0 (progn (compose-region (match-beginning 1) (match-end 1)
@@ -476,6 +478,13 @@
 
 ;; (remove-hook 'magit-log-mode-hook 'ublt/prettify-magit-log)
 
+
+;;; Bigger minibuffer text
+(defun ublt/minibuffer-setup ()
+  (set (make-local-variable 'face-remapping-alist)
+       '((default :height 1.2)))
+  (setq line-spacing 0.3))
+(add-hook 'minibuffer-setup-hook 'ublt/minibuffer-setup)
 
 
 ;;; Looks like `adaptive-wrap' degrades performance on large buffers (e.g. check
