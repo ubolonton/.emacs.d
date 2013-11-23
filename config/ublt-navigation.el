@@ -121,9 +121,20 @@ created), caused by `scroll-preserve-screen-position' not taking
   ;; pair in window coordinate system and use that.
   (ublt/get-out-of-scroll-margin))
 
-(defadvice evil-scroll-page-down (after play-nice-with-scroll-margin activate)
-  "Fix window jumping. See the same advice for `scroll-up-command'."
-  (ublt/get-out-of-scroll-margin))
+(defmacro ublt/advice-scroller (f)
+  `(defadvice ,f (after play-nice-with-scroll-margin activate)
+     "Fix window jumping. See the same advice for `scroll-up-command'."
+     (ublt/get-out-of-scroll-margin)))
+
+(ublt/advice-scroller Info-scroll-up)
+(ublt/advice-scroller evil-scroll-page-down)
+
+;; ;;; XXX: Does not work. Seems to be ignored most of the time
+;; (defvar ublt/is-avoiding-margin nil)
+;; (defadvice goto-char (after play-nice-with-scroll-margin activate)
+;;   (unless ublt/is-avoiding-margin
+;;     (let ((ublt/is-avoiding-margin t))
+;;       (ublt/get-out-of-scroll-margin))))
 
 (defadvice move-to-window-line-top-bottom (around keep-column activate)
   "Try to keep the current column, or `goal-column'."
