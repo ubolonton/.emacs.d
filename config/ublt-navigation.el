@@ -96,32 +96,47 @@ of line."
       ;; screenfull
       next-screen-context-lines 5)
 
-(defun ublt/avoid-top-scroll-margin ()
-  (let* ((start (window-start))
-         (column (or goal-column (current-column)))
-         (min (save-excursion
-                (goto-char start)
-                ;; This means start scrolling right away if ⬆ now.
-                ;; Without `1-' it means adding 1 more padding line.
-                (next-line (1- scroll-margin))
-                (point))))
-    (unless (> (point) min)
-      (goto-char min)
-      (move-to-column column))))
-
 ;;; XXX: Don't scroll if not needed instead of actual scrolling (use
-;;; `save-excursion')
+;;; `save-excursion'). TODO: This should be `goto-char's job to check
+;;; `scroll-margin' and act appropriately.
+(defun ublt/avoid-top-scroll-margin ()
+  "Scroll text together with cursor (i.e. preserving `point') out
+of window's top part restricted by `scroll-margin' if needed."
+  (let ((initial (point))
+        (this-scroll-margin
+         (min (max 0 scroll-margin)
+              (truncate (/ (window-body-height) 4.0)))))
+    ;; Fix window-text, move cursor to border
+    (move-to-window-line this-scroll-margin)
+    (unwind-protect
+        (let ((now (point)))
+          (when (> now initial)
+            ;; Fix window-cursor, move text down to meet the initial line
+            (message "T %s" (count-lines initial now))
+            (scroll-down (count-lines initial now))))
+      ;; Make sure we are back at the initial point
+      (goto-char initial))))
+
 (defun ublt/avoid-bottom-scroll-margin ()
-  (let ((initial (point)))
-    ;; Fix window-text, move cursor up
-    (move-to-window-line (- scroll-margin))
-    (let ((now (point)))
-      (if (< now initial)
-          ;; Fix window-cursor, move text up so that point is the same
-          (scroll-up (count-lines now initial))
-        ;; The initial point did not actually violate scroll margin,
-        ;; go back
-        (goto-char initial)))))
+  "Scroll text together with cursor (i.e. preserving `point') out
+of window's bottom part restricted by `scroll-margin' if needed."
+  (let ((initial (point))
+        (this-scroll-margin
+         (min (max 0 scroll-margin)
+              (truncate (/ (window-body-height) 4.0)))))
+    ;; (message "i %s" initial)
+    ;; Fix window-text, move cursor to border
+    (move-to-window-line (- -1 this-scroll-margin))
+    (unwind-protect
+        (let ((now (point)))
+          (when (< now initial)
+            ;; Fix window-cursor, move text up to meet the initial line
+            ;; (message "B %s" (count-lines initial now))
+            ;; XXX: count-lines does not exclude invisible lines
+            (scroll-up-line (count-lines now initial))))
+      ;; Make sure we are back at the initial point
+      (goto-char initial))))
+
 
 ;;; FIX: Maybe advicing `scroll-up' or`goto-char' is better because
 ;;; `scroll-margin' affects other scroll functions, and other things
