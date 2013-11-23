@@ -1,5 +1,17 @@
 (require 'ublt-util)
 
+(ublt/set-up 'org-indent
+  (add-hook 'org-mode-hook (ublt/on-fn 'org-indent-mode)))
+
+(setq
+ ;; Intelligent (dwim) bindings
+ org-special-ctrl-a/e t
+ org-special-ctrl-k t
+
+ ;; Show all headlines by default
+ org-startup-folded 'content)
+
+
 (add-to-list 'auto-mode-alist '("\\.\\(org\\)$" . org-mode))
 (setq org-log-done nil
       org-use-fast-todo-selection t
