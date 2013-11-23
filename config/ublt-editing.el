@@ -224,6 +224,21 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
 
 ;;; Misc
 
+;;; TODO: Use this
+(defun ublt/remove-hard-wrap ()
+;;; TODO: Unfill paragraphs one-by-one, skipping those that should not
+;;; be unfilled
+  (interactive)
+  (read-only-mode -1)
+  (mark-whole-buffer)
+  (ublt/unfill-paragraph)
+  (read-only-mode +1)
+  (visual-line-mode +1))
+;; (add-hook 'help-mode-hook #'ublt/remove-hard-wrap)
+;;; Doesn't work well with summary node :(
+;; (defadvice Info-goto-node (after remove-hard-wrap activate)
+;;   (ublt/remove-hard-wrap))
+
 ;;; Obfuscate URL at point
 (ublt/set-up 'obfusurl)
 
