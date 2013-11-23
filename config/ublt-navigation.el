@@ -115,6 +115,12 @@ created), caused by `scroll-preserve-screen-position' not taking
       (goto-char min)
       (move-to-column column))))
 
+(defadvice move-to-window-line-top-bottom (around keep-column activate)
+  "Try to keep the current column, or `goal-column'"
+  (let ((column (or goal-column (current-column))))
+    ad-do-it
+    (move-to-column column)))
+
 
 (ublt/set-up 'grep
   ;; XXX
