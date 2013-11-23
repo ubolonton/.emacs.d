@@ -82,9 +82,7 @@ of line."
 ;;; Scrolling settings
 (setq redisplay-dont-pause t
 
-      ;; Scroll early when scrolling off-screen (FIX: this cause
-      ;; flickering if the buffer is scrolled when the cursor is on
-      ;; the first line (when a buffer is first created))
+      ;; Scroll early when scrolling off-screen
       scroll-margin 4
       ;; Don't center when scrolling off-screen
       scroll-conservatively 10000
@@ -96,6 +94,26 @@ of line."
       ;; Number of overlapped lines to keep when scrolling by
       ;; screenfull
       next-screen-context-lines 5)
+
+(defadvice scroll-up-command (after play-nice-with-scroll-margin activate)
+  "Fix window jumping when the buffer is scrolled while the
+cursor is above the `scroll-margin' (e.g. when a buffer is first
+created), caused by `scroll-preserve-screen-position' not taking
+`scroll-margin' into account."
+  ;; FIX: Should find a way to calculate the current (line, column)
+  ;; pair in window coordinate system and use that.
+  (let* ((start (window-start))
+         (column (or goal-column (current-column)))
+
+         (min (save-excursion
+                (goto-char start)
+                ;; This means start scrolling right away if ⬆ now.
+                ;; Without `1-' it means adding 1 more padding line.
+                (next-line (1- scroll-margin))
+                (point))))
+    (unless (> (point) min)
+      (goto-char min)
+      (move-to-column column))))
 
 
 (ublt/set-up 'grep
