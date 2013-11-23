@@ -319,7 +319,7 @@
   ;; TODO: Rearrange the s- combos
   "C-c p f"       'projectile-find-file
 
-  )
+  "M-o"           'isearch-occur)
 
 
 ;;; Help navigation
@@ -747,7 +747,6 @@
 ;;; Misc
 
 (ublt/keys "isearch" isearch-mode-map
-  "M-o"        'isearch-occur
   "M-z"        'ublt/zap-to-isearch
   "C-<return>" 'ublt/isearch-exit-other-end
   "C-M-w"      'ublt/isearch-yank-symbol)
