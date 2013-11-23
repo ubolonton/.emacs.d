@@ -669,7 +669,8 @@
   "C-c C-l" 'eval-buffer
   "C-c C-s" 'ielm)
 (ublt/keys 'ielm ielm-map
-  "M-TAB"   nil)
+  "M-TAB"   nil
+  "M-."     'elisp-slime-nav-find-elisp-thing-at-point)
 (ublt/keys "clojure-mode" clojure-mode-map
   "C-c C-s" 'run-lisp)
 (ublt/keys "slime" slime-mode-map
