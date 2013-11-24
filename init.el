@@ -224,13 +224,20 @@
 
 ;; Save positions in visited files
 (setq-default save-place t)
-(require 'saveplace)
-(setq save-place-file "~/.emacs.d/.saveplace")
+(ublt/set-up 'saveplace
+  (setq save-place-file "~/.emacs.d/.saveplace"
+        save-place-limit 3000))
 
 ;; Save history
 (setq savehist-additional-variables
       '(search-ring regexp-search-ring)
       savehist-file "~/.emacs.d/.savehist")
+(dolist (var '(log-edit-comment-ring
+               regexp-search-ring
+               search-ring
+               Info-history-list
+               Info-search-history))
+  (add-to-list 'savehist-additional-variables var))
 (savehist-mode t)
 
 (setq bookmark-default-file "~/.emacs.d/.bookmarks")
