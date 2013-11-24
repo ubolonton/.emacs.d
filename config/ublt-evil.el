@@ -148,10 +148,11 @@
 
 
 ;; TODO: Support BEG END TYPE
-(evil-define-text-object evil-an-sgml-tag (count &optional beg end type)
-  "Select a sgml tag block."
-  :extend-selection nil
-  (ublt/evil-an-sgml-range count))
+(ublt/set-up 'evil
+  (evil-define-text-object evil-an-sgml-tag (count &optional beg end type)
+    "Select a sgml tag block."
+    :extend-selection nil
+    (ublt/evil-an-sgml-range count)))
 
 
 ;;; TODO: inner?
