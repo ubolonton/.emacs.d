@@ -170,7 +170,9 @@ created), caused by `scroll-preserve-screen-position' not taking
 (dolist
     (wisdom '((top Info-scroll-up)
               (top evil-scroll-page-down)
+              (top twittering-scroll-up)
               (bottom end-of-buffer)
+              (bottom Info-scroll-down)
               (both mwheel-scroll)))
   (destructuring-bind (where fn) wisdom
     (eval `(ublt/advice-scroller ,fn ,where))))
