@@ -75,6 +75,11 @@
   (destructuring-bind (font size) rescale
     (ublt/assoc! 'face-font-rescale-alist font size)))
 
+;;; XXX: Similar to the above. If a fontset is used, faces' attributes
+;;; are ignored in favor of those specified in the fontset, except for
+;;; characters displayed by the default font in the fontset (ascii
+;;; range). Therefore it's best to specify only `:family' for
+;;; non-primary fonts in the fontset.
 (defvar ublt/variable-width-fontset
   "-unknown-Fira Sans-light-normal-normal--*-*-*-*-m-*-fontset-ubltv")
 (create-fontset-from-fontset-spec ublt/variable-width-fontset)
@@ -83,12 +88,11 @@
   ;; FONTSET-NAME blank (see `create-fontset-from-fontset-spec')
   `(,(font-spec :family "Fira Sans"
                 :weight 'light
-                :size 13.0
-                )
+                :size 13.0)
     ascii)
-  ;; Vietnamese charsets
+  ;; Vietnamese charsets. TODO: Find a thinner font that fits Fira
+  ;; Sans better
   `(,(font-spec :family "DejaVu Sans"
-                :weight 'extra-light
                 ;; :size 11.0              ; points
                 )
     ;; ,(font-spec :family "Arial" :weight 'bold)
@@ -103,7 +107,6 @@
   ;; `(,(font-spec :family "DejaVu Sans")
   ;;   (? . ? ))
   `(,(font-spec :family "Fira Sans"
-                :weight 'light
                 ;; :size 13.0
                 )
     ;; For Vietnamese characters already covered by extended latin
