@@ -797,9 +797,25 @@
 ;; NTA XXX: Their "yank" variations are not as good
 (eval-after-load "ess-mode"
   '(ublt/undefine-keys ess-mode-map
-     ("C-y")))
-(eval-after-load "org-mode"
+     '("C-y")))
+(eval-after-load "org"
   '(ublt/undefine-keys org-mode-map
-     ("C-y")))
+     '("C-y")))
+
+(ublt/keys 'org org-mode-map
+  ;; "M-<return>" 'org-insert-heading-respect-content
+  ;; "C-<return>" 'org-insert-heading
+  ;; "M-S-<return>" 'org-insert-todo-heading-respect-content
+  ;; "C-S-<return>" 'org-insert-todo-heading
+
+  ;; Why org uses these functions for sparse-tree-match navigation I
+  ;; don't even know. Well, it's likely there will never be another
+  ;; definition of "error" in org buffer, so it's fine.
+  ;; TODO: `org-sparse-tree'
+  ;; TODO: `org-store-link'
+  ;; TODO: `org-insert-link'
+  "M-p" 'previous-error
+  "M-n" 'next-error
+  )
 
 (provide 'ublt-dvorak)

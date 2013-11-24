@@ -536,6 +536,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
           ((t (,@vw ,@note))))
          (org-table
           ((t (,@fw :foreground ,green-3)))) ; TODO
+         (org-formula
+          ((t (,@fw ,@param))))
          (org-hide
           ((t (:foreground ,bg))))
          (org-code

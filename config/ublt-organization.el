@@ -9,7 +9,39 @@
  org-special-ctrl-k t
 
  ;; Show all headlines by default
- org-startup-folded 'content)
+ org-startup-folded 'content
+
+ ;; Don't use isearch there, normal isearch is enough
+ org-goto-auto-isearch nil
+ ;; Don't use `outline-path-completion'. `ido-imenu' is better
+ org-goto-interface 'outline
+
+ ;; Don't current heading, create a new one
+ org-M-RET-may-split-line nil
+ ;; Create new heading after the current content
+ org-insert-heading-respect-content t
+
+ ;; Heading visual indentation
+ org-indent-indentation-per-level 2
+ ;; List additional (on top of 2) indentation
+ org-list-indent-offset 1
+
+ ;; Allow using alphabetical bullets
+ org-alphabetical-lists t
+
+ ;; 2 lines to terminate lists
+ org-empty-line-terminates-plain-lists nil
+
+ org-list-use-circular-motion t
+
+ ;; Different list levels should use different bullets
+ org-list-demote-modify-bullet '(("-" . "+")
+                                 ("+" . "-")
+                                 ("1." . "1)")
+                                 ("1)" . "1."))
+
+ ;; org-footnote-auto-adjust t
+ )
 
 
 (add-to-list 'auto-mode-alist '("\\.\\(org\\)$" . org-mode))
@@ -118,8 +150,8 @@
          :publishing-directory "/home/ubolonton/.emacs.d/lib/o-blog/example/out"))
       org-export-htmlize-output-type 'css)
 
-(require 'org-compat)
-(require 'ob-exp)
-(require 'ox)
+(ublt/set-up 'org-compat)
+(ublt/set-up 'ob-exp)
+(ublt/set-up 'ox)
 
 (provide 'ublt-organization)
