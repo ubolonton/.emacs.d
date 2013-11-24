@@ -73,11 +73,14 @@ of line."
   (beginning-of-line))
 
 
-(defun ublt/browse-url-at-point ()
-  (interactive)
-  (case major-mode
-    ('org-mode (call-interactively 'org-open-at-point))
-    (t (call-interactively 'browse-url-at-point))))
+
+(if (functionp 'org-open-at-point-global)
+    (defalias 'ublt/browse-url-at-point 'org-open-at-point-global)
+  (defun ublt/browse-url-at-point ()
+    (interactive)
+    (case major-mode
+      ('org-mode (call-interactively 'org-open-at-point))
+      (t (call-interactively 'browse-url-at-point)))))
 
 
 ;;; Scrolling settings
