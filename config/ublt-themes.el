@@ -516,6 +516,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
           ((t (,@vw ,@string :height 2.0 :bold t))))
          (org-special-keyword
           ((t (,@vw ,@constant))))
+         (org-indent
+          ((t (,@vw))))
          (org-level-1
           ((t (,@vw ,@constant :weight bold :height 1.8))))
          (org-level-2
@@ -649,30 +651,42 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
           ((t (:background "#2C3320"))))
          (ediff-current-diff-Ancestor
           ((t (:background "#0C1350"))))
+         ;; (ediff-fine-diff-A
+         ;;  ((t (:background "#5C3340" :weight bold))))
+         ;; (ediff-fine-diff-B
+         ;;  ((t (:background "#1C6340" :weight bold))))
+         ;; (ediff-fine-diff-C
+         ;;  ((t (:background "#5C6340" :weight bold))))
+         ;; (ediff-fine-diff-Ancestor
+         ;;  ((t (:background "#1C2360" :weight bold))))
          (ediff-fine-diff-A
-          ((t (:background "#5C3340" :weight bold))))
+          ((t (:background "#3C1E2F"))))
          (ediff-fine-diff-B
-          ((t (:background "#1C6340" :weight bold))))
+          ((t (:background "#15442F"))))
          (ediff-fine-diff-C
-          ((t (:background "#5C6340" :weight bold))))
+          ((t (:background "#3C442F"))))
          (ediff-fine-diff-Ancestor
-          ((t (:background "#1C2360" :weight bold))))
+          ((t (:background "#151E63"))))
+         (ublt/ediff-1
+          ((t (,@normal-hl))))
+         (ublt/ediff-2
+          ((t (,@strong-hl))))
          (ediff-even-diff-A
-          ((t ,normal-hl)))
+          ((t (:inherit ublt/ediff-1))))
          (ediff-even-diff-B
-          ((t ,normal-hl)))
+          ((t (:inherit ublt/ediff-1))))
          (ediff-even-diff-C
-          ((t ,strong-hl)))
+          ((t (:inherit ublt/ediff-2))))
          (ediff-even-diff-Ancestor
-          ((t ,strong-hl)))
+          ((t (:inherit ublt/ediff-2))))
          (ediff-odd-diff-A
-          ((t ,strong-hl)))
+          ((t (:inherit ublt/ediff-2))))
          (ediff-odd-diff-B
-          ((t ,strong-hl)))
+          ((t (:inherit ublt/ediff-2))))
          (ediff-odd-diff-C
-          ((t ,normal-hl)))
+          ((t (:inherit ublt/ediff-1))))
          (ediff-odd-diff-Ancestor
-          ((t ,normal-hl)))
+          ((t (:inherit ublt/ediff-1))))
 
          ;; magit
          (magit-item-highlight
