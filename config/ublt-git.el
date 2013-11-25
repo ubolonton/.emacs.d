@@ -22,7 +22,12 @@
     (let* ((logging (assq 'logging magit-key-mode-groups))
            (switches (assq 'switches logging)))
       (setcdr (last switches)
-              (cons switch nil)))))
+              (cons switch nil))))
+
+  ;; XXX
+  (defadvice magit-display-process (around dont-switch activate)
+    ad-do-it
+    (other-window 1)))
 
 (ublt/set-up 'git-commit-mode
   (setq git-commit-summary-max-length 70))
