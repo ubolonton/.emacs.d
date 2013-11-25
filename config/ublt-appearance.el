@@ -48,7 +48,8 @@
                   html-mode-hook
                   dired-mode-hook
                   git-commit-mode-hook
-                  twittering-edit-mode-hook))
+                  twittering-edit-mode-hook
+                  package-menu-mode-hook))
     (add-hook hook (ublt/on-fn 'variable-pitch-mode)))
   ;; This isn't pretty, but the alternative is using a variable-pitch
   ;; font as the default, and creating a `fixed-pitch-mode'.
