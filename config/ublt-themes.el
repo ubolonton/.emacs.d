@@ -251,6 +251,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
                            ;; :height ,(face-attribute 'variable-pitch :height)
                            ))
 
+           ;; Mixins
            (fw             '(:inherit ublt/default-fixed-width))
            (vw             '(:inherit ublt/default-variable-width))
 
@@ -367,6 +368,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (match ((t ,strong-hl)))
          (escape-glyph                  ; Special characters
           ((t (,@prompt :bold t))))     ; TODO
+         (button
+          ((t (:inherit link))))
 
          ;; Highlighting
          (region
@@ -562,7 +565,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (org-block-begin-line
           ((t (,@fw ,@shadowed))))
          (org-block-end-line
-          ((t (,@fw ,@shadowed))))
+          ((t (:inherit org-block-begin-line))))
 
          ;; TODO: Make org/markdown share most faces
          (markdown-link-face
