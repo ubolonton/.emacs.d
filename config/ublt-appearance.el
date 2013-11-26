@@ -94,7 +94,8 @@
 
 
 ;;; Rainbow parentheses for coding modes
-(add-hook 'prog-mode-hook (ublt/on-fn 'highlight-parentheses-mode) t)
+(ublt/set-up 'highlight-parentheses
+  (add-hook 'prog-mode-hook (ublt/on-fn 'highlight-parentheses-mode) t))
 ;; ;; Work-around for a bug in highlight-parentheses-mode which messes up
 ;; ;; the overlays, making the colors off if the mode is turned on twice
 ;; ;; (e.g. by prog-mode-hook and by desktop-mode, which keeps track of

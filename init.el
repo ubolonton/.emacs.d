@@ -47,7 +47,7 @@
          ;; Appearance
          color-theme rainbow-mode page-break-lines  ;; whitespace
          diminish                       ; Mode names => symbols
-         highlight highlight-symbol hl-line+ idle-highlight-mode volatile-highlights
+         highlight highlight-symbol highlight-parentheses hl-line+ idle-highlight-mode volatile-highlights
          ;; Don't actually use these themes, just to learn some ideas
          color-theme-solarized zenburn
          ;; Dired
