@@ -58,7 +58,8 @@
          ;; Languages
          flymake
          haskell-mode quack
-         markdown-mode less-css-mode yaml-mode
+         markdown-mode yaml-mode
+         less-css-mode scss-mode
          clojure-mode clojurescript-mode durendal cider
          elisp-slime-nav
          js2-mode flymake-jshint
