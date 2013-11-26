@@ -71,7 +71,7 @@
 ;;; disadvantage of not allowing rescaling individual characters. For
 ;;; now this is acceptable, since I haven't needed to use 1 font at 2
 ;;; different sizes yet.
-(dolist (rescale '((".*DejaVu Sans-.*" 0.96)))
+(dolist (rescale '((".*DejaVu Sans-.*" 0.94)))
   (destructuring-bind (font size) rescale
     (ublt/assoc! 'face-font-rescale-alist font size)))
 
@@ -151,13 +151,28 @@
                     :font (font-spec :family "CosmicSansNeueMono"
                                      :weight 'normal
                                      :size 12.0)
+                    ;; :font (font-spec :family "Cousine"
+                    ;;                  :weight 'normal
+                    ;;                  :size 12.0)
                     ;; :font (font-spec :family "Anonymous Pro"
+                    ;;                  :weight 'normal
+                    ;;                  :size 12.0)
+                    ;; :font (font-spec :family "Source Code Pro"
                     ;;                  :weight 'normal
                     ;;                  :size 12.0)
                     )
 
-(dolist (rescale '((".*Fira Mono-.*" 0.9)
-                   (".*Droid Sans Mono-.*" 0.9)))
+;;; XXX: Looks like this takes the default font into account somehow?
+;;; This list is against CosmicSansNeueMono 12pt (zooming may break
+;;; the proportion due to rounding, and due to fonts scaling differently)
+(dolist (rescale '((".*Fira Mono-.*" 0.88)
+                   (".*Droid Sans Mono-.*" 0.93)
+                   ;; (".*CosmicSansNeueMono-.*" 1.0)
+                   ;; (".*Inconsolata-.*" 1.0)
+                   ;; (".*Source Code Pro-.*" 1.0)
+                   ;; (".*Anonymous Pro-.*" 1.0)
+                   ;; (".*Cousine-.*" 1.0)
+                   ))
   (destructuring-bind (font size) rescale
     (ublt/assoc! 'face-font-rescale-alist font size)))
 
