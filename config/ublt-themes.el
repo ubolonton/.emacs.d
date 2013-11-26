@@ -644,40 +644,40 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (diff-hunk-header
           ((t (,@constant :italic t)))) ; TODO
 
-         ;; XXX FIX ediff: it adds another overlay with face `default'
-         ;; on top of the refinement overlay to cancel out the
-         ;; refinement (by overriding) when the cursor is out. This
-         ;; also overrides other faces. It should have removed the
-         ;; overlay, or unset the overlay's face, or whatever.
+         ;; XXX FIX ediff: `ediff-util' adds another overlay with face
+         ;; `default' on top of the refinement overlay to cancel out
+         ;; the refinement (by overriding) when the cursor is out.
+         ;; This also overrides other faces. It should have removed
+         ;; the overlay, or unset the overlay's face, or whatever.
 
          ;; ediff
          ;; I think I lost my vision of "small semantic color set"
          ;; here. Semantic maybe but small, probably not. So how do we
          ;; actually organize them?
-         (ediff-current-diff-A
-          ((t (:background "#2C1320")))) ; #2C1320
-         (ediff-current-diff-B
-          ((t (:background "#0C3320")))) ; #002200
-         (ediff-current-diff-C
-          ((t (:background "#2C3320"))))
-         (ediff-current-diff-Ancestor
-          ((t (:background "#0C1350"))))
+         ;; (ediff-current-diff-A
+         ;;  ((t (:background "#2C1320")))) ; #2C1320
+         ;; (ediff-current-diff-B
+         ;;  ((t (:background "#0C3320")))) ; #002200
+         ;; (ediff-current-diff-C
+         ;;  ((t (:background "#2C3320"))))
+         ;; (ediff-current-diff-Ancestor
+         ;;  ((t (:background "#0C1350"))))
+         ;; ;; (ediff-fine-diff-A
+         ;; ;;  ((t (:background "#5C3340" :weight bold))))
+         ;; ;; (ediff-fine-diff-B
+         ;; ;;  ((t (:background "#1C6340" :weight bold))))
+         ;; ;; (ediff-fine-diff-C
+         ;; ;;  ((t (:background "#5C6340" :weight bold))))
+         ;; ;; (ediff-fine-diff-Ancestor
+         ;; ;;  ((t (:background "#1C2360" :weight bold))))
          ;; (ediff-fine-diff-A
-         ;;  ((t (:background "#5C3340" :weight bold))))
+         ;;  ((t (:background "#3C1E2F"))))
          ;; (ediff-fine-diff-B
-         ;;  ((t (:background "#1C6340" :weight bold))))
+         ;;  ((t (:background "#15442F"))))
          ;; (ediff-fine-diff-C
-         ;;  ((t (:background "#5C6340" :weight bold))))
+         ;;  ((t (:background "#3C442F"))))
          ;; (ediff-fine-diff-Ancestor
-         ;;  ((t (:background "#1C2360" :weight bold))))
-         (ediff-fine-diff-A
-          ((t (:background "#3C1E2F"))))
-         (ediff-fine-diff-B
-          ((t (:background "#15442F"))))
-         (ediff-fine-diff-C
-          ((t (:background "#3C442F"))))
-         (ediff-fine-diff-Ancestor
-          ((t (:background "#151E63"))))
+         ;;  ((t (:background "#151E63"))))
          (ublt/ediff-1
           ((t (,@normal-hl))))
          (ublt/ediff-2
@@ -698,6 +698,27 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
           ((t (:inherit ublt/ediff-1))))
          (ediff-odd-diff-Ancestor
           ((t (:inherit ublt/ediff-1))))
+
+         ;; HSV (V)
+         ;; orig: 17 20 20 31
+         ;; low: 13 15 15 25
+         ;; hi: 21 22 25 36
+         (ediff-current-diff-A
+          ((t (:background "#210E18"))))
+         (ediff-current-diff-B
+          ((t (:background "#092618"))))
+         (ediff-current-diff-C
+          ((t (:background "#212618"))))
+         (ediff-current-diff-Ancestor
+          ((t (:background "#090F3D"))))
+         (ediff-fine-diff-A
+          ((t (:background "#361727"))))
+         (ediff-fine-diff-B
+          ((t (:background "#0D3823"))))
+         (ediff-fine-diff-C
+          ((t (:background "#374028"))))
+         (ediff-fine-diff-Ancestor
+          ((t (:background "#0E165C"))))
 
          ;; magit
          (magit-item-highlight
