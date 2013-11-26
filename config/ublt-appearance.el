@@ -115,6 +115,9 @@
 ;; window system
 (when window-system
   (ublt/set-up 'fold-dwim-org
+    ;; XXX FIX `fold-dwim-org'
+    (defun looking-at-end-of-line ()
+      (looking-at "$"))
     ;; Like org-mode TAB and S-TAB
     (setq fold-dwim-org/trigger-keys-block '((kbd "TAB")))
     (defun ublt/code-folding-setup ()
