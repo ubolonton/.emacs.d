@@ -641,6 +641,12 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (diff-hunk-header
           ((t (,@constant :italic t)))) ; TODO
 
+         ;; XXX FIX ediff: it adds another overlay with face `default'
+         ;; on top of the refinement overlay to cancel out the
+         ;; refinement (by overriding) when the cursor is out. This
+         ;; also overrides other faces. It should have removed the
+         ;; overlay, or unset the overlay's face, or whatever.
+
          ;; ediff
          ;; I think I lost my vision of "small semantic color set"
          ;; here. Semantic maybe but small, probably not. So how do we
