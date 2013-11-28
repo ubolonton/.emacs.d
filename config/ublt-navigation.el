@@ -176,6 +176,9 @@ created), caused by `scroll-preserve-screen-position' not taking
               (top twittering-scroll-up)
               (bottom end-of-buffer)
               (bottom Info-scroll-down)
+              (both magit-visit-file-item)
+              (both highlight-symbol-prev)
+              (both highlight-symbol-next)
               (both mwheel-scroll)))
   (destructuring-bind (where fn) wisdom
     (eval `(ublt/advice-scroller ,fn ,where))))
