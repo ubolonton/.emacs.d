@@ -126,6 +126,12 @@
   (add-to-list 'exec-path "c:/Program Files/Git/bin")
   (setenv "PATH" (concat "C:\\Program Files\\Git\\bin;"(getenv "PATH"))))
 
+(ublt/in '(windows-nt)
+  (setq w32-pass-lwindow-to-system nil
+        w32-pass-rwindow-to-system nil
+        w32-lwindow-modifier 'super
+        w32-rwindow-modifier 'super))
+
 ;;; General usability
 (require 'ublt-dvorak)
 (require 'ublt-appearance)
