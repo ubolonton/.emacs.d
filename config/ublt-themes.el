@@ -480,7 +480,9 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
           ((t ,commitment)))
 
          (cider-repl-input-face
-          ((t (:background ,bg+2))))
+          ((t (:background ,bg+1))))
+         (cider-repl-result-face
+          ((t (,@constant))))           ; TODO
 
          ;; Auto-complete & popup
          (ac-completion-face
@@ -522,13 +524,13 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (org-indent
           ((t (,@vw))))
          (org-level-1
-          ((t (,@vw ,@constant :weight bold :height 1.8))))
+          ((t (,@vw ,@constant :weight bold :height 1.6))))
          (org-level-2
-          ((t (,@vw ,@mutable :weight bold :height 1.4))))
+          ((t (,@vw ,@mutable :weight bold :height 1.35))))
          (org-level-3
-          ((t (,@vw ,@string :weight bold :height 1.2))))
+          ((t (,@vw ,@string :weight bold :height 1.15))))
          (org-level-4
-          ((t (,@vw ,@param :height 1.1))))
+          ((t (,@vw :foreground ,green-3 :weight bold :height 1.0))))
          (org-level-5
           ((t (,@vw ,@param))))
          (org-level-6
@@ -569,11 +571,11 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
 
          ;; TODO: Make org/markdown share most faces
          (markdown-link-face
-          ((t (,@vw ,@power))))
+          ((t (:inherit org-link))))
          (markdown-url-face
-          ((t (,@vw :inherit link))))
+          ((t (:inherit org-link))))
          (markdown-url-face
-          ((t (,@vw :inherit link))))
+          ((t (:inherit org-link))))
          (markdown-header-delimiter-face
           ((t (,@dimmed))))
          (markdown-header-face-1
@@ -590,6 +592,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
           ((t (:inherit org-level-6))))
          (markdown-list-face
           ((t (,@vw ,@mutable :weight bold))))
+         (markdown-pre-face
+          ((t (,@fw ,@dimmed-hl ,@string))))
 
          ;; Whitespaces
          (whitespace-space
@@ -722,7 +726,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
 
          ;; magit
          (magit-item-highlight
-          ((t ,dimmed-hl)))
+          ((t (,@dimmed-hl))))
          (magit-section-title
           ((t (,@vw ,@mutable :weight bold)))) ; TODO
          (magit-branch
@@ -752,7 +756,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (magit-log-author
           ((t (,@vw ,@context))))
          (magit-log-date
-          ((t (,@vw ,@dimmed :height 0.9))))
+          ((t (,@vw ,@dimmed))))
          (magit-log-author-date-cutoff
           ((t (:inherit magit-log-author :weight bold))))
          (magit-log-message
@@ -787,6 +791,10 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
           ((t (:inherit org-level-2))))
          (info-title-3
           ((t (:inherit org-level-3))))
+         (info-title-4
+          ((t (:inherit org-level-4))))
+         (info-menu-header
+          ((t (:weight bold))))
          (info-xref
           ((t (,@portal :weight bold))))
          (info-xref-visited
@@ -951,13 +959,17 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
 
          ;; Manual pages
          (woman-bold
-          ((t (:foreground ,blue-1 :bold t)))) ; TODO
+          ((t (,@constant :weight bold)))) ; TODO
          (woman-italic
           ((t (:foreground ,cyan+1))))
          (woman-addition
           ((t ,mutable)))               ; TODO
          (woman-unknown
           ((t (:foreground ,red-4))))   ; TODO
+         (Man-overstrike
+          ((t (:inherit woman-bold))))
+         (Man-underline
+          ((t (:inherit woman-italic))))
 
          ;; undo-tree
          (undo-tree-visualizer-default-face
