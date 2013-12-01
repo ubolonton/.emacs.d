@@ -32,32 +32,34 @@
 (when window-system
   ;; Font-mixing obsession
   (ublt/in '(gnu/linux)
-    (ublt/set-up 'ublt-font
-      ;; Non-code text reads better in proportional font
-      (dolist (hook '(erc-mode-hook
-                      Info-mode-hook
-                      help-mode-hook
-                      apropos-mode-hook
-                      ess-help-mode-hook
-                      lyric-mode-hook
-                      Man-mode-hook woman-mode-hook
-                      twittering-mode-hook
-                      emms-playlist-mode-hook
-                      skype--chat-mode-hook
-                      org-mode-hook
-                      markdown-mode-hook
-                      html-mode-hook
-                      dired-mode-hook
-                      git-commit-mode-hook
-                      twittering-edit-mode-hook
-                      package-menu-mode-hook))
-        (add-hook hook (ublt/on-fn 'variable-pitch-mode)))
-      ;; This isn't pretty, but the alternative is using a variable-pitch
-      ;; font as the default, and creating a `fixed-pitch-mode'.
-      (defun ublt/variable-pitch-if-fundamental ()
-        (when (eq major-mode 'fundamental-mode)
-          (variable-pitch-mode +1)))
-      (add-hook 'find-file-hook 'ublt/variable-pitch-if-fundamental))))
+    (ublt/set-up 'ublt-font))
+  (ublt/in '(windows-nt)
+    (ublt/set-up 'ublt-font-windows))
+  ;; Non-code text reads better in proportional font
+  (dolist (hook '(erc-mode-hook
+                  Info-mode-hook
+                  help-mode-hook
+                  apropos-mode-hook
+                  ess-help-mode-hook
+                  lyric-mode-hook
+                  Man-mode-hook woman-mode-hook
+                  twittering-mode-hook
+                  emms-playlist-mode-hook
+                  skype--chat-mode-hook
+                  org-mode-hook
+                  markdown-mode-hook
+                  html-mode-hook
+                  dired-mode-hook
+                  git-commit-mode-hook
+                  twittering-edit-mode-hook
+                  package-menu-mode-hook))
+    (add-hook hook (ublt/on-fn 'variable-pitch-mode)))
+  ;; This isn't pretty, but the alternative is using a variable-pitch
+  ;; font as the default, and creating a `fixed-pitch-mode'.
+  (defun ublt/variable-pitch-if-fundamental ()
+    (when (eq major-mode 'fundamental-mode)
+      (variable-pitch-mode +1)))
+  (add-hook 'find-file-hook 'ublt/variable-pitch-if-fundamental))
 
 
 ;;; Ubolonton's theme
