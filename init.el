@@ -115,8 +115,16 @@
 ;;   (setq auto-async-byte-compile-display-function 'bury-buffer)
 ;;   (add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode))
 
-(ublt/set-up 'exec-path-from-shell
-  (exec-path-from-shell-initialize))
+(ublt/in '(gnu/linux darwin)
+  (ublt/set-up 'exec-path-from-shell
+    (exec-path-from-shell-initialize)))
+
+(ublt/in '(windows-nt)
+  (setq explicit-shell-file-name "c:/Program Files/Git/bin/bash.exe")
+  (setq shell-file-name explicit-shell-file-name
+        magit-git-executable "C:/Program Files/Git/bin/git.exe")
+  (add-to-list 'exec-path "c:/Program Files/Git/bin")
+  (setenv "PATH" (concat "C:\\Program Files\\Git\\bin;"(getenv "PATH"))))
 
 ;;; General usability
 (require 'ublt-dvorak)
