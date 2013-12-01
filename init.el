@@ -275,8 +275,9 @@
 
 (require 'ublt-git)
 
-(ublt/add-path "python")
-(require 'ublt-python)
+(ublt/in '(gnu/linux darwin)
+  (ublt/add-path "python")
+  (require 'ublt-python))
 
 (require 'ublt-js)
 
