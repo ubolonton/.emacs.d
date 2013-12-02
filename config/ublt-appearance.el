@@ -381,6 +381,7 @@
                (slime-mode                "SLIME")
                (haskell-indentation-mode  "･" haskell-indentation)
                ;; (narrow                    " η")
+               (org-indent-mode           "" org)
                (whole-line-or-region-mode "" whole-line-or-region)
                (buffer-face-mode          "" face-remap)
                (volatile-highlights-mode  "" volatile-highlights)
