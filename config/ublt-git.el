@@ -26,8 +26,8 @@
 
   ;; XXX
   (defadvice magit-display-process (around dont-switch activate)
-    ad-do-it
-    (other-window 1)))
+    (save-selected-window
+      ad-do-it)))
 
 (ublt/set-up 'git-commit-mode
   (setq git-commit-summary-max-length 70))
