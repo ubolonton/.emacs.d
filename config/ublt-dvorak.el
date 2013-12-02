@@ -223,7 +223,8 @@
   "s-h"           'ido-switch-buffer
   "s-H"           'ublt/helm
   "s-f"           'helm-occur
-  "s-F"           'helm-do-grep
+  ;; "s-F"           'helm-do-grep
+  "s-F"           'projectile-find-file
   "s-g"           'magit-status
   "s-G"           'find-grep
   "s-m"           'ace-jump-mode
