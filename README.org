@@ -4,7 +4,7 @@ Some parts are reusable, but highly customized and hard to use out-of-the-box.
 
 git clone --recursive https://github.com/ubolonton/.emacs.d
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
 ;;; Test
 ;;; XXX: Generic for no reason. Duh!
 (defmacro ublt/advice-scroller (scroll-fn where)
@@ -22,4 +22,4 @@ git clone --recursive https://github.com/ubolonton/.emacs.d
        `(progn
           (ublt/advice-scroller ,fn 'top)
           (ublt/advice-scroller ,fn 'bottom))))))
-#+END_SRC
+#+end_src
