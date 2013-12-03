@@ -127,7 +127,7 @@ of window's bottom part restricted by `scroll-margin' if needed."
   (save-excursion
     (let ((initial (point))
           (this-scroll-margin
-           (min (max 0 scroll-margin)
+           (min (max 0 (1+ scroll-margin))
                 (truncate (/ (window-body-height) 4.0)))))
       ;; Fix window-text, move cursor to border
       (move-to-window-line (- this-scroll-margin))
