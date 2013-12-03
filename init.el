@@ -349,8 +349,8 @@
 (add-to-list 'auto-mode-alist '("\\.rjs$" . ruby-mode))
 (setq-default ruby-indent-level 4)
 
-(add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.markdown$" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md$" . gfm-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown$" . gfm-mode))
 
 ;; FIXME: Make it support mp3 not only ogg
 (require 'lyric-mode)
