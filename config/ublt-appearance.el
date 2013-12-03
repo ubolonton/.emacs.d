@@ -568,15 +568,16 @@
 (require 'help+)
 (require 'help-fns+)
 
-;;; Show current function name in mode-line
-(which-func-mode +1)
+;;; XXX: Find out why `python-mode' is upset by `which-func-mode'
+;; ;;; Show current function name in mode-line
+;; (which-func-mode +1)
 
 ;; ;; Fringe
 ;; (set-fringe-mode '(8 . 0))
 
 ;;; FIX: Make them compatible
 (defun ublt/maybe-number-font-lock-mode ()
-  (when (not (eq major-mode 'web-mode))
+  (unless (member major-mode '(web-mode))
     (number-font-lock-mode +1)))
 
 (ublt/set-up 'number-font-lock-mode
