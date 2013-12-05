@@ -112,18 +112,24 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
         (cond
          ((looking-at "[[:lower:]][[:lower:]]") (put this-command 'state "all lower"))
          ((looking-at "[[:upper:]][[:upper:]]") (put this-command 'state "all caps"))
-         ((looking-at "[[:upper:]][[:lower:]]") (put this-command 'state "init caps"))
+         ((looking-at "[[:upper:]][[:lower:]]") (put this-command 'state "title case"))
          ((looking-at "[[:lower:]]") (put this-command 'state "all lower"))
          ((looking-at "[[:upper:]]") (put this-command 'state "all caps"))
          (t (put this-command 'state "all lower")))))
 
     (cond
      ((string= "all lower" (get this-command 'state))
-      (upcase-initials-region p1 p2) (put this-command 'state "init caps"))
-     ((string= "init caps" (get this-command 'state))
-      (upcase-region p1 p2) (put this-command 'state "all caps"))
+      (upcase-initials-region p1 p2)
+      (put this-command 'state "title case")
+      (ublt/status-message "Title Case"))
+     ((string= "title case" (get this-command 'state))
+      (upcase-region p1 p2)
+      (put this-command 'state "all caps")
+      (ublt/status-message "ALL CAPS"))
      ((string= "all caps" (get this-command 'state))
-      (downcase-region p1 p2) (put this-command 'state "all lower")))))
+      (downcase-region p1 p2)
+      (put this-command 'state "all lower")
+      (ublt/status-message "all lower")))))
 
 
 ;;; Copy/cut/duplicate whole line if no region is selected
