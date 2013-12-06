@@ -526,9 +526,9 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (org-level-1
           ((t (,@vw ,@constant :weight bold :height 1.6))))
          (org-level-2
-          ((t (,@vw ,@mutable :weight bold :height 1.35))))
+          ((t (,@vw ,@mutable :weight bold :height 1.3))))
          (org-level-3
-          ((t (,@vw ,@string :weight bold :height 1.15))))
+          ((t (,@vw ,@string :weight bold :height 1.1))))
          (org-level-4
           ((t (,@vw :foreground ,green-3 :weight bold :height 1.0))))
          (org-level-5
