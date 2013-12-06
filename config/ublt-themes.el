@@ -1026,7 +1026,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
           ((t ,param)))                 ; TODO
 
          (ace-jump-face-foreground
-          ((t (,@reset ,@warning))))
+          ((t (,@reset :foreground "black" :background ,yellow))))
 
          (flymake-errline
           ((t ,error-hl)))
