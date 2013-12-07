@@ -145,6 +145,12 @@
 ;;; Misc customization
 ;;; TODO: add case toggling
 
+;;; TODO: Better dictionary (one with tech terms)?
+(ublt/set-up 'flyspell
+  (setq flyspell-default-dictionary "english"))
+(ublt/set-up 'ispell
+  (setq ispell-dictionary "english"))
+
 ;;; This stops the damned auto-pinging
 (setq ffap-machine-p-known 'reject)
 
