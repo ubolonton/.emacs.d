@@ -16,24 +16,26 @@
   ('gnu/linux (modify-all-frames-parameters
                '((top . 0) (left . 0) (width . 119)
                  (fullscreen . fullheight) (cursor-type . bar)
-                 ;; FIX: This may be specific to my laptop
+                 ;; Notes: This section is obsolete. Calibrate whole
+                 ;; system using xrandr instead.
+                 ;; Old vaio laptop
                  ;; (screen-gamma . 2.205)
                  ;; Night
                  ;; (screen-gamma . 2.5)
-                 ;; (screen-gamma . nil)
-                 ;; And this, my new monitor, even after calibration?!?
-                 (screen-gamma . 2.7)
+                 ;; (screen-gamma . 1.5)
+                 (screen-gamma . nil)
+                 ;; Dell monitor
+                 ;; (screen-gamma . 2.7)
                  ;; Daylight adaptation
                  ;; (screen-gamma . 5)
                  ))
-              (defun ublt/toggle-gamma ()
-                (interactive)
-                (modify-all-frames-parameters
-                 `((screen-gamma . ,(let ((g (frame-parameter nil 'screen-gamma)))
-                                      (if (= g 2.7)
-                                          5 2.7))))))))
-
-
+              ;; (defun ublt/toggle-gamma ()
+              ;;   (interactive)
+              ;;   (modify-all-frames-parameters
+              ;;    `((screen-gamma . ,(let ((g (frame-parameter nil 'screen-gamma)))
+              ;;                         (if (= g 2.7)
+              ;;                             5 2.7))))))
+              ))
 
 
 ;;; Fonts
@@ -404,6 +406,7 @@
       (ublt/diminish mode display feature))))
 
 
+;;; TODO: Use a prettification mode
 '(∧∧∧∧∧
   ∨∨∨∨∨
   $this➞foo
@@ -560,6 +563,12 @@
  woman-fill-frame t
  woman-default-indent 7
  )
+
+;;; Maybe move other window's point before and after minibuffer invocation
+;; ;;; XXX: This is bad
+;; (defun ublt/redisplay ()
+;;   (message "%s" (selected-window)))
+;; (add-hook 'minibuffer-setup-hook 'ublt/redisplay)
 
 (setq-default
  ;; Sparse lines
