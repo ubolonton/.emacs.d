@@ -518,27 +518,27 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          ;; org-mode
          ;; TODO: levels
          (org-document-title
-          ((t (,@vw ,@string :height 2.0 :bold t))))
+          ((t (,@string :height 2.0 :bold t))))
          (org-special-keyword
-          ((t (,@vw ,@constant))))
+          ((t (,@constant))))
          (org-indent
-          ((t (,@vw))))
+          ((t ())))
          (org-level-1
-          ((t (,@vw ,@constant :weight bold :height 1.6))))
+          ((t (,@constant :weight bold :height 1.6))))
          (org-level-2
-          ((t (,@vw ,@mutable :weight bold :height 1.3))))
+          ((t (,@mutable :weight bold :height 1.3))))
          (org-level-3
-          ((t (,@vw ,@string :weight bold :height 1.1))))
+          ((t (,@string :weight bold :height 1.1))))
          (org-level-4
-          ((t (,@vw :foreground ,green-3 :weight bold :height 1.0))))
+          ((t (:foreground ,green-3 :weight bold :height 1.0))))
          (org-level-5
-          ((t (,@vw ,@param))))
+          ((t (,@param))))
          (org-level-6
-          ((t (,@vw :foreground ,yellow-1))))
+          ((t (:foreground ,yellow-1))))
          (org-level-7
-          ((t (,@vw :foreground ,green-3))))
+          ((t (:foreground ,green-3))))
          (org-level-8
-          ((t (,@vw ,@note))))
+          ((t (,@note))))
          (org-table
           ((t (,@fw :foreground ,green-3)))) ; TODO
          (org-formula
@@ -591,7 +591,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (markdown-header-face-6
           ((t (:inherit org-level-6))))
          (markdown-list-face
-          ((t (,@vw ,@mutable :weight bold))))
+          ((t (,@mutable :weight bold))))
          (markdown-pre-face
           ((t (,@fw ,@dimmed-hl ,@string))))
          (markdown-bold-face
