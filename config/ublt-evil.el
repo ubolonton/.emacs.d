@@ -58,6 +58,14 @@
                   org-mode))
     (add-to-list 'evil-emacs-state-modes mode))
 
+  ;; Hmm
+  (dolist (mode '(Info-mode))
+    (setq evil-motion-state-modes
+          (delq mode evil-motion-state-modes)))
+
+  (dolist (mode '(occur-mode))
+    (add-to-list 'evil-motion-state-modes mode))
+
   ;; REPL modes: go to prompt on switching to insert mode
   (defun ublt/repl-goto-prompt ()
     (when (member major-mode

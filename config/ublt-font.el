@@ -117,7 +117,7 @@
 
 
 ;;; Don't set :font/:fontset/:family alone. See the long explanation
-;;; section above. And contray to whet the doc says, `font-spec'
+;;; section above. And contrary to whet the doc says, `font-spec'
 ;;; cannot take a fontset as its `:family', like `set-face-attribute'
 (set-face-attribute 'variable-pitch nil
                     :fontset "fontset-ubltv"
