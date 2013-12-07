@@ -594,6 +594,10 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
           ((t (,@vw ,@mutable :weight bold))))
          (markdown-pre-face
           ((t (,@fw ,@dimmed-hl ,@string))))
+         (markdown-bold-face
+          ((t (,@mutable :weight bold))))
+         (markdown-italic-face
+          ((t (,@mutable :slant italic))))
 
          ;; Whitespaces
          (whitespace-space
