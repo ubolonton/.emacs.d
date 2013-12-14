@@ -49,6 +49,7 @@
   (ublt/set-up 'ublt-font
     ;; Non-code text reads better in proportional font
     (dolist (hook '(erc-mode-hook
+                    text-mode-hook
                     Info-mode-hook
                     help-mode-hook
                     apropos-mode-hook
