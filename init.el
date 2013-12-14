@@ -333,6 +333,10 @@
 
 (add-to-list 'auto-mode-alist '("\\.m$" . octave-mode))
 (add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
+(defun ublt/tab-2-spaces ()
+  (setq tab-width 2))
+(add-hook 'yaml-mode-hook 'ublt/tab-2-spaces)
+
 
 ;;; Lisp, Clojure --------------------------------------
 
