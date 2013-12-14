@@ -207,4 +207,11 @@ not regular enough. Uh huh."
       (setcdr entry val))))
 
 
+(defmacro ublt/save-column (&rest body)
+  (declare (indent 0))
+  `(let ((c (or goal-column (current-column))))
+     ,@body
+     (move-to-column c)))
+
+
 (provide 'ublt-util)
