@@ -28,14 +28,19 @@
                  ;; (screen-gamma . 2.7)
                  ;; Daylight adaptation
                  ;; (screen-gamma . 5)
-                 ))
-              ;; (defun ublt/toggle-gamma ()
-              ;;   (interactive)
-              ;;   (modify-all-frames-parameters
-              ;;    `((screen-gamma . ,(let ((g (frame-parameter nil 'screen-gamma)))
-              ;;                         (if (= g 2.7)
-              ;;                             5 2.7))))))
-              ))
+                 ))))
+
+;;; This is needed when redshift is running, since it overwrites
+;;; xrandr's gamma settings
+(defun ublt/set-gamma (g)
+  (modify-all-frames-parameters
+   `((screen-gamma . ,g))))
+
+(defun ublt/toggle-gamma ()
+  (interactive)
+  (ublt/set-gamma
+   (if (equal 2.7 (frame-parameter nil 'screen-gamma))
+       nil 2.7)))
 
 
 ;;; Fonts
