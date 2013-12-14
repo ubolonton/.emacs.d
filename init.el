@@ -65,6 +65,7 @@
          js2-mode flymake-jshint
          php-mode php-boris flymake-php
          rvm flymake-ruby
+         elpy
          web-mode
          emmet-mode                          ; html/css editing
          ;; TODO: Remove starter kit dependency

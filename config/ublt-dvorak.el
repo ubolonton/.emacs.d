@@ -572,7 +572,7 @@
 ;;; NTA FIX: This is because flymake doesn't have its own map
 (dolist (fms '(("js" js-mode-map)
                ("python-mode" py-mode-map)
-               ;; ("python-mode" python-mode-map)
+               ("python" python-mode-map)
                ("php-mode" php-mode-map)
                ("lisp-mode" emacs-lisp-mode-map)
                ("erlang" erlang-mode-map)
@@ -702,12 +702,22 @@
   "C-c C-r" 'octave-send-region
   "C-c C-s" 'octave-show-process-buffer)
 
-(ublt/keys "python-mode" py-mode-map
-  "C-c C-c" 'py-execute-def-or-class ; was py-execute-buffer
-  "C-c C-r" 'py-execute-region       ; was py-shift-region-right
-  "C-c C-l" 'py-execute-buffer       ; was py-shift-region-left
-  "C-c C-s" 'py-shell                ; was py-execute-string
-  "C-c v"   'py-execute-buffer)
+;; (ublt/keys "python-mode" py-mode-map
+;;   "C-c C-c" 'py-execute-def-or-class ; was py-execute-buffer
+;;   "C-c C-r" 'py-execute-region       ; was py-shift-region-right
+;;   "C-c C-l" 'py-execute-buffer       ; was py-shift-region-left
+;;   "C-c C-s" 'py-shell                ; was py-execute-string
+;;   "C-c v"   'py-execute-buffer)
+
+(ublt/keys 'elpy elpy-mode-map
+  "C-c C-c" 'python-shell-send-defun    ;was elpy-shell-send-region-or-buffer
+  "C-c C-r" 'python-shell-send-region   ;was elpy-refactor
+  "C-c C-v" 'python-shell-send-buffer   ;was elpy-check
+  "C-c C-l" 'python-shell-send-file
+  "C-c C-s" 'elpy-shell-switch-to-shell ;was elpy-rgrep-symbol
+  "M-p"     nil                         ;was elpy-nav-backward-definition
+  "M-n"     nil                         ;was elpy-nav-forward-definition
+  )
 
 (ublt/keys "sql" sql-mode-map
   "C-c C-s" 'sql-product-interactive ; was sql-send-string
