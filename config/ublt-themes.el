@@ -399,7 +399,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (idle-highlight
           ((t ,normal-hl)))
          (highlight-indentation-face
-          ((t (:strike-through ,bg+2))))
+          ((t (:strike-through ,bg+1))))
 
          (eval-sexp-fu-flash
           ((t ,normal-hl)))
@@ -479,8 +479,14 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (slime-repl-prompt-face
           ((t ,commitment)))
 
+         ;; (comint-highlight-input
+         ;;  ((t (:foreground ,green-3)))) ; TODO
+         (comint-highlight-prompt
+          ((t (,@type))))
+         (comint-highlight-input
+          ((t (:background ,bg+2 :foreground ,fg-2))))
          (cider-repl-input-face
-          ((t (:background ,bg+1))))
+          ((t (:inherit comint-highlight-input))))
          (cider-repl-result-face
           ((t (,@constant))))           ; TODO
 
@@ -890,9 +896,6 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (eshell-prompt
           ((t ,prompt)))
 
-         (comint-highlight-input
-          ((t (:foreground ,green-3)))) ; TODO
-
          ;; helm
          (helm-header
           ((t (,@mutable :bold t))))    ; TODO
@@ -1071,7 +1074,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (ublt-twitter-meta-face
           ((t (:height 0.9 ,@shadowed))))
          (ublt/flymake-message-face
-          ((t (,@commitment :bold t))))  ; TODO
+          ((t (,@vw ,@commitment :slant italic))))  ; TODO
          (eproject-ido-imenu-file-path
           ((t ,shadowed)))
          (ublt/emms-mode-line-face
