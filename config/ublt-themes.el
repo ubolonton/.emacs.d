@@ -547,6 +547,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
           ((t (:foreground ,bg))))
          (org-code
           ((t (:inherit font-lock-builtin-face))))    ; TODO
+         (org-verbatim
+          ((t (:inherit font-lock-keyword-face))))
          (org-meta-line
           ((t (,@fw ,@context))))
          (org-mode-line-clock
@@ -560,6 +562,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (org-done
           ((t (:foreground ,green-3))))  ; TODO
          ;; FIX: This makes comment in code block fixed-width :(
+         (org-block
+          ((t (,@fw))))
          (org-block-background
           ((t (,@fw))))
          (org-table
@@ -598,6 +602,27 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
           ((t (,@mutable :weight bold))))
          (markdown-italic-face
           ((t (,@mutable :slant italic))))
+
+         (rst-level-1
+          ((t (:inherit org-level-1))))
+         (rst-level-2
+          ((t (:inherit org-level-2))))
+         (rst-level-3
+          ((t (:inherit org-level-3))))
+         (rst-adornment
+          ((t (,@context))))
+         (rst-block
+          ((t (:inherit markdown-list-face))))
+         (rst-literal
+          ((t (:inherit org-code :weight bold))))
+         (rst-reference
+          ((t (:inherit org-code))))
+         (rst-definition
+          ((t (:inherit org-link))))
+         (rst-emphasis1
+          ((t (:inherit markdown-italic-face))))
+         (rst-emphasis2
+          ((t (:inherit markdown-bold-face))))
 
          ;; Whitespaces
          (whitespace-space
