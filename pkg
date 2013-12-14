@@ -36,16 +36,28 @@
 (case ublt/action
   ('upgrade
    (message "Upgrading packages")
-   (epl-upgrade))
+   (let ((upgrades (epl-find-upgrades)))
+     (epl-upgrade)
+     (message "======================================================================")
+     (dolist (upgrade upgrades)
+       (let* ((old (epl-upgrade-installed upgrade))
+              (new (epl-upgrade-available upgrade))
+              (name (epl-package-name old))
+              (v1 (epl-package-version old))
+              (v2 (epl-package-version new)))
+         (message "%s" name)
+         (message "%s \t => \t %s" v1 v2)))))
 
   ('update
    (message "Updating index")
-   (package-refresh-contents))
+   (package-refresh-contents)
+   (message "======================================================================"))
 
   ('install
    (dolist (p ublt/args)
      (message "Installing `%s'" p)
-     (package-install (intern p))))
+     (package-install (intern p)))
+   (message "======================================================================"))
 
   ('installed?
    (let ((p (intern (nth 2 argv))))
