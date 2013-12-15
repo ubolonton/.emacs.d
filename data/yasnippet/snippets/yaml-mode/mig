@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# Schemup migration declaration
+# --
+---
+table: ${1:table/view}
+from: ${2:start-version}
+to: ${3:end-version}
+sql: |
+  $0

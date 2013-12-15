@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# Schemup migration declaration
+# --
+---
+table: ${1:table/view}
+from: null
+to: ${2:end-version}
+sql: |
+  CREATE TABLE $1 (
+      id SERIAL PRIMARY KEY,
+      $0
+  );
