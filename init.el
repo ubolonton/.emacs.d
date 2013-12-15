@@ -58,6 +58,7 @@
          ;; Languages
          flymake
          haskell-mode quack
+         adoc-mode
          markdown-mode yaml-mode
          less-css-mode scss-mode
          clojure-mode clojurescript-mode durendal cider
@@ -65,7 +66,7 @@
          js2-mode flymake-jshint
          php-mode php-boris flymake-php
          rvm flymake-ruby
-         elpy
+         elpy                           ;python
          web-mode
          emmet-mode                          ; html/css editing
          ;; TODO: Remove starter kit dependency
@@ -332,11 +333,18 @@
 
 (require 'ublt-web)
 
-(add-to-list 'auto-mode-alist '("\\.m$" . octave-mode))
-(add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
+(ublt/set-up 'octave-mode
+  (add-to-list 'auto-mode-alist '("\\.m$" . octave-mode)))
+
 (defun ublt/tab-2-spaces ()
   (setq tab-width 2))
-(add-hook 'yaml-mode-hook 'ublt/tab-2-spaces)
+
+(ublt/set-up 'yaml-mode
+  (add-hook 'yaml-mode-hook 'ublt/tab-2-spaces)
+  (add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode)))
+
+(ublt/set-up 'adoc-mode
+  (add-to-list 'auto-mode-alist '("\\.asciidoc$" . adoc-mode)))
 
 
 ;;; Lisp, Clojure --------------------------------------
