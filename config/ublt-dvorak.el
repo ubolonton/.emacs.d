@@ -805,6 +805,9 @@
 (ublt/keys "twittering-mode" twittering-mode-map
   "S-SPC" 'twittering-scroll-down)
 
+(ublt/keys 'package package-menu-mode-map
+  "S-SPC" 'scroll-down-command)
+
 ;; NTA XXX: Their "yank" variations are not as good
 (eval-after-load "ess-mode"
   '(ublt/undefine-keys ess-mode-map
