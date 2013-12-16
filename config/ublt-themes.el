@@ -484,7 +484,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (comint-highlight-prompt
           ((t (,@type))))
          (comint-highlight-input
-          ((t (:background ,bg+2 :foreground ,fg-2))))
+          ((t (:background ,bg+2 :foreground ,fg-1))))
          (cider-repl-input-face
           ((t (:inherit comint-highlight-input))))
          (cider-repl-result-face
@@ -557,6 +557,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
           ((t (:inherit font-lock-keyword-face))))
          (org-meta-line
           ((t (,@fw ,@context))))
+         (org-document-info-keyword
+          ((t (:inherit org-meta-line))))
          (org-mode-line-clock
           ((t (:foreground ,red-2 :bold t)))) ; TODO
          (org-link
@@ -603,7 +605,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (markdown-list-face
           ((t (,@mutable :weight bold))))
          (markdown-pre-face
-          ((t (,@fw ,@dimmed-hl ,@string))))
+          ((t (,@fw ,@dimmed-hl ,@string)))) ;TODO
          (markdown-bold-face
           ((t (,@mutable :weight bold))))
          (markdown-italic-face
@@ -620,15 +622,36 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (rst-block
           ((t (:inherit markdown-list-face))))
          (rst-literal
-          ((t (:inherit org-code :weight bold))))
+          ((t (:inherit org-code :weight bold)))) ;TODO
          (rst-reference
-          ((t (:inherit org-code))))
+          ((t (:inherit org-code))))    ;TODO
          (rst-definition
           ((t (:inherit org-link))))
          (rst-emphasis1
           ((t (:inherit markdown-italic-face))))
          (rst-emphasis2
           ((t (:inherit markdown-bold-face))))
+
+         (markup-title-0-face
+          ((t (:inherit org-document-title))))
+         (markup-title-1-face
+          ((t (:inherit org-level-1))))
+         (markup-title-2-face
+          ((t (:inherit org-level-2))))
+         (markup-title-3-face
+          ((t (:inherit org-level-3))))
+         (markup-title-4-face
+          ((t (:inherit org-level-4))))
+         (markup-title-5-face
+          ((t (:inherit org-level-5))))
+         (markup-internal-reference-face
+          ((t (:inherit org-link))))
+         (markup-typewriter-face
+          ((t (:inherit org-code))))
+         (markup-code-face
+          ((t (:inherit markdown-pre-face))))
+         (markup-list-face
+          ((t (:inherit markdown-list-face))))
 
          ;; Whitespaces
          (whitespace-space
