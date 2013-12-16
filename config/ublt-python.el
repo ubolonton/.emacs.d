@@ -1,5 +1,9 @@
 (require 'ublt-util)
 
+(ublt/set-up 'elpy
+  (elpy-enable))
+
+
 (ublt/set-up 'python
   (defun ublt/tab-4-spaces ()
     (setq tab-width 4))
@@ -8,15 +12,13 @@
 
   (setq python-check-command "pyflakes"
         python-shell-interpreter "ipython"
-        python-shell-interpreter-args "-i --colors=NoColor"
+        python-shell-interpreter-args "-i --colors=Linux"
         python-shell-prompt-regexp "In \\[[0-9]?\\]: "
-        python-shell-prompt-output-regexp "Out \\[[0-9]?\\]: "))
+        python-shell-prompt-output-regexp "Out \\[[0-9]?\\]: "
+        python-fill-docstring-style 'pep-257-nn
+        python-shell-virtualenv-path "~/.virtualenvs/default"))
 
 ;;; TODO: completion, history search, and other ipythons stuff
-
-(ublt/set-up 'elpy
-  (setq python-check-command "pyflakes")
-  (elpy-enable))
 
 
 ;; ;; ============================================================
