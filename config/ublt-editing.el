@@ -208,7 +208,7 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
                 ac-sources '(ac-source-words-in-buffer
                              ac-source-words-in-same-mode-buffers
                              ;; ac-source-words-in-all-buffer
-                             ac-source-dictionary
+                             ;; ac-source-dictionary
                              ;; ac-source-abbrev
                              ))
   (setq ac-delay 0.5
