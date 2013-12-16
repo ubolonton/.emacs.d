@@ -28,7 +28,7 @@
  org-insert-heading-respect-content t
 
  ;; Heading visual indentation
- org-indent-indentation-per-level 2
+ org-indent-indentation-per-level 1
  ;; List additional (on top of 2) indentation
  org-list-indent-offset 1
 
