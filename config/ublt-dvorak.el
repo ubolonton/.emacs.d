@@ -717,6 +717,10 @@
   "C-c C-s" 'elpy-shell-switch-to-shell ;was elpy-rgrep-symbol
   "M-p"     nil                         ;was elpy-nav-backward-definition
   "M-n"     nil                         ;was elpy-nav-forward-definition
+  "C-<up>"  nil                         ;was elpy-nav-backward-definition
+  "C-<down>"  nil                       ;was elpy-nav-forward-definition
+  "M-<left>" 'elpy-nav-backward-definition ;was backward-list
+  "M-<right>" 'elpy-nav-forward-definition ;was forward-list
   )
 
 (ublt/keys "sql" sql-mode-map
