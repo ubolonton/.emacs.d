@@ -5,6 +5,9 @@
 ;;; FIX: This must be before web-mode is loaded, which is weird
 (setq web-mode-extra-comment-keywords '("NTA" "FIX" "XXX"))
 (ublt/set-up 'web-mode
+  ;; `web-mode' doesn't highlight correctly if `font-lock-mode' is on.
+  ;; Weird
+  (add-hook 'web-mode-hook (ublt/off-fn 'font-lock-mode))
   (setq web-mode-script-padding 0
         web-mode-style-padding 2
         web-mode-enable-current-element-highlight t

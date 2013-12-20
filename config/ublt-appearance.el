@@ -139,8 +139,9 @@
     ;; Like org-mode TAB and S-TAB
     (setq fold-dwim-org/trigger-keys-block '((kbd "TAB")))
     (defun ublt/code-folding-setup ()
-      (hs-minor-mode 1)
-      (fold-dwim-org/minor-mode 1)
+      (unless (eq major-mode 'web-mode)
+        (hs-minor-mode 1)
+        (fold-dwim-org/minor-mode 1))
       ;; hideshowvis causes `htmlize-buffer' & `htmlize-file' to stop
       ;; working, and `htmlize' output to contain *hideshowvis*
       ;; garbage text
