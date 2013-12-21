@@ -285,7 +285,6 @@
 
 (require 'ublt-git)
 
-(ublt/add-path "python")
 (require 'ublt-python)
 
 (require 'ublt-js)
