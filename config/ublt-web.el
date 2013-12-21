@@ -25,6 +25,7 @@
   )
 (ublt/set-up 'css-mode
   (add-hook 'css-mode-hook 'esk-prog-mode-hook)
+  (setq css-indent-offset 2)
   ;; (add-hook 'css-mode-hook 'enable-paredit-mode)
   )
 
@@ -32,12 +33,12 @@
 
 ;;; XXX
 (ublt/set-up 'php-mode
-  (setq php-mode-coding-style nil))
+  (setq php-mode-coding-style nil)
+  (add-hook 'php-mode-hook (lambda () (setq c-basic-offset 4))))
 
 ;; Emmet (Zen-coding)
 (ublt/set-up 'emmet-mode
   (setq emmet-preview-default nil)
-  ;; (make-variable-buffer-local 'emmet-indentation)
   (defun ublt/set-up-emmet ()
     (emmet-mode +1)
     (set (make-local-variable 'emmet-indentation) tab-width))

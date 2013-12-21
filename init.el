@@ -276,10 +276,6 @@
 
 ;;; Languages support ------------------------------------------------
 
-;; Indentation in some modes
-(setq css-indent-offset 2)
-(add-hook 'php-mode-hook (lambda () (setq c-basic-offset 4)))
-
 (defun turn-off-hl-line-mode ()
   (hl-line-mode nil))
 ;; ;; Might be useful for f*cks like PHP, JSP, ASP.NET, mako, rhtml, django
