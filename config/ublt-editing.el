@@ -193,7 +193,6 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
     "Use `paredit-comment-dwim', but only in lisp code."
     (if (member major-mode '(lisp-mode emacs-lisp-mode clojure-mode scheme-mode))
         (call-interactively 'paredit-comment-dwim)
-      (message "normal")
       ad-do-it)))
 
 
