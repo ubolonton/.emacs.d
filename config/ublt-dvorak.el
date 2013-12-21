@@ -321,7 +321,8 @@
   ;; TODO: Rearrange the s- combos
   "C-c p f"       'projectile-find-file
 
-  "M-o"           'isearch-occur)
+  "M-o"           'isearch-occur
+  "M-O"           'helm-swoop)
 
 
 ;;; Help navigation
