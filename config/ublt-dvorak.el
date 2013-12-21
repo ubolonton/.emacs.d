@@ -213,6 +213,7 @@
   "s-2"           'split-window-vertically
   "s-3"           'split-window-horizontally
   "s-0"           'delete-window
+  "s-)"           'bury-buffer
   "s-w"           'other-window
   "s-W"           'ublt/swap-windows
 
