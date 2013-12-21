@@ -86,17 +86,6 @@
 
 
 
-;;; TODO: Use this (from Emacs prelude)
-;; (defun prelude-add-subfolders-to-load-path (parent-dir)
-;;   "Adds all first level `parent-dir' subdirs to the
-;; Emacs load path."
-;;   (dolist (f (directory-files parent-dir))
-;;     (let ((name (concat parent-dir f)))
-;;       (when (and (file-directory-p name)
-;;                  (not (equal f ".."))
-;;                  (not (equal f ".")))
-;;         (add-to-list 'load-path name)))))
-
 ;;; Path to stuffs that come from single files
 (ublt/add-path "single-file-modes")
 
@@ -275,17 +264,6 @@
 
 
 ;;; Languages support ------------------------------------------------
-
-(defun turn-off-hl-line-mode ()
-  (hl-line-mode nil))
-;; ;; Might be useful for f*cks like PHP, JSP, ASP.NET, mako, rhtml, django
-;; (ublt/add-path "nxhtml/")
-;; (add-hook 'nxhtml-mode-hook (lambda () (rng-validate-mode -1)))
-;; (load "autostart.el")
-;; (add-to-list 'auto-mode-alist '("\\.mako?$" . mako-nxhtml-mumamo-mode))
-;; (add-hook 'mako-nxhtml-mumamo-mode-hook 'esk-turn-on-hl-line-mode)
-;; (add-hook 'nxhtml-mode-hook (ublt/off-fn 'auto-fill-mode))
-;; (add-hook 'nxhtml-mode-hook (ublt/off-fn 'flyspell-mode))
 
 ;;; TODO: Enable this when there is a workaround for highlighted
 ;;; symbols always being displayed in fixed-width font
