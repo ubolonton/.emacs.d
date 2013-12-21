@@ -11,6 +11,7 @@
 ;;; Emacs is not a text editor, and here we load its package manager!
 (require 'package)
 (dolist (source '(("marmalade" . "http://marmalade-repo.org/packages/")
+                  ("org" . "http://orgmode.org/elpa/")
                   ("elpa" . "http://tromey.com/elpa/")
                   ("melpa" . "http://melpa.milkbox.net/packages/")
                   ))
