@@ -792,6 +792,8 @@
          "<down>" 'ido-next-match
          "<up>"   'ido-prev-match
          "M-w"    'ido-fallback
+         "C-r"    'ido-toggle-regexp    ;was ido-prev-match
+         "C-t"    nil                   ;was ido-toggle-regexp
          ;; Select first decide where to do later
          "s-2"    'ido-invoke-in-vertical-split
          "s-3"    'ido-invoke-in-horizontal-split
