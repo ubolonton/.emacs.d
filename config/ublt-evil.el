@@ -191,6 +191,11 @@
     (evil-an-object-range
      count beg end type #'forward-symbol))
 
+  (evil-define-text-object evil-a-sexp (count &optional beg end type)
+    "Select a sexp."
+    (evil-an-object-range
+     count beg end type #'forward-sexp))
+
   ;; (evil-define-text-object evil-inner-symbol (count &optional beg end type)
   ;;   "Select a symbol."
   ;;   (evil-inner-object-range

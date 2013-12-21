@@ -472,7 +472,8 @@
   "t" 'evil-an-sgml-tag
   "T" 'evil-a-tag
   "S" 'evil-a-symbol
-  "*" 'evil-a-symbol)
+  "*" 'evil-a-symbol
+  "l" 'evil-a-sexp)
 (ublt/keys "evil" evil-inner-text-objects-map
   "T" 'evil-inner-tag)
 ;; (ublt/keys "evil" evil-inner-text-objects-map
@@ -823,6 +824,9 @@
 (eval-after-load "org"
   '(ublt/undefine-keys org-mode-map
      '("C-y")))
+
+(ublt/keys 'eproject eproject-mode-map
+  "C-c C-f" nil)
 
 (ublt/keys 'org org-mode-map
   ;; "M-<return>" 'org-insert-heading-respect-content

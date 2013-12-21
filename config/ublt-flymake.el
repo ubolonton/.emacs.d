@@ -24,13 +24,15 @@
 (defun ublt/flymake-err-echo ()
   "Echo flymake error message in the minibuffer (not saving to *Messages*)."
   (ublt/status-message "%s"
-             (propertize (mapconcat 'identity
-                                    (ublt/flymake-err-at (point)) "\n")
-                         'face 'ublt/flymake-message-face)))
+                       (propertize (mapconcat 'identity
+                                              (ublt/flymake-err-at (point)) "\n")
+                                   'face 'ublt/flymake-message-face)))
 
 (defadvice flymake-goto-next-error (after display-message activate)
+  "Echo error message in minibufer."
   (ublt/flymake-err-echo))
 (defadvice flymake-goto-prev-error (after display-message activate)
+  "Echo error message in minibuffer."
   (ublt/flymake-err-echo))
 
 (eval-after-load "php-mode"
