@@ -4,10 +4,6 @@
 (add-to-list 'load-path "~/.emacs.d/config")
 (require 'ublt-util)
 
-;;; FIX: Stop using Emacs 23
-(when (ublt/legacy?)
-  (load-file "~/.emacs.d/emacs23/package.el"))
-
 ;;; Emacs is not a text editor, and here we load its package manager!
 (require 'package)
 (dolist (source '(("marmalade" . "http://marmalade-repo.org/packages/")
@@ -87,17 +83,6 @@
 ;;; ~/.emacs.d/ubolonton/init.el. And don't ever choose "elpa" as your
 ;;; user name =))
 
-;;; Clipboard integration for old version
-(when (ublt/legacy?)
-  (eval-after-load "ublt-dvorak"
-    '(progn
-       (ublt/define-keys
-        global-map
-        "M-w" 'clipboard-kill-ring-save
-        "C-w" 'clipboard-kill-region
-        "C-y" 'clipboard-yank)
-       (setq x-select-enable-clipboard t))))
-
 
 
 ;;; TODO: Use this (from Emacs prelude)
@@ -175,10 +160,6 @@
 ;; (require 'skype)
 ;; (skype--init)
 (setq skype--my-user-handle "ubolonton")
-
-(unless (ublt/legacy?)
-  ;; Uhm but why do we need it turned on on 24?
-  (setq stack-trace-on-error t))
 
 ;; nxhtml seems to byte-compile a lot while running, and uses some
 ;; obsolete stuffs. This is to prevent warning pop-ups (especially in

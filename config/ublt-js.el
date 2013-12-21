@@ -43,8 +43,6 @@
      ))
 
 (ublt/set-up 'js
-  (when (ublt/legacy?)
-    (add-hook 'js-mode-hook 'esk-prog-mode-hook))
 
   ;; XXX: What is this for?
   (defvar javascript-mode-syntax-table js-mode-syntax-table)

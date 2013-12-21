@@ -3,12 +3,6 @@
     (put f 'disabled nil)))
 
 
-;;; nxhtml is having troubles with emacs 24, so I have to use both 24
-;;; & 23 now
-(defun ublt/legacy? ()
-  (< emacs-major-version 24))
-
-
 (defun ublt/add-path (path)
   "Add to load-path a path relative to ~/.emacs.d/lib/"
   (add-to-list 'load-path (concat "~/.emacs.d/lib/" path)))
