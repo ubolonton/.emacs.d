@@ -1009,6 +1009,11 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (web-mode-comment-keyword-face
           ((t (:inherit font-lock-warning-face))))
 
+         (nxml-element-local-name
+          ((t (,@constant))))
+         (nxml-element-prefix
+          ((t (,@context))))
+
          (help-argument-name
           ((t (:foreground ,blue-1))))    ; TODO
 
