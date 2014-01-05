@@ -130,8 +130,11 @@
 (ublt/set-up 'ispell
   (setq ispell-dictionary "english"))
 
+(setq
 ;;; This stops the damned auto-pinging
-(setq ffap-machine-p-known 'reject)
+ ffap-machine-p-known 'reject
+
+ tramp-default-method "ssh")
 
 ;;; Old buffer clean up
 (ublt/set-up 'midnight
@@ -140,7 +143,6 @@
         )
   (add-to-list 'desktop-locals-to-save 'buffer-display-time))
 
-(setq tramp-default-method "ssh")
 
 (ublt/in '(gnu/linux)
   (setq find-ls-option '("-print0 | xargs -0 ls -ld" . "-ld")))
@@ -150,11 +152,6 @@
 ;; (require 'skype)
 ;; (skype--init)
 (setq skype--my-user-handle "ubolonton")
-
-;; nxhtml seems to byte-compile a lot while running, and uses some
-;; obsolete stuffs. This is to prevent warning pop-ups (especially in
-;; mako files)
-(setq byte-compile-warnings '(not obsolete free-vars))
 
 ;; `http://www.emacswiki.org/emacs/DeskTop#toc6'
 ;; (desktop-save-mode +1)

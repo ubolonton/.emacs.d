@@ -109,6 +109,7 @@
 ;; TODO: Using `sgml-skip-tag-forward' and `sgml-skip-tag-backward'
 ;; might not be a good idea because they are marked as FIXME
 ;; TODO: Put this in evil proper
+;; TODO: Handle edge cases properly
 (defun ublt/evil-an-sgml-range (count)
   (let* ((tag (ublt/sgml-get-tag count))
          (start (sgml-tag-start tag))

@@ -537,6 +537,7 @@
 ;;           (auto-fill-mode -1))
 ;;       (adaptive-wrap-prefix-mode -1))))
 
+;;; TODO: Move to editing
 (defadvice visual-line-mode (after no-hard-wrapping activate)
   "Turn off `auto-fill-mode' (automatic hard wrapping)."
   (when visual-line-mode
