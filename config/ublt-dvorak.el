@@ -470,12 +470,16 @@
 (ublt/keys "evil" evil-outer-text-objects-map
   "d" 'evil-a-defun
   "t" 'evil-an-sgml-tag
-  "T" 'evil-a-tag
-  "S" 'evil-a-symbol
+  ;; "T" 'evil-a-tag
+  "s" 'evil-a-symbol
+  "S" 'evil-a-sentence
   "*" 'evil-a-symbol
   "l" 'evil-a-sexp)
 (ublt/keys "evil" evil-inner-text-objects-map
-  "T" 'evil-inner-tag)
+  ;; "T" 'evil-inner-tag
+  "t" 'evil-inner-tag
+  "S" 'evil-inner-sentence
+  "s" 'evil-inner-symbol)
 ;; (ublt/keys "evil" evil-inner-text-objects-map
 ;;   "d" 'evil-inner-defun
 ;;   "S" 'evil-inner-symbol
