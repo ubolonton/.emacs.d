@@ -18,6 +18,7 @@
   ;; `web-mode' doesn't highlight correctly if `font-lock-mode' is on.
   ;; Weird
   (add-hook 'web-mode-hook (ublt/off-fn 'font-lock-mode))
+  (add-hook 'web-mode-hook (ublt/off-fn 'auto-fill-mode))
   (setq web-mode-script-padding 0
         web-mode-style-padding 2
         web-mode-enable-current-element-highlight t
