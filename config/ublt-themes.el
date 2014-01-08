@@ -1010,9 +1010,14 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
           ((t (:inherit font-lock-warning-face))))
 
          (nxml-element-local-name
-          ((t (,@constant))))
+          ((t (,@fw ,@constant))))
          (nxml-element-prefix
-          ((t (,@context))))
+          ((t (,@fw ,@context))))
+         (nxml-tag-delimiter
+          ((t (,@fw ,@dimmed))))
+         ;; (nxml-element-local-name
+         ;;  ((t ,portal)))                ; TODO
+
 
          (help-argument-name
           ((t (:foreground ,blue-1))))    ; TODO
@@ -1092,11 +1097,6 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
           ((t ,error-hl)))
          (flymake-warnline
           ((t (:underline ,yellow-1))))
-
-         (nxml-tag-delimiter
-          ((t (:inherit esk-paren-face))))
-         (nxml-element-local-name
-          ((t ,portal)))                ; TODO
 
          ;; My own custom faces
          (ublt-twitter-meta-face
