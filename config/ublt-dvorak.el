@@ -321,6 +321,8 @@
   ;; TODO: Rearrange the s- combos
   "C-c p f"       'projectile-find-file
 
+  "M-a"           'hs-toggle-hiding
+
   "M-o"           'isearch-occur
   "M-O"           'helm-swoop)
 
@@ -726,6 +728,8 @@
   "M-n"     nil                         ;was elpy-nav-forward-definition
   "C-<up>"  nil                         ;was elpy-nav-backward-definition
   "C-<down>"  nil                       ;was elpy-nav-forward-definition
+  "M-a"     nil                         ;was elpy-nav-backward-statement
+  "M-e"     nil                         ;was elpy-nav-forward-statement
   "M-<left>" 'elpy-nav-backward-definition ;was backward-list
   "M-<right>" 'elpy-nav-forward-definition ;was forward-list
   )
@@ -785,6 +789,7 @@
   "C-c C-c"    'dired-toggle-read-only)
 
 (ublt/keys 'magit magit-mode-map
+  "M-a"   'magit-toggle-section
   "S-SPC" 'magit-show-item-or-scroll-down)
 (ublt/keys 'git-commit-mode git-commit-mode-map
   "s-s"     'git-commit-commit
