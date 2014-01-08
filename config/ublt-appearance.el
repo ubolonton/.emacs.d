@@ -132,6 +132,14 @@
 ;;; XXX: This makes terminal Emacs hang, so only use if there's a
 ;; window system
 (when window-system
+  (ublt/set-up 'hideshow
+    (defadvice hs-toggle-hiding (around keep-point activate)
+      "Try to keep point after toggling."
+      (save-excursion
+        ad-do-it))
+    (setq
+     hs-hide-comments-when-hiding-all nil
+     hs-isearch-open t))
   (ublt/set-up 'fold-dwim-org
     ;; XXX FIX `fold-dwim-org'
     (defun looking-at-end-of-line ()
