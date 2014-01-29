@@ -1008,6 +1008,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
           ((t (:inherit highlight))))
          (web-mode-comment-keyword-face
           ((t (:inherit font-lock-warning-face))))
+         (web-mode-html-tag-bracket-face
+          ((t (,@context))))
 
          (nxml-element-local-name
           ((t (,@fw ,@constant))))
