@@ -1111,14 +1111,14 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
           ((t (:height 1.0))))
          (ublt/mode-line-major-mode
           ((t (:bold t))))
-         ;; (ublt/evil-emacs-tag
-         ;;  ((t (:foreground ,blue-1 :height 1.2))))
-         ;; (ublt/evil-normal-tag
-         ;;  ((t (:foreground ,red-2 :bold t :height 1.2))))
-         ;; (ublt/evil-insert-tag
-         ;;  ((t (:foreground ,bg :bold t :height 1.2))))
-         ;; (ublt/evil-visual-tag
-         ;;  ((t (:foreground ,red :bold t :height 1.2))))
+         (ublt/evil-emacs-tag
+          ((t (:foreground ,blue-1))))
+         (ublt/evil-normal-tag
+          ((t (:foreground ,red-2 :bold t))))
+         (ublt/evil-insert-tag
+          ((t (:foreground ,bg :bold t))))
+         (ublt/evil-visual-tag
+          ((t (:foreground ,red-2 :bold t))))
 
          ;; Skype TODO
          (skype--face-my-message

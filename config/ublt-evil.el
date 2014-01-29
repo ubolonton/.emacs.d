@@ -33,11 +33,11 @@
         evil-insert-state-tag (propertize "( I )" 'face 'ublt/evil-insert-tag)
         evil-emacs-state-tag  (propertize "( E )" 'face 'ublt/evil-emacs-tag)
         evil-visual-state-tag (propertize "( ∞ )" 'face 'ublt/evil-visual-tag)
-        evil-motion-state-cursor `(box ,(face-attribute 'org-done :foreground))
-        evil-normal-state-cursor `(box ,(face-attribute 'org-done :foreground))
+        evil-motion-state-cursor '(box "YellowGreen")
+        evil-normal-state-cursor '(box "YellowGreen")
         evil-insert-state-cursor '(bar "YellowGreen")
         evil-emacs-state-cursor  '(bar "YellowGreen")
-        evil-visual-state-cursor `(box ,(face-attribute 'font-lock-keyword-face :foreground)))
+        evil-visual-state-cursor '(box "#F86155"))
 
   ;; Modes that should be insert state by default
   (dolist (mode '(sql-interactive-mode
