@@ -184,15 +184,16 @@
 "))
       (call-interactively 'org-export-as-html))))
 
-(ublt/set-up 'o-blog
-  (dolist (project
-           '(("blog"
-              :base-directory "~/Programming/projects/blog/src/"
-              :publishing-directory "~/Programming/projects/blog/public")
-             ("o-blog"
-              :base-directory "~/.emacs.d/lib/o-blog/example/"
-              :publishing-directory "~/.emacs.d/lib/o-blog/example/out")))
-    (add-to-list 'org-publish-project-alist project)))
+(ublt/set-up 'org-publish
+  (ublt/set-up 'o-blog
+    (dolist (project
+             '(("blog"
+                :base-directory "~/Programming/projects/blog/src/"
+                :publishing-directory "~/Programming/projects/blog/public")
+               ("o-blog"
+                :base-directory "~/.emacs.d/lib/o-blog/example/"
+                :publishing-directory "~/.emacs.d/lib/o-blog/example/out")))
+      (add-to-list 'org-publish-project-alist project))))
 
 (ublt/set-up 'org-compat)
 (ublt/set-up 'ob-exp)
