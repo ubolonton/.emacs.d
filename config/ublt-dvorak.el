@@ -786,11 +786,13 @@
   "C-M-s"      'dired-isearch-filenames
   "C-M-S-s"    'isearch-forward
   "M-l"        'move-to-window-line-top-bottom
-  "C-c C-c"    'dired-toggle-read-only)
+  "C-c C-c"    'dired-toggle-read-only
+  "M-o"        'dired-omit-mode)
 
 (ublt/keys 'magit magit-mode-map
   "M-a"   'magit-toggle-section
-  "S-SPC" 'magit-show-item-or-scroll-down)
+  "S-SPC" 'magit-show-item-or-scroll-down
+  "C-M-u" 'magit-goto-parent-section)
 (ublt/keys 'git-commit-mode git-commit-mode-map
   "s-s"     'git-commit-commit
   "C-x C-s" 'git-commit-commit)
@@ -851,6 +853,7 @@
   ;; TODO: `org-insert-link'
   "M-p" 'previous-error
   "M-n" 'next-error
+  "M-a" 'org-cycle
   )
 
 (provide 'ublt-dvorak)
