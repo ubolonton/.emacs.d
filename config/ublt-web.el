@@ -59,7 +59,7 @@
   (add-hook 'css-mode-hook 'esk-prog-mode-hook)
   (setq css-indent-offset 2))
 
-(ublt/set-up 'html-mode
+(ublt/set-up 'sgml-mode
   (add-hook 'html-mode-hook (ublt/off-fn 'auto-fill-mode)))
 
 ;;; XXX
