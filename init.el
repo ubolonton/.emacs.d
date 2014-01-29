@@ -287,7 +287,7 @@
 
 (require 'ublt-web)
 
-(ublt/set-up 'octave-mode
+(ublt/set-up 'octave-mod
   (add-to-list 'auto-mode-alist '("\\.m$" . octave-mode)))
 
 (defun ublt/tab-2-spaces ()
