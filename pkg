@@ -46,7 +46,7 @@
               (v1 (epl-package-version old))
               (v2 (epl-package-version new)))
          (message "%s" name)
-         (message "%s \t => \t %s" v1 v2)))))
+         (message "  %s \t => \t %s" v1 v2)))))
 
   ('update
    (message "Updating index")
