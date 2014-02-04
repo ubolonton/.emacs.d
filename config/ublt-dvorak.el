@@ -664,6 +664,8 @@
   "C-c C-i" 'haskell-process-do-info
   "C-c M-." nil
   "C-c C-d" nil)
+(ublt/keys "lisp-mode" lisp-mode-shared-map
+  "RET" 'reindent-then-newline-and-indent)
 (ublt/keys "lisp-mode" emacs-lisp-mode-map
   "M-TAB"   nil
   "C-c C-c" 'eval-defun

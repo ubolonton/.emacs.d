@@ -673,6 +673,9 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (paren-face-no-match
           ((t (:background ,yellow))))  ; TODO
          ;; Parentheses dimming in Lisp modes
+         (ublt/lisp-paren-face
+          ((t ,dimmed)))
+         ;; TODO: Remove
          (esk-paren-face
           ((t ,dimmed)))
          (sp-show-pair-match-face

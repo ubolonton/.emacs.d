@@ -464,7 +464,7 @@
               (0 (progn (compose-region (match-beginning 1) (match-end 1)
                                         ?ƒ 'decompose-region)
                         nil)))
-             ("{\\|}\\|;\\|\\$" . 'esk-paren-face)
+             ("{\\|}\\|;\\|\\$" . 'ublt/lisp-paren-face)
              ("\\(ret\\)urn"
               (0 (progn (compose-region (match-beginning 1) (match-end 1)
                                         ?▸ 'decompose-region)
@@ -475,7 +475,7 @@
                         nil)))))
 (dolist (mode '(js-mode js2-mode web-mode))
   (font-lock-add-keywords
-   mode `(("{\\|}\\|;" . 'esk-paren-face)
+   mode `(("{\\|}\\|;" . 'ublt/lisp-paren-face)
           ("\\(function\\)"
            (0 (progn (compose-region (match-beginning 1) (match-end 1)
                                      ?ƒ 'decompose-region)
@@ -487,6 +487,13 @@
           ("ret\\(urn\\)"
            (0 (progn (compose-region (match-beginning 1) (match-end 1)
                                      ?▸ 'decompose-region)
+                     nil))))))
+(dolist (mode '(clojure-mode clojurescript-mode))
+  (font-lock-add-keywords
+   mode `(("{\\|}\\|;" . 'ublt/lisp-paren-face)
+          ("(\\(\\<fn\\>\\)"
+           (0 (progn (compose-region (match-beginning 1) (match-end 1)
+                                     ?ƒ 'decompose-region)
                      nil))))))
 
 (defun ublt/pretty-org (on)
