@@ -324,7 +324,28 @@
   "M-a"           'hs-toggle-hiding
 
   "M-o"           'isearch-occur
-  "M-O"           'helm-swoop)
+  "M-O"           'helm-swoop
+
+  "C-<f10>"       'menu-bar-mode
+  "C-s"           'isearch-forward-regexp
+  "C-r"           'isearch-backward-regexp
+  ;; FIX
+  "C-M-s"         'isearch-forward
+
+  ;; FIX
+  "C-c r"         'revert-buffer
+  "C-c y"         'bury-buffer
+
+  ;; FIX
+  "C-x m"         'eshell
+  "C-x C-m"       'shell
+
+  ;; FIX
+  "C-c e"         'esk-eval-and-replace
+  "M-j"           'join-line
+
+  "C-c g"         'magit-status
+  "C-C n"         'esk-cleanup-buffer)
 
 
 ;;; Help navigation
@@ -340,6 +361,11 @@
   "M-s-h" 'Info-history-back
   "M-s-n" 'Info-history-forward
   "M-."   'elisp-slime-nav-find-elisp-thing-at-point)
+
+(ublt/keys 'help-mode 'help-command
+  "a" 'apropos
+  "A" 'apropos-command
+  "V" 'apropos-value)
 
 
 ;;; Evil -------------------------------------------------------------
