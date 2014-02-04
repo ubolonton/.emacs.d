@@ -68,7 +68,7 @@
          web-mode
          emmet-mode                          ; html/css editing
          ;; TODO: Remove starter kit dependency
-         starter-kit starter-kit-eshell
+         starter-kit
          starter-kit-ruby))
 (dolist (p ublt/packages)
   (when (not (package-installed-p p))
