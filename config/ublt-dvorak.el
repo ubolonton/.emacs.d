@@ -345,7 +345,14 @@
   "M-j"           'join-line
 
   "C-c g"         'magit-status
-  "C-C n"         'esk-cleanup-buffer)
+  "C-C n"         'esk-cleanup-buffer
+
+  "s-<mouse-4>"   'text-scale-increase
+  "s-<mouse-5>"   'text-scale-decrease
+  "S-<mouse-4>"   'backward-paragraph
+  "S-<mouse-5>"   'forward-paragraph
+  "M-<mouse-4>"   'scroll-down-line
+  "M-<mouse-5>"   'scroll-up-line)
 
 
 ;;; Help navigation
