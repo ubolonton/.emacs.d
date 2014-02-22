@@ -12,10 +12,13 @@
         ;; not volatile or temporary like helm buffer). This is
         ;; important for small screen such as mine.
         magit-status-buffer-switch-function 'switch-to-buffer
+        ;; origin/xyz => xyz
+        magit-default-tracking-name-function 'magit-default-tracking-name-branch-only
         ;; TODO: Face
-        ;; FIX: 'all is currently buggy, throwing "Can't find the
-        ;; beginning of the file". When it's fixed use 'all instead.
-        magit-diff-refine-hunk t)
+        magit-diff-refine-hunk 'all
+        magit-restore-window-configuration t
+        magit-set-upstream-on-push t
+        )
   ;; XXX: Make magit support customizing switches instead
   (dolist (switch '(("-M" "No merge commits" "--no-merges")
                     ("-t" "Topo Order" "--topo-order")))
