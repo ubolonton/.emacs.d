@@ -11,7 +11,7 @@
  org-special-ctrl-k t
 
  ;; Show all headlines by default
- org-startup-folded 'content
+ org-startup-folded t
 
  org-catch-invisible-edits 'smart
 
