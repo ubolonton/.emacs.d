@@ -29,6 +29,7 @@
         web-mode-tag-auto-close-style 1)
   (add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.mako?$" . web-mode))
+  (add-to-list 'web-mode-engine-file-regexps '("mako" . "\\.mako?\\'"))
   (add-to-list 'auto-mode-alist '("\\.underscore$" . web-mode)))
 
 
