@@ -1155,13 +1155,23 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
       ;; ;; (set-face-font 'variable-pitch variable-pitch-family)
       ;; ;; (message "Done %s" (face-attribute 'default :height))
 
+      ;; (setq
+      ;;  hl-paren-colors `("Orange" ,yellow "Greenyellow"
+      ;;                    ,green "Springgreen" "Cyan"
+      ;;                    ,blue-2 "Magenta" "Purple"
+      ;;                    "Orange" ,yellow "Greenyellow"
+      ;;                    ,green "Springgreen" "Cyan"
+      ;;                    ,blue-2 "Magenta" "Purple"))
+
       (setq
-       hl-paren-colors `("Orange" ,yellow "Greenyellow"
-                         ,green "Springgreen" "Cyan"
-                         ,blue-2 "Magenta" "Purple"
-                         "Orange" ,yellow "Greenyellow"
-                         ,green "Springgreen" "Cyan"
-                         ,blue-2 "Magenta" "Purple"))
+       hl-paren-colors
+       `("#00FF00"
+         "#00DD00"
+         "#00BB00"
+         "#009900"
+         "#007700"
+         "#005500"
+         ))
       )))
 
 (provide 'ublt-themes)
