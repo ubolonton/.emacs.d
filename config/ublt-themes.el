@@ -1004,7 +1004,9 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (web-mode-part-face
           ((t (:background ,bg+1))))
          (web-mode-block-face
-          ((t (:background ,bg+2))))
+          ((t (:background ,bg+1))))
+         (web-mode-block-delimiter-face
+          ((t (:inherit web-mode-block-face :foreground ,bg+3))))
          (web-mode-css-selector-face
           ((t (:inherit font-lock-function-name-face))))
          (web-mode-current-element-highlight-face
