@@ -633,6 +633,7 @@
        "{"             'paredit-open-curly
        "}"             'paredit-close-curly
        "M-("           'paredit-wrap-round
+       "M-)"           'paredit-forward-slurp-sexp
        "M-["           'paredit-wrap-square
        "M-{"           'paredit-wrap-curly
        "M-r"           nil              ; was paredit-raise-sexp
@@ -645,16 +646,7 @@
        "M-<left>"      'paredit-backward
        "M-<right>"     'paredit-forward
        ;; TODO: advice comment-dwim instead
-       "M-;"           nil)
-     (eval-after-load "starter-kit-lisp"
-       '(ublt/define-keys paredit-mode-map
-          "M-(" 'paredit-wrap-round
-          "M-)" 'paredit-forward-slurp-sexp))
-     (eval-after-load "starter-kit-lisp-autoloads"
-       '(ublt/define-keys paredit-mode-map
-          "M-(" 'paredit-wrap-round
-          "M-)" 'paredit-forward-slurp-sexp))))
-;;; XXX starter-kit
+       "M-;"           nil)))
 
 (ublt/keys "python-mode" py-mode-map
   "{"       'paredit-open-curly
