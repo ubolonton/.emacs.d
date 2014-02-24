@@ -15,7 +15,7 @@
                 clojurescript-mode))
   (font-lock-add-keywords mode '(("(\\|)" . 'ublt/lisp-paren-face))))
 
-(ublt/set-up 'paredit-mode
+(ublt/set-up 'paredit
   (dolist (hook '(scheme-mode-hook
                   emacs-lisp-mode-hook
                   lisp-mode-hook
