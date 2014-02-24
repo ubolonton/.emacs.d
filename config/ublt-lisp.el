@@ -15,6 +15,10 @@
                 clojurescript-mode))
   (font-lock-add-keywords mode '(("(\\|)" . 'ublt/lisp-paren-face))))
 
+;; Scheme
+(ublt/set-up 'quack
+  (setq quack-fontify-style nil))
+
 (ublt/set-up 'paredit
   (dolist (hook '(scheme-mode-hook
                   emacs-lisp-mode-hook
@@ -42,7 +46,6 @@
   (ublt/set-up 'elisp-slime-nav
     (add-hook 'emacs-lisp-mode-hook (ublt/on-fn 'elisp-slime-nav-mode))))
 
-;; clojure-mode customization
 (ublt/set-up 'clojure-mode
   (add-to-list 'auto-mode-alist '("\\.dtm$" . clojure-mode))
   ;; (define-clojure-indent
@@ -67,9 +70,9 @@
 ;;; TODO: `ublt/set-up' should accept a list of features
   (add-hook 'cider-repl-mode-hook 'ublt/repl-clojure-font-lock))
 
-;;;; ielm settings ---------------
-(add-hook 'ielm-mode-hook
-          (lambda () (setq comint-input-ring-file-name "~/.emacs.d/.ielm-input.hist")))
+(ublt/set-up 'ielm
+  (add-hook 'ielm-mode-hook
+            (lambda () (setq comint-input-ring-file-name "~/.emacs.d/.ielm-input.hist"))))
 
 ;;; @cider: making a keymap available without the mode being provided
 ;;; is just fucking insane

@@ -144,10 +144,6 @@
         (load-file "~/Programming/factor/misc/fuel/fu.el")))
   (error (message "No Factor")))
 
-;; Scheme
-(require 'quack)
-(setq quack-fontify-style nil)
-
 (require 'ublt-erlang)
 (require 'ublt-haskell)
 (require 'ublt-sql)
