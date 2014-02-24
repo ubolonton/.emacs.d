@@ -15,9 +15,12 @@
         ;; origin/xyz => xyz
         magit-default-tracking-name-function 'magit-default-tracking-name-branch-only
         ;; TODO: Face
-        magit-diff-refine-hunk 'all
         magit-restore-window-configuration t
         magit-set-upstream-on-push t
+        ;; `all' would be nice, but it's too slow for large diffs
+        magit-diff-refine-hunk t
+        ;; Looks like turning this off doesn't help with refined diffs, so
+        magit-diff-use-overlays t
         )
   ;; XXX: Make magit support customizing switches instead
   (dolist (switch '(("-M" "No merge commits" "--no-merges")
