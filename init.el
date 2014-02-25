@@ -140,18 +140,9 @@
 (require 'ublt-haskell)
 (require 'ublt-sql)
 (require 'ublt-web)
+(require 'ublt-markups)
 (ublt/set-up 'octave-mod
   (add-to-list 'auto-mode-alist '("\\.m$" . octave-mode)))
-
-(defun ublt/tab-2-spaces ()
-  (setq tab-width 2))
-
-(ublt/set-up 'yaml-mode
-  (add-hook 'yaml-mode-hook 'ublt/tab-2-spaces)
-  (add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode)))
-
-(ublt/set-up 'adoc-mode
-  (add-to-list 'auto-mode-alist '("\\.asciidoc$" . adoc-mode)))
 
 
 ;;; Lisp, Clojure --------------------------------------
