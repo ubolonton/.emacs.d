@@ -135,15 +135,7 @@
 
 ;;; Languages support ------------------------------------------------
 
-;; Factor
-(condition-case err
-    (progn
-      (ublt/in '(darwin)
-        (load-file "/Applications/factor/misc/fuel/fu.el"))
-      (ublt/in '(gnu/linux)
-        (load-file "~/Programming/factor/misc/fuel/fu.el")))
-  (error (message "No Factor")))
-
+(require 'ublt-factor)
 (require 'ublt-erlang)
 (require 'ublt-haskell)
 (require 'ublt-sql)
