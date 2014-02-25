@@ -124,12 +124,11 @@
 (require 'ublt-evil)
 (require 'ublt-dired)
 (require 'ublt-ido)
+
 ;; (ublt/add-path "helm")
 (require 'ublt-helm)
 
 (require 'ublt-git)
-(require 'ublt-python)
-(require 'ublt-js)
 (require 'ublt-flymake)
 
 
@@ -141,13 +140,11 @@
 (require 'ublt-sql)
 (require 'ublt-web)
 (require 'ublt-markups)
+(require 'ublt-lisp)
+(require 'ublt-python)
+(require 'ublt-js)
 (ublt/set-up 'octave-mod
   (add-to-list 'auto-mode-alist '("\\.m$" . octave-mode)))
-
-
-;;; Lisp, Clojure --------------------------------------
-
-(require 'ublt-lisp)
 
 
 (setq custom-file "~/.emacs.d/custom.el")
