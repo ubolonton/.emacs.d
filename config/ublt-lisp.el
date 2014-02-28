@@ -58,16 +58,12 @@
   ;;   (do-it 'defun))
   )
 
-;;; XXX: Fix durendal instead
-(ublt/set-up 'durendal
-  ;; For REPL font-lock trick to work in Emacs 24
+(ublt/set-up 'clojure-mode
+  ;; This messes up other coloring, but code coloring is more important for now
   (defun ublt/repl-clojure-font-lock ()
     (font-lock-mode -1)
     (clojure-mode-font-lock-setup)
     (font-lock-mode +1))
-  (durendal-enable)
-  (setq durendal-auto-compile? nil)
-;;; TODO: `ublt/set-up' should accept a list of features
   (add-hook 'cider-repl-mode-hook 'ublt/repl-clojure-font-lock))
 
 (ublt/set-up 'ielm

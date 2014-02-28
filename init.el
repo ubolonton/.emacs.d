@@ -59,7 +59,7 @@
          adoc-mode
          markdown-mode yaml-mode
          less-css-mode scss-mode
-         clojure-mode clojurescript-mode durendal cider
+         clojure-mode clojurescript-mode cider
          elisp-slime-nav
          js2-mode flymake-jshint
          php-mode php-boris flymake-php
