@@ -3,6 +3,17 @@
 ;;; Misc customization
 ;;; TODO: add case toggling
 
+;;; Might grow into a project on its own, adding more project
+;;; management stuffs
+(ublt/set-up 'eproject
+  (ublt/add-path "eproject")
+  (setq eproject-completing-read-function 'eproject--ido-completing-read
+        eproject-todo-expressions '("TODO" "XXX" "FIX" "FIXME" "HACK" "NTA"))
+  (ublt/set-up 'eproject-ido-imenu))
+
+(ublt/set-up 'projectile
+  (projectile-global-mode +1))
+
 ;;; TODO: Better dictionary (one with tech terms)?
 (ublt/set-up 'flyspell
   (setq flyspell-default-dictionary "english"))

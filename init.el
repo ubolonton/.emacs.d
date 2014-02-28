@@ -111,15 +111,6 @@
 (when window-system (ublt/set-up 'ublt-entertainment))
 (ublt/set-up 'ublt-organization)
 
-;;; Might grow into a project on its own, adding more project
-;;; management stuffs
-(ublt/add-path "eproject")
-(setq eproject-completing-read-function 'eproject--ido-completing-read
-      eproject-todo-expressions '("TODO" "XXX" "FIX" "FIXME" "HACK" "NTA"))
-(require 'eproject-ido-imenu)
-
-(ublt/set-up 'projectile
-  (projectile-global-mode +1))
 
 (require 'ublt-evil)
 (require 'ublt-dired)
