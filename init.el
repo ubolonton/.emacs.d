@@ -102,24 +102,29 @@
 (require 'ublt-navigation)
 (require 'ublt-editing)
 
-;;; Personal stuffs
+;;; Personal stuff
 (ublt/add-path "org2blog/")
 (ublt/add-path "o-blog")
 (ublt/add-path "o-blog/lisp")
 (ublt/add-path "org-html-slideshow")
 (ublt/set-up 'ublt-communication)
-(when window-system (ublt/set-up 'ublt-entertainment))
+(when window-system
+  (ublt/set-up 'ublt-entertainment))
 (ublt/set-up 'ublt-organization)
 
 
+;;; More stuff
+
+;;; Vim emulation
 (require 'ublt-evil)
+;;; File management
 (require 'ublt-dired)
+;;; Completion/narrowing interfaces
 (require 'ublt-ido)
-
-;; (ublt/add-path "helm")
 (require 'ublt-helm)
-
+;;; git
 (require 'ublt-git)
+;;; Code linters. TODO: Replace with flycheck
 (require 'ublt-flymake)
 
 
