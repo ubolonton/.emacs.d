@@ -5,8 +5,8 @@
 
 ;;; Might grow into a project on its own, adding more project
 ;;; management stuffs
+(ublt/add-path "eproject")
 (ublt/set-up 'eproject
-  (ublt/add-path "eproject")
   (setq eproject-completing-read-function 'eproject--ido-completing-read
         eproject-todo-expressions '("TODO" "XXX" "FIX" "FIXME" "HACK" "NTA"))
   (ublt/set-up 'eproject-ido-imenu))
