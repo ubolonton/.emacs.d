@@ -566,7 +566,11 @@
 
 (ublt/keys 'web-mode web-mode-map
   "M-<up>"    'web-mode-element-previous
-  "M-<down>"  'web-mode-element-next)
+  "M-<down>"  'web-mode-element-next
+  "M-a"       'web-mode-fold-or-unfold
+  "C-M-u"     'web-mode-element-parent
+  "C-M-d"     'web-mode-element-child
+  "M-("       'web-mode-element-wrap)
 
 
 ;;; auto-complete and yasnippet
