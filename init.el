@@ -24,6 +24,7 @@
   '(smex auto-complete yasnippet
          org textmate undo-tree whole-line-or-region
          ace-jump-mode htmlize twittering-mode keyfreq
+         ox-reveal                      ; reveal.js slides from org-mode
          adaptive-wrap
          ido-ubiquitous                 ; List-narrowing UI
          helm helm-cmd-t helm-swoop

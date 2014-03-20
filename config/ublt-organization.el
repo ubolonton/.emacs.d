@@ -195,6 +195,17 @@
                 :publishing-directory "~/.emacs.d/lib/o-blog/example/out")))
       (add-to-list 'org-publish-project-alist project))))
 
+(ublt/set-up 'ox-reveal
+  (setq org-reveal-root "file:///home/ubolonton/Dropbox/org/cogini/slides/reveal.js/"
+
+        org-reveal-transition "linear"
+        org-reveal-transition-speed "fast"
+
+        org-reveal-history t
+        org-reveal-control t
+        org-reveal-progress t
+        org-reveal-rolling-links nil))
+
 (ublt/set-up 'org-compat)
 (ublt/set-up 'ob-exp)
 (ublt/set-up 'ox)
