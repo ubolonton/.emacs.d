@@ -184,7 +184,9 @@ created), caused by `scroll-preserve-screen-position' not taking
               (both magit-visit-file-item)
               (both highlight-symbol-prev)
               (both highlight-symbol-next)
-              (both mwheel-scroll)))
+              (both mwheel-scroll)
+              (both ublt/exchange-point-and-mark-no-activate)
+              (both exchange-point-and-mark)))
   (destructuring-bind (where fn) wisdom
     (eval `(ublt/advice-scroller ,fn ,where))))
 
