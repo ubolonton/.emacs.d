@@ -19,8 +19,9 @@
         magit-set-upstream-on-push t
         ;; `all' would be nice, but it's too slow for large diffs
         magit-diff-refine-hunk t
-        ;; Looks like turning this off doesn't help with refined diffs, so
-        magit-diff-use-overlays t
+        ;; Looks like turning this off doesn't help with refined
+        ;; diffs, but still
+        magit-diff-use-overlays nil
         )
   ;; XXX: Make magit support customizing switches instead
   (dolist (switch '(("-M" "No merge commits" "--no-merges")
