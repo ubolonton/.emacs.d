@@ -196,7 +196,7 @@
       (add-to-list 'org-publish-project-alist project))))
 
 (ublt/set-up 'ox-reveal
-  (setq org-reveal-root "file:///home/ubolonton/Dropbox/org/cogini/slides/reveal.js/"
+  (setq org-reveal-root "reveal.js/"
 
         org-reveal-transition "linear"
         org-reveal-transition-speed "fast"
