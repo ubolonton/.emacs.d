@@ -27,7 +27,23 @@
   (add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.mako?$" . web-mode))
   (add-to-list 'web-mode-engine-file-regexps '("mako" . "\\.mako?\\'"))
-  (add-to-list 'auto-mode-alist '("\\.underscore$" . web-mode)))
+  (add-to-list 'auto-mode-alist '("\\.underscore$" . web-mode))
+
+  ;; XXX: Quick-n-dirty hack to highlight `o-blog' templates
+  (when (functionp 'org-src-font-lock-fontify-block)
+    (defun ublt/web-mode-font-lock-lisp-tags (limit)
+      (while (search-forward "<lisp>" limit t)
+        (let ((open-end (match-end 0)))
+          (if (search-forward "</lisp>" limit t)
+              (let ((close-beg (match-beginning 0)))
+                (org-src-font-lock-fontify-block "emacs-lisp" open-end close-beg))))))
+    (add-to-list 'web-mode-font-lock-keywords 'ublt/web-mode-font-lock-lisp-tags t)
+    (font-lock-add-keywords
+     'web-mode
+     '(("(\\(ob:\\)\\(\\(\\w\\|-\\)+\\)"
+             (1 font-lock-function-name-face)
+             (2 font-lock-builtin-face)))
+     'append)))
 
 
 ;; Emmet (Zen-coding)
