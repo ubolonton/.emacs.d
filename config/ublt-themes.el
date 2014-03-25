@@ -805,7 +805,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (magit-log-head-label-default
           ((t (:inherit magit-log-head-label-remote :foreground ,yellow-1)))) ; TODO WHat is this?
          (magit-log-sha1
-          ((t ,commitment)))
+          ((t (,@fw ,@commitment))))
          (magit-menu-selected-option
           ((t (:foreground ,green))))   ; TODO What is this?
          (magit-item-mark
