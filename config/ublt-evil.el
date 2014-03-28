@@ -58,9 +58,11 @@
                   php-boris-mode))
     (add-to-list 'evil-insert-state-modes mode))
 
-  (dolist (mode '(Info-mode
-                  org-mode))
+  (dolist (mode '(Info-mode))
     (add-to-list 'evil-emacs-state-modes mode))
+
+  (dolist (mode '(org-mode))
+    (add-to-list 'evil-normal-state-modes mode))
 
   ;; Hmm
   (dolist (mode '(Info-mode))
