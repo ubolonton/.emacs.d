@@ -193,7 +193,31 @@
                ("o-blog"
                 :base-directory "~/.emacs.d/lib/o-blog/example/"
                 :publishing-directory "~/.emacs.d/lib/o-blog/example/out")))
-      (add-to-list 'org-publish-project-alist project))))
+      (add-to-list 'org-publish-project-alist project))
+
+    ;; FIX
+    (defun ublt/org-publish-blog-sync (file)
+      (let ((file1 (format "%s.tmp.org" file)))
+        (copy-file file file1 1)
+        (org-publish-blog-sync file1)
+        (let ((tmp (get-file-buffer file1)))
+          (when tmp
+            (with-current-buffer tmp
+              (set-buffer-modified-p nil)
+              (kill-buffer))))
+        (delete-file file1)))
+
+    (add-hook 'o-blog-before-publish-hook 'org-export-handle-include-files)
+
+    ;; Use this instead of `org-publish-blog'
+    (defun ublt/org-publish-o-blog (&optional file)
+      "Publish FILE as a blog synchronously, processing #+INCLUDE
+statements."
+      (interactive
+       (list (or
+              (when (eq major-mode 'org-mode) (buffer-file-name))
+              (read-file-name "Publish blog from: " nil nil t))))
+      (ublt/org-publish-blog-sync file))))
 
 (ublt/set-up 'ox-reveal
   (setq org-reveal-root "reveal.js/"
