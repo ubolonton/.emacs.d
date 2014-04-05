@@ -8,7 +8,6 @@
   (defun ublt/tab-4-spaces ()
     (setq tab-width 4))
   (add-hook 'python-mode-hook 'ublt/tab-4-spaces)
-  ;; (add-hook 'python-mode-hook (ublt/on-fn 'paredit-mode))
 
   (setq python-check-command "pyflakes"
         python-shell-interpreter "ipython"
@@ -16,7 +15,10 @@
         python-shell-prompt-regexp "In \\[[0-9]?\\]: "
         python-shell-prompt-output-regexp "Out \\[[0-9]?\\]: "
         python-fill-docstring-style 'pep-257-nn
-        python-shell-virtualenv-path "~/.virtualenvs/default"))
+        python-shell-virtualenv-path "~/.virtualenvs/default")
+
+  (ublt/set-up 'paredit
+    (add-hook 'python-mode-hook (ublt/on-fn 'paredit-mode))))
 
 ;;; TODO: completion, history search, and other ipythons stuff
 
