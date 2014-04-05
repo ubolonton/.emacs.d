@@ -149,40 +149,8 @@
 ;; Use external browser
 (add-to-list 'org-file-apps '("\\.x?html?\\'" browse-url file))
 
-;; ;;; Wordpress blogging
-;; (ublt/set-up 'org2blog-autoloads
-;;   (setq org2blog/wp-blog-alist '(("ubolonton"
-;;                                   :url "http://ubolonton.wordpress.com/xmlrpc.php"
-;;                                   :username "ubolonton"
-;;                                   :default-title "From Emacs"
-;;                                   :default-categories ("org2blog" "emacs")
-;;                                   :tags-as-categories nil))
-;;         org2blog/wp-confirm-post nil))
-
-(ublt/set-up 'org-html-slideshow
-  (defun ublt/org-html-slideshow-decorate ()
-    (goto-char (point-max))
-    (insert "
-#+BEGIN_HTML
-<script type='text/javascript' src='js/org-html-slideshow.js'></script>
-#+END_HTML
-
-# Local Variables:
-# org-export-html-style-include-default: nil
-# org-export-html-style-include-scripts: nil
-# End:
-"))
-
-  (defun ublt/org-html-slideshow-publish ()
-    (interactive)
-    (let ((org-export-preprocess-hook (cons 'ublt/org-html-slideshow-decorate org-export-preprocess-hook))
-          (org-export-html-style-extra "
-<link rel='stylesheet' type='text/css' href='css/common.css' />
-<link rel='stylesheet' type='text/css' href='css/screen.css' media='screen' />
-<link rel='stylesheet' type='text/css' href='css/projection.css' media='projection' />
-<link rel='stylesheet' type='text/css' href='css/presenter.css' media='presenter' />
-"))
-      (call-interactively 'org-export-as-html))))
+
+;;; Blogging
 
 (ublt/set-up 'org-publish
   (ublt/set-up 'o-blog
@@ -219,6 +187,9 @@ statements."
               (read-file-name "Publish blog from: " nil nil t))))
       (ublt/org-publish-blog-sync file))))
 
+
+;;; Slides for presentation
+
 (ublt/set-up 'ox-reveal
   (setq org-reveal-root "reveal.js/"
 
@@ -230,10 +201,37 @@ statements."
         org-reveal-progress t
         org-reveal-rolling-links nil))
 
-(ublt/set-up 'org-compat)
-(ublt/set-up 'ob-exp)
-(ublt/set-up 'ox)
-(ublt/set-up 'ob-sql)
-(ublt/set-up 'ob-scheme)
+;;; TODO: Probably don't use this anymore
+(ublt/set-up 'org-html-slideshow
+  (defun ublt/org-html-slideshow-decorate ()
+    (goto-char (point-max))
+    (insert "
+#+BEGIN_HTML
+<script type='text/javascript' src='js/org-html-slideshow.js'></script>
+#+END_HTML
+
+# Local Variables:
+# org-export-html-style-include-default: nil
+# org-export-html-style-include-scripts: nil
+# End:
+"))
+
+  (defun ublt/org-html-slideshow-publish ()
+    (interactive)
+    (let ((org-export-preprocess-hook (cons 'ublt/org-html-slideshow-decorate org-export-preprocess-hook))
+          (org-export-html-style-extra "
+<link rel='stylesheet' type='text/css' href='css/common.css' />
+<link rel='stylesheet' type='text/css' href='css/screen.css' media='screen' />
+<link rel='stylesheet' type='text/css' href='css/projection.css' media='projection' />
+<link rel='stylesheet' type='text/css' href='css/presenter.css' media='presenter' />
+"))
+      (call-interactively 'org-export-as-html))))
+
+
+;; (ublt/set-up 'org-compat)
+;; (ublt/set-up 'ob-exp)
+;; (ublt/set-up 'ox)
+;; (ublt/set-up 'ob-sql)
+;; (ublt/set-up 'ob-scheme)
 
 (provide 'ublt-organization)

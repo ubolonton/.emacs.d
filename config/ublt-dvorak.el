@@ -176,8 +176,8 @@
   "s-T"    "M-,"                        ; pop reference
 
   "s-4"    "C-x 4"                      ; do something other window
-  "s-r"    "C-x r"
-  "s-R"    "C-x r j"
+  ;; "s-r"    "C-x r"
+  ;; "s-R"    "C-x r j"
 
   "s-P"    "C-c p"                      ; projectile
 
@@ -230,8 +230,8 @@
   "s-G"           'find-grep
   "s-m"           'ace-jump-mode
   "s-M"           'ace-jump-char-mode
-  ;; "s-r"           'org-remember
-  ;; "s-R"           'org-agenda
+  "s-r"           'org-capture
+  "s-R"           'org-agenda
   "s-n"           'ublt/switch-to-last-buffer
   "s-b"           'ublt/browse-url-at-point
   "s-p"           'pop-global-mark
@@ -809,7 +809,7 @@
   "C-<return>" 'ublt/isearch-exit-other-end
   "C-M-w"      'ublt/isearch-yank-symbol)
 
-(ublt/keys "dired" dired-mode-map
+(ublt/keys 'dired dired-mode-map
   "M-RET"      'ublt/dired-open-native
   ;; It makes more sense to search in filenames by default
   "C-s"        'dired-isearch-filenames-regexp
