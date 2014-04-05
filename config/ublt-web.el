@@ -36,13 +36,17 @@
         (let ((open-end (match-end 0)))
           (if (search-forward "</lisp>" limit t)
               (let ((close-beg (match-beginning 0)))
+                ;; TODO: Figure out how to add a face without
+                ;; nullifying the effect of `font-lock-add-keywords'
+                ;; (font-lock-append-text-property open-end close-beg 'font-lock-face 'web-mode-block-face)
+                ;; (font-lock-append-text-property open-end close-beg 'face 'web-mode-block-face)
                 (org-src-font-lock-fontify-block "emacs-lisp" open-end close-beg))))))
     (add-to-list 'web-mode-font-lock-keywords 'ublt/web-mode-font-lock-lisp-tags t)
     (font-lock-add-keywords
      'web-mode
      '(("(\\(ob:\\)\\(\\(\\w\\|-\\)+\\)"
-             (1 font-lock-function-name-face)
-             (2 font-lock-builtin-face)))
+             (1 font-lock-variable-name-face)
+             (2 font-lock-function-name-face)))
      'append)))
 
 

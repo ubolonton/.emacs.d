@@ -208,4 +208,28 @@ not regular enough. Uh huh."
      (move-to-column c)))
 
 
+;;; Turns out `font-lock-mode' already has similar functions
+;; ;;; XXX: This currently works only for `font-lock-face' and `face',
+;; ;;; because other props may have different structures
+;; (defun ublt/add-text-property (start end prop value)
+;;   (when (< start end)
+;;     (let ((pos start))
+;;       (while (< pos end)
+;;         (let* ((next (next-single-property-change pos prop nil end))
+;;                (cur (get-text-property pos prop)))
+;;           ;; TODO: How about the prop-list case?
+;;           (put-text-property pos next prop
+;;                              (cond
+;;                               ((listp cur) (cons value cur))
+;;                               (t (list value cur))))
+;;           (setq pos next))))))
+
+;; (defun ublt/add-face (start end face)
+;;   "Put `face' at the beginning of `face' property of text from
+;; `start' to `end'."
+;;   (ublt/add-text-property start end 'face face)
+;;   ;; (ublt/add-text-property start end 'font-lock-face face)
+;;   )
+
+
 (provide 'ublt-util)
