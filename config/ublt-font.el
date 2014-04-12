@@ -148,7 +148,7 @@
                     ;;                  :weight 'normal
                     ;;                  :size 12.0
                     ;;                  )
-                    :font (font-spec :family "CosmicSansNeueMono"
+                    :font (font-spec :family "Fantasque Sans Mono"
                                      :weight 'normal
                                      :size 12.0)
                     ;; :font (font-spec :family "Cousine"
