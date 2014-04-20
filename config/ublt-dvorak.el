@@ -32,6 +32,11 @@
 ;; M-s-m
 ;; M-s-v
 
+(ublt/in '(windows-nt)
+  (setq w32-pass-lwindow-to-system nil
+        w32-pass-rwindow-to-system nil
+        w32-lwindow-modifier 'super
+        w32-rwindow-modifier 'super))
 
 
 ;; Helper to define keys
