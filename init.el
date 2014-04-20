@@ -22,8 +22,9 @@
   (package-refresh-contents))
 (defvar ublt/packages
   '(smex auto-complete yasnippet
-         org textmate undo-tree whole-line-or-region
+         textmate undo-tree whole-line-or-region
          ace-jump-mode htmlize twittering-mode keyfreq
+         org org-bullets
          ox-reveal                      ; reveal.js slides from org-mode
          adaptive-wrap
          ido-ubiquitous                 ; List-narrowing UI
