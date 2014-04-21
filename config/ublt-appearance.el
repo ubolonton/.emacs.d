@@ -74,6 +74,8 @@
         (variable-pitch-mode +1)))
     (add-hook 'find-file-hook 'ublt/variable-pitch-if-fundamental)))
 
+(add-hook 'hexl-mode-hook (ublt/off-fn 'variable-pitch-mode))
+
 
 ;;; Ubolonton's theme
 ;;; TODO: Fix highlight-parentheses-mode so that switching theme
