@@ -361,6 +361,14 @@
   "M-<mouse-5>"   'scroll-up-line)
 
 
+(eval-after-load 'undo-tree
+  '(progn
+     (define-key undo-tree-visualizer-mode-map
+       [remap evil-previous-visual-line] 'undo-tree-visualize-undo)
+     (define-key undo-tree-visualizer-mode-map
+       [remap evil-next-visual-line] 'undo-tree-visualize-redo)))
+
+
 ;;; Help navigation
 (ublt/keys "help-mode" help-mode-map
   "M-s-h" 'help-go-back
