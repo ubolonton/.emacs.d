@@ -41,7 +41,10 @@
         evil-normal-state-cursor '(box "YellowGreen")
         evil-insert-state-cursor '(bar "YellowGreen")
         evil-emacs-state-cursor  '(bar "YellowGreen")
-        evil-visual-state-cursor '(box "#F86155"))
+        evil-visual-state-cursor '(box "#F86155")
+
+        evil-move-cursor-back nil
+        evil-want-visual-char-semi-exclusive t)
 
   ;; Modes that should be insert state by default
   (dolist (mode '(sql-interactive-mode
