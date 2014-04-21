@@ -193,7 +193,15 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
     "Use `paredit-comment-dwim', but only in lisp code."
     (if (member major-mode '(lisp-mode emacs-lisp-mode clojure-mode scheme-mode))
         (call-interactively 'paredit-comment-dwim)
-      ad-do-it)))
+      ad-do-it))
+
+  ;; FIX: This is too ad-hoc
+  (defadvice paredit-backward (before fix-evil-off-by-1 activate)
+    (when (member evil-state '(motion normal))
+      (forward-char)))
+  (defadvice paredit-forward (after fix-evil-off-by-1 activate)
+    (when (member evil-state '(motion normal))
+      (backward-char))))
 
 
 ;; auto-complete
