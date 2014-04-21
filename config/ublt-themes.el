@@ -997,6 +997,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
           ((t (:foreground ,fg-3))))
          (web-mode-html-attr-name-face
           ((t (:inherit font-lock-variable-name-face))))
+         (web-mode-param-name-face
+          ((t (:inherit font-lock-constant-face))))
          (web-mode-html-attr-equal-face
           ((t ,context)))
          (web-mode-html-tag-face
