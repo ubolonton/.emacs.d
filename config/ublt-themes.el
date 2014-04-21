@@ -1118,6 +1118,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
           ((t (:bold t))))
          (ublt/evil-emacs-tag
           ((t (:foreground ,blue-1))))
+         (ublt/evil-motion-tag
+          ((t (:foreground ,red-2 :bold t))))
          (ublt/evil-normal-tag
           ((t (:foreground ,red-2 :bold t))))
          (ublt/evil-insert-tag

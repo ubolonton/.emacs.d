@@ -16,6 +16,9 @@
 (defface ublt/evil-insert-tag
   `((t (:inherit font-lock-comment-delimiter-face :slant normal :weight bold)))
   "Evil insert mode indicator face")
+(defface ublt/evil-motion-tag
+  `((t (:inherit diredp-mode-line-flagged :weight bold)))
+  "Evil motion mode indicator face")
 (defface ublt/evil-normal-tag
   `((t (:inherit diredp-mode-line-flagged :weight bold)))
   "Evil normal mode indicator face")
@@ -30,6 +33,7 @@
   ;; Visual indicators
   (setq evil-mode-line-format 'before
         evil-normal-state-tag (propertize "« ☢ »" 'face 'ublt/evil-normal-tag)
+        evil-motion-state-tag (propertize "» ☣ «" 'face 'ublt/evil-motion-tag)
         evil-insert-state-tag (propertize "( I )" 'face 'ublt/evil-insert-tag)
         evil-emacs-state-tag  (propertize "( E )" 'face 'ublt/evil-emacs-tag)
         evil-visual-state-tag (propertize "( ∞ )" 'face 'ublt/evil-visual-tag)
