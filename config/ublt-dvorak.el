@@ -186,7 +186,8 @@
 
   "s-P"    "C-c p"                      ; projectile
 
-  "M-f"    "<escape>"                   ; use evil-mode
+  "M-F"    "s-<escape>"                 ; evil's motion state
+  "M-f"    "<escape>"                   ; evil's normal state
   )
 
 (ublt/define-keys global-map
@@ -400,6 +401,7 @@
 
   "C-r"      nil
   "M-."      nil                   ; evil-repeat-pop-next
+  "s-<escape>" 'evil-motion-state
   "<escape>" 'evil-force-normal-state
 
   ;; (r)eplace => (b)
@@ -425,6 +427,8 @@
   "e,"       'goto-last-change-reverse
   )
 (ublt/keys "evil" evil-motion-state-map
+  "s-<escape>" 'evil-motion-state
+  "<escape>" 'evil-force-normal-state
 
   ;; Dvorak, positional
   "h"     'evil-backward-char      ; ⬅
@@ -484,6 +488,7 @@
   "C-y"    nil
   )
 (ublt/keys "evil" evil-insert-state-map
+  "s-<escape>" 'evil-motion-state
   "<escape>" 'evil-normal-state
 
   "C-n" nil                        ; evil-complete-next
@@ -495,12 +500,15 @@
   "C-t" nil                        ; evil-shift-right-line
   )
 (ublt/keys "evil" evil-visual-state-map
+  "s-<escape>" 'evil-motion-state
   "<escape>" 'evil-exit-visual-state
   "R" nil
   )
 (ublt/keys "evil" evil-replace-state-map
+  "s-<escape>" 'evil-motion-state
   "<escape>" 'evil-normal-state)
 (ublt/keys "evil" evil-emacs-state-map
+  "s-<escape>" 'evil-motion-state
   "<escape>" 'evil-normal-state)
 (ublt/keys "evil" evil-insert-state-map
   "C-k" nil
