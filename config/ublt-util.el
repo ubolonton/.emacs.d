@@ -231,5 +231,16 @@ not regular enough. Uh huh."
 ;;   ;; (ublt/add-text-property start end 'font-lock-face face)
 ;;   )
 
+(defun ublt/find-chars (str)
+  (mapc
+   (lambda (x)
+     (let ((nn (get-char-code-property x 'name)))
+       (when
+           (and (not (null nn))
+                (string-match str nn))
+         (insert-char x)
+         (insert " " nn "\n"))))
+   (number-sequence 0 (expt 2 16))))
+
 
 (provide 'ublt-util)
