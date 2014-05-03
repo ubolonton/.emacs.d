@@ -46,9 +46,22 @@
     (font-lock-add-keywords
      'web-mode
      '(("(\\(ob:\\)\\(\\(\\w\\|-\\)+\\)"
-             (1 font-lock-variable-name-face)
-             (2 font-lock-function-name-face)))
-     'append)))
+        (1 font-lock-variable-name-face)
+        (2 font-lock-function-name-face)))
+     'append))
+
+  ;; This is a hack to allow using dir-local variables to set
+  ;; `web-mode' engine. FIX: `web-mode' should check local variables
+  ;; itself.
+  ;; `http://stackoverflow.com/questions/5147060/how-can-i-access-directory-local-variables-in-my-major-mode-hooks'
+  (defvar ublt/web-mode-engine nil)
+  (defun ublt/web-mode-set-engine ()
+    (add-hook 'hack-local-variables-hook
+              (lambda ()
+                (when ublt/web-mode-engine
+                  (web-mode-set-engine ublt/web-mode-engine)))
+              nil t))
+  (add-hook 'web-mode-hook 'ublt/web-mode-set-engine))
 
 
 ;; Emmet (Zen-coding)
