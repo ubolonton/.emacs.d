@@ -542,6 +542,17 @@
 ;;   "*" 'evil-inner-symbol)
 
 
+;;; Diff navigation
+(defun ublt/setup-ediff-mode-map ()
+  (ublt/define-keys 'ediff-mode-map
+    "c" 'ediff-previous-difference
+    "t" 'ediff-next-difference))
+
+(eval-after-load 'ediff
+  '(progn
+     (add-hook 'ediff-keymap-setup-hook 'ublt/setup-ediff-mode-map)))
+
+
 ;;; Helm
 (ublt/keys "helm" helm-map
   "s-h"         'minibuffer-keyboard-quit
