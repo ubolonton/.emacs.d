@@ -574,12 +574,12 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
           ((t (,@fw))))
          (org-block-background
           ((t (,@fw))))
-         (org-table
-          ((t (,@fw))))
          (org-block-begin-line
           ((t (,@fw ,@shadowed))))
          (org-block-end-line
           ((t (:inherit org-block-begin-line))))
+         (org-checkbox
+          ((t (,@fw :weight bold))))
 
          ;; TODO: Make org/markdown share most faces
          (markdown-link-face
