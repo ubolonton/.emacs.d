@@ -243,4 +243,9 @@ not regular enough. Uh huh."
    (number-sequence 0 (expt 2 16))))
 
 
+(defun ublt/get-string-from-file (path)
+  (with-temp-buffer
+    (insert-file-contents path)
+    (buffer-string)))
+
 (provide 'ublt-util)

@@ -278,6 +278,19 @@ statements."
 "))
       (call-interactively 'org-export-as-html))))
 
+(ublt/set-up 'ox-latex
+  (setq org-latex-pdf-process '("xelatex -interaction nonstopmode %f"
+                                "xelatex -interaction nonstopmode %f")
+        org-latex-toc-command "")
+  (add-to-list 'org-latex-classes
+               '("ublt-org-article"
+                 (ublt/get-string-from-file "~/.emacs.d/config/ublt-org-article.tex")
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
+
 
 
 (provide 'ublt-organization)
