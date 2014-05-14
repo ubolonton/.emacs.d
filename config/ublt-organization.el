@@ -281,7 +281,24 @@ statements."
 (ublt/set-up 'ox-latex
   (setq org-latex-pdf-process '("xelatex -interaction nonstopmode %f"
                                 "xelatex -interaction nonstopmode %f")
-        org-latex-toc-command "")
+        org-latex-toc-command ""
+        ;; Don't use `inputenc', `fontenc' (xelatex `fontspec' is
+        ;; supposed to handle unicode better)
+        org-latex-default-packages-alist
+        '(("" "fixltx2e" nil)
+          ("" "graphicx" t)
+          ("" "longtable" nil)
+          ("" "float" nil)
+          ("" "wrapfig" nil)
+          ("" "rotating" nil)
+          ("normalem" "ulem" t)
+          ("" "amsmath" t)
+          ("" "textcomp" t)
+          ("" "marvosym" t)
+          ("" "wasysym" t)
+          ("" "amssymb" t)
+          ("" "hyperref" nil)
+          "\\tolerance=1000"))
   (add-to-list 'org-latex-classes
                '("ublt-org-article"
                  (ublt/get-string-from-file "~/.emacs.d/config/ublt-org-article.tex")
