@@ -3,7 +3,6 @@
 (ublt/set-up 'elpy
   (elpy-enable))
 
-
 (ublt/set-up 'python
   (defun ublt/tab-4-spaces ()
     (setq tab-width 4))
@@ -16,6 +15,8 @@
         python-shell-prompt-output-regexp "Out \\[[0-9]?\\]: "
         python-fill-docstring-style 'pep-257-nn
         python-shell-virtualenv-path "~/.virtualenvs/default")
+
+  (add-to-list 'auto-mode-alist '("\\.tac$" . python-mode))
 
   (ublt/set-up 'paredit
     (add-hook 'python-mode-hook (ublt/on-fn 'paredit-mode))))
