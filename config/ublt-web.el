@@ -16,6 +16,14 @@
 (setq web-mode-extra-comment-keywords '("NTA" "FIX" "XXX"))
 (ublt/set-up 'web-mode
   (add-hook 'web-mode-hook (ublt/off-fn 'auto-fill-mode))
+
+  ;; FIX: This is a bad hack
+  (defadvice web-mode-highlight-part (around tweak-jsx activate)
+    (if (equal web-mode-content-type "jsx")
+        (let ((web-mode-enable-part-face nil))
+          ad-do-it)
+      ad-do-it))
+
   (setq web-mode-script-padding 0
         web-mode-style-padding 2
         web-mode-enable-current-element-highlight t
