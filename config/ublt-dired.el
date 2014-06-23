@@ -5,6 +5,11 @@
 (eval-when-compile
   (require 'cl))
 
+(ublt/in '(darwin)
+  (require 'ls-lisp)
+  (setq ls-lisp-use-insert-directory-program t)
+  (setq insert-directory-program "/opt/local/libexec/gnubin/ls"))
+
 ;;; Apparently this works much better than dired-do-async-shell-command and
 ;; nohup trickeries
 (defun ublt/dired-open-native ()
