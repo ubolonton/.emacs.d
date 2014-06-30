@@ -66,10 +66,11 @@
  org-tags-column -97
 
  org-completion-use-ido t
+ ;; Whole path instead of level-by-level navigation
  org-outline-path-complete-in-steps nil
  org-refile-use-outline-path t
 
- ;; org-indirect-buffer-display 'current-window
+ org-indirect-buffer-display 'current-window
  )
 
 ;; (add-to-list 'auto-mode-alist '("\\.\\(org\\)$" . org-mode))
@@ -111,6 +112,7 @@
    (sequence "DESIGN" "IMPLEMENT(i)" "TEST" "|" "DONE(d)")
    (sequence "|" "CANCELLED(c)"))
 
+ ;; TODO: Add more colors
  org-todo-keyword-faces '(("TODO" :foreground "Red" :weight normal)
                           ("DEFERRED" :foreground "DeepSkyBlue" :weight normal)
                           ("STARTED" :foreground "DarkGoldenRod" :weight normal)
@@ -118,6 +120,9 @@
                           ("DONE" :foreground "LightGreen" :weight normal))
 
  org-use-fast-todo-selection t
+
+ ;; Allow S-<left> and S-<right> to change state without logging the change
+ org-treat-S-cursor-todo-selection-as-state-change nil
 
  ;; Use with `org-toggle-ordered-property'
  org-enforce-todo-dependencies t
@@ -133,18 +138,42 @@
  org-log-note-clock-out t)
 
 (ublt/set-up 'org-clock
-  (setq org-clock-persist 'history)
-  (org-clock-persistence-insinuate))
+  (org-clock-persistence-insinuate)
+
+  ;; (defun ublt/clock-in-to-next (kw))
+
+  (setq
+   org-clock-history-length 24
+   org-clock-in-resume t
+
+   org-clock-into-drawer t
+   org-clock-out-remove-zero-time-clocks t
+   org-clock-out-when-done t
+   org-clock-persistent t
+
+   ;; org-clock-in-switch-to-state ublt/clock-in-to-next
+   ))
+
 
 (ublt/set-up 'org-agenda
+  (defun ublt/verify-refile-target ()
+    (not (member (nth 2 (org-heading-components)) org-done-keywords)))
+
   (setq
    org-agenda-dim-blocked-tasks t
    org-agenda-start-on-weekday nil
    org-agenda-skip-scheduled-if-deadline-is-shown nil
    org-agenda-skip-deadline-if-done nil
    org-agenda-skip-scheduled-if-done nil
-   org-agenda-tags-column -118
    org-agenda-span 'week
+
+   ;; org-scheduled-past-days 365
+
+   org-agenda-log-mode-items '(closed clock state)
+
+   org-agenda-tags-column -118
+   org-agenda-window-setup 'current-window
+   org-agenda-restore-windows-after-quit t
 
    ;; TODO: Maybe more
    org-agenda-files '("~/org/gtd/gtd.org"
@@ -158,6 +187,9 @@
    org-refile-targets '((("~/org/gtd/projects.org") . (:maxlevel . 2))
                         (("~/org/gtd/gtd.org") . (:maxlevel . 1))
                         (("~/org/gtd/someday.org") . (:maxlevel . 1)))
+
+   org-refile-allow-creating-parent-nodes 'confirm
+   org-refile-target-verify-function 'ublt/verify-refile-target
 
    ;; org-columns-default-format "%TODO %50ITEM %TAGS %CATEGORY"
 
