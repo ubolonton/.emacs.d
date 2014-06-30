@@ -202,7 +202,7 @@
                     '((agenda time-up priority-down tag-up)))
                    (org-deadline-warning-days 0)))))
      ("S" "'Someday' task list"
-      ((todo "TODO" ((org-agenda-files '("~/gtd/someday.org"))
+      ((todo "TODO" ((org-agenda-files '("~/org/gtd/someday.org"))
                      (org-agenda-prefix-format '((todo . "  ")))))))))
 
   (add-hook 'org-agenda-mode-hook (ublt/on-fn 'hl-line-mode)))
