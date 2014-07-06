@@ -919,4 +919,8 @@
   "M-a" 'org-cycle
   )
 
+(ublt/keys 'org-agenda org-agenda-mode-map
+  "C-<down>" 'org-agenda-do-date-later
+  "C-<up>"   'org-agenda-do-date-earlier)
+
 (provide 'ublt-dvorak)
