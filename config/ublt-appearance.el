@@ -516,6 +516,16 @@
            (0 (progn (compose-region (match-beginning 1) (match-end 1)
                                      ?ƒ 'decompose-region)
                      nil))))))
+(dolist (mode '(python-mode))
+  (font-lock-add-keywords
+   mode `(("\\(yi\\)eld"
+           (0 (progn (compose-region (match-beginning 1) (match-end 1)
+                                     ?γ 'decompose-region)
+                     nil)))
+          ("yi\\(eld\\)"
+           (0 (progn (compose-region (match-beginning 1) (match-end 1)
+                                     ?ζ 'decompose-region)
+                     nil))))))
 
 (defun ublt/pretty-org (on)
   (funcall (if on #'font-lock-add-keywords
