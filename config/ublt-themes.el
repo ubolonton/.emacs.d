@@ -564,7 +564,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (org-link
           ((t (:inherit link))))
          (org-date
-          ((t (:foreground ,cyan :underline t))))  ; TODO
+          ((t (,@fw :foreground ,cyan :underline t))))  ; TODO
          (org-todo
           ((t ,commitment)))
          (org-done
@@ -580,6 +580,24 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
           ((t (:inherit org-block-begin-line))))
          (org-checkbox
           ((t (,@fw :weight bold))))
+         (org-time-grid
+          ((t (,@fw :foreground ,gold-1))))
+         (org-agenda-structure
+          ((t (,@fw :foreground "LightSkyBlue"))))
+         (org-agenda-date-today
+          ((t (:inherit org-agenda-date :underline t))))
+         (org-agenda-date-weekend
+          ((t (:inherit org-agenda-date :slant italic))))
+         (org-agenda-current-time
+          ((t (,@fw :inherit org-time-grid :background ,bg+2))))
+         (org-scheduled
+          ((t (,@vw :foreground ,green-2 :slant italic))))
+         (org-scheduled-previously
+          ((t (,@fw :foreground "Chocolate1" :slant italic))))
+         (org-scheduled-today
+          ((t (,@vw :foreground ,green-3))))
+         (org-column
+          ((t (,@fw :slant normal))))
 
          ;; TODO: Make org/markdown share most faces
          (markdown-link-face
