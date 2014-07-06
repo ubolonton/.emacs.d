@@ -169,11 +169,15 @@
    org-agenda-skip-scheduled-if-done nil
    org-agenda-span 'week
 
+   org-agenda-time-grid '((daily today require-timed)
+                          "-----------------------"
+                          (800 1000 1200 1400 1600 1800 2000 2200 2300))
+
    ;; org-scheduled-past-days 365
 
    org-agenda-log-mode-items '(closed clock state)
 
-   org-agenda-tags-column -118
+   org-agenda-tags-column -196
    org-agenda-window-setup 'current-window
    org-agenda-restore-windows-after-quit t
 
@@ -197,15 +201,22 @@
 
    ;; TODO: More
    org-agenda-custom-commands
-   '(("P" "Projects" ((tags "PROJECT")))
+   '(("P" "Projects summary"
+      ((tags "PROJECT" ((org-agenda-todo-list-sublevels nil)))))
+     ("p" "Projects details"
+      ((tags "PROJECT" )))
      ("D" "Daily action list"
       ((agenda "" ((org-agenda-ndays 1)
                    (org-agenda-sorting-strategy
                     '((agenda time-up priority-down tag-up)))
-                   (org-deadline-warning-days 0)))))
-     ("S" "'Someday' task list"
+                   (org-deadline-warning-days 0)
+                   (org-agenda-prefix-format '((agenda  . " %i %-12:c%?-12t% s")))))))
+     ("S" "\"Someday\" task list"
       ((todo "TODO" ((org-agenda-files '("~/org/gtd/someday.org"))
-                     (org-agenda-prefix-format '((todo . "  ")))))))))
+                     (org-agenda-prefix-format '((todo . "  ")))))))
+     ("u" "Test"
+      ((agenda "")
+       (tags-todo "Work")))))
 
   (add-hook 'org-agenda-mode-hook (ublt/on-fn 'hl-line-mode)))
 
@@ -216,10 +227,10 @@
    '(
      ("t" "Todo"
       entry (file+headline "~/org/gtd/gtd.org" "Tasks")
-      "** TODO %^{Brief Description} %^g\n   - Added: %U\n%?")
+      "** TODO %^{Brief Description} %^g\n   - Added: %U\n%?\n")
      ("s" "Someday"
       entry (file "~/org/gtd/someday.org")
-      "** TODO %^{Do this someday} %^g\n   - Added: %U\n%?")
+      "** TODO %^{Do this someday} %^g\n   - Added: %U\n%?\n")
      ("d" "Diary"
       entry (file "~/org/gtd/journal.org")
       "** %U %^{Diary} :Diary:%^g\n%i%?")
