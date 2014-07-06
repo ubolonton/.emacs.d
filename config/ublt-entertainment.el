@@ -102,6 +102,7 @@ use Emacs 21?!?!"
   (emms-shuffle) (emms-next) (emms-shuffle))
 
 (defun ublt/start-or-pause ()
+  (interactive)
   (if emms-player-playing-p
       (emms-pause)
     (call-interactively 'emms-play-playlist)))
