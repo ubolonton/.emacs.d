@@ -17,12 +17,18 @@
 (ublt/set-up 'web-mode
   (add-hook 'web-mode-hook (ublt/off-fn 'auto-fill-mode))
 
+  ;; Use `web-mode', as `jsx-mode' is actually not ReactJS's..
   ;; FIX: This is a bad hack
+  (add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
   (defadvice web-mode-highlight-part (around tweak-jsx activate)
     (if (equal web-mode-content-type "jsx")
         (let ((web-mode-enable-part-face nil))
           ad-do-it)
       ad-do-it))
+  (defun ublt/web-mode-jsx ()
+    (when (equal web-mode-content-type "jsx")
+      (esk-paredit-nonlisp)))
+  (add-hook 'web-mode-hook 'ublt/web-mode-jsx)
 
   (setq web-mode-script-padding 0
         web-mode-style-padding 2
