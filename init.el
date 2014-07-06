@@ -40,6 +40,7 @@
          anzu                           ; Match count for search
          info+
          pabbrev                        ; TODO: Find better alternative
+         zeal-at-point                  ; Doc search
          ;; git
          magit magit-svn
          ;; Vim emulation
