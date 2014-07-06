@@ -240,10 +240,12 @@
   "s-R"           'org-agenda
   "s-n"           'ublt/switch-to-last-buffer
   "s-b"           'ublt/browse-url-at-point
+  "s-B"           'zeal-at-point
   "s-p"           'pop-global-mark
   "s-<backspace>" 'ublt/toggle-alpha
   "s-<return>"    'ublt/toggle-fullscreen
-  "s-/"           'find-file-in-project
+  ;; "s-/"           'find-file-in-project
+  "s-/"           'variable-pitch-mode
   "s-\\"          'align-regexp
 
   ;; These should be translated
