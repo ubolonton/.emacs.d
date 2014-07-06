@@ -48,6 +48,22 @@
   ;; Font-mixing obsession
   (ublt/set-up 'ublt-font
     ;; Non-code text reads better in proportional font
+    (defvar ublt/disable-variable-pitch-mode nil)
+    (make-local-variable 'ublt/disable-variable-pitch-mode)
+    ;; This isn't pretty, but the alternative is using a variable-pitch
+    ;; font as the default, and creating a `fixed-pitch-mode'.
+    (defun ublt/variable-pitch-mode-maybe ()
+      ;; `http://stackoverflow.com/questions/5147060/how-can-i-access-directory-local-variables-in-my-major-mode-hooks'
+      (when (not ublt/disable-variable-pitch-mode)
+        (variable-pitch-mode +1))
+      (add-hook 'hack-local-variables-hook
+                (lambda ()
+                  (when ublt/disable-variable-pitch-mode
+                    (variable-pitch-mode -1)))
+                nil t))
+    (defun ublt/variable-pitch-mode-fundamental ()
+      (when (eq major-mode 'fundamental-mode)
+        (ublt/variable-pitch-mode-maybe)))
     (dolist (hook '(erc-mode-hook
                     text-mode-hook
                     Info-mode-hook
@@ -66,13 +82,8 @@
                     git-commit-mode-hook
                     twittering-edit-mode-hook
                     package-menu-mode-hook))
-      (add-hook hook (ublt/on-fn 'variable-pitch-mode)))
-    ;; This isn't pretty, but the alternative is using a variable-pitch
-    ;; font as the default, and creating a `fixed-pitch-mode'.
-    (defun ublt/variable-pitch-if-fundamental ()
-      (when (eq major-mode 'fundamental-mode)
-        (variable-pitch-mode +1)))
-    (add-hook 'find-file-hook 'ublt/variable-pitch-if-fundamental)))
+      (add-hook hook 'ublt/variable-pitch-mode-maybe))
+    (add-hook 'find-file-hook 'ublt/variable-pitch-mode-fundamental)))
 
 (add-hook 'hexl-mode-hook (ublt/off-fn 'variable-pitch-mode))
 
