@@ -140,7 +140,9 @@
 (ublt/set-up 'org-clock
   (org-clock-persistence-insinuate)
 
-  ;; (defun ublt/clock-in-to-next (kw))
+  (defun ublt/clock-in-to-next (kw)
+    (when (equal kw "TODO")
+      "STARTED"))
 
   (setq
    org-clock-history-length 24
@@ -151,7 +153,7 @@
    org-clock-out-when-done t
    org-clock-persistent t
 
-   ;; org-clock-in-switch-to-state ublt/clock-in-to-next
+   org-clock-in-switch-to-state 'ublt/clock-in-to-next
    ))
 
 
