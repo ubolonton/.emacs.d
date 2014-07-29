@@ -520,6 +520,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
           ((t (:inherit ido-first-match :bold t))))
          (ido-subdir
           ((t ,more)))
+         (flx-highlight-face
+          ((t (:foreground ,blue-1 :weight bold))))
 
          ;; org-mode
          ;; TODO: levels

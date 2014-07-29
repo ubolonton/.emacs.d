@@ -40,5 +40,10 @@
                  nil require-match initial-input hist def))
         ad-do-it))))
 
+(ublt/set-up 'flx-ido
+  (flx-ido-mode +1)
+  (setq ido-enable-flex-matching t
+        ido-use-faces nil
+        flx-ido-use-faces t))
 
 (provide 'ublt-ido)

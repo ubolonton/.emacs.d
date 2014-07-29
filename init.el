@@ -28,6 +28,7 @@
          ox-reveal                      ; reveal.js slides from org-mode
          adaptive-wrap
          ido-ubiquitous                 ; List-narrowing UI
+         flx-ido                        ; Improved flex matching for ido
          helm helm-cmd-t helm-swoop
          ;; number-font-lock-mode          ; Color numbers in code
          powerline                      ; Util helping configure mode-line
