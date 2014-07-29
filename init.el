@@ -141,8 +141,6 @@
 (require 'ublt-lisp)
 (require 'ublt-python)
 (require 'ublt-js)
-(ublt/set-up 'octave-mod
-  (add-to-list 'auto-mode-alist '("\\.m$" . octave-mode)))
 
 
 (setq custom-file "~/.emacs.d/custom.el")
