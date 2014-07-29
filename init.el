@@ -29,7 +29,7 @@
          adaptive-wrap
          ido-ubiquitous                 ; List-narrowing UI
          helm helm-cmd-t helm-swoop
-         number-font-lock-mode          ; Color numbers in code
+         ;; number-font-lock-mode          ; Color numbers in code
          powerline                      ; Util helping configure mode-line
          ;; TODO: Use & combine with eproject
          projectile                     ; Project management
