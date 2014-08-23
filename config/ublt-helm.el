@@ -47,7 +47,7 @@
 
 ;;; Quote the the search string
 (ublt/in '(gnu/linux)
-  (setq helm-locate-command "locate %s -r %s"))
+  (setq helm-locate-command "locate %s -e -A --regex %s"))
 
 (defun ublt/helm ()
   (interactive)
