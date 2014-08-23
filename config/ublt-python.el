@@ -1,6 +1,15 @@
 (require 'ublt-util)
 
+(require 'flycheck-pyflakes)
+
+(add-hook 'python-mode-hook (ublt/on-fn 'flycheck-mode))
+
 (ublt/set-up 'elpy
+  (ublt/set-up 'flycheck
+    (setq elpy-modules
+          (delete 'elpy-module-flymake elpy-modules))
+    (add-hook 'elpy-mode-hook (ublt/on-fn 'flycheck-mode)))
+  (setq elpy-rpc-backend "jedi")
   (elpy-enable))
 
 (ublt/set-up 'python
@@ -20,6 +29,7 @@
 
   (ublt/set-up 'paredit
     (add-hook 'python-mode-hook (ublt/on-fn 'paredit-mode))))
+
 
 ;;; TODO: completion, history search, and other ipythons stuff
 

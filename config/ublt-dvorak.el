@@ -649,7 +649,7 @@
      (ublt/define-keys js2-mode-map
        "M-p" 'js2-prev-error
        "M-n" 'js2-next-error)))
-;;; NTA FIX: This is because flymake doesn't have its own map
+;;; NTA FIX: Use `flycheck-mode-map' maybe?
 (dolist (fms '(("js" js-mode-map)
                ("python-mode" py-mode-map)
                ("python" python-mode-map)
@@ -660,8 +660,8 @@
   (destructuring-bind (file map) fms
     (eval-after-load file
       `(ublt/define-keys ,map
-         "M-n" 'flymake-goto-next-error
-         "M-p" 'flymake-goto-prev-error))))
+         "M-n" 'flycheck-next-error
+         "M-p" 'flycheck-previous-error))))
 
 
 ;;; Paredit
@@ -795,8 +795,13 @@
   "C-<down>"  nil                       ;was elpy-nav-forward-definition
   "M-a"     nil                         ;was elpy-nav-backward-statement
   "M-e"     nil                         ;was elpy-nav-forward-statement
-  "M-<left>" 'elpy-nav-backward-definition ;was backward-list
-  "M-<right>" 'elpy-nav-forward-definition ;was forward-list
+  "C-<left>" nil                        ;was elpy-nav-backward-iblock
+  "C-<right>" nil                       ;was elpy-nav-forward-iblock
+  "M-<left>"  'elpy-nav-backward-iblock
+  "M-<right>" 'elpy-nav-forward-iblock
+  "M-,"       'pop-tag-mark
+  ;; "M-<left>" 'elpy-nav-backward-definition ;was backward-list
+  ;; "M-<right>" 'elpy-nav-forward-definition ;was forward-list
   )
 
 (ublt/keys "sql" sql-mode-map

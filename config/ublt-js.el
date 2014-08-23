@@ -1,27 +1,5 @@
 (require 'ublt-util)
 
-;; Javascript (it seems js-mode in Emacs is newer than espresso)
-;; v8: scons via apt-get (not pip or easy_install; among other things,
-;; build tool & package manager is what clojure gets absolutely right,
-;; whereas python sucks ass).
-;; Actually screw that, use virtualenv and easy_install scons, as
-;; described here https://github.com/koansys/jshint-v8. But remember
-;; to do
-;;
-;; export SCONS_LIB_DIR=/path/to/virtual-scons-egg/scons-sth
-;;
-;; scons console=readline snapshot=on library=shared d8
-;;
-;; Well it's still complains about missing libv8.so. Just install
-;; "node" then.
-;;
-;;
-;; (defalias 'javascript-mode 'espresso-mode)
-;; (setq js-mode-hook '())
-;; (setq flymake-jslint-command "jslint")
-
-;;; TODO: Buffer-local/dir-local config for jshint
-
 (ublt/set-up 'js2-mode
   (add-hook 'js2-mode-hook 'esk-prog-mode-hook)
   (add-hook 'js2-mode-hook 'esk-paredit-nonlisp)
@@ -52,18 +30,11 @@
     (add-hook 'js-mode-hook 'esk-paredit-nonlisp)))
 
 ;;; Syntax checking
-(eval-after-load "flymake"
-  '(progn
-     (ublt/set-up 'flymake-jshint
-       ;; FIX: Somehow this does not work now?
-       (setq jshint-configuration-path "~/.jshint.json")
-
-       (defun ublt/flymake-js-maybe-enable ()
-         (when (and buffer-file-name
-                    (string-match "\\.js$" buffer-file-name))
-           (flymake-jshint-load)))
-       (remove-hook 'js-mode-hook 'flymake-mode)
-       (add-hook 'js-mode-hook 'ublt/flymake-js-maybe-enable))))
-
+;;; TODO: Buffer-local/dir-local config for jshint
+(ublt/set-up 'flycheck
+  ;; Install jshint with node
+  (setq-default flycheck-jshintrc "~/.jshint.json")
+  (add-hook 'js-mode-hook (ublt/on-fn 'flycheck-mode))
+  (add-hook 'js2-mode-hook (ublt/on-fn 'flycheck-mode)))
 
 (provide 'ublt-js)

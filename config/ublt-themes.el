@@ -863,7 +863,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (git-commit-overlong-summary-face
           ((t (:inherit git-commit-summary-face :foreground ,red))))
          (git-commit-nonempty-second-line-face
-          ((t (:inherit (git-commit-summary-face flymake-errline)))))
+          ((t (:inherit (git-commit-summary-face ublt/flycheck-message-face)))))
 
          ;; info
          (info-title-1
@@ -1126,11 +1126,13 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
           ((t ,error-hl)))
          (flymake-warnline
           ((t (:underline ,yellow-1))))
+         (flycheck-error
+          ((t ,error-hl)))
 
          ;; My own custom faces
          (ublt-twitter-meta-face
           ((t (:height 0.9 ,@shadowed))))
-         (ublt/flymake-message-face
+         (ublt/flycheck-message-face
           ((t (,@vw ,@commitment :slant italic))))  ; TODO
          (eproject-ido-imenu-file-path
           ((t ,shadowed)))

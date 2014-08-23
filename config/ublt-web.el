@@ -111,6 +111,8 @@
 ;;; XXX
 (ublt/set-up 'php-mode
   (setq php-mode-coding-style nil)
-  (add-hook 'php-mode-hook (lambda () (setq c-basic-offset 4))))
+  (add-hook 'php-mode-hook (lambda () (setq c-basic-offset 4)))
+  (ublt/set-up 'flycheck
+    (add-hook 'php-mode-hook (ublt/on-fn 'flycheck-mode))))
 
 (provide 'ublt-web)

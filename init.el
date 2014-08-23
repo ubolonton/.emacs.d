@@ -58,16 +58,16 @@
          ;; Code folding
          fold-dwim fold-dwim-org hideshowvis
          ;; Languages
-         flymake
+         flycheck
          haskell-mode quack
          adoc-mode
          markdown-mode yaml-mode
          less-css-mode scss-mode
          clojure-mode clojurescript-mode cider
          elisp-slime-nav
-         js2-mode flymake-jshint
-         php-mode php-boris flymake-php
-         rvm flymake-ruby
+         js2-mode
+         php-mode php-boris
+         rvm
          elpy                           ;python
          web-mode
          emmet-mode                          ; html/css editing
@@ -127,8 +127,8 @@
 (require 'ublt-helm)
 ;;; git
 (require 'ublt-git)
-;;; Code linters. TODO: Replace with flycheck
-(require 'ublt-flymake)
+;;; Code linters.
+(require 'ublt-flycheck)
 
 
 ;;; Languages support ------------------------------------------------
