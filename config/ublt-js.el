@@ -24,6 +24,7 @@
   (setq js-indent-level 2
         espresso-indent-level 2)
   (add-to-list 'auto-mode-alist '("\\.json$" . js-mode))
+  (add-to-list 'auto-mode-alist '("\\.jsm$" . js-mode))
 
   ;; FIX
   (ublt/set-up 'starter-kit
