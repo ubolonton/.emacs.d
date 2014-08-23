@@ -125,16 +125,20 @@ of window's top part restricted by `scroll-margin' if needed."
 of window's bottom part restricted by `scroll-margin' if needed."
   ;; Make sure we are back at the initial point afterward
   (save-excursion
-    (let ((initial (point))
-          (this-scroll-margin
-           (min (max 0 (1+ scroll-margin))
-                (truncate (/ (window-body-height) 4.0)))))
-      ;; Fix window-text, move cursor to border
-      (move-to-window-line (- this-scroll-margin))
-      (let ((now (point)))
-        (when (< now initial)
-          ;; Fix window-cursor, move text up to meet the initial line
-          (scroll-up-line (count-screen-lines now initial)))))))
+    ;; FIX: This is for functions that do funky things with
+    ;; buffer/window. Maybe it's better to use `around' advices
+    ;; instead?
+    (with-current-buffer (window-buffer (selected-window))
+      (let ((initial (point))
+            (this-scroll-margin
+             (min (max 0 (1+ scroll-margin))
+                  (truncate (/ (window-body-height) 4.0)))))
+        ;; Fix window-text, move cursor to border
+        (move-to-window-line (- this-scroll-margin))
+        (let ((now (point)))
+          (when (< now initial)
+            ;; Fix window-cursor, move text up to meet the initial line
+            (scroll-up-line (count-screen-lines now initial))))))))
 
 ;;; FIX: Maybe advicing `scroll-up' or`goto-char' is better because
 ;;; `scroll-margin' affects other scroll functions, and other things
@@ -177,9 +181,9 @@ created), caused by `scroll-preserve-screen-position' not taking
               (top scroll-down-command)
               (bottom end-of-buffer)
               (bottom Info-scroll-down)
-              ;; (bottom cider-repl-return)
-              ;; (bottom cider-repl-emit-result)
-              ;; (bottom cider-repl-emit-output)
+              (bottom cider-repl-return)
+              (bottom cider-repl-emit-result)
+              (bottom cider-repl-emit-output)
               (bottom cider-repl-emit-prompt)
               (both magit-visit-file-item)
               (both highlight-symbol-prev)
