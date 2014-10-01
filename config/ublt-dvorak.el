@@ -765,10 +765,13 @@
   "C-c v"   'cider-load-current-buffer
   "C-c C-z" 'cider-src
   "C-c C-s" 'cider-switch-to-relevant-repl-buffer)
-(ublt/keys 'cider-repl-mode cider-repl-mode-map
+(ublt/keys 'cider-repl cider-repl-mode-map
   "M-TAB"   nil
   "C-c C-z" 'cider-src
   "C-c C-s" 'cider-switch-to-last-clojure-buffer)
+(ublt/keys 'scheme scheme-mode-map
+  "C-c C-s" 'switch-to-scheme
+  "C-c v"   'scheme-compile-file)
 
 (ublt/keys "factor-mode" factor-mode-map
   "C-c C-c" 'fuel-eval-definition

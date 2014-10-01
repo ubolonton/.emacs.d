@@ -64,9 +64,12 @@
   ;; This messes up other coloring, but code coloring is more important for now
   (defun ublt/repl-clojure-font-lock ()
     (font-lock-mode -1)
-    (clojure-mode-font-lock-setup)
+    (clojure-font-lock-setup)
     (font-lock-mode +1))
-  (add-hook 'cider-repl-mode-hook 'ublt/repl-clojure-font-lock))
+  (add-hook 'cider-repl-mode-hook 'ublt/repl-clojure-font-lock)
+
+  (dolist (c (string-to-list ":_-?!#*"))
+    (modify-syntax-entry c "w" clojure-mode-syntax-table)))
 
 (ublt/set-up 'ielm
   (add-hook 'ielm-mode-hook
@@ -78,7 +81,11 @@
   (setq cider-repl-popup-stacktraces t
         cider-repl-use-pretty-printing t
         cider-repl-wrap-history t
-        cider-repl-history-file "~/.emacs.d/.nrepl.hist"))
+        cider-repl-history-file "~/.emacs.d/.nrepl.hist")
+  ;; TODO: This doesn't work. Find another way
+  ;; (defadvice cider-repl-emit-prompt (after move-to-end activate)
+  ;;   (goto-char (point-max)))
+  )
 (ublt/set-up 'cider-interaction
   (setq cider-popup-stacktraces nil))
 
