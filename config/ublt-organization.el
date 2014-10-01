@@ -345,8 +345,8 @@ statements."
           ("" "hyperref" nil)
           "\\tolerance=1000"))
   (add-to-list 'org-latex-classes
-               '("ublt-org-article"
-                 (ublt/get-string-from-file "~/.emacs.d/config/ublt-org-article.tex")
+               `("ublt-org-article"
+                 ,(ublt/get-string-from-file "~/.emacs.d/config/ublt-org-article.tex")
                  ("\\section{%s}" . "\\section*{%s}")
                  ("\\subsection{%s}" . "\\subsection*{%s}")
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
