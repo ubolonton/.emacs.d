@@ -46,6 +46,9 @@
          magit magit-svn
          ;; Vim emulation
          evil surround
+         evil-args
+         evil-visualstar
+         evil-numbers
          ;; Appearance
          color-theme rainbow-mode page-break-lines  ;; whitespace
          diminish                       ; Mode names => symbols

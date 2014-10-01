@@ -214,6 +214,10 @@
   "M-s-ç"         'ublt/move-text-up    ; OS X
   "M-s-†"         'ublt/move-text-down  ; OS X
 
+  "M-s-=" 'evil-numbers/inc-at-pt
+  "M-s--" 'evil-numbers/dec-at-pt
+
+
   ;; Windows manipulation
   "s-1"           'delete-other-windows
   "s-2"           'split-window-vertically
@@ -443,8 +447,8 @@
   ;; Dvorak, positional
   "h"     'evil-backward-char      ; ⬅
   "n"     'evil-forward-char       ; ➡
-  "H"     'evil-window-top
-  "N"     'evil-window-bottom
+  "H"     'evil-backward-arg
+  "N"     'evil-forward-arg
   ;; Dvorak, positional (line)
   "c"     'evil-previous-visual-line      ; ⬆
   "t"     'evil-next-visual-line          ; ⬇
@@ -526,6 +530,7 @@
   "C-e" nil
   "C-y" nil)
 (ublt/keys "evil" evil-outer-text-objects-map
+  "a" 'evil-outer-arg
   "d" 'evil-a-defun
   "t" 'evil-an-sgml-tag
   ;; "T" 'evil-a-tag
@@ -534,6 +539,7 @@
   "*" 'evil-a-symbol
   "l" 'evil-a-sexp)
 (ublt/keys "evil" evil-inner-text-objects-map
+  "a" 'evil-inner-arg
   ;; "T" 'evil-inner-tag
   "t" 'evil-inner-tag
   "S" 'evil-inner-sentence

@@ -65,7 +65,8 @@
                   php-boris-mode))
     (add-to-list 'evil-insert-state-modes mode))
 
-  (dolist (mode '(Info-mode))
+  (dolist (mode '(Info-mode
+                  cider-browse-ns-mode))
     (add-to-list 'evil-emacs-state-modes mode))
 
   (dolist (mode '(org-mode))
@@ -242,5 +243,9 @@
                   (?t . surround-read-tag)
                   (?< . surround-read-tag)))
   (global-surround-mode +1))
+
+(ublt/set-up 'evil-visualstar)
+(ublt/set-up 'evil-args)
+(ublt/set-up 'evil-numbers)
 
 (provide 'ublt-evil)
