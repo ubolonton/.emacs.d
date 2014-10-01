@@ -10,4 +10,7 @@
 (ublt/set-up 'adoc-mode
   (add-to-list 'auto-mode-alist '("\\.asciidoc$" . adoc-mode)))
 
+(ublt/set-up 'mustache-mode
+  (add-to-list 'auto-mode-alist '("\\.mustache$" . mustache-mode)))
+
 (provide 'ublt-markups)
