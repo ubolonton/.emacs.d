@@ -62,6 +62,7 @@
          fold-dwim fold-dwim-org hideshowvis
          ;; Languages
          flycheck
+         flycheck-pyflakes
          haskell-mode quack
          adoc-mode
          markdown-mode yaml-mode
