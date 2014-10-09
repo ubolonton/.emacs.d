@@ -115,7 +115,8 @@
 
 ;;; These are translated so that they can be pervasive, as most modes
 ;;; rebind them (syntactically override), instead of remapping the
-;;; original command (semantically override).
+;;; original command (semantically override). NTA: Many of these are
+;;; now handled system-wide by `autokey', but are kept here just in case
 (ublt/define-keys key-translation-map
   ;; OSX goodness
   ;; TODO: Use sth like s-t instead of s-x, since s-x is not convenient
@@ -152,6 +153,16 @@
   "M-u"    "<kp-delete>"                ; ⌦
   "M-."    "M-DEL"                      ; ⌫ delete word
   "M-p"    "M-<kp-delete>"              ; ⌦ delete word
+
+  ;; "Help" `autokey'
+  "C-<backspace>" "M-DEL"
+  "C-<delete>"    "M-<kp-delete>"
+  "<backspace>"   "DEL"
+  "<delete>"      "<kp-delete>"
+  "<home>"        "C-a"
+  "<end>"         "C-e"
+  "C-<home>"      "M-<"
+  "C-<end>"       "M->"
 
   "M-i"    "C-k"
   "M-d"    "C-a"
