@@ -9,7 +9,8 @@
 (dolist (source '(("marmalade" . "http://marmalade-repo.org/packages/")
                   ("org" . "http://orgmode.org/elpa/")
                   ("elpa" . "http://tromey.com/elpa/")
-                  ("melpa" . "http://melpa.milkbox.net/packages/")
+                  ("melpa" . "http://stable.melpa.org/packages/")
+                  ("elpy" . "http://jorgenschaefer.github.io/packages/")
                   ))
   (add-to-list 'package-archives source t))
 ;;; Some packages mess up `package-archives'. This fixes that.
