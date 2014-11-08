@@ -84,6 +84,9 @@
   (when (not (package-installed-p p))
     (package-install p)))
 
+;;; XXX TODO: Remove this
+(ublt/set-up 'starter-kit)
+
 ;;; XXX: Some starter-kit packages are broken
 (defalias 'run-coding-hook 'esk-prog-mode-hook)
 (defalias 'esk-run-coding-hook 'esk-prog-mode-hook)
