@@ -369,7 +369,7 @@
                 (powerline-raw ":" 'ublt/default-fixed-width)
                 (powerline-raw "%2c" 'ublt/default-fixed-width) ; column
                 (powerline-raw " " 'ublt/default-fixed-width)
-                (powerline-raw "%p" 'ublt/default-fixed-width) ; percent
+                (powerline-raw (nyan-create))
 
                 (powerline-raw " ")
                 (powerline-vc)
