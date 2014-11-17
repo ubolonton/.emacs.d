@@ -239,14 +239,14 @@
   "s-W"           'ublt/swap-windows
 
   ;; Utilities, super-
-  "s-i"           'ido-imenu
+  "s-i"           'helm-imenu
   "s-d"           'helm-command-prefix
   "s-D"           'eproject-ido-imenu
-  "s-h"           'ido-switch-buffer
-  "s-H"           'ublt/helm
+  "s-H"           'ido-switch-buffer
+  "s-h"           'ublt/helm
   "s-f"           'helm-occur
-  ;; "s-F"           'helm-do-grep
-  "s-F"           'projectile-find-file
+  "s-F"           'helm-projectile
+  ;; "s-F"           'projectile-find-file
   "s-g"           'magit-status
   "s-G"           'find-grep
   "s-m"           'ace-jump-mode
@@ -316,7 +316,7 @@
   "C-z"           nil                   ; who needs suspend-frame?
   "C-x C-h"       nil                   ; bad emacs-starter-kit
   "S-s-SPC"       'whitespace-mode
-  ;; "M-x"           'helm-M-x          ; C-x C-m for the original
+  "M-x"           'helm-M-x          ; C-x C-m for the original
   "M-X"           'smex-major-mode-commands
   "C-h C-a"       'apropos-command
   ;; "C-x C-b"       'ido-switch-buffer     ; Because it's to easy to mis-press

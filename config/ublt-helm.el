@@ -114,4 +114,6 @@ all of the sources."
 
 (ublt/set-up 'helm-swoop)
 
+(helm-mode +1)
+
 (provide 'ublt-helm)
