@@ -43,7 +43,7 @@
        nil 2.7)))
 
 
-;;; Fonts
+;; Fonts
 (when window-system
   ;; Font-mixing obsession
   (ublt/set-up 'ublt-font
@@ -327,6 +327,11 @@
                         'help-echo (concat (format-time-string "%c") "; "
                                            (emacs-uptime "Uptime: %hh")))
             "]"))
+
+  (ublt/set-up 'nyan-mode)
+
+  (unless (functionp 'nyan-create)
+    (defun nyan-create () ""))
 
   (defun ublt/powerline ()
     (interactive)
