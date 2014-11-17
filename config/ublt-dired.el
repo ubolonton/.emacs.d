@@ -22,7 +22,7 @@
       (dolist (file files)
         (call-process (case system-type
                         ('darwin "open")
-                        ('gnu/linux "gnome-open"))
+                        ('gnu/linux "xdg-open"))
                       nil 0 nil file)))))
 
 ;;; TODO: Improve & use
