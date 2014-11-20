@@ -328,7 +328,8 @@
                                            (emacs-uptime "Uptime: %hh")))
             "]"))
 
-  (ublt/set-up 'nyan-mode)
+  (ublt/set-up 'nyan-mode
+    (setq nyan-bar-length 24))
 
   (unless (functionp 'nyan-create)
     (defun nyan-create () ""))
