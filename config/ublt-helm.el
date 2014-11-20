@@ -5,13 +5,27 @@
 ;;; TODO: Clean up
 
 (require 'helm-config)
-(require 'helm-match-plugin)
 (require 'helm-regexp)
-(require 'helm-buffers)
-(require 'helm-files)
-(setq helm-mp-highlight-delay 0.7
-      helm-mp-highlight-threshold 4
-      helm-maybe-use-default-as-input t
+(ublt/set-up 'helm-files
+  (setq helm-ff-file-name-history-use-recentf t
+        helm-ff-search-library-in-sexp t)
+  (dolist (pattern '("\\.pyc$" "\\.elc$"))
+    (add-to-list 'helm-boring-file-regexp-list pattern)))
+(ublt/set-up 'helm-match-plugin
+  (setq helm-mp-highlight-delay 0.7
+        helm-mp-highlight-threshold 4))
+(ublt/set-up 'helm-buffers
+  (setq helm-buffers-fuzzy-matching t))
+(ublt/set-up 'helm-net
+  (setq helm-google-suggest-use-curl-p (when (executable-find "curl") t)))
+(ublt/in '(gnu/linux)
+  ;;; Quote the the search string
+  (ublt/set-up 'helm-locate
+    (setq helm-locate-command "locate %s -e -A --regex %s")))
+(setq helm-maybe-use-default-as-input t
+      helm-quick-update t
+      helm-split-window-in-side-p 'below
+      helm-move-to-line-cycle-in-source t
       ;; Better-looking separator for multi-line sources
       helm-candidate-separator "────────────────────────────────────────────────────────────────────────────────"
       ;; So C-w put the current symbol in helm's prompt
@@ -41,13 +55,6 @@
       base)))
 
 (ublt/set-up 'helm-cmd-t)
-
-(dolist (pattern '("\\.pyc$" "\\.elc$"))
-  (add-to-list 'helm-boring-file-regexp-list pattern))
-
-;;; Quote the the search string
-(ublt/in '(gnu/linux)
-  (setq helm-locate-command "locate %s -e -A --regex %s"))
 
 (defun ublt/helm ()
   (interactive)
