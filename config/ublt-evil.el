@@ -59,6 +59,7 @@
                   inferior-lisp-mode
                   inferior-haskell-mode
                   haskell-interactive-mode
+                  inf-mongo-mode
                   grep-mode
                   pylookup-mode
                   cider-repl-mode

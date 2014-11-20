@@ -79,6 +79,7 @@
          web-mode
          emmet-mode                          ; html/css editing
          go-mode
+         inf-mongo
          ;; TODO: Remove starter kit dependency
          starter-kit))
 (dolist (p ublt/packages)
