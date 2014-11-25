@@ -347,7 +347,6 @@
   "M-a"           'hs-toggle-hiding
 
   "M-o"           'isearch-occur
-  "M-O"           'helm-swoop
 
   "C-<f10>"       'menu-bar-mode
   "C-s"           'isearch-forward-regexp
@@ -376,6 +375,10 @@
   "S-<mouse-5>"   'forward-paragraph
   "M-<mouse-4>"   'scroll-down-line
   "M-<mouse-5>"   'scroll-up-line)
+
+(when window-system
+  (ublt/define-keys global-map
+    "M-O"           'helm-swoop))
 
 
 (eval-after-load 'undo-tree
