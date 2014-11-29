@@ -591,25 +591,7 @@
   "C-x h"       'helm-mark-all
   "M-a"         'helm-toggle-all-marks
   "C-f"         'helm-follow-mode
-  ;; "s-w"         'ublt/helm-exit-minibuffer-other-window
-  )
-;; XXX: Shouldn't there be a better way?
-(ublt/keys 'helm-buffers helm-buffer-map
-  "s-w" 'helm-buffer-switch-other-window)
-(ublt/keys 'helm-buffers helm-buffers-ido-virtual-map
-  "s-w" 'helm-ff-run-switch-other-window)
-(ublt/keys 'helm-files helm-find-files-map
-  "s-w" 'helm-ff-run-switch-other-window)
-(ublt/keys 'helm-tags helm-etags-map
-  "s-w" 'helm-etags-run-switch-other-window)
-(ublt/keys 'helm-bookmark helm-bookmark-map
-  "s-w" 'helm-bookmark-run-jump-other-window)
-(ublt/keys 'helm-grep helm-grep-map
-  "s-w" 'helm-grep-run-other-window-action)
-(ublt/keys 'helm-locate helm-generic-files-map
-  "s-w" 'helm-ff-run-switch-other-window)
-(ublt/keys 'helm-regexp helm-moccur-map
-  "s-w" 'helm-moccur-run-goto-line-ow)
+  "s-w"         'ublt/helm-maybe-exit-minibuffer-other-window)
 
 
 ;;; HTML/CSS

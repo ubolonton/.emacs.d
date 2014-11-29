@@ -12,17 +12,21 @@
   (setq helm-mp-highlight-delay 0.7
         helm-mp-highlight-threshold 4))
 
+
 (ublt/set-up 'helm-files
   (setq helm-ff-file-name-history-use-recentf t
         helm-ff-auto-update-initial-value t
         helm-ff-search-library-in-sexp t)
   (dolist (pattern '("\\.pyc$" "\\.elc$"))
     (add-to-list 'helm-boring-file-regexp-list pattern)))
+
 (ublt/set-up 'helm-buffers
   (setq helm-buffers-fuzzy-matching t))
+
 (ublt/set-up 'helm-locate
   (ublt/in '(gnu/linux)
     (setq helm-locate-command "locate %s -e -A --regex %s")))
+
 
 (ublt/set-up 'helm-net
   (setq helm-google-suggest-use-curl-p (when (executable-find "curl") t)
@@ -40,6 +44,7 @@
       helm-candidate-separator "────────────────────────────────────────────────────────────────────────────────"
       ;; So C-w put the current symbol in helm's prompt
       helm-yank-symbol-first t)
+
 
 (defun ublt/helm-sources ()
   (let ((base '( ;; helm-c-source-ffap-line
@@ -59,6 +64,11 @@
           (error base))
       base)))
 
+(defun ublt/helm ()
+  (interactive)
+  (helm-other-buffer (ublt/helm-sources) "*ublt/helm*"))
+
+
 ;;; FIX: Check why there is flickering with helm-occur and
 ;;; helm-source-buffers-list but not helm-swoop while moving through
 ;;; the result list. If it can be fixed, enable follow-mode for helm-source-buffers-list
@@ -70,9 +80,6 @@
 (ublt/helm-enable-follow-mode)
 ;; (remove-hook 'helm-before-initialize-hook #'ublt/helm-enable-follow-mode)
 
-(defun ublt/helm ()
-  (interactive)
-  (helm-other-buffer (ublt/helm-sources) "*ublt/helm*"))
 
 ;;; TODO: Maybe customize faces is better (per-source selection of
 ;;; fixed-pitch/variable-pitched font)?
@@ -123,14 +130,27 @@ all of the sources."
         (text-scale-increase 1))
     (error nil)))
 
-;;; FIX: Does not work
-;; (defun ublt/helm-exit-minibuffer-other-window ()
-;;   (interactive)
-;;   ;; (helm-quit-and-execute-action 'other-window)
-;;   (with-helm-window
-;;     (other-window 1)
-;;     (call-interactively 'helm-exit-minibuffer))
-;;   )
+
+(defvar ublt/helm-exit-other-window-p nil)
+
+(defun ublt/helm-maybe-exit-minibuffer-other-window ()
+  (interactive)
+  ;; We cannot use `let' because the action is executed after exiting
+  ;; the minibuffer, not during
+  (setq ublt/helm-exit-other-window-p t)
+  (call-interactively 'helm-maybe-exit-minibuffer))
+
+;;; For some reason combining them into a single around advice didn't work
+(defadvice helm-execute-selection-action-1
+    (before maybe-other-window activate)
+  (when ublt/helm-exit-other-window-p
+    (other-window 1)))
+
+(defadvice helm-execute-selection-action-1
+    (around maybe-other-window-cleanup activate)
+  (unwind-protect ad-do-it
+    (setq ublt/helm-exit-other-window-p nil)))
+
 
 (helm-mode +1)
 
