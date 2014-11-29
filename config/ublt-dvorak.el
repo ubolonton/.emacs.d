@@ -59,6 +59,9 @@
  '(("\\<\\(ublt/define-keys\\) \\(.*\\)\\>"
     (1 font-lock-keyword-face)
     (2 font-lock-variable-name-face))
+   ("\\<\\(ublt/undefine-keys\\) \\(.*\\)\\>"
+    (1 font-lock-keyword-face)
+    (2 font-lock-variable-name-face))
    ("\\<\\(ublt/keys\\) *\\(.*\\) *\\_<\\(.*\\)\\>"
     (1 font-lock-keyword-face)
     (2 font-lock-constant-face)
@@ -118,9 +121,7 @@
 ;;; original command (semantically override). NTA: Many of these are
 ;;; now handled system-wide by `autokey', but are kept here just in case
 (ublt/define-keys key-translation-map
-  ;; OSX goodness
-  ;; TODO: Use sth like s-t instead of s-x, since s-x is not convenient
-  ;; for Dvorak
+  ;; OSX conventions
   "s-c"    "M-w"                        ;   copy
   "s-x"    "C-w"                        ; ✂ cut
   "s-v"    "C-y"                        ;   paste
@@ -130,6 +131,11 @@
   "s-z"    "C-_"                        ; ↺ undo
   "s-Z"    "M-_"                        ; ↻ redo
   "s-a"    "C-x h"                      ;   mark all
+  "s-o"    "C-x C-f"                    ;   open file
+
+  ;; Other super-based translations
+  "s-t"    "M-."                        ; push reference
+  "s-T"    "M-,"                        ; pop reference
 
   ;; XXX: ⬅➡ WTF Unicode. There's no RIGHTWARDS BLACK ARROW
   ;; Movement keys (right hand)
@@ -171,11 +177,6 @@
   ;; Nut!!! But seriously much more effective
   "M-SPC"  "C-SPC"
   "C-SPC"  "M-SPC"
-  ;; More obsession, but C-t is actually unavailable this way
-  ;; though. And another problem is that C-x is a prefix that's kinda
-  ;; mnemonic. So it's not used until I find a workaround
-  ;; "C-t" "C-x"
-  ;; "C-x" "C-t"
 
   "C-M-h"  "M-<left>"                ; ⬅ list (except for org-mode)
   "C-M-n"  "M-<right>"               ; ➡ list (except for org-mode)
@@ -188,47 +189,17 @@
   "M-m"    "M-p"                        ; ⬁ special (history, errors)
   "M-v"    "M-n"                        ; ⬂ special (history, errors)
 
-  "s-t"    "M-."                        ; push reference
-  "s-T"    "M-,"                        ; pop reference
-
   "s-4"    "C-x 4"                      ; do something other window
   ;; "s-r"    "C-x r"
   ;; "s-R"    "C-x r j"
 
-  "s-P"    "C-c p"                      ; projectile
+  ;; "s-P"    "C-c p"                      ; projectile
 
   "M-F"    "s-<escape>"                 ; evil's motion state
   "M-f"    "<escape>"                   ; evil's normal state
   )
 
 (ublt/define-keys global-map
-  ;; OSX goodness
-  "s-u"           'revert-buffer        ; ⟲
-  "s-k"           'kill-this-buffer
-  "s-l"           'goto-line
-
-  "M-w"           'whole-line-or-region-kill-ring-save
-  "C-y"           'whole-line-or-region-yank
-
-  "s-C"           'ublt/duplicate-line
-
-  "C-_"           'undo-tree-undo
-  "M-_"           'undo-tree-redo
-
-  ;; Line/region movement
-  "M-s-h"         'textmate-shift-left
-  "M-s-n"         'textmate-shift-right
-  "M-s-c"         'ublt/move-text-up
-  "M-s-t"         'ublt/move-text-down
-  "M-s-˙"         'textmate-shift-left  ; OS X
-  "M-s-˜"         'textmate-shift-right ; OS X
-  "M-s-ç"         'ublt/move-text-up    ; OS X
-  "M-s-†"         'ublt/move-text-down  ; OS X
-
-  "M-s-=" 'evil-numbers/inc-at-pt
-  "M-s--" 'evil-numbers/dec-at-pt
-
-
   ;; Windows manipulation
   "s-1"           'delete-other-windows
   "s-2"           'split-window-vertically
@@ -262,9 +233,37 @@
   ;; "s-/"           'find-file-in-project
   "s-/"           'variable-pitch-mode
   "s-\\"          'align-regexp
+  "s-u"           'revert-buffer        ; ⟲
+  "s-k"           'kill-this-buffer
+  ;; "s-l"           'goto-line
+  "s-l"           'helm-swoop
+  "s-C"           'ublt/duplicate-line
+  "s-+"           'text-scale-increase
+  "s-="           'text-scale-increase
+  "s--"           'text-scale-decrease
 
   ;; These should be translated
-  "s-["           'backward-page   "s-]" 'forward-page
+  "s-["           'backward-page
+  "s-]"           'forward-page
+
+  "M-w"           'whole-line-or-region-kill-ring-save
+  "C-y"           'whole-line-or-region-yank
+
+  "C-_"           'undo-tree-undo
+  "M-_"           'undo-tree-redo
+
+  ;; Line/region movement
+  "M-s-h"         'textmate-shift-left
+  "M-s-n"         'textmate-shift-right
+  "M-s-c"         'ublt/move-text-up
+  "M-s-t"         'ublt/move-text-down
+  "M-s-˙"         'textmate-shift-left  ; OS X
+  "M-s-˜"         'textmate-shift-right ; OS X
+  "M-s-ç"         'ublt/move-text-up    ; OS X
+  "M-s-†"         'ublt/move-text-down  ; OS X
+
+  "M-s-=" 'evil-numbers/inc-at-pt
+  "M-s--" 'evil-numbers/dec-at-pt
 
   "C-M-r"         'highlight-symbol-next
   "C-M-g"         'highlight-symbol-prev
@@ -272,13 +271,9 @@
   ;; Deletion
   "<kp-delete>"   'delete-char
   "M-<kp-delete>" 'kill-word
-  ;; "M-I"           'kill-whole-line
-
   "M-I"           'whole-line-or-region-kill-region
-  "s-+"           'text-scale-increase
-  "s-="           'text-scale-increase
+
   "C-="           'text-scale-increase
-  "s--"           'text-scale-decrease
 
   "M-Q"           'ublt/unfill-paragraph
 
@@ -294,7 +289,7 @@
 
   ;; Ubuntu
   "M-<f4>"        'kmacro-start-macro-or-insert-counter ; F3 is taken by xbindkeys
-  "C-<f9>"        'ibus-toggle
+  ;; "C-<f9>"        'ibus-toggle
 
   ;; Right, use C-u if you want digit args
   "M-5"           'query-replace
@@ -322,6 +317,7 @@
   ;; "C-x C-b"       'ido-switch-buffer     ; Because it's to easy to mis-press
   "C-x C-b"       'ublt/helm       ; Because it's to easy to mis-press
   "C-x b"         'ublt/helm
+  "C-x <return>"  'term
   "C-x B"         'ibuffer
   "C-S-s"         'ublt/isearch-other-window
 
@@ -362,6 +358,8 @@
   "C-x m"         'eshell
   "C-x C-m"       'shell
 
+  "C-x C-f"       'helm-find-files
+
   ;; FIX
   "C-c e"         'esk-eval-and-replace
   "M-j"           'join-line
@@ -378,7 +376,7 @@
 
 (when window-system
   (ublt/define-keys global-map
-    "M-O"           'helm-swoop))
+    "M-O" 'helm-swoop))
 
 
 (eval-after-load 'undo-tree
@@ -593,7 +591,7 @@
   "o"   'helm-occur
   "O"   'helm-multi-occur
   "SPC" 'helm-global-mark-ring
-  "i"   'helm-browse-code            ; helm-imenu
+  "i"   'helm-imenu
   )
 
 
@@ -820,8 +818,8 @@
   "M-e"     nil                         ;was elpy-nav-forward-statement
   "C-<left>" nil                        ;was elpy-nav-backward-iblock
   "C-<right>" nil                       ;was elpy-nav-forward-iblock
-  "M-<left>"  'elpy-nav-backward-iblock
-  "M-<right>" 'elpy-nav-forward-iblock
+  "M-<left>"  nil
+  "M-<right>" nil
   "M-,"       'pop-tag-mark
   ;; "M-<left>" 'elpy-nav-backward-definition ;was backward-list
   ;; "M-<right>" 'elpy-nav-forward-definition ;was forward-list
