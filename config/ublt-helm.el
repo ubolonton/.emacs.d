@@ -32,6 +32,7 @@
   (setq helm-google-suggest-use-curl-p (when (executable-find "curl") t)
         helm-home-url "https://www.google.com"))
 
+(ublt/set-up 'helm-org)
 (ublt/set-up 'helm-regexp)
 (ublt/set-up 'helm-swoop)
 (ublt/set-up 'helm-cmd-t)
@@ -71,14 +72,17 @@
 
 ;;; FIX: Check why there is flickering with helm-occur and
 ;;; helm-source-buffers-list but not helm-swoop while moving through
-;;; the result list. If it can be fixed, enable follow-mode for helm-source-buffers-list
+;;; the result list. If it can be fixed, enable follow-mode for
+;;; helm-source-buffers-list
+
 (defun ublt/helm-enable-follow-mode ()
   (dolist (source (list helm-source-occur
                         helm-source-moccur
                         helm-source-org-headline))
-    (helm-attrset 'follow 1 source)))
-(ublt/helm-enable-follow-mode)
-;; (remove-hook 'helm-before-initialize-hook #'ublt/helm-enable-follow-mode)
+    (condition-case nil
+        (helm-attrset 'follow 1 source)
+      (error (message "ublt/helm-enable-follow-mode: missing source")))))
+(add-hook 'helm-before-initialize-hook #'ublt/helm-enable-follow-mode)
 
 
 ;;; TODO: Maybe customize faces is better (per-source selection of
