@@ -10,7 +10,8 @@
           (delete 'elpy-module-flymake elpy-modules))
     (add-hook 'elpy-mode-hook (ublt/on-fn 'flycheck-mode)))
   (setq elpy-rpc-backend "jedi")
-  (elpy-enable))
+  (elpy-enable)
+  (elpy-use-ipython))
 
 (ublt/set-up 'python
   (defun ublt/tab-4-spaces ()
