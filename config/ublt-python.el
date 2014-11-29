@@ -23,8 +23,7 @@
         python-shell-interpreter-args "-i --colors=Linux"
         python-shell-prompt-regexp "In \\[[0-9]?\\]: "
         python-shell-prompt-output-regexp "Out \\[[0-9]?\\]: "
-        python-fill-docstring-style 'pep-257-nn
-        python-shell-virtualenv-path "~/.virtualenvs/default")
+        python-fill-docstring-style 'pep-257-nn)
 
   (add-to-list 'auto-mode-alist '("\\.tac$" . python-mode))
 
