@@ -574,13 +574,6 @@
 
 
 ;;; Helm
-(ublt/keys "helm" helm-map
-  "s-h"         'minibuffer-keyboard-quit
-  "s-<return> " 'minibuffer-keyboard-quit
-  "C-x h"       'helm-toggle-all-marks
-  "C-f"         'helm-follow-mode
-  ;; "s-w"         'ublt/helm-exit-minibuffer-other-window
-  )
 (ublt/keys "helm-config" helm-command-map
   "s-r" 'helm-emms
   "g"   'helm-google-suggest
@@ -591,8 +584,32 @@
   "o"   'helm-occur
   "O"   'helm-multi-occur
   "SPC" 'helm-global-mark-ring
-  "i"   'helm-imenu
+  "i"   'helm-imenu)
+(ublt/keys 'helm helm-map
+  "s-h"         'minibuffer-keyboard-quit
+  "s-<return> " 'minibuffer-keyboard-quit
+  "C-x h"       'helm-mark-all
+  "M-a"         'helm-toggle-all-marks
+  "C-f"         'helm-follow-mode
+  ;; "s-w"         'ublt/helm-exit-minibuffer-other-window
   )
+;; XXX: Shouldn't there be a better way?
+(ublt/keys 'helm-buffers helm-buffer-map
+  "s-w" 'helm-buffer-switch-other-window)
+(ublt/keys 'helm-buffers helm-buffers-ido-virtual-map
+  "s-w" 'helm-ff-run-switch-other-window)
+(ublt/keys 'helm-files helm-find-files-map
+  "s-w" 'helm-ff-run-switch-other-window)
+(ublt/keys 'helm-tags helm-etags-map
+  "s-w" 'helm-etags-run-switch-other-window)
+(ublt/keys 'helm-bookmark helm-bookmark-map
+  "s-w" 'helm-bookmark-run-jump-other-window)
+(ublt/keys 'helm-grep helm-grep-map
+  "s-w" 'helm-grep-run-other-window-action)
+(ublt/keys 'helm-locate helm-generic-files-map
+  "s-w" 'helm-ff-run-switch-other-window)
+(ublt/keys 'helm-regexp helm-moccur-map
+  "s-w" 'helm-moccur-run-goto-line-ow)
 
 
 ;;; HTML/CSS
