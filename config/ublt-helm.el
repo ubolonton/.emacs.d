@@ -28,6 +28,10 @@
     (setq helm-locate-command "locate %s -e -A --regex %s")))
 
 
+(ublt/set-up 'helm-imenu
+  (setq helm-imenu-delimiter ":"))
+
+
 (ublt/set-up 'helm-net
   (setq helm-google-suggest-use-curl-p (when (executable-find "curl") t)
         helm-home-url "https://www.google.com"))
@@ -36,6 +40,8 @@
 (ublt/set-up 'helm-regexp)
 (ublt/set-up 'helm-swoop)
 (ublt/set-up 'helm-cmd-t)
+(ublt/set-up 'helm-man-woman)
+
 
 (setq helm-maybe-use-default-as-input t
       helm-quick-update t
@@ -45,6 +51,9 @@
       helm-candidate-separator "────────────────────────────────────────────────────────────────────────────────"
       ;; So C-w put the current symbol in helm's prompt
       helm-yank-symbol-first t)
+
+(dolist (source '(helm-source-man-pages))
+  (add-to-list 'helm-sources-using-default-as-input source))
 
 
 (defun ublt/helm-sources ()
@@ -78,10 +87,13 @@
 (defun ublt/helm-enable-follow-mode ()
   (dolist (source (list helm-source-occur
                         helm-source-moccur
-                        helm-source-org-headline))
+                        helm-source-org-headline
+                        helm-source-pp-bookmarks
+                        helm-source-imenu
+                        helm-source-buffers-list))
     (condition-case nil
         (helm-attrset 'follow 1 source)
-      (error (message "ublt/helm-enable-follow-mode: missing source")))))
+      (error nil))))
 (add-hook 'helm-before-initialize-hook #'ublt/helm-enable-follow-mode)
 
 

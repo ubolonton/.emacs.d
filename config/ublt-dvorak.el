@@ -210,7 +210,7 @@
   "s-W"           'ublt/swap-windows
 
   ;; Utilities, super-
-  "s-i"           'helm-imenu
+  "s-i"           'helm-semantic-or-imenu
   "s-d"           'helm-command-prefix
   "s-D"           'eproject-ido-imenu
   "s-H"           'ido-switch-buffer
