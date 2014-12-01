@@ -324,8 +324,12 @@ statements."
       (call-interactively 'org-export-as-html))))
 
 (ublt/set-up 'ox-latex
-  (setq org-latex-pdf-process '("xelatex -interaction nonstopmode %f"
-                                "xelatex -interaction nonstopmode %f")
+  ;; Use minted for code highlighting in exported pdf files
+  ;; http://joat-programmer.blogspot.nl/2013/07/org-mode-version-8-and-pdf-export-with.html
+  (add-to-list 'org-latex-packages-alist '("" "minted"))
+  (setq org-latex-listings 'minted
+        org-latex-pdf-process '("xelatex -shell-escape -interaction nonstopmode %f"
+                                "xelatex -shell-escape -interaction nonstopmode %f")
         org-latex-toc-command ""
         ;; Don't use `inputenc', `fontenc' (xelatex `fontspec' is
         ;; supposed to handle unicode better)
