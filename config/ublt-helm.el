@@ -172,6 +172,8 @@ all of the sources."
 (defadvice helm-execute-selection-action-1
     (before maybe-other-window activate)
   (when ublt/helm-exit-other-window-p
+    (when (= (count-windows) 1)
+      (split-window-horizontally))
     (other-window 1)))
 
 (defadvice helm-execute-selection-action-1
