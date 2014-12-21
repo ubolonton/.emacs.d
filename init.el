@@ -23,7 +23,7 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 (defvar ublt/packages
-  '(smex auto-complete yasnippet
+  '(smex company yasnippet
          textmate undo-tree whole-line-or-region
          ace-jump-mode htmlize twittering-mode keyfreq
          nyan-mode                      ; buffer position as nyan cat

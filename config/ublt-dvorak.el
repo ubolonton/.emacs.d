@@ -331,7 +331,7 @@
 
   ;; FIX: Still have to override mode-specific bindings. There must
   ;; be something better
-  "M-TAB"         'auto-complete       ; Don't use completion-at-point
+  "M-TAB"         'company-complete
 
   ;; TODO: Something (were upcase/downcase region)
   "C-x C-u"       'nil
@@ -625,35 +625,21 @@
 
 
 ;;; auto-complete and yasnippet
-(ublt/keys "auto-complete" ac-complete-mode-map
-  "M-n"   'ac-next
-  "M-p"   'ac-previous
-  "C-h"   'ac-help
-  "SPC"   'ac-complete
-  "TAB"   'ac-complete
-  "M-TAB" 'ac-expand
-  ;; Possibly because of some weird interaction with key translation,
-  ;; we need to set both C-SPC & M-SPC here.
-  "C-SPC" 'ac-expand
-  "M-SPC" nil
-  "<next>" 'ac-quick-help-scroll-down
-  "<prior>" 'ac-quick-help-scroll-up)
-(ublt/keys "auto-complete" ac-mode-map
-  "M-TAB" 'auto-complete)
-(eval-after-load "auto-complete"
-  '(ac-set-trigger-key nil))
+(ublt/keys 'company company-active-map
+  "C-s" 'company-filter-candidates
+  "C-d" 'company-show-location)
 
 (ublt/keys "yasnippet" yas-minor-mode-map
   "TAB" nil
   "<tab>" nil
   "M-B" 'yas-expand)
 (ublt/keys "slime" slime-mode-map
-  "M-TAB"   'auto-complete)
+  "M-TAB" 'company-complete)
 
 (ublt/keys "python-mode" py-mode-map
-  "M-TAB" 'auto-complete)
+  "M-TAB" 'company-complete)
 (ublt/keys "python-mode" py-shell-map
-  "M-TAB" 'auto-complete)
+  "M-TAB" 'company-complete)
 
 
 ;;; Error navigation
@@ -854,7 +840,7 @@
 
 (ublt/keys "slime-repl" slime-repl-mode-map
   "M-I"   'slime-repl-delete-from-input-history
-  "M-TAB" 'auto-complete
+  "M-TAB" 'company-complete
   "DEL"    nil
   "M-s"    nil
   "C-c p" 'slime-repl-set-package

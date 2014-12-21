@@ -204,30 +204,11 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
       (backward-char))))
 
 
-;; auto-complete
-(ublt/set-up 'auto-complete-config
-  (ac-config-default)
-  (ac-flyspell-workaround)
-  (add-to-list 'ac-dictionary-directories "~/.emacs.d/data/auto-complete/dict")
-  (global-auto-complete-mode +1)
-  ;; (add-hook 'eshell-mode-hook 'ac-eshell-mode-setup)
-  (setq-default ac-auto-start nil
-                ac-sources '(ac-source-words-in-buffer
-                             ac-source-words-in-same-mode-buffers
-                             ;; ac-source-words-in-all-buffer
-                             ;; ac-source-dictionary
-                             ;; ac-source-abbrev
-                             ))
-  (setq ac-delay 0.5
-        ac-auto-show-menu 1
-        ac-quick-help-delay 0.8)
+;;; Automatic completion
 
-  (dolist (mode '(magit-log-edit-mode log-edit-mode org-mode text-mode haml-mode
-                                      sass-mode yaml-mode csv-mode espresso-mode haskell-mode
-                                      html-mode nxml-mode sh-mode smarty-mode clojure-mode
-                                      lisp-mode textile-mode markdown-mode tuareg-mode
-                                      nxhtml-mode))
-    (add-to-list 'ac-modes mode)))
+(ublt/set-up 'company
+  (setq company-idle-delay 0.45)
+  (global-company-mode +1))
 
 
 ;;; Yasnippet --------------------------------------------------------
