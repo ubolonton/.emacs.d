@@ -248,7 +248,7 @@
 
 ;;; Blogging
 
-(ublt/set-up 'org-publish
+(ublt/set-up 'ox-publish
   (ublt/set-up 'o-blog
     (dolist (project
              '(("blog"
