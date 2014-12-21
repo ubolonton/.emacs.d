@@ -562,7 +562,7 @@
 ;;; Bigger minibuffer text
 (defun ublt/minibuffer-setup ()
   (set (make-local-variable 'face-remapping-alist)
-       '((default :height 1.2)))
+       '((default :height 1.0)))
   (setq line-spacing 0.3))
 (add-hook 'minibuffer-setup-hook 'ublt/minibuffer-setup)
 
@@ -616,6 +616,7 @@
 
  ;; Limit minibuffer to 20% frame height
  max-mini-window-height 0.2
+ ;; resize-mini-windows 'grow-only
 
  ;; Echo keystrokes faster
  echo-keystrokes 0.2

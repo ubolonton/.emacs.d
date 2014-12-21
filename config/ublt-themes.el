@@ -360,7 +360,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (text-cursor
           ((t (:background ,yellow :foreground ,bg)))) ; What's this?
          (minibuffer-prompt
-          ((t (,@prompt :bold t ))))
+          ((t (,@prompt :bold t))))
          (left-margin ((t (nil))))
          (toolbar ((t (nil))))
          (fringe ((t (,@context ,@dimmed-hl))))
@@ -413,11 +413,11 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
           ((t (:inherit mode-line ,@strong-hl ,@strong
                         :box (:color ,bg+3)))))
          (mode-line-buffer-id
-          ((t (:bold t :height 1.2))))
+          ((t (:bold t :height 1.0))))
          (mode-line-highlight
           ((t (:inherit mode-line))))
          (which-func
-          ((t (:foreground ,red-2 :height 1.1 :bold t))))
+          ((t (:foreground ,red-2 :height 1.0 :bold t))))
          (anzu-mode-line
           ((t (:foreground ,red-2 :weight bold))))
 
