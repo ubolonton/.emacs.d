@@ -15,7 +15,10 @@
 
 (ublt/set-up 'helm-files
   (setq helm-ff-file-name-history-use-recentf t
-        helm-ff-auto-update-initial-value t
+        ;; helm-ff-auto-update-initial-value t
+        ;; helm-ff-transformer-show-only-basename nil
+        helm-file-cache-fuzzy-match t
+        helm-recentf-fuzzy-match t
         helm-ff-search-library-in-sexp t)
   (dolist (pattern '("\\.pyc$" "\\.elc$"))
     (add-to-list 'helm-boring-file-regexp-list pattern)))
@@ -25,22 +28,27 @@
 
 (ublt/set-up 'helm-locate
   (ublt/in '(gnu/linux)
-    (setq helm-locate-command "locate %s -e -A --regex %s")))
+    (setq helm-locate-command "locate %s -e -A --regex %s"
+          helm-locate-fuzzy-match t)))
 
 
 (ublt/set-up 'helm-imenu
-  (setq helm-imenu-delimiter ":"))
+  (setq helm-imenu-delimiter ":"
+        helm-imenu-fuzzy-match t))
 
 
 (ublt/set-up 'helm-net
   (setq helm-google-suggest-use-curl-p (when (executable-find "curl") t)
         helm-home-url "https://www.google.com"))
 
+(ublt/set-up 'helm-command
+  (setq helm-M-x-fuzzy-match t))
+
 (ublt/set-up 'helm-org)
 (ublt/set-up 'helm-regexp)
 (ublt/set-up 'helm-swoop)
 (ublt/set-up 'helm-cmd-t)
-(ublt/set-up 'helm-man-woman)
+(ublt/set-up 'helm-man)
 
 
 (setq helm-maybe-use-default-as-input t
@@ -60,10 +68,11 @@
   (let ((base '( ;; helm-c-source-ffap-line
                 ;; helm-c-source-ffap-guesser
                 helm-source-buffers-list
-                helm-source-recentf
+                ;; helm-source-recentf
                 helm-source-ido-virtual-buffers
                 helm-source-buffer-not-found
                 helm-source-files-in-current-dir
+                ;; helm-source-bookmarks
                 helm-source-pp-bookmarks
                 helm-source-file-cache
                 helm-source-locate)))
@@ -84,13 +93,16 @@
 ;;; the result list. If it can be fixed, enable follow-mode for
 ;;; helm-source-buffers-list
 
+;;; TODO: Add file/buffer navigation once it's possible to do
+;;; dedicated transparent frame for helm
 (defun ublt/helm-enable-follow-mode ()
   (dolist (source (list helm-source-occur
                         helm-source-moccur
-                        helm-source-org-headline
-                        helm-source-pp-bookmarks
+                        ;; helm-source-org-headline
+                        ;; helm-source-pp-bookmarks
                         helm-source-imenu
-                        helm-source-buffers-list))
+                        ;; helm-source-buffers-list
+                        ))
     (condition-case nil
         (helm-attrset 'follow 1 source)
       (error nil))))
