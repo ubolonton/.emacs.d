@@ -214,8 +214,8 @@
   ;;    count beg end type #'forward-symbol))
   )
 
-(ublt/set-up 'surround
-  (setq-default surround-pairs-alist
+(ublt/set-up 'evil-surround
+  (setq-default evil-surround-pairs-alist
                 '((?\( . ("(" . ")"))
                   (?\[ . ("[" . "]"))
                   (?\{ . ("{" . "}"))
@@ -241,12 +241,17 @@
                   (?d . ("\"\"\"" . "\"\"\""))
                   (?D . ("'''" . "'''"))
 
-                  (?t . surround-read-tag)
-                  (?< . surround-read-tag)))
+                  (?t . evil-surround-read-tag)
+                  (?< . evil-surround-read-tag)
+
+                  (?f . evil-surround-function)))
   (global-surround-mode +1))
 
 (ublt/set-up 'evil-visualstar)
 (ublt/set-up 'evil-args)
 (ublt/set-up 'evil-numbers)
+(ublt/set-up 'evil-nerd-commenter)
+(ublt/set-up 'evil-matchit
+  (global-evil-matchit-mode +1))
 
 (provide 'ublt-evil)

@@ -437,7 +437,7 @@
   "B"        'evil-replace-state
 
   ;; g => e
-  "e"  nil
+  "e"        nil
   "e&"       'evil-ex-repeat-global-substitute
   "e8"       'what-cursor-position
   "ea"       'what-cursor-position
@@ -453,6 +453,13 @@
   "e~"       'evil-invert-case
   "e;"       'goto-last-change
   "e,"       'goto-last-change-reverse
+
+  "ee"       'evilnc-comment-operator
+  "eci"      'evilnc-comment-or-uncomment-lines
+  "ecc"      'evilnc-copy-and-comment-lines
+  "ecp"      'evilnc-comment-or-uncomment-paragraphs
+  "ecr"      'comment-or-uncomment-region
+  "ecv"      'evilnc-toggle-invert-comment-line-by-line
   )
 (ublt/keys "evil" evil-motion-state-map
   "s-<escape>" 'evil-motion-state
@@ -493,7 +500,7 @@
   ;; g => (e)vil do
   "e"     nil
   "ed"    'evil-goto-definition
-  "ee"    'evil-backward-word-end
+  "ee"    nil
   "eE"    'evil-backward-WORD-end
   "eg"    'evil-goto-first-line
   "ej"    'evil-next-visual-line

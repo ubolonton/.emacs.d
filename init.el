@@ -49,10 +49,13 @@
          ;; git
          magit magit-svn
          ;; Vim emulation
-         evil surround
+         evil
+         evil-surround
          evil-args
          evil-visualstar
          evil-numbers
+         evil-nerd-commenter
+         evil-matchit
          ;; Appearance
          color-theme rainbow-mode page-break-lines  ;; whitespace
          diminish                       ; Mode names => symbols
