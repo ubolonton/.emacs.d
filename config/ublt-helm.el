@@ -8,10 +8,16 @@
 
 (require 'helm-config)
 
+(defun ublt/helm-enable-fuzzy (sources-and-classes)
+  (dolist (setting sources-and-classes)
+    (destructuring-bind (s class) setting
+      (let ((source (symbol-value s)))
+        (set s (helm-make-source (helm-attr 'name source) class
+                 :fuzzy-match t))))))
+
 (ublt/set-up 'helm-match-plugin
   (setq helm-mp-highlight-delay 0.7
         helm-mp-highlight-threshold 4))
-
 
 (ublt/set-up 'helm-files
   (setq helm-ff-file-name-history-use-recentf t
@@ -24,13 +30,20 @@
     (add-to-list 'helm-boring-file-regexp-list pattern)))
 
 (ublt/set-up 'helm-buffers
-  (setq helm-buffers-fuzzy-matching t))
+  (setq helm-buffers-fuzzy-matching t)
+  (unless helm-source-buffers-list
+    (setq helm-source-buffers-list
+          (helm-make-source "Buffers" 'helm-source-buffers))))
 
 (ublt/set-up 'helm-locate
   (ublt/in '(gnu/linux)
     (setq helm-locate-command "locate %s -e -A --regex %s"
-          helm-locate-fuzzy-match t)))
+          helm-locate-fuzzy-match nil)))
 
+(ublt/set-up 'helm-bookmark
+  (ublt/helm-enable-fuzzy
+   '((helm-source-pp-bookmarks helm-source-basic-bookmarks)
+     (helm-source-bookmarks helm-source-basic-bookmarks))))
 
 (ublt/set-up 'helm-imenu
   (setq helm-imenu-delimiter ":"
