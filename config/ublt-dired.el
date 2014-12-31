@@ -39,19 +39,16 @@
 ;; Highlight current line
 (add-hook 'dired-mode-hook (ublt/on-fn 'hl-line-mode))
 
-;; Hide details
-(ublt/set-up 'dired-details+
-  (setq dired-details-hide-link-targets nil)
-  ;; Hide unimportant files
-  (setq-default dired-omit-mode t
-                dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\.")
-  ;;
-  (add-to-list 'dired-details-invisible-lines
-               "итого"))
+(ublt/set-up 'dired-x
+  (setq dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\.")
+  (setq-default dired-omit-mode t))
+
+(ublt/set-up 'dired-aux
+  (setq dired-isearch-filenames 'dwim))
 
 ;; Directories first by default. "s d" to change locally
 (ublt/set-up 'dired-sort-map
-  (setq dired-listing-switches "--group-directories-first -alh"))
+  (setq dired-listing-switches "--group-directories-first -alhG1v"))
 
 (setq
  ;; Offer the other window's path as default when copying
