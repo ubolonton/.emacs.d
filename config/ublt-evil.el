@@ -143,76 +143,41 @@
       (t nil))))
 
 
-;; (defun ublt/evil-inner-sgml-range (count)
-;;   (let* ((tag (ublt/sgml-get-tag count))
-;;          (start (sgml-tag-start tag))
-;;          (end (sgml-tag-end tag)))
-;;     (case (sgml-tag-type tag)
-;;       ((empty decl cdata) nil)
-;;       ('open
-;;        (save-excursion
-;;          (goto-char end)
-;;          (let ((inner-start (point)))
-;;            (goto-char start)
-;;            (sgml-skip-tag-forward 1)
-;;            (let ((close (ublt/sgml-get-tag 1)))
-;;              (list inner-start (sgml-tag-start close))))))
-;;       ('close
-;;        (save-excursion
-;;          (goto-char start)
-;;          (let ((inner-end (point)))
-;;            (goto-char end)
-;;            (sgml-skip-tag-backward 1)
-;;            (let ((open (ublt/sgml-get-tag 1)))
-;;              (list (sgml-tag-end open) inner-end)))))
-;;       ('comment (TODO))
-;;       ('pi (TODO))
-;;       ('jsp (TODO))                     ; WAT?
-;;       (t nil))))
+(evil-define-text-object evil-a-defun (count &optional beg end type)
+  "Select a defun."
+  :extend-selection t
+  (evil-select-an-object 'evil-defun beg end type count))
 
+;; TODO: This should be body-only
+(evil-define-text-object evil-inner-defun (count &optional beg end type)
+  "Select a defun."
+  :extend-selection nil
+  (evil-select-inner-object 'evil-defun beg end type count))
 
-;; TODO: Support BEG END TYPE
-(ublt/set-up 'evil
-  (evil-define-text-object evil-an-sgml-tag (count &optional beg end type)
-    "Select a sgml tag block."
-    :extend-selection nil
-    (ublt/evil-an-sgml-range count)))
+(evil-define-text-object evil-a-sexp (count &optional beg end type)
+  "Select a sexp."
+  :extend-selection t
+  ;; FIX: Hmm
+  (evil-select-inner-object 'sexp beg end type count))
 
+;; TODO: This should not include the parentheses
+(evil-define-text-object evil-inner-sexp (count &optional beg end type)
+  "Select a sexp."
+  :extend-selection nil
+  (evil-select-inner-object 'sexp beg end type count))
 
-;;; TODO: inner?
-(ublt/set-up 'thingatpt
-  (defun ublt/backward-defun (&optional arg)
-    (forward-thing 'defun (- arg)))
+(evil-define-text-object evil-a-url (count &optional beg end type)
+  "Select a url."
+  :extend-selection t
+  ;; FIX: Hmm
+  (evil-select-inner-object 'url beg end type count))
 
-  (defun ublt/forward-defun (&optional arg)
-    (forward-thing 'defun arg))
+;; TODO: This should be domain only, or excluding the protocol
+(evil-define-text-object evil-inner-url (count &optional beg end type)
+  "Select a url."
+  :extend-selection nil
+  (evil-select-inner-object 'url beg end type count))
 
-  (evil-define-text-object evil-a-defun (count &optional beg end type)
-    "Select a defun."
-    (evil-an-object-range
-     count beg end type #'ublt/forward-defun #'ublt/backward-defun))
-
-  ;; (evil-define-text-object evil-inner-defun (count &optional beg end type)
-  ;;   "Select inner defun."
-  ;;   (evil-inner-object-range
-  ;;    count beg end type #'ublt/forward-defun
-  ;;   #'ublt/backward-defun))
-
-  (evil-define-text-object evil-a-symbol (count &optional beg end type)
-    "Select a symbol."
-    (evil-an-object-range
-     count beg end type #'forward-symbol))
-
-  (evil-define-text-object evil-a-sexp (count &optional beg end type)
-    "Select a sexp."
-    (evil-an-object-range
-     count beg end type #'forward-sexp))
-
-  ;; (evil-define-text-object evil-inner-symbol (count &optional beg end type)
-  ;;   "Select a symbol."
-  ;;   (evil-inner-object-range
-  ;;    count beg end type #'forward-symbol))
-  )
 
 (ublt/set-up 'evil-surround
   (setq-default evil-surround-pairs-alist
