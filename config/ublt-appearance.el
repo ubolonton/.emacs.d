@@ -450,99 +450,84 @@
   ⟶⟶⟶
   $this⇾foo
   $this⤞foo)
-(font-lock-add-keywords
- 'org-mode `(("\\(=>\\)"
-              (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                        ?⇒ 'decompose-region)
-                        nil)))
-             ("\\(<=\\)"
-              (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                        ?⇐ 'decompose-region)
-                        nil)))))
+
+(defun ublt/show-as (how &optional pred)
+  (let* ((beg (match-beginning 1))
+         (end (match-end 1))
+         (ok (or (not pred) (funcall pred beg end))))
+    (when ok
+      (compose-region beg end how 'decompose-region))
+    nil))
+
+(defun ublt/-not-in-org-src-block (beg end)
+  (notany (lambda (overlay)
+            (eq (overlay-get overlay 'face) 'org-block-background))
+          (overlays-in beg end)))
+
+(defun ublt/pretty-org (on)
+  (let ((f (if on #'font-lock-add-keywords
+             #'font-lock-remove-keywords)))
+    (funcall
+     f 'org-mode `(("\\(#\\+begin_src\\>\\)"
+                    (0 (ublt/show-as ?➤)))
+                   ("\\(#\\+end_src\\>\\)"
+                    (0 (ublt/show-as ?➤)))
+                   ;; Arrows
+                   ("\\(=>\\)"
+                    (0 (ublt/show-as ?⟹ #'ublt/-not-in-org-src-block)))
+                   ("\\(<=\\)"
+                    (0 (ublt/show-as ?⟸ #'ublt/-not-in-org-src-block)))
+                   ("\\(->\\)"
+                    (0 (ublt/show-as ?⟶ #'ublt/-not-in-org-src-block)))
+                   ("\\(<-\\)"
+                    (0 (ublt/show-as ?⟵ #'ublt/-not-in-org-src-block)))))))
+(ublt/pretty-org t)
+
 (font-lock-add-keywords
  'web-mode `(("\\(function\\)"
-              (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                        ?ƒ 'decompose-region)
-                        nil)))))
+              (0 (ublt/show-as ?ƒ)))))
 (font-lock-add-keywords
  'php-mode `(("\\(->\\)"
-              (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                        ?➛ 'decompose-region)
-                        nil)))
+              (0 (ublt/show-as ?➛)))
              ("\\(=>\\)"
-              (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                        ?⇒ 'decompose-region)
-                        nil)))
+              (0 (ublt/show-as ?⇒)))
              ("\\(array\\)("
-              (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                        ?▸ 'decompose-region)
-                        nil)))
+              (0 (ublt/show-as ?▸)))
              ("\\(function\\)"
-              (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                        ?ƒ 'decompose-region)
-                        nil)))
+              (0 (ublt/show-as ?ƒ)))
              ("{\\|}\\|;\\|\\$" . 'ublt/lisp-paren-face)
              ("\\(ret\\)urn"
-              (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                        ?▸ 'decompose-region)
-                        nil)))
+              (0 (ublt/show-as ?▸)))
              ("ret\\(urn\\)"
-              (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                        ?▸ 'decompose-region)
-                        nil)))))
+              (0 (ublt/show-as ?▸)))))
 (dolist (mode '(js-mode js2-mode web-mode))
   (font-lock-add-keywords
    mode `(("{\\|}\\|;" . 'ublt/lisp-paren-face)
           ("\\(function\\)"
-           (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                     ?ƒ 'decompose-region)
-                     nil)))
+           (0 (ublt/show-as ?ƒ)))
+          ;; yield => γζ
           ("\\(yi\\)eld"
-           (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                     ?γ 'decompose-region)
-                     nil)))
+           (0 (ublt/show-as ?γ)))
           ("yi\\(eld\\)"
-           (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                     ?ζ 'decompose-region)
-                     nil)))
+           (0 (ublt/show-as ?ζ)))
+          ;; return => ▸▸
           ("\\(ret\\)urn"
-           (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                     ?▸ 'decompose-region)
-                     nil)))
+           (0 (ublt/show-as ?▸)))
           ("ret\\(urn\\)"
-           (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                     ?▸ 'decompose-region)
-                     nil))))))
+           (0 (ublt/show-as ?▸))))))
 (dolist (mode '(clojure-mode clojurescript-mode))
   (font-lock-add-keywords
    mode `(("{\\|}\\|;" . 'ublt/lisp-paren-face)
           ("(\\(\\<fn\\>\\)"
-           (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                     ?ƒ 'decompose-region)
-                     nil))))))
+           (0 (ublt/show-as ?ƒ))))))
 (dolist (mode '(python-mode))
   (font-lock-add-keywords
-   mode `(("\\(yi\\)eld"
-           (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                     ?γ 'decompose-region)
-                     nil)))
+   mode `(
+          ;; yield => γζ
+          ("\\(yi\\)eld"
+           (0 (ublt/show-as ?γ)))
           ("yi\\(eld\\)"
-           (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                     ?ζ 'decompose-region)
-                     nil))))))
-
-(defun ublt/pretty-org (on)
-  (funcall (if on #'font-lock-add-keywords
-             #'font-lock-remove-keywords)
-           'org-mode `(("\\(#\\+begin_src\\>\\)"
-                        (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                                  "➤")
-                                  nil)))
-                       ("\\(#\\+end_src\\>\\)"
-                        (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                                  "➤")
-                                  nil))))))
-(ublt/pretty-org t)
+           (0 (ublt/show-as ?ζ))))))
 
 ;;; Don't use. This destroys magit's fontification. Magit does something special
 ;; (defun ublt/prettify-magit-log ()
@@ -636,7 +621,7 @@
 (setq-default
  ;; Sparse lines
  ;; TODO: 0.15 or 0.2?
- line-spacing 0.15
+ line-spacing 0.12
 
  ;; 70-char column width
  fill-column 70
@@ -701,5 +686,9 @@
 %s
 " file style))
   (setq hfy-page-header 'ublt/hfy-page-header))
+
+(ublt/set-up 'golden-ratio
+  (dolist (mode '(ediff-mode))
+    (add-to-list 'golden-ratio-exclude-modes mode)))
 
 (provide 'ublt-appearance)
