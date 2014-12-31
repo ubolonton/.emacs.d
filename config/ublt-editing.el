@@ -46,37 +46,8 @@ arg lines up."
 
 
 ;;; Cycling and extending selection
-;; TODO: Make `defun' selection work with non-Lisp
 
-(ublt/set-up 'thing-cmds
-  ;; FIX: this-command/last-command variables do not work well with
-  ;; interactive commands that use call-interactively. Therefore
-  ;; wrapping cycle-thing-region does not work well. Consider setting
-  ;; thing-types depending on major-mode instead. Use
-  ;; `mark-enclosing-sexp' for Lisp languages
-
-  (setq thing-types '("symbol" "line" "paragraph"))
-  ;; '("word" "sentence" "paragraph" "page")
-
-  ;; TODO: Expand on this idea. If point is at X, and a command starts
-  ;; a selection where neither point nor mark is X, then cancelling
-  ;; that selection should move point back to X.
-
-  ;; FIX: This does not have the desire effect when region was started
-  ;; with set-mark-command. It only helps with things like
-  ;; cycle-thing-region. Also it should only be activated when region
-  ;; is canceled directly by user, not when another function that uses
-  ;; region finishes and unsets it.
-  (defun ublt/restore-thing-cmds-point ()
-    "Restore caret position after upon quiting cycling selection.
-Works on `mark-enclosing-sexp'."
-    (cond
-     ((and (member last-command '(cycle-thing-region))
-           cycle-thing-region-point)
-      (goto-char cycle-thing-region-point))
-     ((member last-command '(mark-enclosing-sexp))
-      (goto-char (car mark-ring)))))
-  (add-hook 'deactivate-mark-hook 'ublt/restore-thing-cmds-point))
+(ublt/set-up 'expand-region)
 
 
 ;;; Toggle CUA mode, starting CUA rect if turning on

@@ -295,10 +295,12 @@
   "M-5"           'query-replace
   "M-%"           'query-replace-regexp
   "M-6"           'ublt/toggle-letter-case
-  "M-7"           'ublt/toggle-cua-rect
-  "M-8"           'ublt/cycle-prose-region
-  "M-9"           'mark-enclosing-sexp
-  "M-0"           'cycle-thing-region
+  ;; "M-7"           'ublt/toggle-cua-rect
+  ;; "M-8"           'ublt/cycle-prose-region
+  ;; "M-9"           'mark-enclosing-sexp
+  "M-7"           'er/expand-region
+  "M-4"           'er/expand-region
+  "s-O"           'er/expand-region
 
   ;; TODO: more pervasive
   "C-a"           'ublt/back-to-indentation-or-line-beginning
@@ -935,5 +937,10 @@
 (ublt/keys 'org-agenda org-agenda-mode-map
   "C-<down>" 'org-agenda-do-date-later
   "C-<up>"   'org-agenda-do-date-earlier)
+
+(eval-after-load 'expand-region
+  '(setq expand-region-fast-keys-enabled t
+         expand-region-contract-fast-key "u"
+         expand-region-reset-fast-key "e"))
 
 (provide 'ublt-dvorak)

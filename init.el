@@ -26,6 +26,7 @@
   '(smex company yasnippet
          textmate undo-tree whole-line-or-region
          ace-jump-mode htmlize twittering-mode keyfreq
+         expand-region
          nyan-mode                      ; buffer position as nyan cat
          org org-bullets
          ox-reveal                      ; reveal.js slides from org-mode
