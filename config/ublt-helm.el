@@ -46,9 +46,11 @@
      (helm-source-bookmarks helm-source-basic-bookmarks))))
 
 (ublt/set-up 'helm-imenu
-  (setq helm-imenu-delimiter ":"
-        helm-imenu-fuzzy-match t))
-
+  (setq helm-imenu-delimiter " "
+        helm-imenu-fuzzy-match t
+        ;; This is a misfeature when combined with "use default as
+        ;; input", so disable it
+        helm-imenu-execute-action-at-once-if-one nil))
 
 (ublt/set-up 'helm-net
   (setq helm-google-suggest-use-curl-p (when (executable-find "curl") t)
