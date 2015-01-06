@@ -152,7 +152,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
   (flet ((find-color (name)
                      (nth (if window-system 1 2)
                           (assoc name ublt/colors))))
-    (let* (;; (variable-pitch-family (face-attribute 'variable-pitch :family))
+    (let* ( ;; (variable-pitch-family (face-attribute 'variable-pitch :family))
            (bg          (find-color 'bg))
            (bg+1        (find-color 'bg+1))
            (bg+2        (find-color 'bg+2))
@@ -238,18 +238,18 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
            ;; FIX: Using this make faces unscalable
            ;; Fixed-width font
            (fw0           `(
-                           :font ,(face-attribute 'default :font)
-                           :fontset ,(face-attribute 'default :fontset)
-                           ;; :weight ,(face-attribute 'default :weight)
-                           ;; :height ,(face-attribute 'default :height)
-                           ))
+                            :font ,(face-attribute 'default :font)
+                            :fontset ,(face-attribute 'default :fontset)
+                            ;; :weight ,(face-attribute 'default :weight)
+                            ;; :height ,(face-attribute 'default :height)
+                            ))
            ;; Variable-width font
            (vw0           `(
-                           :fontset ,(face-attribute 'variable-pitch :fontset)
-                           :font ,(face-attribute 'variable-pitch :font)
-                           ;; :weight ,(face-attribute 'variable-pitch :weight)
-                           ;; :height ,(face-attribute 'variable-pitch :height)
-                           ))
+                            :fontset ,(face-attribute 'variable-pitch :fontset)
+                            :font ,(face-attribute 'variable-pitch :font)
+                            ;; :weight ,(face-attribute 'variable-pitch :weight)
+                            ;; :height ,(face-attribute 'variable-pitch :height)
+                            ))
 
            ;; Mixins
            (fw             '(:inherit ublt/default-fixed-width))
@@ -309,7 +309,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (font-lock-keyword-face
           ((t (,@fw ,@power))))
          (font-lock-reference-face
-          ((t (,@fw ,@reference))))           ; TODO What's this?
+          ((t (,@fw ,@reference))))     ; TODO What's this?
          (font-lock-regexp-grouping-backslash
           ((t (,@fw :foreground ,bg+1))))
          (font-lock-regexp-grouping-construct
@@ -327,7 +327,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (font-lock-warning-face
           ((t (,@fw ,@warning))))
          (font-lock-constant-face
-          ((t (,@fw ,@constant))))            ; TODO: Different shade
+          ((t (,@fw ,@constant))))      ; TODO: Different shade
          (number-font-lock-face
           ((t (,@fw ,@constant))))
 
@@ -363,7 +363,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
           ((t (,@prompt :bold t))))
          (left-margin ((t (nil))))
          (toolbar ((t (nil))))
-         (fringe ((t (,@context ,@dimmed-hl))))
+         (fringe ((t (,@context ,@fw))))
          (link ((t (,@portal :underline ,bg+3))))
          (match ((t ,strong-hl)))
          (escape-glyph                  ; Special characters
@@ -377,7 +377,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (secondary-selection
           ((t ,special-hl)))
          (hl-line
-          ((t ,dimmed-hl)))                ; line highlighting
+          ((t ,dimmed-hl)))             ; line highlighting
          (hl-sexp-face
           ((t ,dimmed-hl)))
          (highlight
@@ -425,7 +425,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (diredp-file-name
           ((t (:inherit default))))     ; TODO
          (diredp-dir-heading
-          ((t (:foreground ,gold-1 :bold t))))  ; TODO
+          ((t (:foreground ,gold-1 :bold t)))) ; TODO
          (dired-symlink
           ((t ,teleport)))
          (diredp-symlink
@@ -554,7 +554,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (org-hide
           ((t (:foreground ,bg))))
          (org-code
-          ((t (:inherit font-lock-builtin-face))))    ; TODO
+          ((t (:inherit font-lock-builtin-face)))) ; TODO
          (org-verbatim
           ((t (:inherit font-lock-keyword-face))))
          (org-meta-line
@@ -566,11 +566,11 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (org-link
           ((t (:inherit link))))
          (org-date
-          ((t (,@fw :foreground ,cyan :underline t))))  ; TODO
+          ((t (,@fw :foreground ,cyan :underline t)))) ; TODO
          (org-todo
           ((t ,commitment)))
          (org-done
-          ((t (:foreground ,green-3))))  ; TODO
+          ((t (:foreground ,green-3)))) ; TODO
          ;; FIX: This makes comment in code block fixed-width :(
          (org-block
           ((t (,@fw))))
@@ -917,15 +917,17 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          ;; Null out most attributes, because it seems to inherit
          ;; the face of each line's first character.
          (linum
-          ((t (:inherit fringe ,@dimmed :slant normal :bold t
+          ((t (:inherit fringe ,@dimmed :slant normal :weight normal
                         :underline nil :strike-through nil :overline nil
                         :box nil))))
+         (linum-relative-current-face
+          ((t (:inherit linum ,@dimmed-hl :foreground ,fg-3 :weight bold))))
 
          ;; erc
          (erc-notice-face
           ((t ,dimmed)))
          (erc-nick-default-face
-          ((t ,string)))              ; TODO
+          ((t ,string)))                ; TODO
          (erc-current-nick-face
           ((t ,constant)))
          (erc-my-nick-face
@@ -946,7 +948,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (helm-header
           ((t (,@mutable :bold t))))    ; TODO
          (helm-source-header
-          ((t (,@vw ,@mutable :weight bold :height 1.5))))    ; TODO
+          ((t (,@vw ,@mutable :weight bold :height 1.5)))) ; TODO
          ;; XXX: Maybe I just don't believe in themes with narrow
          ;; selection of colors
          (helm-selection
@@ -954,7 +956,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (helm-selection-line
           ((t (:inherit secondary-selection))))
          (helm-match
-          ((t (,@strong ,@normal-hl :bold t))))
+          ((t (:foreground ,yellow-1 :weight bold))))
          (helm-overlay-line-face
           ((t ,normal-hl)))
          (helm-file-name
@@ -974,7 +976,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (helm-grep-file
           ((t ,special-hl)))
          (helm-moccur-buffer
-          ((t ,reference)))  ; TODO
+          ((t ,reference)))             ; TODO
          (helm-grep-finish
           ((t ,doc)))                   ; TODO
          (helm-swoop-target-line-face
@@ -986,6 +988,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
           ((t ,normal-hl)))
          (helm-action
           ((t ())))
+         (helm-buffer-directory
+          ((t (:inherit helm-ff-directory))))
 
          (ecb-default-highlight-face
           ((t (:bold t ,@normal-hl))))
@@ -1049,7 +1053,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
 
 
          (help-argument-name
-          ((t (:foreground ,blue-1))))    ; TODO
+          ((t (:foreground ,blue-1))))  ; TODO
 
          ;; Manual pages
          (woman-bold
@@ -1075,9 +1079,9 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
 
          ;; ???
          (hexl-address-region
-          ((t (:foreground ,blue-1))))    ; TODO
+          ((t (:foreground ,blue-1))))  ; TODO
          (hexl-ascii-region
-          ((t (:foreground ,blue-1))))    ; TODO
+          ((t (:foreground ,blue-1))))  ; TODO
 
          ;; Twitter
          (twittering-uri-face
@@ -1133,7 +1137,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (ublt-twitter-meta-face
           ((t (:height 0.9 ,@shadowed))))
          (ublt/flycheck-message-face
-          ((t (,@vw ,@commitment :slant italic))))  ; TODO
+          ((t (,@vw ,@commitment :slant italic)))) ; TODO
          (eproject-ido-imenu-file-path
           ((t ,shadowed)))
          (ublt/emms-mode-line-face
