@@ -22,7 +22,7 @@
 (ublt/set-up 'helm-files
   (setq helm-ff-file-name-history-use-recentf t
         ;; helm-ff-auto-update-initial-value t
-        ;; helm-ff-transformer-show-only-basename nil
+        helm-ff-transformer-show-only-basename nil
         helm-file-cache-fuzzy-match t
         helm-recentf-fuzzy-match t
         helm-ff-search-library-in-sexp t)
