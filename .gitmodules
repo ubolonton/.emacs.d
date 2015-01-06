@@ -13,6 +13,3 @@
 [submodule "lib/org-html-slideshow"]
 	path = lib/org-html-slideshow
 	url = https://github.com/relevance/org-html-slideshow
-[submodule "lib/o-blog"]
-	path = lib/o-blog
-	url = https://github.com/renard/o-blog
