@@ -215,7 +215,7 @@
   "s-D"           'eproject-ido-imenu
   "s-H"           'ido-switch-buffer
   "s-h"           'ublt/helm
-  "s-f"           'helm-occur
+  "s-f"           'helm-swoop
   "s-F"           'helm-projectile
   ;; "s-F"           'projectile-find-file
   "s-g"           'magit-status

@@ -61,9 +61,12 @@
 
 (ublt/set-up 'helm-org)
 (ublt/set-up 'helm-regexp)
-(ublt/set-up 'helm-swoop)
 (ublt/set-up 'helm-cmd-t)
 (ublt/set-up 'helm-man)
+
+(ublt/set-up 'helm-swoop
+  (setq helm-swoop-speed-or-color t
+        helm-swoop-use-line-number-face t))
 
 
 (setq helm-maybe-use-default-as-input t
