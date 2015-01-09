@@ -213,11 +213,22 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
 ;;; Obfuscate URL at point
 (ublt/set-up 'obfusurl)
 
-;; Kill region by DEL/delete (Emacs 24)
-(setq delete-active-region 'kill)
+(setq
+ ;; Kill region by DEL/delete (Emacs 24)
+ delete-active-region 'kill
+
+;; No autosave/backup
+ auto-save-default nil
+ make-backup-files nil
+
+ ;; Save clipboard's content into kill-ring before replacing it
+ save-interprogram-paste-before-kill t
+
+ ;; yank-pop-change-selection t
+ kill-do-not-save-duplicates t)
 
 ;; Typing/deleting deletes selected text if any
-(delete-selection-mode 1)
+(delete-selection-mode +1)
 
 ;; Don't understand why it's 8 by default
 (setq-default tab-width 4)
@@ -226,14 +237,8 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
 (ublt/set-up 'undo-tree
   (global-undo-tree-mode))
 
-;; No autosave/backup
-(setq auto-save-default nil
-      make-backup-files nil)
-
-(setq skeleton-pair t)
-
 ;; Automatically update files whose contents were changed
-(global-auto-revert-mode 1)
+(global-auto-revert-mode +1)
 ;; (setq auto-revert-check-vc-info t)
 
 
