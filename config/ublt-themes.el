@@ -363,7 +363,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
           ((t (,@prompt :bold t))))
          (left-margin ((t (nil))))
          (toolbar ((t (nil))))
-         (fringe ((t (,@context ,@fw))))
+         (fringe ((t (:foreground ,fg-2 ,@fw))))
+         (vertical-border ((t (:foreground ,bg+2))))
          (link ((t (,@portal :underline ,bg+3))))
          (match ((t ,strong-hl)))
          (escape-glyph                  ; Special characters
@@ -603,7 +604,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
 
          ;; TODO: Make org/markdown share most faces
          (markdown-link-face
-          ((t (:inherit org-link))))
+          ((t (,@teleport))))
          (markdown-url-face
           ((t (:inherit org-link))))
          (markdown-url-face
@@ -919,7 +920,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (linum
           ((t (:inherit fringe ,@dimmed :slant normal :weight normal
                         :underline nil :strike-through nil :overline nil
-                        :box nil))))
+                        :background ,bg :box nil))))
          (linum-relative-current-face
           ((t (:inherit linum ,@dimmed-hl :foreground ,fg-3 :weight bold))))
 
