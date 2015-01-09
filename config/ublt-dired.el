@@ -1,9 +1,9 @@
 (require 'ublt-util)
 
-(require 'dired+)
-
 (eval-when-compile
   (require 'cl))
+
+(require 'dired+)
 
 (ublt/in '(darwin)
   (require 'ls-lisp)
@@ -57,6 +57,7 @@
  ;; Make find-name-dired ignore case
  find-name-arg "-iname"
 
+ dired-hide-details-hide-symlink-targets nil
  ;;
  dired-guess-shell-alist-user
  (list
