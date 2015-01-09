@@ -68,6 +68,9 @@
   (setq helm-swoop-speed-or-color t
         helm-swoop-use-line-number-face t))
 
+(ublt/set-up 'helm-elisp
+  (setq helm-apropos-fuzzy-match t))
+
 
 (setq helm-maybe-use-default-as-input t
       helm-quick-update t
