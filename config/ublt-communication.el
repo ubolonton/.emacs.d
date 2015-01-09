@@ -49,9 +49,12 @@
 
 (ublt/set-up 'erc
   (setq erc-autojoin-channels-alist
-        '(("freenode.net" "#emacs" "#conkeror" "#clojure" "#concatenative" "#reactjs")
-          ("cogini.org" "#cogini"))
+        '(("freenode.net" "#emacs" "#conkeror" "#clojure" "#concatenative" "#reactjs"))
+
+        erc-server "irc.freenode.net"
+        erc-port 6667
         erc-nick "ubolonton"
+        erc-try-new-nick-p nil
 
         erc-hide-list '("JOIN" "PART" "QUIT" "NICK")
         erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
@@ -66,8 +69,8 @@
         erc-log-write-after-insert t)
   (defun ublt/erc ()
     (interactive)
-    (erc :server "irc.cogini.org" :port 6667 :nick "ubolonton")
-    (call-interactively 'erc)))
+    (erc :server "irc.freenode.net" :port 6667 :nick "ubolonton"
+         :password (read-passwd "Password on freenode: "))))
 
 ;;; Emails (wanderlust)
 ;;; `http://emacs-fu.blogspot.com/2009/06/e-mail-with-wanderlust.html'
