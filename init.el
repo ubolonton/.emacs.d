@@ -27,6 +27,7 @@
          textmate undo-tree whole-line-or-region
          ace-jump-mode htmlize twittering-mode keyfreq
          expand-region
+         linum-relative                 ; relative line number
          nyan-mode                      ; buffer position as nyan cat
          org org-bullets
          ox-reveal                      ; reveal.js slides from org-mode

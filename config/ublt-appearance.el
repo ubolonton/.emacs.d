@@ -215,6 +215,14 @@
   (global-page-break-lines-mode +1))
 
 
+;;; Line number
+(ublt/set-up 'linum-relative
+  (setq linum-relative-current-symbol "")
+  (unless (eq linum-format 'linum-relative)
+    (linum-relative-toggle))
+  (global-linum-mode +1))
+
+
 (defun ublt/toggle-fullscreen ()
   "Tested only in X."
   (interactive)
