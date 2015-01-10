@@ -1125,7 +1125,12 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
           ((t ,param)))                 ; TODO
 
          (ace-jump-face-foreground
-          ((t (,@reset :foreground "black" :background ,yellow))))
+          ((t (:underline nil :box nil
+                          :strike-through nil :inverse-video nil :overline nil
+                          :background ,bg :foreground "Yellow"
+                          :weight normal))))
+         (ace-jump-face-background
+          ((t (:foreground ,bg+3))))
 
          (flymake-errline
           ((t ,error-hl)))
