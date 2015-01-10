@@ -92,8 +92,7 @@
 ;;; TODO: Fix highlight-parentheses-mode so that switching theme
 ;;; switches parentheses' colors correctly.
 (ublt/set-up 'ublt-themes
-  (when (y-or-n-p "Use dark theme?")
-    (color-theme-ubolonton-dark)))
+  (color-theme-ubolonton-dark))
 
 
 ;;; Whitespaces
