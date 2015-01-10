@@ -173,5 +173,6 @@
 
 ;; Interops (with Terminal, Conkeror...) -----------------------------
 (condition-case err
-    (server-start)
+    (unless (server-running-p)
+      (server-start))
   (error (message "Could not start server")))
