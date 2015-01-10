@@ -89,7 +89,7 @@
   (let ((base '( ;; helm-c-source-ffap-line
                 ;; helm-c-source-ffap-guesser
                 helm-source-buffers-list
-                ;; helm-source-recentf
+                helm-source-recentf
                 helm-source-ido-virtual-buffers
                 helm-source-buffer-not-found
                 helm-source-files-in-current-dir
