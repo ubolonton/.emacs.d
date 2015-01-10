@@ -62,7 +62,7 @@ of line."
 ;; Often we want to switch back-n-forth between 2 buffers
 (defun ublt/switch-to-last-buffer ()
   (interactive)
-  (switch-to-buffer (other-buffer)))
+  (switch-to-buffer (other-buffer (current-buffer) t)))
 
 
 (defadvice forward-page (after advice-recenter-top activate)
