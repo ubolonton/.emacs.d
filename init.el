@@ -123,6 +123,11 @@
 (require 'ublt-navigation)
 (require 'ublt-editing)
 
+(condition-case err
+    (when (y-or-n-p "Load secrets?")
+      (require 'ublt-secrets "ublt-secrets.el.gpg"))
+  (error (message "(ubolonton) Failed to load secrets!")))
+
 ;;; Personal stuff
 (ublt/add-path "org2blog/")
 (ublt/add-path "o-blog")
