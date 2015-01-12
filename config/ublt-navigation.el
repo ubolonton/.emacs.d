@@ -224,6 +224,10 @@ created), caused by `scroll-preserve-screen-position' not taking
                                        (loop for i from ?A to ?Z collect i))))
 
 
+(ublt/set-up 'popwin
+  (popwin-mode +1))
+
+
 ;;; Whitespace-only diffs are not interesting most of the time
 (setq-default ediff-ignore-similar-regions t)
 

@@ -27,6 +27,7 @@
          textmate undo-tree whole-line-or-region
          ace-jump-mode htmlize twittering-mode keyfreq
          expand-region
+         popwin                         ; make unimportant windows transient
          move-text                      ; move selected/current lines up/down
          linum-relative                 ; relative line number
          nyan-mode                      ; buffer position as nyan cat
