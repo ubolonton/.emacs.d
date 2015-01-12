@@ -255,12 +255,12 @@
   ;; Line/region movement
   "M-s-h"         'textmate-shift-left
   "M-s-n"         'textmate-shift-right
-  "M-s-c"         'ublt/move-text-up
-  "M-s-t"         'ublt/move-text-down
+  "M-s-c"         'move-text-up
+  "M-s-t"         'move-text-down
   "M-s-˙"         'textmate-shift-left  ; OS X
   "M-s-˜"         'textmate-shift-right ; OS X
-  "M-s-ç"         'ublt/move-text-up    ; OS X
-  "M-s-†"         'ublt/move-text-down  ; OS X
+  "M-s-ç"         'move-text-up    ; OS X
+  "M-s-†"         'move-text-down  ; OS X
 
   "M-s-=" 'evil-numbers/inc-at-pt
   "M-s--" 'evil-numbers/dec-at-pt
