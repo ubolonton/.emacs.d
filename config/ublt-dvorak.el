@@ -642,7 +642,8 @@
 ;;; auto-complete and yasnippet
 (ublt/keys 'company company-active-map
   "C-s" 'company-filter-candidates
-  "C-d" 'company-show-location)
+  "C-d" 'company-show-location
+  "<right>" 'company-complete-selection)
 
 (ublt/keys "yasnippet" yas-minor-mode-map
   "TAB" nil

@@ -509,6 +509,25 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (popup-summary-face
           ((t (:inherit popup-face ,@note))))
 
+         (company-tooltip
+          ((t (,@fw ,@strong-hl :foreground ,cyan-1))))
+         (company-tooltip-selection
+          ((t (:inherit company-tooltip :foreground ,cyan :background ,fg-3))))
+         (company-tooltip-common
+          ((t (:inherit company-tooltip ,@mutable))))
+         (company-tooltip-common-selection
+          ((t (:inherit company-tooltip-selection ,@param))))
+         (company-scrollbar-bg
+          ((t (:background ,fg-3))))
+         (company-scrollbar-fg
+          ((t (:background ,green-2))))
+         (company-preview
+          ((t (:foreground ,fg-3))))
+         (company-preview-common
+          ((t (:inherit company-preview))))
+         (company-tooltip-annotation
+          ((t (:inherit company-tooltip ,@power))))
+
          (dropdown-list-face
           ((t (:inherit ac-completion-face))))
          (dropdown-list-selection-face
