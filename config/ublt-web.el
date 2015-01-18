@@ -36,6 +36,8 @@
         web-mode-enable-block-face t
         web-mode-enable-part-face t
         web-mode-enable-comment-keywords t
+        web-mode-markup-indent-offset 2
+        web-mode-css-indent-offset 2
         ;; Auto-close when "</" is typed
         web-mode-tag-auto-close-style 1)
   (add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
@@ -81,7 +83,8 @@
 ;; Emmet (Zen-coding)
 
 (ublt/set-up 'emmet-mode
-  (setq emmet-preview-default nil)
+  (setq emmet-preview-default nil
+        emmet-indentation 2)
   (defun ublt/set-up-emmet ()
     (emmet-mode +1)
     ;; Dynamic indentation after expansion based on tab width
