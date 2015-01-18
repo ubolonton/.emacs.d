@@ -480,12 +480,12 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (slime-repl-prompt-face
           ((t ,commitment)))
 
-         ;; (comint-highlight-input
-         ;;  ((t (:foreground ,green-3)))) ; TODO
          (comint-highlight-prompt
           ((t (,@type))))
          (comint-highlight-input
-          ((t (:background ,bg+2 :foreground ,fg-1))))
+          ((t (:background ,bg+1 :foreground ,fg-1))))
+         (cider-repl-prompt-face
+          ((t (:inherit font-lock-constant-face))))
          (cider-repl-input-face
           ((t (:inherit comint-highlight-input))))
          (cider-repl-result-face
