@@ -81,13 +81,13 @@
 ;;; range). Therefore it's best to specify only `:family' for
 ;;; non-primary fonts in the fontset.
 (defvar ublt/variable-width-fontset
-  "-unknown-Fira Sans-light-normal-normal--*-*-*-*-m-*-fontset-ubltv")
+  "-unknown-Fira Sans-normal-normal-normal--*-*-*-*-m-*-fontset-ubltv")
 (create-fontset-from-fontset-spec ublt/variable-width-fontset)
 (ublt/assign-font ublt/variable-width-fontset
   ;; For a more programmatic manipulation, use this and leave the
   ;; FONTSET-NAME blank (see `create-fontset-from-fontset-spec')
   `(,(font-spec :family "Fira Sans"
-                :weight 'light
+                :weight 'normal
                 :size 13.0)
     ascii)
   ;; Vietnamese charsets. TODO: Find a thinner font that fits Fira

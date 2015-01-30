@@ -24,6 +24,8 @@
 ;;; TODO: +/- names sometimes implies saturation, sometimes implies
 ;;; blackness
 ;;; TODO: More saturation level
+;;; TODO: This is tightly integrated with the fonts used (Fira Sans,
+;;; Fantasque...). Change that maybe?
 
 ;;; XXX: color-theme's old versions' bug
 ;; (defun color-theme-alist (plist)
@@ -221,8 +223,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
            (reference    `(:foreground ,blue-2))
 
            (dimmed-hl    `(:background ,bg+1))
-           ;; FIX: Why `:weight' `light'?
-           (normal-hl    `(:background ,bg+2 :weight light))
+           (normal-hl    `(:background ,bg+2))
            (strong-hl    `(:background ,bg+3))
            (special-hl   `(:background ,blue-3))
 
@@ -254,6 +255,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
            ;; Mixins
            (fw             '(:inherit ublt/default-fixed-width))
            (vw             '(:inherit ublt/default-variable-width))
+           (vw-italic      `(,@vw :weight light :slant italic))
 
            ;; (fheight      (face-attribute 'default :height))
            ;; (ffontset     (face-attribute 'default :fontset))
@@ -275,7 +277,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
 
          (default ((t (,@fw0))))
          ;; FIX: Height should be font-dependent in general
-         (variable-pitch ((t (,@vw0))))
+         (variable-pitch ((t (,@vw0 :foreground ,fg-1))))
 
          ;; Most faces that wish to always use
          ;; fixed-width/variable-width font should inherit these, not
@@ -299,7 +301,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (font-lock-builtin-face
           ((t (,@fw ,@constant))))
          (font-lock-comment-face
-          ((t (,@vw ,@note :slant italic))))
+          ((t (,@vw-italic ,@note))))
          (font-lock-comment-delimiter-face
           ((t (:inherit font-lock-comment-face ,@shadowed))))
          (font-lock-doc-string-face
@@ -317,7 +319,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (font-lock-string-face
           ((t (,@fw ,@string))))
          (font-lock-doc-face
-          ((t (,@vw ,@string :slant italic))))
+          ((t (,@vw-italic ,@string))))
          (font-lock-type-face
           ((t (,@fw ,@type))))
          (font-lock-preprocessor-face
@@ -374,7 +376,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
 
          ;; Highlighting
          (region
-          ((t ,normal-hl)))             ; selection
+          ((t (,@normal-hl :inherit t))))           ; selection
          (secondary-selection
           ((t ,special-hl)))
          (hl-line
@@ -551,14 +553,15 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
           ((t (,@constant))))
          (org-indent
           ((t ())))
+         ;; We use `normal' not `bold' for these because we use Fira Sans
          (org-level-1
-          ((t (,@constant :weight bold :height 1.6))))
+          ((t (,@constant :weight normal :height 1.4))))
          (org-level-2
-          ((t (,@mutable :weight bold :height 1.3))))
+          ((t (,@mutable :weight normal :height 1.2))))
          (org-level-3
-          ((t (,@string :weight bold :height 1.1))))
+          ((t (,@string :weight normal :height 1.1))))
          (org-level-4
-          ((t (:foreground ,green-3 :weight bold :height 1.0))))
+          ((t (:foreground ,cyan+1 :weight normal :height 1.0))))
          (org-level-5
           ((t (,@param))))
          (org-level-6
@@ -601,7 +604,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (org-block-end-line
           ((t (:inherit org-block-begin-line))))
          (org-checkbox
-          ((t (,@fw :weight bold))))
+          ((t (,@fw :weight bold :box (:line-width 1 :style released-button :color ,bg)))))
          (org-time-grid
           ((t (,@fw :foreground ,gold-1))))
          (org-agenda-structure
@@ -613,7 +616,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (org-agenda-current-time
           ((t (,@fw :inherit org-time-grid :background ,bg+2))))
          (org-scheduled
-          ((t (,@vw :foreground ,green-2 :slant italic))))
+          ((t (,@vw-italic :foreground ,green-2))))
          (org-scheduled-previously
           ((t (,@fw :foreground "Chocolate1" :slant italic))))
          (org-scheduled-today
@@ -861,7 +864,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (magit-log-author-date-cutoff
           ((t (:inherit magit-log-author :weight bold))))
          (magit-log-message
-          ((t (,@vw :slant italic))))
+          ((t (,@vw-italic))))
          (magit-key-mode-switch-face
           ((t (:inherit font-lock-type-face))))
          ;; TODO
@@ -1007,7 +1010,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (helm-swoop-target-word-face
           ((t ,normal-hl)))
          (helm-action
-          ((t ())))
+          ((t (,@vw :height 1.1))))
          (helm-buffer-directory
           ((t (:inherit helm-ff-directory))))
 
@@ -1162,7 +1165,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (ublt-twitter-meta-face
           ((t (:height 0.9 ,@shadowed))))
          (ublt/flycheck-message-face
-          ((t (,@vw ,@commitment :slant italic)))) ; TODO
+          ((t (,@vw-italic ,@commitment)))) ; TODO
          (eproject-ido-imenu-file-path
           ((t ,shadowed)))
          (ublt/emms-mode-line-face
