@@ -453,6 +453,7 @@
   "e~"       'evil-invert-case
   "e;"       'goto-last-change
   "e,"       'goto-last-change-reverse
+  "en"       'ublt/narrow-or-widen
 
   "ee"       'evilnc-comment-operator
   "eci"      'evilnc-comment-or-uncomment-lines
@@ -511,6 +512,7 @@
   "e$"    'evil-end-of-visual-line
   "e\C-]" 'find-tag
   "ev"    'evil-visual-restore
+  "en"       'ublt/narrow-or-widen
 
   "*"     'highlight-symbol-next
   "#"     'highlight-symbol-prev
@@ -538,6 +540,7 @@
   "s-<escape>" 'evil-motion-state
   "<escape>" 'evil-exit-visual-state
   "R" nil
+  "C-n"       'ublt/narrow-or-widen
   )
 (ublt/keys "evil" evil-replace-state-map
   "s-<escape>" 'evil-motion-state

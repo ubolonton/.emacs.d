@@ -308,4 +308,10 @@ created), caused by `scroll-preserve-screen-position' not taking
 (ad-deactivate 'magit-refresh)
 (ad-deactivate 'magit-status)
 
+(defun ublt/narrow-or-widen ()
+  (interactive)
+  (if (buffer-narrowed-p)
+      (widen)
+    (call-interactively #'narrow-to-region)))
+
 (provide 'ublt-navigation)
