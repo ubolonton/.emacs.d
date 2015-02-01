@@ -289,7 +289,6 @@
 
   ;; Ubuntu
   "M-<f4>"        'kmacro-start-macro-or-insert-counter ; F3 is taken by xbindkeys
-  ;; "C-<f9>"        'ibus-toggle
 
   ;; Right, use C-u if you want digit args
   "M-5"           'query-replace

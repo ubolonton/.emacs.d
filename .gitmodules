@@ -4,12 +4,3 @@
 [submodule "lib/eproject"]
 	path = lib/eproject
 	url = https://github.com/jrockway/eproject.git
-[submodule "lib/emacs-skype"]
-	path = lib/emacs-skype
-	url = https://github.com/kiwanami/emacs-skype.git
-[submodule "lib/nxhtml"]
-	path = lib/nxhtml
-	url = https://github.com/emacsmirror/nxhtml.git
-[submodule "lib/org-html-slideshow"]
-	path = lib/org-html-slideshow
-	url = https://github.com/relevance/org-html-slideshow
