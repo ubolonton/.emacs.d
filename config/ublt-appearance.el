@@ -632,12 +632,10 @@
  )
 
 ;; Technicolor
-(require 'info+)
-
+(ublt/set-up 'info+)
 ;; Buffed-up help system
-(require 'help-macro+)
-(require 'help+)
-(require 'help-fns+)
+(ublt/set-up 'help+)
+(ublt/set-up 'help-fns+)
 
 ;;; XXX: Find out why `python-mode' is upset by `which-func-mode'
 ;; ;;; Show current function name in mode-line

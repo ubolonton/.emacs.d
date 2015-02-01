@@ -47,9 +47,10 @@
          scpaste                        ; Publish highlighted code fragments
          exec-path-from-shell           ; Uhm, f*ck shell
          anzu                           ; Match count for search
-         info+
+         help+ help-fns+ info+
          pabbrev                        ; TODO: Find better alternative
          zeal-at-point                  ; Doc search
+         moz                            ; interface with mozrepl
          ;; git
          magit magit-svn
          ;; Vim emulation
