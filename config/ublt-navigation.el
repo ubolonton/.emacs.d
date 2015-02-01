@@ -211,7 +211,11 @@ created), caused by `scroll-preserve-screen-position' not taking
   ;; XXX
   (when (equal grep-find-command '("find . -type f -exec grep -nH -e {} +" . 34))
     (grep-apply-setting 'grep-find-command
-                        '("find . -type f -exec grep -nH -e '' {} +" . 35))))
+                        '("find . -type f -exec grep -nH -e '' {} +" . 35)))
+  (when (equal grep-command "grep -nH -e ")
+    (grep-apply-setting 'grep-command
+                        "grep -nHr --exclude-dir={.bzr,.cvs,.git,.hg,.svn} . -e "))
+  )
 
 
 (ublt/set-up 'ace-jump-mode
