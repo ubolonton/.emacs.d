@@ -32,13 +32,13 @@
  ;; Don't use `outline-path-completion'. `ido-imenu' is better
  org-goto-interface 'outline
 
- ;; Don't current heading, create a new one
+ ;; Don't split current heading, create a new one
  org-M-RET-may-split-line nil
  ;; Create new heading after the current content
  org-insert-heading-respect-content t
 
  ;; Heading visual indentation
- org-indent-indentation-per-level 1
+ org-indent-indentation-per-level 2
  ;; List additional (on top of 2) indentation
  org-list-indent-offset 1
 
@@ -70,8 +70,7 @@
  org-outline-path-complete-in-steps nil
  org-refile-use-outline-path t
 
- org-indirect-buffer-display 'current-window
- )
+ org-indirect-buffer-display 'current-window)
 
 ;; (add-to-list 'auto-mode-alist '("\\.\\(org\\)$" . org-mode))
 
