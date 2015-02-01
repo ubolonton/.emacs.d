@@ -29,14 +29,14 @@
         (insert (propertize s 'font-lock-face f)))
       (insert "\n\n"))
     (dolist (s (list
-                "<= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <="
-                "⇐ ⇐ ⇐ ⇐ ⇐ ⇐ ⇐ ⇐ ⇐ ⇐ ⇐ ⇐ ⇐ ⇐ ⇐ ⇐"
-                "=> => => => => => => => => => => => => => => =>"
-                "⇒ ⇒ ⇒ ⇒ ⇒ ⇒ ⇒ ⇒ ⇒ ⇒ ⇒ ⇒ ⇒ ⇒ ⇒ ⇒"
+                "<= <= <= <= <= <= <= <= <= <= <= <= <= <="
+                "⇐ ⇐ ⇐ ⇐ ⇐ ⇐ ⇐ ⇐ ⇐ ⇐ ⇐ ⇐ ⇐ ⇐"
+                "=> => => => => => => => => => => => => =>"
+                "⇒ ⇒ ⇒ ⇒ ⇒ ⇒ ⇒ ⇒ ⇒ ⇒ ⇒ ⇒ ⇒ ⇒"
                 "return return return return return return"
                 "▸▸ ▸▸ ▸▸ ▸▸ ▸▸ ▸▸ ▸▸ ▸▸ ▸▸ ▸▸ ▸▸ ▸▸ ▸▸ ▸▸"
-                "function function function function"
-                "ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ"
+                "function function function function funct"
+                "ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ"
                 "lambda lambda lambda lambda lambda lambda"
                 "λ λ λ λ λ λ λ λ λ λ λ λ λ λ λ λ λ λ λ λ λ"
                 ))

@@ -166,9 +166,11 @@
 ;;; This list is against CosmicSansNeueMono 12pt (zooming may break
 ;;; the proportion due to rounding, and due to fonts scaling differently)
 (dolist (rescale '((".*Fira Mono-.*" 0.88)
-                   (".*Droid Sans Mono-.*" 0.93)
+                   (".*Droid Sans Mono-.*" 0.88)
+                   (".*DejaVu Sans Mono-.*" 0.88)
+                   (".*Symbol-.*" 1.06)
+                   (".*Inconsolata-.*" 1.04)
                    ;; (".*CosmicSansNeueMono-.*" 1.0)
-                   ;; (".*Inconsolata-.*" 1.0)
                    ;; (".*Source Code Pro-.*" 1.0)
                    ;; (".*Anonymous Pro-.*" 1.0)
                    ;; (".*Cousine-.*" 1.0)
@@ -193,7 +195,7 @@
                 ;; :size 10.8
                 )
     cyrillic-iso8859-5)
-  `(,(font-spec :family "Ume Mincho"
+  `(,(font-spec :family "DejaVu Sans Mono"
                 ;; :size 12.0
                 )
     (?▸ . ?▸))
