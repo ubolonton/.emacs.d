@@ -625,9 +625,7 @@
 ;; (add-hook 'minibuffer-setup-hook 'ublt/redisplay)
 
 (setq-default
- ;; Sparse lines
- ;; TODO: 0.15 or 0.2?
- line-spacing 0.12
+ line-spacing 0.00
 
  ;; 70-char column width
  fill-column 70

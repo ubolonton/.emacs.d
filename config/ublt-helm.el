@@ -164,7 +164,7 @@ all of the sources."
   (with-current-buffer helm-buffer
     (when (ublt/helm-should-use-variable-pitch? helm-sources)
       (variable-pitch-mode +1))
-    (setq line-spacing 0.6)
+    (setq line-spacing 0.2)
     ;; (text-scale-increase 1)
     ))
 (add-hook 'helm-after-initialize-hook 'ublt/helm-tweak-appearance)
