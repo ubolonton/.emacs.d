@@ -78,7 +78,6 @@
                     org-mode-hook
                     markdown-mode-hook
                     html-mode-hook
-                    dired-mode-hook
                     git-commit-mode-hook
                     twittering-edit-mode-hook
                     package-menu-mode-hook))
@@ -91,8 +90,8 @@
 ;;; Ubolonton's theme
 ;;; TODO: Fix highlight-parentheses-mode so that switching theme
 ;;; switches parentheses' colors correctly.
-(ublt/set-up 'ublt-themes
-  (color-theme-ubolonton-dark))
+(ublt/set-up 'ublt-dark-theme
+  (load-theme 'ublt-dark))
 
 
 ;;; Whitespaces

@@ -32,11 +32,11 @@
 (ublt/set-up 'evil
   ;; Visual indicators
   (setq evil-mode-line-format 'before
-        evil-normal-state-tag (propertize "« ☢ »" 'face 'ublt/evil-normal-tag)
-        evil-motion-state-tag (propertize "» ☣ «" 'face 'ublt/evil-motion-tag)
+        evil-normal-state-tag (propertize "( N )" 'face 'ublt/evil-normal-tag)
+        evil-motion-state-tag (propertize "( M )" 'face 'ublt/evil-motion-tag)
         evil-insert-state-tag (propertize "( I )" 'face 'ublt/evil-insert-tag)
         evil-emacs-state-tag  (propertize "( E )" 'face 'ublt/evil-emacs-tag)
-        evil-visual-state-tag (propertize "( ∞ )" 'face 'ublt/evil-visual-tag)
+        evil-visual-state-tag (propertize "( V )" 'face 'ublt/evil-visual-tag)
         evil-motion-state-cursor '(box "Yellow")
         evil-normal-state-cursor '(box "Yellow")
         evil-insert-state-cursor '(bar "YellowGreen")

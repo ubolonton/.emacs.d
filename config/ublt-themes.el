@@ -340,13 +340,6 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (js2-jsdoc-tag-face
           ((t (:inherit font-lock-builtin-face))))
 
-         (js2-function-param
-          ((t ,param)))
-         (js2-jsdoc-type
-          ((t (:inherit font-lock-type-face))))
-         (js2-jsdoc-tag
-          ((t (:inherit font-lock-builtin-face))))
-
          (js3-function-param-face
           ((t ,param)))
          (js3-jsdoc-type-face
@@ -365,7 +358,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
           ((t (,@prompt :bold t))))
          (left-margin ((t (nil))))
          (toolbar ((t (nil))))
-         (fringe ((t (:foreground ,fg-2 ,@fw))))
+         (fringe ((t (:foreground ,fg-2 ,@fw0))))
          (vertical-border ((t (:foreground ,bg+2))))
          (link ((t (,@portal :underline ,bg+3))))
          (match ((t ,strong-hl)))
@@ -373,6 +366,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
           ((t (,@prompt :bold t))))     ; TODO
          (button
           ((t (:inherit link))))
+         (vim-empty-lines-face
+          ((t (,@shadowed))))
 
          ;; Highlighting
          (region
@@ -405,11 +400,14 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
           ((t (:strike-through ,bg+1))))
 
          (eval-sexp-fu-flash
-          ((t ,normal-hl)))
+          ((t (:background ,bg+2 :inherit t))))
+         (eval-sexp-fu-flash-error
+          ((t (:foreground ,red :inherit t))))
 
          ;; Mode line
          (mode-line
           ((t (,@status ,@vw :foreground ,bg
+                        ;; :height 0.9
                         :box (:line-width 1 :color ,cyan-2)
                         ))))
          (mode-line-inactive
@@ -864,7 +862,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
          (magit-log-author-date-cutoff
           ((t (:inherit magit-log-author :weight bold))))
          (magit-log-message
-          ((t (,@vw-italic))))
+          ((t (:inherit variable-pitch :slant italic :weight light))))
          (magit-key-mode-switch-face
           ((t (:inherit font-lock-type-face))))
          ;; TODO
@@ -1150,7 +1148,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
           ((t (:underline nil :box nil
                           :strike-through nil :inverse-video nil :overline nil
                           :background ,bg :foreground "Yellow"
-                          :weight normal))))
+                          :inherit t))))
          (ace-jump-face-background
           ((t (:foreground ,bg+3))))
 
