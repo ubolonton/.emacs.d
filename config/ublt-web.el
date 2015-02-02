@@ -30,16 +30,22 @@
       (esk-paredit-nonlisp)))
   (add-hook 'web-mode-hook 'ublt/web-mode-jsx)
 
-  (setq web-mode-script-padding 0
-        web-mode-style-padding 2
-        web-mode-enable-current-element-highlight t
-        web-mode-enable-block-face t
-        web-mode-enable-part-face t
-        web-mode-enable-comment-keywords t
-        web-mode-markup-indent-offset 2
-        web-mode-css-indent-offset 2
-        ;; Auto-close when "</" is typed
-        web-mode-tag-auto-close-style 1)
+  (setq-default
+   ;; Padding
+   web-mode-script-padding 0
+   web-mode-style-padding 2
+   ;; Indentation
+   web-mode-markup-indent-offset 2
+   web-mode-code-indent-offset 2
+   web-mode-css-indent-offset 2
+   ;; Coloring a lot
+   web-mode-enable-current-element-highlight t
+   web-mode-enable-block-face t
+   web-mode-enable-part-face t
+   web-mode-enable-comment-keywords t
+   web-mode-enable-element-content-fontification t
+   ;; Auto-close when "</" is typed
+   web-mode-tag-auto-close-style 1)
   (add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.mako?$" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.handlebars$" . web-mode))
