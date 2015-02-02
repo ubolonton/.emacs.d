@@ -45,6 +45,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
        (blush     "#F86155")
        (skin      "#D98D54")
        (magenta   "#805DBB")
+       (magenta-d "#6A5ACD")
        ;; (violet "")
        (blue-l    "#7991E3")
        (blue      "#0084CF")
@@ -140,9 +141,9 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
 
        (constant     `(:foreground ,blue))
 
-       (number       `(:foreground ,aqua))
+       (number       `(:foreground ,seaweed))
 
-       (reference    `(:foreground "#6A5ACD"))
+       (reference    `(:foreground ,magenta-d))
 
        (dimmed-hl    `(:background ,bg+1))
        (normal-hl    `(:background ,bg+2))
@@ -243,6 +244,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (,@special-hl))))
    `(highlight                          ;TODO: What is this?
      ((,class (,@normal-hl))))
+   `(match
+     ((,class (,@strong-hl))))
    ;; Search
    `(isearch                            ;current match
      ((,class (,@special-hl :foreground ,yellow))))
@@ -451,6 +454,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (,@context))))
    `(web-mode-html-tag-face
      ((,class (:inherit font-lock-builtin-face))))
+   `(web-mode-html-tag-custom-face
+     ((,class (:inherit web-mode-html-tag-face :slant italic :underline ,bg+3))))
    `(web-mode-part-face
      ((,class (,@dimmed-hl))))
    `(web-mode-block-face
@@ -465,6 +470,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (:inherit font-lock-warning-face))))
    `(web-mode-html-tag-bracket-face
      ((,class (,@fw ,@context))))
+   `(web-mode-folded-face
+     ((,class (:underline t))))
 
    `(nxml-element-local-name
      ((,class (,@fw ,@constant))))
@@ -641,6 +648,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (:inherit secondary-selection))))
    `(helm-match
      ((,class (:foreground ,radio ,@bold))))
+   `(helm-grep-match
+     ((,class (:foreground ,yellow))))
    `(helm-ff-file
      ((,class (,@portal))))
    `(helm-ff-directory
@@ -654,9 +663,11 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(helm-separator
      ((,class (,@shadowed))))
    `(helm-grep-file
-     ((,class (,@special-hl))))
-   ;; `(helm-moccur-buffer                 ;TODO
-   ;;   ((,class (,@reference))))
+     ((,class (,@reference))))
+   `(helm-moccur-buffer                 ;TODO
+     ((,class (,@reference))))
+   `(helm-grep-lineno
+     ((,class (,@number))))
    ;; `(helm-grep-finish                   ;TODO
    ;;   ((,class (,@doc))))
    `(helm-action
@@ -676,12 +687,12 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
 
    ;; dired
 
-   `(diredp-file-name
-     ((,class (,@vw))))                 ; TODO
+   `(diredp-file-name                   ;TODO
+     ((,class (,@vw))))
    `(diredp-dir-priv
      ((,class (,@vw ,@more))))
-   `(diredp-dir-heading
-     ((,class (,@header))))             ; TODO
+   `(diredp-dir-heading                 ;TODO
+     ((,class (,@header))))
    `(dired-symlink
      ((,class (,@teleport))))
    `(diredp-symlink
@@ -695,15 +706,15 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(diredp-exec-priv
      ((,class (:inherit diredp-no-priv ,@raw))))
    `(diredp-number
-     ((,class (,@number))))             ; TODO
-   `(diredp-flag-mark-line
-     ((,class (,@special-hl :inherit t)))) ; Selection mark
-   `(diredp-deletion
-     ((,class (,@error-hl))))           ; Deletion mark
+     ((,class (,@number))))
+   `(diredp-flag-mark-line              ;selected
+     ((,class (,@special-hl :inherit t))))
+   `(diredp-deletion                    ;marked for deletion
+     ((,class (,@error-hl))))
    `(diredp-deletion-file-name
      ((,class (,@error-hl))))
-   `(diredp-compressed-file-suffix
-     ((,class (,@constant))))           ; TODO
+   `(diredp-compressed-file-suffix      ;TODO
+     ((,class (,@constant))))
    `(diredp-file-suffix
      ((,class (,@context))))
    `(diredp-ignored-file-name
@@ -851,6 +862,13 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (,@essence))))
    `(undo-tree-visualizer-active-branch-face ;TODO
      ((,class (,@string))))
+
+   `(compilation-info
+     ((,class (,@reference))))
+   `(compilation-error
+     ((,class (,@warning))))
+   `(compilation-line-number            ;TODO
+     ((,class (,@number))))
 
    ;; XXX: Why aren't these even registered?
    `(hexl-address-region
