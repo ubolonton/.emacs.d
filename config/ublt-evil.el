@@ -210,7 +210,7 @@
                   (?< . evil-surround-read-tag)
 
                   (?f . evil-surround-function)))
-  (global-surround-mode +1))
+  (global-evil-surround-mode +1))
 
 (ublt/set-up 'evil-visualstar)
 (ublt/set-up 'evil-args)
