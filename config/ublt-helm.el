@@ -168,16 +168,6 @@ all of the sources."
     ;; (text-scale-increase 1)
     ))
 (add-hook 'helm-after-initialize-hook 'ublt/helm-tweak-appearance)
-;;; XXX: Big hack!
-;;; TODO: Move to ublt-appearance?
-(defadvice helm-initialize-overlays (after tweak-appearance activate)
-  "Use big `variable-pitch' font to show actions."
-  (condition-case nil
-      (with-current-buffer helm-action-buffer
-        (variable-pitch-mode +1)
-        (setq line-spacing 0.6)
-        (text-scale-increase 1))
-    (error nil)))
 
 
 (defvar ublt/helm-exit-other-window-p nil)
