@@ -75,6 +75,7 @@
          ;; Languages
          flycheck
          flycheck-pyflakes
+         edts                           ;erlang
          haskell-mode quack
          adoc-mode
          markdown-mode yaml-mode
