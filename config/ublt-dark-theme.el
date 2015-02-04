@@ -51,6 +51,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
        (blue      "#0084CF")
        (blue-d    "#223360")
        (cyan      "#00CDCD")
+       ;; (sky       "LightSkyBlue")
        (spring    "#00FA9A")
        (aqua      "#66CDAA")
        (grass     "#00DD00")
@@ -348,8 +349,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (:inherit diff-removed))))
    `(magit-diff-none
      ((,class (:inherit diff-context))))
-   ;; `(magit-log-head-label-default       ;TODO
-   ;;  ((,class (:inherit magit-log-head-label-remote :foreground ,radio))))
+   `(magit-log-head-label-default
+    ((,class (:inherit magit-log-head-label-remote ,@mutable))))
    `(magit-log-sha1
      ((,class (,@fw ,@commitment))))
    `(magit-item-mark
@@ -510,8 +511,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    ;;  ((,class (:foreground ,green-3))))
    `(org-level-8
     ((,class (,@note))))
-   ;; `(org-table                          ;TODO
-   ;;  ((,class (,@fw :foreground ,green-3))))
+   `(org-table                          ;TODO
+    ((,class (,@fw :foreground ,blue-l))))
    `(org-formula
     ((,class (,@fw ,@param))))
    `(org-hide
@@ -563,6 +564,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    ;;  ((,class (,@vw :foreground ,green-3))))
    `(org-column
     ((,class (,@fw :slant normal))))
+   `(org-priority
+     ((,class (:foreground ,radio ,@bold))))
 
    `(markdown-link-face
      ((,class (,@teleport))))
