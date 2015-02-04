@@ -72,74 +72,6 @@
     (erc :server "irc.freenode.net" :port 6667 :nick "ubolonton"
          :password (read-passwd "Password on freenode: "))))
 
-;;; Emails (wanderlust)
-;;; `http://emacs-fu.blogspot.com/2009/06/e-mail-with-wanderlust.html'
-;;; `http://www.mail-archive.com/emacs-orgmode@gnu.org/msg20250/wlconfiguration.org'
-
-(setq user-mail-address "ubolonton@gmail.com"
-      wl-from "Nguyễn Tuấn Anh <ubolonton@gmail.com>")
-
-(autoload 'wl "wl" "Wanderlust" t)
-(autoload 'wl-other-frame "wl" "Wanderlust on new frame." t)
-(autoload 'wl-draft "wl-draft" "Write draft with Wanderlust." t)
-
-;; IMAP
-(setq elmo-imap4-default-server "imap.gmail.com"
-      elmo-imap4-default-user "ubolonton@gmail.com"
-      elmo-imap4-default-authenticate-type 'clear
-      elmo-imap4-default-port '993
-      elmo-imap4-default-stream-type 'ssl
-      elmo-imap4-use-modified-utf7 t)
-
-;; SMTP
-(setq wl-smtp-connection-type 'starttls
-      wl-smtp-posting-port 587
-      wl-smtp-authenticate-type "plain"
-      wl-smtp-posting-user "ubolonton"
-      wl-smtp-posting-server "smtp.gmail.com"
-      wl-insert-message-id nil          ; Message ID by server, no warning
-      wl-local-domain "gmail.com")
-
-(setq wl-default-folder "%inbox"
-      wl-default-spec "%"
-      wl-draft-folder "%[Gmail]/Drafts" ; Gmail IMAP
-      wl-trash-folder "%[Gmail]/Trash")
-
-(setq wl-folder-check-async t
-      wl-stay-folder-window t           ; Keep folder pane
-      )
-
-(setq mime-edit-split-message nil)
-
-(autoload 'wl-user-agent-compose "wl-draft" nil t)
-(if (boundp 'mail-user-agent)
-    (setq mail-user-agent 'wl-user-agent))
-(if (fboundp 'define-mail-user-agent)
-    (define-mail-user-agent
-      'wl-user-agent
-      'wl-user-agent-compose
-      'wl-draft-send
-      'wl-draft-kill
-      'mail-send-hook))
-
-;; Hide many fields from message buffers
-(setq wl-message-ignored-field-list '("^.*:")
-      wl-message-visible-field-list '("^\\(To\\|Cc\\):"
-                                      "^Subject:"
-                                      "^\\(From\\|Reply-To\\):"
-                                      "^Organization:"
-                                      "^Message-Id:"
-                                      "^\\(Posted\\|Date\\):"
-                                      )
-      wl-message-sort-field-list '("^From"
-                                   "^Organization:"
-                                   "^X-Attribution:"
-                                   "^Subject"
-                                   "^Date"
-                                   "^To"
-                                   "^Cc"))
-
-
 ;;; scpaste
 (ublt/set-up 'scpaste
   (setq scpaste-scp-destination "ubolonton@ubolonton.org:/home/ubolonton/paste"
