@@ -58,6 +58,9 @@ of line."
   (other-window 1))
 
 
+(ublt/set-up 'recentf
+  (setq recentf-max-saved-items 300))
+
 ;;; Switch to last buffer
 ;; Often we want to switch back-n-forth between 2 buffers
 (defun ublt/switch-to-last-buffer ()
