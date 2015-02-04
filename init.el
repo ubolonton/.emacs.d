@@ -171,6 +171,7 @@
 (require 'ublt-markups)
 (require 'ublt-lisp)
 (require 'ublt-python)
+(require 'ublt-ruby)
 (require 'ublt-js)
 
 
