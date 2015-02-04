@@ -87,11 +87,11 @@
 (add-hook 'hexl-mode-hook (ublt/off-fn 'variable-pitch-mode))
 
 
-;;; Ubolonton's theme
-;;; TODO: Fix highlight-parentheses-mode so that switching theme
-;;; switches parentheses' colors correctly.
-(ublt/set-up 'ublt-dark-theme
-  (load-theme 'ublt-dark))
+;;;Color theme
+(if window-system
+    (ublt/set-up 'ublt-dark-theme
+      (load-theme 'ublt-dark))
+  (load-theme 'monokai))
 
 
 ;;; Whitespaces

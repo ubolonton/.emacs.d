@@ -16,7 +16,6 @@
 (defvar ublt/text-scale-vw-remapping nil)
 (make-variable-buffer-local 'ublt/text-scale-vw-remapping)
 
-;; TODO: This seems unnecessary with `deftheme' and `custom-theme-set-variables'.
 (defadvice text-scale-mode (after scale-base-faces activate)
   "Additionally scale other base faces so that all faces are
 scaled. This \"base face\" trick is used by `ublt-themes'."
@@ -940,3 +939,25 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
                (file-name-as-directory (file-name-directory load-file-name))))
 
 (provide-theme 'ublt-dark)
+
+;;; NTA TODO: Consider these (from http://designmodo.github.com/Flat-UI/)
+'("#1abc9c" "Turquoise"
+  "#16a085" "Green sea"
+  "#2ecc71" "Emerland"
+  "#27ae60" "Nephritis"
+  "#3498db" "Peter river"
+  "#2980b9" "Belize hole"
+  "#9b59b6" "Amethyst"
+  "#8e44ad" "Wisteria"
+  "#34495e" "Wet asphalt"
+  "#2c3e50" "Midnight blu"
+  "#f1c40f" "Sun flower"
+  "#f39c12" "Orange"
+  "#e67e22" "Carrot"
+  "#d35400" "Pumpkin"
+  "#e74c3c" "Alizarin"
+  "#c0392b" "Pomegranate"
+  "#ecf0f1" "Clouds"
+  "#bdc3c7" "Silver"
+  "#95a5a6" "Concrete"
+  "#7f8c8d" "Asbestos")
