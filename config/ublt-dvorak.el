@@ -830,6 +830,8 @@
 
 (ublt/keys "sql" sql-mode-map
   "C-c C-s" 'sql-product-interactive ; was sql-send-string
+  "C-M-x"   'sql-send-paragraph
+  "C-c C-d" 'ublt/sql-describe-thing-at-point
   )
 
 ;;; XXX: Why doesn't this work???
