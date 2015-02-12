@@ -2,6 +2,7 @@
 
 (require 'ruby-mode)
 
-(setq ruby-indent-level 2)
+(add-to-list 'auto-mode-alist '("\\.rjs$" . ruby-mode))
+(setq-default ruby-indent-level 4)
 
 (provide 'ublt-ruby)

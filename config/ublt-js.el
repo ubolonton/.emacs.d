@@ -33,4 +33,13 @@
   (add-hook 'js-mode-hook (ublt/on-fn 'flycheck-mode))
   (add-hook 'js2-mode-hook (ublt/on-fn 'flycheck-mode)))
 
+;;; Code navigation & completion. Install "tern" globally with npm.
+(ublt/set-up 'tern
+  (add-hook 'js-mode-hook (ublt/on-fn 'tern-mode))
+  (add-hook 'js2-mode-hook (ublt/on-fn 'tern-mode))
+
+  (ublt/set-up 'company-tern
+    (add-to-list 'company-backends 'company-tern)
+    (setq company-tern-property-marker " .")))
+
 (provide 'ublt-js)

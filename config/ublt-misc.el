@@ -132,14 +132,6 @@
   ;; Notifications
   (ublt/set-up 'todochiku))
 
-;; TODO: move to corresponding mode sections
-;; .rjs file is ruby file
-(add-to-list 'auto-mode-alist '("\\.rjs$" . ruby-mode))
-(setq-default ruby-indent-level 4)
-
-(add-to-list 'auto-mode-alist '("\\.md$" . gfm-mode))
-(add-to-list 'auto-mode-alist '("\\.markdown$" . gfm-mode))
-
 ;; FIXME: Make it support mp3 not only ogg
 (require 'lyric-mode)
 
@@ -151,11 +143,62 @@
   (setq browse-url-browser-function 'browse-url-generic
         browse-url-generic-program "conkeror"))
 
-(add-hook 'sql-interactive-mode-hook (lambda () (setq truncate-lines t)))
+(defalias 'yes-or-no-p 'y-or-n-p)
 
-(condition-case nil
-    (load-file "~/.emacs.d/config/ublt-personal.el")
-  (error nil))
+(when window-system
+  (blink-cursor-mode -1))
+
+(defun ublt/turn-off-tool-bar ()
+  (if (functionp 'tool-bar-mode) (tool-bar-mode -1)))
+(add-hook 'before-make-frame-hook 'ublt/turn-off-tool-bar)
+
+(ublt/turn-off-tool-bar)
+(when (functionp 'menu-bar-mode) (menu-bar-mode -1))
+(when (functionp 'scroll-bar-mode) (scroll-bar-mode -1))
+
+(setq inhibit-startup-screen t
+      sentence-end-double-space nil
+      shift-select-mode nil
+      backup-directory-alist `(("." . ,(concat user-emacs-directory "backups")))
+      diff-switches "-u")
+
+(set-default 'indent-tabs-mode nil)
+(set-default 'indicate-empty-lines nil)
+(set-default 'imenu-auto-rescan t)
+
+(add-to-list 'safe-local-variable-values '(lexical-binding . t))
+(add-to-list 'safe-local-variable-values '(whitespace-line-column . 80))
+
+(show-paren-mode +1)
+
+;; (eval-after-load "ispell"
+;;   '(when (executable-find ispell-program-name)
+;;    (add-hook 'text-mode-hook 'turn-on-flyspell)))
+
+;;; Seed the random-number generator.
+(random t)
+
+;; (eval-after-load 'hippie-exp
+;;   '(progn
+;;      (dolist (f '(try-expand-line try-expand-list try-complete-file-name-partially))
+;;        (delete f hippie-expand-try-functions-list))
+
+;;      ;; Add this back in at the end of the list.
+;;      (add-to-list 'hippie-expand-try-functions-list 'try-complete-file-name-partially t)))
+
+;; (eval-after-load 'grep
+;;   '(when (boundp 'grep-find-ignored-files)
+;;      (add-to-list 'grep-find-ignored-files "*.class")))
+
+;; (eval-after-load 'diff-mode
+;;   '(progn
+;;      (set-face-foreground 'diff-added "green4")
+;;      (set-face-foreground 'diff-removed "red3")))
+
+;; (eval-after-load 'magit
+;;   '(progn
+;;      (set-face-foreground 'magit-diff-add "green4")
+;;      (set-face-foreground 'magit-diff-del "red3")))
 
 
 ;;; `http://www.masteringemacs.org/articles/2011/07/20/searching-buffers-occur-mode/'
