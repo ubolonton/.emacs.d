@@ -430,11 +430,11 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(number-font-lock-face
      ((,class (,@fw ,@number))))
 
-   `(js2-function-param-face
+   `(js2-function-param
      ((,class (,@param))))
-   `(js2-jsdoc-type-face
+   `(js2-jsdoc-type
      ((,class (:inherit font-lock-type-face))))
-   `(js2-jsdoc-tag-face
+   `(js2-jsdoc-tag
      ((,class (:inherit font-lock-builtin-face))))
 
    `(js3-function-param
@@ -480,7 +480,10 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(nxml-tag-delimiter
      ((,class (,@fw ,@dimmed))))
    `(nxml-element-local-name            ;TODO
-     ((,class ,portal)))
+     ((,class (,@portal))))
+
+   `(sh-heredoc
+     ((,class (,@doc ,@bold))))
 
 
    ;; Non-HTML markup languages
@@ -710,9 +713,9 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(diredp-number
      ((,class (,@number))))
    `(diredp-flag-mark-line              ;selected
-     ((,class (,@special-hl :inherit t))))
+     ((,class (,@special-hl ,@vw))))
    `(diredp-deletion                    ;marked for deletion
-     ((,class (,@error-hl))))
+     ((,class (,@error-hl ,@vw))))
    `(diredp-deletion-file-name
      ((,class (,@error-hl))))
    `(diredp-compressed-file-suffix      ;TODO
