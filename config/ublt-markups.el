@@ -14,7 +14,7 @@
   (add-to-list 'auto-mode-alist '("\\.mustache$" . mustache-mode)))
 
 (ublt/set-up 'css-mode
-  (ublt/set-up 'paredit-mode
+  (ublt/set-up 'paredit
     (add-hook 'css-mode-hook (ublt/on-fn 'paredit-mode)))
   (ublt/set-up 'aggressive-indent
     (add-hook 'css-mode-hook (ublt/on-fn 'aggressive-indent-mode))))

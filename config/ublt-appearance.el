@@ -652,12 +652,6 @@
 (ublt/set-up 'number-font-lock-mode
   (add-hook 'prog-mode-hook #'ublt/maybe-number-font-lock-mode))
 
-;;; XXX: Don't overwrite other packages' functions
-(defun esk-add-watchwords ()
-  (font-lock-add-keywords
-   nil '(("\\<\\(FIXME\\|TODO\\|FIX\\|XXX\\|HACK\\|REFACTOR\\|NOCOMMIT\\|NTA\\)"
-          1 font-lock-warning-face t))))
-
 (ublt/set-up 'eval-sexp-fu
   (setq eval-sexp-fu-flash-duration 0.5
         eval-sexp-fu-flash-error-duration 0.5))

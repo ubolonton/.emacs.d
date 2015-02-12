@@ -121,7 +121,7 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
 
   (defun ublt/paredit-space-for-open? (endp delimiter)
     "Don't insert space for ( [ \" in these modes."
-    (not (and (member major-mode '(comint-mode python-mode javascript-mode js-mode js2-mode))
+    (not (and (member major-mode '(comint-mode python-mode javascript-mode js-mode js2-mode web-mode))
               (member delimiter '(?\( ?\[ ?\")))))
   (add-to-list 'paredit-space-for-delimiter-predicates
                'ublt/paredit-space-for-open?)
@@ -156,8 +156,6 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
         company-transformers '(company-sort-by-occurrence))
   (global-company-mode +1))
 
-
-
 
 ;;; Yasnippet --------------------------------------------------------
 
@@ -168,6 +166,7 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
   ;; (add-to-list 'hippie-expand-try-functions-list 'yas-hippie-try-expand)
   (add-to-list 'yas-snippet-dirs "~/.emacs.d/data/yasnippet/snippets")
   (yas-global-mode +1))
+
 
 
 ;;; Misc
@@ -187,6 +186,12 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
 ;; (defadvice Info-goto-node (after remove-hard-wrap activate)
 ;;   (ublt/remove-hard-wrap))
 
+(defun ublt/cleanup-buffer ()
+  (interactive)
+  (indent-region (point-min) (point-max))
+  (untabify (point-min) (point-max))
+  (delete-trailing-whitespace))
+
 ;;; Obfuscate URL at point
 (ublt/set-up 'obfusurl)
 
@@ -194,7 +199,7 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
  ;; Kill region by DEL/delete (Emacs 24)
  delete-active-region 'kill
 
-;; No autosave/backup
+ ;; No autosave/backup
  auto-save-default nil
  make-backup-files nil
 

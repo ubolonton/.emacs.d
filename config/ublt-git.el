@@ -1,6 +1,3 @@
-;; TODO: Submit this to emacs-starter-kit. Older versions of magit
-;; seem to ignore this option. Version 1 uses it as a list. I don't
-;; understand why emacs-starter-kit set it as a string.
 (require 'ublt-util)
 
 (ublt/set-up 'magit

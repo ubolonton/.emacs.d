@@ -84,32 +84,17 @@
          less-css-mode scss-mode
          clojure-mode clojurescript-mode cider
          elisp-slime-nav
-         js2-mode
+         js2-mode json-mode
          php-mode php-boris
          rvm
          elpy                           ;python
          web-mode
          emmet-mode                          ; html/css editing
          go-mode
-         inf-mongo
-         ;; TODO: Remove starter kit dependency
-         starter-kit))
+         inf-mongo))
 (dolist (p ublt/packages)
   (when (not (package-installed-p p))
     (package-install p)))
-
-;;; XXX TODO: Remove this
-(ublt/set-up 'starter-kit)
-
-;;; XXX: Some starter-kit packages are broken
-(defalias 'run-coding-hook 'esk-prog-mode-hook)
-(defalias 'esk-run-coding-hook 'esk-prog-mode-hook)
-
-;;; NOTE: As my stuffs may depend on packages loaded after
-;;; starter-kit, it does not make sense to let starter-kit load my
-;;; stuffs. Thus my config is in ~/.emacs.d/init.el, not
-;;; ~/.emacs.d/ubolonton/init.el. And don't ever choose "elpa" as your
-;;; user name =))
 
 
 
@@ -166,6 +151,7 @@
 
 ;;; Languages support ------------------------------------------------
 
+(require 'ublt-programming)
 (require 'ublt-factor)
 (require 'ublt-erlang)
 (require 'ublt-haskell)

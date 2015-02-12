@@ -122,11 +122,6 @@
 ;; (key-chord-mode +1)
 ;; (key-chord-define-global "dd" 'kill-whole-line)
 
-;;; TODO: Enable this when there is a workaround for highlighted
-;;; symbols always being displayed in fixed-width font
-(remove-hook 'prog-mode-hook 'idle-highlight-mode)
-
-
 ;; Who the hell set it to t?
 (setq debug-on-error nil)
 

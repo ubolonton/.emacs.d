@@ -310,7 +310,6 @@
   "M-b"           'hippie-expand        ; more convenient here
   "M-B"           'yas-expand
   "C-z"           nil                   ; who needs suspend-frame?
-  "C-x C-h"       nil                   ; bad emacs-starter-kit
   "S-s-SPC"       'whitespace-mode
   "M-x"           'helm-M-x          ; C-x C-m for the original
   "M-X"           'smex-major-mode-commands
@@ -366,7 +365,7 @@
   "M-j"           'join-line
 
   "C-c g"         'magit-status
-  "C-C n"         'esk-cleanup-buffer
+  "C-C n"         'ublt/cleanup-buffer
 
   "s-<mouse-4>"   'text-scale-increase
   "s-<mouse-5>"   'text-scale-decrease

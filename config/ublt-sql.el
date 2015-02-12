@@ -6,7 +6,7 @@
 
   ;; FIX: Somehow sql-mode being a prog-mode does not help. So it
   ;; needs to be added manually
-  (add-hook 'sql-mode-hook 'esk-add-watchwords t))
+  (add-hook 'sql-mode-hook 'ublt/add-watchwords t))
 
 ;;; TODO: Implement more. This is currently just describe-table-at-point
 (defun ublt/sql-describe-thing-at-point ()

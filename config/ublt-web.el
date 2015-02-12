@@ -3,15 +3,6 @@
 
 ;;; Mix-language files
 
-;; ;; Might be useful for f*cks like PHP, JSP, ASP.NET, mako, rhtml, django
-;; (ublt/add-path "nxhtml/")
-;; (add-hook 'nxhtml-mode-hook (lambda () (rng-validate-mode -1)))
-;; (load "autostart.el")
-;; (add-to-list 'auto-mode-alist '("\\.mako?$" . mako-nxhtml-mumamo-mode))
-;; (add-hook 'mako-nxhtml-mumamo-mode-hook 'esk-turn-on-hl-line-mode)
-;; (add-hook 'nxhtml-mode-hook (ublt/off-fn 'auto-fill-mode))
-;; (add-hook 'nxhtml-mode-hook (ublt/off-fn 'flyspell-mode))
-
 ;;; FIX: This must be before web-mode is loaded, which is weird
 (setq web-mode-extra-comment-keywords '("NTA" "FIX" "XXX"))
 (ublt/set-up 'web-mode
@@ -27,7 +18,7 @@
       ad-do-it))
   (defun ublt/web-mode-jsx ()
     (when (equal web-mode-content-type "jsx")
-      (esk-paredit-nonlisp)))
+      (paredit-mode +1)))
   (add-hook 'web-mode-hook 'ublt/web-mode-jsx)
 
   (setq-default
@@ -108,10 +99,10 @@
 ;;; TODO: Paredit for css/less
 
 (ublt/set-up 'less-css-mode
-  (add-hook 'less-css-mode-hook 'esk-prog-mode-hook))
+  (add-hook 'less-css-mode-hook 'ublt/run-prog-mode-hook))
 
 (ublt/set-up 'css-mode
-  (add-hook 'css-mode-hook 'esk-prog-mode-hook)
+  (add-hook 'css-mode-hook 'ublt/run-prog-mode-hook)
   (setq css-indent-offset 2))
 
 (ublt/set-up 'sgml-mode
