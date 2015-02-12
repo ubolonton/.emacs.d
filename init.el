@@ -84,7 +84,7 @@
          less-css-mode scss-mode
          clojure-mode clojurescript-mode cider
          elisp-slime-nav
-         js2-mode json-mode
+         js2-mode json-mode tern company-tern
          php-mode php-boris
          rvm
          elpy                           ;python

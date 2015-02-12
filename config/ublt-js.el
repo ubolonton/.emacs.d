@@ -40,6 +40,7 @@
 
   (ublt/set-up 'company-tern
     (add-to-list 'company-backends 'company-tern)
-    (setq company-tern-property-marker " .")))
+    (setq company-tern-property-marker " ."
+          company-tern-meta-as-single-line t)))
 
 (provide 'ublt-js)
