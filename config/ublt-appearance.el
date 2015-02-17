@@ -261,6 +261,7 @@
 (dolist (hook '(emms-browser-show-display-hook
                 archive-zip-mode-hook
                 dired-mode-hook
+                sql-mode-hook
                 org-agenda-mode-hook))  ; XXX: not working
   (add-hook hook (ublt/off-fn 'visual-line-mode)))
 
