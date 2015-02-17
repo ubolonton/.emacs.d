@@ -152,6 +152,7 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
         company-tooltip-flip-when-above t
         company-frontends '(company-pseudo-tooltip-frontend
                             company-preview-frontend)
+        company-tooltip-align-annotations t
         company-selection-wrap-around t
         company-transformers '(company-sort-by-occurrence))
   (global-company-mode +1))
