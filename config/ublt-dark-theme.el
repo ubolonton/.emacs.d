@@ -212,7 +212,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (:inherit mode-line))))
    ;; `(which-func                          ;TODO
    ;;   ((,class (:foreground ,red-2 :height 1.0 :bold t))))
-   `(anzu-mode-line                      ;TODO
+   `(anzu-mode-line                     ;TODO
      ((,class (:foreground ,blue-d :weight bold))))
 
 
@@ -263,9 +263,9 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
 
    ;; flyspell
    `(flyspell-incorrect
-    ((,class (:underline (:color ,blush :style wave)))))
+     ((,class (:underline (:color ,blush :style wave)))))
    `(flyspell-duplicate
-    ((,class (:underline (:color ,radio :style wave)))))
+     ((,class (:underline (:color ,radio :style wave)))))
    ;; flycheck
    `(flycheck-error
      ((,class (,@error-hl))))
@@ -349,7 +349,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(magit-diff-none
      ((,class (:inherit diff-context))))
    `(magit-log-head-label-default
-    ((,class (:inherit magit-log-head-label-remote ,@mutable))))
+     ((,class (:inherit magit-log-head-label-remote ,@mutable))))
    `(magit-log-sha1
      ((,class (,@fw ,@commitment))))
    `(magit-item-mark
@@ -491,73 +491,81 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    ;; org-mode
    ;; TODO: levels
    `(org-document-title
-    ((,class (,@string :height 2.0 :bold t))))
+     ((,class (,@string :height 2.0 :bold t))))
    `(org-special-keyword
-    ((,class (,@constant))))
+     ((,class (,@constant))))
    `(org-indent                         ;TODO
-    ((,class ())))
+     ((,class ())))
    ;; We use `normal' not `bold' for these because we use Fira Sans
    `(org-level-1
-    ((,class (,@constant :weight normal :height 1.4))))
+     ((,class (,@constant :weight normal :height 1.4))))
    `(org-level-2
-    ((,class (,@mutable :weight normal :height 1.2))))
+     ((,class (,@mutable :weight normal :height 1.2))))
    `(org-level-3
-    ((,class (,@string :weight normal :height 1.1))))
+     ((,class (,@string :weight normal :height 1.1))))
    `(org-level-4
-    ((,class (:foreground ,cyan :weight normal :height 1.0))))
+     ((,class (:foreground ,cyan :weight normal :height 1.0))))
    `(org-level-5
-    ((,class (,@param))))
+     ((,class (,@param))))
    `(org-level-6
-    ((,class (:foreground ,radio))))
+     ((,class (:foreground ,radio))))
    ;; `(org-level-7                        ;TODO
    ;;  ((,class (:foreground ,green-3))))
    `(org-level-8
-    ((,class (,@note))))
+     ((,class (,@note))))
    `(org-table                          ;TODO
-    ((,class (,@fw :foreground ,blue-l))))
+     ((,class (,@fw :foreground ,blue-l))))
    `(org-formula
-    ((,class (,@fw ,@param))))
+     ((,class (,@fw ,@param))))
    `(org-hide
-    ((,class (:foreground ,bg))))
+     ((,class (:foreground ,bg))))
    `(org-code
-    ((,class (:inherit font-lock-builtin-face))))
+     ((,class (:inherit font-lock-builtin-face))))
    `(org-verbatim
-    ((,class (:inherit font-lock-keyword-face))))
+     ((,class (:inherit font-lock-keyword-face))))
    `(org-meta-line
-    ((,class (,@fw ,@context))))
+     ((,class (,@fw ,@context))))
    `(org-document-info-keyword
-    ((,class (:inherit org-meta-line))))
+     ((,class (:inherit org-meta-line))))
    ;; `(org-mode-line-clock                ;TODO
    ;;  ((,class (:foreground ,blush-2 :bold t))))
    `(org-link
-    ((,class (:inherit link))))
+     ((,class (:inherit link))))
    `(org-date                           ;TODO
-    ((,class (,@fw :foreground ,cyan :underline t))))
+     ((,class (,@fw :foreground ,cyan :underline t))))
    `(org-todo
-    ((,class (,@commitment))))
+     ((,class (,@commitment))))
    ;; `(org-done                           ;TODO
    ;;  ((,class (:foreground ,green-3))))
    ;; FIX: This makes comment in code block fixed-width :(
    `(org-block
-    ((,class (,@fw))))
+     ((,class (,@fw))))
    `(org-block-background
-    ((,class (,@fw))))
+     ((,class (,@fw))))
    `(org-block-begin-line
-    ((,class (,@fw ,@shadowed))))
+     ((,class (,@fw ,@shadowed))))
    `(org-block-end-line
-    ((,class (:inherit org-block-begin-line))))
+     ((,class (:inherit org-block-begin-line))))
    `(org-checkbox
-    ((,class (,@fw :weight bold :box (:line-width 1 :style released-button :color ,bg)))))
+     ((,class (,@fw :weight bold :box (:line-width 1 :style released-button :color ,bg)))))
    ;; `(org-time-grid                      ;TODO
    ;;  ((,class (,@fw :foreground ,golden-1))))
    ;; `(org-agenda-structure               ;TODO
    ;;  ((,class (,@fw :foreground "LightSkyBlue"))))
    `(org-agenda-date-today
-    ((,class (:inherit org-agenda-date :underline t))))
+     ((,class (:inherit org-agenda-date :underline t))))
    `(org-agenda-date-weekend
-    ((,class (:inherit org-agenda-date :slant italic))))
+     ((,class (:inherit org-agenda-date :slant italic))))
    `(org-agenda-current-time
-    ((,class (,@fw :inherit org-time-grid :background ,bg+2))))
+     ((,class (,@fw :inherit org-time-grid :background ,bg+2))))
+   `(org-scheduled-previously
+     ((,class (,@vw-italic :foreground ,blue-l))))
+   `(org-scheduled-today
+     ((,class (,@vw :foreground ,radio))))
+   `(org-agenda-done
+     ((,class (,@vw-italic :foreground ,spring))))
+   `(org-tag
+     ((,class (,@fw))))
    ;; `(org-scheduled                      ;TODO
    ;;  ((,class (,@vw-italic :foreground ,green-2))))
    ;; `(org-scheduled-previously           ;TODO
@@ -565,7 +573,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    ;; `(org-scheduled-today                ;TODO
    ;;  ((,class (,@vw :foreground ,green-3))))
    `(org-column
-    ((,class (,@fw :slant normal))))
+     ((,class (,@fw :slant normal))))
    `(org-priority
      ((,class (:foreground ,radio ,@bold))))
 
@@ -589,7 +597,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (:inherit org-level-6))))
    `(markdown-list-face
      ((,class (,@mutable :weight bold))))
-   `(markdown-pre-face                  ;TODO: Make it similar to org-block
+   `(markdown-pre-face             ;TODO: Make it similar to org-block
      ((,class (,@fw ,@dimmed-hl ,@string))))
    `(markdown-bold-face
      ((,class (,@mutable :weight bold))))
@@ -815,7 +823,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(Man-underline
      ((,class (:inherit woman-italic))))
 
-   
+      
    ;; IRC
 
    `(erc-notice-face
@@ -835,7 +843,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(erc-button
      ((,class (:slant normal))))
 
-   
+      
    ;; Popups
 
    `(company-tooltip
@@ -899,7 +907,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    ;; Twitter
    `(twittering-uri-face
      ((,class (:inherit link))))
-   `(twittering-username-face            ;TODO
+   `(twittering-username-face           ;TODO
      ((,class (,@string))))
 
    ;; My own custom faces
