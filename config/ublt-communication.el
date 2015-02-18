@@ -10,17 +10,31 @@
 
   (defface ublt-twitter-meta-face
     '((t (:inherit font-lock-comment-face)))
-    "Twitter face for important text")
+    "")
+  (defface ublt-twitter-meta-reply
+    '((t (:inherit ublt-twitter-meta-face)))
+    "")
+  (defface ublt-twitter-meta-retweet
+    '((t (:inherit ublt-twitter-meta-face)))
+    "")
+  (defface ublt-twitter-meta-location
+    '((t (:inherit ublt-twitter-meta-face)))
+    "")
+
   (setq twittering-status-format
-        "%i %s,  %FACE[ublt-twitter-meta-face]{%@  from %f%L%r%R}\n\t%t"
+        "%i %s%RT{%FACE[ublt-twitter-meta-face]{ ♽ }%FACE[ublt-twitter-meta-retweet]{%s}}%FACE[ublt-twitter-meta-reply]{%r}%FACE[ublt-twitter-meta-face]{ %@}%FACE[ublt-twitter-meta-location]{ from %f%L}\n           %t"
+        ;; "%i %s  %FACE[ublt-twitter-meta-face]{%@  from %f%L%r}%FACE[shadow]{%R}\n\t%t"
+        ;; "%i %s: %t\n\t%FACE[ublt-twitter-meta-face]{%@  from %f%L%r%R}"
         twittering-url-show-status nil
         twittering-timer-interval 600
         twittering-use-master-password t
         twittering-use-icon-storage t
         twittering-display-remaining t
+        twittering-use-native-retweet t
         twittering-number-of-tweets-on-retrieval 100
         )
   (add-hook 'twittering-mode-hook (ublt/on-fn 'hl-line-mode))
+  (add-hook 'twittering-mode-hook (ublt/on-fn 'adaptive-wrap-prefix-mode))
   (add-hook 'twittering-edit-mode-hook (ublt/off-fn 'auto-fill-mode))
   (add-hook 'twittering-edit-mode-hook (ublt/on-fn 'visual-line-mode))
 

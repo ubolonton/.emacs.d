@@ -912,7 +912,13 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
 
    ;; My own custom faces
    `(ublt-twitter-meta-face
-     ((,class (:height 0.9 ,@shadowed))))
+     ((,class (:height 0.8 ,@shadowed))))
+   `(ublt-twitter-meta-location
+     ((,class (:height 0.8 ,@spectral))))
+   `(ublt-twitter-meta-reply
+     ((,class (:height 0.8 :foreground ,blue-d))))
+   `(ublt-twitter-meta-retweet
+     ((,class (:height 0.8 :foreground ,blue))))
    `(ublt/flycheck-message-face         ;TODO
      ((,class (,@vw-italic ,@commitment))))
    `(eproject-ido-imenu-file-path
