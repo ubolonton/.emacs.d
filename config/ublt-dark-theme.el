@@ -735,7 +735,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(diredp-file-suffix
      ((,class (,@context))))
    `(diredp-ignored-file-name
-     ((,class (,@note :italic t))))
+     ((,class (,@vw-italic ,@note))))
    ;; `(diredp-mode-line-marked
    ;;   ((,class (:bold t :foreground ,blue))))
    ;; `(diredp-mode-line-flagged
@@ -812,6 +812,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
 
    `(help-argument-name                 ;TODO
      ((,class (:foreground ,blue))))
+   `(describe-variable-value
+     ((,class (,@fw ,@doc))))
 
    ;; man/woman
    `(woman-bold                         ;TODO
@@ -858,6 +860,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (:inherit company-tooltip ,@mutable))))
    `(company-tooltip-common-selection
      ((,class (:inherit company-tooltip-selection ,@param))))
+   `(company-tooltip-annotation
+     ((,class (:inherit company-tooltip :foreground ,seaweed))))
    `(company-scrollbar-bg
      ((,class (:background ,fg-3))))
    `(company-scrollbar-fg
@@ -866,8 +870,6 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (:foreground ,fg-3))))
    `(company-preview-common
      ((,class (:inherit company-preview))))
-   `(company-tooltip-annotation
-     ((,class (:inherit company-tooltip ,@power))))
 
 
    ;; Misc
