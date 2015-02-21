@@ -473,14 +473,18 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(web-mode-folded-face
      ((,class (:underline t))))
 
-   `(nxml-element-local-name
-     ((,class (,@fw ,@constant))))
    `(nxml-element-prefix
      ((,class (,@fw ,@context))))
+   `(nxml-element-local-name
+     ((,class (:inherit font-lock-builtin-face))))
    `(nxml-tag-delimiter
      ((,class (,@fw ,@dimmed))))
-   `(nxml-element-local-name            ;TODO
-     ((,class (,@portal))))
+   `(nxml-processing-instruction-delimiter
+     ((,class (:inherit nxml-tag-delimiter))))
+   `(nxml-markup-declaration-delimiter
+     ((,class (:inherit nxml-tag-delimiter))))
+   `(nxml-entity-ref-name
+     ((,class (,@fw :foreground ,skin))))
 
    `(sh-heredoc
      ((,class (,@doc ,@bold))))
