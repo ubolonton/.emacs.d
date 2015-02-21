@@ -401,10 +401,11 @@
   "M-s-n" 'Info-history-forward
   "M-."   'elisp-slime-nav-find-elisp-thing-at-point)
 
-(ublt/keys 'help-mode 'help-command
+(ublt/keys 'help-mode help-map
   "a" 'apropos
   "A" 'apropos-command
-  "V" 'apropos-value)
+  "V" 'apropos-value
+  "C-k" 'helm-descbinds)
 
 
 ;;; Evil -------------------------------------------------------------
@@ -599,7 +600,7 @@
   "M-O" 'helm-multi-occur
   "o"   'helm-occur
   "O"   'helm-multi-occur
-  "SPC" 'helm-global-mark-ring
+  "SPC" 'helm-all-mark-rings
   "i"   'helm-imenu)
 (ublt/keys 'helm helm-map
   "s-h"         'minibuffer-keyboard-quit
@@ -608,6 +609,8 @@
   "M-a"         'helm-toggle-all-marks
   "C-f"         'helm-follow-mode
   "s-w"         'ublt/helm-maybe-exit-minibuffer-other-window)
+(ublt/keys 'minibuffer minibuffer-local-map
+  "C-c C-l"     'helm-minibuffer-history)
 
 
 ;;; HTML/CSS
