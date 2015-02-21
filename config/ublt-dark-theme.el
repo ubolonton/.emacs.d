@@ -497,7 +497,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(org-document-title
      ((,class (,@string :height 2.0 :bold t))))
    `(org-special-keyword
-     ((,class (,@constant))))
+     ((,class (,@fw ,@constant))))
    `(org-indent                         ;TODO
      ((,class ())))
    ;; We use `normal' not `bold' for these because we use Fira Sans
@@ -563,13 +563,13 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(org-agenda-current-time
      ((,class (,@fw :inherit org-time-grid :background ,bg+2))))
    `(org-scheduled-previously
-     ((,class (,@vw-italic :foreground ,blue-l))))
+     ((,class (,@fw :foreground ,blue-l))))
    `(org-scheduled-today
-     ((,class (,@vw :foreground ,radio))))
+     ((,class (,@fw :foreground ,radio))))
    `(org-agenda-done
-     ((,class (,@vw-italic :foreground ,spring))))
+     ((,class (,@fw :foreground ,spring))))
    `(org-tag
-     ((,class (,@fw))))
+     ((,class (,@fw ,@context))))
    ;; `(org-scheduled                      ;TODO
    ;;  ((,class (,@vw-italic :foreground ,green-2))))
    ;; `(org-scheduled-previously           ;TODO
@@ -579,7 +579,9 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(org-column
      ((,class (,@fw :slant normal))))
    `(org-priority
-     ((,class (:foreground ,radio ,@bold))))
+     ((,class (:foreground ,radio))))
+   `(org-headline-done
+     ((,class (:inherit org-level-2 ,@context))))
 
    `(markdown-link-face
      ((,class (,@teleport))))
