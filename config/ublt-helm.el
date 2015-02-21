@@ -59,7 +59,8 @@
 (ublt/set-up 'helm-command
   (setq helm-M-x-fuzzy-match t))
 
-(ublt/set-up 'helm-org)
+(ublt/set-up 'helm-org
+  (setq helm-org-headings-fontify t))
 (ublt/set-up 'helm-regexp)
 (ublt/set-up 'helm-cmd-t)
 (ublt/set-up 'helm-man)
