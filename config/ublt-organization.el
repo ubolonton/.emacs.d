@@ -258,31 +258,8 @@
         org-reveal-progress t
         org-reveal-rolling-links nil))
 
-;;; TODO: Probably don't use this anymore
-(ublt/set-up 'org-html-slideshow
-  (defun ublt/org-html-slideshow-decorate ()
-    (goto-char (point-max))
-    (insert "
-#+BEGIN_HTML
-<script type='text/javascript' src='js/org-html-slideshow.js'></script>
-#+END_HTML
-
-# Local Variables:
-# org-export-html-style-include-default: nil
-# org-export-html-style-include-scripts: nil
-# End:
-"))
-
-  (defun ublt/org-html-slideshow-publish ()
-    (interactive)
-    (let ((org-export-preprocess-hook (cons 'ublt/org-html-slideshow-decorate org-export-preprocess-hook))
-          (org-export-html-style-extra "
-<link rel='stylesheet' type='text/css' href='css/common.css' />
-<link rel='stylesheet' type='text/css' href='css/screen.css' media='screen' />
-<link rel='stylesheet' type='text/css' href='css/projection.css' media='projection' />
-<link rel='stylesheet' type='text/css' href='css/presenter.css' media='presenter' />
-"))
-      (call-interactively 'org-export-as-html))))
+
+;;; PDF export
 
 (ublt/set-up 'ox-latex
   ;; Use minted for code highlighting in exported pdf files
