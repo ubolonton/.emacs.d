@@ -67,15 +67,17 @@
 
 (ublt/set-up 'helm-swoop
   (setq helm-swoop-speed-or-color t
-        helm-swoop-use-line-number-face t))
+        helm-swoop-use-line-number-face t
+        helm-swoop-pre-input-function (lambda () nil)))
 
 (ublt/set-up 'helm-elisp
   (setq helm-apropos-fuzzy-match t))
 
 
-(setq helm-maybe-use-default-as-input t
-      helm-quick-update t
+(setq helm-quick-update t
+      ;; helm-maybe-use-default-as-input nil
       helm-split-window-in-side-p 'below
+      helm-always-two-windows nil
       helm-move-to-line-cycle-in-source t
       ;; Better-looking separator for multi-line sources
       helm-candidate-separator "────────────────────────────────────────────────────────────────────────────────"
