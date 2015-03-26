@@ -303,11 +303,23 @@
       entry (file+headline "~/org/gtd/someday.org" "Books")
       (file "~/org/gtd/templates/someday-link.org")
       :empty-lines-before 1)
+     ("xm" "Movie to watch"
+      entry (file+headline "~/org/gtd/someday.org" "Movies")
+      (file "~/org/gtd/templates/someday-link.org")
+      :empty-lines-before 1)
 
      ("t" "Task to review at the end of today"
       entry (file "~/org/gtd/daily.org")
       (file "~/org/gtd/templates/quick-task.org")
       :empty-lines-before 1)
+
+     ("T" "Task that starts now"
+      entry (file "~/org/gtd/daily.org")
+      (file "~/org/gtd/templates/immediate-task.org")
+      :empty-lines-before 1
+      ;; FIX: Clocking in doesn't seem to work, sometimes
+      :clock-in t)
+
 
      ;; TODO: Break this down by type
      ("s" "Someday, do this (task or project)!"
