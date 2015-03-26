@@ -526,8 +526,13 @@
 (dolist (mode '(clojure-mode clojurescript-mode))
   (font-lock-add-keywords
    mode `(("{\\|}\\|;" . 'ublt/lisp-paren-face)
+          ;; fn => ƒ
           ("(\\(\\<fn\\>\\)"
            (0 (ublt/show-as ?ƒ))))))
+(dolist (mode '(emacs-lisp-mode))
+  (font-lock-add-keywords
+   mode `(("\\(lambda\\)"
+           (0 (ublt/show-as ?λ))))))
 (dolist (mode '(python-mode))
   (font-lock-add-keywords
    mode `(
@@ -535,7 +540,9 @@
           ("\\(yi\\)eld"
            (0 (ublt/show-as ?γ)))
           ("yi\\(eld\\)"
-           (0 (ublt/show-as ?ζ))))))
+           (0 (ublt/show-as ?ζ)))
+          ("\\(lambda\\)"
+           (0 (ublt/show-as ?λ))))))
 
 ;;; Don't use. This destroys magit's fontification. Magit does something special
 ;; (defun ublt/prettify-magit-log ()
