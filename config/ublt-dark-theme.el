@@ -385,13 +385,14 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (:inherit git-commit-summary-face :foreground ,blush))))
    `(git-commit-nonempty-second-line-face
      ((,class (:inherit git-commit-summary-face ,@error-hl))))
-
    `(git-commit-comment-heading-face
      ((,class (:inherit magit-section-title :weight normal))))
    `(git-commit-comment-action-face
      ((,class (,@fw ,@commitment))))
    `(git-commit-comment-file-face
      ((,class (,@vw ,@string))))
+   `(git-commit-branch-face
+     ((,class (,@fw ,@more :box ,bg+3))))
 
 
    ;; Programming languages
