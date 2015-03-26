@@ -144,11 +144,6 @@
 ;;; Code linters.
 (require 'ublt-flycheck)
 
-;;; https://github.com/politza/pdf-tools
-(ublt/set-up 'pdf-tools
-  (pdf-tools-install))
-
-
 ;;; Languages support ------------------------------------------------
 
 (require 'ublt-programming)
