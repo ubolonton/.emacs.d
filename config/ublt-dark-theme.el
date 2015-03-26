@@ -145,6 +145,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
 
        (reference    `(:foreground ,magenta-d))
 
+       (spectral-hl  `(:background "#0F1724"))
        (dimmed-hl    `(:background ,bg+1))
        (normal-hl    `(:background ,bg+2))
        (strong-hl    `(:background ,bg+3))
@@ -502,9 +503,9 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class ())))
    ;; We use `normal' not `bold' for these because we use Fira Sans
    `(org-level-1
-     ((,class (,@constant :weight normal :height 1.4))))
+     ((,class (,@vw ,@constant :weight normal :overline ,bg+2 :height 1.4 ,@spectral-hl))))
    `(org-level-2
-     ((,class (,@mutable :weight normal :height 1.2))))
+     ((,class (,@vw ,@mutable :weight normal :overline ,bg+2 :height 1.2 ,@spectral-hl))))
    `(org-level-3
      ((,class (,@string :weight normal :height 1.1))))
    `(org-level-4
@@ -518,7 +519,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(org-level-8
      ((,class (,@note))))
    `(org-table                          ;TODO
-     ((,class (,@fw :foreground ,blue-l))))
+     ((,class (,@fw :overline ,bg+1 :foreground ,blue-l))))
    `(org-formula
      ((,class (,@fw ,@param))))
    `(org-hide
@@ -545,15 +546,15 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(org-block
      ((,class (,@fw))))
    `(org-block-background
-     ((,class (,@fw))))
+     ((,class (,@fw ,@spectral-hl))))
    `(org-block-begin-line
-     ((,class (,@fw ,@shadowed))))
+     ((,class (:inherit org-block-background ,@constant :underline ,blue-d))))
    `(org-block-end-line
-     ((,class (:inherit org-block-begin-line))))
+     ((,class (:inherit org-block-background ,@spectral :overline ,blue-d))))
    `(org-checkbox
      ((,class (,@fw :weight bold :box (:line-width 1 :style released-button :color ,bg)))))
-   ;; `(org-time-grid                      ;TODO
-   ;;  ((,class (,@fw :foreground ,golden-1))))
+   `(org-time-grid
+    ((,class (,@fw ,@context))))
    ;; `(org-agenda-structure               ;TODO
    ;;  ((,class (,@fw :foreground "LightSkyBlue"))))
    `(org-agenda-date-today
@@ -561,13 +562,13 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(org-agenda-date-weekend
      ((,class (:inherit org-agenda-date :slant italic))))
    `(org-agenda-current-time
-     ((,class (,@fw :inherit org-time-grid :background ,bg+2))))
+     ((,class (,@fw :inherit org-time-grid ,@header :background ,bg+2))))
    `(org-scheduled-previously
      ((,class (,@fw :foreground ,blue-l))))
    `(org-scheduled-today
      ((,class (,@fw :foreground ,radio))))
    `(org-agenda-done
-     ((,class (,@fw :foreground ,spring))))
+     ((,class (,@fw :foreground ,seaweed))))
    `(org-tag
      ((,class (,@fw ,@context))))
    ;; `(org-scheduled                      ;TODO

@@ -69,6 +69,8 @@
  ;; Fontify code blocks
  org-src-fontify-natively t
 
+ org-fontify-whole-heading-line t
+
  org-export-htmlize-output-type 'css
 
  org-tags-column 0
