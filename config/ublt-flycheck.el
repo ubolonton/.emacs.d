@@ -1,5 +1,9 @@
 (require 'flycheck)
 
+(defface ublt/flycheck-message-face
+  '((t (:inherit font-lock-warning-face)))
+  "Face for current flycheck error message shown in the minibuffer")
+
 ;;; XXX FIX: This is monkey-patching of `flycheck-display-error-messages'
 (defun ublt/flycheck-display-error-messages (errors)
   (let ((messages (delq nil (mapcar #'flycheck-error-message errors))))

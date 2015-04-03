@@ -930,7 +930,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(ublt-twitter-meta-retweet
      ((,class (:height 0.8 :foreground ,blue))))
    `(ublt/flycheck-message-face         ;TODO
-     ((,class (,@vw-italic ,@commitment))))
+     ((,class (,@vw ,@commitment))))
    `(eproject-ido-imenu-file-path
      ((,class (,@shadowed))))
    `(ublt/emms-mode-line-face
