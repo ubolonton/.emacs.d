@@ -6,7 +6,15 @@
   (ublt/set-up 'moz
     (add-hook 'js2-mode-hook 'moz-minor-mode))
 
-  (setq js2-highlight-level 3)
+  (add-hook 'js2-mode-hook (ublt/off-fn 'auto-fill-mode))
+
+  (setq js2-highlight-level 3
+        js2-concat-multiline-strings nil
+        ;; Use jshint instead
+        js2-mode-show-parse-errors t
+        js2-mode-show-strict-warnings nil
+        js2-strict-trailing-comma-warning nil
+        js2-strict-missing-semi-warning nil)
   (setq-default js2-basic-offset 2)
 
   (setcdr (assoc "\\.js\\'" auto-mode-alist) 'js2-mode))
