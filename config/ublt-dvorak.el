@@ -308,15 +308,15 @@
   "C-c C-x C-o"   'org-clock-out
   "M-l"           'move-to-window-line-top-bottom
   "M-b"           'hippie-expand        ; more convenient here
-  "M-B"           'yas-expand
+  "M-B"           nil                   ; use yas-minor-mode-map
   "C-z"           nil                   ; who needs suspend-frame?
   "S-s-SPC"       'whitespace-mode
   "M-x"           'helm-M-x          ; C-x C-m for the original
   "M-X"           'smex-major-mode-commands
   "C-h C-a"       'apropos-command
   ;; "C-x C-b"       'ido-switch-buffer     ; Because it's to easy to mis-press
-  "C-x C-b"       'ublt/helm       ; Because it's to easy to mis-press
-  "C-x b"         'ublt/helm
+  "C-x C-b"       'helm-mini       ; Because it's to easy to mis-press
+  "C-x b"         'helm-mini
   "C-x <return>"  'term
   "C-x B"         'ibuffer
   "C-S-s"         'ublt/isearch-other-window
@@ -663,17 +663,11 @@
 
 
 ;;; Error navigation
-(eval-after-load "js2-mode"
-  '(progn
-     (unless (functionp 'js-prev-error)
-       (defun js2-prev-error (&optional arg reset)
-         (interactive "p")
-         (js2-next-error (- arg) reset)))
-     (ublt/define-keys js2-mode-map
-       "M-p" 'js2-prev-error
-       "M-n" 'js2-next-error)))
-;;; NTA FIX: Use `flycheck-mode-map' maybe?
+(ublt/keys 'flycheck flycheck-mode-map
+  "M-p" 'flycheck-previous-error
+  "M-n" 'flycheck-next-error)
 (dolist (fms '(("js" js-mode-map)
+               ("js2-mode" js2-mode-map)
                ("python-mode" py-mode-map)
                ("python" python-mode-map)
                ("php-mode" php-mode-map)
@@ -683,8 +677,8 @@
   (destructuring-bind (file map) fms
     (eval-after-load file
       `(ublt/define-keys ,map
-         "M-n" 'flycheck-next-error
-         "M-p" 'flycheck-previous-error))))
+         "M-p" nil
+         "M-n" nil))))
 
 
 ;;; Paredit
