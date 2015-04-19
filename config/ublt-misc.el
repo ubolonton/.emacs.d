@@ -171,10 +171,6 @@
 
 (show-paren-mode +1)
 
-;; (eval-after-load "ispell"
-;;   '(when (executable-find ispell-program-name)
-;;    (add-hook 'text-mode-hook 'turn-on-flyspell)))
-
 ;;; Seed the random-number generator.
 (random t)
 
@@ -186,19 +182,18 @@
      ;; Add this back in at the end of the list.
      (add-to-list 'hippie-expand-try-functions-list 'try-complete-file-name-partially t)))
 
-;; (eval-after-load 'grep
-;;   '(when (boundp 'grep-find-ignored-files)
-;;      (add-to-list 'grep-find-ignored-files "*.class")))
-
-;; (eval-after-load 'diff-mode
-;;   '(progn
-;;      (set-face-foreground 'diff-added "green4")
-;;      (set-face-foreground 'diff-removed "red3")))
-
-;; (eval-after-load 'magit
-;;   '(progn
-;;      (set-face-foreground 'magit-diff-add "green4")
-;;      (set-face-foreground 'magit-diff-del "red3")))
+;;; Open files with certain extensions using an external program
+;;; (opening a large PDF file can hang Emacs).
+(defvar ublt/find-file-externally-extensions
+  '("pdf" "xls" "doc"))
+(defadvice find-file (around open-externally activate)
+  (let ((file-name (ad-get-arg 0)))
+    (if (member (file-name-extension file-name) ublt/find-file-externally-extensions)
+        (call-process (case system-type
+                        ('darwin "open")
+                        ('gnu/linux "xdg-open"))
+                      nil 0 nil file-name)
+      ad-do-it)))
 
 
 ;;; `http://www.masteringemacs.org/articles/2011/07/20/searching-buffers-occur-mode/'
