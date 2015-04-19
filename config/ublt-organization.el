@@ -216,7 +216,8 @@
    ;; TODO: Restructure
    org-refile-targets '((("~/org/gtd/someday.org") . (:maxlevel . 1))
                         (("~/org/gtd/tasks.org") . (:maxlevel . 1))
-                        (("~/org/gtd/projects.org") . (:maxlevel . 2)))
+                        (("~/org/gtd/projects.org") . (:maxlevel . 2))
+                        (("~/org/work/fram/work-notes.org") . (:maxlevel . 3)))
 
    org-refile-allow-creating-parent-nodes 'confirm
    org-refile-target-verify-function 'ublt/verify-refile-target
@@ -230,6 +231,17 @@
              ((org-agenda-todo-list-sublevels nil)))))
      ("p" "Projects details"
       ((tags "PROJECT")))
+     ("w" "Work"
+      ((agenda "")
+       (tags-todo "SCHEDULED=\"\""))
+      ((org-agenda-files '("~/org/work/fram/work-notes.org"))
+       (org-agenda-ndays 1)
+       (org-agenda-sorting-strategy
+        '((agenda todo-state-up time-up priority-down)))
+       (org-deadline-warning-days 0)
+       (org-agenda-prefix-format
+        '((agenda  . "%i %-9:c%?-12t%-12s")
+          (tags  . "%i %-9:c%?-12t")))))
      ("D" "Daily action list"
       (
        ;; Tasks with a date (deadline, scheduled)
