@@ -5,9 +5,12 @@
 (add-hook 'python-mode-hook (ublt/on-fn 'flycheck-mode))
 
 (ublt/set-up 'elpy
+  (setq elpy-modules '(elpy-module-sane-defaults
+                       elpy-module-company
+                       elpy-module-eldoc
+                       elpy-module-highlight-indentation
+                       elpy-module-pyvenv))
   (ublt/set-up 'flycheck
-    (setq elpy-modules
-          (delete 'elpy-module-flymake elpy-modules))
     (add-hook 'elpy-mode-hook (ublt/on-fn 'flycheck-mode)))
   (setq elpy-rpc-backend "jedi")
   (elpy-enable)
