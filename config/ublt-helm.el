@@ -77,7 +77,8 @@
 (setq helm-quick-update t
       ;; helm-maybe-use-default-as-input nil
       helm-split-window-in-side-p 'below
-      helm-always-two-windows nil
+      helm-split-window-default-side 'below
+      helm-always-two-windows t
       helm-move-to-line-cycle-in-source t
       ;; Better-looking separator for multi-line sources
       helm-candidate-separator "────────────────────────────────────────────────────────────────────────────────"
