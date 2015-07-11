@@ -14,6 +14,14 @@
                   ("elpy" . "http://jorgenschaefer.github.io/packages/")
                   ))
   (add-to-list 'package-archives source t))
+
+(when (boundp 'package-pinned-packages)
+  (setq package-pinned-packages
+        '((elpy . "elpy")
+          (org . "org")
+          (cider . "melpa-stable")
+          (helm . "melpa-stable"))))
+
 ;;; Some packages mess up `package-archives'. This fixes that.
 (defvar ublt/package-archives package-archives)
 (add-hook 'after-init-hook (lambda () (setq package-archives ublt/package-archives)))
@@ -80,9 +88,11 @@
          edts                           ;erlang
          haskell-mode quack
          adoc-mode
+         ess
          markdown-mode yaml-mode
          less-css-mode scss-mode
          clojure-mode clojurescript-mode cider
+         scala-mode2 ensime
          elisp-slime-nav
          js2-mode json-mode tern company-tern
          php-mode php-boris
