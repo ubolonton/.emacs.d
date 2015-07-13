@@ -18,6 +18,7 @@
 (dolist (source '(("marmalade" . "http://marmalade-repo.org/packages/")
                   ("org" . "http://orgmode.org/elpa/")
                   ("elpa" . "http://tromey.com/elpa/")
+                  ("melpa-stable" . "http://stable.melpa.org/packages/")
                   ("melpa" . "http://stable.melpa.org/packages/")
                   ("elpy" . "http://jorgenschaefer.github.io/packages/")
                   ))
