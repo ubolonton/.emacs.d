@@ -12,7 +12,6 @@
         ;; origin/xyz => xyz
         magit-default-tracking-name-function 'magit-default-tracking-name-branch-only
         ;; TODO: Face
-        magit-restore-window-configuration t
         magit-set-upstream-on-push t
         ;; `all' would be nice, but it's too slow for large diffs
         magit-diff-refine-hunk t
@@ -21,17 +20,56 @@
         magit-diff-use-overlays nil
         )
   ;; XXX: Make magit support customizing switches instead
-  (dolist (switch '(("-M" "No merge commits" "--no-merges")
-                    ("-t" "Topo Order" "--topo-order")))
-    (let* ((logging (assq 'logging magit-key-mode-groups))
-           (switches (assq 'switches logging)))
-      (setcdr (last switches)
-              (cons switch nil))))
+  ;; (dolist (switch '(("-M" "No merge commits" "--no-merges")
+  ;;                   ("-t" "Topo Order" "--topo-order")))
+  ;;   (let* ((logging (assq 'logging magit-key-mode-groups))
+  ;;          (switches (assq 'switches logging)))
+  ;;     (setcdr (last switches)
+  ;;             (cons switch nil))))
 
   ;; XXX
   (defadvice magit-display-process (around dont-switch activate)
     (save-selected-window
       ad-do-it)))
+
+;;; magit 2.1 up
+(ublt/set-up 'magit
+  (setq
+   ;; Show original windows when quitting magit.
+   magit-restore-window-configuration t
+
+   ;; magit status buffer should not be a pop-up (in the sense of
+   ;; not being volatile or temporary like helm buffer). This is
+   ;; important for small screens.
+   magit-status-buffer-switch-function 'switch-to-buffer
+
+   ;; `all' would be nice, but it's too slow for large diffs
+   magit-diff-refine-hunk t
+
+   ;; Use repo base names in buffer names
+   magit-status-buffer-name-format   "*magit: %b*"
+   magit-refs-buffer-name-format     "*magit-refs: %b*"
+   magit-log-buffer-name-format      "*magit-log: %b*"
+   magit-cherry-buffer-name-format   "*magit-cherry: %b*"
+   magit-reflog-buffer-name-format   "*magit-reflog: %b*"
+   magit-process-buffer-name-format  "*magit-process: %b*"
+   magit-stashes-buffer-name-format  "*magit-stashes: %b*"
+   magit-stash-buffer-name-format    "*magit-stash: %b*"
+   magit-diff-buffer-name-format     "*magit-diff: %b*"
+   magit-revision-buffer-name-format "*magit-rev: %b*"
+
+   ;; Git directories
+   magit-repository-directories '("~/Programming/projects"
+                                  "~/Programming/lib")
+   magit-repository-directories-depth 1
+
+   ;; Other
+   magit-log-show-refname-after-summary t
+   magit-blame-mode-lighter " Bl"
+   ;; TODO: Check these. They don't seem to work.
+   ;; magit-log-format-graph-function 'magit-log-format-graph-function
+   ;; magit-completing-read-function 'helm-completing-read-with-cands-in-buffer
+   ))
 
 (ublt/set-up 'git-commit-mode
   (setq git-commit-summary-max-length 70))
