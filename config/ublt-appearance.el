@@ -495,6 +495,9 @@
  'web-mode `(("\\(function\\)"
               (0 (ublt/show-as ?ƒ)))))
 (font-lock-add-keywords
+ 'ess-mode `(("\\(function\\)"
+              (0 (ublt/show-as ?ƒ)))))
+(font-lock-add-keywords
  'php-mode `(("\\(->\\)"
               (0 (ublt/show-as ?➛)))
              ("\\(=>\\)"
