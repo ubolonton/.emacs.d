@@ -201,6 +201,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
 
    `(shadow ((,class (,@dimmed))))
    `(link ((,class (,@portal :underline ,bg+3))))
+   `(button
+     ((,class (,@fw ,@portal :underline ,bg+3))))
 
    ;; mode-line
    `(mode-line
@@ -379,6 +381,67 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(magit-blame-subject
      ((,class (:inherit (magit-log-message magit-blame-header)))))
 
+   `(magit-section-highlight
+     ((,class (,@normal-hl))))
+   `(magit-section-heading
+     ((,class (,@vw ,@mutable :weight bold))))
+   `(magit-branch-local
+     ((,class (,@more))))
+   `(magit-branch-current
+     ((,class (,@more :box (:color ,fg-2)))))
+   `(magit-branch-remote
+     ((,class (,@doc))))
+   `(magit-diff-file-heading
+     ((,class (:inherit magit-file-name :weight normal))))
+   `(magit-diff-file-heading-highlight
+     ((,class (:inherit magit-diff-file-heading ,@normal-hl :weight bold))))
+   `(magit-diff-hunk-heading
+     ((,class (:inherit diff-hunk-header :overline ,bg+3))))
+   `(magit-diff-hunk-heading-highlight
+     ((,class (:inherit magit-diff-hunk-heading ,@special-hl :overline ,fg :weight bold))))
+   `(magit-diff-added
+     ((,class (:inherit diff-added))))
+   `(magit-diff-removed
+     ((,class (:inherit diff-removed))))
+   `(magit-diff-context
+     ((,class (:inherit diff-context))))
+   `(magit-diff-added-highlight
+     ((,class (:inherit magit-diff-added ,@dimmed-hl))))
+   `(magit-diff-removed-highlight
+     ((,class (:inherit magit-diff-removed ,@dimmed-hl))))
+   `(magit-diff-context-highlight
+     ((,class (:inherit maigt-diff-context ,@dimmed-hl))))
+   ;; `(magit-log-head-label-default
+   ;;   ((,class (:inherit magit-log-head-label-remote ,@mutable))))
+   `(magit-hash
+     ((,class (,@fw ,@commitment))))
+   ;; `(magit-item-mark
+   ;;   ((,class (:inherit secondary-selection))))
+   ;; `(magit-tag                          ;TODO
+   ;;   ((,class (:foreground ,seaweed :box ,bg+3))))
+   ;; `(magit-log-head-label-tags
+   ;;   ((,class (:inherit magit-tag))))
+   ;; `(magit-log-author
+   ;;   ((,class (,@vw ,@context))))
+   ;; `(magit-log-date
+   ;;   ((,class (,@vw ,@dimmed))))
+   ;; `(magit-log-message
+   ;;   ((,class (,@vw-italic))))
+   ;; `(magit-key-mode-switch-face
+   ;;   ((,class (:inherit font-lock-type-face))))
+   `(magit-blame-heading
+     ((,class (,@vw ,@normal-hl :foreground ,fg-1 :overline ,bg+3))))
+   `(magit-blame-hash
+     ((,class (:inherit magit-hash))))
+   `(magit-blame-name
+     ((,class (:inherit magit-blame-heading))))
+   `(magit-blame-date
+     ((,class (:inherit magit-blame-heading ,@context))))
+   `(magit-blame-summary
+     ((,class (:inherit (git-commit-summary magit-blame-heading)))))
+   `(magit-popup-argument
+     ((,class (:inherit font-lock-variable-name-face))))
+
    `(git-commit-summary-face
      ((,class (:inherit magit-log-message))))
    `(git-commit-overlong-summary-face
@@ -392,6 +455,21 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(git-commit-comment-file-face
      ((,class (,@vw ,@string))))
    `(git-commit-branch-face
+     ((,class (,@fw ,@more :box ,bg+3))))
+
+   `(git-commit-summary
+     ((,class (:inherit magit-log-message))))
+   `(git-commit-overlong-summary
+     ((,class (:inherit git-commit-summary-face :foreground ,blush))))
+   `(git-commit-nonempty-second-line
+     ((,class (:inherit git-commit-summary-face ,@error-hl))))
+   `(git-commit-comment-heading
+     ((,class (:inherit magit-section-heading :weight normal))))
+   `(git-commit-comment-action
+     ((,class (,@fw ,@commitment))))
+   `(git-commit-comment-file
+     ((,class (,@vw ,@string))))
+   `(git-commit-comment-branch
      ((,class (,@fw ,@more :box ,bg+3))))
 
 
@@ -428,7 +506,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(font-lock-warning-face
      ((,class (,@fw ,@warning))))
    `(font-lock-constant-face
-     ((,class (,@fw ,@constant))))      ; TODO: Different shade
+     ((,class (,@fw ,@constant))))
    `(number-font-lock-face
      ((,class (,@fw ,@number))))
 
@@ -555,7 +633,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(org-checkbox
      ((,class (,@fw :weight bold :box (:line-width 1 :style released-button :color ,bg)))))
    `(org-time-grid
-    ((,class (,@fw ,@context))))
+     ((,class (,@fw ,@context))))
    ;; `(org-agenda-structure               ;TODO
    ;;  ((,class (,@fw :foreground "LightSkyBlue"))))
    `(org-agenda-date-today
@@ -815,7 +893,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (:inherit info-constant-ref-item))))
 
    `(help-argument-name                 ;TODO
-     ((,class (:foreground ,blue))))
+     ((,class (,@fw :foreground ,blue))))
    `(describe-variable-value
      ((,class (,@fw ,@doc))))
 
@@ -833,7 +911,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(Man-underline
      ((,class (:inherit woman-italic))))
 
-      
+   
    ;; IRC
 
    `(erc-notice-face
@@ -853,7 +931,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(erc-button
      ((,class (:slant normal))))
 
-      
+   
    ;; Popups
 
    `(company-tooltip
@@ -913,6 +991,16 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
                           :inherit t))))
    `(ace-jump-face-background
      ((,class (:foreground ,bg+3))))
+
+   `(avy-background-face
+     ((,class (:foreground ,bg+3))))
+   `(avy-lead-face
+     ((,class (:underline nil :box nil
+                          :strike-through nil :inverse-video nil :overline nil
+                          :background ,bg :foreground ,yellow
+                          :inherit t))))
+   `(avy-lead-face-0
+     ((,class (:inherit avy-lead-face))))
 
    ;; Twitter
    `(twittering-uri-face
