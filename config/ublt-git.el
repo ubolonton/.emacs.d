@@ -46,6 +46,10 @@
    ;; `all' would be nice, but it's too slow for large diffs
    magit-diff-refine-hunk t
 
+   magit-diff-paint-whitespace 'status
+
+   magit-push-always-verify nil
+
    ;; Use repo base names in buffer names
    magit-status-buffer-name-format   "*magit: %b*"
    magit-refs-buffer-name-format     "*magit-refs: %b*"
@@ -69,7 +73,15 @@
    ;; TODO: Check these. They don't seem to work.
    ;; magit-log-format-graph-function 'magit-log-format-graph-function
    ;; magit-completing-read-function 'helm-completing-read-with-cands-in-buffer
-   ))
+
+   )
+
+  (add-hook 'git-commit-setup-hook #'git-commit-turn-on-flyspell)
+
+  ;; XXX
+  (defadvice magit-process (around dont-switch activate)
+    (save-selected-window
+      ad-do-it)))
 
 (ublt/set-up 'git-commit-mode
   (setq git-commit-summary-max-length 70))
