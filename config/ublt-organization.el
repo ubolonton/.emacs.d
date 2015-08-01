@@ -47,6 +47,8 @@
  ;; List additional (on top of 2) indentation
  org-list-indent-offset 1
 
+ org-hide-emphasis-markers t
+
  ;; Allow using alphabetical bullets
  org-alphabetical-lists t
 
