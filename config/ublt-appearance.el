@@ -688,8 +688,8 @@
   (add-hook 'prog-mode-hook #'ublt/maybe-number-font-lock-mode))
 
 (ublt/set-up 'eval-sexp-fu
-  (setq eval-sexp-fu-flash-duration 0.5
-        eval-sexp-fu-flash-error-duration 0.5))
+  (setq eval-sexp-fu-flash-duration 0.4
+        eval-sexp-fu-flash-error-duration 0.6))
 
 (ublt/set-up 'volatile-highlights
   (volatile-highlights-mode +1))
