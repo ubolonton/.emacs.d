@@ -88,10 +88,11 @@
 
 
 ;;;Color theme
-(if window-system
-    (ublt/set-up 'ublt-dark-theme
-      (load-theme 'ublt-dark t))
-  (load-theme 'monokai t))
+(when (y-or-n-p "Load theme?")
+  (if window-system
+      (ublt/set-up 'ublt-dark-theme
+        (load-theme 'ublt-dark t))
+    (load-theme 'monokai t)))
 
 
 ;;; Whitespaces
