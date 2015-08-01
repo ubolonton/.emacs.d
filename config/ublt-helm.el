@@ -42,8 +42,7 @@
 
 (ublt/set-up 'helm-bookmark
   (ublt/helm-enable-fuzzy
-   '((helm-source-pp-bookmarks helm-source-basic-bookmarks)
-     (helm-source-bookmarks helm-source-basic-bookmarks))))
+   '((helm-source-bookmarks helm-source-basic-bookmarks))))
 
 (ublt/set-up 'helm-imenu
   (setq helm-imenu-delimiter " "
@@ -90,15 +89,12 @@
 
 
 (defun ublt/helm-sources ()
-  (let ((base '( ;; helm-c-source-ffap-line
-                ;; helm-c-source-ffap-guesser
-                helm-source-buffers-list
+  (let ((base '(helm-source-buffers-list
                 helm-source-recentf
                 helm-source-ido-virtual-buffers
                 helm-source-buffer-not-found
                 helm-source-files-in-current-dir
-                ;; helm-source-bookmarks
-                helm-source-pp-bookmarks
+                helm-source-bookmarks
                 helm-source-file-cache
                 helm-source-locate)))
     (if (featurep 'helm-cmd-t)
@@ -130,7 +126,8 @@
                         ))
     (condition-case nil
         (helm-attrset 'follow 1 source)
-      (error nil))))
+      (error nil)))
+  )
 (add-hook 'helm-before-initialize-hook #'ublt/helm-enable-follow-mode)
 
 
@@ -145,7 +142,6 @@ font (fixed-pitch is still preferable)."
                        ;; helm-c-source-ffap-guesser
                        ;; helm-c-source-buffers-list
                        helm-source-bookmarks
-                       helm-source-pp-bookmarks
                        ;; helm-source-recentf
                        ;; helm-source-file-cache
                        ;; helm-source-filelist
