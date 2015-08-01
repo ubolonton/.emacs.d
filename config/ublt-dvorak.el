@@ -45,13 +45,15 @@
   (declare (indent 1))
   (let ((i 0))
     (while (< i (length ps))
-      (if (= (mod i 2) 0)
-          (let ((src (elt ps i))
-                (dst (elt ps (1+ i))))
-            (define-key key-map
-              (read-kbd-macro src) (if (stringp dst)
-                                       (read-kbd-macro dst)
-                                     dst))))
+      (let ((src (elt ps i))
+            (dst (elt ps (1+ i))))
+        (define-key key-map
+          (if (symbolp src)
+              (vector 'remap src)
+            (read-kbd-macro src))
+          (if (stringp dst)
+              (read-kbd-macro dst)
+            dst)))
       (setq i (+ i 2)))))
 
 (font-lock-add-keywords
@@ -608,7 +610,8 @@
   "C-x h"       'helm-mark-all
   "M-a"         'helm-toggle-all-marks
   "C-f"         'helm-follow-mode
-  "s-w"         'ublt/helm-maybe-exit-minibuffer-other-window)
+  'ublt/switch-to-last-buffer 'helm-select-action
+  'other-window               'ublt/helm-maybe-exit-minibuffer-other-window)
 (ublt/keys 'minibuffer minibuffer-local-map
   "C-c C-l"     'helm-minibuffer-history)
 
@@ -900,9 +903,9 @@
          "C-r"    'ido-toggle-regexp    ;was ido-prev-match
          "C-t"    nil                   ;was ido-toggle-regexp
          ;; Select first decide where to do later
-         "s-2"    'ido-invoke-in-vertical-split
-         "s-3"    'ido-invoke-in-horizontal-split
-         "s-w"    'ido-invoke-in-other-window))
+         'split-window-vertically   'ido-invoke-in-vertical-split
+         'split-window-horizontally 'ido-invoke-in-horizontal-split
+         'other-window              'ido-invoke-in-other-window))
      (add-hook 'ido-setup-hook 'ublt/set-up-ido-keymaps)))
 
 (ublt/keys "info" Info-mode-map
@@ -946,6 +949,7 @@
   "M-p" 'previous-error
   "M-n" 'next-error
   "M-a" 'org-cycle
+  'helm-semantic-or-imenu 'helm-org-in-buffer-headings
   )
 
 (ublt/keys 'org-agenda org-agenda-mode-map
