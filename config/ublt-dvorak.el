@@ -689,6 +689,10 @@
          "M-p" nil
          "M-n" nil))))
 
+;; (ublt/keys 'ag ag-mode-map
+;;   "M-p" 'compilation-previous-error
+;;   "M-n" 'compilation-next-error)
+
 
 ;;; Paredit
 (eval-after-load "paredit"

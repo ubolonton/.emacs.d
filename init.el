@@ -93,6 +93,7 @@
          less-css-mode scss-mode
          clojure-mode clojurescript-mode cider
          scala-mode2 ensime
+         helm-ag
          elisp-slime-nav
          js2-mode json-mode tern company-tern
          php-mode php-boris
