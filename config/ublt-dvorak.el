@@ -221,9 +221,13 @@
   "s-F"           'helm-projectile
   ;; "s-F"           'projectile-find-file
   "s-g"           'magit-status
+  "s-C-g"         'magit-dispatch-popup
   "s-G"           'find-grep
-  "s-m"           'ace-jump-mode
-  "s-M"           'ace-jump-char-mode
+  ;; "s-G"           'projectile-grep
+  ;; "s-m"           'ace-jump-mode
+  ;; "s-M"           'ace-jump-char-mode
+  "s-m"           'avy-goto-word-1
+  "s-M"           'avy-goto-char-2
   "s-r"           'org-capture
   "s-R"           'org-agenda
   "s-n"           'ublt/switch-to-last-buffer
@@ -584,8 +588,10 @@
 ;;; Diff navigation
 (defun ublt/setup-ediff-mode-map ()
   (ublt/define-keys 'ediff-mode-map
-    "c" 'ediff-previous-difference
-    "t" 'ediff-next-difference))
+    ;; TODO: Previously we used c/t, but 3-way diff view needs "c".
+    "<up>"   'ediff-previous-difference
+    "<down>" 'ediff-next-difference
+    ))
 
 (eval-after-load 'ediff
   '(progn
@@ -885,12 +891,17 @@
   "M-o"        'dired-omit-mode)
 
 (ublt/keys 'magit magit-mode-map
-  "M-a"   'magit-toggle-section
-  "S-SPC" 'magit-show-item-or-scroll-down
-  "C-M-u" 'magit-goto-parent-section)
+  "U"     'magit-unstage-all
+  "M-a"   'magit-section-toggle
+  "S-SPC" 'magit-diff-show-or-scroll-down
+  "C-M-u" 'magit-section-up)
 (ublt/keys 'git-commit-mode git-commit-mode-map
   "s-s"     'git-commit-commit
   "C-x C-s" 'git-commit-commit)
+(ublt/keys 'with-editor with-editor-mode-map
+  "s-s"     'with-editor-finish
+  "C-x C-s" 'with-editor-finish
+  "s-k"     'with-editor-cancel)
 
 (eval-after-load "ido"
   '(progn

@@ -228,7 +228,16 @@ created), caused by `scroll-preserve-screen-position' not taking
                                      ace-jump-char-mode)
         ace-jump-word-mode-use-query-char t
         ace-jump-mode-move-keys (nconc (loop for i from ?a to ?z collect i)
-                                       (loop for i from ?A to ?Z collect i))))
+                                       (loop for i from ?0 to ?9 collect i)
+                                       ;; (loop for i from ?A to ?Z collect i)
+                                       )))
+
+(ublt/set-up 'avy
+  (setq
+   avy-background t
+   ;; Dvorak, stronger finger first, left hand first?
+   avy-keys '(?u ?h ?i ?d ?e ?t ?o ?n  ?p ?g ?k ?m  ?. ?c  ?, ?r  ?j ?w  ?q ?v  ?a ?s)
+   avy-style 'at-full))
 
 
 (ublt/set-up 'popwin

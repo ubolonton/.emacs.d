@@ -33,7 +33,7 @@
 (defvar ublt/packages
   '(smex company yasnippet
          textmate undo-tree whole-line-or-region
-         ace-jump-mode htmlize twittering-mode keyfreq
+         ace-jump-mode avy htmlize twittering-mode keyfreq
          expand-region
          eval-sexp-fu                   ; flash eval'ed code
          popwin                         ; make unimportant windows transient
