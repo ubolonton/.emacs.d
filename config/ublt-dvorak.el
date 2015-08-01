@@ -201,6 +201,12 @@
   "M-f"    "<escape>"                   ; evil's normal state
   )
 
+;;; See the configuration files for zsh (`.zshrc'), readline
+;;; (`.inputrc'), Konsole (`default.keytab')
+;; (define-key local-function-key-map "[25~" (kbd "<backspace>"))
+;; (define-key local-function-key-map "[26~" (kbd "C-<backspace>"))
+;; (define-key local-function-key-map "[27~" (kbd "C-<delete>"))
+
 (ublt/define-keys global-map
   ;; Windows manipulation
   "s-1"           'delete-other-windows
@@ -796,6 +802,10 @@
 (ublt/keys 'scheme scheme-mode-map
   "C-c C-s" 'switch-to-scheme
   "C-c v"   'scheme-compile-file)
+(ublt/keys 'ess-mode ess-mode-map
+  "C-c v"   'ess-eval-buffer
+  ;; "C-c C-s" 'ess-switch-to-inferior-or-script-buffer
+  )
 
 (ublt/keys "factor-mode" factor-mode-map
   "C-c C-c" 'fuel-eval-definition
