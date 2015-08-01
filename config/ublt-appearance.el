@@ -222,6 +222,12 @@
   (global-linum-mode +1))
 
 
+;;; Empty lines at the end of a buffer. TODO: Use this once it doesn't
+;; mess with comint modes anymore
+;; (ublt/set-up 'vim-empty-lines-mode
+;;   (global-vim-empty-lines-mode +1))
+
+
 (defun ublt/toggle-fullscreen ()
   "Tested only in X."
   (interactive)
@@ -417,22 +423,29 @@
                  (error (message (format "Error diminishing \"%s\": %s" ,mode-name err)))))
           (diminish mode-name display-text))
       (error (message (format "Error diminishing \"%s\": %s" mode-name err)))))
+  '(
+   ъ 1 2 3 4 5   6 7 8 9 0 х
+     э б ю з н   а п с к д \
+     ф щ у г ш   в р е т ы -
+     ж й о л ч   и ь ц м я
+     ё Б               . =
+     )
   ;; mode name - displayed text - feature name (file name)
-  (dolist (m '((paredit-mode              "(Π)"   paredit)
-               (eproject-mode             "eP" eproject)
-               (projectile-mode           "Πρ" projectile)
+  (dolist (m '((paredit-mode              "(П)"   paredit)
+               (eproject-mode             "еП" eproject)
+               (projectile-mode           "Пр" projectile)
                (undo-tree-mode            "⌘-Z"  undo-tree)
-               (yas-minor-mode            "γas"  yasnippet)
+               (yas-minor-mode            "яс"  yasnippet)
                (flymake-mode              " !"   flymake)
                (flyspell-mode             " !"   flyspell)
                (hs-minor-mode             " ⊕" hideshow)
-               (company-mode              "αc" company)
+               (company-mode              "" company)
                (rainbow-mode              " ❂" rainbow-mode)
                (anzu-mode                 " Σ" anzu)
                (isearch                   " Σ")
                (auto-fill-function        " ⏎")
                (visual-line-mode          " ⤾")
-               (slime-mode                "SLIME")
+               ;; (slime-mode                "SLIME")
                (haskell-indentation-mode  "･" haskell-indentation)
                (org-indent-mode           "" org-indent)
                (whole-line-or-region-mode "" whole-line-or-region)
@@ -448,8 +461,14 @@
 
 
 ;;; TODO: Use a prettification mode
+
+;;; - `pretty-symbols': simplistic
+;;; - `pretty-symbol-mode': built-in, simplistic (1 symbol ->
+;;; 1 char, no conditional).
+;;; - `pretty-mode': lots of mapping, not customizable, no conditional.
 '(∧∧∧∧∧
   ∨∨∨∨∨
+  $this->foo
   $this➞foo
   $this➝foo
   $this➜foo
