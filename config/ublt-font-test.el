@@ -39,6 +39,9 @@
                 "ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ ƒ"
                 "lambda lambda lambda lambda lambda lambda"
                 "λ λ λ λ λ λ λ λ λ λ λ λ λ λ λ λ λ λ λ λ λ"
-                ))
+                "[ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]"
+                " ☐   ☐   ☐   ☐   ☐   ☐   ☐   ☐   ☐   ☐   ☐"
+                "[X] [X] [X] [X] [X] [X] [X] [X] [X] [X] [X]"
+                " ☑   ☑   ☑   ☑   ☑   ☑   ☑   ☑   ☑   ☑   ☑"))
       (insert "\n| ")
       (insert (propertize s 'font-lock-face 'font-lock-keyword-face)))))

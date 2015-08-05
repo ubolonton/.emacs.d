@@ -1,0 +1,49 @@
+* Header 1
+** Header 2
+*** Header 3
+**** Header 4
+***** Header 5
+
+This is a piece of text.
+
+Formatting: /italic/, *bold*, _underline_, ~code~, =verbatim=.
+
+[[https://ubolonton.org][Link to ubolonton.org]]
+
+List:
+- a
+- b
+- c
+   + 1
+   + 2
+   + 3
+
+Check list
+- [ ] a
+- [X] b
+- [X] c
+   + [X] d
+- [-] e
+   + [X] f
+   + [ ] g
+
+Table:
+| Title | Summary |
+| X     | Y       |
+
+# A comment
+
+* Code
+#+begin_src clojure
+; A function
+(defn foo [x]
+  "A doc string."
+  (:bar x))
+#+end_src
+
+#+begin_src python
+# A comment.
+def foo(x):
+    """A doc string."""
+    return str(x)
+#+end_src

@@ -1,11 +1,6 @@
 (unless (>= emacs-major-version 24)
   (error "Ublt dark theme requires Emacs 24 or later"))
 
-;;; TODO: Check if the built-in face `fixed-pitch' can be used instead
-(defface ublt/default-fixed-width
-  '((t (:inherit default)))
-  "")
-
 (defface ublt/default-variable-width
   '((t (:inherit variable-pitch)))
   "")
@@ -25,12 +20,13 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
     (when ublt/text-scale-vw-remapping
       (face-remap-remove-relative ublt/text-scale-vw-remapping))
     (when ratio
-      (setq ublt/text-scale-fw-remapping
-            (face-remap-add-relative 'ublt/default-fixed-width
-                                     :height ratio))
       (setq ublt/text-scale-vw-remapping
             (face-remap-add-relative 'ublt/default-variable-width
-                                     :height ratio)))
+                                     :height ratio))
+      (setq ublt/text-scale-fw-remapping
+            (face-remap-add-relative 'fixed-pitch
+                                     :height ratio))
+      )
     (force-window-update (current-buffer))))
 
 (deftheme ublt-dark "Ubolonton's dark color theme")
@@ -160,13 +156,13 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
        ;; Mixins
 
        ;; Fixed-width (unscalable)
-       (fw0           `(:font ,(face-attribute 'default :font)
-                              :fontset ,(face-attribute 'default :fontset)))
+       (fw0           `(:font ,(face-attribute 'fixed-pitch :font)
+                              :fontset ,(face-attribute 'fixed-pitch :fontset)))
        ;; Variable-width (unscalable)
        (vw0           `(:font ,(face-attribute 'variable-pitch :font)
                               :fontset ,(face-attribute 'variable-pitch :fontset)))
        ;; Fixed-width (scalable)
-       (fw             '(:inherit ublt/default-fixed-width))
+       (fw             '(:inherit fixed-pitch))
        ;; Variable-width (scalable)
        (vw             '(:inherit ublt/default-variable-width))
        (vw-italic      `(,@vw :weight light :slant italic))
@@ -178,26 +174,20 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    'ublt-dark
 
 
-   ;; Base
-
-   `(default
-      ((,class (:foreground ,fg :background ,bg))))
-   `(variable-pitch
-     ((,class (,@vw0 :foreground ,fg-1 :background ,bg))))
-
-   ;; Most faces that wish to always use
+   ;; Mixin bases. Most faces that wish to always use
    ;; fixed-width/variable-width font should inherit these, not
-   ;; `default', which gets font remapped. Because we do want
-   ;; these faces to participate in scale remapping, we use
-   ;; dynamic inheritance instead of static mixin, so that it's
-   ;; suffice to scale remap 2 faces. You may wonder where
-   ;; is is desirable to mix fixed-width/variable-width fonts;
-   ;; Org-mode, markdown, info... and to a lesser degree, html
-   ;; code. Basically places that mix prose and code.
-   `(ublt/default-fixed-width
+   ;; `default', which gets font remapped. `text-scale-mode' is
+   ;; advised to scale them correctly.
+   `(fixed-pitch
      ((,class (,@fw0))))
    `(ublt/default-variable-width
      ((,class (,@vw0))))
+
+   ;; Bases
+   `(default
+      ((,class (,@fw0 :foreground ,fg :background ,bg))))
+   `(variable-pitch
+     ((,class (,@vw0 :foreground ,fg-1))))
 
    `(shadow ((,class (,@dimmed))))
    `(link ((,class (,@portal :underline ,bg+3))))
@@ -217,7 +207,6 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    ;;   ((,class (:foreground ,red-2 :height 1.0 :bold t))))
    `(anzu-mode-line                     ;TODO
      ((,class (:foreground ,blue-d :weight bold))))
-
 
    ;; Fringe
    `(fringe

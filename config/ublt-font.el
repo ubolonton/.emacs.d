@@ -9,6 +9,9 @@
 
 ;;; Fontsets
 
+;; NOTE: Use (modify-all-frames-parameters nil ...) to reset font if there
+;; is "invalid font" error. Such bizarre API.
+
 ;;; TODO: What is the way to prioritize character sets? This seems to
 ;; have no effect if both :font/:fontset are set. The priority list
 ;; must be somewhere else? Or are there 2 lists?
@@ -39,8 +42,8 @@
 ;; unspecified
 
 ;;; :fontset => seems to work fine regardless of "preferred charset"
-;;; reported for each character. The import thing seems to be what
-;;; `fontset-font' reports instead (TODO: not even sure about that)
+;;; reported for each character. The important thing seems to be what
+;;; `fontset-font' reports instead (TODO: not even sure about that).
 
 ;; ELISP> (face-attribute 'variable-pitch :font)
 ;; unspecified
@@ -53,9 +56,8 @@
 ;;; Don't do this, it's the same as (set-face-attribute ... :font)
 ;; which is weird, as described above (probably that's the reason
 ;; fontsets are excluded from its completion list when calling
-;; interactively, duh)
+;; interactively, duh).
 ;; (set-frame-font "fontset-ubltf")
-
 
 (defun ublt/assign-font (fontset &rest mappings)
   (declare (indent 1))
@@ -112,26 +114,34 @@
     ;; For Vietnamese characters already covered by extended latin
     latin-iso8859-1
     ;; Russian
-    cyrillic-iso8859-5))
+    cyrillic-iso8859-5)
+  `(,(font-spec :family "Symbol")
+    (?☑ . ?☑)
+    (?☐ . ?☐)))
 
 
 
-;;; Don't set :font/:fontset/:family alone. See the long explanation
-;;; section above. And contrary to whet the doc says, `font-spec'
-;;; cannot take a fontset as its `:family', like `set-face-attribute'
-(set-face-attribute 'variable-pitch nil
-                    :fontset "fontset-ubltv"
-                    ;; This is determined from FONTSET-NAME part (see
-                    ;; `create-fontset-from-fontset-spec')
-                    :font "fontset-ubltv"
-                    ;; :font (font-spec :family "Fira Sans"
-                    ;;                  :weight 'light
-                    ;;                  :size 13.0)
-                    ;; :height 130         ; 1/10 points
-                    ;; :font (font-spec :family "Ubuntu Condensed"
-                    ;;                  :weight 'extra-light
-                    ;;                  :size 13.5)
-                    )
+;; ;;; Don't set :font/:fontset/:family alone. See the long explanation
+;; ;;; section above. And contrary to whet the doc says, `font-spec'
+;; ;;; cannot take a fontset as its `:family', like `set-face-attribute'
+;; (set-face-attribute 'variable-pitch nil
+;;                     :fontset "fontset-ubltv"
+;;                     ;; This is determined from FONTSET-NAME part (see
+;;                     ;; `create-fontset-from-fontset-spec')
+;;                     :font "fontset-ubltv"
+;;                     ;; :font (font-spec :family "Fira Sans"
+;;                     ;;                  :weight 'light
+;;                     ;;                  :size 13.0)
+;;                     ;; :height 130         ; 1/10 points
+;;                     ;; :font (font-spec :family "Ubuntu Condensed"
+;;                     ;;                  :weight 'extra-light
+;;                     ;;                  :size 13.5)
+;;                     )
+
+(set-face-attribute
+ 'variable-pitch nil
+ :fontset "fontset-ubltv"
+ :font "fontset-ubltv")
 
 ;;; The non-uniformity of face/font/fontset handling (normal vs.
 ;;; default) is so ugly. TODO FIX: Make sure applying theme does not
@@ -141,76 +151,50 @@
 ;;; TODO: More aggressive prettification and now that we get this
 ;;; thing and large unicode fonts (Quivira, Gentium, Doulos, Charis...)
 
-;; NOTE: Use (modify-all-frames-parameters nil ...) to reset font if there
-;; is "invalid font" error. Such bizarre API.
-(set-face-attribute 'default nil
-                    ;; :font (font-spec :family "Inconsolata"
-                    ;;                  :weight 'normal
-                    ;;                  :size 12.0
-                    ;;                  )
-                    :font (font-spec :family "Fantasque Sans Mono"
-                                     :weight 'normal
-                                     :size 12.0)
-                    ;; :font (font-spec :family "Cousine"
-                    ;;                  :weight 'normal
-                    ;;                  :size 12.0)
-                    ;; :font (font-spec :family "Anonymous Pro"
-                    ;;                  :weight 'normal
-                    ;;                  :size 12.0)
-                    ;; :font (font-spec :family "Source Code Pro"
-                    ;;                  :weight 'normal
-                    ;;                  :size 12.0)
-                    )
+(defvar ublt/fixed-width-fontset
+  "-unknown-Fantasque Sans Mono-normal-normal-normal-*-*-*-*-*-m-*-fontset-ubltf")
+(create-fontset-from-fontset-spec ublt/fixed-width-fontset)
 
-;;; XXX: Looks like this takes the default font into account somehow?
-;;; This list is against CosmicSansNeueMono 12pt (zooming may break
-;;; the proportion due to rounding, and due to fonts scaling differently)
 (dolist (rescale '((".*Fira Mono-.*" 0.88)
                    (".*Droid Sans Mono-.*" 0.88)
                    (".*DejaVu Sans Mono-.*" 0.88)
                    (".*Symbol-.*" 1.06)
-                   (".*Inconsolata-.*" 1.04)
-                   ;; (".*CosmicSansNeueMono-.*" 1.0)
-                   ;; (".*Source Code Pro-.*" 1.0)
-                   ;; (".*Anonymous Pro-.*" 1.0)
-                   ;; (".*Cousine-.*" 1.0)
-                   ))
+                   (".*Inconsolata-.*" 1.04)))
   (destructuring-bind (font size) rescale
     (ublt/assoc! 'face-font-rescale-alist font size)))
 
-;;; FIX: Somehow variable-pitch font gets messed up after each theme
-;;; application as well, and either evaluation this or
-;;; `set-face-attribute' on `variable-pitch' again fixes that!?!?!
-(ublt/assign-font (face-attribute 'default :fontset)
-  `(,(font-spec :family "Droid Sans Mono"
-                ;; :size 10.8
-                )
+(ublt/assign-font ublt/fixed-width-fontset
+  `(,(font-spec :family "Fantasque Sans Mono"
+                :weight 'normal
+                :size 12.0)
+    ascii)
+  `(,(font-spec :family "Droid Sans Mono")
     vietnamese-viscii-upper
     vietnamese-viscii-lower
     viscii
     vscii
     vscii-2
     tcvn-5712)
-  `(,(font-spec :family "Fira Mono"
-                ;; :size 10.8
-                )
+  `(,(font-spec :family "Fira Mono")
     cyrillic-iso8859-5)
-  `(,(font-spec :family "DejaVu Sans Mono"
-                ;; :size 12.0
-                )
+  `(,(font-spec :family "DejaVu Sans Mono")
     (?▸ . ?▸))
-  `(,(font-spec :family "Symbol"
-                ;; :size 12.0
-                )
+  `(,(font-spec :family "Symbol")
     (?⇒ . ?⇒)
-    (?⇐ . ?⇐))
+    (?⇐ . ?⇐)
+    (?☑ . ?☑)
+    (?☐ . ?☐))
   `(,(font-spec :family "Droid Sans Mono"
-                :weight 'normal
-                ;; :size 10.8
-                )
+                :weight 'normal)
     (?λ . ?λ))
   `(,(font-spec :family "Inconsolata"
                 :weight 'normal)
 	(?ƒ . ?ƒ)))
+
+(dolist (face '(default fixed-pitch))
+  (set-face-attribute
+   face nil
+   :fontset "fontset-ubltf"
+   :font "fontset-ubltf"))
 
 (provide 'ublt-font)
