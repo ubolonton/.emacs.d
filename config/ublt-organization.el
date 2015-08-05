@@ -219,7 +219,7 @@
    org-refile-targets '((("~/org/gtd/someday.org") . (:maxlevel . 1))
                         (("~/org/gtd/tasks.org") . (:maxlevel . 1))
                         (("~/org/gtd/projects.org") . (:maxlevel . 2))
-                        (("~/org/work/fram/work-notes.org") . (:maxlevel . 3)))
+                        (("~/org/work/adatao/work-notes.org") . (:maxlevel . 3)))
 
    org-refile-allow-creating-parent-nodes 'confirm
    org-refile-target-verify-function 'ublt/verify-refile-target
@@ -236,7 +236,7 @@
      ("w" "Work"
       ((agenda "")
        (tags-todo "SCHEDULED=\"\""))
-      ((org-agenda-files '("~/org/work/fram/work-notes.org"))
+      ((org-agenda-files '("~/org/work/adatao/work-notes.org"))
        (org-agenda-ndays 1)
        (org-agenda-sorting-strategy
         '((agenda todo-state-up time-up priority-down)))
