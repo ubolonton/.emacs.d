@@ -619,6 +619,14 @@
   "Turn off `auto-fill-mode' (automatic hard wrapping)."
   (when visual-line-mode
     (auto-fill-mode -1)))
+
+;;; Change highlighting
+(ublt/set-up 'diff-hl
+  (global-diff-hl-mode +1)
+  (if (display-graphic-p)
+      (setq diff-hl-side 'right)
+    (setq diff-hl-side 'left)
+    (diff-hl-margin-mode)))
 
 
 ;;; Misc

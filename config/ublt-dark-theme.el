@@ -461,6 +461,13 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(git-commit-comment-branch
      ((,class (,@fw ,@more :box ,bg+3))))
 
+   `(diff-hl-insert
+     ((,class (:foreground ,bg :background ,forest))))
+   `(diff-hl-delete
+     ((,class (:foreground ,blush :background ,blush))))
+   `(diff-hl-change
+     ((,class (:foreground ,cyan :background ,cyan))))
+
 
    ;; Programming languages
 
