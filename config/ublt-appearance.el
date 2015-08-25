@@ -44,7 +44,7 @@
 
 
 ;; Fonts
-(when window-system
+(when (display-graphic-p)
   ;; Font-mixing obsession
   (ublt/set-up 'ublt-font
     ;; Non-code text reads better in proportional font
@@ -89,7 +89,7 @@
 
 ;;;Color theme
 (when (y-or-n-p "Load theme?")
-  (if window-system
+  (if (window-system)
       (ublt/set-up 'ublt-dark-theme
         (load-theme 'ublt-dark t))
     (load-theme 'monokai t)))
@@ -500,6 +500,12 @@
                     (0 (ublt/show-as ?➤)))
                    ("\\(#\\+end_src\\>\\)"
                     (0 (ublt/show-as ?➤)))
+                   ("\\(\\[X\\]\\)"
+                    (0 (ublt/show-as ?☑)))
+                   ("\\(\\[ \\]\\)"
+                    (0 (ublt/show-as ?☐)))
+                   ;; ("\\[\\(X\\)\\]"
+                   ;;  (0 (ublt/show-as ?✓)))
                    ;; Arrows
                    ("\\(=>\\)"
                     (0 (ublt/show-as ?⟹ #'ublt/-not-in-org-src-block)))
