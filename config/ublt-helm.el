@@ -15,10 +15,6 @@
         (set s (helm-make-source (helm-attr 'name source) class
                  :fuzzy-match t))))))
 
-(ublt/set-up 'helm-match-plugin
-  (setq helm-mp-highlight-delay 0.7
-        helm-mp-highlight-threshold 4))
-
 (ublt/set-up 'helm-files
   (setq helm-ff-file-name-history-use-recentf t
         ;; helm-ff-auto-update-initial-value t
@@ -96,7 +92,8 @@
                 helm-source-files-in-current-dir
                 helm-source-bookmarks
                 helm-source-file-cache
-                helm-source-locate)))
+                helm-source-locate
+                )))
     (if (featurep 'helm-cmd-t)
         ;; FIX
         (condition-case nil
@@ -192,6 +189,21 @@ all of the sources."
   (unwind-protect ad-do-it
     (setq ublt/helm-exit-other-window-p nil)))
 
+;;; TODO: Continue with the attempt to show helm in a separate
+;; dedicated frame.
+;; (defun ublt/helm-display-buffer (buffer)
+;;   ;; (window-frame)
+;;   (special-display-popup-frame
+;;    buffer
+;;    '((minibuffer . nil)
+;;      (name . "ublt-helm-dedicated")
+;;      (title . "*ublt-helm-dedicated*"))))
+
+;; (setq helm-display-function #'ublt/helm-display-buffer
+;;       helm-full-frame t)
+
+;; (setq helm-display-function #'helm-default-display-buffer
+;;       helm-full-frame nil)
 
 (helm-mode +1)
 
