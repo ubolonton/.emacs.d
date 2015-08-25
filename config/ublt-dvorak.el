@@ -546,6 +546,7 @@
   "C-x C-n" nil                    ; evil-complete-next-line
   "C-x C-p" nil                    ; evil-complete-previous-line
   "C-t" nil                        ; evil-shift-right-line
+  "C-a" nil                        ; evil-paste-last-insertion
   )
 (ublt/keys "evil" evil-visual-state-map
   "s-<escape>" 'evil-motion-state
@@ -839,12 +840,13 @@
   "M-a"     nil                         ;was elpy-nav-backward-statement
   "M-e"     nil                         ;was elpy-nav-forward-statement
   "C-<left>" nil                        ;was elpy-nav-backward-iblock
-  "C-<right>" nil                       ;was elpy-nav-forward-iblock
+  "C-<right>" nil
   "M-<left>"  nil
   "M-<right>" nil
   "M-,"       'pop-tag-mark
   ;; "M-<left>" 'elpy-nav-backward-definition ;was backward-list
   ;; "M-<right>" 'elpy-nav-forward-definition ;was forward-list
+  "C-M-i" nil
   )
 
 (ublt/keys "sql" sql-mode-map
@@ -853,7 +855,6 @@
   "C-c C-d" 'ublt/sql-describe-thing-at-point
   )
 
-;;; XXX: Why doesn't this work???
 ;; (eval-after-load "erlang"
 ;;   (add-hook 'erlang-mode-hook
 ;;             (lambda ()
