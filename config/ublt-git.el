@@ -83,6 +83,13 @@
     (save-selected-window
       ad-do-it)))
 
+(ublt/set-up 'magit-popup
+  (dolist (switch '((?m "Exclude merges" "--no-merges")
+                    (?M "Show only merges" "--merges")
+                    (?t "Sort topologically" "--topo-order")
+                    (?f "Exclude foreign" "--first-parent")))
+    (apply #'magit-define-popup-switch 'magit-log-popup switch)))
+
 (ublt/set-up 'git-commit-mode
   (setq git-commit-summary-max-length 70))
 
