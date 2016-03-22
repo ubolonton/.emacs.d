@@ -157,6 +157,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
 
        ;; Fixed-width (unscalable)
        (fw0           `(:font ,(face-attribute 'fixed-pitch :font)
+                              :weight light
                               :fontset ,(face-attribute 'fixed-pitch :fontset)))
        ;; Variable-width (unscalable)
        (vw0           `(:font ,(face-attribute 'variable-pitch :font)
@@ -575,7 +576,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(org-special-keyword
      ((,class (,@fw ,@constant))))
    `(org-indent                         ;TODO
-     ((,class ())))
+     ((,class (:inherit org-hide ;; :foreground ,bg+2 :background ,bg+2
+                        ))))
    ;; We use `normal' not `bold' for these because we use Fira Sans
    `(org-level-1
      ((,class (,@vw ,@constant :weight normal :overline ,bg+2 :height 1.4 ,@spectral-hl))))
