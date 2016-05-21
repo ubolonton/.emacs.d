@@ -45,7 +45,7 @@
          adaptive-wrap
          ido-ubiquitous                 ; List-narrowing UI
          flx-ido                        ; Improved flex matching for ido
-         helm helm-cmd-t helm-swoop
+         helm helm-swoop
          ;; number-font-lock-mode          ; Color numbers in code
          powerline                      ; Util helping configure mode-line
          ;; TODO: Use & combine with eproject

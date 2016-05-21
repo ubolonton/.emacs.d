@@ -91,15 +91,8 @@
                 helm-source-buffer-not-found
                 helm-source-files-in-current-dir
                 helm-source-bookmarks
-                helm-source-file-cache
-                helm-source-locate
-                )))
-    (if (featurep 'helm-cmd-t)
-        ;; FIX
-        (condition-case nil
-            (append base (list (helm-cmd-t-get-create-source (helm-cmd-t-root-data))))
-          (error base))
-      base)))
+                helm-source-file-cache)))
+    base))
 
 (defun ublt/helm ()
   (interactive)
