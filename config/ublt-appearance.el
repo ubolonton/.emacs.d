@@ -46,7 +46,10 @@
 ;; Fonts
 (when (display-graphic-p)
   ;; Font-mixing obsession
-  (ublt/set-up 'ublt-font
+  (ublt/set-up
+      (case system-type
+        ('gnu/linx 'ublt-font)
+        ('darwin 'ublt-font-osx))
     ;; Non-code text reads better in proportional font
     (defvar ublt/disable-variable-pitch-mode nil)
     (make-local-variable 'ublt/disable-variable-pitch-mode)
