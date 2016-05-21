@@ -246,7 +246,7 @@
   "s-/"           'variable-pitch-mode
   "s-\\"          'align-regexp
   "s-u"           'revert-buffer        ; ⟲
-  "s-k"           'kill-this-buffer
+  "s-k"           'ublt/kill-this-buffer
   ;; "s-l"           'goto-line
   "s-l"           'helm-swoop
   "s-C"           'ublt/duplicate-line

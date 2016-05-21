@@ -326,4 +326,8 @@ created), caused by `scroll-preserve-screen-position' not taking
       (widen)
     (call-interactively #'narrow-to-region)))
 
+(defun ublt/kill-this-buffer ()
+  (interactive)
+  (kill-buffer (current-buffer)))
+
 (provide 'ublt-navigation)
