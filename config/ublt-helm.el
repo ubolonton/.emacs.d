@@ -32,9 +32,11 @@
           (helm-make-source "Buffers" 'helm-source-buffers))))
 
 (ublt/set-up 'helm-locate
+  (setq helm-locate-fuzzy-match nil)
   (ublt/in '(gnu/linux)
-    (setq helm-locate-command "locate %s -e -A --regex %s"
-          helm-locate-fuzzy-match nil)))
+    (setq helm-locate-command "locate %s -e -A --regex %s"))
+  (ublt/in '(darwin)
+    (setq helm-locate-command "mdfind %s %s")))
 
 (ublt/set-up 'helm-bookmark
   (ublt/helm-enable-fuzzy
