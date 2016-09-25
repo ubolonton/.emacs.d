@@ -166,7 +166,7 @@
 (ublt/assign-font ublt/fixed-width-fontset
   `(,(font-spec :family "Fantasque Sans Mono"
                 :weight 'normal
-                :size 12.0)
+                :size 13.0)
     ascii)
   `(,(font-spec :family "Droid Sans Mono")
     vietnamese-viscii-upper
@@ -175,7 +175,8 @@
     vscii
     vscii-2
     tcvn-5712)
-  `(,(font-spec :family "Fira Mono")
+  `(,(font-spec :family "Fira Mono"
+                :size 14.0)
     cyrillic-iso8859-5)
   `(,(font-spec :family "DejaVu Sans Mono")
     (?▸ . ?▸))

@@ -678,10 +678,10 @@
 ;; (add-hook 'minibuffer-setup-hook 'ublt/redisplay)
 
 (setq-default
- line-spacing 0.00
+ line-spacing 0.1
 
- ;; 70-char column width
- fill-column 70
+ ;; Default width that triggers hard-wrap.
+ fill-column 120
  )
 
 ;; Technicolor
