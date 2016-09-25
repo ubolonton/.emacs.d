@@ -239,8 +239,9 @@
   "s-R"           'org-agenda
   "s-n"           'ublt/switch-to-last-buffer
   "s-b"           'ublt/browse-url-at-point
-  "s-B"           'zeal-at-point
+  "s-B"           'dash-at-point
   "s-p"           'pop-global-mark
+  "s-P"           'avy-pop-mark
   "s-<backspace>" 'ublt/toggle-alpha
   "s-<return>"    'ublt/toggle-fullscreen
   ;; "s-/"           'find-file-in-project
@@ -626,6 +627,8 @@
   "C-f"         'helm-follow-mode
   'ublt/switch-to-last-buffer 'helm-select-action
   'other-window               'ublt/helm-maybe-exit-minibuffer-other-window)
+(ublt/keys 'helm-buffers helm-buffer-map
+  "s-k" 'helm-buffer-run-kill-buffers)
 (ublt/keys 'minibuffer minibuffer-local-map
   "C-c C-l"     'helm-minibuffer-history)
 
