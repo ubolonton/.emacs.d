@@ -9,8 +9,7 @@
 ;; Default size, cursor
 (case system-type
   ('darwin (modify-all-frames-parameters
-            '((top . 0) (left . 0)      ;(width . 1280) (height . 800)
-              (cursor-type . bar))))
+            '((fullscreen . maximized))))
   ('windows-nt (modify-all-frames-parameters
                 '((cursor-type . bar))))
   ('gnu/linux (modify-all-frames-parameters
