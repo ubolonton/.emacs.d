@@ -6,12 +6,11 @@
 
 ;;; Emacs is not a text editor, and here we load its package manager!
 (require 'package)
-(dolist (source '(("marmalade" . "http://marmalade-repo.org/packages/")
-                  ("org" . "http://orgmode.org/elpa/")
-                  ("elpa" . "http://tromey.com/elpa/")
-                  ("melpa-stable" . "http://stable.melpa.org/packages/")
-                  ("melpa" . "http://melpa.org/packages/")
-                  ("elpy" . "http://jorgenschaefer.github.io/packages/")
+(dolist (source '(("marmalade" . "https://marmalade-repo.org/packages/")
+                  ("org" . "https://orgmode.org/elpa/")
+                  ("melpa-stable" . "https://stable.melpa.org/packages/")
+                  ("melpa" . "https://melpa.org/packages/")
+                  ("elpy" . "https://jorgenschaefer.github.io/packages/")
                   ))
   (add-to-list 'package-archives source t))
 
