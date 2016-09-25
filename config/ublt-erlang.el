@@ -35,7 +35,7 @@
       :error-patterns
       ((warning line-start (file-name) ":" line ": Warning:" (message) line-end)
        (error line-start (file-name) ":" line ": " (message) line-end))
-      :mode erlang-mode
+      :modes (list erlang-mode)
       :predicate (lambda () (and (eql major-mode 'erlang-mode) (eproject-root))))
 
     (setq flycheck-checkers (delq 'erlang flycheck-checkers))
