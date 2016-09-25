@@ -641,7 +641,7 @@
 
 (setq
  ;; 2x70 instead of the default 2x80 so that side-by-side is preferable
- split-width-threshold 120
+ split-width-threshold 150
 
  ;; Tile ediff windows horizontally
  ediff-split-window-function 'split-window-horizontally
