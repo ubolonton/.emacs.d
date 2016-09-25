@@ -20,6 +20,9 @@
         '((elpy . "elpy")
           (org . "org")
           (cider . "melpa-stable")
+          (helm-ag . "melpa-stable")
+          (helm-projectile . "melpa-stable")
+          (projectile . "melpa-stable")
           (helm . "melpa-stable"))))
 
 ;;; Some packages mess up `package-archives'. This fixes that.
@@ -93,7 +96,7 @@
          less-css-mode scss-mode
          clojure-mode clojurescript-mode cider
          scala-mode2 ensime
-         helm-ag
+         helm-ag helm-projectile
          elisp-slime-nav
          js2-mode json-mode tern company-tern
          php-mode php-boris

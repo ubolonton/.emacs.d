@@ -229,6 +229,7 @@
   "s-g"           'magit-status
   "s-C-g"         'magit-dispatch-popup
   "s-G"           'find-grep
+  "s-H"           'helm-ag
   ;; "s-G"           'projectile-grep
   ;; "s-m"           'ace-jump-mode
   ;; "s-M"           'ace-jump-char-mode

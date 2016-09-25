@@ -68,6 +68,11 @@
 (ublt/set-up 'helm-elisp
   (setq helm-apropos-fuzzy-match t))
 
+(ublt/set-up 'helm-projectile
+  (setq projectile-enable-caching t))
+
+(ublt/set-up 'helm-ag
+  (setq helm-ag-insert-at-point t))
 
 (setq helm-quick-update t
       ;; helm-maybe-use-default-as-input nil
