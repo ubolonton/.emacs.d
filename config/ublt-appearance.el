@@ -387,10 +387,10 @@
                 (powerline-raw evil-mode-line-tag)
 
                 (powerline-raw " ")
-                (powerline-raw "%4l" 'ublt/default-fixed-width) ; line
-                (powerline-raw ":" 'ublt/default-fixed-width)
-                (powerline-raw "%2c" 'ublt/default-fixed-width) ; column
-                (powerline-raw " " 'ublt/default-fixed-width)
+                (powerline-raw "%4l" 'fixed-pitch) ; line
+                (powerline-raw ":" 'fixed-pitch)
+                (powerline-raw "%2c" 'fixed-pitch) ; column
+                (powerline-raw " " 'fixed-pitch)
                 (powerline-raw (nyan-create))
 
                 (powerline-raw " ")
