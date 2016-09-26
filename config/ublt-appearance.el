@@ -646,10 +646,8 @@
  ;; Tile ediff windows horizontally
  ediff-split-window-function 'split-window-horizontally
 
- ;; XXX: Somehow this is very slow when navigating between hunks, use
- ;; the default for now.
- ;; ;; Don't create new frame for ediff's control window
- ;; ediff-window-setup-function 'ediff-setup-windows-plain
+ ;; Don't create new frame for ediff's control window
+ ediff-window-setup-function 'ediff-setup-windows-plain
 
  ;; Bells suck, both visible and audible
  visible-bell (case system-type
