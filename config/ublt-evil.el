@@ -81,8 +81,8 @@
   (dolist (mode '(occur-mode))
     (add-to-list 'evil-motion-state-modes mode))
 
-  (ublt/set-up 'git-commit
-    (add-hook 'git-commit-setup-hook 'evil-insert-state))
+  (eval-after-load 'git-commit
+    '(add-hook 'git-commit-setup-hook 'evil-insert-state))
 
   ;; REPL modes: go to prompt on switching to insert mode
   (defun ublt/repl-goto-prompt ()

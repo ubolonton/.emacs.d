@@ -62,7 +62,7 @@
          zeal-at-point                  ; Doc search
          moz                            ; interface with mozrepl
          ;; git
-         magit magit-svn diff-hl
+         magit magit-svn diff-hl git-timemachine
          ;; Vim emulation
          evil
          evil-surround

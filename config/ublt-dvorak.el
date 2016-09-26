@@ -914,13 +914,13 @@
   "M-a"   'magit-section-toggle
   "S-SPC" 'magit-diff-show-or-scroll-down
   "C-M-u" 'magit-section-up)
-(ublt/keys 'git-commit-mode git-commit-mode-map
-  "s-s"     'git-commit-commit
-  "C-x C-s" 'git-commit-commit)
 (ublt/keys 'with-editor with-editor-mode-map
   "s-s"     'with-editor-finish
   "C-x C-s" 'with-editor-finish
   "s-k"     'with-editor-cancel)
+(ublt/keys 'git-timemachine git-timemachine-mode-map
+  "M-p" 'git-timemachine-show-previous-revision
+  "M-n" 'git-timemachine-show-next-revision)
 
 (eval-after-load "ido"
   '(progn
