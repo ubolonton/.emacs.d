@@ -89,6 +89,7 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
 (setq default-coding-system 'utf-8
       locale-coding-system 'utf-8
       x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
+(define-coding-system-alias 'UTF-8 'utf-8)
 (ublt/set-up 'htmlize
   (setq htmlize-html-charset "utf-8"))
 ;;; TODO: Test this in Windows. If it works, use `ublt/in'
