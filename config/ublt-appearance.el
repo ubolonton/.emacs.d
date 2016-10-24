@@ -631,6 +631,7 @@
 ;;; Change highlighting
 (ublt/set-up 'diff-hl
   (global-diff-hl-mode +1)
+  (setq diff-hl-draw-borders nil)
   (if (display-graphic-p)
       (setq diff-hl-side 'right)
     (setq diff-hl-side 'left)
