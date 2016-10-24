@@ -2,17 +2,13 @@
 
 (require 'flycheck-pyflakes)
 
-(add-hook 'python-mode-hook (ublt/on-fn 'flycheck-mode))
-
 (ublt/set-up 'elpy
   (setq elpy-modules '(elpy-module-sane-defaults
                        elpy-module-company
                        elpy-module-eldoc
                        elpy-module-highlight-indentation
                        elpy-module-pyvenv))
-  (ublt/set-up 'flycheck
-    (add-hook 'elpy-mode-hook (ublt/on-fn 'flycheck-mode)))
-  (setq elpy-rpc-backend "jedi")
+  (setq elpy-rpc-backend "rope")
   (elpy-enable)
   (elpy-use-ipython))
 
@@ -20,6 +16,12 @@
   (defun ublt/tab-4-spaces ()
     (setq tab-width 4))
   (add-hook 'python-mode-hook 'ublt/tab-4-spaces)
+
+  (ublt/set-up 'flycheck
+    (defun ublt/python-maybe-flycheck ()
+      (when (member (file-name-extension buffer-file-name) '("py"))
+        (flycheck-mode +1)))
+    (add-hook 'python-mode-hook #'ublt/python-maybe-flycheck))
 
   (setq python-check-command "pyflakes"
         python-shell-interpreter "ipython"
@@ -29,6 +31,7 @@
         python-fill-docstring-style 'pep-257-nn)
 
   (add-to-list 'auto-mode-alist '("\\.tac$" . python-mode))
+  (add-to-list 'auto-mode-alist '("\\.bzl$" . python-mode))
 
   (ublt/set-up 'paredit
     (add-hook 'python-mode-hook (ublt/on-fn 'paredit-mode))))
