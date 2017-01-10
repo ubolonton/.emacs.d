@@ -22,4 +22,7 @@
 (add-hook 'prog-mode-hook (ublt/on-fn 'hl-line-mode))
 (add-hook 'prog-mode-hook (ublt/on-fn 'highlight-parentheses-mode))
 
+(add-to-list 'auto-mode-alist '("\\.m$" . octave-mode))
+(add-to-list 'auto-mode-alist '("\\.xml.jin$" . nxml-mode))
+
 (provide 'ublt-programming)

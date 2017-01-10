@@ -171,6 +171,8 @@
 (require 'ublt-ruby)
 (require 'ublt-js)
 
+(ublt/set-up 'ublt-mix-modes)
+
 
 (setq custom-file "~/.emacs.d/custom.el")
 (condition-case err
