@@ -185,7 +185,7 @@
 ;;; Open files with certain extensions using an external program
 ;;; (opening a large PDF file can hang Emacs).
 (defvar ublt/find-file-externally-extensions
-  '("pdf" "xls" "xlsx" "doc" "docx" "odt" "jpg" "png" "dmg"))
+  '("pdf" "xls" "xlsx" "doc" "docx" "odt" "jpg" "png" "dmg" "pkg"))
 (defadvice find-file (around open-externally activate)
   (let* ((file-name (ad-get-arg 0)))
     (if (member (downcase (or (file-name-extension file-name) ""))
