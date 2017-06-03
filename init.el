@@ -36,6 +36,7 @@
   '(smex company yasnippet
          textmate undo-tree whole-line-or-region
          ace-jump-mode avy htmlize twittering-mode keyfreq
+         ag
          expand-region
          eval-sexp-fu                   ; flash eval'ed code
          popwin                         ; make unimportant windows transient
@@ -48,6 +49,7 @@
          ido-ubiquitous                 ; List-narrowing UI
          flx-ido                        ; Improved flex matching for ido
          helm helm-swoop
+         helm-ag helm-projectile
          ;; number-font-lock-mode          ; Color numbers in code
          powerline                      ; Util helping configure mode-line
          ;; TODO: Use & combine with eproject
@@ -94,8 +96,7 @@
          markdown-mode yaml-mode
          less-css-mode scss-mode
          clojure-mode clojurescript-mode cider
-         scala-mode2 ensime
-         helm-ag helm-projectile
+         scala-mode ensime
          elisp-slime-nav
          js2-mode json-mode tern company-tern
          php-mode php-boris

@@ -228,7 +228,7 @@
   ;; "s-F"           'projectile-find-file
   "s-g"           'magit-status
   "s-C-g"         'magit-dispatch-popup
-  "s-G"           'find-grep
+  "s-G"           'ag
   "s-H"           'helm-ag
   ;; "s-G"           'projectile-grep
   ;; "s-m"           'ace-jump-mode
@@ -250,7 +250,7 @@
   "s-u"           'revert-buffer        ; ⟲
   "s-k"           'ublt/kill-this-buffer
   ;; "s-l"           'goto-line
-  "s-l"           'helm-swoop
+  "s-l"           'helm-swoop           ;TODO: This is unused (because s-f)
   "s-C"           'ublt/duplicate-line
   "s-+"           'text-scale-increase
   "s-="           'text-scale-increase
