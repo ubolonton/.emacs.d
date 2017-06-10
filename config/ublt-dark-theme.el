@@ -771,6 +771,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (,@vw :height 1.1))))
    `(helm-buffer-directory
      ((,class (:inherit helm-ff-directory))))
+   `(helm-buffer-process
+     ((,class (,@dimmed ,@vw-italic :height 0.95))))
    ;; helm-swoop
    `(helm-swoop-target-line-face
      ((,class (:inherit secondary-selection))))
