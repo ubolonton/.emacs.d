@@ -556,7 +556,7 @@
            (0 (ublt/show-as ?▸)))
           ("ret\\(urn\\)"
            (0 (ublt/show-as ?▸))))))
-(dolist (mode '(clojure-mode clojurescript-mode))
+(dolist (mode '(clojure-mode))
   (font-lock-add-keywords
    mode `(("{\\|}\\|;" . 'ublt/lisp-paren-face)
           ;; fn => ƒ

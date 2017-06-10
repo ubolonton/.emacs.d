@@ -248,16 +248,6 @@ created), caused by `scroll-preserve-screen-position' not taking
 (setq-default ediff-ignore-similar-regions t)
 
 
-;;; Doc search
-(ublt/set-up 'zeal-at-point
-  (dolist (pair '((python-mode . "python")
-                  (ruby-mode . "chef")
-                  (latex-mode . "latex")
-                  (sql-mode . "postgresql")
-                  (clojurescript-mode . "clojure")))
-    (add-to-list 'zeal-at-point-mode-alist pair)))
-
-
 ;;; What's the point of jumping to a section's start but putting it at
 ;;; the bottom of the window? This somewhat fixes it
 

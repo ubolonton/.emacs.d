@@ -230,9 +230,6 @@
   "s-C-g"         'magit-dispatch-popup
   "s-G"           'ag
   "s-H"           'helm-ag
-  ;; "s-G"           'projectile-grep
-  ;; "s-m"           'ace-jump-mode
-  ;; "s-M"           'ace-jump-char-mode
   "s-m"           'avy-goto-word-1
   "s-M"           'avy-goto-char-2
   "s-r"           'org-capture

@@ -11,8 +11,7 @@
 (dolist (mode '(scheme-mode
                 emacs-lisp-mode
                 lisp-mode
-                clojure-mode
-                clojurescript-mode))
+                clojure-mode))
   (font-lock-add-keywords mode '(("(\\|)" . 'ublt/lisp-paren-face))))
 
 ;; Scheme
@@ -25,7 +24,6 @@
                   lisp-mode-hook
                   ielm-mode-hook
                   clojure-mode-hook
-                  clojurescript-mode-hook
                   cider-repl-mode-hook))
     (add-hook hook (ublt/on-fn 'paredit-mode) t)))
 

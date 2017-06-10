@@ -35,7 +35,7 @@
 (defvar ublt/packages
   '(smex company yasnippet
          textmate undo-tree whole-line-or-region
-         ace-jump-mode avy htmlize twittering-mode keyfreq
+         avy htmlize twittering-mode keyfreq
          ag
          expand-region
          eval-sexp-fu                   ; flash eval'ed code
@@ -61,8 +61,6 @@
          anzu                           ; Match count for search
          help+ help-fns+ info+
          pabbrev                        ; TODO: Find better alternative
-         zeal-at-point                  ; Doc search
-         moz                            ; interface with mozrepl
          ;; git
          magit magit-svn diff-hl git-timemachine
          ;; Vim emulation
@@ -96,12 +94,12 @@
          ess
          markdown-mode yaml-mode
          less-css-mode scss-mode
-         clojure-mode clojurescript-mode cider
+         clojure-mode cider
          scala-mode ensime
          elisp-slime-nav
          js2-mode json-mode tern company-tern
+         typescript-mode
          php-mode php-boris
-         rvm
          elpy                           ;python
          web-mode
          emmet-mode                          ; html/css editing
@@ -129,11 +127,6 @@
 (require 'ublt-appearance)
 (require 'ublt-navigation)
 (require 'ublt-editing)
-
-(condition-case err
-    (when (y-or-n-p "Load secrets?")
-      (require 'ublt-secrets "ublt-secrets.el.gpg"))
-  (error (message "(ubolonton) Failed to load secrets!")))
 
 ;;; Personal stuff
 (ublt/add-path "org2blog/")
