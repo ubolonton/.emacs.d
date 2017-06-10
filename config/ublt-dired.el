@@ -50,6 +50,9 @@
 (ublt/set-up 'dired-sort-map
   (setq dired-listing-switches "--group-directories-first -alhG1v"))
 
+(ublt/set-up 'all-the-icons-dired
+  (add-hook 'dired-mode-hook (ublt/on-fn 'all-the-icons-dired-mode)))
+
 (setq
  ;; Offer the other window's path as default when copying
  dired-dwim-target t

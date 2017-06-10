@@ -84,6 +84,7 @@
          ;; Dired
          dired-details dired-details+
          dired+
+         all-the-icons-dired
          ;; Code folding
          fold-dwim fold-dwim-org hideshowvis
          ;; Languages
