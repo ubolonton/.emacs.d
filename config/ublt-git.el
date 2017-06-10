@@ -21,12 +21,25 @@
                                   ("~/Programming/adatao" . 1))
    magit-repository-directories-depth 1
 
+   magit-refresh-status-buffer nil
+
    ;; Other
    magit-log-show-refname-after-summary t
    magit-blame-mode-lighter " Bl")
 
+  ;; XXX: The initialization of this is icky. We use `global-auto-revert-mode' anyway, so disable it here.
+  (magit-auto-revert-mode -1)
+
   (eval-after-load 'diff-hl
     '(add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
+
+  ;; XXX: `magit-patch-id' calls out to shell, which suffers shell initialization delay. This is
+  ;; a temporary workaround. The proper fix is probably writing a C extension or something that
+  ;; calls git directly. The mid-term fix is probably calling git directly, not going through shell.
+  ;; Either that, or going through shell without initialization.
+  (defadvice magit-patch-id (around speed-up activate)
+    (let ((shell-file-name "sh"))
+      ad-do-it))
 
   ;; ;; XXX
   ;; (defadvice magit-process (around dont-switch activate)
