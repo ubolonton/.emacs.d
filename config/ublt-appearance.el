@@ -84,9 +84,11 @@
                     twittering-edit-mode-hook
                     package-menu-mode-hook))
       (add-hook hook 'ublt/variable-pitch-mode-maybe))
-    (add-hook 'find-file-hook 'ublt/variable-pitch-mode-fundamental)))
-
-(add-hook 'hexl-mode-hook (ublt/off-fn 'variable-pitch-mode))
+    (add-hook 'find-file-hook 'ublt/variable-pitch-mode-fundamental)
+    (dolist (hook '(hexl-mode
+                    dns-mode-hook))
+      (add-hook hook (ublt/off-fn 'variable-pitch-mode)))
+    ))
 
 
 ;;;Color theme
