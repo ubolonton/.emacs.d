@@ -8,6 +8,9 @@
 (ublt/set-up 'web-mode
   (add-hook 'web-mode-hook (ublt/off-fn 'auto-fill-mode))
 
+  ;; FreeMarker templates
+  (add-to-list 'auto-mode-alist '("\\.ftl$" . web-mode))
+
   ;; Use `web-mode', as `jsx-mode' is actually not ReactJS's..
   (add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.tsx$" . web-mode))
