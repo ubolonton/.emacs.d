@@ -150,11 +150,11 @@
                  ("Book" . b))
 
  ;; Log a lot
- org-log-done 'note
- org-log-reschedule 'note
+ org-log-done 'time
+ org-log-reschedule 'time
  org-log-repeat 'time
- org-log-redeadline t
- org-log-note-clock-out t)
+ org-log-redeadline 'time
+ org-log-note-clock-out nil)
 
 (ublt/set-up 'org-clock
   (org-clock-persistence-insinuate)
@@ -219,7 +219,7 @@
    org-refile-targets '((("~/org/gtd/someday.org") . (:maxlevel . 1))
                         (("~/org/gtd/tasks.org") . (:maxlevel . 1))
                         (("~/org/gtd/projects.org") . (:maxlevel . 2))
-                        (("~/org/work/adatao/work-notes.org") . (:maxlevel . 3)))
+                        (("~/org/work/anduin/work-notes.org") . (:maxlevel . 3)))
 
    org-refile-allow-creating-parent-nodes 'confirm
    org-refile-target-verify-function 'ublt/verify-refile-target
@@ -236,7 +236,7 @@
      ("w" "Work"
       ((agenda "")
        (tags-todo "SCHEDULED=\"\""))
-      ((org-agenda-files '("~/org/work/adatao/work-notes.org"))
+      ((org-agenda-files '("~/org/work/anduin/work-notes.org"))
        (org-agenda-ndays 1)
        (org-agenda-sorting-strategy
         '((agenda todo-state-up time-up priority-down)))
