@@ -3,8 +3,6 @@
 (ublt/set-up 'js2-mode
   (ublt/set-up 'paredit
     (add-hook 'js2-mode-hook (ublt/on-fn 'paredit-mode)))
-  (ublt/set-up 'moz
-    (add-hook 'js2-mode-hook 'moz-minor-mode))
 
   (add-hook 'js2-mode-hook (ublt/off-fn 'auto-fill-mode))
 
@@ -23,8 +21,6 @@
 (ublt/set-up 'js
   (ublt/set-up 'paredit
     (add-hook 'js-mode-hook (ublt/on-fn 'paredit-mode)))
-  (ublt/set-up 'moz
-    (add-hook 'js-mode-hook 'moz-minor-mode))
 
   (setq js-indent-level 2
         espresso-indent-level 2)

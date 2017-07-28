@@ -53,7 +53,6 @@
                   git-commit-mode
                   erlang-shell-mode
                   dired-mode
-                  inferior-moz-mode
                   inferior-octave-mode
                   inferior-ess-mode
                   inferior-lisp-mode
@@ -90,7 +89,6 @@
                   '(eshell-mode
                     sql-interactive-mode
                     erlang-shell-mode slime-repl-mode
-                    inferior-moz-mode
                     inferior-octave-mode
                     inferior-emacs-lisp-mode
                     inferior-lisp-mode
