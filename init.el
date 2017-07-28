@@ -87,7 +87,7 @@
          fold-dwim fold-dwim-org hideshowvis
          ;; Languages
          flycheck
-         flycheck-pyflakes
+
          edts                           ;erlang
          haskell-mode quack
          adoc-mode
@@ -95,14 +95,14 @@
          markdown-mode yaml-mode
          less-css-mode scss-mode
          clojure-mode cider
-         scala-mode ensime
+         scala-mode
          elisp-slime-nav
          js2-mode json-mode tern company-tern
          typescript-mode
          php-mode php-boris
-         elpy                           ;python
+         elpy flycheck-pyflakes         ;python
          web-mode
-         emmet-mode                          ; html/css editing
+         emmet-mode                     ; html/css editing
          go-mode
          inf-mongo))
 (dolist (p ublt/packages)
