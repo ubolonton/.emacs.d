@@ -96,7 +96,7 @@
          clojure-mode cider
          scala-mode
          elisp-slime-nav
-         js2-mode json-mode tern company-tern
+         js2-mode json-mode
          typescript-mode
          php-mode php-boris
          elpy flycheck-pyflakes         ;python

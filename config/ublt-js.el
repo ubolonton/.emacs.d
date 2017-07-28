@@ -28,7 +28,9 @@
   (add-to-list 'auto-mode-alist '("\\.jsm$" . js-mode))  )
 
 (ublt/set-up 'json-mode
-  (add-to-list 'auto-mode-alist '("\\.json$" . json-mode)))
+  (add-to-list 'auto-mode-alist '("\\.json$" . json-mode))
+  (ublt/set-up 'flycheck
+    (add-hook 'json-mode-hook (ublt/on-fn 'flycheck-mode))))
 
 ;;; Syntax checking
 ;;; TODO: Buffer-local/dir-local config for jshint
@@ -38,14 +40,14 @@
   (add-hook 'js-mode-hook (ublt/on-fn 'flycheck-mode))
   (add-hook 'js2-mode-hook (ublt/on-fn 'flycheck-mode)))
 
-;;; Code navigation & completion. Install "tern" globally with npm.
-(ublt/set-up 'tern
-  (add-hook 'js-mode-hook (ublt/on-fn 'tern-mode))
-  (add-hook 'js2-mode-hook (ublt/on-fn 'tern-mode))
+;; ;;; Code navigation & completion. Install "tern" globally with npm.
+;; (ublt/set-up 'tern
+;;   (add-hook 'js-mode-hook (ublt/on-fn 'tern-mode))
+;;   (add-hook 'js2-mode-hook (ublt/on-fn 'tern-mode))
 
-  (ublt/set-up 'company-tern
-    (add-to-list 'company-backends 'company-tern)
-    (setq company-tern-property-marker " ."
-          company-tern-meta-as-single-line t)))
+;;   (ublt/set-up 'company-tern
+;;     (add-to-list 'company-backends 'company-tern)
+;;     (setq company-tern-property-marker " ."
+;;           company-tern-meta-as-single-line t)))
 
 (provide 'ublt-js)

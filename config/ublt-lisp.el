@@ -41,6 +41,9 @@
 
   (add-hook 'emacs-lisp-mode-hook 'ublt/remove-elc-on-save)
 
+  (ublt/set-up 'flycheck
+    (add-hook 'emacs-lisp-mode-hook (ublt/on-fn 'flycheck-mode)))
+
   (ublt/set-up 'elisp-slime-nav
     (add-hook 'emacs-lisp-mode-hook (ublt/on-fn 'elisp-slime-nav-mode))))
 
