@@ -128,6 +128,10 @@
 
 ;;; Misc stuff I use -------------------------------------------------
 
+(ublt/in '(darwin)
+  (ublt/set-up 'woman
+    (add-to-list 'woman-manpath '("/opt/local/bin" . "/opt/local/man") t)))
+
 (ublt/in '(darwin gnu/linux)
   ;; Notifications
   (ublt/set-up 'todochiku))
