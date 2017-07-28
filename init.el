@@ -6,10 +6,8 @@
 
 ;;; Emacs is not a text editor, and here we load its package manager!
 (require 'package)
-(dolist (source '(("marmalade" . "https://marmalade-repo.org/packages/")
-                  ("org" . "https://orgmode.org/elpa/")
+(dolist (source '(("org" . "http://orgmode.org/elpa/")
                   ("melpa-stable" . "https://stable.melpa.org/packages/")
-                  ("melpa" . "https://melpa.org/packages/")
                   ("elpy" . "https://jorgenschaefer.github.io/packages/")
                   ))
   (add-to-list 'package-archives source t))
@@ -22,6 +20,7 @@
           (helm-ag . "melpa-stable")
           (helm-projectile . "melpa-stable")
           (projectile . "melpa-stable")
+          (magit . "melpa-stable")
           (helm . "melpa-stable"))))
 
 ;;; Some packages mess up `package-archives'. This fixes that.
