@@ -103,6 +103,8 @@
          web-mode
          emmet-mode                     ; html/css editing
          go-mode
+         dockerfile-mode
+         terraform-mode company-terraform
          inf-mongo))
 (dolist (p ublt/packages)
   (when (not (package-installed-p p))
@@ -164,6 +166,7 @@
 (require 'ublt-python)
 (require 'ublt-ruby)
 (require 'ublt-js)
+(require 'ublt-devops)
 
 (ublt/set-up 'ublt-mix-modes)
 
