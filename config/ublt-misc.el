@@ -100,6 +100,8 @@
 
 (setq recentf-save-file "~/.emacs.d/.recentf" )
 
+(setq ring-bell-function 'ignore)
+
 ;; TextMate minor mode
 (require 'textmate)
 ;; (textmate-mode)
