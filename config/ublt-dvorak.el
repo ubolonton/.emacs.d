@@ -421,7 +421,7 @@
 
 ;;; Evil -------------------------------------------------------------
 ;;; TODO: Swap WORD & word
-(ublt/keys "evil" evil-normal-state-map
+(ublt/keys 'evil evil-normal-state-map
   ;; Preparation for motion map
   "h" nil "H" nil
   "n" nil "N" nil
@@ -472,7 +472,7 @@
   "ecr"      'comment-or-uncomment-region
   "ecv"      'evilnc-toggle-invert-comment-line-by-line
   )
-(ublt/keys "evil" evil-motion-state-map
+(ublt/keys 'evil evil-motion-state-map
   "s-<escape>" 'evil-motion-state
   "<escape>" 'evil-force-normal-state
 
@@ -534,7 +534,7 @@
   "C-o"    nil
   "C-y"    nil
   )
-(ublt/keys "evil" evil-insert-state-map
+(ublt/keys 'evil evil-insert-state-map
   "s-<escape>" 'evil-motion-state
   "<escape>" 'evil-normal-state
 
@@ -546,25 +546,28 @@
   "C-x C-p" nil                    ; evil-complete-previous-line
   "C-t" nil                        ; evil-shift-right-line
   "C-a" nil                        ; evil-paste-last-insertion
+  "C-e" nil                        ; evil-copy-from-below
+  "C-y" nil                        ; evil-copy-from-above
+  "C-k" nil                        ; evil-insert-digraph
   )
-(ublt/keys "evil" evil-visual-state-map
+(ublt/keys 'evil evil-visual-state-map
   "s-<escape>" 'evil-motion-state
   "<escape>" 'evil-exit-visual-state
   "R" nil
   "C-n"       'ublt/narrow-or-widen
   )
-(ublt/keys "evil" evil-replace-state-map
+(ublt/keys 'evil evil-replace-state-map
   "s-<escape>" 'evil-motion-state
   "<escape>" 'evil-normal-state)
-(ublt/keys "evil" evil-emacs-state-map
+(ublt/keys 'evil evil-emacs-state-map
   "s-<escape>" 'evil-motion-state
   "<escape>" 'evil-normal-state)
-(ublt/keys "evil" evil-insert-state-map
+(ublt/keys 'evil evil-insert-state-map
   "C-k" nil
   "C-o" nil
   "C-e" nil
   "C-y" nil)
-(ublt/keys "evil" evil-outer-text-objects-map
+(ublt/keys 'evil evil-outer-text-objects-map
   "a" 'evil-outer-arg
   "d" 'evil-a-defun
   "t" 'evil-a-tag
@@ -575,7 +578,7 @@
   ;; "l" 'evil-a-sexp
   "u" 'evil-a-url
   )
-(ublt/keys "evil" evil-inner-text-objects-map
+(ublt/keys 'evil evil-inner-text-objects-map
   "a" 'evil-inner-arg
   ;; "T" 'evil-inner-tag
   "d" 'evil-inner-defun
@@ -585,7 +588,7 @@
   "u" 'evil-inner-url
   ;; "l" 'evil-inner-sexp
   )
-;; (ublt/keys "evil" evil-inner-text-objects-map
+;; (ublt/keys 'evil evil-inner-text-objects-map
 ;;   "d" 'evil-inner-defun
 ;;   "S" 'evil-inner-symbol
 ;;   "*" 'evil-inner-symbol)
