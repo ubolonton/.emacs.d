@@ -8,9 +8,13 @@
 (require 'package)
 (dolist (source '(("org" . "http://orgmode.org/elpa/")
                   ("melpa-stable" . "https://stable.melpa.org/packages/")
+                  ("melpa" . "https://melpa.org/packages/")
                   ("elpy" . "https://jorgenschaefer.github.io/packages/")
                   ))
   (add-to-list 'package-archives source t))
+(setq
+ package-archive-priorities '(("melpa-stable" . 1)
+                              ("melpa" . 0)))
 
 (when (boundp 'package-pinned-packages)
   (setq package-pinned-packages
