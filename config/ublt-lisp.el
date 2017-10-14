@@ -11,7 +11,8 @@
 (dolist (mode '(scheme-mode
                 emacs-lisp-mode
                 lisp-mode
-                clojure-mode))
+                clojure-mode
+                clojurescript-mode))
   (font-lock-add-keywords mode '(("(\\|)" . 'ublt/lisp-paren-face))))
 
 ;; Scheme
