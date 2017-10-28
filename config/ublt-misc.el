@@ -31,7 +31,8 @@
   (setq clean-buffer-list-delay-general 7             ; days
         clean-buffer-list-delay-special (* 3 24 3600) ; 3 days
         )
-  (add-to-list 'desktop-locals-to-save 'buffer-display-time))
+  (add-to-list 'desktop-locals-to-save 'buffer-display-time)
+  (midnight-mode +1))
 
 
 (ublt/in '(gnu/linux)

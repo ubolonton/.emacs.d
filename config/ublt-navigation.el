@@ -102,6 +102,9 @@ of line."
       ;; screenfull
       next-screen-context-lines 5)
 
+;;; TODO: This next section seems redundant now. I don't see jumpy window
+;;; anymore even with this disabled.
+
 ;;; TODO: This should be `goto-char's job to check
 ;;; `scroll-margin' and act appropriately.
 (defun ublt/avoid-top-scroll-margin ()
