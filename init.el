@@ -186,3 +186,6 @@
     (unless (server-running-p)
       (server-start))
   (error (message "Could not start server")))
+
+;;; Here because something above explicitly set it to nil.
+(setq ring-bell-function 'ignore)
