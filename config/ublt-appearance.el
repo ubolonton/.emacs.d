@@ -579,6 +579,9 @@
            (0 (ublt/show-as ?ζ)))
           ("\\(lambda\\)"
            (0 (ublt/show-as ?λ))))))
+(font-lock-add-keywords
+ 'scala-mode `(("\\(=>\\)"
+              (0 (ublt/show-as ?⇒)))))
 
 ;;; Don't use. This destroys magit's fontification. Magit does something special
 ;; (defun ublt/prettify-magit-log ()
