@@ -107,6 +107,7 @@
          web-mode
          emmet-mode                     ; html/css editing
          go-mode
+         rust-mode cargo
          dockerfile-mode
          terraform-mode company-terraform
          inf-mongo))
