@@ -24,6 +24,7 @@
         helm-ff-search-library-in-sexp t)
   (dolist (pattern '("\\.pyc$" "\\.elc$"))
     (add-to-list 'helm-boring-file-regexp-list pattern)))
+(ublt/set-up 'helm-for-files)
 
 (ublt/set-up 'helm-buffers
   (setq helm-buffers-fuzzy-matching t)
