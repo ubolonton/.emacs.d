@@ -152,7 +152,7 @@ font (fixed-pitch is still preferable)."
                        helm-source-emms-streams
                        helm-source-emms-files
                        helm-source-emms-dired
-                       ;; helm-source-google-suggest
+                       helm-source-google-suggest
                        helm-source-apt
                        ;; helm-source-helm-commands
                        )))
