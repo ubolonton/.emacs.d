@@ -63,7 +63,7 @@
 
 (ublt/set-up 'erc
   (setq erc-autojoin-channels-alist
-        '(("freenode.net" "#emacs" "#conkeror" "#clojure" "#concatenative" "#reactjs"))
+        '(("freenode.net" "#emacs" "#conkeror" "#clojure" "#concatenative" "#flink"))
 
         erc-server "irc.freenode.net"
         erc-port 6667
