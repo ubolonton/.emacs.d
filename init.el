@@ -90,12 +90,11 @@
          fold-dwim fold-dwim-org hideshowvis
          ;; Languages
          flycheck
-
          edts                           ;erlang
          haskell-mode quack
          adoc-mode
          ess
-         markdown-mode yaml-mode
+         markdown-mode yaml-mode toml-mode
          less-css-mode scss-mode
          clojure-mode cider
          scala-mode
@@ -107,7 +106,7 @@
          web-mode
          emmet-mode                     ; html/css editing
          go-mode
-         rust-mode cargo
+         rust-mode cargo racer
          dockerfile-mode
          terraform-mode company-terraform
          inf-mongo))
@@ -125,6 +124,7 @@
 ;;   (add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode))
 
 (ublt/set-up 'exec-path-from-shell
+  (add-to-list 'exec-path-from-shell-variables "RUST_SRC_PATH")
   (exec-path-from-shell-initialize))
 
 ;;; General usability
@@ -172,6 +172,7 @@
 (require 'ublt-ruby)
 (require 'ublt-js)
 (require 'ublt-devops)
+(require 'ublt-rust)
 
 (ublt/set-up 'ublt-mix-modes)
 
