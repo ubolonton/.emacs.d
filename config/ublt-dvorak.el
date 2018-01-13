@@ -890,6 +890,10 @@
   "C-c p" 'slime-repl-set-package
   "C-c n" 'slime-repl-set-package)
 
+(ublt/keys "markdown-mode" markdown-mode-map
+  "<M-right>" 'markdown-demote
+  "<M-left>" 'markdown-promote)
+
 
 ;;; Misc
 
