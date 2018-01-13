@@ -230,7 +230,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(region
      ((,class (,@normal-hl))))
    `(eval-sexp-fu-flash                 ;Flashing eval'ed expression
-     ((,class (,@normal-hl))))
+     ((,class (,@special-hl))))
    `(eval-sexp-fu-flash-error
      ((,class (,@warning))))
    `(secondary-selection                ;Highlight changes
@@ -243,7 +243,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(isearch                            ;current match
      ((,class (,@special-hl :foreground ,yellow))))
    `(lazy-highlight                     ;other matches
-     ((,class (,@special-hl))))
+     ((,class (,@special-hl :foreground ,fg+1))))
    `(isearch-fail                       ;no match
      ((,class (,@error-hl))))
    ;; Parens
@@ -262,6 +262,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    ;; flycheck
    `(flycheck-error
      ((,class (,@error-hl))))
+   `(flycheck-warning
+     ((,class (:underline (:color ,bg+3 :style wave)))))
 
 
    ;; diffs & git
@@ -357,6 +359,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (,@vw ,@dimmed))))
    `(magit-log-message
      ((,class (,@vw-italic))))
+   `(magit-log-graph
+     ((,class (:inherit font-lock-doc-face))))
    `(magit-key-mode-switch-face
      ((,class (:inherit font-lock-type-face))))
    `(magit-blame-header
@@ -772,7 +776,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(helm-buffer-directory
      ((,class (:inherit helm-ff-directory))))
    `(helm-buffer-process
-     ((,class (,@dimmed ,@vw-italic :height 0.95))))
+     ((,class (,@doc ,@vw-italic :height 0.85))))
    ;; helm-swoop
    `(helm-swoop-target-line-face
      ((,class (:inherit secondary-selection))))
