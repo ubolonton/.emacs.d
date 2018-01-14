@@ -158,39 +158,42 @@
 (dolist (rescale '((".*Fira Mono-.*" 0.88)
                    (".*Droid Sans Mono-.*" 0.88)
                    (".*DejaVu Sans Mono-.*" 0.88)
-                   (".*Symbol-.*" 1.06)
+                   (".*Symbol-.*" 1.08)
                    (".*Inconsolata-.*" 1.04)))
   (destructuring-bind (font size) rescale
     (ublt/assoc! 'face-font-rescale-alist font size)))
 
-(ublt/assign-font ublt/fixed-width-fontset
-  `(,(font-spec :family "Fantasque Sans Mono"
-                :weight 'normal
-                :size 13.0)
-    ascii)
-  `(,(font-spec :family "Droid Sans Mono")
-    vietnamese-viscii-upper
-    vietnamese-viscii-lower
-    viscii
-    vscii
-    vscii-2
-    tcvn-5712)
-  `(,(font-spec :family "Fira Mono"
-                :size 14.0)
-    cyrillic-iso8859-5)
-  `(,(font-spec :family "DejaVu Sans Mono")
-    (?▸ . ?▸))
-  `(,(font-spec :family "Symbol")
-    (?⇒ . ?⇒)
-    (?⇐ . ?⇐)
-    (?☑ . ?☑)
-    (?☐ . ?☐))
-  `(,(font-spec :family "Droid Sans Mono"
-                :weight 'normal)
-    (?λ . ?λ))
-  `(,(font-spec :family "Inconsolata"
-                :weight 'normal)
-	(?ƒ . ?ƒ)))
+;;; XXX: Not sure why, but we need to set these for the default fontset as well (`t'), not just "ubltf".
+(dolist (fontset (list ublt/fixed-width-fontset t))
+  (ublt/assign-font fontset
+    `(,(font-spec :family "Fantasque Sans Mono"
+                  :weight 'normal
+                  :size 13.0)
+      ascii)
+    `(,(font-spec :family "Droid Sans Mono")
+      vietnamese-viscii-upper
+      vietnamese-viscii-lower
+      viscii
+      vscii
+      vscii-2
+      tcvn-5712)
+    `(,(font-spec :family "Fira Mono"
+                  :size 14.0)
+      cyrillic-iso8859-5)
+    `(,(font-spec :family "DejaVu Sans Mono")
+      (?▸ . ?▸))
+    `(,(font-spec :family "Symbol")
+      (?→ . ?→)
+      (?⇒ . ?⇒)
+      (?⇐ . ?⇐)
+      (?☑ . ?☑)
+      (?☐ . ?☐))
+    `(,(font-spec :family "Droid Sans Mono"
+                  :weight 'normal)
+      (?λ . ?λ))
+    `(,(font-spec :family "Inconsolata"
+                  :weight 'normal)
+      (?ƒ . ?ƒ))))
 
 (dolist (face '(default fixed-pitch))
   (set-face-attribute
