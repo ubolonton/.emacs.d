@@ -4,6 +4,7 @@
   (setq tab-width 2))
 
 (ublt/set-up 'markdown-mode
+  (setq markdown-fontify-code-blocks-natively t)
   (add-to-list 'auto-mode-alist '("\\.md$" . gfm-mode))
   (add-to-list 'auto-mode-alist '("\\.markdown$" . gfm-mode)))
 
