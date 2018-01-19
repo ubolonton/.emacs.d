@@ -6,7 +6,8 @@
 (ublt/set-up 'markdown-mode
   (setq markdown-fontify-code-blocks-natively t)
   (add-to-list 'auto-mode-alist '("\\.md$" . gfm-mode))
-  (add-to-list 'auto-mode-alist '("\\.markdown$" . gfm-mode)))
+  (add-to-list 'auto-mode-alist '("\\.markdown$" . gfm-mode))
+  (add-hook 'markdown-mode-hook #'ublt/run-prog-mode-hook))
 
 (ublt/set-up 'yaml-mode
   (add-hook 'yaml-mode-hook 'ublt/tab-2-spaces)
