@@ -155,6 +155,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
 
        ;; Mixins
 
+       (italic         `(:slant italic))
+
        ;; Fixed-width (unscalable)
        (fw0           `(:font ,(face-attribute 'fixed-pitch :font)
                               :weight light
@@ -166,7 +168,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
        (fw             '(:inherit fixed-pitch))
        ;; Variable-width (scalable)
        (vw             '(:inherit ublt/default-variable-width))
-       (vw-italic      `(,@vw :weight light :slant italic))
+       (vw-italic      `(,@vw :weight light ,@italic))
 
        (bold           `(:weight bold))
 
@@ -287,7 +289,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(diff-file-header                   ;TODO
      ((,class (:foreground ,spring))))
    `(diff-hunk-header                   ;TODO
-     ((,class (,@constant :slant italic))))
+     ((,class (,@constant ,@italic))))
 
    `(ediff-even-diff-A
      ((,class (,@normal-hl))))
@@ -484,6 +486,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (:inherit font-lock-comment-face ,@shadowed))))
    `(font-lock-doc-string-face
      ((,class (,@fw ,@doc))))
+   `(font-lock-doc-face
+     ((,class (,@vw-italic ,@string))))
    `(font-lock-function-name-face
      ((,class (,@fw ,@essence))))
    `(font-lock-keyword-face
@@ -496,8 +500,6 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (,@fw ,@constant))))
    `(font-lock-string-face
      ((,class (,@fw ,@string))))
-   `(font-lock-doc-face
-     ((,class (,@vw-italic ,@string))))
    `(font-lock-type-face
      ((,class (,@fw ,@type))))
    `(font-lock-preprocessor-face
@@ -536,7 +538,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(web-mode-html-tag-face
      ((,class (:inherit font-lock-builtin-face))))
    `(web-mode-html-tag-custom-face
-     ((,class (:inherit web-mode-html-tag-face :slant italic :underline ,bg+3))))
+     ((,class (:inherit web-mode-html-tag-face ,@italic :underline ,bg+3))))
    `(web-mode-part-face
      ((,class (,@dimmed-hl))))
    `(web-mode-block-face
@@ -571,7 +573,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (,@doc ,@bold))))
 
 
-   ;; Non-HTML markup languages
+   ;; Non-HTML markup languages: org-mode, markdown...
 
    ;; org-mode
    ;; TODO: levels
@@ -623,15 +625,12 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (,@commitment))))
    ;; `(org-done                           ;TODO
    ;;  ((,class (:foreground ,green-3))))
-   ;; FIX: This makes comment in code block fixed-width :(
    `(org-block
      ((,class (,@fw))))
-   `(org-block-background
-     ((,class (,@fw ,@spectral-hl))))
    `(org-block-begin-line
-     ((,class (:inherit org-block-background ,@constant :underline ,blue-d))))
+     ((,class (:inherit org-block ,@dimmed :underline ,blue-d))))
    `(org-block-end-line
-     ((,class (:inherit org-block-background ,@spectral :overline ,blue-d))))
+     ((,class (:inherit org-block ,@dimmed :overline ,blue-d))))
    `(org-checkbox
      ((,class (,@fw :weight bold :box (:line-width 1 :style released-button :color ,bg)))))
    `(org-time-grid
@@ -641,7 +640,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(org-agenda-date-today
      ((,class (:inherit org-agenda-date :underline t))))
    `(org-agenda-date-weekend
-     ((,class (:inherit org-agenda-date :slant italic))))
+     ((,class (:inherit org-agenda-date ,@italic))))
    `(org-agenda-current-time
      ((,class (,@fw :inherit org-time-grid ,@header :background ,bg+2))))
    `(org-scheduled-previously
@@ -655,7 +654,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    ;; `(org-scheduled                      ;TODO
    ;;  ((,class (,@vw-italic :foreground ,green-2))))
    ;; `(org-scheduled-previously           ;TODO
-   ;;  ((,class (,@fw :foreground "Chocolate1" :slant italic))))
+   ;;  ((,class (,@fw :foreground "Chocolate1" ,@italic))))
    ;; `(org-scheduled-today                ;TODO
    ;;  ((,class (,@vw :foreground ,green-3))))
    `(org-column
@@ -690,7 +689,13 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(markdown-bold-face
      ((,class (,@mutable :weight bold))))
    `(markdown-italic-face
-     ((,class (,@mutable :slant italic))))
+     ((,class (,@mutable ,@italic))))
+   `(markdown-code-face
+     ((,class (:inherit org-block))))
+   `(markdown-language-keyword-face
+     ((,class (:inherit org-block-begin-line))))
+   `(markdown-markup-face
+     ((,class (,@dimmed))))
 
    `(rst-level-1
      ((,class (:inherit org-level-1))))
@@ -860,7 +865,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(info-menu-header
      ((,class (:weight bold))))
    `(info-xref
-     ((,class (,@portal :slant italic))))
+     ((,class (,@portal ,@italic))))
    `(info-xref-visited
      ((,class (:inherit info-xref ,@note :weight bold :slant normal))))
    `(info-quoted-name
@@ -872,7 +877,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(info-reference-item
      ((,class (,@fw ,@mutable :weight bold :height 1.1))))
    `(info-function-ref-item
-     ((,class (:weight bold :slant italic :height 0.7))))
+     ((,class (:weight bold ,@italic :height 0.7))))
    `(info-constant-ref-item
      ((,class (,@constant :inherit info-function-ref-item))))
    `(info-user-option-ref-item
@@ -931,7 +936,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(erc-prompt-face
      ((,class (,@prompt :bold t))))
    `(erc-command-indicator-face
-     ((,class (:slant italic :weight normal))))
+     ((,class (,@italic :weight normal))))
    `(erc-button
      ((,class (:slant normal))))
 

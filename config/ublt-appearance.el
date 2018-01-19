@@ -504,9 +504,13 @@
              #'font-lock-remove-keywords)))
     (funcall
      f 'org-mode `(("\\(#\\+begin_src\\>\\)"
-                    (0 (ublt/show-as ?➤)))
+                    (0 (ublt/show-as ?⌨)))
+                   ("\\(#\\+BEGIN_SRC\\>\\)"
+                    (0 (ublt/show-as ?⌨)))
                    ("\\(#\\+end_src\\>\\)"
-                    (0 (ublt/show-as ?➤)))
+                    (0 (ublt/show-as ?⌨)))
+                   ("\\(#\\+END_SRC\\>\\)"
+                    (0 (ublt/show-as ?⌨)))
                    ("\\(\\[X\\]\\)"
                     (0 (ublt/show-as ?☑)))
                    ("\\(\\[ \\]\\)"
