@@ -108,7 +108,11 @@
 
 (ublt/set-up 'css-mode
   (add-hook 'css-mode-hook 'ublt/run-prog-mode-hook)
-  (setq css-indent-offset 2))
+  (setq css-indent-offset 2)
+  (ublt/set-up 'paredit
+    (add-hook 'css-mode-hook (ublt/on-fn 'paredit-mode)))
+  (ublt/set-up 'aggressive-indent
+    (add-hook 'css-mode-hook (ublt/on-fn 'aggressive-indent-mode))))
 
 (ublt/set-up 'sgml-mode
   (add-hook 'html-mode-hook (ublt/off-fn 'auto-fill-mode)))
