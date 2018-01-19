@@ -891,8 +891,10 @@
   "C-c n" 'slime-repl-set-package)
 
 (ublt/keys "markdown-mode" markdown-mode-map
+  "<M-down>"  'markdown-move-down
+  "<M-up>"    'markdown-move-up
   "<M-right>" 'markdown-demote
-  "<M-left>" 'markdown-promote)
+  "<M-left>"  'markdown-promote)
 
 
 ;;; Misc
