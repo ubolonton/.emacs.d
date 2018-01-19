@@ -97,7 +97,11 @@
  'org-babel-load-languages
  '((emacs-lisp . t)
    (clojure . t)
-   (sh . t)))
+   (plantuml . t)
+   (shell . t)))
+
+(ublt/set-up 'ob-plantuml
+  (setq org-plantuml-jar-path "~/bin/plantuml.jar"))
 
 
 ;;; Task management, GTD
