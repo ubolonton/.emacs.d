@@ -25,7 +25,7 @@
           (helm-projectile . "melpa-stable")
           (projectile . "melpa-stable")
           (magit . "melpa-stable")
-          (helm . "melpa-stable"))))
+          (helm . "melpa"))))
 
 ;;; Some packages mess up `package-archives'. This fixes that.
 (defvar ublt/package-archives package-archives)

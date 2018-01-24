@@ -209,4 +209,47 @@ all of the sources."
 
 (helm-mode +1)
 
+(when (functionp #'helm-display-buffer-in-own-frame)
+  (setq helm-display-function #'helm-display-buffer-in-own-frame
+        helm-display-buffer-reuse-frame t
+        helm-use-undecorated-frame-option t)
+;;; XXX: Don't monkey-patch
+  (defun helm-display-buffer-popup-frame (buffer frame-alist)
+    (if helm-display-buffer-reuse-frame
+        (progn
+          (unless (and helm-popup-frame
+                       (frame-live-p helm-popup-frame))
+            (setq helm-popup-frame (make-frame frame-alist)))
+          (let* ((display (frame-parameter helm-popup-frame 'display))
+                 ;; TODO: Use current frame's size and position.
+                 (display-w (display-pixel-width display))
+                 (display-h (display-pixel-height display))
+
+                 (w (round (* display-w 0.6)))
+                 (h (round (* display-h 0.7)))
+                 (x (/ (- display-w w) 2))
+                 (y 0))
+            (set-frame-size helm-popup-frame w h t)
+            (modify-frame-parameters
+             helm-popup-frame
+             '((left-fringe . 4)
+               (right-fringe . 4)
+               (border-width . 0)
+               (menu-bar-lines . 0)
+               (unsplittable . t)
+               (tool-bar-lines . 0)))
+            (select-frame helm-popup-frame)
+            (set-frame-position helm-popup-frame x y)
+            (switch-to-buffer buffer)
+            ;; TODO: More principled way to turn off certain mode in a helm buffer.
+            (linum-mode -1)
+            (select-frame-set-input-focus helm-popup-frame t)))
+      ;; If user have changed `helm-display-buffer-reuse-frame' to nil
+      ;; maybe kill the frame.
+      (when (and helm-popup-frame
+                 (frame-live-p helm-popup-frame))
+        (delete-frame helm-popup-frame))
+      (display-buffer
+       buffer '(display-buffer-pop-up-frame . nil)))))
+
 (provide 'ublt-helm)

@@ -250,7 +250,7 @@
   (interactive)
   (let ((a (frame-parameter nil 'alpha)))
     (if (or (not (numberp a)) (= a  100))
-        (set-frame-parameter nil 'alpha 88)
+        (set-frame-parameter nil 'alpha 5)
       (set-frame-parameter nil 'alpha 100))))
 
 
