@@ -23,6 +23,8 @@
 
    magit-refresh-status-buffer nil
 
+   magit-log-margin '(t age-abbreviated magit-log-margin-width t 10)
+
    ;; Other
    magit-log-show-refname-after-summary t
    magit-blame-mode-lighter " Bl")
