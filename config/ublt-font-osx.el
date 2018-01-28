@@ -6,6 +6,10 @@
 
 (require 'ublt-util)
 
+;;; emacs-mac-app
+(case window-system
+  ('mac (mac-auto-operator-composition-mode +1)))
+
 
 ;;; Fontsets
 
@@ -115,7 +119,7 @@
     latin-iso8859-1
     ;; Russian
     cyrillic-iso8859-5)
-  `(,(font-spec :family "Symbol")
+  `(,(font-spec :family "Lucida Grande")
     (?☑ . ?☑)
     (?☐ . ?☐)))
 
@@ -152,7 +156,10 @@
 ;;; thing and large unicode fonts (Quivira, Gentium, Doulos, Charis...)
 
 (defvar ublt/fixed-width-fontset
-  "-unknown-Fantasque Sans Mono-normal-normal-normal-*-*-*-*-*-m-*-fontset-ubltf")
+  (format "-unknown-%s-normal-normal-*-*-*-*-*-m-*-fontset-ubltf"
+          (case window-system
+            ('mac "Fira Code-bold")
+            ('ns "Fantasque Sans Mono-normal"))))
 (create-fontset-from-fontset-spec ublt/fixed-width-fontset)
 
 (dolist (rescale '((".*Fira Mono-.*" 0.88)
@@ -166,9 +173,12 @@
 ;;; XXX: Not sure why, but we need to set these for the default fontset as well (`t'), not just "ubltf".
 (dolist (fontset (list ublt/fixed-width-fontset t))
   (ublt/assign-font fontset
-    `(,(font-spec :family "Fantasque Sans Mono"
-                  :weight 'normal
-                  :size 13.0)
+    `(,(case window-system
+         ('mac (font-spec :family "Fira Code"
+                          :weight 'normal))
+         ('ns (font-spec :family "Fantasque Sans Mono"
+                         :weight 'normal
+                         :size 13.0)))
       ascii)
     `(,(font-spec :family "Droid Sans Mono")
       vietnamese-viscii-upper
@@ -183,17 +193,13 @@
     `(,(font-spec :family "DejaVu Sans Mono")
       (?▸ . ?▸))
     `(,(font-spec :family "Symbol")
-      (?→ . ?→)
       (?⇒ . ?⇒)
       (?⇐ . ?⇐)
       (?☑ . ?☑)
       (?☐ . ?☐))
     `(,(font-spec :family "Droid Sans Mono"
                   :weight 'normal)
-      (?λ . ?λ))
-    `(,(font-spec :family "Inconsolata"
-                  :weight 'normal)
-      (?ƒ . ?ƒ))))
+      (?λ . ?λ))))
 
 (dolist (face '(default fixed-pitch))
   (set-face-attribute

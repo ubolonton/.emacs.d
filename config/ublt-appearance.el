@@ -47,7 +47,7 @@
   ;; Font-mixing obsession
   (ublt/set-up
       (case system-type
-        ('gnu/linx 'ublt-font)
+        ('gnu/linux 'ublt-font)
         ('darwin 'ublt-font-osx))
     ;; Non-code text reads better in proportional font
     (defvar ublt/disable-variable-pitch-mode nil)
@@ -585,7 +585,7 @@
            (0 (ublt/show-as ?λ))))))
 (font-lock-add-keywords
  'scala-mode `(("\\(=>\\)"
-              (0 (ublt/show-as ?⇒)))))
+                (0 (ublt/show-as ?⇒)))))
 
 ;;; Don't use. This destroys magit's fontification. Magit does something special
 ;; (defun ublt/prettify-magit-log ()
