@@ -42,6 +42,27 @@
        nil 2.7)))
 
 
+;;; Frame title
+(defun ublt/frame-title ()
+  (if (and (featurep 'projectile) (projectile-project-p))
+      (let ((prj (projectile-project-name)))
+        (cond
+         (buffer-file-name
+          (format "[%s] %s" prj
+                  ;; TODO: Handle symlinks
+                  (car (projectile-make-relative-to-root (list buffer-file-name)))))
+         ((eq major-mode 'dired-mode)
+          (format "[%s] %s" prj
+                  ;; TODO: Handle symlinks
+                  (car (projectile-make-relative-to-root (list default-directory)))))
+         (t
+          (format "[%s] -- %s" prj (buffer-name)))))
+    (or buffer-file-name (buffer-name))))
+
+(setq
+ frame-title-format '(:eval (ublt/frame-title)))
+
+
 ;; Fonts
 (when (display-graphic-p)
   ;; Font-mixing obsession
