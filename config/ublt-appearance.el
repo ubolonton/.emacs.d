@@ -520,6 +520,11 @@
             (eq (overlay-get overlay 'face) 'org-block-background))
           (overlays-in beg end)))
 
+(defun ublt/-no-ligature-support (beg end)
+  (not (and
+        (eq window-system 'mac)
+        mac-auto-operator-composition-mode)))
+
 (defun ublt/pretty-org (on)
   (let ((f (if on #'font-lock-add-keywords
              #'font-lock-remove-keywords)))
@@ -557,9 +562,9 @@
               (0 (ublt/show-as ?ƒ)))))
 (font-lock-add-keywords
  'php-mode `(("\\(->\\)"
-              (0 (ublt/show-as ?➛)))
+              (0 (ublt/show-as ?➛ #'ublt/-no-ligature-support)))
              ("\\(=>\\)"
-              (0 (ublt/show-as ?⇒)))
+              (0 (ublt/show-as ?⇒ #'ublt/-no-ligature-support)))
              ("\\(array\\)("
               (0 (ublt/show-as ?▸)))
              ("\\(function\\)"
@@ -604,9 +609,10 @@
            (0 (ublt/show-as ?ζ)))
           ("\\(lambda\\)"
            (0 (ublt/show-as ?λ))))))
-(font-lock-add-keywords
- 'scala-mode `(("\\(=>\\)"
-                (0 (ublt/show-as ?⇒)))))
+(unless (eq window-system 'mac)
+  (font-lock-add-keywords
+   'scala-mode `(("\\(=>\\)"
+                  (0 (ublt/show-as ?⇒))))))
 
 ;;; Don't use. This destroys magit's fontification. Magit does something special
 ;; (defun ublt/prettify-magit-log ()
