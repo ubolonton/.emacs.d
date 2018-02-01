@@ -112,7 +112,11 @@
          inf-mongo))
 (dolist (p ublt/packages)
   (when (not (package-installed-p p))
-    (package-install p)))
+    (condition-case err
+        (package-install p)
+      (error
+       (message (propertize "Failed to install %s: %s" 'face 'font-lock-keyword-face)
+                p err)))))
 
 
 
