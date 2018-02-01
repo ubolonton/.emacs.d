@@ -722,8 +722,6 @@
  fill-column 120
  )
 
-;; Technicolor
-(ublt/set-up 'info+)
 ;; Buffed-up help system
 (ublt/set-up 'helpful)
 

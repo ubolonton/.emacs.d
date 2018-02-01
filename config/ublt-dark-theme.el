@@ -863,12 +863,16 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(info-title-4
      ((,class (:inherit org-level-4 :weight bold))))
    `(info-menu-header
-     ((,class (:weight bold))))
+     ((,class (:inherit org-level-2 ,@bold))))
    `(info-xref
-     ((,class (,@portal ,@italic))))
+     ((,class (,@portal))))
    `(info-xref-visited
-     ((,class (:inherit info-xref ,@note :weight bold :slant normal))))
+     ((,class (:inherit info-xref ,@note ,@italic))))
+   `(info-header-node
+     ((,class (:inherit info-title-4 ,@italic))))
    `(info-quoted-name
+     ((,class (,@fw ,@constant))))
+   `(Info-quoted
      ((,class (,@fw ,@constant))))
    `(info-single-quote
      ((,class (,@constant))))

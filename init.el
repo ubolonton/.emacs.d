@@ -62,7 +62,6 @@
          scpaste                        ; Publish highlighted code fragments
          exec-path-from-shell           ; Uhm, f*ck shell
          anzu                           ; Match count for search
-         info+
          helpful
          pabbrev                        ; TODO: Find better alternative
          ;; git
