@@ -3,7 +3,7 @@
 (eval-when-compile
   (require 'cl))
 
-(require 'dired+)
+(ublt/set-up 'dired+)
 
 (ublt/in '(darwin)
   (require 'ls-lisp)
@@ -61,6 +61,7 @@
  find-name-arg "-iname"
 
  dired-hide-details-hide-symlink-targets nil
+
  ;;
  dired-guess-shell-alist-user
  (list

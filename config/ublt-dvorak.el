@@ -909,7 +909,7 @@
   "C-<return>" 'ublt/isearch-exit-other-end
   "C-M-w"      'ublt/isearch-yank-symbol)
 
-(ublt/keys 'dired+ dired-mode-map
+(ublt/keys 'dired dired-mode-map
   "M-RET"      'ublt/dired-open-native
   ;; It makes more sense to search in filenames by default
   "C-s"        'dired-isearch-filenames-regexp
