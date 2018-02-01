@@ -194,9 +194,6 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
   (untabify (point-min) (point-max))
   (delete-trailing-whitespace))
 
-;;; Obfuscate URL at point
-(ublt/set-up 'obfusurl)
-
 (setq
  ;; Kill region by DEL/delete (Emacs 24)
  delete-active-region 'kill
