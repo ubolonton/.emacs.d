@@ -94,10 +94,8 @@
                     help-mode-hook
                     apropos-mode-hook
                     ess-help-mode-hook
-                    lyric-mode-hook
                     Man-mode-hook woman-mode-hook
                     twittering-mode-hook
-                    emms-playlist-mode-hook
                     skype--chat-mode-hook
                     org-mode-hook
                     markdown-mode-hook
@@ -291,8 +289,7 @@
 (global-visual-line-mode -1)
 
 ;;; Don't wrap where alignment is important
-(dolist (hook '(emms-browser-show-display-hook
-                archive-zip-mode-hook
+(dolist (hook '(archive-zip-mode-hook
                 dired-mode-hook
                 sql-mode-hook
                 org-agenda-mode-hook))  ; XXX: not working

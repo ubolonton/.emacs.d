@@ -335,11 +335,6 @@
   "M-<left>"      'backward-list
   "M-<right>"     'forward-list
 
-  ;; XXX: Multimedia keys
-  "<XF86Forward>" 'emms-next
-  "<XF86Back>"    'emms-previous
-  "<XF86Reload>"  'emms-pause
-
   ;; FIX: Still have to override mode-specific bindings. There must
   ;; be something better
   "M-TAB"         'company-complete
@@ -619,7 +614,6 @@
 
 ;;; Helm
 (ublt/keys "helm-config" helm-command-map
-  "s-r" 'helm-emms
   "g"   'helm-google-suggest
   "l"   'helm-locate
   "p"   'helm-list-emacs-process

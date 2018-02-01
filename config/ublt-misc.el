@@ -117,13 +117,6 @@
   (ublt/set-up 'woman
     (add-to-list 'woman-manpath '("/opt/local/bin" . "/opt/local/man") t)))
 
-(ublt/in '(darwin gnu/linux)
-  ;; Notifications
-  (ublt/set-up 'todochiku))
-
-;; FIXME: Make it support mp3 not only ogg
-(require 'lyric-mode)
-
 ;; Devilspie's config
 (add-to-list 'auto-mode-alist '("\\.ds$" . lisp-mode))
 

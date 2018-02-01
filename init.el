@@ -139,8 +139,6 @@
 
 ;;; Personal stuff
 (ublt/set-up 'ublt-communication)
-(when window-system
-  (ublt/set-up 'ublt-entertainment))
 (ublt/set-up 'ublt-organization)
 
 

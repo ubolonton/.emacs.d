@@ -149,9 +149,6 @@ font (fixed-pitch is still preferable)."
                        ;; helm-source-locate
                        helm-source-emacs-process
                        helm-source-org-headline
-                       helm-source-emms-streams
-                       helm-source-emms-files
-                       helm-source-emms-dired
                        helm-source-google-suggest
                        helm-source-apt
                        ;; helm-source-helm-commands

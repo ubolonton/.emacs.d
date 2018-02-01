@@ -1035,8 +1035,6 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (:height 0.8 :foreground ,blue))))
    `(ublt/flycheck-message-face         ;TODO
      ((,class (,@vw ,@commitment))))
-   `(ublt/emms-mode-line-face
-     ((,class (:height 1.0))))
    `(ublt/mode-line-major-mode
      ((,class (:bold t))))
    `(ublt/evil-emacs-tag
