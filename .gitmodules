@@ -1,6 +1,3 @@
 [submodule "lib/pylookup"]
 	path = lib/pylookup
 	url = http://github.com/tsgates/pylookup.git
-[submodule "lib/eproject"]
-	path = lib/eproject
-	url = https://github.com/jrockway/eproject.git

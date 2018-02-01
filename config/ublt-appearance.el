@@ -457,7 +457,6 @@
      )
   ;; mode name - displayed text - feature name (file name)
   (dolist (m '((paredit-mode               "(П)" paredit)
-               (eproject-mode              "еП" eproject)
                (projectile-mode            "Пр" projectile)
                (undo-tree-mode             "" undo-tree)
                (yas-minor-mode             "яс" yasnippet)

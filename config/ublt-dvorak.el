@@ -220,10 +220,10 @@
   ;; Utilities, super-
   "s-i"           'helm-semantic-or-imenu
   "s-d"           'helm-command-prefix
-  "s-D"           'eproject-ido-imenu
   "s-H"           'ido-switch-buffer
   "s-h"           'ublt/helm
-  "s-f"           'helm-swoop
+  ;; "s-f"           'helm-swoop
+  "s-f"           'helm-occur
   "s-F"           'helm-projectile
   ;; "s-F"           'projectile-find-file
   "s-g"           'magit-status
@@ -966,9 +966,6 @@
 (eval-after-load "org"
   '(ublt/undefine-keys org-mode-map
      '("C-y")))
-
-(ublt/keys 'eproject eproject-mode-map
-  "C-c C-f" nil)
 
 (ublt/keys 'org org-mode-map
   ;; "M-<return>" 'org-insert-heading-respect-content
