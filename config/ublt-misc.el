@@ -32,12 +32,6 @@
 (ublt/in '(gnu/linux)
   (setq find-ls-option '("-print0 | xargs -0 ls -ld" . "-ld")))
 
-(ublt/add-path "emacs-skype")
-;;; XXX: Disable for now, since Skype is f**king unstable
-;; (require 'skype)
-;; (skype--init)
-(setq skype--my-user-handle "ubolonton")
-
 ;; `http://www.emacswiki.org/emacs/DeskTop#toc6'
 ;; (desktop-save-mode +1)
 (defadvice desktop-create-buffer (around ignore-errors activate)
@@ -100,12 +94,6 @@
 ;; TextMate minor mode
 (require 'textmate)
 ;; (textmate-mode)
-
-;; TODO: Use this
-;; ECB, CEDET
-;; (ublt/add-path "ecb/")
-;; (require 'ecb)
-;; (setq ecb-windows-width 40)
 
 ;; pabbrev
 ;; (require 'pabbrev)

@@ -138,9 +138,6 @@
 (require 'ublt-editing)
 
 ;;; Personal stuff
-(ublt/add-path "org2blog/")
-(ublt/add-path "o-blog")
-(ublt/add-path "org-html-slideshow")
 (ublt/set-up 'ublt-communication)
 (when window-system
   (ublt/set-up 'ublt-entertainment))
