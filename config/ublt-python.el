@@ -40,40 +40,6 @@
 ;;; TODO: completion, history search, and other ipythons stuff
 
 
-;; ;; ============================================================
-;; ;; `http://taesoo.org/Opensource/Pylookup'
-;; ;; add pylookup to your loadpath, ex) "~/.lisp/addons/pylookup"
-;; (setq pylookup-dir "~/.emacs.d/lib/pylookup")
-;; (add-to-list 'load-path pylookup-dir)
-;; ;; load pylookup when compile time
-;; (eval-when-compile (require 'pylookup))
-
-;; ;; ;; set executable file and db file
-;; (setq pylookup-program (concat pylookup-dir "/pylookup.py"))
-;; (setq pylookup-db-file (concat pylookup-dir "/pylookup.db"))
-
-;; ;; ;; to speedup, just load it on demand
-;; (autoload 'pylookup-lookup "pylookup"
-;;   "Lookup SEARCH-TERM in the Python HTML indexes." t)
-;; (autoload 'pylookup-update "pylookup"
-;;   "Run pylookup-update and create the database at `pylookup-db-file'." t)
-
-;; (defvar ac-source-rope
-;;   '((candidates . (lambda () (prefix-list-elements (rope-completions) ac-target))))
-;;   "Source for Rope")
-;; (defun set-up-rope-ac ()
-;;   (interactive)
-;;   (setq ac-sources (add-to-list 'ac-sources 'ac-source-yasnippet)))
-;; (add-hook 'python-mode-hook 'set-up-rope-ac)
-
-
-;; (add-to-list 'Info-directory-list "~/.emacs.d/lib/python")
-;; (require 'info-look)
-;; (info-lookup-add-help
-;;  :mode 'python-mode
-;;  :regexp "[[:alnum:]]+"
-;;  :doc-spec
-;;  '(("(python)Index" nil "")))
 
 ;; ;;; TODO: Remove pymacs/ropemacs/ropemode?
 ;; ;; (ublt/set-up 'jedi

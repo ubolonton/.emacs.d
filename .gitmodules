@@ -1,3 +1,0 @@
-[submodule "lib/pylookup"]
-	path = lib/pylookup
-	url = http://github.com/tsgates/pylookup.git

@@ -60,7 +60,6 @@
                   haskell-interactive-mode
                   inf-mongo-mode
                   grep-mode
-                  pylookup-mode
                   cider-repl-mode
                   php-boris-mode))
     (add-to-list 'evil-insert-state-modes mode))

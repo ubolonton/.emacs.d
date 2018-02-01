@@ -875,12 +875,7 @@
 
 ;;; Other bindings specific to language modes
 (ublt/keys "python-mode" py-mode-map
-  "M-."    'pylookup-lookup
-  "C-c h"  'pylookup-lookup
   "'"      'skeleton-pair-insert-maybe)
-(ublt/keys "python-mode" py-shell-map
-  "C-c h"  'pylookup-lookup
-  "s-t"    'pylookup-lookup)
 
 (ublt/keys "slime-repl" slime-repl-mode-map
   "M-I"   'slime-repl-delete-from-input-history
