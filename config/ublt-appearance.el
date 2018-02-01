@@ -90,6 +90,7 @@
     (dolist (hook '(erc-mode-hook
                     text-mode-hook
                     Info-mode-hook
+                    helpful-mode-hook
                     help-mode-hook
                     apropos-mode-hook
                     ess-help-mode-hook
@@ -724,8 +725,7 @@
 ;; Technicolor
 (ublt/set-up 'info+)
 ;; Buffed-up help system
-(ublt/set-up 'help+)
-(ublt/set-up 'help-fns+)
+(ublt/set-up 'helpful)
 
 ;;; XXX: Find out why `python-mode' is upset by `which-func-mode'
 ;; ;;; Show current function name in mode-line

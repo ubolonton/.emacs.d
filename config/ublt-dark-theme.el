@@ -906,6 +906,9 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(describe-variable-value
      ((,class (,@fw ,@doc))))
 
+   `(helpful-heading
+     ((,class (:inherit org-level-3))))
+
    ;; man/woman
    `(woman-bold                         ;TODO
      ((,class (,@constant))))

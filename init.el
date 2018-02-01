@@ -62,7 +62,8 @@
          scpaste                        ; Publish highlighted code fragments
          exec-path-from-shell           ; Uhm, f*ck shell
          anzu                           ; Match count for search
-         help+ help-fns+ info+
+         info+
+         helpful
          pabbrev                        ; TODO: Find better alternative
          ;; git
          magit magit-svn diff-hl git-timemachine
