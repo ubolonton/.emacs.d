@@ -6,8 +6,6 @@
 (ublt/set-up 'dired+)
 
 (ublt/in '(darwin)
-  (require 'ls-lisp)
-  (setq ls-lisp-use-insert-directory-program t)
   (setq insert-directory-program "/opt/local/libexec/gnubin/ls"))
 
 ;;; Apparently this works much better than dired-do-async-shell-command and
