@@ -241,7 +241,6 @@
   "s-P"           'avy-pop-mark
   "s-<backspace>" 'ublt/toggle-alpha
   "s-<return>"    'ublt/toggle-fullscreen
-  ;; "s-/"           'find-file-in-project
   "s-/"           'variable-pitch-mode
   "s-\\"          'align-regexp
   "s-u"           'revert-buffer        ; ⟲

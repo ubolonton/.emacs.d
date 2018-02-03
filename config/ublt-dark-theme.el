@@ -192,7 +192,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(variable-pitch
      ((,class (,@vw0 :foreground ,fg-1))))
 
-   `(shadow ((,class (,@dimmed))))
+   `(shadow ((,class (,@context ,@italic))))
    `(link ((,class (,@portal :underline ,bg+3))))
    `(button
      ((,class (,@fw ,@portal :underline ,bg+3))))
@@ -797,6 +797,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
 
    `(diredp-file-name                   ;TODO
      ((,class (,@vw))))
+   `(diredp-dir-name
+     ((,class (,@teleport))))
    `(diredp-dir-priv
      ((,class (,@vw ,@more))))
    `(diredp-dir-heading                 ;TODO
@@ -826,7 +828,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(diredp-file-suffix
      ((,class (,@context))))
    `(diredp-ignored-file-name
-     ((,class (,@vw-italic ,@note))))
+     ((,class (,@italic ,@note))))
    ;; `(diredp-mode-line-marked
    ;;   ((,class (:bold t :foreground ,blue))))
    ;; `(diredp-mode-line-flagged
