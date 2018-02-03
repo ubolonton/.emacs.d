@@ -29,6 +29,9 @@
 (ublt/set-up 'diredfl
   (diredfl-global-mode +1))
 
+(ublt/set-up 'dired-rainbow
+  (dired-rainbow-define-chmod executable "#D98D54" "-.*x.*"))
+
 (setq
  ;; Offer the other window's path as default when copying
  dired-dwim-target t

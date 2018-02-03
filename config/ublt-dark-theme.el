@@ -841,6 +841,9 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(diredfl-deletion
      ((,class (:inherit diredfl-deletion-file-name))))
 
+   `(dired-rainbow-executable-face
+     ((,class (:inherit diredfl-exec-priv))))
+
 
    ;; REPLs
 
