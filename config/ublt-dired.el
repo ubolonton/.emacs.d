@@ -6,8 +6,8 @@
 (ublt/in '(darwin)
   (setq insert-directory-program "/opt/local/libexec/gnubin/ls"))
 
-;; Highlight current line
 (add-hook 'dired-mode-hook (ublt/on-fn 'hl-line-mode))
+(add-hook 'dired-mode-hook (ublt/on-fn 'dired-hide-details-mode))
 
 (ublt/set-up 'dired-x
   (setq dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\.")
