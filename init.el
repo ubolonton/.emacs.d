@@ -111,12 +111,7 @@
          terraform-mode company-terraform
          inf-mongo))
 (dolist (p ublt/packages)
-  (when (not (package-installed-p p))
-    (condition-case err
-        (package-install p)
-      (error
-       (message (propertize "Failed to install %s: %s" 'face 'font-lock-keyword-face)
-                p err)))))
+  (ublt/package-install p))
 
 
 

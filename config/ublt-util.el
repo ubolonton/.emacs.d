@@ -56,6 +56,16 @@
     (require feature filename)))
 
 
+(defvar ublt/package-errors ())
+(defun ublt/package-install (pkg)
+  (when (not (package-installed-p pkg))
+    (condition-case err
+        (package-install pkg nil)
+      (error
+       (setq ublt/package-errors (plist-put ublt/package-errors pkg err))
+       (message (propertize "Failed to install %s: %s" 'face 'font-lock-keyword-face)
+                pkg err)))))
+
 
 (defmacro ublt/set-up (feature &rest body)
   "Try loading the feature, running BODY afterward, notifying
@@ -67,6 +77,7 @@ files."
   `(let ((f (if (stringp ,feature) (intern ,feature) ,feature)))
      (when (ublt/require f nil t)
        ,@body)))
+
 
 ;; TODO: Isn't this about appearance?
 (font-lock-add-keywords
