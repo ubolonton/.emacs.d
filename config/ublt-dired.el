@@ -3,8 +3,6 @@
 (eval-when-compile
   (require 'cl))
 
-(ublt/set-up 'dired+)
-
 (ublt/in '(darwin)
   (setq insert-directory-program "/opt/local/libexec/gnubin/ls"))
 
@@ -27,6 +25,9 @@
 
 (ublt/set-up 'dired-collapse
   (add-hook 'dired-mode-hook (ublt/on-fn 'dired-collapse-mode)))
+
+(ublt/set-up 'diredfl
+  (diredfl-global-mode +1))
 
 (setq
  ;; Offer the other window's path as default when copying

@@ -192,7 +192,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(variable-pitch
      ((,class (,@vw0 :foreground ,fg-1))))
 
-   `(shadow ((,class (,@context ,@italic))))
+   `(shadow ((,class (,@context))))
    `(link ((,class (,@portal :underline ,bg+3))))
    `(button
      ((,class (,@fw ,@portal :underline ,bg+3))))
@@ -759,11 +759,11 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(helm-ff-file
      ((,class (,@portal))))
    `(helm-ff-directory
-     ((,class (:inherit diredp-dir-priv ,@fw ,dimmed-hl))))
+     ((,class (:inherit diredfl-dir-priv ,@fw ,dimmed-hl))))
    `(helm-ff-symlink
-     ((,class (:inherit diredp-symlink))))
+     ((,class (:inherit diredfl-symlink))))
    `(helm-ff-executable
-     ((,class (:inherit diredp-exec-priv))))
+     ((,class (:inherit diredfl-exec-priv))))
    ;; `(helm-candidate-number
    ;;   ((,class (:background ,yellow-1 :foreground ,bg :bold t)))) ; TODO
    `(helm-separator
@@ -795,44 +795,51 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
 
    ;; dired
 
-   `(diredp-file-name                   ;TODO
-     ((,class (,@vw))))
-   `(diredp-dir-name
-     ((,class (,@teleport))))
-   `(diredp-dir-priv
-     ((,class (,@vw ,@more))))
-   `(diredp-dir-heading                 ;TODO
-     ((,class (,@header))))
-   `(dired-symlink
-     ((,class (,@teleport))))
-   `(diredp-symlink
-     ((,class (,@teleport))))
-   `(diredp-no-priv
-     ((,class (,@dimmed-hl ,@spectral))))
-   `(diredp-read-priv
-     ((,class (:inherit diredp-no-priv ,@more))))
-   `(diredp-write-priv
-     ((,class (:inherit diredp-no-priv ,@power))))
-   `(diredp-exec-priv
-     ((,class (:inherit diredp-no-priv ,@raw))))
-   `(diredp-number
+   `(diredfl-dir-heading
+     ((,class (,@header ,@vw))))
+   `(diredfl-number
      ((,class (,@number))))
-   `(diredp-flag-mark-line              ;selected
-     ((,class (,@special-hl ,@vw))))
-   `(diredp-deletion                    ;marked for deletion
-     ((,class (,@error-hl ,@vw))))
-   `(diredp-deletion-file-name
-     ((,class (,@error-hl))))
-   `(diredp-compressed-file-suffix      ;TODO
-     ((,class (,@constant))))
-   `(diredp-file-suffix
-     ((,class (,@context))))
-   `(diredp-ignored-file-name
+
+   ;; Type
+   `(diredfl-file-name                   ;TODO
+     ((,class (,@vw))))
+   `(diredfl-dir-name
+     ((,class (,@teleport))))
+   `(dired-symlink
+     ((,class (,@portal ,@vw-italic :underline ,bg+3))))
+   `(diredfl-symlink
+     ((,class (:inherit dired-symlink))))
+   `(diredfl-ignored-file-name
      ((,class (,@italic ,@note))))
-   ;; `(diredp-mode-line-marked
-   ;;   ((,class (:bold t :foreground ,blue))))
-   ;; `(diredp-mode-line-flagged
-   ;;   ((,class (:bold t :foreground ,blush-2))))
+
+   `(diredfl-file-suffix
+     ((,class (,@context ,@italic))))
+   `(diredfl-compressed-file-suffix      ;TODO
+     ((,class (,@constant))))
+
+   ;; Permission bits
+   `(diredfl-no-priv
+     ((,class (,@dimmed-hl ,@spectral))))
+   `(diredfl-read-priv
+     ((,class (:inherit diredfl-no-priv ,@more))))
+   `(diredfl-write-priv
+     ((,class (:inherit diredfl-no-priv ,@power))))
+   `(diredfl-exec-priv
+     ((,class (:inherit diredfl-no-priv ,@raw))))
+   `(diredfl-rare-priv
+     ((,class (,@special-hl ,@power ,@italic))))
+   `(diredfl-dir-priv
+     ((,class (,@special-hl ,@power ,@italic))))
+
+   ;; Selection
+   `(diredfl-flag-mark-line              ;selected
+     ((,class (,@special-hl ,@vw))))
+   `(diredfl-flag-mark
+     ((,class (:inherit diredfl-flag-mark-line))))
+   `(diredfl-deletion-file-name         ;marked for deletion
+     ((,class (,@error-hl ,@vw))))
+   `(diredfl-deletion
+     ((,class (:inherit diredfl-deletion-file-name))))
 
 
    ;; REPLs

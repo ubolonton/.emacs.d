@@ -903,6 +903,7 @@
   "C-M-w"      'ublt/isearch-yank-symbol)
 
 (ublt/keys 'dired dired-mode-map
+  ")"          'dired-hide-details-mode
   "M-RET"      'ublt/dired-open-native
   ;; It makes more sense to search in filenames by default
   "C-s"        'dired-isearch-filenames-regexp
