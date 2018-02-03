@@ -9,8 +9,7 @@
                        elpy-module-highlight-indentation
                        elpy-module-pyvenv))
   (setq elpy-rpc-backend "rope")
-  (elpy-enable)
-  (elpy-use-ipython))
+  (elpy-enable))
 
 (ublt/set-up 'python
   (defun ublt/tab-4-spaces ()
