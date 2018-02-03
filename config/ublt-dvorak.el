@@ -220,7 +220,6 @@
   ;; Utilities, super-
   "s-i"           'helm-semantic-or-imenu
   "s-d"           'helm-command-prefix
-  "s-H"           'ido-switch-buffer
   "s-h"           'ublt/helm
   ;; "s-f"           'helm-swoop
   "s-f"           'helm-occur
