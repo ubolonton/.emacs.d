@@ -25,9 +25,10 @@
 
    magit-log-margin '(t age-abbreviated magit-log-margin-width t 10)
 
+
    ;; Other
    magit-log-show-refname-after-summary t
-   magit-blame-mode-lighter " Bl")
+   magit-blame-mode-lighter "🔥")
 
   ;; XXX: The initialization of this is icky. We use `global-auto-revert-mode' anyway, so disable it here.
   (magit-auto-revert-mode -1)
@@ -48,6 +49,16 @@
   ;;   (save-selected-window
   ;;     ad-do-it))
   )
+
+(ublt/set-up 'magit-diff
+  ;; gravatars
+  (setq magit-revision-show-gravatars '("^Author:     " .  "^Commit:     "))
+  (defun ublt/disable-line-spacing ()
+    (setq line-spacing 0))
+  (add-hook 'magit-revision-mode-hook #'ublt/disable-line-spacing))
+
+(ublt/set-up 'magit-refs
+  (setq magit-refs-show-commit-count 'branch))
 
 (ublt/set-up 'magit-popup
   (dolist (switch '((?m "Exclude merges" "--no-merges")
