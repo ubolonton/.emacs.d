@@ -463,7 +463,7 @@
                (flyspell-mode              " !" flyspell)
                (hs-minor-mode              " ⊕" hideshow)
                (company-mode               "" company)
-               (rainbow-mode               " ❂" rainbow-mode)
+               (rainbow-mode               "🌈" rainbow-mode)
                (helm-mode                  " ⎈" helm)
                (anzu-mode                  " Σ" anzu)
                (isearch                    " Σ")
