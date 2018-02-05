@@ -262,7 +262,8 @@
   "M-w"           'whole-line-or-region-kill-ring-save
   "C-y"           'whole-line-or-region-yank
 
-  'undo           'undo-tree-undo
+  ;; Can't use remapping here, since it would make `undo-tree' not turning on.
+  "C-_"           'undo-tree-undo
   "M-_"           'undo-tree-redo
 
   ;; Line/region movement
