@@ -172,6 +172,10 @@
   "C-<home>"      "M-<"
   "C-<end>"       "M->"
 
+  ;; TODO: Make this work (need to handle ESC prefix as well).
+  ;; ;; "Help" `Karabiner-Elements' (e.g. we want C-g -> ⎋ system-wide, except in Emacs).
+  ;; "<escape>" "C-g"
+
   "M-i"    "C-k"
   "M-d"    "C-a"
   "M-D"    "C-e"
@@ -226,7 +230,7 @@
   "s-F"           'helm-projectile
   ;; "s-F"           'projectile-find-file
   "s-g"           'magit-status
-  "s-C-g"         'magit-dispatch-popup
+  "s-C-g"         'magit-file-popup
   "s-G"           'ag
   "s-H"           'helm-ag
   "s-m"           'avy-goto-word-1
@@ -258,7 +262,7 @@
   "M-w"           'whole-line-or-region-kill-ring-save
   "C-y"           'whole-line-or-region-yank
 
-  "C-_"           'undo-tree-undo
+  'undo           'undo-tree-undo
   "M-_"           'undo-tree-redo
 
   ;; Line/region movement
@@ -927,6 +931,8 @@
 (ublt/keys 'git-timemachine git-timemachine-mode-map
   "M-p" 'git-timemachine-show-previous-revision
   "M-n" 'git-timemachine-show-next-revision)
+(ublt/keys 'git-rebase git-rebase-mode-map
+  'undo-tree-undo 'git-rebase-undo)
 
 (eval-after-load "ido"
   '(progn
