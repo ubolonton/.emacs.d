@@ -65,6 +65,7 @@
     (add-to-list 'evil-insert-state-modes mode))
 
   (dolist (mode '(Info-mode
+                  helpful-mode
                   cider-browse-ns-mode))
     (add-to-list 'evil-emacs-state-modes mode))
 
