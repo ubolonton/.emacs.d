@@ -495,9 +495,9 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(font-lock-reference-face
      ((,class (,@fw ,@reference))))     ; TODO What's this?
    `(font-lock-regexp-grouping-backslash
-     ((,class (,@fw ,@spectral))))
+     ((,class (,@fw ,@dimmed))))
    `(font-lock-regexp-grouping-construct
-     ((,class (,@fw ,@constant))))
+     ((,class (,@fw ,@constant ,@bold))))
    `(font-lock-string-face
      ((,class (,@fw ,@string))))
    `(font-lock-type-face
@@ -867,13 +867,13 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
 
    ;; info
    `(info-title-1
-     ((,class (:inherit org-level-1 :weight bold))))
+     ((,class (:inherit org-level-1 ,@bold))))
    `(info-title-2
-     ((,class (:inherit org-level-2 :weight bold))))
+     ((,class (:inherit org-level-2 ,@bold))))
    `(info-title-3
-     ((,class (:inherit org-level-3 :weight bold))))
+     ((,class (:inherit org-level-3 ,@bold))))
    `(info-title-4
-     ((,class (:inherit org-level-4 :weight bold))))
+     ((,class (:inherit org-level-4))))
    `(info-menu-header
      ((,class (:inherit org-level-2 ,@bold))))
    `(info-xref
@@ -881,31 +881,19 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(info-xref-visited
      ((,class (:inherit info-xref ,@note ,@italic))))
    `(info-header-node
-     ((,class (:inherit info-title-4 ,@italic))))
-   `(info-quoted-name
-     ((,class (,@fw ,@constant))))
+     ((,class (:inherit info-title-4 ,@bold ,@italic))))
    `(Info-quoted
      ((,class (,@fw ,@constant))))
-   `(info-single-quote
-     ((,class (,@constant))))
-   `(info-string
-     ((,class (:foreground ,radio))))
-   `(info-reference-item
-     ((,class (,@fw ,@mutable :weight bold :height 1.1))))
-   `(info-function-ref-item
-     ((,class (:weight bold ,@italic :height 0.7))))
-   `(info-constant-ref-item
-     ((,class (,@constant :inherit info-function-ref-item))))
-   `(info-user-option-ref-item
-     ((,class (,@param :inherit info-function-ref-item :slant normal))))
-   `(info-variable-ref-item
-     ((,class (,@mutable :inherit info-function-ref-item))))
-   `(info-macro-ref-item
-     ((,class (,@power :inherit info-function-ref-item))))
-   `(info-special-form-ref-item
-     ((,class (,@power :inherit info-function-ref-item :slant normal))))
-   `(info-command-ref-item
-     ((,class (,@type :inherit info-function-ref-item))))
+
+   ;; info-colors
+   `(info-colors-ref-item-type
+     ((,class (,@context ,@bold ,@italic))))
+   `(info-colors-ref-item-user-option
+     ((,class (:inherit font-lock-variable-name-face))))
+   `(info-colors-ref-item-variable
+     ((,class (:inherit info-colors-ref-item-user-option ,@italic))))
+   `(info-colors-lisp-code-block
+     ((,class (:inherit org-block ,@dimmed-hl))))
 
    ;; apropos
    `(apropos-symbol

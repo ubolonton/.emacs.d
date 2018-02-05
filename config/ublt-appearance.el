@@ -722,6 +722,9 @@
 ;; Buffed-up help system
 (ublt/set-up 'helpful)
 
+(ublt/set-up 'info-colors
+  (add-hook 'Info-selection-hook 'info-colors-fontify-node))
+
 ;;; XXX: Find out why `python-mode' is upset by `which-func-mode'
 ;; ;;; Show current function name in mode-line
 ;; (which-func-mode +1)

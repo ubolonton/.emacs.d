@@ -63,6 +63,7 @@
          exec-path-from-shell           ; Uhm, f*ck shell
          anzu                           ; Match count for search
          helpful
+         info-colors
          pabbrev                        ; TODO: Find better alternative
          ;; git
          magit magit-svn diff-hl git-timemachine

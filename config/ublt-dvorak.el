@@ -612,6 +612,8 @@
 
 ;;; Helm
 (ublt/keys "helm-config" helm-command-map
+  "h g" 'helm-info-magit
+  "h o" 'helm-info-org
   "g"   'helm-google-suggest
   "l"   'helm-locate
   "p"   'helm-list-emacs-process
