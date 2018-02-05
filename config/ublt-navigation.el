@@ -254,22 +254,18 @@ created), caused by `scroll-preserve-screen-position' not taking
 ;;; What's the point of jumping to a section's start but putting it at
 ;;; the bottom of the window? This somewhat fixes it
 
-(defun ublt/recenter-near-top ()
+(defun ublt/recenter-near-top (&optional arg)
+  "Scroll the current line to the top part of the current window."
   (recenter (max 5
-                 (/ (window-body-height) 5)
-                 scroll-margin)))
+                 (round (* (window-body-height) 0.25))
+                 scroll-margin))
+  arg)
 
-(defadvice ido-imenu (after bring-into-view activate)
-  (ublt/recenter-near-top))
-
-;;; This can be achieved by setting `find-function-recenter-line'. But
-;;; we want it to be a little more dynamic, so use an advice instead.
-(defadvice find-function-do-it (after bring-into-view activate)
-  (ublt/recenter-near-top))
-
-;;; TODO: This is getting tiresome. There must be a more systematic way.
-(defadvice occur-mode-goto-occurrence (after bring-into-view activate)
-  (ublt/recenter-near-top))
+(dolist (func '(ido-menu
+                find-function-do-it
+                racer--find-file
+                occur-mode-goto-occurrence))
+  (advice-add func :filter-return #'ublt/recenter-near-top))
 
 ;;; This is needed because the help buttons use `find-function'
 ;;; library in a very weird way.
