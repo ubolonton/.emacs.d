@@ -772,6 +772,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (,@reference))))
    `(helm-moccur-buffer                 ;TODO
      ((,class (,@reference))))
+   `(helm-non-file-buffer
+     ((,class (:foreground ,fg-2 ,@italic))))
    `(helm-grep-lineno
      ((,class (,@number))))
    ;; `(helm-grep-finish                   ;TODO
@@ -893,7 +895,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(info-colors-ref-item-variable
      ((,class (:inherit info-colors-ref-item-user-option ,@italic))))
    `(info-colors-lisp-code-block
-     ((,class (:inherit org-block ,@dimmed-hl))))
+     ((,class (:inherit org-block ,@dimmed-hl :weight normal))))
 
    ;; apropos
    `(apropos-symbol
