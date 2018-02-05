@@ -6,7 +6,7 @@
 
 ;;; Emacs is not a text editor, and here we load its package manager!
 (require 'package)
-(dolist (source '(("org" . "http://orgmode.org/elpa/")
+(dolist (source '(("org" . "https://orgmode.org/elpa/")
                   ("melpa-stable" . "https://stable.melpa.org/packages/")
                   ("melpa" . "https://melpa.org/packages/")
                   ("elpy" . "https://jorgenschaefer.github.io/packages/")
@@ -31,6 +31,8 @@
 (defvar ublt/package-archives package-archives)
 (add-hook 'after-init-hook (lambda () (setq package-archives ublt/package-archives)))
 (package-initialize)
+
+(setq tls-checktrust 'ask)
 
 ;;; Required packages
 (when (not package-archive-contents)
