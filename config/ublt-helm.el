@@ -117,29 +117,6 @@
   (interactive)
   (helm-other-buffer (ublt/helm-sources) "*ublt/helm*"))
 
-
-;;; FIX: Check why there is flickering with helm-occur and
-;;; helm-source-buffers-list but not helm-swoop while moving through
-;;; the result list. If it can be fixed, enable follow-mode for
-;;; helm-source-buffers-list
-
-;;; TODO: Add file/buffer navigation once it's possible to do
-;;; dedicated transparent frame for helm
-(defun ublt/helm-enable-follow-mode ()
-  (dolist (source (list helm-source-occur
-                        helm-source-moccur
-                        ;; helm-source-org-headline
-                        ;; helm-source-pp-bookmarks
-                        helm-source-imenu
-                        ;; helm-source-buffers-list
-                        ))
-    (condition-case nil
-        (helm-attrset 'follow 1 source)
-      (error nil)))
-  )
-(add-hook 'helm-before-initialize-hook #'ublt/helm-enable-follow-mode)
-
-
 ;;; TODO: Maybe customize faces is better (per-source selection of
 ;;; fixed-pitch/variable-pitched font)?
 ;;; XXX: `helm-M-x' does not define a source
@@ -170,7 +147,8 @@ all of the sources."
   (with-current-buffer helm-buffer
     (when (ublt/helm-should-use-variable-pitch? helm-sources)
       (variable-pitch-mode +1))
-    (setq line-spacing 0.2)
+    (setq line-spacing 0.3)
+    (visual-line-mode -1)
     ;; (text-scale-increase 1)
     ))
 (add-hook 'helm-after-initialize-hook 'ublt/helm-tweak-appearance)
@@ -216,7 +194,6 @@ all of the sources."
 
 (helm-mode +1)
 
-;;; XXX: Don't monkey-patch.
 ;;; TODO: Refine this.
 ;;; TODO: Sometimes inline display is better.
 ;;; TODO: Make something similar for `magit-popup'.
@@ -226,6 +203,16 @@ all of the sources."
         helm-display-buffer-reuse-frame t
         helm-use-undecorated-frame-option t)
 
+  (defun ublt/make-transparent-maybe (&optional result)
+    (set-frame-parameter helm-popup-frame 'alpha
+                         (if (helm-follow-mode-p) 35 100))
+    result)
+
+  ;; Make helm popup frame transparent when `helm-follow-mode' is on.
+  (add-hook 'helm-minibuffer-set-up-hook #'ublt/make-transparent-maybe)
+  (advice-add 'helm-follow-mode :filter-return #'ublt/make-transparent-maybe)
+
+  ;; XXX: Don't monkey-patch.
   (defun helm-display-buffer-in-own-frame (buffer &optional resume)
   "Display helm buffer BUFFER in a separate frame.
 
@@ -303,6 +290,7 @@ Note that this feature is available only with emacs-25+."
       )
     (helm-log-run-hook 'helm-window-configuration-hook)))
 
+  ;; XXX: Don't monkey-patch.
   (defun helm-display-buffer-popup-frame (buffer frame-alist)
     (if helm-display-buffer-reuse-frame
         (progn
@@ -315,15 +303,15 @@ Note that this feature is available only with emacs-25+."
                  (display-h (display-pixel-height display))
 
                  (w (round (* display-w 0.6)))
-                 (h (round (* display-h 0.7)))
+                 (h (round (* display-h 0.6)))
                  (x (/ (- display-w w) 2))
                  (y 0))
             (set-frame-size helm-popup-frame w h t)
             (modify-frame-parameters
              helm-popup-frame
              '((fullscreen . nil)
-               (left-fringe . 4)
-               (right-fringe . 4)
+               (left-fringe . 8)
+               (right-fringe . 8)
                (border-width . 0)
                (menu-bar-lines . 0)
                (unsplittable . t)

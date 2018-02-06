@@ -225,6 +225,7 @@
   "s-i"           'helm-semantic-or-imenu
   "s-d"           'helm-command-prefix
   "s-h"           'ublt/helm
+  "C-s-h"         'helm-follow-mode
   "s-f"           'helm-swoop
   "s-F"           'helm-projectile
   ;; "s-F"           'projectile-find-file
