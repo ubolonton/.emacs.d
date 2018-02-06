@@ -225,8 +225,7 @@
   "s-i"           'helm-semantic-or-imenu
   "s-d"           'helm-command-prefix
   "s-h"           'ublt/helm
-  ;; "s-f"           'helm-swoop
-  "s-f"           'helm-occur
+  "s-f"           'helm-swoop
   "s-F"           'helm-projectile
   ;; "s-F"           'projectile-find-file
   "s-g"           'magit-status

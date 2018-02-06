@@ -65,6 +65,16 @@
 (ublt/set-up 'helm-man)
 
 (ublt/set-up 'helm-swoop
+  ;; XXX: https://github.com/ShingoFukuyama/helm-swoop/issues/123
+  ;; https://github.com/ShingoFukuyama/helm-swoop/pull/124
+  (setq helm-swoop-split-window-function
+        (lambda ($buf &optional resume)
+          (if helm-swoop-split-with-multiple-windows
+              (funcall helm-swoop-split-direction)
+            (when (one-window-p)
+              (funcall helm-swoop-split-direction)))
+          (other-window 1)
+          (switch-to-buffer $buf)))
   (setq helm-swoop-speed-or-color t
         helm-swoop-use-line-number-face t
         helm-swoop-pre-input-function (lambda () nil)))
@@ -208,6 +218,8 @@ all of the sources."
 
 ;;; XXX: Don't monkey-patch.
 ;;; TODO: Refine this.
+;;; TODO: Sometimes inline display is better.
+;;; TODO: Make something similar for `magit-popup'.
 ;;; https://www.reddit.com/r/emacs/comments/7rho4f/now_you_can_use_helm_with_frames_instead_of/
 (when (functionp #'helm-display-buffer-in-own-frame)
   (setq helm-display-function #'helm-display-buffer-in-own-frame
