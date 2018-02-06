@@ -950,15 +950,6 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(yas-field-highlight-face
      ((,class (,@strong-hl))))
 
-   ;; ace-jump
-   `(ace-jump-face-foreground
-     ((,class (:underline nil :box nil
-                          :strike-through nil :inverse-video nil :overline nil
-                          :background ,bg :foreground ,yellow
-                          :inherit t))))
-   `(ace-jump-face-background
-     ((,class (:foreground ,bg+3))))
-
    `(avy-background-face
      ((,class (:foreground ,bg+3))))
    `(avy-lead-face

@@ -119,22 +119,22 @@ of line."
   )
 
 
-(ublt/set-up 'ace-jump-mode
-  (setq ace-jump-mode-case-sensitive-search nil
-        ace-jump-mode-submode-list '(ace-jump-word-mode
-                                     ace-jump-line-mode
-                                     ace-jump-char-mode)
-        ace-jump-word-mode-use-query-char t
-        ace-jump-mode-move-keys (nconc (loop for i from ?a to ?z collect i)
-                                       (loop for i from ?0 to ?9 collect i)
-                                       ;; (loop for i from ?A to ?Z collect i)
-                                       )))
-
 (ublt/set-up 'avy
   (setq
    avy-background t
-   ;; Dvorak, stronger finger first, left hand first?
-   avy-keys '(?u ?h ?i ?d ?e ?t ?o ?n  ?p ?g ?k ?m  ?. ?c  ?, ?r  ?j ?w  ?q ?v  ?a ?s)
+   avy-keys (list ;Dvorak, stronger finger first, left hand first. TODO: Fewer?
+             ?u ?h                      ;index
+             ?i ?d                      ;index ←→
+             ?e ?t                      ;middle
+             ?o ?n                      ;ring
+             ?p ?g                      ;index ↑
+             ?k ?m                      ;index ↓
+             ?. ?c                      ;middle ↑
+             ?, ?r                      ;ring ↑
+             ?j ?w                      ;middle ↓
+             ?q ?v                      ;ring ↓
+             ?a ?s                      ;pinkies
+             )
    avy-style 'at-full))
 
 
