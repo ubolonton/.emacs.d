@@ -26,9 +26,6 @@
   (add-to-list 'desktop-locals-to-save 'buffer-display-time)
   (midnight-mode +1))
 
-;; Increase GC threshold `https://github.com/lewang/flx'.
-(setq gc-cons-threshold (* 2 (expt 10 7)))
-
 (ublt/in '(gnu/linux)
   (setq find-ls-option '("-print0 | xargs -0 ls -ld" . "-ld")))
 
