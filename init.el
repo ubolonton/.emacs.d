@@ -14,18 +14,12 @@
   (add-to-list 'package-archives source t))
 (setq
  package-archive-priorities '(("melpa-stable" . 1)
-                              ("melpa" . 0)))
+                              ("melpa" . 2)))
 
 (when (boundp 'package-pinned-packages)
   (setq package-pinned-packages
         '((elpy . "elpy")
-          (org . "org")
-          (cider . "melpa-stable")
-          (helm-ag . "melpa-stable")
-          (helm-projectile . "melpa-stable")
-          (projectile . "melpa-stable")
-          (magit . "melpa-stable")
-          (helm . "melpa"))))
+          (org . "org"))))
 
 ;;; Some packages mess up `package-archives'. This fixes that.
 (defvar ublt/package-archives package-archives)
