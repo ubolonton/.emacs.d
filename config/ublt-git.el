@@ -44,6 +44,9 @@
     (let ((shell-file-name "sh"))
       ad-do-it))
 
+  (add-to-list 'load-path "~/Programming/projects/magit-libgit2/elisp")
+  (ublt/set-up 'magit-libgit2-x)
+
   ;; ;; XXX
   ;; (defadvice magit-process (around dont-switch activate)
   ;;   (save-selected-window
