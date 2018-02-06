@@ -135,6 +135,13 @@ of line."
              ?q ?v                      ;ring ↓
              ?a ?s                      ;pinkies
              )
+   avy-dispatch-alist '((?x . avy-action-kill-move)
+                        (?X . avy-action-kill-stay)
+                        (?T . avy-action-teleport)
+                        (?M . avy-action-mark)
+                        (?C . avy-action-copy)
+                        (?y . avy-action-yank)
+                        (?I . avy-action-ispell))
    avy-style 'at-full))
 
 

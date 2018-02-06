@@ -248,7 +248,7 @@
   "s-u"           'revert-buffer        ; ⟲
   "s-k"           'ublt/kill-this-buffer
   ;; "s-l"           'goto-line
-  "s-l"           'helm-swoop           ;TODO: This is unused (because s-f)
+  "s-l"           'helm-swoop
   "s-C"           'ublt/duplicate-line
   "s-+"           'text-scale-increase
   "s-="           'text-scale-increase
@@ -595,6 +595,15 @@
   "u" 'evil-inner-url
   ;; "l" 'evil-inner-sexp
   )
+(ublt/keys 'evil-integration evil-motion-state-map
+  "k"     'evil-avy-goto-char-in-line
+  )
+(ublt/keys 'evil-integration global-map
+  "s-m" 'evil-avy-goto-word-1
+  "s-M" 'evil-avy-goto-char-2
+  )
+
+
 ;; (ublt/keys 'evil evil-inner-text-objects-map
 ;;   "d" 'evil-inner-defun
 ;;   "S" 'evil-inner-symbol
