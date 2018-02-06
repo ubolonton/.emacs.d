@@ -270,14 +270,15 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
 
    ;; diffs & git
 
+   ;; Inline diffs.
    `(diff-added
      ((,class (,@plus))))
    `(diff-removed
      ((,class (,@minus))))
    `(diff-refine-added
-     ((,class (:inherit diff-added ,@normal-hl))))
+     ((,class (:inherit diff-added ,@strong-hl))))
    `(diff-refine-removed
-     ((,class (:inherit diff-removed ,@normal-hl))))
+     ((,class (:inherit diff-removed ,@strong-hl))))
    `(diff-context
      ((,class ,context)))
    `(diff-indicator-added
@@ -291,6 +292,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(diff-hunk-header                   ;TODO
      ((,class (,@constant ,@italic))))
 
+   ;; Side-by-side diff/merge.
    `(ediff-even-diff-A
      ((,class (,@normal-hl))))
    `(ediff-even-diff-B
@@ -307,7 +309,6 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (:inherit ediff-even-diff-Ancestor))))
    `(ediff-odd-diff-Ancestor
      ((,class (:inherit ediff-even-diff-C))))
-
    ;; HSV (V)
    ;; orig: 17 20 20 31
    ;; low: 13 15 15 25
@@ -329,72 +330,41 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(ediff-fine-diff-Ancestor
      ((,class (:background "#0E165C"))))
 
-   `(magit-item-highlight
-     ((,class (,@dimmed-hl))))
-   `(magit-section-title
-     ((,class (,@vw ,@mutable :weight bold))))
-   `(magit-branch
-     ((,class (,@more))))
-   `(magit-diff-file-header
-     ((,class (:inherit diff-file-header))))
-   `(magit-diff-hunk-header
-     ((,class (:inherit diff-hunk-header))))
-   `(magit-diff-add
-     ((,class (:inherit diff-added))))
-   `(magit-diff-del
-     ((,class (:inherit diff-removed))))
-   `(magit-diff-none
-     ((,class (:inherit diff-context))))
-   `(magit-log-head-label-default
-     ((,class (:inherit magit-log-head-label-remote ,@mutable))))
-   `(magit-log-sha1
-     ((,class (,@fw ,@commitment))))
-   `(magit-item-mark
-     ((,class (:inherit secondary-selection))))
    `(magit-tag                          ;TODO
      ((,class (:foreground ,seaweed :box ,bg+3))))
-   `(magit-log-head-label-tags
-     ((,class (:inherit magit-tag))))
-   `(magit-log-author
-     ((,class (,@vw ,@context))))
-   `(magit-log-date
-     ((,class (,@vw ,@dimmed))))
-   `(magit-log-message
-     ((,class (,@vw-italic))))
-   `(magit-log-graph
-     ((,class (:inherit font-lock-doc-face))))
-   `(magit-key-mode-switch-face
-     ((,class (:inherit font-lock-type-face))))
-   `(magit-blame-header
-     ((,class (,@vw ,@normal-hl :foreground ,fg-1))))
-   ;; TODO
-   ;; (magit-blame-sha1
-   ;;  ((t ())))
-   `(magit-blame-culprit
-     ((,class (:inherit magit-blame-header))))
-   `(magit-blame-time
-     ((,class (:inherit magit-blame-header ,@context))))
-   `(magit-blame-subject
-     ((,class (:inherit (magit-log-message magit-blame-header)))))
-
-   `(magit-section-highlight
-     ((,class (,@normal-hl))))
-   `(magit-section-heading
-     ((,class (,@vw ,@mutable :weight bold))))
    `(magit-branch-local
      ((,class (,@more))))
    `(magit-branch-current
      ((,class (,@more :box (:color ,fg-2)))))
    `(magit-branch-remote
      ((,class (,@doc))))
+
+   `(magit-hash
+     ((,class (,@fw ,@commitment))))
+
+   `(magit-popup-heading
+     ((,class (:inherit font-lock-keyword-face))))
+   `(magit-popup-key
+     ((,class (:inherit font-lock-builtin-face))))
+   `(magit-popup-argument
+     ((,class (:inherit font-lock-variable-name-face))))
+
+   ;; Section.
+   `(magit-section-heading
+     ((,class (,@vw ,@mutable ,@bold))))
+   `(magit-section-highlight
+     ((,class (,@normal-hl))))
+   ;; Files.
    `(magit-diff-file-heading
-     ((,class (:inherit magit-file-name :weight normal))))
+     ((,class (:inherit magit-filename))))
    `(magit-diff-file-heading-highlight
-     ((,class (:inherit magit-diff-file-heading ,@normal-hl :weight bold))))
+     ((,class (:inherit magit-diff-file-heading ,@normal-hl ,@bold))))
+   ;; Hunks.
    `(magit-diff-hunk-heading
      ((,class (:inherit diff-hunk-header :overline ,bg+3))))
    `(magit-diff-hunk-heading-highlight
-     ((,class (:inherit magit-diff-hunk-heading ,@special-hl :overline ,fg :weight bold))))
+     ((,class (:inherit magit-diff-hunk-heading ,@special-hl :overline ,fg ,@bold))))
+   ;; Diffs.
    `(magit-diff-added
      ((,class (:inherit diff-added))))
    `(magit-diff-removed
@@ -406,25 +376,17 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(magit-diff-removed-highlight
      ((,class (:inherit magit-diff-removed ,@dimmed-hl))))
    `(magit-diff-context-highlight
-     ((,class (:inherit maigt-diff-context ,@dimmed-hl))))
-   ;; `(magit-log-head-label-default
-   ;;   ((,class (:inherit magit-log-head-label-remote ,@mutable))))
-   `(magit-hash
-     ((,class (,@fw ,@commitment))))
-   ;; `(magit-item-mark
-   ;;   ((,class (:inherit secondary-selection))))
-   ;; `(magit-tag                          ;TODO
-   ;;   ((,class (:foreground ,seaweed :box ,bg+3))))
-   ;; `(magit-log-head-label-tags
-   ;;   ((,class (:inherit magit-tag))))
-   ;; `(magit-log-author
-   ;;   ((,class (,@vw ,@context))))
-   ;; `(magit-log-date
-   ;;   ((,class (,@vw ,@dimmed))))
-   ;; `(magit-log-message
-   ;;   ((,class (,@vw-italic))))
-   ;; `(magit-key-mode-switch-face
-   ;;   ((,class (:inherit font-lock-type-face))))
+     ((,class (:inherit magit-diff-context ,@dimmed-hl :foreground ,fg-2))))
+
+   ;; Logging.
+   `(magit-log-author
+     ((,class (,@vw ,@context))))
+   `(magit-log-date
+     ((,class (,@vw ,@dimmed))))
+   `(magit-log-graph
+     ((,class (:inherit font-lock-doc-face))))
+
+   ;; Blaming.
    `(magit-blame-heading
      ((,class (,@vw ,@normal-hl :foreground ,fg-1 :overline ,bg+3))))
    `(magit-blame-hash
@@ -435,24 +397,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (:inherit magit-blame-heading ,@context))))
    `(magit-blame-summary
      ((,class (:inherit (git-commit-summary magit-blame-heading)))))
-   `(magit-popup-argument
-     ((,class (:inherit font-lock-variable-name-face))))
 
-   `(git-commit-summary-face
-     ((,class (:inherit magit-log-message))))
-   `(git-commit-overlong-summary-face
-     ((,class (:inherit git-commit-summary-face :foreground ,blush))))
-   `(git-commit-nonempty-second-line-face
-     ((,class (:inherit git-commit-summary-face ,@error-hl))))
-   `(git-commit-comment-heading-face
-     ((,class (:inherit magit-section-title :weight normal))))
-   `(git-commit-comment-action-face
-     ((,class (,@fw ,@commitment))))
-   `(git-commit-comment-file-face
-     ((,class (,@vw ,@string))))
-   `(git-commit-branch-face
-     ((,class (,@fw ,@more :box ,bg+3))))
-
+   ;; Committing.
    `(git-commit-summary
      ((,class (:inherit magit-log-message))))
    `(git-commit-overlong-summary
@@ -468,6 +414,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(git-commit-comment-branch
      ((,class (,@fw ,@more :box ,bg+3))))
 
+   ;; Fringe highlights of diffs.
    `(diff-hl-insert
      ((,class (:foreground ,bg :background ,forest))))
    `(diff-hl-delete
@@ -886,6 +833,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (:inherit info-title-4 ,@bold ,@italic))))
    `(Info-quoted
      ((,class (,@fw ,@constant))))
+   `(info-menu-star
+     ((,class ())))
 
    ;; info-colors
    `(info-colors-ref-item-type

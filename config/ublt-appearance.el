@@ -611,20 +611,6 @@
    'scala-mode `(("\\(=>\\)"
                   (0 (ublt/show-as ?⇒))))))
 
-;;; Don't use. This destroys magit's fontification. Magit does something special
-;; (defun ublt/prettify-magit-log ()
-;;   (font-lock-add-keywords
-;;    nil '(;; ("|"
-;;          ;;  (0 (progn (compose-region (match-beginning 1) (match-end 1)
-;;          ;;                            ?│))))
-;;          ("\\(*\\)"
-;;           (0 (progn (compose-region (match-beginning 1) (match-end 1)
-;;                                     ?∙ 'decompose-region)
-;;                     nil))))))
-;; (add-hook 'magit-log-mode-hook 'ublt/prettify-magit-log)
-
-;; (remove-hook 'magit-log-mode-hook 'ublt/prettify-magit-log)
-
 
 ;;; Bigger minibuffer text
 (defun ublt/minibuffer-setup ()
