@@ -32,15 +32,9 @@
   (ublt/set-up 'eldoc
     (add-hook 'emacs-lisp-mode-hook (ublt/on-fn 'eldoc-mode)))
 
-  (defun ublt/remove-elc-on-save ()
-    "If you're saving an elisp file, likely the .elc is no longer valid."
-    (make-local-variable 'after-save-hook)
-    (add-hook 'after-save-hook
-              (lambda ()
-                (if (file-exists-p (concat buffer-file-name "c"))
-                    (delete-file (concat buffer-file-name "c"))))))
-
-  (add-hook 'emacs-lisp-mode-hook 'ublt/remove-elc-on-save)
+  (ublt/set-up 'auto-compile
+    (auto-compile-on-save-mode +1)
+    (setq auto-compile-display-buffer nil))
 
   (ublt/set-up 'elisp-slime-nav
     (add-hook 'emacs-lisp-mode-hook (ublt/on-fn 'elisp-slime-nav-mode))))

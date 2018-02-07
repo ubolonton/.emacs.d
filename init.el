@@ -32,82 +32,84 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 (defvar ublt/packages
-  '(smex company yasnippet
-         textmate undo-tree whole-line-or-region
-         avy htmlize twittering-mode keyfreq
-         ag
-         expand-region
-         eval-sexp-fu                   ; flash eval'ed code
-         popwin                         ; make unimportant windows transient
-         move-text                      ; move selected/current lines up/down
-         linum-relative                 ; relative line number
-         nyan-mode                      ; buffer position as nyan cat
-         org org-bullets
-         ox-reveal                      ; reveal.js slides from org-mode
-         adaptive-wrap
-         ido-ubiquitous                 ; List-narrowing UI
-         flx-ido                        ; Improved flex matching for ido
-         helm helm-swoop
-         helm-ag helm-projectile
-         ;; number-font-lock-mode          ; Color numbers in code
-         powerline                      ; Util helping configure mode-line
-         ;; TODO: Use & combine with eproject
-         projectile                     ; Project management
-         emms                           ; Music
-         paredit                        ; Structural editing with ()[]{}
-         scpaste                        ; Publish highlighted code fragments
-         exec-path-from-shell           ; Uhm, f*ck shell
-         anzu                           ; Match count for search
-         helpful
-         info-colors
-         pabbrev                        ; TODO: Find better alternative
-         ;; git
-         magit magit-svn diff-hl git-timemachine
-         ;; Vim emulation
-         evil
-         evil-surround
-         evil-args
-         evil-visualstar
-         evil-numbers
-         evil-nerd-commenter
-         evil-matchit
-         ;; Appearance
-         rainbow-mode page-break-lines  ;; whitespace
-         diminish                       ; Mode names => symbols
-         highlight highlight-symbol highlight-parentheses hl-line+ idle-highlight-mode volatile-highlights
-         ;; Sometimes (e.g. in terminals)
-         solarized-theme
-         zenburn-theme
-         monokai-theme
-         ;; Dired
-         dired-collapse
-         dired-rainbow
-         diredfl
-         all-the-icons-dired
-         ;; Code folding
-         fold-dwim fold-dwim-org hideshowvis
-         ;; Languages
-         flycheck
-         edts                           ;erlang
-         haskell-mode quack
-         adoc-mode
-         ess
-         markdown-mode yaml-mode toml-mode
-         less-css-mode scss-mode
-         clojure-mode cider
-         scala-mode
-         elisp-slime-nav
-         js2-mode json-mode
-         typescript-mode
-         php-mode php-boris
-         elpy flycheck-pyflakes         ;python
-         web-mode
-         emmet-mode                     ; html/css editing
-         go-mode
-         rust-mode cargo racer
-         dockerfile-mode
-         terraform-mode company-terraform
-         inf-mongo))
+  '(smex
+    auto-compile                        ;recompile Emacs Lisp on-save
+    company yasnippet
+    textmate undo-tree whole-line-or-region
+    avy htmlize twittering-mode keyfreq
+    ag
+    expand-region
+    eval-sexp-fu                        ; flash eval'ed code
+    popwin                              ; make unimportant windows transient
+    move-text                           ; move selected/current lines up/down
+    linum-relative                      ; relative line number
+    nyan-mode                           ; buffer position as nyan cat
+    org org-bullets
+    ox-reveal                           ; reveal.js slides from org-mode
+    adaptive-wrap
+    ido-ubiquitous                      ; List-narrowing UI
+    flx-ido                             ; Improved flex matching for ido
+    helm helm-swoop
+    helm-ag helm-projectile
+    ;; number-font-lock-mode          ; Color numbers in code
+    powerline                           ; Util helping configure mode-line
+    ;; TODO: Use & combine with eproject
+    projectile                          ; Project management
+    emms                                ; Music
+    paredit                             ; Structural editing with ()[]{}
+    scpaste                             ; Publish highlighted code fragments
+    exec-path-from-shell                ; Uhm, f*ck shell
+    anzu                                ; Match count for search
+    helpful
+    info-colors
+    pabbrev                             ; TODO: Find better alternative
+    ;; git
+    magit magit-svn diff-hl git-timemachine
+    ;; Vim emulation
+    evil
+    evil-surround
+    evil-args
+    evil-visualstar
+    evil-numbers
+    evil-nerd-commenter
+    evil-matchit
+    ;; Appearance
+    rainbow-mode page-break-lines ;; whitespace
+    diminish                      ; Mode names => symbols
+    highlight highlight-symbol highlight-parentheses hl-line+ idle-highlight-mode volatile-highlights
+    ;; Sometimes (e.g. in terminals)
+    solarized-theme
+    zenburn-theme
+    monokai-theme
+    ;; Dired
+    dired-collapse
+    dired-rainbow
+    diredfl
+    all-the-icons-dired
+    ;; Code folding
+    fold-dwim fold-dwim-org hideshowvis
+    ;; Languages
+    flycheck
+    edts                                ;erlang
+    haskell-mode quack
+    adoc-mode
+    ess
+    markdown-mode yaml-mode toml-mode
+    less-css-mode scss-mode
+    clojure-mode cider
+    scala-mode
+    elisp-slime-nav
+    js2-mode json-mode
+    typescript-mode
+    php-mode php-boris
+    elpy flycheck-pyflakes              ;python
+    web-mode
+    emmet-mode                          ; html/css editing
+    go-mode
+    rust-mode cargo racer
+    dockerfile-mode
+    terraform-mode company-terraform
+    inf-mongo))
 (dolist (p ublt/packages)
   (ublt/package-install p))
 
@@ -115,10 +117,6 @@
 
 ;;; Path to stuffs that come from single files
 (ublt/add-path "single-file-modes")
-
-;; (ublt/set-up 'auto-async-byte-compile
-;;   (setq auto-async-byte-compile-display-function 'bury-buffer)
-;;   (add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode))
 
 (ublt/set-up 'exec-path-from-shell
   (add-to-list 'exec-path-from-shell-variables "RUST_SRC_PATH")
