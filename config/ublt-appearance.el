@@ -13,37 +13,27 @@
               (right-fringe . 4))))
   ('windows-nt (modify-all-frames-parameters
                 '((cursor-type . bar))))
+  ;; In Linux the colors may be off. Use xrandr to tweak gamma system-wide.
   ('gnu/linux (modify-all-frames-parameters
                '((top . 0) (left . 0) (width . 119)
                  (fullscreen . fullheight) (cursor-type . bar)
-                 ;; Notes: This section is obsolete. Calibrate whole
-                 ;; system using xrandr instead.
-                 ;; Old vaio laptop
-                 ;; (screen-gamma . 2.205)
-                 ;; Night
-                 ;; (screen-gamma . 2.5)
-                 ;; (screen-gamma . 1.5)
-                 (screen-gamma . nil)
-                 ;; Dell monitor
-                 ;; (screen-gamma . 2.7)
-                 ;; Daylight adaptation
-                 ;; (screen-gamma . 5)
                  ))))
 
 ;;; This is needed when redshift is running, since it overwrites
 ;;; xrandr's gamma settings
-(defun ublt/set-gamma (g)
-  (modify-all-frames-parameters
-   `((screen-gamma . ,g))))
+(ublt/in '(gnu/linux)
+ (defun ublt/set-gamma (g)
+   (modify-all-frames-parameters
+    `((screen-gamma . ,g))))
 
-(defun ublt/toggle-gamma ()
-  (interactive)
-  (ublt/set-gamma
-   (if (equal 2.7 (frame-parameter nil 'screen-gamma))
-       nil 2.7)))
+ (defun ublt/toggle-gamma ()
+   (interactive)
+   (ublt/set-gamma
+    (if (equal 2.7 (frame-parameter nil 'screen-gamma))
+        nil 2.7))))
 
 
-;;; Frame title
+;;; Make frame title more useful: project + buffer names
 (defun ublt/frame-title ()
   (if (and (featurep 'projectile) (projectile-project-p))
       (let ((prj (projectile-project-name)))
@@ -60,8 +50,7 @@
           (format "[%s] -- %s" prj (buffer-name)))))
     (or buffer-file-name (buffer-name))))
 
-(setq
- frame-title-format '(:eval (ublt/frame-title)))
+(setq frame-title-format '(:eval (ublt/frame-title)))
 
 
 ;; Fonts
@@ -150,14 +139,6 @@
 ;;; Rainbow parentheses for coding modes
 (ublt/set-up 'highlight-parentheses
   (add-hook 'prog-mode-hook (ublt/on-fn 'highlight-parentheses-mode) t))
-;; ;; Work-around for a bug in highlight-parentheses-mode which messes up
-;; ;; the overlays, making the colors off if the mode is turned on twice
-;; ;; (e.g. by prog-mode-hook and by desktop-mode, which keeps track of
-;; ;; active minor modes from last session)
-;; (defadvice highlight-parentheses-mode (around work-around-hl-bug activate)
-;;   (unless (and highlight-parentheses-mode
-;;                (= 1 (ad-get-arg 0)))
-;;     ad-do-it))
 
 
 ;;; Code folding
@@ -313,20 +294,6 @@
         uniquify-after-kill-buffer-p t
         ;; Don't muck with special buffers
         uniquify-ignore-buffers-re "^\\*"))
-
-
-;; Uncluttered shell prompt
-;; (setq eshell-prompt-function (lambda ()
-;;                                (concat
-;;                                 (eshell-user-name)
-;;                                 (abbreviate-file-name (eshell/pwd))
-;;                                 "")
-;;                                ;; (concat
-;;                                ;;  "\n╭─ " (eshell-user-name)
-;;                                ;;  "  " (abbreviate-file-name (eshell/pwd))
-;;                                ;;  "\n╰─ ")
-;;                                )
-;;       eshell-prompt-regexp "^╭─ .*\\(?:\n\\).*╰─ $")
 
 
 ;;; mode-line appearance
