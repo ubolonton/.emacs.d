@@ -121,7 +121,6 @@
 (ublt/add-path "single-file-modes")
 
 (ublt/set-up 'exec-path-from-shell
-  (add-to-list 'exec-path-from-shell-variables "RUST_SRC_PATH")
   (exec-path-from-shell-initialize))
 
 ;;; General usability

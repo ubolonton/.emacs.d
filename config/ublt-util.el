@@ -67,6 +67,7 @@
                 pkg err)))))
 
 
+;;; TODO: Use `use-package'.
 (defmacro ublt/set-up (feature &rest body)
   "Try loading the feature, running BODY afterward, notifying
 user if not found. This is mostly for my customizations, since I
