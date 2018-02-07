@@ -31,6 +31,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
 
 (deftheme ublt-dark "Ubolonton's dark color theme")
 
+;; I don't believe in themes with narrow selection of colors.
+
 (let* ((class     '((class color) (min-colors 257)))
 
        (radio     "#9ACD32")
@@ -689,18 +691,22 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
 
    ;; helm
 
+   ;; Base
    `(helm-header
      ((,class (,@vw ,@header))))        ; TODO
    `(helm-source-header
      ((,class (,@vw ,@dimmed-hl ,@subheader ,@bold)))) ; TODO
-   ;; XXX: Maybe I just don't believe in themes with narrow
-   ;; selection of colors
+   `(helm-separator
+     ((,class (,@shadowed))))
+   `(helm-match
+     ((,class (:foreground ,radio ,@bold))))
    `(helm-selection
      ((,class (:inherit secondary-selection))))
    `(helm-selection-line
      ((,class (:inherit secondary-selection))))
-   `(helm-match
-     ((,class (:foreground ,radio ,@bold))))
+   `(helm-action
+     ((,class (,@vw :height 1.1))))
+
    `(helm-grep-match
      ((,class (:foreground ,yellow))))
    `(helm-ff-file
@@ -713,8 +719,6 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (:inherit diredfl-exec-priv))))
    ;; `(helm-candidate-number
    ;;   ((,class (:background ,yellow-1 :foreground ,bg :bold t)))) ; TODO
-   `(helm-separator
-     ((,class (,@shadowed))))
    `(helm-grep-file
      ((,class (,@reference))))
    `(helm-moccur-buffer                 ;TODO
@@ -725,12 +729,16 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (,@number))))
    ;; `(helm-grep-finish                   ;TODO
    ;;   ((,class (,@doc))))
-   `(helm-action
-     ((,class (,@vw :height 1.1))))
+
    `(helm-buffer-directory
      ((,class (:inherit helm-ff-directory))))
    `(helm-buffer-process
      ((,class (,@doc ,@vw-italic :height 0.85))))
+   `(helm-buffer-size
+     ((,class (,@dimmed))))
+   `(helm-buffer-modified
+     ((,class (,@commitment))))
+
    ;; helm-swoop
    `(helm-swoop-target-line-face
      ((,class (:inherit secondary-selection))))
