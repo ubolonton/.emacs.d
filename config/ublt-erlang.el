@@ -3,8 +3,8 @@
 (ublt/set-up 'erlang
   (add-to-list 'auto-mode-alist '("\\.rel$" . erlang-mode)))
 
-(ublt/set-up 'edts
-  (add-hook 'after-init-hook (lambda () (ublt/set-up 'edts-start))))
+;; (ublt/set-up 'edts
+;;   (add-hook 'after-init-hook (lambda () (ublt/set-up 'edts-start))))
 
 ;;; XXX
 (add-hook 'erlang-mode-hook (ublt/off-fn 'auto-complete-mode) t)
