@@ -36,7 +36,9 @@
 (defvar ublt/packages
   '(smex
     auto-compile                        ;recompile Emacs Lisp on-save
-    company yasnippet
+    company
+    yasnippet
+    yasnippet-snippets
     textmate undo-tree whole-line-or-region
     avy htmlize twittering-mode keyfreq
     ag

@@ -323,6 +323,7 @@
   "M-l"           'move-to-window-line-top-bottom
   "M-b"           'hippie-expand        ; more convenient here
   "M-B"           nil                   ; use yas-minor-mode-map
+  "M-s"           nil                   ; use yas-minor-mode-map
   "C-z"           nil                   ; who needs suspend-frame?
   "S-s-SPC"       'whitespace-mode
   "M-x"           'helm-M-x          ; C-x C-m for the original
@@ -357,7 +358,7 @@
   "C-s"           'isearch-forward-regexp
   "C-r"           'isearch-backward-regexp
   ;; FIX
-  "C-M-s"         'isearch-forward
+  "C-s-s"         'isearch-forward
 
   ;; FIX
   "C-c r"         'revert-buffer
@@ -690,7 +691,9 @@
 (ublt/keys "yasnippet" yas-minor-mode-map
   "TAB" nil
   "<tab>" nil
-  "M-B" 'yas-expand)
+  "M-B" 'yas-expand
+  "M-s" 'yas-expand
+  )
 (ublt/keys "slime" slime-mode-map
   "M-TAB" 'company-complete)
 
@@ -742,6 +745,7 @@
        "C-<right>"     nil
        "M-<left>"      'paredit-backward
        "M-<right>"     'paredit-forward
+       "C-M-s"         'paredit-splice-sexp
        ;; TODO: advice comment-dwim instead
        "M-;"           nil)))
 
@@ -923,7 +927,7 @@
   ;; It makes more sense to search in filenames by default
   "C-s"        'dired-isearch-filenames-regexp
   "C-S-s"      'isearch-forward-regexp
-  "C-M-s"      'dired-isearch-filenames
+  "C-s-s"      'dired-isearch-filenames
   "C-M-S-s"    'isearch-forward
   "M-l"        'move-to-window-line-top-bottom
   "C-c C-c"    'dired-toggle-read-only
