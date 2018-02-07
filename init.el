@@ -1,10 +1,15 @@
 ;;; For browsing Emacs's C source. This must be set early.
 (setq source-directory "~/Programming/Tools/emacs")
 
+(setq load-prefer-newer t)
+
+;;; Make package downloading a bit more secure.
+(setq tls-checktrust 'ask)
+
 (add-to-list 'load-path "~/.emacs.d/config")
 (require 'ublt-util)
 
-;;; Emacs is not a text editor, and here we load its package manager!
+;;; Package repositories.
 (require 'package)
 (dolist (source '(("org" . "https://orgmode.org/elpa/")
                   ("melpa-stable" . "https://stable.melpa.org/packages/")
@@ -15,7 +20,6 @@
 (setq
  package-archive-priorities '(("melpa-stable" . 1)
                               ("melpa" . 2)))
-
 (when (boundp 'package-pinned-packages)
   (setq package-pinned-packages
         '((elpy . "elpy")
@@ -25,8 +29,6 @@
 (defvar ublt/package-archives package-archives)
 (add-hook 'after-init-hook (lambda () (setq package-archives ublt/package-archives)))
 (package-initialize)
-
-(setq tls-checktrust 'ask)
 
 ;;; Required packages
 (when (not package-archive-contents)
@@ -76,7 +78,7 @@
     ;; Appearance
     rainbow-mode page-break-lines ;; whitespace
     diminish                      ; Mode names => symbols
-    highlight highlight-symbol highlight-parentheses hl-line+ idle-highlight-mode volatile-highlights
+    highlight highlight-symbol highlight-parentheses idle-highlight-mode volatile-highlights
     ;; Sometimes (e.g. in terminals)
     solarized-theme
     zenburn-theme
