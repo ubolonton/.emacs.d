@@ -4,7 +4,9 @@
   (setq tab-width 2))
 
 (ublt/set-up 'markdown-mode
-  (setq markdown-fontify-code-blocks-natively t)
+  (setq markdown-fontify-code-blocks-natively t
+        markdown-asymmetric-header t
+        markdown-hide-urls t)
   (add-to-list 'auto-mode-alist '("\\.md$" . gfm-mode))
   (add-to-list 'auto-mode-alist '("\\.markdown$" . gfm-mode))
   (add-hook 'markdown-mode-hook #'ublt/run-prog-mode-hook))
