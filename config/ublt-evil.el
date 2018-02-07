@@ -104,6 +104,26 @@
 
   (evil-mode +1))
 
+(ublt/set-up 'all-the-icons
+  (setq
+   evil-insert-state-tag (all-the-icons-octicon "pencil"
+                                                :v-adjust 0.01
+                                                :height 1.09
+                                                :face 'all-the-icons-dred)
+   evil-normal-state-tag (all-the-icons-octicon "rocket"
+                                                :v-adjust 0.05
+                                                :face 'all-the-icons-dred)
+   evil-motion-state-tag (all-the-icons-octicon "rocket"
+                                                :v-adjust 0.05
+                                                :face 'all-the-icons-lyellow)
+   evil-visual-state-tag (all-the-icons-octicon "eye"
+                                                :v-adjust 0.05
+                                                :face 'all-the-icons-dred)
+   evil-emacs-state-tag (all-the-icons-fileicon "elisp"
+                                                :v-adjust -0.15
+                                                :face 'all-the-icons-dred)
+   ))
+
 
 (defun ublt/sgml-get-context (count)
   (save-excursion
