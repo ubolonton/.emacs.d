@@ -339,65 +339,64 @@
   (unless (functionp 'nyan-create)
     (defun nyan-create () ""))
 
+  ;; XXX: A modified `all-the-icons-icon-for-mode'
+  (defun ublt/buffer-icon (&rest arg-override)
+    (if (and (buffer-file-name)
+             (all-the-icons-auto-mode-match?))
+        (apply 'all-the-icons-icon-for-file (file-name-nondirectory (buffer-file-name)) arg-override)
+      (apply 'all-the-icons-icon-for-mode major-mode arg-override)))
+
   (defun ublt/powerline ()
-    (interactive)
-    (setq-default
-     mode-line-format
-     ;; ("%e" mode-line-front-space
-     ;;  mode-line-mule-info
-     ;;  mode-line-client
-     ;;  mode-line-modified
-     ;;  mode-line-remote
-     ;;  mode-line-frame-identification
-     ;;  mode-line-buffer-identification
-     ;;  "   " mode-line-position
-     ;;  (vc-mode vc-mode)
-     ;;  "  " mode-line-modes
-     ;;  mode-line-misc-info
-     ;;  mode-line-end-spaces)
-     '("%e"
-       (:eval
-        (let* ((active (powerline-selected-window-active))
-               (mode-line (if active 'mode-line 'mode-line-inactive)))
-          (list (powerline-raw mode-line-mule-info)
-                (powerline-raw mode-line-remote)
-                (powerline-raw mode-line-modified)
+    (let* ((active (powerline-selected-window-active))
+           (mode-line (if active 'mode-line 'mode-line-inactive)))
+      (list (powerline-raw mode-line-mule-info)
+            (powerline-raw mode-line-remote)
+            (powerline-raw mode-line-modified)
 
-                (powerline-raw " ")
-                (powerline-buffer-size)
+            (powerline-raw " ")
+            (powerline-buffer-size)
 
-                (powerline-raw " ")
-                (powerline-raw mode-line-buffer-identification)
+            (powerline-raw " ")
+            (powerline-raw mode-line-buffer-identification)
 
-                (powerline-raw " ")
-                (ublt/powerline-narrow-indicator)
+            (powerline-raw " ")
+            (ublt/powerline-narrow-indicator)
 
-                (powerline-raw " ")
-                (powerline-raw evil-mode-line-tag)
+            (powerline-raw " ")
+            (powerline-raw evil-mode-line-tag)
 
-                (powerline-raw " ")
-                (powerline-raw "%4l" 'fixed-pitch) ; line
-                (powerline-raw ":" 'fixed-pitch)
-                (powerline-raw "%2c" 'fixed-pitch) ; column
-                (powerline-raw " " 'fixed-pitch)
-                (powerline-raw (nyan-create))
+            (powerline-raw " ")
+            (powerline-raw "%4l" 'fixed-pitch) ; line
+            (powerline-raw ":" 'fixed-pitch)
+            (powerline-raw "%2c" 'fixed-pitch) ; column
+            (powerline-raw " " 'fixed-pitch)
+            (powerline-raw (nyan-create))
 
-                (powerline-raw " ")
-                (powerline-vc)
+            (powerline-raw " ")
+            (powerline-vc)
 
-                (powerline-raw " ")
-                (powerline-raw "(")
-                (powerline-major-mode 'ublt/mode-line-major-mode)
-                (powerline-raw " ")
-                (powerline-minor-modes mode-line)
-                (powerline-raw ")")
+            (powerline-raw " ")
+            (powerline-raw "(")
 
-                (powerline-raw " ")
-                (ublt/powerline-clock)
+            ;; Major mode
+            (or (if active
+                    (ublt/buffer-icon :v-adjust -0.05
+                                      :face 'all-the-icons-dred
+                                      )
+                  (ublt/buffer-icon :v-adjust -0.05
+                                    ))
+                (powerline-major-mode 'ublt/mode-line-major-mode))
 
-                (powerline-raw mode-line-misc-info)))))))
+            (powerline-raw " ")
+            (powerline-minor-modes mode-line)
+            (powerline-raw ")")
 
-  (ublt/powerline))
+            (powerline-raw " ")
+            (ublt/powerline-clock)
+
+            (powerline-raw mode-line-misc-info))))
+
+  (setq-default mode-line-format '("%e" (:eval (ublt/powerline)))))
 
 
 ;;; Make mode-line uncluttered by changing how minor modes are shown
@@ -422,7 +421,7 @@
      ё Б               . =
      )
   ;; mode name - displayed text - feature name (file name)
-  (dolist (m '((paredit-mode               "(П)" paredit)
+  (dolist (m '((paredit-mode               "()" paredit)
                (projectile-mode            "Пр" projectile)
                (undo-tree-mode             "" undo-tree)
                (yas-minor-mode             "яс" yasnippet)
@@ -432,7 +431,7 @@
                (hs-minor-mode              " ⊕" hideshow)
                (company-mode               "" company)
                (rainbow-mode               "🌈" rainbow-mode)
-               (helm-mode                  " ⎈" helm)
+               (helm-mode                  "" helm)
                (anzu-mode                  " Σ" anzu)
                (isearch                    " Σ")
                (auto-fill-function         " ⏎")
