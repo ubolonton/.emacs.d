@@ -350,8 +350,6 @@
   ;; TODO: Rearrange the s- combos
   "C-c p f"       'projectile-find-file
 
-  "M-a"           'hs-toggle-hiding
-
   "M-o"           'isearch-occur
 
   "C-<f10>"       'menu-bar-mode
@@ -915,6 +913,9 @@
 
 
 ;;; Misc
+
+(ublt/keys 'hideshow hs-minor-mode-map
+  "M-a"   'hs-toggle-hiding)
 
 (ublt/keys "isearch" isearch-mode-map
   "M-z"        'ublt/zap-to-isearch
