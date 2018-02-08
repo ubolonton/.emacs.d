@@ -18,6 +18,7 @@
    ;; Git directories
    magit-repository-directories '(("~/Programming/projects" . 1)
                                   ("~/Programming/lib" . 1)
+                                  ("~/Programming/Tools" . 1)
                                   ("~/Programming/adatao" . 1))
    magit-repository-directories-depth 1
 
