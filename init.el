@@ -103,6 +103,7 @@
     clojure-mode cider
     scala-mode
     elisp-slime-nav
+    cask-mode
     js2-mode json-mode
     typescript-mode
     php-mode php-boris
