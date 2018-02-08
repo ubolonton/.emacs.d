@@ -790,11 +790,11 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
 
    ;; Selection
    `(diredfl-flag-mark-line              ;selected
-     ((,class (,@special-hl ,@vw))))
+     ((,class (,@special-hl))))
    `(diredfl-flag-mark
      ((,class (:inherit diredfl-flag-mark-line))))
    `(diredfl-deletion-file-name         ;marked for deletion
-     ((,class (,@error-hl ,@vw))))
+     ((,class (,@error-hl))))
    `(diredfl-deletion
      ((,class (:inherit diredfl-deletion-file-name))))
 
