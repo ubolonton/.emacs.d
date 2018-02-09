@@ -64,20 +64,7 @@
 (ublt/set-up 'helm-cmd-t)
 (ublt/set-up 'helm-man)
 
-(ublt/set-up 'helm-swoop
-  ;; XXX: https://github.com/ShingoFukuyama/helm-swoop/issues/123
-  ;; https://github.com/ShingoFukuyama/helm-swoop/pull/124
-  (setq helm-swoop-split-window-function
-        (lambda ($buf &optional resume)
-          (if helm-swoop-split-with-multiple-windows
-              (funcall helm-swoop-split-direction)
-            (when (one-window-p)
-              (funcall helm-swoop-split-direction)))
-          (other-window 1)
-          (switch-to-buffer $buf)))
-  (setq helm-swoop-speed-or-color t
-        helm-swoop-use-line-number-face t
-        helm-swoop-pre-input-function (lambda () nil)))
+(ublt/set-up 'swiper-helm)
 
 (ublt/set-up 'helm-elisp
   (setq helm-apropos-fuzzy-match t))

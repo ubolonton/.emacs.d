@@ -739,16 +739,6 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(helm-buffer-modified
      ((,class (,@commitment))))
 
-   ;; helm-swoop
-   `(helm-swoop-target-line-face
-     ((,class (:inherit secondary-selection))))
-   `(helm-swoop-target-line-block-face
-     ((,class (:inherit secondary-selection))))
-   `(helm-swoop-line-number-face
-     ((,class (,@number))))
-   `(helm-swoop-target-word-face
-     ((,class (,@normal-hl))))
-
 
    ;; dired
 

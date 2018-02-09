@@ -226,7 +226,7 @@
   "s-d"           'helm-command-prefix
   "s-h"           'ublt/helm
   "C-s-h"         'helm-follow-mode
-  "s-f"           'helm-swoop
+  "s-f"           'swiper-helm
   "s-F"           'helm-projectile
   ;; "s-F"           'projectile-find-file
   "s-g"           'magit-status
@@ -249,7 +249,7 @@
   "s-u"           'revert-buffer        ; ⟲
   "s-k"           'ublt/kill-this-buffer
   ;; "s-l"           'goto-line
-  "s-l"           'helm-swoop
+  "s-l"           'swiper-helm
   "s-C"           'ublt/duplicate-line
   "s-+"           'text-scale-increase
   "s-="           'text-scale-increase
@@ -394,7 +394,7 @@
 
 (when window-system
   (ublt/define-keys global-map
-    "M-O" 'helm-swoop))
+    "M-O" 'swiper-helm))
 
 
 (eval-after-load 'undo-tree
@@ -918,6 +918,7 @@
   "M-a"   'hs-toggle-hiding)
 
 (ublt/keys "isearch" isearch-mode-map
+  'swiper-helm 'swiper-helm-from-isearch
   "M-z"        'ublt/zap-to-isearch
   "C-<return>" 'ublt/isearch-exit-other-end
   "C-M-w"      'ublt/isearch-yank-symbol)
