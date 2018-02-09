@@ -521,6 +521,13 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(sh-heredoc
      ((,class (,@doc ,@bold))))
 
+   `(rust-question-mark-face
+     ((,class (:inherit font-lock-keyword-face ,@bold ,@italic))))
+   `(rust-string-interpolation-face
+     ((,class (:inherit font-lock-variable-name-face ,@italic))))
+   `(rust-unsafe-face
+     ((,class (:inherit font-lock-warning-face ,@bold ,@italic))))
+
 
    ;; Non-HTML markup languages: org-mode, markdown...
 
