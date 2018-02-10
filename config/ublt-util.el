@@ -260,4 +260,23 @@ not regular enough. Uh huh."
     (insert-file-contents path)
     (buffer-string)))
 
+
+(defun ublt/theme-fontify-theme-buffer ()
+  (interactive)
+  (save-excursion
+    (goto-char (point-min))
+    (dolist (face (face-list))
+     (save-excursion
+       (when (search-forward (concat "`(" (symbol-name face)) nil t)
+         (put-text-property (match-beginning 0) (match-end 0)
+                            'font-lock-face face))))))
+
+(defun ublt/theme-debug ()
+  "Enable theme-debugging in this buffer."
+  (interactive)
+  (make-local-variable 'before-save-hook)
+  (add-hook 'before-save-hook 'ublt/theme-fontify-theme-buffer))
+
+
+
 (provide 'ublt-util)
