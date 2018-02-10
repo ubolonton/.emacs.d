@@ -413,8 +413,6 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (,@fw ,@commitment))))
    `(git-commit-comment-file
      ((,class (,@vw ,@string))))
-   `(git-commit-comment-branch
-     ((,class (,@fw ,@more :box ,bg+3))))
 
    ;; Fringe highlights of diffs.
    `(diff-hl-insert
@@ -433,16 +431,12 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (,@vw-italic ,@note))))
    `(font-lock-comment-delimiter-face
      ((,class (:inherit font-lock-comment-face ,@shadowed))))
-   `(font-lock-doc-string-face
-     ((,class (,@fw ,@doc))))
    `(font-lock-doc-face
      ((,class (,@vw-italic ,@string))))
    `(font-lock-function-name-face
      ((,class (,@fw ,@essence))))
    `(font-lock-keyword-face
      ((,class (,@fw ,@power))))
-   `(font-lock-reference-face
-     ((,class (,@fw ,@reference))))     ; TODO What's this?
    `(font-lock-regexp-grouping-backslash
      ((,class (,@fw ,@dimmed))))
    `(font-lock-regexp-grouping-construct
