@@ -669,7 +669,7 @@
  line-spacing 0.1
 
  ;; Default width that triggers hard-wrap.
- fill-column 120
+ fill-column 90
  )
 
 ;; Buffed-up help system
