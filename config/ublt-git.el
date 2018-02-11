@@ -72,6 +72,8 @@
     (apply #'magit-define-popup-switch 'magit-log-popup switch)))
 
 (ublt/set-up 'git-commit
+  (add-hook 'git-commit-mode-hook
+            (lambda () (setq fill-column 80)))
   (setq git-commit-summary-max-length 70))
 
 (ublt/set-up 'magit-svn)
