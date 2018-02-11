@@ -260,6 +260,8 @@ not regular enough. Uh huh."
     (insert-file-contents path)
     (buffer-string)))
 
+
+;;; Tools to tweak theme.
 
 (defun ublt/theme-fontify-theme-buffer ()
   (interactive)
@@ -275,8 +277,28 @@ not regular enough. Uh huh."
   "Enable theme-debugging in this buffer."
   (interactive)
   (make-local-variable 'before-save-hook)
-  (add-hook 'before-save-hook 'ublt/theme-fontify-theme-buffer))
+  (add-hook 'before-save-hook 'ublt/theme-fontify-theme-buffer)
+  (rainbow-mode +1))
 
+(defun ublt/color-at-point-lighten (percent)
+  (interactive "p")
+  (let ((c (thing-at-point 'sexp))
+        (p (point)))
+    (when (stringp c)
+      (let ((new-color (color-lighten-name c percent))
+            (bound (bounds-of-thing-at-point 'sexp)))
+        (delete-region (car bound) (cdr bound))
+        (insert new-color)
+        (goto-char p)))))
 
+(defun ublt/color-at-point-darken (percent)
+  (interactive "p")
+  (ublt/color-at-point-lighten (- percent)))
 
+(when nil
+  (ublt/define-keys global-map
+    "s-<up>" 'ublt/color-at-point-lighten
+    "s-<down>" 'ublt/color-at-point-darken))
+
+
 (provide 'ublt-util)

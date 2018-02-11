@@ -49,7 +49,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
        (blue-d    "#223360")
        (cyan      "#00CDCD")
        ;; (sky       "LightSkyBlue")
-       (spring    "#00FA9A")
+       (spring    "#00e08a")
        (aqua      "#66CDAA")
        (grass     "#00DD00")
        (forest    "#228B22")
