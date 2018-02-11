@@ -392,15 +392,15 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
 
    ;; Blaming.
    `(magit-blame-heading
-     ((,class (,@vw ,@normal-hl :foreground ,fg-1 :overline ,bg+3))))
+     ((,class (,@vw ,@normal-hl :foreground ,fg-1 :overline ,fg-3 :height 0.85))))
    `(magit-blame-hash
-     ((,class (:inherit magit-hash))))
+     ((,class (:inherit (magit-hash magit-blame-heading) :height 0.85))))
    `(magit-blame-name
      ((,class (:inherit magit-blame-heading))))
    `(magit-blame-date
      ((,class (:inherit magit-blame-heading ,@context))))
    `(magit-blame-summary
-     ((,class (:inherit (git-commit-summary magit-blame-heading)))))
+     ((,class (:inherit magit-blame-heading ,@subheader))))
 
    ;; Committing.
    `(git-commit-summary

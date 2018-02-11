@@ -76,4 +76,7 @@
 
 (ublt/set-up 'magit-svn)
 
+(ublt/set-up 'magit-blame
+  (setq magit-blame-time-format "%F"))
+
 (provide 'ublt-git)
