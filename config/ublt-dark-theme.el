@@ -353,9 +353,11 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
 
    ;; Section.
    `(magit-section-heading
-     ((,class (,@vw ,@mutable ,@bold))))
+     ((,class (,@vw ,@subheader ,@bold))))
    `(magit-section-highlight
      ((,class (,@normal-hl))))
+   `(magit-section-secondary-heading
+     ((,class (,@vw ,@subheader ,@italic))))
    ;; Files.
    `(magit-diff-file-heading
      ((,class (:inherit magit-filename))))
@@ -538,7 +540,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(org-level-1
      ((,class (,@vw ,@constant :weight normal :overline ,bg+2 :height 1.4 ,@spectral-hl))))
    `(org-level-2
-     ((,class (,@vw ,@mutable :weight normal :overline ,bg+2 :height 1.2 ,@spectral-hl))))
+     ((,class (,@vw ,@subheader :weight normal :overline ,bg+2 :height 1.2 ,@spectral-hl))))
    `(org-level-3
      ((,class (,@string :weight normal :height 1.1))))
    `(org-level-4
@@ -633,7 +635,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(markdown-header-face-6
      ((,class (:inherit org-level-6))))
    `(markdown-list-face
-     ((,class (,@mutable :weight bold))))
+     ((,class (,@subheader :weight bold))))
    `(markdown-pre-face             ;TODO: Make it similar to org-block
      ((,class (,@fw ,@dimmed-hl ,@string))))
    `(markdown-bold-face
@@ -905,7 +907,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(company-tooltip-selection
      ((,class (:inherit company-tooltip :foreground ,cyan :background ,fg-3))))
    `(company-tooltip-common
-     ((,class (:inherit company-tooltip ,@mutable))))
+     ((,class (:inherit company-tooltip ,@subheader))))
    `(company-tooltip-common-selection
      ((,class (:inherit company-tooltip-selection ,@param))))
    `(company-tooltip-annotation
