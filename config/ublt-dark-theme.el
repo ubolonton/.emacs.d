@@ -33,6 +33,10 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
 
 ;; I don't believe in themes with narrow selection of colors.
 
+;; L in [0, 100]
+;; A in [-86.185, 98,254]
+;; B in [-107.863, 94.482]
+
 (let* ((class     '((class color) (min-colors 257)))
 
        (radio     "#9ACD32")
@@ -95,15 +99,38 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
        ;; ;; org-scheduled-previously
        ;; "#FF7F24"
 
-       (bg   "#0C1320")
-       (bg+1 "#131A27")
-       (bg+2 "#1F2633")
-       (bg+3 "#2C3340")
+       ;; (bg   "#0C1320")
+       ;; (bg+1 "#131A27")
+       ;; (bg+2 "#1F2633")
+       ;; (bg+3 "#2C3340")
+       ;; (fg-3 "#505764")
+       ;; (fg-2 "#626976")
+       ;; (fg-1 "#747B88")
+       ;; (fg   "#858C99")
+       ;; (fg+1 "#B8C1C9")
+
+       ;; ;; 2%
+       ;; (bg   "#0e1727")
+       ;; (bg+1 "#161e2d")
+       ;; (bg+2 "#222a39")
+       ;; (bg+3 "#303746")
+       ;; (fg-3 "#545b69")
+       ;; (fg-2 "#626976")
+       ;; (fg-1 "#747B88")
+       ;; (fg   "#858C99")
+       ;; (fg+1 "#B8C1C9")
+
+       ;; 3%
+       (bg   "#10192b")
+       (bg+1 "#182031")
+       (bg+2 "#242d3c")
+       (bg+3 "#323a49")
        (fg-3 "#505764")
        (fg-2 "#626976")
        (fg-1 "#747B88")
        (fg   "#858C99")
        (fg+1 "#B8C1C9")
+
 
        (warning      `(:foreground "#FF0000"))
        (error-hl     `(:background "#8B1A1A"))
