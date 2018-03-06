@@ -115,6 +115,7 @@
     go-mode
     rust-mode cargo racer
     dockerfile-mode
+    protobuf-mode
     terraform-mode company-terraform
     inf-mongo))
 (dolist (p ublt/packages)
