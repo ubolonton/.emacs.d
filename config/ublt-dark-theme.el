@@ -459,7 +459,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(font-lock-comment-face
      ((,class (,@vw-italic ,@note))))
    `(font-lock-comment-delimiter-face
-     ((,class (:inherit font-lock-comment-face ,@shadowed))))
+     ((,class (:inherit font-lock-comment-face ,@dimmed))))
    `(font-lock-doc-face
      ((,class (,@vw-italic ,@string))))
    `(font-lock-function-name-face
@@ -549,7 +549,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(rust-string-interpolation-face
      ((,class (:inherit font-lock-variable-name-face ,@italic))))
    `(rust-unsafe-face
-     ((,class (:inherit font-lock-warning-face ,@bold ,@italic))))
+     ((,class (:inherit font-lock-warning-face ,@bold ,@italic
+                        :underline (:color ,fg-2 :style wave)))))
 
 
    ;; Non-HTML markup languages: org-mode, markdown...
