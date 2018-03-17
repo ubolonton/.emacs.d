@@ -225,6 +225,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(link ((,class (,@portal :underline ,bg+3))))
    `(button
      ((,class (,@fw ,@portal :underline ,bg+3))))
+   `(mouse
+     ((,class (:background ,seaweed))))
 
    ;; mode-line
    `(mode-line
