@@ -14,6 +14,7 @@
 (ublt/set-up 'yaml-mode
   (add-hook 'yaml-mode-hook 'ublt/tab-2-spaces)
   (add-hook 'yaml-mode-hook (ublt/off-fn 'variable-pitch-mode))
+  (add-hook 'yaml-mode-hook #'ublt/run-prog-mode-hook)
   (add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode)))
 
 (ublt/set-up 'adoc-mode
