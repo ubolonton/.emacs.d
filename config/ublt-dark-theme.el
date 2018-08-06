@@ -120,17 +120,81 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
        ;; (fg   "#858C99")
        ;; (fg+1 "#B8C1C9")
 
-       ;; 3%
-       (bg   "#10192b")
-       (bg+1 "#182031")
-       (bg+2 "#242d3c")
-       (bg+3 "#323a49")
+       ;; ;; 3%
+       ;; (bg   "#10192b")
+       ;; (bg+1 "#182031")
+       ;; (bg+2 "#242d3c")
+       ;; (bg+3 "#323a49")
+       ;; (fg-3 "#505764")
+       ;; (fg-2 "#626976")
+       ;; (fg-1 "#747B88")
+       ;; (fg   "#858C99")
+       ;; (fg+1 "#B8C1C9")
+
+       ;; ;; 4%
+       ;; (bg   "#111b2e")
+       ;; (bg+1 "#192334")
+       ;; (bg+2 "#262f3f")
+       ;; (bg+3 "#343c4c")
+       ;; (fg-3 "#505764")
+       ;; (fg-2 "#626976")
+       ;; (fg-1 "#747B88")
+       ;; (fg   "#858C99")
+       ;; (fg+1 "#B8C1C9")
+
+       ;; ;; 5%
+       ;; (bg   "#121e32")
+       ;; (bg+1 "#1b2538")
+       ;; (bg+2 "#283142")
+       ;; (bg+3 "#363f4f")
+       ;; (fg-3 "#505764")
+       ;; (fg-2 "#626976")
+       ;; (fg-1 "#747B88")
+       ;; (fg   "#858C99")
+       ;; (fg+1 "#B8C1C9")
+
+       ;; ;; 6%
+       ;; (bg   "#142036")
+       ;; (bg+1 "#1d273b")
+       ;; (bg+2 "#2a3446")
+       ;; (bg+3 "#384152")
+       ;; (fg-3 "#505764")
+       ;; (fg-2 "#626976")
+       ;; (fg-1 "#747B88")
+       ;; (fg   "#858C99")
+       ;; (fg+1 "#B8C1C9")
+
+       ;; ;; 7%
+       ;; (bg   "#152239")
+       ;; (bg+1 "#1e2a3f")
+       ;; (bg+2 "#2c3649")
+       ;; (bg+3 "#3a4355")
+       ;; (fg-3 "#505764")
+       ;; (fg-2 "#626976")
+       ;; (fg-1 "#747B88")
+       ;; (fg   "#858C99")
+       ;; (fg+1 "#B8C1C9")
+
+       ;; 8%
+       (bg   "#17243d")
+       (bg+1 "#202c42")
+       (bg+2 "#2e384c")
+       (bg+3 "#3c4658")
        (fg-3 "#505764")
        (fg-2 "#626976")
        (fg-1 "#747B88")
        (fg   "#858C99")
        (fg+1 "#B8C1C9")
 
+       ;; (bg   "#0C1320")
+       ;; (bg+1 "#131A27")
+       ;; (bg+2 "#1F2633")
+       ;; (bg+3 "#2C3340")
+       ;; (fg-3 "#505764")
+       ;; (fg-2 "#626976")
+       ;; (fg-1 "#747B88")
+       ;; (fg   "#858C99")
+       ;; (fg+1 "#B8C1C9")
 
        (warning      `(:foreground "#FF0000"))
        (error-hl     `(:background "#8B1A1A"))
@@ -170,7 +234,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
 
        (reference    `(:foreground ,magenta-d))
 
-       (spectral-hl  `(:background "#0F1724"))
+       ;; (spectral-hl  `(:background "#0F1724"))
        (dimmed-hl    `(:background ,bg+1))
        (normal-hl    `(:background ,bg+2))
        (strong-hl    `(:background ,bg+3))
@@ -214,6 +278,9 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (,@fw0))))
    `(ublt/default-variable-width
      ((,class (,@vw0))))
+
+   `(bold
+     ((,class (,@bold :foreground ,fg+1))))
 
    ;; Bases
    `(default
@@ -568,9 +635,9 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
                         ))))
    ;; We use `normal' not `bold' for these because we use Fira Sans
    `(org-level-1
-     ((,class (,@vw ,@constant :weight normal :overline ,bg+2 :height 1.4 ,@spectral-hl))))
+     ((,class (,@vw ,@constant :weight normal :overline ,bg+2 :height 1.4 ,@dimmed-hl))))
    `(org-level-2
-     ((,class (,@vw ,@subheader :weight normal :overline ,bg+2 :height 1.2 ,@spectral-hl))))
+     ((,class (,@vw ,@subheader :weight normal :overline ,bg+2 :height 1.2 ,@dimmed-hl))))
    `(org-level-3
      ((,class (,@string :weight normal :height 1.1))))
    `(org-level-4
