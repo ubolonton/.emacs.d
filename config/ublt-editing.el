@@ -156,6 +156,8 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
         company-tooltip-align-annotations t
         company-selection-wrap-around t
         company-transformers '(company-sort-by-occurrence))
+  (ublt/set-up 'company-box
+    (add-hook 'company-mode-hook 'company-box-mode))
   (global-company-mode +1))
 
 
