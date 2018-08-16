@@ -156,23 +156,7 @@
         ad-do-it))
     (setq
      hs-hide-comments-when-hiding-all nil
-     hs-isearch-open t))
-  (ublt/set-up 'fold-dwim-org
-    ;; XXX FIX `fold-dwim-org'
-    (defun looking-at-end-of-line ()
-      (looking-at "$"))
-    ;; Like org-mode TAB and S-TAB
-    (setq fold-dwim-org/trigger-keys-block '((kbd "TAB")))
-    (defun ublt/code-folding-setup ()
-      (unless (eq major-mode 'web-mode)
-        (hs-minor-mode 1)
-        (fold-dwim-org/minor-mode 1))
-      ;; hideshowvis causes `htmlize-buffer' & `htmlize-file' to stop
-      ;; working, and `htmlize' output to contain *hideshowvis*
-      ;; garbage text
-      ;; (hideshowvis-enable)
-      )
-    (add-hook 'prog-mode-hook 'ublt/code-folding-setup)))
+     hs-isearch-open t)))
 
 ;; (ublt/set-up 'hideshowvis
 ;;   (define-fringe-bitmap 'hs-marker [0 24 24 126 126 24 24 0])

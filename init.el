@@ -93,7 +93,7 @@
     diredfl
     all-the-icons-dired
     ;; Code folding
-    fold-dwim fold-dwim-org hideshowvis
+    hideshowvis
     ;; Languages
     flycheck
     edts                                ;erlang

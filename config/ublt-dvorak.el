@@ -342,6 +342,9 @@
   ;; FIX: Still have to override mode-specific bindings. There must
   ;; be something better
   "M-TAB"         'company-complete
+  "TAB"           'company-complete
+  "S-TAB"         'company-select-previous
+  "<backtab>"     'company-select-previous
 
   ;; TODO: Something (were upcase/downcase region)
   "C-x C-u"       'nil
