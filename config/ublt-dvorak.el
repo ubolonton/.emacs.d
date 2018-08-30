@@ -342,7 +342,6 @@
   ;; FIX: Still have to override mode-specific bindings. There must
   ;; be something better
   "M-TAB"         'company-complete
-  "TAB"           'company-complete
   "S-TAB"         'company-select-previous
   "<backtab>"     'company-select-previous
 
@@ -820,12 +819,10 @@
   "C-c C-s" 'slime-switch-to-output-buffer)
 (ublt/keys 'cider-mode cider-mode-map
   "M-TAB"   nil
-  "C-c v"   'cider-load-current-buffer
-  "C-c C-z" 'cider-src
-  "C-c C-s" 'cider-switch-to-relevant-repl-buffer)
+  "C-c v"   'cider-load-buffer
+  "C-c C-s" 'cider-switch-to-repl-buffer)
 (ublt/keys 'cider-repl cider-repl-mode-map
   "M-TAB"   nil
-  "C-c C-z" 'cider-src
   "C-c C-s" 'cider-switch-to-last-clojure-buffer)
 (ublt/keys 'scheme scheme-mode-map
   "C-c C-s" 'switch-to-scheme

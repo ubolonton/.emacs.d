@@ -66,7 +66,11 @@
 
   (dolist (mode '(Info-mode
                   helpful-mode
-                  cider-browse-ns-mode))
+                  cider-browse-ns-mode
+                  cider-repl-history-mode
+                  cider-classpath-mode
+                  cider-stacktrace-mode
+                  ))
     (add-to-list 'evil-emacs-state-modes mode))
 
   (dolist (mode '(org-mode))

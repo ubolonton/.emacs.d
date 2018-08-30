@@ -1,4 +1,5 @@
 (require 'ublt-util)
+(require 'dash)
 
 (defface ublt/lisp-paren-face
   '((((class color) (background dark))
@@ -39,45 +40,39 @@
   (ublt/set-up 'elisp-slime-nav
     (add-hook 'emacs-lisp-mode-hook (ublt/on-fn 'elisp-slime-nav-mode))))
 
-(ublt/set-up 'clojure-mode
-  (add-to-list 'auto-mode-alist '("\\.dtm$" . clojure-mode))
-  ;; (define-clojure-indent
-  ;;   (describe 'defun)
-  ;;   (testing 'defun)
-  ;;   (given 'defun)
-  ;;   (using 'defun)
-  ;;   (with 'defun)
-  ;;   (it 'defun)
-  ;;   (do-it 'defun))
-  )
-
-(ublt/set-up 'clojure-mode
-  ;; This messes up other coloring, but code coloring is more important for now
-  (defun ublt/repl-clojure-font-lock ()
-    (font-lock-mode -1)
-    (clojure-font-lock-setup)
-    (font-lock-mode +1))
-  (add-hook 'cider-repl-mode-hook 'ublt/repl-clojure-font-lock)
-
-  (dolist (c (string-to-list ":_-?!#*"))
-    (modify-syntax-entry c "w" clojure-mode-syntax-table)))
-
 (ublt/set-up 'ielm
   (add-hook 'ielm-mode-hook
             (lambda () (setq comint-input-ring-file-name "~/.emacs.d/.ielm-input.hist"))))
 
-;;; @cider: making a keymap available without the mode being provided
-;;; is just fucking insane
-(ublt/set-up 'cider-repl
-  (setq cider-repl-popup-stacktraces t
-        cider-repl-use-pretty-printing t
-        cider-repl-wrap-history t
-        cider-repl-history-file "~/.emacs.d/.nrepl.hist")
-  ;; TODO: This doesn't work. Find another way
-  ;; (defadvice cider-repl-emit-prompt (after move-to-end activate)
-  ;;   (goto-char (point-max)))
-  )
-(ublt/set-up 'cider-interaction
-  (setq cider-popup-stacktraces nil))
+(ublt/set-up 'clojure-mode
+  (add-to-list 'auto-mode-alist '("\\.dtm$" . clojure-mode)))
+
+(ublt/set-up 'cider
+  (setq cider-prompt-for-symbol nil
+        cider-font-lock-dynamically '(macro core var deprecated))
+
+  (ublt/in '(darwin)
+    (setq cider-jdk-src-paths (-> "find /Library/Java/JavaVirtualMachines -name src.zip | head -n 1"
+                                  shell-command-to-string string-trim list)))
+
+  (add-hook 'cider-mode-hook #'cider-company-enable-fuzzy-completion)
+  (add-hook 'cider-mode-hook (ublt/on-fn 'eldoc-mode))
+
+  (ublt/set-up 'cider-repl
+    (setq cider-repl-popup-stacktraces t
+          cider-repl-use-pretty-printing t
+          cider-repl-wrap-history t
+
+          cider-repl-history-file "~/.emacs.d/.nrepl.hist"
+          cider-repl-history-highlight-current-entry t
+          cider-repl-history-highlight-inserted-item 'pulse
+          cider-repl-history-current-entry-face 'secondary-selection
+          cider-repl-history-inserted-item-face 'secondary-selection
+
+          nrepl-log-messages t
+          nrepl-hide-special-buffers t))
+
+  (ublt/set-up 'helm-cider
+    (helm-cider-mode +1)))
 
 (provide 'ublt-lisp)

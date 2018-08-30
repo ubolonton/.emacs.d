@@ -35,6 +35,7 @@
   (package-refresh-contents))
 (defvar ublt/packages
   '(smex
+    dash
     auto-compile                        ;recompile Emacs Lisp on-save
     company company-box
     yasnippet
@@ -102,7 +103,7 @@
     ess
     markdown-mode yaml-mode toml-mode
     less-css-mode scss-mode
-    clojure-mode cider
+    clojure-mode cider helm-cider
     scala-mode
     elisp-slime-nav
     cask-mode
