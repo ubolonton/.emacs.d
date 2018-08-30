@@ -29,6 +29,9 @@
 (ublt/set-up 'highlight-parentheses
   (add-hook 'prog-mode-hook (ublt/on-fn 'highlight-parentheses-mode)))
 
+(ublt/set-up 'lsp-ui
+  (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+
 (add-to-list 'auto-mode-alist '("\\.m$" . octave-mode))
 (add-to-list 'auto-mode-alist '("\\.xml.jin$" . nxml-mode))
 
