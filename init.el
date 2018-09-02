@@ -103,7 +103,7 @@
     ess
     markdown-mode yaml-mode toml-mode
     less-css-mode scss-mode
-    clojure-mode cider helm-cider
+    clojure-mode cider helm-cider clj-refactor
     scala-mode
     elisp-slime-nav
     cask-mode

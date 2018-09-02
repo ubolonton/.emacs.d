@@ -45,7 +45,13 @@
             (lambda () (setq comint-input-ring-file-name "~/.emacs.d/.ielm-input.hist"))))
 
 (ublt/set-up 'clojure-mode
-  (add-to-list 'auto-mode-alist '("\\.dtm$" . clojure-mode)))
+  (add-to-list 'auto-mode-alist '("\\.dtm$" . clojure-mode))
+  (define-clojure-indent
+    (facts '(:defn (1)))
+    (fact '(:defn (1)))))
+
+(ublt/set-up 'clj-refactor
+  (setq cljr-suppress-no-project-warning t))
 
 (ublt/set-up 'cider
   (setq cider-prompt-for-symbol nil
@@ -59,8 +65,9 @@
   (add-hook 'cider-mode-hook (ublt/on-fn 'eldoc-mode))
 
   (ublt/set-up 'cider-repl
-    (setq cider-repl-popup-stacktraces t
+    (setq cider-repl-display-help-banner nil
           cider-repl-use-pretty-printing t
+          cider-repl-popup-stacktraces t
           cider-repl-wrap-history t
 
           cider-repl-history-file "~/.emacs.d/.nrepl.hist"
