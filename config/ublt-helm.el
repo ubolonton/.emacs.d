@@ -1,6 +1,7 @@
+(require 'ublt-util)
+
 (eval-when-compile
   (require 'cl))
-(require 'ublt-util)
 
 ;;; TODO: Clean up
 
@@ -88,7 +89,6 @@
 
 (dolist (source '(helm-source-man-pages))
   (add-to-list 'helm-sources-using-default-as-input source))
-
 
 (defun ublt/helm-sources ()
   (let ((base '(helm-source-buffers-list
@@ -188,7 +188,7 @@ all of the sources."
 (when (functionp #'helm-display-buffer-in-own-frame)
   (setq helm-display-function #'helm-display-buffer-in-own-frame
         helm-display-buffer-reuse-frame t
-        helm-use-undecorated-frame-option t)
+        helm-use-undecorated-frame-option nil)
 
   (defun ublt/make-transparent-maybe (&optional result)
     (set-frame-parameter helm-popup-frame 'alpha
