@@ -164,13 +164,11 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
 ;;; Yasnippet --------------------------------------------------------
 
 (ublt/set-up 'yasnippet
-  (setq yas-prompt-functions '(yas-ido-prompt yas-no-prompt)
-        yas-choose-keys-first t)
+  (setq yas-choose-keys-first t)
   ;; Don't, use a dedicate key binding for yas
   ;; (add-to-list 'hippie-expand-try-functions-list 'yas-hippie-try-expand)
   (add-to-list 'yas-snippet-dirs "~/.emacs.d/data/yasnippet/snippets")
   (yas-global-mode +1))
-
 
 
 ;;; Misc

@@ -163,8 +163,7 @@ of line."
                  scroll-margin))
   arg)
 
-(dolist (func '(ido-menu
-                find-function-do-it
+(dolist (func '(find-function-do-it
                 racer--find-file
                 occur-mode-goto-occurrence))
   (advice-add func :filter-return #'ublt/recenter-near-top))

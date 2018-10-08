@@ -296,11 +296,6 @@
   "<f9> <f9>"     'ublt/toggle-fonts
   "<f9> <f12>"    'ublt/toggle-line-wrap
 
-  ;; ido-mode
-  "C-x C-d"       'ido-dired
-  "C-x d"         'ido-list-directory
-  "C-x C-i"       'ido-imenu
-
   ;; Ubuntu
   "M-<f4>"        'kmacro-start-macro-or-insert-counter ; F3 is taken by xbindkeys
 
@@ -329,7 +324,6 @@
   "M-x"           'helm-M-x          ; C-x C-m for the original
   "M-X"           'smex-major-mode-commands
   "C-h C-a"       'apropos-command
-  ;; "C-x C-b"       'ido-switch-buffer     ; Because it's to easy to mis-press
   "C-x C-b"       'helm-mini       ; Because it's to easy to mis-press
   "C-x b"         'helm-mini
   "C-x <return>"  'term
@@ -949,22 +943,6 @@
   "M-n" 'git-timemachine-show-next-revision)
 (ublt/keys 'git-rebase git-rebase-mode-map
   'undo-tree-undo 'git-rebase-undo)
-
-(eval-after-load "ido"
-  '(progn
-     (defun ublt/set-up-ido-keymaps ()
-       (ublt/define-keys ido-completion-map
-         "<tab>"  'ido-complete
-         "<down>" 'ido-next-match
-         "<up>"   'ido-prev-match
-         "M-w"    'ido-fallback
-         "C-r"    'ido-toggle-regexp    ;was ido-prev-match
-         "C-t"    nil                   ;was ido-toggle-regexp
-         ;; Select first decide where to do later
-         'split-window-vertically   'ido-invoke-in-vertical-split
-         'split-window-horizontally 'ido-invoke-in-horizontal-split
-         'other-window              'ido-invoke-in-other-window))
-     (add-hook 'ido-setup-hook 'ublt/set-up-ido-keymaps)))
 
 (ublt/keys "info" Info-mode-map
   "<kp-delete>" 'Info-scroll-up

@@ -34,8 +34,7 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 (defvar ublt/packages
-  '(smex
-    dash
+  '(dash
     auto-compile                        ;recompile Emacs Lisp on-save
     company company-box
     yasnippet
@@ -52,8 +51,6 @@
     org org-bullets
     ox-reveal                           ; reveal.js slides from org-mode
     adaptive-wrap
-    ido-ubiquitous                      ; List-narrowing UI
-    flx-ido                             ; Improved flex matching for ido
     helm
     swiper-helm
     helm-ag
@@ -151,7 +148,6 @@
 ;;; File management
 (require 'ublt-dired)
 ;;; Completion/narrowing interfaces
-(require 'ublt-ido)
 (require 'ublt-helm)
 ;;; git
 (require 'ublt-git)

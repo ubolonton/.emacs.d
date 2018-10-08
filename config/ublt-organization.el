@@ -34,7 +34,7 @@
 
  ;; Don't use isearch there, normal isearch is enough
  org-goto-auto-isearch nil
- ;; Don't use `outline-path-completion'. `ido-imenu' is better
+ ;; Don't use `outline-path-completion'. `helm-org-in-buffer-headings' is better
  org-goto-interface 'outline
 
  ;; Don't split current heading, create a new one
@@ -77,7 +77,6 @@
 
  org-tags-column 0
 
- org-completion-use-ido t
  ;; Whole path instead of level-by-level navigation
  org-outline-path-complete-in-steps nil
  org-refile-use-outline-path t
