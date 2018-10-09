@@ -285,14 +285,23 @@ Note that this feature is available only with emacs-25+."
                        (frame-live-p helm-popup-frame))
             (setq helm-popup-frame (make-frame frame-alist)))
           (let* ((display (frame-parameter helm-popup-frame 'display))
-                 ;; TODO: Use current frame's size and position.
-                 (display-w (display-pixel-width display))
-                 (display-h (display-pixel-height display))
-
-                 (w (round (* display-w 0.6)))
-                 (h (round (* display-h 0.6)))
-                 (x (/ (- display-w w) 2))
-                 (y 0))
+                 (display-w (x-display-pixel-width))
+                 (display-h (x-display-pixel-height))
+                 ;; External monitor (Dell).
+                 (external-w 2560)
+                 (external-h 1440)
+                 ;; MBP, 15-inch, 2017, default.
+                 (laptop-w 1680)
+                 (laptop-h 1050)
+                 (has-external (> display-w external-w))
+                 ;; ;; TODO: Use current frame's size and position.
+                 (w (round (* (if has-external external-w laptop-w) 0.45)))
+                 (h (round (* (if has-external external-h laptop-h) 0.45)))
+                 (x (if has-external
+                        (+ laptop-w
+                           (/ (- external-w w) 2))
+                      (/ (- laptop-w w) 2)))
+                 (y -9999))
             (set-frame-size helm-popup-frame w h t)
             (modify-frame-parameters
              helm-popup-frame
