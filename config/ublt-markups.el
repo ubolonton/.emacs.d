@@ -23,4 +23,7 @@
 (ublt/set-up 'mustache-mode
   (add-to-list 'auto-mode-alist '("\\.mustache$" . mustache-mode)))
 
+(ublt/set-up 'toml-mode
+  (add-to-list 'auto-mode-alist '("Pipfile$" . toml-mode)))
+
 (provide 'ublt-markups)
