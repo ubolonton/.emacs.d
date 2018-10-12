@@ -46,7 +46,6 @@
     eval-sexp-fu                        ; flash eval'ed code
     popwin                              ; make unimportant windows transient
     move-text                           ; move selected/current lines up/down
-    linum-relative                      ; relative line number
     nyan-mode                           ; buffer position as nyan cat
     org org-bullets
     ox-reveal                           ; reveal.js slides from org-mode

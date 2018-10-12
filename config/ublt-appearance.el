@@ -204,14 +204,6 @@
   (global-page-break-lines-mode +1))
 
 
-;;; Line number
-(ublt/set-up 'linum-relative
-  (setq linum-relative-current-symbol "")
-  (unless (eq linum-format 'linum-relative)
-    (linum-relative-toggle))
-  (global-linum-mode +1))
-
-
 ;;; Empty lines at the end of a buffer. TODO: Use this once it doesn't
 ;; mess with comint modes anymore
 ;; (ublt/set-up 'vim-empty-lines-mode
