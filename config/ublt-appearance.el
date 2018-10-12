@@ -192,18 +192,6 @@
 ;;         hideshowvis-ignore-same-line nil))
 
 
-;;; ^L visualization
-
-(ublt/set-up 'page-break-lines
-  (setq page-break-lines-char ?━)
-  (dolist (mode '(sh-mode
-                  conf-mode
-                  js-mode
-                  js2-mode))
-    (add-to-list 'page-break-lines-modes mode))
-  (global-page-break-lines-mode +1))
-
-
 ;;; Empty lines at the end of a buffer. TODO: Use this once it doesn't
 ;; mess with comint modes anymore
 ;; (ublt/set-up 'vim-empty-lines-mode

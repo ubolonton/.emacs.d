@@ -77,7 +77,7 @@
     evil-nerd-commenter
     evil-matchit
     ;; Appearance
-    rainbow-mode page-break-lines ;; whitespace
+    rainbow-mode
     diminish                      ; Mode names => symbols
     highlight highlight-symbol highlight-parentheses idle-highlight-mode volatile-highlights
     ;; Sometimes (e.g. in terminals)
