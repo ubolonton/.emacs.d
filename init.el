@@ -97,7 +97,7 @@
     haskell-mode quack
     adoc-mode
     ess
-    markdown-mode yaml-mode toml-mode
+    markdown-mode yaml-mode
     less-css-mode scss-mode
     clojure-mode cider helm-cider clj-refactor
     scala-mode
