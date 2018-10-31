@@ -201,7 +201,7 @@ all of the sources."
 
   ;; XXX: Don't monkey-patch.
   (defun helm-display-buffer-in-own-frame (buffer &optional resume)
-  "Display helm buffer BUFFER in a separate frame.
+    "Display helm buffer BUFFER in a separate frame.
 
 Function suitable for `helm-display-function',
 `helm-completion-in-region-display-function'
@@ -211,71 +211,71 @@ See `helm-display-buffer-height' and `helm-display-buffer-width' to
 configure frame size.
 
 Note that this feature is available only with emacs-25+."
-  (cl-assert (and (fboundp 'window-absolute-pixel-edges)
-                  (fboundp 'frame-geometry))
-             nil "Helm buffer in own frame is only available starting at emacs-25+")
-  (if (not (display-graphic-p))
-      ;; Fallback to default when frames are not usable.
-      (helm-default-display-buffer buffer)
-    (setq helm--buffer-in-new-frame-p t)
-    (let* ((pos (window-absolute-pixel-position))
-           (half-screen-size (/ (display-pixel-height x-display-name) 2))
-           (frame-info (frame-geometry))
-           (prmt-size (length helm--prompt))
-           (line-height (frame-char-height))
-           (default-frame-alist
-            (if resume
-                (buffer-local-value 'helm--last-frame-parameters
-                                    (get-buffer buffer))
-              `((width . ,helm-display-buffer-width)
-                (height . ,helm-display-buffer-height)
-                (tool-bar-lines . 0)
-                (left . ,(- (car pos)
-                            (* (frame-char-width)
-                               (if (< (- (point) (point-at-bol)) prmt-size)
-                                   (- (point) (point-at-bol))
-                                 prmt-size))))
-                ;; Try to put frame at the best possible place.
-                ;; Frame should be below point if enough
-                ;; place, otherwise above point and
-                ;; current line should not be hidden
-                ;; by helm frame.
-                (top . ,(if (> (cdr pos) half-screen-size)
-                            ;; Above point
-                            (- (cdr pos)
-                               ;; add 2 lines to make sure there is always a gap
-                               (* (+ helm-display-buffer-height 2) line-height)
-                               ;; account for title bar height too
-                               (cddr (assq 'title-bar-size frame-info)))
-                          ;; Below point
-                          (+ (cdr pos) line-height)))
-                (title . "Helm")
-                (undecorated . ,helm-use-undecorated-frame-option)
-                (vertical-scroll-bars . nil)
-                (menu-bar-lines . 0)
-                (fullscreen . nil)
-                (visible . ,(null helm-display-buffer-reuse-frame))
-                (minibuffer . t))))
-           display-buffer-alist)
-      ;; Add the hook inconditionally, if
-      ;; helm-echo-input-in-header-line is nil helm-hide-minibuffer-maybe
-      ;; will have anyway no effect so no need to remove the hook.
-      (add-hook 'helm-minibuffer-set-up-hook 'helm-hide-minibuffer-maybe)
-      (with-helm-buffer
-        (setq-local helm-echo-input-in-header-line
-                    (not (> (cdr pos) half-screen-size))))
-      (helm-display-buffer-popup-frame buffer default-frame-alist)
-      ;; When frame size have been modified manually by user restore
-      ;; it to default value unless resuming or not using
-      ;; `helm-display-buffer-reuse-frame'.
-      ;; This have to be done AFTER raising the frame otherwise
-      ;; minibuffer visibility is lost until next session.
-      ;; (unless (or resume (not helm-display-buffer-reuse-frame))
-      ;;   (set-frame-size helm-popup-frame
-      ;;                   (cdr (assq 'width default-frame-alist))
-      ;;                   (cdr (assq 'height default-frame-alist))))
-      )
-    (helm-log-run-hook 'helm-window-configuration-hook)))
+    (cl-assert (and (fboundp 'window-absolute-pixel-edges)
+                    (fboundp 'frame-geometry))
+               nil "Helm buffer in own frame is only available starting at emacs-25+")
+    (if (not (display-graphic-p))
+        ;; Fallback to default when frames are not usable.
+        (helm-default-display-buffer buffer)
+      (setq helm--buffer-in-new-frame-p t)
+      (let* ((pos (window-absolute-pixel-position))
+             (half-screen-size (/ (display-pixel-height x-display-name) 2))
+             (frame-info (frame-geometry))
+             (prmt-size (length helm--prompt))
+             (line-height (frame-char-height))
+             (default-frame-alist
+               (if resume
+                   (buffer-local-value 'helm--last-frame-parameters
+                                       (get-buffer buffer))
+                 `((width . ,helm-display-buffer-width)
+                   (height . ,helm-display-buffer-height)
+                   (tool-bar-lines . 0)
+                   (left . ,(- (car pos)
+                               (* (frame-char-width)
+                                  (if (< (- (point) (point-at-bol)) prmt-size)
+                                      (- (point) (point-at-bol))
+                                    prmt-size))))
+                   ;; Try to put frame at the best possible place.
+                   ;; Frame should be below point if enough
+                   ;; place, otherwise above point and
+                   ;; current line should not be hidden
+                   ;; by helm frame.
+                   (top . ,(if (> (cdr pos) half-screen-size)
+                               ;; Above point
+                               (- (cdr pos)
+                                  ;; add 2 lines to make sure there is always a gap
+                                  (* (+ helm-display-buffer-height 2) line-height)
+                                  ;; account for title bar height too
+                                  (cddr (assq 'title-bar-size frame-info)))
+                             ;; Below point
+                             (+ (cdr pos) line-height)))
+                   (title . "Helm")
+                   (undecorated . ,helm-use-undecorated-frame-option)
+                   (vertical-scroll-bars . nil)
+                   (menu-bar-lines . 0)
+                   (fullscreen . nil)
+                   (visible . ,(null helm-display-buffer-reuse-frame))
+                   (minibuffer . t))))
+             display-buffer-alist)
+        ;; Add the hook inconditionally, if
+        ;; helm-echo-input-in-header-line is nil helm-hide-minibuffer-maybe
+        ;; will have anyway no effect so no need to remove the hook.
+        (add-hook 'helm-minibuffer-set-up-hook 'helm-hide-minibuffer-maybe)
+        (with-helm-buffer
+          (setq-local helm-echo-input-in-header-line
+                      (not (> (cdr pos) half-screen-size))))
+        (helm-display-buffer-popup-frame buffer default-frame-alist)
+        ;; When frame size have been modified manually by user restore
+        ;; it to default value unless resuming or not using
+        ;; `helm-display-buffer-reuse-frame'.
+        ;; This have to be done AFTER raising the frame otherwise
+        ;; minibuffer visibility is lost until next session.
+        ;; (unless (or resume (not helm-display-buffer-reuse-frame))
+        ;;   (set-frame-size helm-popup-frame
+        ;;                   (cdr (assq 'width default-frame-alist))
+        ;;                   (cdr (assq 'height default-frame-alist))))
+        )
+      (helm-log-run-hook 'helm-window-configuration-hook)))
 
   ;; XXX: Don't monkey-patch.
   (defun helm-display-buffer-popup-frame (buffer frame-alist)
@@ -288,19 +288,27 @@ Note that this feature is available only with emacs-25+."
                  (display-w (x-display-pixel-width))
                  (display-h (x-display-pixel-height))
                  ;; External monitor (Dell).
-                 (external-w 2560)
-                 (external-h 1440)
+                 (dell-w 2560)
+                 (dell-h 1440)
                  ;; MBP, 15-inch, 2017, default.
                  (laptop-w 1680)
                  (laptop-h 1050)
-                 (has-external (> display-w external-w))
+                 (setup (cond
+                         ((> display-w dell-w) 'both)
+                         ((= display-w dell-w) 'dell)
+                         (t 'laptop)))
                  ;; ;; TODO: Use current frame's size and position.
-                 (w (round (* (if has-external external-w laptop-w) 0.45)))
-                 (h (round (* (if has-external external-h laptop-h) 0.45)))
-                 (x (if has-external
-                        (+ laptop-w
-                           (/ (- external-w w) 2))
-                      (/ (- laptop-w w) 2)))
+                 (w (round (* 0.45 (if (eql setup 'laptop)
+                                       laptop-w
+                                     dell-w))))
+                 (h (round (* 0.45 (if (eql setup 'laptop)
+                                       laptop-h
+                                     dell-h))))
+                 (x (case setup
+                      ('laptop (/ (- laptop-w w) 2))
+                      ('dell (/ (- dell-w w) 2))
+                      ('both (+ laptop-w
+                                (/ (- dell-w w) 2)))))
                  (y -9999))
             (set-frame-size helm-popup-frame w h t)
             (modify-frame-parameters
