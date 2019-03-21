@@ -1,5 +1,7 @@
-(require 'cl)
 (require 'ublt-util)
+
+(eval-when-compile
+  (require 'cl))
 
 ;;; My Dvorak key map for Dvorak. Keys are extensively remapped and
 ;;; translated.

@@ -1,10 +1,10 @@
-;;; TODO: Maybe functions/macros to create fontspec from scratch?
-;;; Maybe TODO: Integration with `ublt-themes'
+(require 'ublt-util)
 
 (eval-when-compile
   (require 'cl))
 
-(require 'ublt-util)
+;;; TODO: Maybe functions/macros to create fontspec from scratch?
+;;; Maybe TODO: Integration with `ublt-themes'
 
 
 ;;; Fontsets

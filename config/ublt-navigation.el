@@ -1,11 +1,11 @@
 (require 'ublt-util)
 
-;;; Extra navigation functions
-
 (eval-when-compile
   (require 'cl))
 
 
+;;; Extra navigation functions
+
 ;;; Better C-a
 (defun ublt/back-to-indentation-or-line-beginning ()
   "Go back to indentation, or if already there, to the beginning

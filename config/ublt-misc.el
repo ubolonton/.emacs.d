@@ -1,5 +1,8 @@
 (require 'ublt-util)
 
+(eval-when-compile
+  (require 'cl))
+
 ;;; Misc customization
 ;;; TODO: add case toggling
 

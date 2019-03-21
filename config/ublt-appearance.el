@@ -1,11 +1,11 @@
 (require 'ublt-util)
 
-;;; Font, colors, text appearance
-
 (eval-when-compile
   (require 'cl))
 
 
+;;; Font, colors, text appearance
+
 ;; Default size, cursor
 (case system-type
   ('darwin (modify-all-frames-parameters
