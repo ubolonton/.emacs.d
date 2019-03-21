@@ -94,7 +94,7 @@
   ;; FONTSET-NAME blank (see `create-fontset-from-fontset-spec')
   `(,(font-spec :family "Lucida Grande"
                 :weight 'normal
-                :size 13.0)
+                :size 14.0)
     ascii)
   ;; Vietnamese charsets. TODO: Find a thinner font that fits Fira
   ;; Sans better
