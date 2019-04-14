@@ -553,6 +553,12 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (,@fw ,@constant))))
    `(number-font-lock-face
      ((,class (,@fw ,@number))))
+   `(lisp-extra-font-lock-quoted
+     ((,class (,@fw))))
+   `(lisp-extra-font-lock-quoted-function
+     ((,class (,@fw :inherit link))))
+   `(lisp-extra-font-lock-backquote
+     ((,class (:inherit font-lock-preprocessor-face))))
 
    `(js2-function-param
      ((,class (,@param))))

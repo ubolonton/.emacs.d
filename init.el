@@ -101,7 +101,7 @@
     less-css-mode scss-mode
     clojure-mode cider helm-cider clj-refactor
     scala-mode
-    elisp-slime-nav
+    elisp-slime-nav lisp-extra-font-lock
     cask-mode
     js2-mode json-mode
     typescript-mode

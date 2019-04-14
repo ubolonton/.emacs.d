@@ -38,7 +38,10 @@
     (setq auto-compile-display-buffer nil))
 
   (ublt/set-up 'elisp-slime-nav
-    (add-hook 'emacs-lisp-mode-hook (ublt/on-fn 'elisp-slime-nav-mode))))
+    (add-hook 'emacs-lisp-mode-hook (ublt/on-fn 'elisp-slime-nav-mode)))
+
+  (ublt/set-up 'lisp-extra-font-lock
+    (lisp-extra-font-lock-global-mode +1)))
 
 (ublt/set-up 'ielm
   (add-hook 'ielm-mode-hook
