@@ -15,6 +15,9 @@
 
    magit-diff-paint-whitespace 'status
 
+   ;; 2-way diff for staging is much more useful than 3-way.
+   magit-ediff-dwim-show-on-hunks t
+
    ;; Git directories
    magit-repository-directories '(("~/Programming/projects" . 1)
                                   ("~/Programming/lib" . 1)
