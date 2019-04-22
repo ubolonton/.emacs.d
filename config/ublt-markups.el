@@ -6,6 +6,7 @@
 (ublt/set-up 'markdown-mode
   (setq markdown-fontify-code-blocks-natively t
         markdown-asymmetric-header t
+        markdown-spaces-after-code-fence 0
         markdown-hide-urls t)
   (add-to-list 'auto-mode-alist '("\\.md$" . gfm-mode))
   (add-to-list 'auto-mode-alist '("\\.markdown$" . gfm-mode))
