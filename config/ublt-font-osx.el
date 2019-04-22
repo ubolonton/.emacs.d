@@ -96,11 +96,8 @@
                 :weight 'normal
                 :size 14.0)
     ascii)
-  ;; Vietnamese charsets. TODO: Find a thinner font that fits Fira
-  ;; Sans better
-  `(,(font-spec :family "DejaVu Sans"
-                ;; :size 11.0              ; points
-                )
+  ;; Vietnamese charsets.
+  `(,(font-spec :family "DejaVu Sans")
     ;; ,(font-spec :family "Arial" :weight 'bold)
     vietnamese-viscii-upper
     vietnamese-viscii-lower
@@ -112,9 +109,7 @@
   ;; ;; for partial ASCII range"
   ;; `(,(font-spec :family "DejaVu Sans")
   ;;   (? . ? ))
-  `(,(font-spec :family "Lucida Grande"
-                ;; :size 13.0
-                )
+  `(,(font-spec :family "DejaVu Sans")
     ;; For Vietnamese characters already covered by extended latin
     latin-iso8859-1
     ;; Russian
@@ -158,15 +153,14 @@
 (defvar ublt/fixed-width-fontset
   (format "-unknown-%s-normal-normal-*-*-*-*-*-m-*-fontset-ubltf"
           (case window-system
-            ('mac "Fira Code-bold")
+            ('mac "Fira Code-normal")
             ('ns "Fantasque Sans Mono-normal"))))
 (create-fontset-from-fontset-spec ublt/fixed-width-fontset)
 
-(dolist (rescale '((".*Fira Mono-.*" 0.88)
-                   (".*Droid Sans Mono-.*" 0.88)
-                   (".*DejaVu Sans Mono-.*" 0.88)
-                   (".*Symbol-.*" 1.08)
-                   (".*Inconsolata-.*" 1.04)))
+(dolist (rescale '((".*Fira Mono-.*" 1.00)
+                   (".*Droid Sans Mono-.*" 1.00)
+                   (".*DejaVu Sans Mono-.*" 1.00)
+                   (".*Symbol-.*" 1.239)))
   (destructuring-bind (font size) rescale
     (ublt/assoc! 'face-font-rescale-alist font size)))
 
@@ -176,9 +170,8 @@
     `(,(case window-system
          ('mac (font-spec :family "Fira Code"
                           :weight 'normal))
-         ('ns (font-spec :family "Fantasque Sans Mono"
-                         :weight 'normal
-                         :size 13.0)))
+         ('ns (font-spec :family "Fira Code"
+                         :weight 'normal)))
       ascii)
     `(,(font-spec :family "Droid Sans Mono")
       vietnamese-viscii-upper
@@ -187,8 +180,7 @@
       vscii
       vscii-2
       tcvn-5712)
-    `(,(font-spec :family "Fira Mono"
-                  :size 14.0)
+    `(,(font-spec :family "Fira Mono")
       cyrillic-iso8859-5)
     `(,(font-spec :family "DejaVu Sans Mono")
       (?▸ . ?▸))
