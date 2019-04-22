@@ -630,10 +630,10 @@
 ;; (add-hook 'minibuffer-setup-hook 'ublt/redisplay)
 
 (setq-default
- line-spacing 0.1
+ line-spacing 0.15
 
  ;; Default width that triggers hard-wrap.
- fill-column 90
+ fill-column 100
  )
 
 ;; Buffed-up help system
