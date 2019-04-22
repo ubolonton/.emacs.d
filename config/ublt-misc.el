@@ -142,6 +142,7 @@
       sentence-end-double-space nil
       shift-select-mode nil
       backup-directory-alist `(("." . ,(concat user-emacs-directory "backups")))
+      create-lockfiles nil
       diff-switches "-u")
 
 (set-default 'indent-tabs-mode nil)
