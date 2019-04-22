@@ -111,7 +111,7 @@
     emmet-mode                          ; html/css editing
     go-mode
     lsp-mode lsp-ui
-    rust-mode cargo racer lsp-rust company-lsp
+    rust-mode cargo company-lsp
     dockerfile-mode
     protobuf-mode
     systemd
