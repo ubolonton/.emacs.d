@@ -32,6 +32,9 @@
 (ublt/set-up 'lsp-ui
   (add-hook 'lsp-mode-hook 'lsp-ui-mode))
 
+(ublt/set-up 'lsp-mode
+  (setq lsp-prefer-flymake :none))
+
 (add-to-list 'auto-mode-alist '("\\.m$" . octave-mode))
 (add-to-list 'auto-mode-alist '("\\.xml.jin$" . nxml-mode))
 
