@@ -21,12 +21,12 @@
                                   ("~/Programming/Tools" . 1)
                                   ("~/Programming/adatao" . 1)
                                   ("~/Programming/arimo" . 1))
-   magit-repository-directories-depth 1
 
    magit-refresh-status-buffer nil
 
    magit-log-margin '(t age-abbreviated magit-log-margin-width t 10)
 
+   magit-status-margin '(t age-abbreviated magit-log-margin-width t 10)
 
    ;; Other
    magit-log-show-refname-after-summary t
@@ -65,12 +65,10 @@
 (ublt/set-up 'magit-refs
   (setq magit-refs-show-commit-count 'branch))
 
-(ublt/set-up 'magit-popup
-  (dolist (switch '((?m "Exclude merges" "--no-merges")
-                    (?M "Show only merges" "--merges")
-                    (?t "Sort topologically" "--topo-order")
-                    (?f "Exclude foreign" "--first-parent")))
-    (apply #'magit-define-popup-switch 'magit-log-popup switch)))
+(ublt/set-up 'transient
+  (setq transient-default-level 7)
+  (dolist (addition '(("=m" ("-M" "Show merges only" "--merges"))))
+    (apply #'transient-append-suffix 'magit-log addition)))
 
 (ublt/set-up 'git-commit
   (add-hook 'git-commit-mode-hook

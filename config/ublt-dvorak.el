@@ -232,7 +232,7 @@
   "s-F"           'helm-projectile
   ;; "s-F"           'projectile-find-file
   "s-g"           'magit-status
-  "s-C-g"         'magit-file-popup
+  "s-C-g"         'magit-file-dispatch
   "s-G"           'ag
   "s-H"           'helm-ag
   "s-m"           'avy-goto-word-1
