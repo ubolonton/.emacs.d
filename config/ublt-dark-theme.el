@@ -637,7 +637,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(org-special-keyword
      ((,class (,@fw ,@constant))))
    `(org-indent                         ;TODO
-     ((,class (:inherit org-hide ;; :foreground ,bg+2 :background ,bg+2
+     ((,class (:inherit (org-hide fixed-pitch) ;; :foreground ,bg+2 :background ,bg+2
                         ))))
    ;; We use `normal' not `bold' for these because we use Fira Sans
    `(org-level-1
