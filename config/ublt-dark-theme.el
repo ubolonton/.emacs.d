@@ -643,7 +643,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(org-level-1
      ((,class (,@vw ,@constant :weight normal :overline ,bg+2 :height 1.4 ,@dimmed-hl))))
    `(org-level-2
-     ((,class (,@vw ,@subheader :weight normal :overline ,bg+2 :height 1.2 ,@dimmed-hl))))
+     ((,class (,@vw ,@subheader :weight normal :overline ,bg+1 :height 1.2))))
    `(org-level-3
      ((,class (,@string :weight normal :height 1.1))))
    `(org-level-4
