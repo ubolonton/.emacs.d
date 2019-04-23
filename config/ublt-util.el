@@ -85,6 +85,7 @@ files."
  'emacs-lisp-mode
  '(("\\<ublt/in\\>" . font-lock-keyword-face)
    ("\\<ublt/set-up\\>" . font-lock-keyword-face)
+   ("\\<use-package +\\(.*\\)\\>" 1 font-lock-constant-face)
    ("\\<ublt/set-up +\\(.*\\)\\>" 1 font-lock-constant-face)) 'append)
 
 
