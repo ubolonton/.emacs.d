@@ -54,7 +54,7 @@
     ;; Appearance
     rainbow-mode
     diminish                      ; Mode names => symbols
-    highlight-symbol highlight-parentheses idle-highlight-mode volatile-highlights
+    highlight-symbol idle-highlight-mode volatile-highlights
     ;; Sometimes (e.g. in terminals)
     solarized-theme
     zenburn-theme
@@ -85,7 +85,6 @@
     web-mode
     emmet-mode                          ; html/css editing
     go-mode
-    lsp-mode lsp-ui
     dockerfile-mode
     protobuf-mode
     systemd

@@ -136,11 +136,6 @@
 ;;       ))
 
 
-;;; Rainbow parentheses for coding modes
-(ublt/set-up 'highlight-parentheses
-  (add-hook 'prog-mode-hook (ublt/on-fn 'highlight-parentheses-mode) t))
-
-
 ;;; Code folding
 
 ;;; FIX: Figure out why `web-mode' does not highlight code if this
