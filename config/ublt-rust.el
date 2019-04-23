@@ -1,9 +1,17 @@
 (require 'ublt-util)
 
-(ublt/set-up 'exec-path-from-shell
-  (exec-path-from-shell-copy-env "RUST_SRC_PATH"))
+(use-package exec-path-from-shell
+  :config (exec-path-from-shell-copy-envs '("RUST_SRC_PATH" "RUSTC_WRAPPER")))
 
-(ublt/set-up 'lsp-mode
-  (add-hook 'rust-mode-hook #'lsp))
+(use-package rust-mode
+  :custom (rust-format-on-save t))
+
+(use-package cargo)
+
+(use-package lsp-mode
+  :hook (rust-mode . lsp))
+
+(use-package company-lsp
+  :after (company lsp-mode))
 
 (provide 'ublt-rust)
