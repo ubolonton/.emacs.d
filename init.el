@@ -106,8 +106,9 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-(setq straight-use-package-by-default t)
 (straight-use-package 'use-package)
+(setq straight-use-package-by-default t
+      straight-check-for-modifications '(find-when-checking))
 (setq use-package-verbose t)
 
 (dolist (p ublt/packages)
