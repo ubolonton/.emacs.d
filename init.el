@@ -9,32 +9,9 @@
 (add-to-list 'load-path "~/.emacs.d/config")
 (require 'ublt-util)
 
-;;; Package repositories.
-(require 'package)
-(dolist (source '(("org" . "https://orgmode.org/elpa/")
-                  ("melpa-stable" . "https://stable.melpa.org/packages/")
-                  ("melpa" . "https://melpa.org/packages/")
-                  ("elpy" . "https://jorgenschaefer.github.io/packages/")
-                  ))
-  (add-to-list 'package-archives source t))
-(setq
- package-archive-priorities '(("melpa-stable" . 1)
-                              ("melpa" . 2)))
-(when (boundp 'package-pinned-packages)
-  (setq package-pinned-packages
-        '((elpy . "elpy")
-          (org . "org"))))
-
-;;; Some packages mess up `package-archives'. This fixes that.
-(defvar ublt/package-archives package-archives)
-(add-hook 'after-init-hook (lambda () (setq package-archives ublt/package-archives)))
-(package-initialize)
-
-;;; Required packages
-(when (not package-archive-contents)
-  (package-refresh-contents))
 (defvar ublt/packages
-  '(dash
+  '(use-package
+    dash
     auto-compile                        ;recompile Emacs Lisp on-save
     company company-box
     yasnippet
@@ -79,7 +56,7 @@
     ;; Appearance
     rainbow-mode
     diminish                      ; Mode names => symbols
-    highlight highlight-symbol highlight-parentheses idle-highlight-mode volatile-highlights
+    highlight-symbol highlight-parentheses idle-highlight-mode volatile-highlights
     ;; Sometimes (e.g. in terminals)
     solarized-theme
     zenburn-theme
@@ -117,8 +94,26 @@
     systemd
     terraform-mode company-terraform
     inf-mongo))
+
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+(setq straight-use-package-by-default t)
+(straight-use-package 'use-package)
+(setq use-package-verbose t)
+
 (dolist (p ublt/packages)
-  (ublt/package-install p))
+  (straight-use-package p))
 
 
 
