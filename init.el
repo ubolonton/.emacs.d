@@ -43,8 +43,6 @@
     helpful
     info-colors
     pabbrev                             ; TODO: Find better alternative
-    ;; git
-    magit magit-svn diff-hl git-timemachine
     ;; Vim emulation
     evil
     evil-surround
