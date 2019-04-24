@@ -11,105 +11,140 @@
 
 (defvar ublt/packages
   '(use-package
-    dash
-    auto-compile                        ;recompile Emacs Lisp on-save
-    company company-box
-    yasnippet
-    yasnippet-snippets
-    textmate undo-tree whole-line-or-region
-    avy htmlize twittering-mode keyfreq
-    ag
-    expand-region
-    eval-sexp-fu                        ; flash eval'ed code
-    popwin                              ; make unimportant windows transient
-    move-text                           ; move selected/current lines up/down
-    nyan-mode                           ; buffer position as nyan cat
-    org org-bullets
-    ox-reveal                           ; reveal.js slides from org-mode
-    adaptive-wrap
-    helm
-    swiper-helm
-    helm-ag
-    helm-projectile
-    ;; number-font-lock-mode          ; Color numbers in code
-    powerline                           ; Util helping configure mode-line
-    ;; TODO: Use & combine with eproject
-    projectile                          ; Project management
-    emms                                ; Music
-    paredit                             ; Structural editing with ()[]{}
-    scpaste                             ; Publish highlighted code fragments
-    exec-path-from-shell                ; Uhm, f*ck shell
-    anzu                                ; Match count for search
-    helpful
-    info-colors
-    pabbrev                             ; TODO: Find better alternative
-    ;; Vim emulation
-    evil
-    evil-surround
-    evil-args
-    evil-visualstar
-    evil-numbers
-    evil-nerd-commenter
-    evil-matchit
-    ;; Appearance
-    rainbow-mode
-    diminish                      ; Mode names => symbols
-    highlight-symbol idle-highlight-mode volatile-highlights
-    ;; Sometimes (e.g. in terminals)
-    solarized-theme
-    zenburn-theme
-    monokai-theme
-    ;; Dired
-    dired-collapse
-    dired-rainbow
-    diredfl
-    all-the-icons-dired
-    ;; Code folding
-    hideshowvis
-    ;; Languages
-    flycheck
-    edts                                ;erlang
-    haskell-mode quack
-    adoc-mode
-    ess
-    markdown-mode yaml-mode
-    less-css-mode scss-mode
-    clojure-mode cider helm-cider clj-refactor
-    scala-mode
-    elisp-slime-nav lisp-extra-font-lock
-    cask-mode
-    typescript-mode
-    php-mode php-boris
-    elpy flycheck-pyflakes              ;python
-    web-mode
-    emmet-mode                          ; html/css editing
-    go-mode
-    dockerfile-mode
-    protobuf-mode
-    systemd
-    terraform-mode company-terraform
-    inf-mongo))
+     dash
+     auto-compile                        ;recompile Emacs Lisp on-save
+     company company-box
+     yasnippet
+     yasnippet-snippets
+     textmate undo-tree whole-line-or-region
+     avy htmlize twittering-mode keyfreq
+     ag
+     expand-region
+     eval-sexp-fu                        ; flash eval'ed code
+     popwin                              ; make unimportant windows transient
+     move-text                           ; move selected/current lines up/down
+     nyan-mode                           ; buffer position as nyan cat
+     org org-bullets
+     ox-reveal                           ; reveal.js slides from org-mode
+     adaptive-wrap
+     helm
+     swiper-helm
+     helm-ag
+     helm-projectile
+     ;; number-font-lock-mode          ; Color numbers in code
+     powerline                           ; Util helping configure mode-line
+     ;; TODO: Use & combine with eproject
+     projectile                          ; Project management
+     emms                                ; Music
+     paredit                             ; Structural editing with ()[]{}
+     scpaste                             ; Publish highlighted code fragments
+     exec-path-from-shell                ; Uhm, f*ck shell
+     anzu                                ; Match count for search
+     helpful
+     info-colors
+     pabbrev                             ; TODO: Find better alternative
+     ;; Vim emulation
+     evil
+     evil-surround
+     evil-args
+     evil-visualstar
+     evil-numbers
+     evil-nerd-commenter
+     evil-matchit
+     ;; Appearance
+     rainbow-mode
+     diminish                      ; Mode names => symbols
+     highlight-symbol idle-highlight-mode volatile-highlights
+     ;; Sometimes (e.g. in terminals)
+     solarized-theme
+     zenburn-theme
+     monokai-theme
+     ;; Dired
+     dired-collapse
+     dired-rainbow
+     diredfl
+     all-the-icons-dired
+     ;; Code folding
+     hideshowvis
+     ;; Languages
+     flycheck
+     edts                                ;erlang
+     haskell-mode quack
+     adoc-mode
+     ess
+     markdown-mode yaml-mode
+     less-css-mode scss-mode
+     clojure-mode cider helm-cider clj-refactor
+     scala-mode
+     elisp-slime-nav lisp-extra-font-lock
+     cask-mode
+     typescript-mode
+     php-mode php-boris
+     elpy flycheck-pyflakes              ;python
+     web-mode
+     emmet-mode                          ; html/css editing
+     go-mode
+     dockerfile-mode
+     protobuf-mode
+     systemd
+     terraform-mode company-terraform
+     inf-mongo))
 
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 5))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
+(pcase (getenv "EMACS_PACKAGE_MANAGER")
+  ("straight.el"
+   (progn
+     (defvar bootstrap-version)
+     (let ((bootstrap-file
+            (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+           (bootstrap-version 5))
+       (unless (file-exists-p bootstrap-file)
+         (with-current-buffer
+             (url-retrieve-synchronously
+              "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+              'silent 'inhibit-cookies)
+           (goto-char (point-max))
+           (eval-print-last-sexp)))
+       (load bootstrap-file nil 'nomessage))
 
-(straight-use-package 'use-package)
-(setq straight-use-package-by-default t
-      straight-check-for-modifications '(find-when-checking))
+     (setq straight-use-package-by-default t)
+     (straight-use-package 'use-package)
+
+     (dolist (p ublt/packages)
+       (straight-use-package p))))
+  (_ (progn
+       ;; Package repositories.
+       (require 'package)
+       (dolist (source '(("org" . "https://orgmode.org/elpa/")
+                         ("melpa-stable" . "https://stable.melpa.org/packages/")
+                         ("melpa" . "https://melpa.org/packages/")
+                         ("elpy" . "https://jorgenschaefer.github.io/packages/")
+                         ))
+         (add-to-list 'package-archives source t))
+       ;; Prefer stable packages.
+       (setq package-archive-priorities '(("melpa-stable" . 1)
+                                          ("melpa" . 2)))
+       ;; Pin `elpy' and `org'.
+       (when (boundp 'package-pinned-packages)
+         (setq package-pinned-packages
+               '((elpy . "elpy")
+                 (org . "org"))))
+
+       ;; Some packages mess up `package-archives'. This fixes that.
+       (defvar ublt/package-archives package-archives)
+       (add-hook 'after-init-hook (lambda () (setq package-archives ublt/package-archives)))
+       (package-initialize)
+
+       (when (not package-archive-contents)
+         (package-refresh-contents))
+
+       (dolist (p ublt/packages)
+         (ublt/package-install p))
+
+       (require 'use-package)
+       ;; Since we have to use `:straight' `nil' for some packages when using `straight.el'.
+       (setq use-package-ignore-unknown-keywords t))))
+
 (setq use-package-verbose t)
-
-(dolist (p ublt/packages)
-  (straight-use-package p))
 
 
 
