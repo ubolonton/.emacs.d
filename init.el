@@ -17,7 +17,7 @@
      yasnippet
      yasnippet-snippets
      textmate undo-tree whole-line-or-region
-     avy twittering-mode keyfreq
+     avy keyfreq
      ag
      expand-region
      popwin                              ; make unimportant windows transient
@@ -29,7 +29,6 @@
      projectile                          ; Project management
      emms                                ; Music
      paredit                             ; Structural editing with ()[]{}
-     scpaste                             ; Publish highlighted code fragments
      exec-path-from-shell                ; Uhm, f*ck shell
      pabbrev                             ; TODO: Find better alternative
      ;; Vim emulation
