@@ -87,7 +87,40 @@
      inf-mongo))
 
 (pcase (getenv "EMACS_PACKAGE_MANAGER")
-  ("straight.el"
+  ("package.el"
+   (progn
+     ;; Package repositories.
+     (require 'package)
+     (dolist (source '(("org" . "https://orgmode.org/elpa/")
+                       ("melpa-stable" . "https://stable.melpa.org/packages/")
+                       ("melpa" . "https://melpa.org/packages/")
+                       ("elpy" . "https://jorgenschaefer.github.io/packages/")
+                       ))
+       (add-to-list 'package-archives source t))
+     ;; Prefer stable packages.
+     (setq package-archive-priorities '(("melpa-stable" . 1)
+                                        ("melpa" . 2)))
+     ;; Pin `elpy' and `org'.
+     (when (boundp 'package-pinned-packages)
+       (setq package-pinned-packages
+             '((elpy . "elpy")
+               (org . "org"))))
+
+     ;; Some packages mess up `package-archives'. This fixes that.
+     (defvar ublt/package-archives package-archives)
+     (add-hook 'after-init-hook (lambda () (setq package-archives ublt/package-archives)))
+     (package-initialize)
+
+     (when (not package-archive-contents)
+       (package-refresh-contents))
+
+     (dolist (p ublt/packages)
+       (ublt/package-install p))
+
+     (require 'use-package)
+     ;; Since we have to use `:straight' `nil' for some packages when using `straight.el'.
+     (setq use-package-ignore-unknown-keywords t)))
+  (_
    (progn
      (defvar bootstrap-version)
      (let ((bootstrap-file
@@ -106,39 +139,7 @@
      (straight-use-package 'use-package)
 
      (dolist (p ublt/packages)
-       (straight-use-package p))))
-  (_ (progn
-       ;; Package repositories.
-       (require 'package)
-       (dolist (source '(("org" . "https://orgmode.org/elpa/")
-                         ("melpa-stable" . "https://stable.melpa.org/packages/")
-                         ("melpa" . "https://melpa.org/packages/")
-                         ("elpy" . "https://jorgenschaefer.github.io/packages/")
-                         ))
-         (add-to-list 'package-archives source t))
-       ;; Prefer stable packages.
-       (setq package-archive-priorities '(("melpa-stable" . 1)
-                                          ("melpa" . 2)))
-       ;; Pin `elpy' and `org'.
-       (when (boundp 'package-pinned-packages)
-         (setq package-pinned-packages
-               '((elpy . "elpy")
-                 (org . "org"))))
-
-       ;; Some packages mess up `package-archives'. This fixes that.
-       (defvar ublt/package-archives package-archives)
-       (add-hook 'after-init-hook (lambda () (setq package-archives ublt/package-archives)))
-       (package-initialize)
-
-       (when (not package-archive-contents)
-         (package-refresh-contents))
-
-       (dolist (p ublt/packages)
-         (ublt/package-install p))
-
-       (require 'use-package)
-       ;; Since we have to use `:straight' `nil' for some packages when using `straight.el'.
-       (setq use-package-ignore-unknown-keywords t))))
+       (straight-use-package p)))))
 
 (setq use-package-verbose t)
 
