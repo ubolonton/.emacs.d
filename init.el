@@ -78,7 +78,6 @@
     scala-mode
     elisp-slime-nav lisp-extra-font-lock
     cask-mode
-    js2-mode json-mode
     typescript-mode
     php-mode php-boris
     elpy flycheck-pyflakes              ;python
