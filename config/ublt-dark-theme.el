@@ -350,7 +350,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(show-paren-match                   ;matching
      ((,class (,@strong))))
    `(show-paren-mismatch                ;unmatched
-     ((,class (:inherit font-lock-warning-face))))
+     ((,class (:inherit flyspell-incorrect ,@warning ,@bold))))
    `(ublt/lisp-paren-face               ;dimmed
      ((,class (,@dimmed))))
 
@@ -693,7 +693,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(org-block-end-line
      ((,class (:inherit org-block ,@dimmed :overline ,blue-d))))
    `(org-checkbox
-     ((,class (,@fw :weight bold :box (:line-width 1 :style released-button :color ,bg)))))
+     ((,class (,@fw :weight bold :foreground ,fg+1 :box (:line-width 1 :style released-button :color ,bg)))))
    `(org-time-grid
      ((,class (,@fw ,@context))))
    ;; `(org-agenda-structure               ;TODO
