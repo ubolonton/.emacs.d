@@ -10,11 +10,7 @@
 (require 'ublt-util)
 
 (defvar ublt/packages
-  '(use-package
-     dash
-     org org-bullets
-     ox-reveal                          ; reveal.js slides from org-mode
-))
+  '(use-package))
 
 (pcase (getenv "EMACS_PACKAGE_MANAGER")
   ("package.el"
@@ -97,8 +93,8 @@
 (require 'ublt-editing)
 
 ;;; Personal stuff
-(ublt/set-up 'ublt-communication)
-(ublt/set-up 'ublt-organization)
+(require 'ublt-communication)
+(require 'ublt-organization)
 
 
 ;;; More stuff
