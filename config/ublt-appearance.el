@@ -3,11 +3,12 @@
 (eval-when-compile
   (require 'cl))
 
-
 ;;; Font, colors, text appearance
 
-;; Default size, cursor
-(case system-type
+
+
+;;; Default size, cursor
+(pcase system-type
   ('darwin (modify-all-frames-parameters
             '((left-fringe . 8)
               (right-fringe . 4))))
@@ -22,15 +23,15 @@
 ;;; This is needed when redshift is running, since it overwrites
 ;;; xrandr's gamma settings
 (ublt/in '(gnu/linux)
- (defun ublt/set-gamma (g)
-   (modify-all-frames-parameters
-    `((screen-gamma . ,g))))
+  (defun ublt/set-gamma (g)
+    (modify-all-frames-parameters
+     `((screen-gamma . ,g))))
 
- (defun ublt/toggle-gamma ()
-   (interactive)
-   (ublt/set-gamma
-    (if (equal 2.7 (frame-parameter nil 'screen-gamma))
-        nil 2.7))))
+  (defun ublt/toggle-gamma ()
+    (interactive)
+    (ublt/set-gamma
+     (if (equal 2.7 (frame-parameter nil 'screen-gamma))
+         nil 2.7))))
 
 
 ;;; Make frame title more useful: project + buffer names
@@ -57,7 +58,7 @@
 (when (display-graphic-p)
   ;; Font-mixing obsession
   (ublt/set-up
-      (case system-type
+      (pcase system-type
         ('gnu/linux 'ublt-font)
         ('darwin 'ublt-font-osx))
     ;; Non-code text reads better in proportional font
@@ -118,22 +119,22 @@
 ;; `idle-highlight'. For these modes to be useful some workarounds are
 ;; needed, probably using overlays.
 
-;; ;; `http://xahlee.org/emacs/whitespace-mode.html'
-;; (setq whitespace-style
-;;       '(face spaces tabs newline space-mark tab-mark newline-mark))
-;; (setq whitespace-display-mappings
-;;       '(
-;;         (space-mark 32 [?\ ] [46])           ; whitespace
-;;         (space-mark 160 [164] [95])
-;;         (space-mark 2208 [2212] [95])
-;;         (space-mark 2336 [2340] [95])
-;;         (space-mark 3616 [3620] [95])
-;;         (space-mark 3872 [3876] [95])
-;;                                         ;   (newline-mark ?\n [8629 ?\n] [182 ?\n]) ; new-line
-;;         (newline-mark ?\n [?¶ ?\n] [182 ?\n]) ; new-line
-;;                                         ;   (tab-mark ?\t [9654 ?\t] [92 ?\t])         ; tab
-;;         (tab-mark ?\t [?» ?\t] [92 ?\t])         ; tab
-;;       ))
+;; `http://xahlee.org/emacs/whitespace-mode.html'
+(setq whitespace-style
+      '(face tabs newline space-mark tab-mark newline-mark))
+(setq whitespace-display-mappings
+      '(
+        (space-mark 32 [?\ ] [46])           ; whitespace
+        (space-mark 160 [164] [95])
+        (space-mark 2208 [2212] [95])
+        (space-mark 2336 [2340] [95])
+        (space-mark 3616 [3620] [95])
+        (space-mark 3872 [3876] [95])
+                                        ;   (newline-mark ?\n [8629 ?\n] [182 ?\n]) ; new-line
+        (newline-mark ?\n [?¶ ?\n] [182 ?\n]) ; new-line
+                                        ;   (tab-mark ?\t [9654 ?\t] [92 ?\t])         ; tab
+        (tab-mark ?\t [?» ?\t] [92 ?\t])         ; tab
+      ))
 
 
 ;;; Code folding
@@ -143,15 +144,14 @@
 ;; supporting `hideshow'.
 ;;; XXX: This makes terminal Emacs hang, so only use if there's a
 ;; window system
-(when window-system
-  (ublt/set-up 'hideshow
-    (defadvice hs-toggle-hiding (around keep-point activate)
-      "Try to keep point after toggling."
-      (save-excursion
-        ad-do-it))
-    (setq
-     hs-hide-comments-when-hiding-all nil
-     hs-isearch-open t)))
+(use-package hideshow
+  :when window-system
+  :custom ((hs-hide-comments-when-hiding-all nil)
+           (hs-isearch-open t))
+  :config (defadvice hs-toggle-hiding (around keep-point activate)
+            "Try to keep point after toggling."
+            (save-excursion
+              ad-do-it)))
 
 ;; (ublt/set-up 'hideshowvis
 ;;   (define-fringe-bitmap 'hs-marker [0 24 24 126 126 24 24 0])
@@ -215,7 +215,8 @@
       (set-frame-parameter nil 'alpha 100))))
 
 
-;;; Looks like only tweaking visual-line-mode is needed (I was
+;;; Text wrapping.
+;;; Looks like only tweaking `visual-line-mode' is needed (I was
 ;;; probably confused by global/local variables)
 
 (setq-default
@@ -246,13 +247,15 @@
 
 ;;; Sometimes buffers have the same names
 ;; from `http://trey-jackson.blogspot.com/2008/01/emacs-tip-11-uniquify.html'
-(ublt/set-up 'uniquify
-  (setq uniquify-buffer-name-style 'reverse
-        uniquify-separator "  "
-        ;; Rename after killing uniquified
-        uniquify-after-kill-buffer-p t
-        ;; Don't muck with special buffers
-        uniquify-ignore-buffers-re "^\\*"))
+(use-package uniquify
+  ;; FIX: `straight.el' doesn't seem to recognize some built-in packages.
+  :straight nil
+  :custom ((uniquify-buffer-name-style 'reverse)
+           (uniquify-separator "  ")
+           ;; Rename after killing uniquified
+           (uniquify-after-kill-buffer-p t)
+           ;; Don't muck with special buffers
+           (uniquify-ignore-buffers-re "^\\*")))
 
 
 ;;; mode-line appearance
@@ -266,8 +269,10 @@
   '((t :bold t))
   "Face for mode-line clock")
 
-(ublt/set-up 'powerline
+(use-package powerline
+  :custom (mode-line-format '("%e" (:eval (ublt/powerline))))
   ;; FIX: This code duplicates powerline, which duplicates Emacs'
+  :config
   (defpowerline ublt/powerline-narrow-indicator
     (let (real-point-min real-point-max)
       (save-excursion
@@ -291,9 +296,11 @@
                                            (emacs-uptime "Uptime: %hh")))
             "]"))
 
-  (when window-system
-    (ublt/set-up 'nyan-mode
-      (setq nyan-bar-length 24)))
+  ;; Show buffer position with Nyan Cat.
+  (use-package nyan-mode
+    :demand t
+    :when window-system
+    :custom (nyan-bar-length 24))
 
   (unless (functionp 'nyan-create)
     (defun nyan-create () ""))
@@ -353,16 +360,15 @@
             (powerline-raw " ")
             (ublt/powerline-clock)
 
-            (powerline-raw mode-line-misc-info))))
-
-  (setq-default mode-line-format '("%e" (:eval (ublt/powerline)))))
+            (powerline-raw mode-line-misc-info)))))
 
 
 ;;; Make mode-line uncluttered by changing how minor modes are shown
 
 ;;; TODO: Use images (propertize "mode" 'display (find-images ...))
 ;;; XXX: This looks so weird
-(ublt/set-up 'diminish
+(use-package diminish
+  :config
   (defun ublt/diminish (mode-name display-text &optional feature)
     (condition-case err
         (if feature
@@ -373,12 +379,12 @@
           (diminish mode-name display-text))
       (error (message (format "Error diminishing \"%s\": %s" mode-name err)))))
   '(
-   ъ 1 2 3 4 5   6 7 8 9 0 х
-     э б ю з н   а п с к д \
-     ф щ у г ш   в р е т ы -
-     ж й о л ч   и ь ц м я
-     ё Б               . =
-     )
+    ъ 1 2 3 4 5   6 7 8 9 0 х
+    э б ю з н   а п с к д \
+    ф щ у г ш   в р е т ы -
+    ж й о л ч   и ь ц м я
+    ё Б               . =
+    )
   ;; mode name - displayed text - feature name (file name)
   (dolist (m '((paredit-mode               "()" paredit)
                (projectile-mode            "Пр" projectile)
@@ -577,9 +583,10 @@
     (auto-fill-mode -1)))
 
 ;;; Change highlighting
-(ublt/set-up 'diff-hl
+(use-package diff-hl
+  :custom (diff-hl-draw-borders nil)
+  :config
   (global-diff-hl-mode +1)
-  (setq diff-hl-draw-borders nil)
   (if (display-graphic-p)
       (setq diff-hl-side 'right)
     (setq diff-hl-side 'left)
@@ -590,7 +597,8 @@
 
 (setq
  ;; 2x70 instead of the default 2x80 so that side-by-side is preferable
- split-width-threshold 150
+ split-width-threshold 300
+ split-height-threshold 200
 
  ;; Tile ediff windows horizontally
  ediff-split-window-function 'split-window-horizontally
@@ -632,10 +640,11 @@
  )
 
 ;; Buffed-up help system
-(ublt/set-up 'helpful)
+(use-package helpful)
 
-(ublt/set-up 'info-colors
-  (add-hook 'Info-selection-hook 'info-colors-fontify-node))
+;;; Colorize info pages.
+(use-package info-colors
+  :hook (Info-selection . info-colors-fontify-node))
 
 ;;; XXX: Find out why `python-mode' is upset by `which-func-mode'
 ;; ;;; Show current function name in mode-line
@@ -649,42 +658,46 @@
   (unless (member major-mode '(web-mode))
     (number-font-lock-mode +1)))
 
-(ublt/set-up 'number-font-lock-mode
-  (add-hook 'prog-mode-hook #'ublt/maybe-number-font-lock-mode))
+;; (use-package number-font-lock-mode
+;;   :hook (prog-mode . ublt/maybe-number-font-lock-mode))
 
-(ublt/set-up 'eval-sexp-fu
-  (setq eval-sexp-fu-flash-duration 0.4
-        eval-sexp-fu-flash-error-duration 0.6))
+;;; Flash eval'ed Lisp code.
+(use-package eval-sexp-fu
+  :custom ((eval-sexp-fu-flash-duration 0.4)
+           (eval-sexp-fu-flash-error-duration 0.6)))
 
-(ublt/set-up 'volatile-highlights
-  (volatile-highlights-mode +1))
+;;; Highlight last changes.
+(use-package volatile-highlights
+  :config (volatile-highlights-mode +1))
 
-(ublt/set-up 'anzu
-  (setq anzu-minimum-input-length 2
-        anzu-search-threshold 100)
-  (global-anzu-mode +1))
+;;; Show match count for searches.
+(use-package anzu
+  :custom ((anzu-minimum-input-length 2)
+           (anzu-search-threshold 100))
+  :config (global-anzu-mode +1))
 
-(ublt/set-up 'htmlize
-  (setq htmlize-ignore-face-size nil
-        htmlize-css-name-prefix "htmlize-"
-        htmlize-html-major-mode 'html-mode))
+(use-package htmlize
+  :custom ((htmlize-ignore-face-size nil)
+           (htmlize-css-name-prefix "htmlize-")
+           (htmlize-html-major-mode 'html-mode)))
 
 ;;; TODO: Tweak htmlize instead. `htmlfontify' does not work with org
 ;;; blocks.
-(ublt/set-up 'htmlfontify
-  (defun ublt/hfy-page-header (file style)
-    ;; FIX: Escape file name???
-    (format "<!DOCTYPE html>
+(use-package htmlfontify
+  :straight nil
+  :custom (hfy-page-header 'ublt/hfy-page-header)
+  :config (defun ublt/hfy-page-header (file style)
+            ;; FIX: Escape file name???
+            (format "<!DOCTYPE html>
 <html>
   <head>
     <title>%s</title>
     <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">
 %s
-" file style))
-  (setq hfy-page-header 'ublt/hfy-page-header))
+" file style)))
 
-(ublt/set-up 'golden-ratio
-  (dolist (mode '(ediff-mode))
-    (add-to-list 'golden-ratio-exclude-modes mode)))
+;; (use-package golden-ratio
+;;   (dolist (mode '(ediff-mode))
+;;     (add-to-list 'golden-ratio-exclude-modes mode)))
 
 (provide 'ublt-appearance)

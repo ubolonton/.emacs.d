@@ -17,27 +17,20 @@
      yasnippet
      yasnippet-snippets
      textmate undo-tree whole-line-or-region
-     avy htmlize twittering-mode keyfreq
+     avy twittering-mode keyfreq
      ag
      expand-region
-     eval-sexp-fu                        ; flash eval'ed code
      popwin                              ; make unimportant windows transient
      move-text                           ; move selected/current lines up/down
-     nyan-mode                           ; buffer position as nyan cat
      org org-bullets
      ox-reveal                           ; reveal.js slides from org-mode
      adaptive-wrap
-     ;; number-font-lock-mode          ; Color numbers in code
-     powerline                           ; Util helping configure mode-line
      ;; TODO: Use & combine with eproject
      projectile                          ; Project management
      emms                                ; Music
      paredit                             ; Structural editing with ()[]{}
      scpaste                             ; Publish highlighted code fragments
      exec-path-from-shell                ; Uhm, f*ck shell
-     anzu                                ; Match count for search
-     helpful
-     info-colors
      pabbrev                             ; TODO: Find better alternative
      ;; Vim emulation
      evil
@@ -49,8 +42,7 @@
      evil-matchit
      ;; Appearance
      rainbow-mode
-     diminish                      ; Mode names => symbols
-     highlight-symbol idle-highlight-mode volatile-highlights
+     highlight-symbol idle-highlight-mode
      ;; Sometimes (e.g. in terminals)
      solarized-theme
      zenburn-theme
