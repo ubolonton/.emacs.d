@@ -380,15 +380,15 @@
   "M-<mouse-4>"   'scroll-down-line
   "M-<mouse-5>"   'scroll-up-line)
 
-(ublt/set-up 'helpful
-  (ublt/define-keys global-map
-    "C-h f"   'helpful-callable
-    "C-h w"   'helpful-command
-    "C-h k"   'helpful-key
-    "C-h v"   'helpful-variable
-    "C-h o"   'helpful-symbol
-    "C-h s"   'helpful-at-point
-    "C-h C-s" 'helpful-at-point))
+(use-package helpful
+  :config (ublt/define-keys global-map
+            "C-h f"   'helpful-callable
+            "C-h w"   'helpful-command
+            "C-h k"   'helpful-key
+            "C-h v"   'helpful-variable
+            "C-h o"   'helpful-symbol
+            "C-h s"   'helpful-at-point
+            "C-h C-s" 'helpful-at-point))
 
 (when window-system
   (ublt/define-keys global-map

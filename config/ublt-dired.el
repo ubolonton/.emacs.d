@@ -1,59 +1,60 @@
 (require 'ublt-util)
 
-(eval-when-compile
-  (require 'cl))
-
 (ublt/in '(darwin)
   (setq insert-directory-program "/opt/local/libexec/gnubin/ls"))
 
-(add-hook 'dired-mode-hook (ublt/on-fn 'hl-line-mode))
-(add-hook 'dired-mode-hook (ublt/on-fn 'dired-hide-details-mode))
+(use-package hl-line
+  :hook (dired-mode . hl-line-mode))
 
-(ublt/set-up 'dired-x
-  (setq dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\.")
-  (setq-default dired-omit-mode t))
+(use-package dired
+  :straight nil
+  :custom (
+           ;; Offer the other window's path as default when copying
+           (dired-dwim-target t)
 
-(ublt/set-up 'dired-aux
-  (setq dired-isearch-filenames 'dwim))
+           ;; Make find-name-dired ignore case
+           (find-name-arg "-iname")
+
+           (dired-hide-details-hide-symlink-targets nil))
+  :hook (dired-mode . dired-hide-details-mode))
+
+(use-package dired-x
+  :straight nil
+  :custom ((dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\.")
+           (dired-omit-mode t)
+           (dired-guess-shell-alist-user
+            (list
+             (list "\\.t\\(ar\\.bz2\\|bz\\)\\'"
+                   "tar xvjf"
+                   "bunzip2 -c * | tar xvf -"
+                   ;; Extract files into a separate subdirectory
+                   '(concat "mkdir " (file-name-sans-extension file)
+                            "; bunzip2 -c * | tar -C "
+                            (file-name-sans-extension file) " -xvf -")
+                   ;; Optional decompression.
+                   "bunzip2")))))
+
+(use-package dired-aux
+  :straight nil
+  :custom (dired-isearch-filenames 'dwim))
 
 ;; Directories first by default. "s d" to change locally
-(ublt/set-up 'dired-sort-map
-  (setq dired-listing-switches "--group-directories-first -alhG1v"))
+(use-package dired-sort-map
+  :straight nil
+  :custom (dired-listing-switches "--group-directories-first -alhG1v"))
 
-(ublt/set-up 'all-the-icons-dired
-  (add-hook 'dired-mode-hook (ublt/on-fn 'all-the-icons-dired-mode)))
+(use-package all-the-icons-dired
+  :hook (dired-mode . all-the-icons-dired-mode))
 
-(ublt/set-up 'dired-collapse
-  (add-hook 'dired-mode-hook (ublt/on-fn 'dired-collapse-mode)))
+(use-package dired-collapse
+  :hook (dired-mode . dired-collapse-mode))
 
-(ublt/set-up 'diredfl
-  (diredfl-global-mode +1))
+;;; Make dired more colorful.
+(use-package diredfl
+  :config (diredfl-global-mode +1))
 
-(ublt/set-up 'dired-rainbow
-  (dired-rainbow-define-chmod executable "#D98D54" "-.*x.*"))
-
-(setq
- ;; Offer the other window's path as default when copying
- dired-dwim-target t
-
- ;; Make find-name-dired ignore case
- find-name-arg "-iname"
-
- dired-hide-details-hide-symlink-targets nil
-
- ;;
- dired-guess-shell-alist-user
- (list
-  (list "\\.t\\(ar\\.bz2\\|bz\\)\\'"
-        "tar xvjf"
-        "bunzip2 -c * | tar xvf -"
-        ;; Extract files into a separate subdirectory
-        '(concat "mkdir " (file-name-sans-extension file)
-                 "; bunzip2 -c * | tar -C "
-                 (file-name-sans-extension file) " -xvf -")
-        ;; Optional decompression.
-        "bunzip2"))
- )
+(use-package dired-rainbow
+  :config (dired-rainbow-define-chmod executable "#D98D54" "-.*x.*"))
 
 ;;; Apparently this works much better than dired-do-async-shell-command and
 ;; nohup trickeries
@@ -65,7 +66,7 @@
     (when (or (<= n 3)
               (y-or-n-p (format "Open %d files?" n)))
       (dolist (file files)
-        (call-process (case system-type
+        (call-process (pcase system-type
                         ('darwin "open")
                         ('gnu/linux "xdg-open"))
                       nil 0 nil file)))))

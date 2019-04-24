@@ -24,18 +24,24 @@
 ;; (add-hook 'prog-mode-hook (ublt/on-fn auto-highlight-symbol-mode))
 
 (add-hook 'prog-mode-hook 'ublt/add-watchwords)
-(add-hook 'prog-mode-hook (ublt/on-fn 'hl-line-mode))
 
-(ublt/set-up 'highlight-parentheses
-  (add-hook 'prog-mode-hook (ublt/on-fn 'highlight-parentheses-mode)))
+(use-package hl-line
+  :hook (prog-mode . hl-line-mode))
 
-(ublt/set-up 'lsp-ui
-  (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+(use-package highlight-parentheses
+  :hook (prog-mode . highlight-parentheses-mode))
 
-(ublt/set-up 'lsp-mode
-  (setq lsp-prefer-flymake :none))
+(use-package lsp-mode
+  :custom (lsp-prefer-flymake :none))
 
-(add-to-list 'auto-mode-alist '("\\.m$" . octave-mode))
-(add-to-list 'auto-mode-alist '("\\.xml.jin$" . nxml-mode))
+(use-package lsp-ui
+  :hook (lsp-mode . lsp-ui-mode))
+
+(use-package octave
+  :mode "\\.m$")
+
+(use-package nxml-mode
+  :straight nil
+  :mode "\\.xml.jin$")
 
 (provide 'ublt-programming)

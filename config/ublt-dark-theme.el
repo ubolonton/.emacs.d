@@ -269,7 +269,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
   (custom-theme-set-faces
    'ublt-dark
 
-
+   
    ;; Mixin bases. Most faces that wish to always use
    ;; fixed-width/variable-width font should inherit these, not
    ;; `default', which gets font remapped. `text-scale-mode' is
@@ -322,7 +322,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(linum-relative-current-face
      ((,class (:inherit (hl-line linum) ,@context ,@bold))))
 
-
+   
    ;; Highlighting, flyspell, flycheck
 
    `(hl-line                            ;TODO: Less dimmed
@@ -350,7 +350,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(show-paren-match                   ;matching
      ((,class (,@strong))))
    `(show-paren-mismatch                ;unmatched
-     ((,class (:inherit font-lock-warning-face))))
+     ((,class (:inherit flyspell-incorrect ,@warning ,@bold))))
    `(ublt/lisp-paren-face               ;dimmed
      ((,class (,@dimmed))))
 
@@ -365,7 +365,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(flycheck-warning
      ((,class (:underline (:color ,bg+3 :style wave)))))
 
-
+   
    ;; diffs & git
 
    ;; Inline diffs.
@@ -429,22 +429,28 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (:background "#0E165C"))))
 
    `(magit-tag                          ;TODO
-     ((,class (:foreground ,seaweed :box ,bg+3))))
+     ((,class (:foreground ,seaweed :box ,fg-2 ,@normal-hl))))
    `(magit-branch-local
-     ((,class (,@more))))
+     ((,class (,@more ,@special-hl :box ,blue-d))))
    `(magit-branch-current
      ((,class (,@more :box (:color ,fg-2)))))
    `(magit-branch-remote
-     ((,class (,@doc))))
+     ((,class (,@doc ,@special-hl))))
 
    `(magit-hash
      ((,class (,@fw ,@commitment))))
 
    `(magit-popup-heading
-     ((,class (:inherit font-lock-keyword-face))))
-   `(magit-popup-key
      ((,class (:inherit font-lock-builtin-face))))
+   `(magit-popup-key
+     ((,class (:inherit font-lock-keyword-face))))
    `(magit-popup-argument
+     ((,class (:inherit font-lock-variable-name-face))))
+   `(transient-heading
+     ((,class (:inherit font-lock-builtin-face :underline t))))
+   `(transient-key
+     ((,class (:inherit font-lock-keyword-face))))
+   `(transient-argument
      ((,class (:inherit font-lock-variable-name-face))))
 
    ;; Section.
@@ -520,7 +526,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(diff-hl-change
      ((,class (:foreground ,cyan :background ,cyan))))
 
-
+   
    ;; Programming languages
 
    `(font-lock-builtin-face
@@ -530,7 +536,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(font-lock-comment-delimiter-face
      ((,class (:inherit font-lock-comment-face ,@dimmed))))
    `(font-lock-doc-face
-     ((,class (,@vw-italic ,@string))))
+     ;; XXX
+     ((,class (,@fw ,@italic ,@string :font "Fantasque Sans Mono"))))
    `(font-lock-function-name-face
      ((,class (,@fw ,@essence))))
    `(font-lock-keyword-face
@@ -627,7 +634,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (:inherit font-lock-warning-face ,@bold ,@italic
                         :underline (:color ,fg-2 :style wave)))))
 
-
+   
    ;; Non-HTML markup languages: org-mode, markdown...
 
    ;; org-mode
@@ -687,7 +694,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(org-block-end-line
      ((,class (:inherit org-block ,@dimmed :overline ,blue-d))))
    `(org-checkbox
-     ((,class (,@fw :weight bold :box (:line-width 1 :style released-button :color ,bg)))))
+     ((,class (,@fw :weight bold :foreground ,fg+1 :box (:line-width 1 :style released-button :color ,bg)))))
    `(org-time-grid
      ((,class (,@fw ,@context))))
    ;; `(org-agenda-structure               ;TODO
@@ -794,7 +801,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(markup-list-face
      ((,class (:inherit markdown-list-face))))
 
-
+   
    ;; helm
 
    ;; Base
@@ -845,7 +852,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(helm-buffer-modified
      ((,class (,@commitment))))
 
-
+   
    ;; dired
 
    `(diredfl-dir-heading
@@ -897,7 +904,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(dired-rainbow-executable-face
      ((,class (:inherit diredfl-exec-priv))))
 
-
+   
    ;; REPLs
 
    `(comint-highlight-prompt
@@ -915,7 +922,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(eshell-prompt
      ((,class (,@prompt))))
 
-
+   
    ;; Help
 
    ;; info
@@ -982,7 +989,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(Man-underline
      ((,class (:inherit woman-italic))))
 
-   
+   
    ;; IRC
 
    `(erc-notice-face
@@ -1002,7 +1009,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(erc-button
      ((,class (:slant normal))))
 
-   
+   
    ;; Popups
 
    `(company-tooltip
@@ -1024,7 +1031,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(company-preview-common
      ((,class (:inherit company-preview))))
 
-
+   
    ;; Misc
 
    ;; undo-tree

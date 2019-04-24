@@ -151,15 +151,13 @@
 ;;; thing and large unicode fonts (Quivira, Gentium, Doulos, Charis...)
 
 (defvar ublt/fixed-width-fontset
-  (format "-unknown-%s-normal-normal-*-*-*-*-*-m-*-fontset-ubltf"
-          (case window-system
-            ('mac "Fira Code-normal")
-            ('ns "Fantasque Sans Mono-normal"))))
+  (format "-unknown-Fira Code-normal-normal-normal-*-*-*-*-*-m-*-fontset-ubltf"))
 (create-fontset-from-fontset-spec ublt/fixed-width-fontset)
 
 (dolist (rescale '((".*Fira Mono-.*" 1.00)
                    (".*Droid Sans Mono-.*" 1.00)
                    (".*DejaVu Sans Mono-.*" 1.00)
+                   (".*Fantasque Sans Mono.*" 1.10)
                    (".*Symbol-.*" 1.239)))
   (destructuring-bind (font size) rescale
     (ublt/assoc! 'face-font-rescale-alist font size)))
@@ -167,11 +165,8 @@
 ;;; XXX: Not sure why, but we need to set these for the default fontset as well (`t'), not just "ubltf".
 (dolist (fontset (list ublt/fixed-width-fontset t))
   (ublt/assign-font fontset
-    `(,(case window-system
-         ('mac (font-spec :family "Fira Code"
-                          :weight 'normal))
-         ('ns (font-spec :family "Fira Code"
-                         :weight 'normal)))
+    `(,(font-spec :family "Fira Code"
+                  :weight 'normal)
       ascii)
     `(,(font-spec :family "Droid Sans Mono")
       vietnamese-viscii-upper
