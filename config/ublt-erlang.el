@@ -1,19 +1,9 @@
 (require 'ublt-util)
 
-(ublt/set-up 'erlang
-  (add-to-list 'auto-mode-alist '("\\.rel$" . erlang-mode)))
+(use-package erlang
+  :mode ("\\.rel$" . erlang-mode))
 
-;; (ublt/set-up 'edts
-;;   (add-hook 'after-init-hook (lambda () (ublt/set-up 'edts-start))))
-
-;;; XXX
-(add-hook 'erlang-mode-hook (ublt/off-fn 'auto-complete-mode) t)
-
-;; Syntax checking
-(ublt/set-up 'flycheck
-  ;; (add-hook 'erlang-mode-hook (ublt/on-fn 'flycheck-mode))
-
-  ;; XXX
-  (add-hook 'erlang-mode-hook (ublt/off-fn 'flymake-mode) t))
+(use-package flycheck
+  :hook (erlang-mode . flycheck-mode))
 
 (provide 'ublt-erlang)

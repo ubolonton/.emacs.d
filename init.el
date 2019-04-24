@@ -12,47 +12,9 @@
 (defvar ublt/packages
   '(use-package
      dash
-     textmate
-     keyfreq
      org org-bullets
-     ox-reveal                           ; reveal.js slides from org-mode
-     adaptive-wrap
-     ;; TODO: Use & combine with eproject
-     projectile                          ; Project management
-     emms                                ; Music
-     exec-path-from-shell                ; Uhm, f*ck shell
-     pabbrev                             ; TODO: Find better alternative
-     ;; Appearance
-     rainbow-mode
-     highlight-symbol idle-highlight-mode
-     ;; Sometimes (e.g. in terminals)
-     solarized-theme
-     zenburn-theme
-     monokai-theme
-     ;; Code folding
-     hideshowvis
-     ;; Languages
-     flycheck
-     edts                                ;erlang
-     haskell-mode quack
-     adoc-mode
-     ess
-     markdown-mode yaml-mode
-     less-css-mode scss-mode
-     clojure-mode cider clj-refactor
-     scala-mode
-     elisp-slime-nav lisp-extra-font-lock
-     cask-mode
-     typescript-mode
-     php-mode php-boris
-     elpy flycheck-pyflakes              ;python
-     web-mode
-     emmet-mode                          ; html/css editing
-     go-mode
-     dockerfile-mode
-     protobuf-mode
-     systemd
-     inf-mongo))
+     ox-reveal                          ; reveal.js slides from org-mode
+))
 
 (pcase (getenv "EMACS_PACKAGE_MANAGER")
   ("package.el"
@@ -123,8 +85,9 @@
 ;;; Path to stuffs that come from single files
 (ublt/add-path "single-file-modes")
 
-(ublt/set-up 'exec-path-from-shell
-  (exec-path-from-shell-initialize))
+;;; Uhm, f*ck shell
+(use-package exec-path-from-shell
+  :config (exec-path-from-shell-initialize))
 
 ;;; General usability
 (require 'ublt-misc)

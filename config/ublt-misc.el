@@ -1,19 +1,17 @@
 (require 'ublt-util)
 
-(eval-when-compile
-  (require 'cl))
-
 ;;; Misc customization
 ;;; TODO: add case toggling
 
-(ublt/set-up 'projectile
-  (projectile-global-mode +1))
+;;; Project management
+(use-package projectile
+  :config (projectile-global-mode +1))
 
 ;;; TODO: Better dictionary (one with tech terms)?
-(ublt/set-up 'flyspell
-  (setq flyspell-default-dictionary "english"))
-(ublt/set-up 'ispell
-  (setq ispell-dictionary "english"))
+(use-package flyspell
+  :custom (flyspell-default-dictionary "english"))
+(use-package ispell
+  :custom (ispell-dictionary "english"))
 
 (setq
 ;;; This stops the damned auto-pinging
@@ -22,10 +20,10 @@
  tramp-default-method "ssh")
 
 ;;; Old buffer clean up
-(ublt/set-up 'midnight
-  (setq clean-buffer-list-delay-general 7             ; days
-        clean-buffer-list-delay-special (* 3 24 3600) ; 3 days
-        )
+(use-package midnight
+  :custom ((clean-buffer-list-delay-general 7)
+           (clean-buffer-list-delay-special (* 3 24 3600)))
+  :config
   (add-to-list 'desktop-locals-to-save 'buffer-display-time)
   (midnight-mode +1))
 
@@ -58,7 +56,7 @@
 ;; (command-frequency-table-load)
 ;; (command-frequency-mode 1)
 ;; (command-frequency-autosave-mode 1)
-;; (ublt/set-up 'keyfreq
+;; (use-package keyfreq
 ;;   (keyfreq-mode 1)
 ;;   (keyfreq-autosave-mode 1))
 
@@ -69,9 +67,9 @@
 
 ;; Save positions in visited files
 (setq-default save-place t)
-(ublt/set-up 'saveplace
-  (setq save-place-file "~/.emacs.d/.saveplace"
-        save-place-limit 3000))
+(use-package saveplace
+  :custom ((save-place-file "~/.emacs.d/.saveplace")
+           (save-place-limit 3000)))
 
 ;; Save history
 (setq savehist-additional-variables
@@ -92,7 +90,7 @@
 (setq ring-bell-function 'ignore)
 
 ;; TextMate minor mode
-(require 'textmate)
+(use-package textmate)
 ;; (textmate-mode)
 
 ;; pabbrev
@@ -114,8 +112,8 @@
 ;;; Misc stuff I use -------------------------------------------------
 
 (ublt/in '(darwin)
-  (ublt/set-up 'woman
-    (add-to-list 'woman-manpath '("/opt/local/bin" . "/opt/local/man") t)))
+  (use-package woman
+    :config (add-to-list 'woman-manpath '("/opt/local/bin" . "/opt/local/man") t)))
 
 ;; Devilspie's config
 (add-to-list 'auto-mode-alist '("\\.ds$" . lisp-mode))
@@ -157,13 +155,12 @@
 ;;; Seed the random-number generator.
 (random t)
 
-(eval-after-load 'hippie-exp
-  '(progn
-     (dolist (f '(try-expand-line try-expand-list try-complete-file-name-partially))
-       (delete f hippie-expand-try-functions-list))
+(with-eval-after-load 'hippie-exp
+  (dolist (f '(try-expand-line try-expand-list try-complete-file-name-partially))
+     (delete f hippie-expand-try-functions-list))
 
-     ;; Add this back in at the end of the list.
-     (add-to-list 'hippie-expand-try-functions-list 'try-complete-file-name-partially t)))
+  ;; Add this back in at the end of the list.
+  (add-to-list 'hippie-expand-try-functions-list 'try-complete-file-name-partially t))
 
 ;;; Open files with certain extensions using an external program
 ;;; (opening a large PDF file can hang Emacs).
@@ -173,7 +170,7 @@
   (let* ((file-name (ad-get-arg 0)))
     (if (member (downcase (or (file-name-extension file-name) ""))
                 ublt/find-file-externally-extensions)
-        (call-process (case system-type
+        (call-process (pcase system-type
                         ('darwin "open")
                         ('gnu/linux "xdg-open"))
                       nil 0 nil file-name)

@@ -38,6 +38,13 @@
      ,@body))
 
 
+(defmacro ublt/with-defer (&rest body)
+  (declare (indent 0))
+  `(eval-when-compile
+     (let ((use-package-always-defer t))
+       ,@body)))
+
+
 (defvar ublt/ok-features ())
 (defvar ublt/error-features ())
 ;;; XXX: Hmm
@@ -279,6 +286,7 @@ not regular enough. Uh huh."
   (interactive)
   (make-local-variable 'before-save-hook)
   (add-hook 'before-save-hook 'ublt/theme-fontify-theme-buffer)
+  (use-package rainbow-mode)
   (rainbow-mode +1))
 
 (defun ublt/color-at-point-lighten (percent)

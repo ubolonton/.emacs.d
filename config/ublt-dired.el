@@ -39,8 +39,9 @@
   :custom (dired-isearch-filenames 'dwim))
 
 ;; Directories first by default. "s d" to change locally
-(ublt/set-up 'dired-sort-map
-  (setq dired-listing-switches "--group-directories-first -alhG1v"))
+(use-package dired-sort-map
+  :straight nil
+  :custom (dired-listing-switches "--group-directories-first -alhG1v"))
 
 (use-package all-the-icons-dired
   :hook (dired-mode . all-the-icons-dired-mode))

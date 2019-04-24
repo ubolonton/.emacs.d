@@ -1,5 +1,3 @@
-(require 'flycheck)
-
 (defgroup ubolonton nil ""
   :group 'personal)
 
@@ -16,7 +14,8 @@
                                              'face 'ublt/flycheck-message-face)
                                  flycheck-error-message-buffer))))
 
-(setq flycheck-display-errors-delay 0
-      flycheck-display-errors-function #'ublt/flycheck-display-error-messages)
+(use-package flycheck
+  :custom ((flycheck-display-errors-delay 0)
+           (flycheck-display-errors-function #'ublt/flycheck-display-error-messages)))
 
 (provide 'ublt-flycheck)

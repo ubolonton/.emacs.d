@@ -3,6 +3,7 @@
 
 ;;; Twitter
 (use-package twittering-mode
+  :defer t
   :custom ((twittering-status-format
             "%i %s%RT{%FACE[ublt-twitter-meta-face]{ ♽ }%FACE[ublt-twitter-meta-retweet]{%s}}%FACE[ublt-twitter-meta-reply]{%r}%FACE[ublt-twitter-meta-face]{ %@}%FACE[ublt-twitter-meta-location]{ from %f%L}\n           %t")
            (twittering-url-show-status nil)
@@ -39,6 +40,7 @@
 ;;; ERC
 
 (use-package erc
+  :defer t
   :straight nil
   :custom ((erc-autojoin-channels-alist
             '(("freenode.net" "#emacs" "#conkeror" "#clojure" "#concatenative" "#flink")))

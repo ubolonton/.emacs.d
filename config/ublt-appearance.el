@@ -103,6 +103,10 @@
 
 
 ;;;Color theme
+(ublt/with-defer
+  (use-package monokai-theme)
+  (use-package zenburn-theme)
+  (use-package solarized-theme))
 (when (y-or-n-p "Load theme?")
   (if (window-system)
       (ublt/set-up 'ublt-dark-theme

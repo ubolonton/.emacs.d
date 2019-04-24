@@ -1,6 +1,10 @@
 (require 'ublt-util)
 
-(use-package terraform-mode)
+(ublt/with-defer
+  (use-package terraform-mode)
+  (use-package dockerfile-mode)
+  (use-package systemd)
+  (use-package inf-mongo))
 
 (use-package company-terraform
   :after (company terraform-mode)

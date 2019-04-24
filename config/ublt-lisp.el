@@ -1,5 +1,6 @@
 (require 'ublt-util)
-(require 'dash)
+
+(use-package dash)
 
 (defface ublt/lisp-paren-face
   '((((class color) (background dark))
@@ -16,73 +17,76 @@
                 clojurescript-mode))
   (font-lock-add-keywords mode '(("(\\|)" . 'ublt/lisp-paren-face))))
 
-;; Scheme
-(ublt/set-up 'quack
-  (setq quack-fontify-style nil))
+(use-package paredit
+  :config (dolist (hook '(scheme-mode-hook
+                          emacs-lisp-mode-hook
+                          lisp-mode-hook
+                          ielm-mode-hook
+                          clojure-mode-hook
+                          cider-repl-mode-hook))
+            (add-hook hook (ublt/on-fn 'paredit-mode) t)))
 
-(ublt/set-up 'paredit
-  (dolist (hook '(scheme-mode-hook
-                  emacs-lisp-mode-hook
-                  lisp-mode-hook
-                  ielm-mode-hook
-                  clojure-mode-hook
-                  cider-repl-mode-hook))
-    (add-hook hook (ublt/on-fn 'paredit-mode) t)))
+(use-package eldoc
+  :hook (emacs-lisp-mode . eldoc-mode))
 
-(ublt/set-up 'lisp-mode
-  (ublt/set-up 'eldoc
-    (add-hook 'emacs-lisp-mode-hook (ublt/on-fn 'eldoc-mode)))
+;;; Recompile Emacs Lisp on-save.
+(use-package auto-compile
+  :custom (auto-compile-display-buffer nil)
+  :config (auto-compile-on-save-mode +1))
 
-  (ublt/set-up 'auto-compile
-    (auto-compile-on-save-mode +1)
-    (setq auto-compile-display-buffer nil))
+(use-package elisp-slime-nav
+  :hook (emacs-lisp-mode . elisp-slime-nav-mode))
 
-  (ublt/set-up 'elisp-slime-nav
-    (add-hook 'emacs-lisp-mode-hook (ublt/on-fn 'elisp-slime-nav-mode)))
+(use-package lisp-extra-font-lock
+  :config (lisp-extra-font-lock-global-mode +1))
 
-  (ublt/set-up 'lisp-extra-font-lock
-    (lisp-extra-font-lock-global-mode +1)))
+(use-package ielm
+  :hook (ielm-mode . (lambda () (setq comint-input-ring-file-name "~/.emacs.d/.ielm-input.hist"))))
 
-(ublt/set-up 'ielm
-  (add-hook 'ielm-mode-hook
-            (lambda () (setq comint-input-ring-file-name "~/.emacs.d/.ielm-input.hist"))))
+(ublt/with-defer
+  (use-package cask-mode)
 
-(ublt/set-up 'clojure-mode
-  (add-to-list 'auto-mode-alist '("\\.dtm$" . clojure-mode))
-  (define-clojure-indent
-    (facts '(:defn (1)))
-    (fact '(:defn (1)))))
+  ;; Scheme
+  (use-package quack
+    :custom (quack-fontify-style nil))
 
-(ublt/set-up 'clj-refactor
-  (setq cljr-suppress-no-project-warning t))
+  (use-package clojure-mode
+    :mode "\\.dtm$"
+    :config (define-clojure-indent
+              (facts '(:defn (1)))
+              (fact '(:defn (1)))))
 
-(ublt/set-up 'cider
-  (setq cider-prompt-for-symbol nil
-        cider-font-lock-dynamically '(macro core var deprecated))
+  (use-package clj-refactor
+    :custom (cljr-suppress-no-project-warning t))
 
-  (ublt/in '(darwin)
-    (setq cider-jdk-src-paths (-> "find /Library/Java/JavaVirtualMachines -name src.zip | head -n 1"
-                                  shell-command-to-string string-trim list)))
+  (use-package cider
+    :custom ((cider-prompt-for-symbol nil)
+             (cider-font-lock-dynamically '(macro core var deprecated)))
 
-  (add-hook 'cider-mode-hook #'cider-company-enable-fuzzy-completion)
-  (add-hook 'cider-mode-hook (ublt/on-fn 'eldoc-mode))
+    :config (ublt/in '(darwin)
+              (setq cider-jdk-src-paths (-> "find /Library/Java/JavaVirtualMachines -name src.zip | head -n 1"
+                                            shell-command-to-string string-trim list)))
 
-  (ublt/set-up 'cider-repl
-    (setq cider-repl-display-help-banner nil
-          cider-repl-use-pretty-printing t
-          cider-repl-popup-stacktraces t
-          cider-repl-wrap-history t
-
-          cider-repl-history-file "~/.emacs.d/.nrepl.hist"
-          cider-repl-history-highlight-current-entry t
-          cider-repl-history-highlight-inserted-item 'pulse
-          cider-repl-history-current-entry-face 'secondary-selection
-          cider-repl-history-inserted-item-face 'secondary-selection
-
-          nrepl-log-messages t
-          nrepl-hide-special-buffers t))
+    :hook ((cider-mode . cider-company-enable-fuzzy-completion)
+           (cider-mode . eldoc-mode)))
 
   (use-package helm-cider
-    :config (helm-cider-mode +1)))
+    :config (helm-cider-mode +1))
+
+  (use-package cider-repl
+    :straight cider
+    :custom ((cider-repl-display-help-banner nil)
+             (cider-repl-use-pretty-printing t)
+             (cider-repl-popup-stacktraces t)
+             (cider-repl-wrap-history t)
+
+             (cider-repl-history-file "~/.emacs.d/.nrepl.hist")
+             (cider-repl-history-highlight-current-entry t)
+             (cider-repl-history-highlight-inserted-item 'pulse)
+             (cider-repl-history-current-entry-face 'secondary-selection)
+             (cider-repl-history-inserted-item-face 'secondary-selection)
+
+             (nrepl-log-messages t)
+             (nrepl-hide-special-buffers t))))
 
 (provide 'ublt-lisp)
