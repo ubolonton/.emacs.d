@@ -13,9 +13,7 @@
   '(use-package
      dash
      textmate
-     avy keyfreq
-     ag
-     popwin                              ; make unimportant windows transient
+     keyfreq
      org org-bullets
      ox-reveal                           ; reveal.js slides from org-mode
      adaptive-wrap

@@ -1,8 +1,5 @@
 (require 'ublt-util)
 
-(eval-when-compile
-  (require 'cl))
-
 
 ;;; Extra navigation functions
 
@@ -58,8 +55,10 @@ of line."
   (other-window 1))
 
 
-(ublt/set-up 'recentf
-  (setq recentf-max-saved-items 300))
+(use-package recentf
+  :straight nil
+  :custom (recentf-max-saved-items 300))
+
 
 ;;; Switch to last buffer
 ;; Often we want to switch back-n-forth between 2 buffers
@@ -79,7 +78,7 @@ of line."
 
 (defun ublt/browse-url-at-point ()
   (interactive)
-  (case major-mode
+  (pcase major-mode
     ('markdown-mode (call-interactively #'markdown-follow-thing-at-point))
     ('gfm-mode (call-interactively #'markdown-follow-thing-at-point))
     ('org-mode (call-interactively #'org-open-at-point))
@@ -108,49 +107,52 @@ of line."
   (ublt/save-column ad-do-it))
 
 
-(ublt/set-up 'grep
+(use-package grep
+  :straight nil
+  :config
   ;; XXX
   (when (equal grep-find-command '("find . -type f -exec grep -nH -e {} +" . 34))
     (grep-apply-setting 'grep-find-command
                         '("find . -type f -exec grep -nH -e '' {} +" . 35)))
   (when (equal grep-command "grep -nH -e ")
     (grep-apply-setting 'grep-command
-                        "grep -nHr --exclude-dir={.bzr,.cvs,.git,.hg,.svn} . -e "))
-  )
+                        "grep -nHr --exclude-dir={.bzr,.cvs,.git,.hg,.svn} . -e ")))
 
 
-(ublt/set-up 'avy
-  (setq
-   avy-background t
-   avy-keys (list ;Dvorak, stronger finger first, left hand first. TODO: Fewer?
-             ?u ?h                      ;index
-             ?i ?d                      ;index ←→
-             ?e ?t                      ;middle
-             ?o ?n                      ;ring
-             ?p ?g                      ;index ↑
-             ?k ?m                      ;index ↓
-             ?. ?c                      ;middle ↑
-             ?, ?r                      ;ring ↑
-             ?j ?w                      ;middle ↓
-             ?q ?v                      ;ring ↓
-             ?a ?s                      ;pinkies
-             )
-   avy-dispatch-alist '((?x . avy-action-kill-move)
-                        (?X . avy-action-kill-stay)
-                        (?T . avy-action-teleport)
-                        (?M . avy-action-mark)
-                        (?C . avy-action-copy)
-                        (?y . avy-action-yank)
-                        (?I . avy-action-ispell))
-   avy-style 'at-full))
+;;; Jump around by finding textual anchors.
+(use-package avy
+  :custom ((avy-background t)
+           (avy-keys (list             ;Dvorak, stronger finger first, left hand first. TODO: Fewer?
+                      ?u ?h            ;index
+                      ?i ?d            ;index ←→
+                      ?e ?t            ;middle
+                      ?o ?n            ;ring
+                      ?p ?g            ;index ↑
+                      ?k ?m            ;index ↓
+                      ?. ?c            ;middle ↑
+                      ?, ?r            ;ring ↑
+                      ?j ?w            ;middle ↓
+                      ?q ?v            ;ring ↓
+                      ?a ?s            ;pinkies
+                      ))
+           (avy-dispatch-alist '((?x . avy-action-kill-move)
+                                 (?X . avy-action-kill-stay)
+                                 (?T . avy-action-teleport)
+                                 (?M . avy-action-mark)
+                                 (?C . avy-action-copy)
+                                 (?y . avy-action-yank)
+                                 (?I . avy-action-ispell)))
+           (avy-style 'at-full)))
 
 
-(ublt/set-up 'popwin
-  (popwin-mode +1))
+;;; Make unimportant windows transient
+(use-package popwin
+  :config (popwin-mode +1))
 
 
-;;; Whitespace-only diffs are not interesting most of the time
-(setq-default ediff-ignore-similar-regions t)
+
+(use-package ag
+  :config (add-to-list 'ag-arguments "--follow"))
 
 
 ;;; What's the point of jumping to a section's start but putting it at
