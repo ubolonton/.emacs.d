@@ -46,11 +46,6 @@
      solarized-theme
      zenburn-theme
      monokai-theme
-     ;; Dired
-     dired-collapse
-     dired-rainbow
-     diredfl
-     all-the-icons-dired
      ;; Code folding
      hideshowvis
      ;; Languages
