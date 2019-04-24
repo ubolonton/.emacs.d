@@ -22,14 +22,6 @@
      emms                                ; Music
      exec-path-from-shell                ; Uhm, f*ck shell
      pabbrev                             ; TODO: Find better alternative
-     ;; Vim emulation
-     evil
-     evil-surround
-     evil-args
-     evil-visualstar
-     evil-numbers
-     evil-nerd-commenter
-     evil-matchit
      ;; Appearance
      rainbow-mode
      highlight-symbol idle-highlight-mode

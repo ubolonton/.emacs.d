@@ -29,23 +29,24 @@
   `((t (:inherit font-lock-preprocessor-face)))
   "Evil visual mode indicator face")
 
-(ublt/set-up 'evil
+(use-package evil
   ;; Visual indicators
-  (setq evil-mode-line-format 'before
-        evil-normal-state-tag (propertize "( N )" 'face 'ublt/evil-normal-tag)
-        evil-motion-state-tag (propertize "( M )" 'face 'ublt/evil-motion-tag)
-        evil-insert-state-tag (propertize "( I )" 'face 'ublt/evil-insert-tag)
-        evil-emacs-state-tag  (propertize "( E )" 'face 'ublt/evil-emacs-tag)
-        evil-visual-state-tag (propertize "( V )" 'face 'ublt/evil-visual-tag)
-        evil-motion-state-cursor '(box "Yellow")
-        evil-normal-state-cursor '(box "Yellow")
-        evil-insert-state-cursor '(bar "YellowGreen")
-        evil-emacs-state-cursor  '(bar "YellowGreen")
-        evil-visual-state-cursor '(box "#F86155")
+  :custom ((evil-mode-line-format 'before)
+           (evil-normal-state-tag (propertize "( N )" 'face 'ublt/evil-normal-tag))
+           (evil-motion-state-tag (propertize "( M )" 'face 'ublt/evil-motion-tag))
+           (evil-insert-state-tag (propertize "( I )" 'face 'ublt/evil-insert-tag))
+           (evil-emacs-state-tag  (propertize "( E )" 'face 'ublt/evil-emacs-tag))
+           (evil-visual-state-tag (propertize "( V )" 'face 'ublt/evil-visual-tag))
+           (evil-motion-state-cursor '(box "Yellow"))
+           (evil-normal-state-cursor '(box "Yellow"))
+           (evil-insert-state-cursor '(bar "YellowGreen"))
+           (evil-emacs-state-cursor  '(bar "YellowGreen"))
+           (evil-visual-state-cursor '(box "#F86155"))
 
-        evil-move-cursor-back nil
-        evil-want-visual-char-semi-exclusive t)
+           (evil-move-cursor-back nil)
+           (evil-want-visual-char-semi-exclusive t))
 
+  :config
   ;; Modes that should be insert state by default
   (dolist (mode '(sql-interactive-mode
                   twittering-edit-mode
@@ -84,8 +85,8 @@
   (dolist (mode '(occur-mode))
     (add-to-list 'evil-motion-state-modes mode))
 
-  (eval-after-load 'git-commit
-    '(add-hook 'git-commit-setup-hook 'evil-insert-state))
+  (use-package git-commit
+    :hook (git-commit-setup . evil-insert-state))
 
   ;; REPL modes: go to prompt on switching to insert mode
   (defun ublt/repl-goto-prompt ()
@@ -106,28 +107,38 @@
   (define-key evil-insert-state-map
     (read-kbd-macro evil-toggle-key) 'evil-emacs-state)
 
+  (with-eval-after-load 'paredit
+    ;; FIX: This is too ad-hoc
+    (defadvice paredit-backward (before fix-evil-off-by-1 activate)
+      (when (member evil-state '(motion normal))
+        (forward-char)))
+    (defadvice paredit-forward (after fix-evil-off-by-1 activate)
+      (when (member evil-state '(motion normal))
+        (backward-char))))
+
   (evil-mode +1))
 
-(ublt/set-up 'all-the-icons
-  (setq
-   evil-insert-state-tag (all-the-icons-octicon "pencil"
-                                                :v-adjust 0.01
-                                                :height 1.09
-                                                :face 'all-the-icons-dred)
-   evil-normal-state-tag (all-the-icons-octicon "rocket"
-                                                :v-adjust 0.05
-                                                :face 'all-the-icons-dred)
-   evil-motion-state-tag (all-the-icons-octicon "rocket"
-                                                :v-adjust 0.05
-                                                :face 'all-the-icons-lyellow)
-   evil-visual-state-tag (all-the-icons-octicon "eye"
-                                                :v-adjust 0.05
-                                                :face 'all-the-icons-dred)
-   evil-emacs-state-tag (all-the-icons-fileicon "elisp"
-                                                :v-adjust -0.15
-                                                :face 'all-the-icons-dred)
-   ))
-
+(use-package all-the-icons
+  :config
+  ;; We put this here instead of using `:after' since we want `all-the-icons' to be extra stuff, not
+  ;; a hard dependency for using `evil'.
+  (use-package evil
+    :custom ((evil-insert-state-tag (all-the-icons-octicon "pencil"
+                                                           :v-adjust 0.01
+                                                           :height 1.09
+                                                           :face 'all-the-icons-dred))
+             (evil-normal-state-tag (all-the-icons-octicon "rocket"
+                                                           :v-adjust 0.05
+                                                           :face 'all-the-icons-dred))
+             (evil-motion-state-tag (all-the-icons-octicon "rocket"
+                                                           :v-adjust 0.05
+                                                           :face 'all-the-icons-lyellow))
+             (evil-visual-state-tag (all-the-icons-octicon "eye"
+                                                           :v-adjust 0.05
+                                                           :face 'all-the-icons-dred))
+             (evil-emacs-state-tag (all-the-icons-fileicon "elisp"
+                                                           :v-adjust -0.15
+                                                           :face 'all-the-icons-dred)))))
 
 (defun ublt/sgml-get-context (count)
   (save-excursion
@@ -135,10 +146,8 @@
       (dotimes (i count result)
         (setq result (sgml-get-context))))))
 
-
 (defun ublt/sgml-get-tag (count)
   (car (last (ublt/sgml-get-context count))))
-
 
 ;; TODO: Extend to line start/end if it's only whitespaces left
 ;; TODO: Handle all tag types
@@ -166,7 +175,6 @@
       ('pi (TODO))
       ('jsp (TODO))                     ; WAT?
       (t nil))))
-
 
 (evil-define-text-object evil-a-defun (count &optional beg end type)
   "Select a defun."
@@ -203,45 +211,44 @@
   :extend-selection nil
   (evil-select-inner-object 'url beg end type count))
 
+(use-package evil-surround
+  :custom (evil-surround-pairs-alist
+           '((?\( . ("(" . ")"))
+             (?\[ . ("[" . "]"))
+             (?\{ . ("{" . "}"))
 
-(ublt/set-up 'evil-surround
-  (setq-default evil-surround-pairs-alist
-                '((?\( . ("(" . ")"))
-                  (?\[ . ("[" . "]"))
-                  (?\{ . ("{" . "}"))
+             (?\) . ("( " . " )"))
+             (?\] . ("[ " . " ]"))
+             (?\} . ("{ " . " }"))
 
-                  (?\) . ("( " . " )"))
-                  (?\] . ("[ " . " ]"))
-                  (?\} . ("{ " . " }"))
+             (?# . ("#{" . "}"))
+             (?b . ("(" . ")"))
+             (?B . ("{" . "}"))
+             (?> . ("<" . ">"))
 
-                  (?# . ("#{" . "}"))
-                  (?b . ("(" . ")"))
-                  (?B . ("{" . "}"))
-                  (?> . ("<" . ">"))
+             (?\/ . ("/* " . " */"))
 
-                  (?\/ . ("/* " . " */"))
+             ;; Single-quoted strings
+             (?\' . ("'" . "'"))
 
-                  ;; Single-quoted strings
-                  (?\' . ("'" . "'"))
+             ;; Emacs-style quotes
+             (?\` . ("`" . "'"))
 
-                  ;; Emacs-style quotes
-                  (?\` . ("`" . "'"))
+             ;; Python multi-line strings
+             (?d . ("\"\"\"" . "\"\"\""))
+             (?D . ("'''" . "'''"))
 
-                  ;; Python multi-line strings
-                  (?d . ("\"\"\"" . "\"\"\""))
-                  (?D . ("'''" . "'''"))
+             (?t . evil-surround-read-tag)
+             (?< . evil-surround-read-tag)
 
-                  (?t . evil-surround-read-tag)
-                  (?< . evil-surround-read-tag)
+             (?f . evil-surround-function)))
+  :config (global-evil-surround-mode +1))
 
-                  (?f . evil-surround-function)))
-  (global-evil-surround-mode +1))
-
-(ublt/set-up 'evil-visualstar)
-(ublt/set-up 'evil-args)
-(ublt/set-up 'evil-numbers)
-(ublt/set-up 'evil-nerd-commenter)
-(ublt/set-up 'evil-matchit
-  (global-evil-matchit-mode +1))
+(use-package evil-visualstar)
+(use-package evil-args)
+(use-package evil-numbers)
+(use-package evil-nerd-commenter)
+(use-package evil-matchit
+  :config (global-evil-matchit-mode +1))
 
 (provide 'ublt-evil)
