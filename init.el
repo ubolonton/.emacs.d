@@ -74,7 +74,6 @@
      dockerfile-mode
      protobuf-mode
      systemd
-     terraform-mode company-terraform
      inf-mongo))
 
 (pcase (getenv "EMACS_PACKAGE_MANAGER")
