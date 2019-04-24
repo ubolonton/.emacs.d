@@ -429,22 +429,28 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (:background "#0E165C"))))
 
    `(magit-tag                          ;TODO
-     ((,class (:foreground ,seaweed :box ,bg+3))))
+     ((,class (:foreground ,seaweed :box ,fg-2 ,@normal-hl))))
    `(magit-branch-local
-     ((,class (,@more))))
+     ((,class (,@more ,@special-hl :box ,blue-d))))
    `(magit-branch-current
      ((,class (,@more :box (:color ,fg-2)))))
    `(magit-branch-remote
-     ((,class (,@doc))))
+     ((,class (,@doc ,@special-hl))))
 
    `(magit-hash
      ((,class (,@fw ,@commitment))))
 
    `(magit-popup-heading
-     ((,class (:inherit font-lock-keyword-face))))
-   `(magit-popup-key
      ((,class (:inherit font-lock-builtin-face))))
+   `(magit-popup-key
+     ((,class (:inherit font-lock-keyword-face))))
    `(magit-popup-argument
+     ((,class (:inherit font-lock-variable-name-face))))
+   `(transient-heading
+     ((,class (:inherit font-lock-builtin-face :underline t))))
+   `(transient-key
+     ((,class (:inherit font-lock-keyword-face))))
+   `(transient-argument
      ((,class (:inherit font-lock-variable-name-face))))
 
    ;; Section.
