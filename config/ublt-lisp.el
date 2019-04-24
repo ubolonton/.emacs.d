@@ -82,7 +82,7 @@
           nrepl-log-messages t
           nrepl-hide-special-buffers t))
 
-  (ublt/set-up 'helm-cider
-    (helm-cider-mode +1)))
+  (use-package helm-cider
+    :config (helm-cider-mode +1)))
 
 (provide 'ublt-lisp)

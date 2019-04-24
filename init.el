@@ -27,10 +27,6 @@
      org org-bullets
      ox-reveal                           ; reveal.js slides from org-mode
      adaptive-wrap
-     helm
-     swiper-helm
-     helm-ag
-     helm-projectile
      ;; number-font-lock-mode          ; Color numbers in code
      powerline                           ; Util helping configure mode-line
      ;; TODO: Use & combine with eproject
@@ -74,7 +70,7 @@
      ess
      markdown-mode yaml-mode
      less-css-mode scss-mode
-     clojure-mode cider helm-cider clj-refactor
+     clojure-mode cider clj-refactor
      scala-mode
      elisp-slime-nav lisp-extra-font-lock
      cask-mode
