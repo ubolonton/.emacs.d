@@ -2,8 +2,9 @@
 
 
 ;;; Move line/region up/down
+(use-package move-text)
 
-(ublt/set-up 'move-text)
+
 
 (defun ublt/unfill-paragraph ()
   "Does the inverse of `fill-paragraph', by calling it with
@@ -14,8 +15,7 @@
 
 
 ;;; Cycling and extending selection
-
-(ublt/set-up 'expand-region)
+(use-package expand-region)
 
 
 ;;; Toggle CUA mode, starting CUA rect if turning on
@@ -72,12 +72,12 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
 
 
 ;;; Copy/cut/duplicate whole line if no region is selected
-(ublt/set-up 'whole-line-or-region
-  (defun ublt/duplicate-line (prefix)
-    (interactive "p")
-    ;; FIX: This looks dirty
-    (call-interactively 'whole-line-or-region-kill-ring-save)
-    (call-interactively 'whole-line-or-region-yank)))
+(use-package whole-line-or-region
+  :config (defun ublt/duplicate-line (prefix)
+            (interactive "p")
+            ;; FIX: This looks dirty
+            (call-interactively 'whole-line-or-region-kill-ring-save)
+            (call-interactively 'whole-line-or-region-yank)))
 
 
 ;; Prefer UTF-8
@@ -90,14 +90,16 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
       locale-coding-system 'utf-8
       x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
 (define-coding-system-alias 'UTF-8 'utf-8)
-(ublt/set-up 'htmlize
-  (setq htmlize-html-charset "utf-8"))
+(use-package htmlize
+  :custom (htmlize-html-charset "utf-8"))
 ;;; TODO: Test this in Windows. If it works, use `ublt/in'
 ;;(set-clipboard-coding-system 'utf-16le-dos)
 
 
 ;;; Paredit ----------------------------------------------------------
-(ublt/set-up 'paredit
+;;; Structural editing with ()[]{}.
+(use-package paredit
+  :config
   ;; (defun ublt/enable-paredit-mode ()
   ;;   "Enable paredit-mode without checking paren balance."
   ;;   (let ((current-prefix-arg t))
@@ -146,32 +148,39 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
 
 ;;; Automatic completion
 
-(ublt/set-up 'company
-  (setq company-idle-delay 0.3
-        company-minimum-prefix-length 2
-        company-require-match nil
-        company-tooltip-flip-when-above t
-        company-frontends '(company-pseudo-tooltip-frontend
-                            company-preview-frontend)
-        company-tooltip-align-annotations t
-        company-selection-wrap-around t
-        company-transformers '(company-sort-by-occurrence))
-  (ublt/set-up 'company-box
-    (add-hook 'company-mode-hook 'company-box-mode))
-  (global-company-mode +1))
+(use-package company
+  :custom ((company-idle-delay 0.3)
+           (company-minimum-prefix-length 2)
+           (company-require-match nil)
+           (company-tooltip-flip-when-above t)
+           (company-frontends '(company-pseudo-tooltip-frontend
+                                company-preview-frontend))
+           (company-tooltip-align-annotations t)
+           (company-selection-wrap-around t)
+           (company-transformers '(company-sort-by-occurrence)))
+  :config (global-company-mode +1))
+
+(use-package company-box
+  :hook (company-mode . company-box-mode))
 
 
 ;;; Yasnippet --------------------------------------------------------
 
-(ublt/set-up 'yasnippet
-  (setq yas-choose-keys-first t)
+(use-package yasnippet
+  :custom (yas-choose-keys-first t)
   ;; Don't, use a dedicate key binding for yas
   ;; (add-to-list 'hippie-expand-try-functions-list 'yas-hippie-try-expand)
+  :config
   (add-to-list 'yas-snippet-dirs "~/.emacs.d/data/yasnippet/snippets")
   (yas-global-mode +1))
 
+(use-package yasnippet-snippets)
+
 
 ;;; Misc
+
+;;; Recompile Emacs Lisp on-save.
+(use-package auto-compile)
 
 ;;; TODO: Use this
 (defun ublt/remove-hard-wrap ()
@@ -215,17 +224,18 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
 (setq-default tab-width 4)
 
 ;; Teh awesome
-(ublt/set-up 'undo-tree
-  (global-undo-tree-mode))
+(use-package undo-tree
+  :config (global-undo-tree-mode +1))
 
 ;; Automatically update files whose contents were changed
 (global-auto-revert-mode +1)
 ;; (setq auto-revert-check-vc-info t)
 
 ;; emacs-mac-app https://bitbucket.org/mituharu/emacs-mac
-(setq
- mac-command-modifier 'super
- mac-option-modifier 'meta
- mac-pass-command-to-system nil)
+(ublt/in '(darwin)
+  (setq
+   mac-command-modifier 'super
+   mac-option-modifier 'meta
+   mac-pass-command-to-system nil))
 
 (provide 'ublt-editing)

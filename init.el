@@ -12,23 +12,16 @@
 (defvar ublt/packages
   '(use-package
      dash
-     auto-compile                        ;recompile Emacs Lisp on-save
-     company company-box
-     yasnippet
-     yasnippet-snippets
-     textmate undo-tree whole-line-or-region
+     textmate
      avy keyfreq
      ag
-     expand-region
      popwin                              ; make unimportant windows transient
-     move-text                           ; move selected/current lines up/down
      org org-bullets
      ox-reveal                           ; reveal.js slides from org-mode
      adaptive-wrap
      ;; TODO: Use & combine with eproject
      projectile                          ; Project management
      emms                                ; Music
-     paredit                             ; Structural editing with ()[]{}
      exec-path-from-shell                ; Uhm, f*ck shell
      pabbrev                             ; TODO: Find better alternative
      ;; Vim emulation
