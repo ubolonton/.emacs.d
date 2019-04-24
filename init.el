@@ -103,8 +103,12 @@
        (ublt/package-install p))
 
      (require 'use-package)
-     ;; Since we have to use `:straight' `nil' for some packages when using `straight.el'.
-     (setq use-package-ignore-unknown-keywords t)))
+     (require 'use-package-ensure)
+     (setq
+      ;; Since we have to use `:straight' `nil' for some packages when using `straight.el'.
+      use-package-ignore-unknown-keywords t
+      ;; We don't want to declare a package twice.
+      use-package-always-ensure t)))
   (_
    (progn
      (defvar bootstrap-version)
@@ -120,8 +124,9 @@
            (eval-print-last-sexp)))
        (load bootstrap-file nil 'nomessage))
 
-     (setq straight-use-package-by-default t)
      (straight-use-package 'use-package)
+     ;; We don't want to declare a package twice.
+     (setq straight-use-package-by-default t)
 
      (dolist (p ublt/packages)
        (straight-use-package p)))))
