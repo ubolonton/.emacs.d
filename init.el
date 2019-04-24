@@ -126,7 +126,9 @@
      (dolist (p ublt/packages)
        (straight-use-package p)))))
 
-(setq use-package-verbose t)
+(setq use-package-verbose t
+      ;; For `use-package-report' to work.
+      use-package-compute-statistics t)
 
 
 
