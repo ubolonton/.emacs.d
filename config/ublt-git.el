@@ -20,11 +20,12 @@
   ;; magit-ediff-dwim-show-on-hunks t
 
   ;; Git directories
-  (magit-repository-directories '(("~/Programming/projects" . 1)
+  (magit-repository-directories '(("~/dotfiles". 0)
+                                  ("~/.emacs.d". 0)
+                                  ("~/Programming/projects" . 1)
                                   ("~/Programming/lib" . 1)
                                   ("~/Programming/Tools" . 1)
-                                  ("~/Programming/adatao" . 1)
-                                  ("~/Programming/arimo" . 1)))
+                                  ("~/.emacs.d/straight/repos" . 1)))
 
   (magit-status-margin '(t age-abbreviated magit-log-margin-width t 10))
 
