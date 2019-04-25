@@ -447,7 +447,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(magit-popup-argument
      ((,class (:inherit font-lock-variable-name-face))))
    `(transient-heading
-     ((,class (:inherit font-lock-builtin-face :underline t))))
+     ((,class (:inherit font-lock-builtin-face))))
    `(transient-key
      ((,class (:inherit font-lock-keyword-face))))
    `(transient-argument
