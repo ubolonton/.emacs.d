@@ -226,7 +226,6 @@
   ;; Utilities, super-
   "s-i"           'helm-semantic-or-imenu
   "s-d"           'helm-command-prefix
-  "s-e"           rg-global-map
   ;; "s-y"           '
   "s-h"           'ublt/helm
   ;; "C-s-h"         'helm-follow-mode
@@ -935,6 +934,9 @@
 
 (ublt/keys 'rg rg-mode-map
   "C-c C-c" 'wgrep-change-to-wgrep-mode)
+
+(ublt/keys 'rg global-map
+  "s-e" 'rg-global-map)
 
 (ublt/keys 'magit magit-mode-map
   "U"     'magit-unstage-all
