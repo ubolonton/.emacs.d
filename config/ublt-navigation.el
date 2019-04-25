@@ -1,5 +1,7 @@
 (require 'ublt-util)
 
+(use-package highlight-symbol)
+
 
 ;;; Extra navigation functions
 
