@@ -156,6 +156,14 @@ of line."
 (use-package ag
   :config (add-to-list 'ag-arguments "--follow"))
 
+(use-package rg
+  :custom ((rg-group-result t)
+           (rg-hide-command nil)
+           (rg-align-position-numbers t)
+           (rg-command-line-flags '("--follow"))))
+
+(use-package wgrep)
+
 
 ;;; What's the point of jumping to a section's start but putting it at
 ;;; the bottom of the window? This somewhat fixes it

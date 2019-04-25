@@ -60,18 +60,18 @@
                   inferior-haskell-mode
                   haskell-interactive-mode
                   inf-mongo-mode
-                  grep-mode
                   cider-repl-mode
                   php-boris-mode))
     (add-to-list 'evil-insert-state-modes mode))
 
   (dolist (mode '(Info-mode
                   helpful-mode
+                  grep-mode
+                  rg-mode
                   cider-browse-ns-mode
                   cider-repl-history-mode
                   cider-classpath-mode
-                  cider-stacktrace-mode
-                  ))
+                  cider-stacktrace-mode))
     (add-to-list 'evil-emacs-state-modes mode))
 
   (dolist (mode '(org-mode))

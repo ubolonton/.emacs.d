@@ -226,14 +226,16 @@
   ;; Utilities, super-
   "s-i"           'helm-semantic-or-imenu
   "s-d"           'helm-command-prefix
+  "s-e"           rg-global-map
+  ;; "s-y"           '
   "s-h"           'ublt/helm
-  "C-s-h"         'helm-follow-mode
+  ;; "C-s-h"         'helm-follow-mode
   "s-f"           'swiper-helm
   "s-F"           'helm-projectile
   ;; "s-F"           'projectile-find-file
   "s-g"           'magit-status
   "s-C-g"         'magit-file-dispatch
-  "s-G"           'ag
+  "s-G"           'rg
   "s-H"           'helm-ag
   "s-m"           'avy-goto-word-1
   "s-M"           'avy-goto-char-2
@@ -930,6 +932,9 @@
   "M-l"        'move-to-window-line-top-bottom
   "C-c C-c"    'dired-toggle-read-only
   "M-o"        'dired-omit-mode)
+
+(ublt/keys 'rg rg-mode-map
+  "C-c C-c" 'wgrep-change-to-wgrep-mode)
 
 (ublt/keys 'magit magit-mode-map
   "U"     'magit-unstage-all
