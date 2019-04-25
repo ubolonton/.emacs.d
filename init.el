@@ -42,10 +42,9 @@
      (dolist (p ublt/packages)
        (ublt/package-install p))
 
-     (eval-when-compile
-       (package-initialize)
-       (require 'use-package)
-       (require 'use-package-ensure))
+     (package-initialize)
+     (require 'use-package)
+     (require 'use-package-ensure)
      (setq
       ;; Since we have to use `:straight' `nil' for some packages when using `straight.el'.
       use-package-ignore-unknown-keywords t
