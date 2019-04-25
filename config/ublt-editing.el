@@ -152,8 +152,10 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
            (company-transformers '(company-sort-by-occurrence)))
   :config (global-company-mode +1))
 
-(use-package company-box
-  :hook (company-mode . company-box-mode))
+(use-package company-posframe
+  :after company
+  :custom ((company-posframe-font "Fantasque Sans Mono"))
+  :config (company-posframe-mode +1))
 
 
 ;;; Yasnippet --------------------------------------------------------
