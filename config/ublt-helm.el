@@ -344,7 +344,8 @@ Note that this feature is available only with emacs-25+."
   :custom (projectile-enable-caching t))
 
 (use-package helm-ag
-  :custom (helm-ag-insert-at-point t))
+  :custom ((helm-ag-insert-at-point t)
+           (helm-ag-command-option "--follow")))
 
 (use-package swiper-helm)
 
