@@ -866,7 +866,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(diredfl-dir-name
      ((,class (,@teleport))))
    `(dired-symlink
-     ((,class (,@portal ,@vw-italic :underline ,bg+3))))
+     ((,class (,@portal ,@italic :underline ,bg+3))))
    `(diredfl-symlink
      ((,class (:inherit dired-symlink))))
    `(diredfl-ignored-file-name
