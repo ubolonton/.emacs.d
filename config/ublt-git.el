@@ -82,7 +82,7 @@
             (apply #'transient-append-suffix 'magit-log addition)))
 
 (use-package magit-libgit2
-  :straight nil
+  :ensure nil :straight nil
   :load-path ("~/Programming/projects/magit-libgit2/elisp"
               "~/Programming/projects/magit-libgit2/target/debug"))
 

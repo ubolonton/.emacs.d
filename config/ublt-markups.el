@@ -25,7 +25,7 @@
   :mode "\\.mustache$")
 
 (use-package conf-mode
-  :straight nil
+  :ensure nil :straight nil
   :mode ("Pipfile$" . conf-toml-mode))
 
 (provide 'ublt-markups)

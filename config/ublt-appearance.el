@@ -253,7 +253,7 @@
 ;; from `http://trey-jackson.blogspot.com/2008/01/emacs-tip-11-uniquify.html'
 (use-package uniquify
   ;; FIX: `straight.el' doesn't seem to recognize some built-in packages.
-  :straight nil
+  :ensure nil :straight nil
   :custom ((uniquify-buffer-name-style 'reverse)
            (uniquify-separator "  ")
            ;; Rename after killing uniquified
@@ -688,7 +688,7 @@
 ;;; TODO: Tweak htmlize instead. `htmlfontify' does not work with org
 ;;; blocks.
 (use-package htmlfontify
-  :straight nil
+  :ensure nil :straight nil
   :custom (hfy-page-header 'ublt/hfy-page-header)
   :config (defun ublt/hfy-page-header (file style)
             ;; FIX: Escape file name???

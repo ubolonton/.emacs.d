@@ -56,7 +56,7 @@ of line."
 
 
 (use-package recentf
-  :straight nil
+  :ensure nil :straight nil
   :custom (recentf-max-saved-items 300))
 
 
@@ -108,7 +108,7 @@ of line."
 
 
 (use-package grep
-  :straight nil
+  :ensure nil :straight nil
   :config
   ;; XXX
   (when (equal grep-find-command '("find . -type f -exec grep -nH -e {} +" . 34))

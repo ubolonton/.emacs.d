@@ -35,7 +35,6 @@
      ;; Some packages mess up `package-archives'. This fixes that.
      (defvar ublt/package-archives package-archives)
      (add-hook 'after-init-hook (lambda () (setq package-archives ublt/package-archives)))
-     (package-initialize)
 
      (when (not package-archive-contents)
        (package-refresh-contents))
@@ -43,8 +42,10 @@
      (dolist (p ublt/packages)
        (ublt/package-install p))
 
-     (require 'use-package)
-     (require 'use-package-ensure)
+     (eval-when-compile
+       (package-initialize)
+       (require 'use-package)
+       (require 'use-package-ensure))
      (setq
       ;; Since we have to use `:straight' `nil' for some packages when using `straight.el'.
       use-package-ignore-unknown-keywords t

@@ -7,7 +7,7 @@
   :hook (dired-mode . hl-line-mode))
 
 (use-package dired
-  :straight nil
+  :ensure nil :straight nil
   :custom (
            ;; Offer the other window's path as default when copying
            (dired-dwim-target t)
@@ -19,7 +19,7 @@
   :hook (dired-mode . dired-hide-details-mode))
 
 (use-package dired-x
-  :straight nil
+  :ensure nil :straight nil
   :custom ((dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\.")
            (dired-omit-mode t)
            (dired-guess-shell-alist-user
@@ -35,12 +35,12 @@
                    "bunzip2")))))
 
 (use-package dired-aux
-  :straight nil
+  :ensure nil :straight nil
   :custom (dired-isearch-filenames 'dwim))
 
 ;; Directories first by default. "s d" to change locally
 (use-package dired-sort-map
-  :straight nil
+  :ensure nil :straight nil
   :custom (dired-listing-switches "--group-directories-first -alhG1v"))
 
 (use-package all-the-icons-dired

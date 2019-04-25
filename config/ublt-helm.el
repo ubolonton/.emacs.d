@@ -12,7 +12,7 @@
 (use-package helm-config
   ;; TODO: Find a way to remove this `:straight' `helm' piece (either by a macro, by calling
   ;; `use-package' on`helm' instead of the individual sub-packages, or by sth else).
-  :straight helm
+  :ensure nil :straight nil
   :custom ((helm-quick-update t)
            ;; helm-maybe-use-default-as-input nil
            (helm-split-window-in-side-p 'below)
@@ -33,7 +33,7 @@
                  :fuzzy-match t))))))
 
 (use-package helm-for-files
-  :straight helm
+  :ensure nil :straight nil
   :custom ((helm-ff-file-name-history-use-recentf t)
            ;; helm-ff-auto-update-initial-value t
            (helm-ff-transformer-show-only-basename nil)
@@ -44,14 +44,14 @@
             (add-to-list 'helm-boring-file-regexp-list pattern)))
 
 (use-package helm-buffers
-  :straight helm
+  :ensure nil :straight nil
   :custom (helm-buffers-fuzzy-matching t)
   :config (unless helm-source-buffers-list
             (setq helm-source-buffers-list
                   (helm-make-source "Buffers" 'helm-source-buffers))))
 
 (use-package helm-locate
-  :straight helm
+  :ensure nil :straight nil
   :custom (helm-locate-fuzzy-match nil)
   :config (progn (ublt/in '(gnu/linux)
                    (setq helm-locate-command "locate %s -e -A --regex %s"))
@@ -59,12 +59,12 @@
                    (setq helm-locate-command "mdfind %s %s"))))
 
 (use-package helm-bookmark
-  :straight helm
+  :ensure nil :straight nil
   :config (ublt/helm-enable-fuzzy
            '((helm-source-bookmarks helm-source-basic-bookmarks))))
 
 (use-package helm-imenu
-  :straight helm
+  :ensure nil :straight nil
   :custom ((helm-imenu-delimiter " ")
            (helm-imenu-fuzzy-match t)
            ;; This is a misfeature when combined with "use default as
@@ -72,28 +72,28 @@
            (helm-imenu-execute-action-at-once-if-one nil)))
 
 (use-package helm-net
-  :straight helm
+  :ensure nil :straight nil
   :custom ((helm-google-suggest-use-curl-p (when (executable-find "curl") t))
            (helm-home-url "https://www.google.com")))
 
 (use-package helm-command
-  :straight helm
+  :ensure nil :straight nil
   :custom (helm-M-x-fuzzy-match t))
 
 (use-package helm-org
-  :straight helm
+  :ensure nil :straight nil
   :custom ((helm-org-headings-fontify t)
            (helm-org-format-outline-path t)))
 
 (use-package helm-regexp
-  :straight helm)
+  :ensure nil :straight nil)
 
 (use-package helm-elisp
-  :straight helm
+  :ensure nil :straight nil
   :custom (helm-apropos-fuzzy-match t))
 
 (use-package helm-man
-  :straight helm
+  :ensure nil :straight nil
   :config (add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages))
 
 (defun ublt/helm-sources ()

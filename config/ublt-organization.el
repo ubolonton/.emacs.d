@@ -85,7 +85,7 @@
      (shell . t))))
 
 (use-package org-indent
-  :straight org
+  :ensure nil :straight nil
   :hook (org-mode . org-indent-mode))
 
 (use-package org-bullets
@@ -93,7 +93,7 @@
   :hook (org-mode . org-bullets-mode))
 
 (use-package ob-plantuml
-  :straight org
+  :ensure nil :straight nil
   :defer t
   :custom (org-plantuml-jar-path "~/bin/plantuml.jar"))
 
@@ -155,7 +155,7 @@
            (org-log-note-clock-out nil)))
 
 (use-package org-clock
-  :straight org
+  :ensure nil :straight nil
   :custom ((org-clock-history-length 24)
            (org-clock-in-resume t)
 
@@ -174,7 +174,7 @@
 
 
 (use-package org-agenda
-  :straight org
+  :ensure nil :straight nil
   :hook ((org-agenda-mode . hl-line-mode)
          (org-agenda-finalize . ublt/org-agenda-align-tags))
   :custom ((org-agenda-dim-blocked-tasks t)
@@ -272,7 +272,7 @@
 
 ;;; Task creation (capturing/remembering)
 (use-package org-capture
-  :straight org
+  :ensure nil :straight nil
   :custom
   (org-capture-templates '(("n" "Note or todo to be reviewed at day's end"
                             entry (file "~/org/gtd/daily.org")
@@ -366,7 +366,7 @@
               "")))
 
 (use-package org-protocol
-  :straight org
+  :ensure nil :straight nil
   :hook (org-capture-after-finalize . ublt/org-capture-back-to-conkeror)
   :config
   ;; FIX: Distinguish Conkeror from other sources
@@ -409,7 +409,7 @@
 ;;; PDF export
 
 (use-package ox-latex
-  :straight org
+  :ensure nil :straight nil
   :defer t
   :custom ((org-latex-listings 'minted)
            (org-latex-pdf-process '("xelatex -shell-escape -interaction nonstopmode %f"

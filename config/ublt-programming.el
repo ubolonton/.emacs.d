@@ -41,7 +41,7 @@
   :mode "\\.m$")
 
 (use-package nxml-mode
-  :straight nil
+  :ensure nil :straight nil
   :mode "\\.xml.jin$")
 
 (provide 'ublt-programming)

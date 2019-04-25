@@ -74,7 +74,7 @@
     :config (helm-cider-mode +1))
 
   (use-package cider-repl
-    :straight cider
+    :ensure nil :straight nil
     :custom ((cider-repl-display-help-banner nil)
              (cider-repl-use-pretty-printing t)
              (cider-repl-popup-stacktraces t)

@@ -41,7 +41,7 @@
 
 (use-package erc
   :defer t
-  :straight nil
+  :ensure nil :straight nil
   :custom ((erc-autojoin-channels-alist
             '(("freenode.net" "#emacs" "#conkeror" "#clojure" "#concatenative" "#flink")))
 
