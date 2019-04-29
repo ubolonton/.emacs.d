@@ -67,7 +67,8 @@
 
      ;; TODO: Remove this once https://github.com/raxod502/straight.el/issues/377 is fixed.
      (defun ublt/straight-use-package-ignore-loaded (orig package &rest args)
-       (unless (featurep package)
+       (if (featurep package)
+           t
          (apply orig package args)))
      (advice-add 'straight-use-package :around #'ublt/straight-use-package-ignore-loaded)
 
