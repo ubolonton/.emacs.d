@@ -393,12 +393,11 @@
     "M-O" 'swiper-helm))
 
 
-(eval-after-load 'undo-tree
-  '(progn
-     (define-key undo-tree-visualizer-mode-map
-       [remap evil-previous-visual-line] 'undo-tree-visualize-undo)
-     (define-key undo-tree-visualizer-mode-map
-       [remap evil-next-visual-line] 'undo-tree-visualize-redo)))
+(with-eval-after-load 'undo-tree
+  (define-key undo-tree-visualizer-mode-map
+     [remap evil-previous-visual-line] 'undo-tree-visualize-undo)
+  (define-key undo-tree-visualizer-mode-map
+    [remap evil-next-visual-line] 'undo-tree-visualize-redo))
 
 
 ;;; Help navigation
@@ -614,9 +613,8 @@
     "<down>" 'ediff-next-difference
     ))
 
-(eval-after-load 'ediff
-  '(progn
-     (add-hook 'ediff-keymap-setup-hook 'ublt/setup-ediff-mode-map)))
+(with-eval-after-load 'ediff
+  (add-hook 'ediff-keymap-setup-hook 'ublt/setup-ediff-mode-map))
 
 
 ;;; Helm
@@ -722,27 +720,26 @@
 
 
 ;;; Paredit
-(eval-after-load "paredit"
-  '(progn
-     (ublt/define-keys paredit-mode-map
-       "{"             'paredit-open-curly
-       "}"             'paredit-close-curly
-       "M-("           'paredit-wrap-round
-       "M-)"           'paredit-forward-slurp-sexp
-       "M-["           'paredit-wrap-square
-       "M-{"           'paredit-wrap-curly
-       "M-r"           nil              ; was paredit-raise-sexp
-       "M-<backspace>" 'paredit-backward-kill-word
-       "M-<kp-delete>" 'paredit-forward-kill-word
-       "<backspace>"   'paredit-backward-delete
-       "<kp-delete>"   'paredit-forward-delete
-       "C-<left>"      nil
-       "C-<right>"     nil
-       "M-<left>"      'paredit-backward
-       "M-<right>"     'paredit-forward
-       "C-M-s"         'paredit-splice-sexp
-       ;; TODO: advice comment-dwim instead
-       "M-;"           nil)))
+(with-eval-after-load "paredit"
+  (ublt/define-keys paredit-mode-map
+     "{"             'paredit-open-curly
+     "}"             'paredit-close-curly
+     "M-("           'paredit-wrap-round
+     "M-)"           'paredit-forward-slurp-sexp
+     "M-["           'paredit-wrap-square
+     "M-{"           'paredit-wrap-curly
+     "M-r"           nil              ; was paredit-raise-sexp
+     "M-<backspace>" 'paredit-backward-kill-word
+     "M-<kp-delete>" 'paredit-forward-kill-word
+     "<backspace>"   'paredit-backward-delete
+     "<kp-delete>"   'paredit-forward-delete
+     "C-<left>"      nil
+     "C-<right>"     nil
+     "M-<left>"      'paredit-backward
+     "M-<right>"     'paredit-forward
+     "C-M-s"         'paredit-splice-sexp
+     ;; TODO: advice comment-dwim instead
+     "M-;"           nil))
 
 (ublt/keys "python-mode" py-mode-map
   "{"       'paredit-open-curly
@@ -967,11 +964,11 @@
   "S-SPC" 'scroll-down-command)
 
 ;; NTA XXX: Their "yank" variations are not as good
-(eval-after-load "ess-mode"
-  '(ublt/undefine-keys ess-mode-map
+(with-eval-after-load "ess-mode"
+  (ublt/undefine-keys ess-mode-map
      '("C-y")))
-(eval-after-load "org"
-  '(ublt/undefine-keys org-mode-map
+(with-eval-after-load 'org
+  (ublt/undefine-keys org-mode-map
      '("C-y")))
 
 (ublt/keys 'org org-mode-map
@@ -996,9 +993,9 @@
   "C-<down>" 'org-agenda-do-date-later
   "C-<up>"   'org-agenda-do-date-earlier)
 
-(eval-after-load 'expand-region
-  '(setq expand-region-fast-keys-enabled t
-         expand-region-contract-fast-key "u"
-         expand-region-reset-fast-key "e"))
+(with-eval-after-load 'expand-region
+  (setq expand-region-fast-keys-enabled t
+        expand-region-contract-fast-key "u"
+        expand-region-reset-fast-key "e"))
 
 (provide 'ublt-dvorak)
