@@ -936,7 +936,7 @@
   "C-c C-c" 'wgrep-change-to-wgrep-mode)
 
 (ublt/keys 'rg global-map
-  "s-e" 'rg-global-map)
+  "s-e" rg-global-map)
 
 (ublt/keys 'magit magit-mode-map
   "U"     'magit-unstage-all
