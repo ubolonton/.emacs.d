@@ -1,13 +1,10 @@
 (require 'ublt-util)
 
-(eval-when-compile
-  (require 'cl))
-
 ;;; TODO: Maybe functions/macros to create fontspec from scratch?
 ;;; Maybe TODO: Integration with `ublt-themes'
 
 ;;; emacs-mac-app
-(case window-system
+(pcase window-system
   ('mac (mac-auto-operator-composition-mode +1)))
 
 
@@ -78,7 +75,7 @@
 ;;; now this is acceptable, since I haven't needed to use 1 font at 2
 ;;; different sizes yet.
 (dolist (rescale '((".*DejaVu Sans-.*" 0.94)))
-  (destructuring-bind (font size) rescale
+  (pcase-let ((`(,font ,size) rescale))
     (ublt/assoc! 'face-font-rescale-alist font size)))
 
 ;;; XXX: Similar to the above. If a fontset is used, faces' attributes
@@ -159,7 +156,7 @@
                    (".*DejaVu Sans Mono-.*" 1.00)
                    (".*Fantasque Sans Mono.*" 1.10)
                    (".*Symbol-.*" 1.239)))
-  (destructuring-bind (font size) rescale
+  (pcase-let ((`(,font ,size) rescale))
     (ublt/assoc! 'face-font-rescale-alist font size)))
 
 ;;; XXX: Not sure why, but we need to set these for the default fontset as well (`t'), not just "ubltf".

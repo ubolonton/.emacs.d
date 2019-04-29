@@ -1,8 +1,5 @@
 (require 'ublt-util)
 
-(eval-when-compile
-  (require 'cl))
-
 ;;; Font, colors, text appearance
 
 
@@ -417,7 +414,7 @@
                (eldoc-mode                 "")
                (page-break-lines-mode      "")
                ))
-    (destructuring-bind (mode display &optional feature) m
+    (pcase-let ((`(,mode ,display ,feature) m))
       (ublt/diminish mode display feature))))
 
 
@@ -611,7 +608,7 @@
  ediff-window-setup-function 'ediff-setup-windows-plain
 
  ;; Bells suck, both visible and audible
- visible-bell (case system-type
+ visible-bell (pcase system-type
                 ('gnu/linux nil)
                 ('darwin nil))
 

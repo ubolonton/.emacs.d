@@ -159,7 +159,7 @@
   (let* ((tag (ublt/sgml-get-tag count))
          (start (sgml-tag-start tag))
          (end (sgml-tag-end tag)))
-    (case (sgml-tag-type tag)
+    (pcase (sgml-tag-type tag)
       ((empty decl cdata) (list start end))
       ('open
        (save-excursion

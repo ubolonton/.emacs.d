@@ -1,8 +1,5 @@
 (require 'ublt-util)
 
-(eval-when-compile
-  (require 'cl))
-
 ;;; TODO: Clean up
 
 (use-package helm)
@@ -27,7 +24,7 @@
 
 (defun ublt/helm-enable-fuzzy (sources-and-classes)
   (dolist (setting sources-and-classes)
-    (destructuring-bind (s class) setting
+    (pcase-let ((`(,s ,class) setting))
       (let ((source (symbol-value s)))
         (set s (helm-make-source (helm-attr 'name source) class
                  :fuzzy-match t))))))
@@ -310,7 +307,7 @@ Note that this feature is available only with emacs-25+."
                            (h (round (* 0.45 (if (eql setup 'laptop)
                                                  laptop-h
                                                dell-h))))
-                           (x (case setup
+                           (x (pcase setup
                                 ('laptop (/ (- laptop-w w) 2))
                                 ('dell (/ (- dell-w w) 2))
                                 ('both (+ laptop-w

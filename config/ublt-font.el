@@ -1,8 +1,5 @@
 (require 'ublt-util)
 
-(eval-when-compile
-  (require 'cl))
-
 ;;; TODO: Maybe functions/macros to create fontspec from scratch?
 ;;; Maybe TODO: Integration with `ublt-themes'
 
@@ -74,7 +71,7 @@
 ;;; now this is acceptable, since I haven't needed to use 1 font at 2
 ;;; different sizes yet.
 (dolist (rescale '((".*DejaVu Sans-.*" 0.94)))
-  (destructuring-bind (font size) rescale
+  (pcase-let ((`(,font ,size) rescale))
     (ublt/assoc! 'face-font-rescale-alist font size)))
 
 ;;; XXX: Similar to the above. If a fontset is used, faces' attributes
@@ -160,7 +157,7 @@
                    (".*DejaVu Sans Mono-.*" 0.88)
                    (".*Symbol-.*" 1.06)
                    (".*Inconsolata-.*" 1.04)))
-  (destructuring-bind (font size) rescale
+  (pcase-let ((`(,font ,size) rescale))
     (ublt/assoc! 'face-font-rescale-alist font size)))
 
 (ublt/assign-font ublt/fixed-width-fontset

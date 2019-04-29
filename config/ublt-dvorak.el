@@ -1,8 +1,5 @@
 (require 'ublt-util)
 
-(eval-when-compile
-  (require 'cl))
-
 ;;; My Dvorak key map for Dvorak. Keys are extensively remapped and
 ;;; translated.
 ;;   ' , . p y    f g c r l   / = \
@@ -658,7 +655,7 @@
                ("html-mode" html-mode-map)
                ("nxml-mode" nxml-mode-map)
                ("web-mode"  web-mode-map)))
-  (destructuring-bind (file map) fms
+  (pcase-let ((`(,file ,map) fms))
     (eval-after-load file
       `(ublt/define-keys ,map
          "s-<right>" 'sgml-skip-tag-forward
@@ -713,7 +710,7 @@
                ("lisp-mode" emacs-lisp-mode-map)
                ("erlang" erlang-mode-map)
                ("ruby-mode" ruby-mode-map)))
-  (destructuring-bind (file map) fms
+  (pcase-let ((`(,file ,map) fms))
     (eval-after-load file
       `(ublt/define-keys ,map
          "M-p" nil

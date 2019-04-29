@@ -179,9 +179,6 @@
 
 ;;; `http://www.masteringemacs.org/articles/2011/07/20/searching-buffers-occur-mode/'
 
-;; (eval-when-compile
-;;   (require 'cl))
-
 ;; (defun get-buffers-matching-mode (mode)
 ;;   "Returns a list of buffers where their major-mode is equal to MODE"
 ;;   (let ((buffer-mode-matches '()))
