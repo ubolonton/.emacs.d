@@ -66,11 +66,11 @@
        (load bootstrap-file nil 'nomessage))
 
      ;; TODO: Remove this once https://github.com/raxod502/straight.el/issues/377 is fixed.
-     (defun ublt/straight-use-package-ignore-loaded (orig package &rest args)
+     (define-advice straight-use-package
+         (:around (orig package &rest args) ignore-loaded)
        (if (featurep package)
            t
          (apply orig package args)))
-     (advice-add 'straight-use-package :around #'ublt/straight-use-package-ignore-loaded)
 
      (straight-use-package 'use-package)
      ;; We don't want to declare a package twice.
