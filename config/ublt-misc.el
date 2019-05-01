@@ -24,7 +24,8 @@
   :custom ((clean-buffer-list-delay-general 7)
            (clean-buffer-list-delay-special (* 3 24 3600)))
   :config
-  (add-to-list 'desktop-locals-to-save 'buffer-display-time)
+  (with-eval-after-load 'desktop
+    (add-to-list 'desktop-locals-to-save 'buffer-display-time))
   (midnight-mode +1))
 
 (ublt/in '(gnu/linux)
@@ -72,20 +73,22 @@
            (save-place-limit 3000)))
 
 ;; Save history
-(setq savehist-additional-variables
-      '(search-ring regexp-search-ring)
-      savehist-file "~/.emacs.d/.savehist")
-(dolist (var '(log-edit-comment-ring
-               regexp-search-ring
-               search-ring
-               Info-history-list
-               Info-search-history))
-  (add-to-list 'savehist-additional-variables var))
-(savehist-mode t)
+(use-package savehist
+  :custom (savehist-file "~/.emacs.d/.savehist")
+  :config
+  (dolist (var '(log-edit-comment-ring
+                 regexp-search-ring
+                 search-ring
+                 Info-history-list
+                 Info-search-history))
+    (add-to-list 'savehist-additional-variables var))
+  (savehist-mode +1))
 
-(setq bookmark-default-file "~/.emacs.d/.bookmarks")
+(use-package bookmark
+  :custom (bookmark-default-file "~/.emacs.d/.bookmarks"))
 
-(setq recentf-save-file "~/.emacs.d/.recentf" )
+(use-package recentf
+  :custom (recentf-save-file "~/.emacs.d/.recentf" ))
 
 (setq ring-bell-function 'ignore)
 

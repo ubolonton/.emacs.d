@@ -550,7 +550,7 @@
   (set (make-local-variable 'face-remapping-alist)
        '((default :height 1.0)))
   (setq line-spacing 0.3))
-(add-hook 'minibuffer-setup-hook 'ublt/minibuffer-setup)
+(add-hook 'minibuffer-setup-hook #'ublt/minibuffer-setup)
 
 
 ;;; Looks like `adaptive-wrap' degrades performance on large buffers (e.g. check

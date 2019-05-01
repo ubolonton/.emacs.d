@@ -92,8 +92,9 @@ files."
  'emacs-lisp-mode
  '(("\\<ublt/in\\>" . font-lock-keyword-face)
    ("\\<ublt/set-up\\>" . font-lock-keyword-face)
+   ("\\<with-eval-after-load +'\\(.*\\)\\>" 1 font-lock-constant-face)
    ("\\<use-package +\\(.*\\)\\>" 1 font-lock-constant-face)
-   ("\\<ublt/set-up +\\(.*\\)\\>" 1 font-lock-constant-face)) 'append)
+   ("\\<ublt/set-up +'\\(.*\\)\\>" 1 font-lock-constant-face)) 'append)
 
 
 (defun ublt/status-message (&rest args)
