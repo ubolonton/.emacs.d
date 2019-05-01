@@ -292,7 +292,7 @@
   "M-Q"           'ublt/unfill-paragraph
 
   ;; Toggling
-  "<f9> l"        'global-linum-mode
+  "<f9> l"        'global-display-line-numbers-mode
   "<f9> <f9>"     'ublt/toggle-fonts
   "<f9> <f12>"    'ublt/toggle-line-wrap
 

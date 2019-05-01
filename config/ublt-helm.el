@@ -328,6 +328,7 @@ Note that this feature is available only with emacs-25+."
                       (switch-to-buffer buffer)
                       ;; TODO: More principled way to turn off certain mode in a helm buffer.
                       (linum-mode -1)
+                      (display-line-numbers-mode -1)
                       (select-frame-set-input-focus helm-popup-frame t)))
                 ;; If user have changed `helm-display-buffer-reuse-frame' to nil
                 ;; maybe kill the frame.

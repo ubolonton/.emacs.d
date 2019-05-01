@@ -315,12 +315,14 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(vertical-border
      ((,class (,@shadowed))))
    ;; Line number
-   `(linum
+   `(line-number
      ((,class (:inherit fringe ,@dimmed :slant normal :weight normal
                         :underline nil :strike-through nil :overline nil
                         :background ,bg :box nil))))
-   `(linum-relative-current-face
-     ((,class (:inherit (hl-line linum) ,@context ,@bold))))
+   `(line-number-current-line
+     ((,class (:inherit (hl-line line-number) ,@context ,@bold))))
+   `(linum ((,class (:inherit line-number))))
+   `(linum-relative-current-face ((,class (:inherit line-number-current-line))))
 
    
    ;; Highlighting, flyspell, flycheck
