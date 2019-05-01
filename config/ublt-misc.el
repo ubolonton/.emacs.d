@@ -69,10 +69,10 @@
 (ublt/enable '(narrow-to-region set-goal-column upcase-region downcase-region))
 
 ;; Save positions in visited files
-(setq-default save-place t)
 (use-package saveplace
   :custom ((save-place-file "~/.emacs.d/.saveplace")
-           (save-place-limit 3000)))
+           (save-place-limit 3000))
+  :config (save-place-mode +1))
 
 ;; Save history
 (use-package savehist
