@@ -903,6 +903,9 @@
   "<M-right>" 'markdown-demote
   "<M-left>"  'markdown-promote)
 
+(ublt/keys 'debug debugger-mode-map
+  "M-." 'elisp-slime-nav-find-elisp-thing-at-point)
+
 
 ;;; Misc
 
