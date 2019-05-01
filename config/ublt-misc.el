@@ -37,6 +37,8 @@
   (condition-case err
       ad-do-it
     (error (message "desktop-create-buffer: %s" err))))
+(setq desktop-restore-frames nil
+      desktop-restore-eager 30)
 (defun ublt/session-restore ()
   "Restore a saved emacs session."
   (interactive)
