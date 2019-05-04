@@ -118,7 +118,7 @@
 
 (ublt/in '(darwin)
   (use-package woman
-    :config (add-to-list 'woman-manpath '("/opt/local/bin" . "/opt/local/man") t)))
+    :config (add-to-list 'woman-manpath '("/opt/local/bin" . "/opt/local/man"))))
 
 ;; Devilspie's config
 (add-to-list 'auto-mode-alist '("\\.ds$" . lisp-mode))
