@@ -217,6 +217,8 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
 
 ;; Teh awesome
 (use-package undo-tree
+  :custom ((undo-tree-visualizer-timestamps t)
+           (undo-tree-visualizer-diff t))
   :config (global-undo-tree-mode +1))
 
 ;; Automatically update files whose contents were changed
