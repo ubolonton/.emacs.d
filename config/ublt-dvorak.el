@@ -714,9 +714,9 @@
          "M-p" nil
          "M-n" nil))))
 
-;; (ublt/keys 'ag ag-mode-map
-;;   "M-p" 'compilation-previous-error
-;;   "M-n" 'compilation-next-error)
+(ublt/keys 'rg rg-mode-map
+  "M-p" 'previous-error-no-select
+  "M-n" 'next-error-no-select)
 
 
 ;;; Paredit
