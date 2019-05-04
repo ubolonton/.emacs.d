@@ -16,6 +16,8 @@
 
 (use-package flycheck
   :custom ((flycheck-display-errors-delay 0)
-           (flycheck-display-errors-function #'ublt/flycheck-display-error-messages)))
+           (flycheck-display-errors-function #'ublt/flycheck-display-error-messages)
+           ;; FIX: Remove this once we use new versions of `shellcheck' that support --external-sources.
+           (flycheck-shellcheck-follow-sources nil)))
 
 (provide 'ublt-flycheck)

@@ -10,4 +10,7 @@
   :after (company terraform-mode)
   :config (add-to-list 'company-backends 'company-terraform))
 
+(use-package flycheck
+  :hook (sh-mode . flycheck-mode))
+
 (provide 'ublt-devops)
