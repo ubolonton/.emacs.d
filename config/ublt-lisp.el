@@ -26,6 +26,9 @@
                           cider-repl-mode-hook))
             (add-hook hook (ublt/on-fn 'paredit-mode) t)))
 
+(use-package lisp-mode
+  :custom (emacs-lisp-docstring-fill-column 80))
+
 (use-package eldoc
   :hook (emacs-lisp-mode . eldoc-mode))
 
