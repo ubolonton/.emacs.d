@@ -538,7 +538,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(font-lock-comment-delimiter-face
      ((,class (:inherit font-lock-comment-face ,@dimmed))))
    `(font-lock-doc-face
-     ;; XXX
+     ;; XXX: Create another fontset for this instead.
      ((,class (,@fw ,@italic ,@string :font "Fantasque Sans Mono"))))
    `(font-lock-function-name-face
      ((,class (,@fw ,@essence))))

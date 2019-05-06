@@ -98,7 +98,7 @@ of line."
       scroll-step 1
 
       ;; Preserve current line position relative to window
-      scroll-preserve-screen-position 1
+      scroll-preserve-screen-position 'always
       ;; Number of overlapped lines to keep when scrolling by
       ;; screenfull
       next-screen-context-lines 5)
