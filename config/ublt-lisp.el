@@ -32,7 +32,8 @@
 (use-package eldoc
   :hook (emacs-lisp-mode . eldoc-mode))
 
-(use-package company-elisp)
+(use-package company-elisp
+  :straight company)
 
 ;;; Recompile Emacs Lisp on-save.
 (use-package auto-compile
