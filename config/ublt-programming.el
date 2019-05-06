@@ -37,8 +37,8 @@
 (use-package lsp-ui
   :hook (lsp-mode . lsp-ui-mode))
 
-(use-package octave
-  :mode "\\.m$")
+(use-package cc-mode
+  :mode ("\\.m$" . objc-mode))
 
 (use-package nxml-mode
   :ensure nil :straight nil
