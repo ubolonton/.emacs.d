@@ -1,0 +1,3 @@
+[submodule "straight/repos/straight.el"]
+	path = straight/repos/straight.el
+	url = https://github.com/raxod502/straight.el
