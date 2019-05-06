@@ -5,6 +5,7 @@
 
 ;;; Project management
 (use-package projectile
+  :defer 10
   :config (projectile-global-mode +1))
 
 ;;; TODO: Better dictionary (one with tech terms)?
