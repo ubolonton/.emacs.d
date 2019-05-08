@@ -1,4 +1,5 @@
 (require 'ublt-util)
+(require 'ublt-navigation)
 
 (use-package magit
   :custom
@@ -87,7 +88,10 @@
   :config (add-to-list 'hl-todo-keyword-faces '("FIX"  . "#cc9393")))
 
 (use-package magit-todos
-  :config (magit-todos-mode +1))
+  :config
+  (define-advice magit-todos--goto-item (:after (&rest _) recenter)
+    (ublt/recenter-near-top))
+  (magit-todos-mode +1))
 
 (use-package magit-libgit2
   :ensure nil :straight nil
