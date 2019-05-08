@@ -9,6 +9,8 @@
 (add-to-list 'load-path "~/.emacs.d/config")
 (require 'ublt-util)
 
+(setq custom-file "~/.emacs.d/custom.el")
+
 (defvar ublt/packages
   '(use-package))
 
@@ -127,12 +129,6 @@
 (require 'ublt-rust)
 
 (ublt/set-up 'ublt-mix-modes)
-
-
-(setq custom-file "~/.emacs.d/custom.el")
-(condition-case err
-    (load custom-file)
-  (error (message "Error loading custom file")))
 
 
 ;; Interops (with Terminal, Conkeror...) -----------------------------
