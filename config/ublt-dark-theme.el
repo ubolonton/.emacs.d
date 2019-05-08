@@ -568,6 +568,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (,@fw :inherit link))))
    `(lisp-extra-font-lock-backquote
      ((,class (:inherit font-lock-preprocessor-face))))
+   `(hl-todo
+     ((,class (:inherit font-lock-warning-face))))
 
    `(js2-function-param
      ((,class (,@param))))

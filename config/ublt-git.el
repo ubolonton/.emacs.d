@@ -82,6 +82,13 @@
   :config (dolist (addition '(("=m" ("-M" "Show merges only" "--merges"))))
             (apply #'transient-append-suffix 'magit-log addition)))
 
+;;; We use this only for magit-todos, since we prefer our own coloring in code buffers.
+(use-package hl-todo
+  :config (add-to-list 'hl-todo-keyword-faces '("FIX"  . "#cc9393")))
+
+(use-package magit-todos
+  :config (magit-todos-mode +1))
+
 (use-package magit-libgit2
   :ensure nil :straight nil
   :load-path ("~/Programming/projects/magit-libgit2/elisp"
