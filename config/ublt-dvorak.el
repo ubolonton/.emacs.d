@@ -310,9 +310,6 @@
   "M-4"           'er/expand-region
   "s-O"           'er/expand-region
 
-  ;; TODO: more pervasive
-  "C-a"           'ublt/back-to-indentation-or-line-beginning
-
   ;; Misc
   "C-c C-x C-o"   'org-clock-out
   "M-l"           'move-to-window-line-top-bottom
@@ -380,6 +377,7 @@
 
 ;;; Remapping some commands to their improved versions (keeping the key bindings).
 (ublt/define-keys global-map
+  'move-beginning-of-line 'ublt/back-to-indentation-or-line-beginning
   'exchange-point-and-mark 'ublt/exchange-point-and-mark-no-activate)
 
 (use-package helpful
