@@ -378,6 +378,10 @@
   "M-<mouse-4>"   'scroll-down-line
   "M-<mouse-5>"   'scroll-up-line)
 
+;;; Remapping some commands to their improved versions (keeping the key bindings).
+(ublt/define-keys global-map
+  'exchange-point-and-mark 'ublt/exchange-point-and-mark-no-activate)
+
 (use-package helpful
   :config (ublt/define-keys global-map
             "C-h f"   'helpful-callable
@@ -393,11 +397,10 @@
     "M-O" 'swiper-helm))
 
 
-(with-eval-after-load 'undo-tree
-  (define-key undo-tree-visualizer-mode-map
-     [remap evil-previous-visual-line] 'undo-tree-visualize-undo)
-  (define-key undo-tree-visualizer-mode-map
-    [remap evil-next-visual-line] 'undo-tree-visualize-redo))
+;;; Remapping.
+(ublt/keys 'undo-tree undo-tree-visualizer-mode-map
+  'evil-previous-visual-line 'undo-tree-visualize-undo
+  'evil-next-visual-line 'undo-tree-visualize-redo)
 
 
 ;;; Help navigation

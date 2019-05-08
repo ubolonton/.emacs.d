@@ -32,8 +32,6 @@ of line."
     (exchange-point-and-mark)
     (when (not active)
       (deactivate-mark nil))))
-(define-key global-map [remap exchange-point-and-mark]
-  'ublt/exchange-point-and-mark-no-activate)
 
 
 ;;; Swap windows
