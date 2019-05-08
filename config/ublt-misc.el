@@ -119,7 +119,12 @@
 
 (ublt/in '(darwin)
   (use-package woman
-    :config (add-to-list 'woman-manpath '("/opt/local/bin" . "/opt/local/man"))))
+    :config
+    (add-to-list 'woman-manpath '("/opt/local/bin" . "/opt/local/man"))
+    (dolist (path '("/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/share/man"
+                    "/Applications/Xcode.app/Contents/Developer/usr/share/man"
+                    "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man"))
+      (add-to-list 'woman-manpath path t))))
 
 ;; Devilspie's config
 (add-to-list 'auto-mode-alist '("\\.ds$" . lisp-mode))
