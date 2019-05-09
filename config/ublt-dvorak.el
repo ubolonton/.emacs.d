@@ -317,6 +317,7 @@
   "M-B"           nil                   ; use yas-minor-mode-map
   "M-s"           nil                   ; use yas-minor-mode-map
   "C-z"           nil                   ; who needs suspend-frame?
+  "M-u"           nil                   ; TODO: Assign M-U to sth else.
   "S-s-SPC"       'whitespace-mode
   "M-x"           'helm-M-x          ; C-x C-m for the original
   "M-X"           'smex-major-mode-commands
