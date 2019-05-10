@@ -20,8 +20,8 @@
 
 ;;; TODO: Enable this when there is a workaround for highlighted
 ;;; symbols always being displayed in fixed-width font
-;; (add-hook 'prog-mode-hook (ublt/on-fn idle-highlight-mode))
-;; (add-hook 'prog-mode-hook (ublt/on-fn auto-highlight-symbol-mode))
+;; (add-hook 'prog-mode-hook #'idle-highlight-mode)
+;; (add-hook 'prog-mode-hook #'auto-highlight-symbol-mode)
 
 (add-hook 'prog-mode-hook 'ublt/add-watchwords)
 

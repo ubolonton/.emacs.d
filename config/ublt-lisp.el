@@ -18,13 +18,10 @@
   (font-lock-add-keywords mode '(("(\\|)" . 'ublt/lisp-paren-face))))
 
 (use-package paredit
-  :config (dolist (hook '(scheme-mode-hook
-                          emacs-lisp-mode-hook
-                          lisp-mode-hook
-                          ielm-mode-hook
-                          clojure-mode-hook
-                          cider-repl-mode-hook))
-            (add-hook hook (ublt/on-fn 'paredit-mode) t)))
+  :hook ((scheme-mode
+          emacs-lisp-mode lisp-mode ielm-mode
+          clojure-mode cider-repl-mode)
+         . paredit-mode))
 
 (use-package lisp-mode
   :ensure nil :straight nil

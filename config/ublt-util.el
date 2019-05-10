@@ -9,18 +9,10 @@
 
 ;;; This is for stuff like
 ;;;
-;;; (add-hook 'css-mode-hook (ublt/on-fn 'paredit-mode))
+;;; (add-hook 'css-mode-hook #'paredit-mode)
 ;;;
 ;;; TODO: Maybe some sort of memoized anonymous function would be
 ;;; better. This works, but only accidentally I think.
-(defvar ublt/on-fns (make-hash-table))
-(defun ublt/on-fn (minor-mode-fn)
-  (let ((fn (gethash minor-mode-fn ublt/on-fns)))
-    (if fn fn
-      (puthash minor-mode-fn
-               `(lambda () (,minor-mode-fn +1))
-               ublt/on-fns))))
-
 (defvar ublt/off-fns (make-hash-table))
 (defun ublt/off-fn (minor-mode-fn)
   (let ((fn (gethash minor-mode-fn ublt/off-fns)))

@@ -32,10 +32,10 @@
     '((t (:inherit ublt-twitter-meta-face)))
     "")
 
-  (add-hook 'twittering-mode-hook (ublt/on-fn 'hl-line-mode))
-  (add-hook 'twittering-mode-hook (ublt/on-fn 'adaptive-wrap-prefix-mode))
+  (add-hook 'twittering-mode-hook #'hl-line-mode)
+  (add-hook 'twittering-mode-hook #'adaptive-wrap-prefix-mode)
   (add-hook 'twittering-edit-mode-hook (ublt/off-fn 'auto-fill-mode))
-  (add-hook 'twittering-edit-mode-hook (ublt/on-fn 'visual-line-mode)))
+  (add-hook 'twittering-edit-mode-hook #'visual-line-mode))
 
 ;;; ERC
 

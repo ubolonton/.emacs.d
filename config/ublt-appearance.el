@@ -238,12 +238,10 @@
                 org-agenda-mode-hook))  ; XXX: not working
   (add-hook hook (ublt/off-fn 'visual-line-mode)))
 
-;;; Always wrap where text should flow
-(dolist (hook '(twittering-mode-hook
-                markdown-mode-hook
-                org-mode-hook
-                html-mode-hook))
-  (add-hook hook (ublt/on-fn 'visual-line-mode)))
+;;; Always wrap where text should flow.
+(use-package simple
+  :ensure nil :straight nil
+  :hook ((twittering-mode markdown-mode org-mode html-mode) . visual-line-mode))
 
 
 ;;; Sometimes buffers have the same names
