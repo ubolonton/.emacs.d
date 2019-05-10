@@ -30,6 +30,13 @@
      ,@body))
 
 
+(defmacro ublt/with-demand (&rest body)
+  (declare (indent 0))
+  `(eval-when-compile
+     (let ((use-package-always-demand t))
+       ,@body)))
+
+
 (defmacro ublt/with-defer (&rest body)
   (declare (indent 0))
   `(eval-when-compile

@@ -106,7 +106,8 @@
 ;;; File management
 (require 'ublt-dired)
 ;;; Completion/narrowing interfaces
-(require 'ublt-helm)
+(ublt/with-demand
+  (require 'ublt-helm))
 ;;; git
 (require 'ublt-git)
 ;;; Code linters.
