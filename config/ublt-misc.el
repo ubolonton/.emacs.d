@@ -64,8 +64,6 @@
 ;;   (keyfreq-mode 1)
 ;;   (keyfreq-autosave-mode 1))
 
-;; (add-hook 'html-mode-hook (ublt/off-fn 'flyspell-mode))
-
 ;; These should be disabled for new users, not me.
 (ublt/enable '(narrow-to-region set-goal-column upcase-region downcase-region))
 

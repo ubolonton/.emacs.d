@@ -2,25 +2,16 @@
   (dolist (f funcs)
     (put f 'disabled nil)))
 
-
 (defun ublt/add-path (path)
   "Add to load-path a path relative to ~/.emacs.d/lib/"
   (add-to-list 'load-path (concat "~/.emacs.d/lib/" path)))
 
 ;;; This is for stuff like
 ;;;
-;;; (add-hook 'css-mode-hook #'paredit-mode)
+;;; (add-hook 'hexl-mode (ublt/off paredit-mode))
 ;;;
-;;; TODO: Maybe some sort of memoized anonymous function would be
-;;; better. This works, but only accidentally I think.
-(defvar ublt/off-fns (make-hash-table))
-(defun ublt/off-fn (minor-mode-fn)
-  (let ((fn (gethash minor-mode-fn ublt/off-fns)))
-    (if fn fn
-      (puthash minor-mode-fn
-               `(lambda () (,minor-mode-fn -1))
-               ublt/off-fns))))
-
+(defmacro ublt/off (minor-mode)
+  `(lambda () (,minor-mode -1)))
 
 ;; To help separating OS-specific stuffs
 (defmacro ublt/in (systems &rest body)
@@ -29,20 +20,17 @@
   `(when (member system-type ,systems)
      ,@body))
 
-
 (defmacro ublt/with-demand (&rest body)
   (declare (indent 0))
   `(eval-when-compile
      (let ((use-package-always-demand t))
        ,@body)))
 
-
 (defmacro ublt/with-defer (&rest body)
   (declare (indent 0))
   `(eval-when-compile
      (let ((use-package-always-defer t))
        ,@body)))
-
 
 (defvar ublt/ok-features ())
 (defvar ublt/error-features ())
@@ -61,7 +49,6 @@
          nil))
     (require feature filename)))
 
-
 (defvar ublt/package-errors ())
 (defun ublt/package-install (pkg)
   (when (not (package-installed-p pkg))
@@ -71,7 +58,6 @@
        (setq ublt/package-errors (plist-put ublt/package-errors pkg err))
        (message (propertize "Failed to install %s: %s" 'face 'font-lock-keyword-face)
                 pkg err)))))
-
 
 ;;; TODO: Use `use-package'.
 (defmacro ublt/set-up (feature &rest body)
@@ -85,7 +71,6 @@ files."
      (when (ublt/require f nil t)
        ,@body)))
 
-
 ;; TODO: Isn't this about appearance?
 (font-lock-add-keywords
  'emacs-lisp-mode
@@ -95,7 +80,6 @@ files."
    ("\\<use-package +\\(.*\\)\\>" 1 font-lock-constant-face)
    ("\\<ublt/set-up +'\\(.*\\)\\>" 1 font-lock-constant-face)) 'append)
 
-
 (defun ublt/status-message (&rest args)
   "Show a message in the minibuffer without logging. Useful for
 transient messages like error messages when hovering over syntax
@@ -103,20 +87,16 @@ errors."
   (let ((message-log-max nil))
     (apply #'message args)))
 
-
-;;; TODO: Use this
 (defun ublt/isearch-other-window ()
   (interactive)
   (save-selected-window
     (other-window 1)
     (isearch-forward-regexp)))
 
-
 ;;; TODO: Mode-specific rules?
 (defun ublt/set-indent-level (chars)
   (setq c-basic-offset chars)
   (setq tab-width chars))
-
 
 ;;; Source -
 ;;; `http://sites.google.com/site/steveyegge2/my-dot-emacs-file'
@@ -152,7 +132,6 @@ errors."
              (set-buffer-modified-p nil)
              t))))
 
-
 ;;; `http://www.emacswiki.org/emacs/ZapToISearch'
 (defun ublt/zap-to-isearch (rbeg rend)
   "Kill the region between the mark and the closest portion of
@@ -187,7 +166,6 @@ and the point, not include the isearch word."
   (isearch-exit)
   (goto-char isearch-other-end))
 
-
 ;;; `http://www.emacswiki.org/emacs/SearchAtPoint'
 (defun ublt/isearch-yank-symbol ()
   "*Put symbol at current point into search string."
@@ -211,7 +189,6 @@ not regular enough. Uh huh."
       (cadr s)
     s))
 
-
 ;;; FIX: Use `dash' library
 (defun ublt/assoc! (list-var key val)
   (let* ((list (symbol-value list-var))
@@ -220,13 +197,11 @@ not regular enough. Uh huh."
         (add-to-list list-var (cons key val))
       (setcdr entry val))))
 
-
 (defmacro ublt/save-column (&rest body)
   (declare (indent 0))
   `(let ((c (or goal-column (current-column))))
      ,@body
      (move-to-column c)))
-
 
 ;;; Turns out `font-lock-mode' already has similar functions
 ;; ;;; XXX: This currently works only for `font-lock-face' and `face',
@@ -261,7 +236,6 @@ not regular enough. Uh huh."
          (insert-char x)
          (insert " " nn "\n"))))
    (number-sequence 0 (expt 2 16))))
-
 
 (defun ublt/get-string-from-file (path)
   (with-temp-buffer

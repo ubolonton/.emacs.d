@@ -34,7 +34,7 @@
 
   (add-hook 'twittering-mode-hook #'hl-line-mode)
   (add-hook 'twittering-mode-hook #'adaptive-wrap-prefix-mode)
-  (add-hook 'twittering-edit-mode-hook (ublt/off-fn 'auto-fill-mode))
+  (add-hook 'twittering-edit-mode-hook (ublt/off auto-fill-mode))
   (add-hook 'twittering-edit-mode-hook #'visual-line-mode))
 
 ;;; ERC

@@ -95,7 +95,7 @@
     (add-hook 'find-file-hook 'ublt/variable-pitch-mode-fundamental)
     (dolist (hook '(hexl-mode
                     dns-mode-hook))
-      (add-hook hook (ublt/off-fn 'variable-pitch-mode)))
+      (add-hook hook (ublt/off variable-pitch-mode)))
     ))
 
 
@@ -236,7 +236,7 @@
                 dired-mode-hook
                 sql-mode-hook
                 org-agenda-mode-hook))  ; XXX: not working
-  (add-hook hook (ublt/off-fn 'visual-line-mode)))
+  (add-hook hook (ublt/off visual-line-mode)))
 
 ;;; Always wrap where text should flow.
 (use-package simple
