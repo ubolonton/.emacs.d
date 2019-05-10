@@ -341,6 +341,9 @@
   "C-x C-u"       'nil
   "C-x C-l"       'nil
 
+  ;; This is used instead of remapping, otherwise `visual-line-mode' interferes with `org-mode'.
+  "C-a"           'ublt/back-to-indentation-or-line-beginning
+
   ;; TODO: Rearrange the s- combos
   "C-c p f"       'projectile-find-file
 
