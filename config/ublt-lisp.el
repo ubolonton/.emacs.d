@@ -27,13 +27,15 @@
             (add-hook hook (ublt/on-fn 'paredit-mode) t)))
 
 (use-package lisp-mode
+  :ensure nil :straight nil
   :custom (emacs-lisp-docstring-fill-column 80))
 
 (use-package eldoc
   :hook (emacs-lisp-mode . eldoc-mode))
 
 (use-package company-elisp
-  :straight company)
+  :requires company
+  :ensure nil :straight nil)
 
 ;;; Recompile Emacs Lisp on-save.
 (use-package auto-compile
