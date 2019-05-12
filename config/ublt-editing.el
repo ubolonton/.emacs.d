@@ -162,16 +162,28 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
 
 (ublt/with-defer
   (use-package yasnippet
-   :custom (yas-choose-keys-first t)
-   ;; Don't, use a dedicate key binding for yas
-   ;; (add-to-list 'hippie-expand-try-functions-list 'yas-hippie-try-expand)
-   :config
-   (add-to-list 'yas-snippet-dirs "~/.emacs.d/data/yasnippet/snippets")
-   (yas-global-mode +1))
+    :custom (yas-choose-keys-first t)
+    ;; Don't, use a dedicate key binding for yas
+    ;; (add-to-list 'hippie-expand-try-functions-list 'yas-hippie-try-expand)
+    :config
+    (add-to-list 'yas-snippet-dirs "~/.emacs.d/data/yasnippet/snippets")
+    (yas-global-mode +1))
 
   (use-package yasnippet-snippets))
 
 
+;;; ------------------------------------------------------------------
+;;; pullover
+(use-package pullover
+  :load-path "~/Programming/projects/pullover/"
+  :hook (pullover-mode . (lambda () (call-interactively 'evil-insert)))
+  :bind (:map pullover-mode-map
+              ([remap ublt/kill-this-buffer] . pullover-cancel)))
+(use-package markdown-mode
+  :custom (pullover-major-mode 'gfm-mode))
+
+
+;;; ------------------------------------------------------------------
 ;;; Misc
 
 ;;; TODO: Use this
