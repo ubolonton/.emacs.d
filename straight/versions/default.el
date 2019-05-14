@@ -23,6 +23,7 @@
  ("dired-hacks" . "2c1234592aee91dcd9401bcd67213e6a4a464fd9")
  ("diredfl" . "9b2a89951cee8bdf5c0cb67f9c3ad6ac73abf9cb")
  ("dockerfile-mode" . "7223d92718f78fa3ab15667cdb2ed90cfeb579e7")
+ ("edit-indirect" . "de645d8144e8a08f039a9c88185121ec81d957ef")
  ("edn.el" . "be9e32d1b49e35247b263b0243df7cfdc8d413ab")
  ("elisp-refs" . "540daaf50a88ca0e7d7c8d5f09ca383362e67baf")
  ("elisp-slime-nav" . "34938422929800839e2f935aca890cd4a229ca99")

@@ -187,6 +187,10 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
 
 
 ;;; ------------------------------------------------------------------
+(use-package edit-indirect)
+
+
+;;; ------------------------------------------------------------------
 ;;; Misc
 
 ;;; TODO: Use this
