@@ -175,6 +175,9 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
 ;;; ------------------------------------------------------------------
 ;;; pullover
 (use-package pullover
+  :when (memq window-system '(mac ns))
+  :ensure nil :straight nil
+  :demand t
   :load-path "~/Programming/projects/pullover/"
   :hook (pullover-mode . (lambda () (call-interactively 'evil-insert)))
   :bind (:map pullover-mode-map
