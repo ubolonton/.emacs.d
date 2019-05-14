@@ -94,6 +94,7 @@
   (magit-todos-mode +1))
 
 (use-package magit-libgit2
+  :disabled
   :ensure nil :straight nil
   :load-path ("~/Programming/projects/magit-libgit2/elisp"
               "~/Programming/projects/magit-libgit2/target/debug"))
