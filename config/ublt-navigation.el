@@ -81,8 +81,8 @@ of line."
   (pcase major-mode
     ('markdown-mode (call-interactively #'markdown-follow-thing-at-point))
     ('gfm-mode (call-interactively #'markdown-follow-thing-at-point))
-    ('org-mode (call-interactively #'org-open-at-point))
-    (t (call-interactively #'org-open-at-point-global))))
+    ('org-mode (org-open-at-point t))
+    (_ (call-interactively #'org-open-at-point-global))))
 
 
 ;;; Scrolling settings
