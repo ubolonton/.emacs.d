@@ -20,7 +20,8 @@
 (use-package paredit
   :hook ((scheme-mode
           emacs-lisp-mode lisp-mode ielm-mode
-          clojure-mode cider-repl-mode)
+          clojure-mode cider-repl-mode
+          cask-mode)
          . paredit-mode))
 
 (use-package lisp-mode
