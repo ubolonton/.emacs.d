@@ -44,4 +44,7 @@
   :ensure nil :straight nil
   :mode "\\.xml.jin$")
 
+(use-package applescript-mode
+  :mode "\\.applescript$")
+
 (provide 'ublt-programming)

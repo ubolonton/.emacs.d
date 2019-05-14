@@ -6,6 +6,7 @@
  ("aggressive-indent-mode" . "3803f24020ef0a656dc5345713c4964073aec9a8")
  ("all-the-icons-dired" . "980b7747d6c4a7992a1ec56afad908956db0a519")
  ("all-the-icons.el" . "f996fafa5b2ea072d0ad1df9cd98acc75820f530")
+ ("applescript-mode" . "8f888cd80af1e0902b5609143facd3051bc94892")
  ("auto-compile" . "e6bbb1371324c8884af3b201e9adbc9296eb2ff4")
  ("avy" . "4d52b5cb7e1c565ca8dfe9c47b54330fd1a395bc")
  ("cargo.el" . "1f3bc0d10dbddabfe1974590847a1359aeb3c244")
