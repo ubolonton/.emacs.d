@@ -595,6 +595,9 @@
 ;;; Misc
 
 (setq
+ ;; To avoid tiny gaps between Emacs's and other apps' windows.
+ frame-resize-pixelwise t
+
  ;; 2x70 instead of the default 2x80 so that side-by-side is preferable
  split-width-threshold 300
  split-height-threshold 200
