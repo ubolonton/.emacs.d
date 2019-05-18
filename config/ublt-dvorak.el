@@ -417,6 +417,7 @@
 (ublt/keys "info" Info-mode-map
   "M-s-h" 'Info-history-back
   "M-s-n" 'Info-history-forward
+  "C-M-x" 'ublt/eval-sexp-at-point
   "M-."   'elisp-slime-nav-find-elisp-thing-at-point)
 
 (ublt/keys 'help-mode help-map

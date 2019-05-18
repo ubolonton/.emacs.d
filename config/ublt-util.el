@@ -98,6 +98,10 @@ errors."
   (setq c-basic-offset chars)
   (setq tab-width chars))
 
+(defun ublt/eval-sexp-at-point ()
+  (interactive)
+  (prin1 (eval (read (thing-at-point 'sexp)))))
+
 ;;; Source -
 ;;; `http://sites.google.com/site/steveyegge2/my-dot-emacs-file'
 ;;; TODO: Use
