@@ -131,6 +131,7 @@ font (fixed-pitch is still preferable)."
                        ;; helm-source-helm-commands
                        )))
          sources))
+
 (defun ublt/helm-tweak-appearance ()
   "Use `variable-pitch' font for helm if it's suitable for
 all of the sources."
@@ -195,7 +196,7 @@ all of the sources."
 
             (defun ublt/make-transparent-maybe (&optional result)
               (set-frame-parameter helm-popup-frame 'alpha
-                                   (if (helm-follow-mode-p) 35 100))
+                                   (if (helm-follow-mode-p) (cons 35 0) (cons 100 0)))
               result)
 
             ;; Make helm popup frame transparent when `helm-follow-mode' is on.
@@ -314,6 +315,7 @@ Note that this feature is available only with emacs-25+."
                                           (/ (- dell-w w) 2)))))
                            (y -9999))
                       (set-frame-size helm-popup-frame w h t)
+                      ;; TODO: Set these only once.
                       (modify-frame-parameters
                        helm-popup-frame
                        '((fullscreen . nil)
@@ -322,6 +324,8 @@ Note that this feature is available only with emacs-25+."
                          (border-width . 0)
                          (menu-bar-lines . 0)
                          (unsplittable . t)
+                         ;; XXX: The frame is shown during blocking operations. "Hide" it.
+                         (alpha . (100 . 0))
                          (tool-bar-lines . 0)))
                       (select-frame helm-popup-frame)
                       (set-frame-position helm-popup-frame x y)

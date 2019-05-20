@@ -221,6 +221,8 @@
 ;;; probably confused by global/local variables)
 
 (setq-default
+ ;; XXX: `helm-popup-frame' is shown during a blocking operation. This allows "hiding" it.
+ frame-alpha-lower-limit 0
  ;; This affects how lines are wrapped (we want wrapping at word
  ;; boundary not in the middle of a word)
  word-wrap t
