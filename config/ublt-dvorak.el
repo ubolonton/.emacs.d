@@ -31,11 +31,15 @@
 ;; M-s-m
 ;; M-s-v
 
-(ublt/in '(windows-nt)
-  (setq w32-pass-lwindow-to-system nil
-        w32-pass-rwindow-to-system nil
-        w32-lwindow-modifier 'super
-        w32-rwindow-modifier 'super))
+(pcase system-type
+  ('windows-nt (setq w32-pass-lwindow-to-system nil
+                     w32-pass-rwindow-to-system nil
+                     w32-lwindow-modifier 'super
+                     w32-rwindow-modifier 'super))
+  ;; emacs-mac-app https://bitbucket.org/mituharu/emacs-mac
+  ('darwin (setq mac-command-modifier 'super
+                 mac-option-modifier 'meta
+                 mac-pass-command-to-system nil)))
 
 
 ;; Helper to define keys

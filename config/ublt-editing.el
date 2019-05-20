@@ -244,11 +244,4 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
 (global-auto-revert-mode +1)
 ;; (setq auto-revert-check-vc-info t)
 
-;; emacs-mac-app https://bitbucket.org/mituharu/emacs-mac
-(ublt/in '(darwin)
-  (setq
-   mac-command-modifier 'super
-   mac-option-modifier 'meta
-   mac-pass-command-to-system nil))
-
 (provide 'ublt-editing)
