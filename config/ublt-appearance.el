@@ -654,16 +654,12 @@
 ;; ;;; Show current function name in mode-line
 ;; (which-func-mode +1)
 
-;; ;; Fringe
-;; (set-fringe-mode '(8 . 0))
-
-;;; FIX: Make them compatible
-(defun ublt/maybe-number-font-lock-mode ()
-  (unless (member major-mode '(web-mode))
-    (number-font-lock-mode +1)))
-
-;; (use-package number-font-lock-mode
-;;   :hook (prog-mode . ublt/maybe-number-font-lock-mode))
+(use-package highlight-numbers
+  :config (defun ublt/-maybe-highlight-numbers ()
+            ;; FIX: Make them compatible
+            (unless (member major-mode '(web-mode))
+              (highlight-numbers-mode +1)))
+  :hook (prog-mode . ublt/-maybe-highlight-numbers))
 
 ;;; Flash eval'ed Lisp code.
 (use-package eval-sexp-fu

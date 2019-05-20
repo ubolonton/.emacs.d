@@ -560,7 +560,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (,@fw ,@warning))))
    `(font-lock-constant-face
      ((,class (,@fw ,@constant))))
-   `(number-font-lock-face
+   `(highlight-numbers-number
      ((,class (,@fw ,@number))))
    `(lisp-extra-font-lock-quoted
      ((,class (,@fw))))
