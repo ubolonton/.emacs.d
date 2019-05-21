@@ -70,7 +70,9 @@
   ;; (defadvice magit-process (around dont-switch activate)
   ;;   (save-selected-window
   ;;     ad-do-it))
-  )
+
+  (with-eval-after-load 'helm-info
+    (ublt/helm-info-reload)))
 
 (use-package diff-hl
   :hook (magit-post-refresh . diff-hl-magit-post-refresh))

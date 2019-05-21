@@ -246,6 +246,12 @@ not regular enough. Uh huh."
     (insert-file-contents path)
     (buffer-string)))
 
+(defun ublt/helm-info-reload ()
+  "Reload `helm-info' index. Use after loading a package with info doc."
+  (require 'helm-info)
+  (custom-set-variables
+   '(helm-default-info-index-list (helm-get-info-files))))
+
 
 ;;; Tools to tweak theme.
 
