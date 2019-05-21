@@ -93,11 +93,6 @@ errors."
     (other-window 1)
     (isearch-forward-regexp)))
 
-;;; TODO: Mode-specific rules?
-(defun ublt/set-indent-level (chars)
-  (setq c-basic-offset chars)
-  (setq tab-width chars))
-
 (defun ublt/eval-sexp-at-point ()
   (interactive)
   (prin1 (eval (read (thing-at-point 'sexp)))))
@@ -246,6 +241,8 @@ not regular enough. Uh huh."
     (insert-file-contents path)
     (buffer-string)))
 
+(declare-function helm-default-info-index-list "helm-info")
+(declare-function helm-get-info-files "helm-info")
 (defun ublt/helm-info-reload ()
   "Reload `helm-info' index. Use after loading a package with info doc."
   (require 'helm-info)
@@ -268,7 +265,8 @@ not regular enough. Uh huh."
 (defun ublt/theme-debug ()
   "Enable theme-debugging in this buffer."
   (interactive)
-  (use-package rainbow-mode)
+  (use-package rainbow-mode
+    :functions (rainbow-mode))
   (make-local-variable 'before-save-hook)
   (add-hook 'before-save-hook 'ublt/theme-fontify-theme-buffer)
   (rainbow-mode +1))
