@@ -67,7 +67,7 @@
  ("highlight-symbol.el" . "7a789c779648c55b16e43278e51be5898c121b3a")
  ("hl-todo" . "487d349b7b8d6738223d5dd10957dd10b45eb9f3")
  ("ht.el" . "095fde55294bd20dc7f46d614e1b0504e3830cfa")
- ("hydra" . "acb69859f3dde8d6924587f39997320256bdd85d")
+ ("hydra" . "e94b39171aa9b2aeb429a4882e9135a702c68d03")
  ("inf-mongo" . "2e498d1c88bd1904eeec18ed06b1a0cf8bdc2a92")
  ("info-colors" . "a8ebb7b8efa314c08ea8110d8b1876afb562bb45")
  ("js2-mode" . "ae9fea81cf9ed80f403c161fde4d8aff1ceb3769")

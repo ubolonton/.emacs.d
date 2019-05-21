@@ -1036,6 +1036,19 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (:inherit company-preview))))
 
    
+   ;; Hydra
+   `(hydra-face-red
+     ((,class (:inherit font-lock-keyword-face))))
+   `(hydra-face-blue
+     ((,class (:inherit font-lock-constant-face))))
+   `(hydra-face-amaranth
+     ((,class (:inherit hydra-face-red ,@bold))))
+   `(hydra-face-pink
+     ((,class (,@note ,@bold))))
+   `(hydra-face-teal
+     ((,class (,@teleport))))
+
+   
    ;; Misc
 
    ;; undo-tree

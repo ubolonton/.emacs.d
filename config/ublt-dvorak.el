@@ -215,6 +215,8 @@
 ;; (define-key local-function-key-map "[27~" (kbd "C-<delete>"))
 
 (ublt/define-keys global-map
+  "C-h"           'ublt/hydra-help/body
+
   ;; Windows manipulation
   "s-1"           'delete-other-windows
   "s-2"           'split-window-vertically
@@ -238,7 +240,7 @@
   "s-G"           'rg
   "s-H"           'helm-ag
   "s-m"           'avy-goto-word-1
-  "s-M"           'avy-goto-char-2
+  "s-M"           'ublt/hydra-avy/body
   "s-r"           'org-capture
   "s-R"           'org-agenda
   "s-n"           'ublt/switch-to-last-buffer
@@ -325,7 +327,6 @@
   "S-s-SPC"       'whitespace-mode
   "M-x"           'helm-M-x          ; C-x C-m for the original
   "M-X"           'smex-major-mode-commands
-  "C-h C-a"       'apropos-command
   "C-x C-b"       'helm-mini       ; Because it's to easy to mis-press
   "C-x b"         'helm-mini
   "C-x <return>"  'term
@@ -388,19 +389,114 @@
   'move-beginning-of-line 'ublt/back-to-indentation-or-line-beginning
   'exchange-point-and-mark 'ublt/exchange-point-and-mark-no-activate)
 
-(use-package helpful
-  :config (ublt/define-keys global-map
-            "C-h f"   'helpful-callable
-            "C-h w"   'helpful-command
-            "C-h k"   'helpful-key
-            "C-h v"   'helpful-variable
-            "C-h o"   'helpful-symbol
-            "C-h s"   'helpful-at-point
-            "C-h C-s" 'helpful-at-point))
-
 (when window-system
   (ublt/define-keys global-map
     "M-O" 'swiper-helm))
+
+
+
+
+;;; TODO: Put this in `ublt-appearance'.
+(use-package hydra
+  :custom
+  (hydra-hint-display-type (if window-system 'posframe 'lv))
+  :config
+  ;; XXX: Don't monkey-patch.
+  (defun hydra-posframe-show (str)
+    (posframe-show
+     " *hydra-posframe*"
+     :string str
+     :internal-border-width 1
+     :internal-border-color (face-attribute 'mode-line :background)
+     :background-color (face-attribute 'hl-line :background)
+     :poshandler #'posframe-poshandler-point-bottom-left-corner)))
+
+(defhydra ublt/hydra-avy (:exit t :hint nil)
+  "
+ ^Line^    ^Region^  ^Goto^
+^^^^^^^^──────────────────────────────────────────
+ _y_ yank  _Y_ yank  _c_ 2 chars  _C_ char
+ _m_ move  _M_ move  _w_ word     _W_ any word
+ _k_ kill  _K_ kill  _l_ line     _L_ end of line
+"
+  ("c" avy-goto-char-2)
+  ("C" avy-goto-char)
+  ("w" avy-goto-word-1)
+  ("W" avy-goto-word-0)
+  ("l" avy-goto-line)
+  ("L" avy-goto-end-of-line)
+  ("m" avy-move-line)
+  ("M" avy-move-region)
+  ("k" avy-kill-whole-line)
+  ("K" avy-kill-region)
+  ("y" avy-copy-line)
+  ("Y" avy-copy-region))
+
+
+(defhydra ublt/hydra-info (:hint nil :color teal)
+  "
+ ^Topic^       ^Other^
+^^^^────────────────────────
+ _e_ elisp     _s_ symbol
+ _o_ org-mode  _i_ at point
+ _g_ magit
+ _r_ emacs     _R_ manual
+
+ [_h_] helm doc
+"
+  ("e" helm-info-elisp)
+  ("o" helm-info-org)
+  ("g" helm-info-magit)
+  ("r" helm-info-emacs)
+  ("s" info-lookup-symbol)
+  ("i" helm-info-at-point)
+  ("R" info-emacs-manual)
+  ("h" helm-documentation))
+
+(defhydra ublt/hydra-help (:hint nil :color teal)
+  "
+      ^Help^  ^Goto^ │ ^Other^
+^^^^─────────────────┼──────────────────^^
+   key  _k_    _K_   │ _l_ what happened?
+   cmd  _w_    _W_   │ _o_ symbol
+  func  _f_    _F_   │ _m_ mode
+   var  _v_    _V_   │ _i_ info
+ point  _s_    _S_   │ _p_ go to lib
+
+ [_C-h_] use built-in help
+"
+  ("C-h" help-for-help)
+
+  ("k" helpful-key)
+  ("w" helpful-command)
+  ("f" helpful-callable)
+  ("v" helpful-variable)
+  ("s" helpful-at-point)
+  ("o" helpful-symbol)
+
+  ("C-k" describe-key-briefly)
+  ("C-w" helpful-command)
+  ("C-f" helpful-callable)
+  ("C-v" helpful-variable)
+  ("C-s" helpful-at-point)
+  ("C-o" helpful-symbol)
+
+  ("K" find-function-on-key)
+  ("W" find-function)
+  ("F" find-function)
+  ("V" find-variable)
+  ("S" find-function-at-point)
+
+  ("p" find-library)
+  ("C-p" find-library)
+
+  ("i" ublt/hydra-info/body)
+  ("C-i" ublt/hydra-info/body)
+  ("l" view-lossage)
+  ("C-l" view-lossage)
+  ("m" describe-mode)
+  ("C-m" describe-mode))
+
 
 
 ;;; Remapping.
