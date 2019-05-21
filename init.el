@@ -6,9 +6,6 @@
 ;;; Make package downloading a bit more secure.
 (setq tls-checktrust 'ask)
 
-(add-to-list 'load-path "~/.emacs.d/config")
-(require 'ublt-util)
-
 (setq custom-file "~/.emacs.d/custom.el")
 
 (defvar ublt/packages
@@ -79,6 +76,11 @@
       use-package-compute-statistics t)
 
 
+
+(use-package dash)
+
+(add-to-list 'load-path "~/.emacs.d/config")
+(require 'ublt-util)
 
 ;;; Path to stuffs that come from single files
 (ublt/add-path "single-file-modes")

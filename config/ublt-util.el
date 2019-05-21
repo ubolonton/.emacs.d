@@ -1,3 +1,7 @@
+;;; -*- lexical-binding: t; coding: utf-8 -*-
+
+(require 'dash)
+
 (defun ublt/enable (funcs)
   (dolist (f funcs)
     (put f 'disabled nil)))
