@@ -262,9 +262,9 @@ not regular enough. Uh huh."
 (defun ublt/theme-debug ()
   "Enable theme-debugging in this buffer."
   (interactive)
+  (use-package rainbow-mode)
   (make-local-variable 'before-save-hook)
   (add-hook 'before-save-hook 'ublt/theme-fontify-theme-buffer)
-  (use-package rainbow-mode)
   (rainbow-mode +1))
 
 (defun ublt/color-at-point-lighten (percent)

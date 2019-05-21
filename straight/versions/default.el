@@ -110,6 +110,7 @@
  ("pyvenv" . "fa6a028349733b0ecb407c4cfb3a715b71931eec")
  ("quack" . "2146805ce2b5a9b155d73929986f11e713787e26")
  ("queue" . "52206c0f78afc0dfb9a287cb928c1e725103336d")
+ ("rainbow-mode" . "8059f1cb756d2b211af962f07c5e6aff958094d7")
  ("rg.el" . "acd8be6a1ee129fe8b3802bfcffe9b56bfa72320")
  ("rust-mode" . "a871d108c745276e93ff1dec7c65e2e5a57e6d8c")
  ("s.el" . "03410e6a7a2b11e47e1fea3b7d9899c7df26435e")
