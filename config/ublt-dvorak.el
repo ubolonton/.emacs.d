@@ -497,6 +497,9 @@
   ("m" describe-mode)
   ("C-m" describe-mode))
 
+(use-package which-key
+  :custom (which-key-popup-type 'minibuffer)
+  :config (which-key-mode))
 
 
 ;;; Remapping.
