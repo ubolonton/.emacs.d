@@ -435,12 +435,12 @@
 
 (defhydra ublt/hydra-info (:hint nil :color teal)
   "
- ^Topic^       ^Other^
-^^^^────────────────────────
- _e_ elisp     _s_ symbol
- _o_ org-mode  _i_ at point
- _g_ magit
- _r_ emacs     _R_ manual
+ ^Search^      ^Open^
+^^^^──────────────────────────────
+ _e_ elisp     _C-s_ symbol
+ _o_ org-mode  _C-i_ info
+ _g_ magit     _C-u_ use-package
+ _r_ emacs     _C-r_ emacs manual
 
  [_h_] helm doc
 "
@@ -448,20 +448,21 @@
   ("o" helm-info-org)
   ("g" helm-info-magit)
   ("r" helm-info-emacs)
-  ("s" info-lookup-symbol)
-  ("i" helm-info-at-point)
-  ("R" info-emacs-manual)
+  ("C-s" info-lookup-symbol)
+  ("C-i" info)
+  ("C-u" (info "use-package"))
+  ("C-r" info-emacs-manual)
   ("h" helm-documentation))
 
 (defhydra ublt/hydra-help (:hint nil :color teal)
   "
-      ^Help^  ^Goto^ │ ^Other^
-^^^^─────────────────┼──────────────────^^
-   key  _k_    _K_   │ _l_ what happened?
-   cmd  _w_    _W_   │ _o_ symbol
-  func  _f_    _F_   │ _m_ mode
-   var  _v_    _V_   │ _i_ info
- point  _s_    _S_   │ _p_ go to lib
+ ^Describe^  ^Goto^ │      ^Other^
+^^^^────────────────┼──────────────────^^
+   key  _k_  _K_    │ _l_ what happened?
+   cmd  _w_  _W_    │ _o_ symbol
+  func  _f_  _F_    │ _m_ mode
+   var  _v_  _V_    │ _i_ info
+ point  _s_  _S_    │ _p_ go to lib
 
  [_C-h_] use built-in help
 "
@@ -728,9 +729,6 @@
 
 ;;; Helm
 (ublt/keys "helm-config" helm-command-map
-  "h g" 'helm-info-magit
-  "h o" 'helm-info-org
-  "h e" 'helm-info-elisp
   "g"   'helm-google-suggest
   "l"   'helm-locate
   "p"   'helm-list-emacs-process
