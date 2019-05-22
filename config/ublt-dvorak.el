@@ -435,68 +435,72 @@
 
 (defhydra ublt/hydra-info (:hint nil :color teal)
   "
- ^Search^      ^Open^
-^^^^──────────────────────────────
- _e_ elisp     _C-s_ symbol
- _o_ org-mode  _C-i_ info
- _g_ magit     _C-u_ use-package
- _r_ emacs     _C-r_ emacs manual
+  Search ^^        Open manual ^^
+^^^^^^───────────────────────────────────────────────────
+  _e_ elisp        _C-e_ elisp          _C-v_ evil
+  _o_ org-mode     _C-o_ org-mode       _C-t_ transient
+  _g_ magit          _G_ magit
+  _r_ emacs        _C-r_ emacs
+  _s_ symbol       _C-u_ use-package
 
- [_h_] helm doc
+ [_h_] helm doc    [_C-i_] all info
 "
   ("e" helm-info-elisp)
   ("o" helm-info-org)
   ("g" helm-info-magit)
   ("r" helm-info-emacs)
-  ("C-s" info-lookup-symbol)
-  ("C-i" info)
-  ("C-u" (info "use-package"))
+  ("s" info-lookup-symbol)
+
+  ("C-e" (info "elisp"))
+  ("C-o" (info "org"))
+  ("G"   (info "magit"))
   ("C-r" info-emacs-manual)
+  ("C-u" (info "use-package"))
+
+  ("C-v" (info "evil"))
+  ("C-t" (info "transient"))
+
+  ("C-i" info)
   ("h" helm-documentation))
 
 (defhydra ublt/hydra-help (:hint nil :color teal)
   "
- ^Describe^  ^Goto^ │      ^Other^
-^^^^────────────────┼──────────────────^^
-   key  _k_  _K_    │ _l_ what happened?
-   cmd  _w_  _W_    │ _o_ symbol
-  func  _f_  _F_    │ _m_ mode
-   var  _v_  _V_    │ _i_ info
- point  _s_  _S_    │ _p_ go to lib
+  Describe ^^      Keys ^^              Go to ^^           Docs ^^
+^^^^^^^^──────────────────────────────────────────────────────────────
+  _f_ function     _k_ key binding      _C-f_ function     _i_ info
+  _c_ command      _w_ where is         _C-v_ variable     _n_ woman
+  _v_ variable     _b_ all bindings     _C-l_ library
+  _s_ symbol       ^^                   _C-k_ key
+  _m_ mode         ^^                     _F_ face
+  _o_ at point     ^^                   _C-o_ at point
 
- [_C-h_] use built-in help
+ [_C-h_] use built-in help    [_l_] view lossage
 "
-  ("C-h" help-for-help)
+  ("f" helpful-callable)
+  ("c" helpful-command)
+  ("v" helpful-variable)
+  ("s" helpful-symbol)
+  ("m" describe-mode)
+  ("o" helpful-at-point)
 
   ("k" helpful-key)
-  ("w" helpful-command)
-  ("f" helpful-callable)
-  ("v" helpful-variable)
-  ("s" helpful-at-point)
-  ("o" helpful-symbol)
+  ("w" where-is)
+  ("b" describe-bindings)
 
-  ("C-k" describe-key-briefly)
-  ("C-w" helpful-command)
-  ("C-f" helpful-callable)
-  ("C-v" helpful-variable)
-  ("C-s" helpful-at-point)
-  ("C-o" helpful-symbol)
+  ("C-f" find-function)
+  ("C-v" find-variable)
+  ("C-k" find-function-on-key)
+  ("C-l" find-library)
+  ("C-o" find-function-at-point)
+  ("F"   find-face-definition)
 
-  ("K" find-function-on-key)
-  ("W" find-function)
-  ("F" find-function)
-  ("V" find-variable)
-  ("S" find-function-at-point)
-
-  ("p" find-library)
-  ("C-p" find-library)
-
+  ("n" helm-man-woman)
   ("i" ublt/hydra-info/body)
+
   ("C-i" ublt/hydra-info/body)
-  ("l" view-lossage)
-  ("C-l" view-lossage)
-  ("m" describe-mode)
-  ("C-m" describe-mode))
+
+  ("C-h" help-for-help)
+  ("l" view-lossage))
 
 (use-package which-key
   :custom (which-key-popup-type 'minibuffer)
