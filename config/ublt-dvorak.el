@@ -398,18 +398,18 @@
 
 ;;; TODO: Put this in `ublt-appearance'.
 (use-package hydra
-  :custom
-  (hydra-hint-display-type (if window-system 'posframe 'lv))
+  :custom (hydra-hint-display-type (if window-system 'posframe 'lv))
   :config
-  ;; XXX: Don't monkey-patch.
-  (defun hydra-posframe-show (str)
-    (posframe-show
-     " *hydra-posframe*"
-     :string str
-     :internal-border-width 1
-     :internal-border-color (face-attribute 'mode-line :background)
-     :background-color (face-attribute 'hl-line :background)
-     :poshandler #'posframe-poshandler-point-bottom-left-corner)))
+  (setq-default hydra-posframe-show-params
+                (list :internal-border-width 1
+                      :poshandler #'posframe-poshandler-point-bottom-left-corner))
+  ;; The advice is needed to use the current theme's color.
+  (define-advice hydra-posframe-show (:around (f &rest args) ublt/tweak-appearance)
+    (let ((hydra-posframe-show-params
+           (append `(:internal-border-color ,(face-attribute 'mode-line :background))
+                   `(:background-color ,(face-attribute 'hl-line :background))
+                   hydra-posframe-show-params)))
+      (apply f args))))
 
 (defhydra ublt/hydra-avy (:exit t :hint nil)
   "
