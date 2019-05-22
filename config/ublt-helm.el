@@ -177,6 +177,13 @@ all of the sources."
   :custom ((helm-display-buffer-reuse-frame t)
            (helm-use-undecorated-frame-option t))
   :config
+
+  ;; XXX: There must by some other way.
+  (define-advice helm-hide-minibuffer-maybe (:before (&rest _) ublt/fix-input-location)
+    "Make sure helm input is always displayed at the top."
+    (with-helm-buffer
+      (setq-local helm-echo-input-in-header-line t)))
+
   (when window-system
     (setq helm-display-function #'helm-display-buffer-in-own-frame)
 
