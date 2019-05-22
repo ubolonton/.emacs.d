@@ -86,7 +86,9 @@
   (savehist-mode +1))
 
 (use-package bookmark
-  :custom (bookmark-default-file "~/.emacs.d/.bookmarks"))
+  :custom ((bookmark-default-file "~/.emacs.d/.bookmarks")
+           (bookmark-version-control t)
+           (bookmark-sort-flag nil)))
 
 (use-package recentf
   :custom (recentf-save-file "~/.emacs.d/.recentf" ))
