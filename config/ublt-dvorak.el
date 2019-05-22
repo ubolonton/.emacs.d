@@ -466,9 +466,9 @@
 (defhydra ublt/hydra-help (:hint nil :color teal)
   "
   Describe ^^      Keys ^^              Go to ^^           Docs ^^
-^^^^^^^^──────────────────────────────────────────────────────────────
-  _f_ function     _k_ key binding      _C-f_ function     _i_ info
-  _c_ command      _w_ where is         _C-v_ variable     _n_ woman
+^^^^^^^^────────────────────────────────────────────────────────────────
+  _f_ function     _k_ key binding      _C-f_ function     _C-i_ info
+  _c_ command      _w_ where is         _C-v_ variable     _C-w_ woman
   _v_ variable     _b_ all bindings     _C-l_ library
   _s_ symbol       ^^                   _C-k_ key
   _m_ mode         ^^                     _F_ face
@@ -482,6 +482,7 @@
   ("s" helpful-symbol)
   ("m" describe-mode)
   ("o" helpful-at-point)
+  ("p" describe-package)
 
   ("k" helpful-key)
   ("w" where-is)
@@ -494,10 +495,8 @@
   ("C-o" find-function-at-point)
   ("F"   find-face-definition)
 
-  ("n" helm-man-woman)
-  ("i" ublt/hydra-info/body)
-
   ("C-i" ublt/hydra-info/body)
+  ("C-w" helm-man-woman)
 
   ("C-h" help-for-help)
   ("l" view-lossage))
