@@ -175,7 +175,7 @@ all of the sources."
 ;;; https://www.reddit.com/r/emacs/comments/7rho4f/now_you_can_use_helm_with_frames_instead_of/
 (use-package helm
   :custom ((helm-display-buffer-reuse-frame t)
-           (helm-use-undecorated-frame-option nil))
+           (helm-use-undecorated-frame-option t))
   :config
   (when window-system
     (setq helm-display-function #'helm-display-buffer-in-own-frame)
@@ -184,6 +184,8 @@ all of the sources."
 
     (defun ublt/make-transparent-maybe (&rest _)
       (set-frame-parameter helm-popup-frame 'alpha
+                           ;; XXX: The frame is shown during blocking operations. "Hide" it by
+                           ;; setting inactive alpha to 0.
                            (if (helm-follow-mode-p) (cons 35 0) (cons 100 0))))
 
     ;; Make helm popup frame transparent when `helm-follow-mode' is on.
@@ -191,53 +193,54 @@ all of the sources."
     (advice-add 'helm-follow-mode :after #'ublt/make-transparent-maybe)
 
     (define-advice helm-display-buffer-popup-frame (:around (f buffer frame-alist) ublt/tweak-appearance)
-      (funcall f buffer
-               (-reduce-from (lambda (alist pair) (cons pair alist))
-                             frame-alist
-                             '((fullscreen . nil)
-                               (left-fringe . 8)
-                               (right-fringe . 8)
-                               (border-width . 0)
-                               (menu-bar-lines . 0)
-                               (unsplittable . t)
-                               (cursor-type . bar)
-                               (tool-bar-lines . 0))))
+      (let ((current-frame (selected-frame)))
+        (funcall f buffer
+                 (-reduce-from (lambda (alist pair) (cons pair alist))
+                               frame-alist
+                               '((fullscreen . nil)
+                                 (left-fringe . 8)
+                                 (right-fringe . 8)
+                                 (border-width . 0)
+                                 (unsplittable . t)
+                                 (undecorated . t)
+                                 (cursor-type . bar))))
 
-      (when helm-popup-frame
-        (let* ((display-w (x-display-pixel-width))
-               ;; External monitor (Dell).
-               (dell-w 2560)
-               (dell-h 1440)
-               ;; MBP, 15-inch, 2017, default.
-               (laptop-w 1680)
-               (laptop-h 1050)
-               (setup (cond
-                       ((> display-w dell-w) 'both)
-                       ((= display-w dell-w) 'dell)
-                       (t 'laptop)))
-               ;; ;; TODO: Use current frame's size and position.
-               (w (round (* 0.38 (if (eql setup 'laptop)
-                                     laptop-w
-                                   dell-w))))
-               (h (round (* 0.42 (if (eql setup 'laptop)
-                                     laptop-h
-                                   dell-h))))
-               (x (pcase setup
-                    ('laptop (/ (- laptop-w w) 2))
-                    ('dell (/ (- dell-w w) 2))
-                    ('both (+ laptop-w
-                              (/ (- dell-w w) 2)))))
-               (y 0))
-          (set-frame-size helm-popup-frame
-                          w h 'pixelwise)
-          (set-frame-position helm-popup-frame
-                              x y)
-          (modify-frame-parameters helm-popup-frame
-                                   ;; XXX: The frame is shown during blocking operations. "Hide" it.
-                                   '((alpha . (100 . 0)))))
-        ;; FIX: Make helm support dynamic sizing instead.
-        (setq helm-display-buffer-width (frame-width helm-popup-frame)
-              helm-display-buffer-height (frame-height helm-popup-frame))))))
+        (when helm-popup-frame
+          (let* ((display-w (x-display-pixel-width))
+                 ;; External monitor (Dell).
+                 (dell-w 2560)
+                 (dell-h 1440)
+                 ;; MBP, 15-inch, 2017, default.
+                 (laptop-w 1680)
+                 (laptop-h 1050)
+                 (setup (cond
+                         ((> display-w dell-w) 'both)
+                         ((= display-w dell-w) 'dell)
+                         (t 'laptop)))
+                 ;; ;; TODO: Use current frame's size and position.
+                 (w (round (* 0.34 (if (eql setup 'laptop)
+                                       laptop-w
+                                     dell-w))))
+                 (h (round (* 0.38 (if (eql setup 'laptop)
+                                       laptop-h
+                                     dell-h))))
+                 (x (pcase setup
+                      ('laptop (/ (- laptop-w w) 2))
+                      ('dell (/ (- dell-w w) 2))
+                      ('both (+ laptop-w
+                                (/ (- dell-w w) 2)))))
+                 (y (pcase (frame-parameter current-frame 'fullscreen)
+                      ('fullboth 0)
+                      (_ (let* ((title-h (cdr (alist-get 'title-bar-size (frame-geometry current-frame))))
+                                (frame-y (cdr (frame-position current-frame))))
+                           (+ frame-y title-h))))))
+            (set-frame-size helm-popup-frame
+                            w h 'pixelwise)
+            (set-frame-position helm-popup-frame
+                                x y))
+          ;; FIX: Make helm support dynamic sizing instead.
+          (setq helm-display-buffer-width (frame-width helm-popup-frame)
+                helm-display-buffer-height (frame-height helm-popup-frame)))))))
 
 (use-package helm-projectile
   :custom (projectile-enable-caching t))
