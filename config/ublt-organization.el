@@ -450,6 +450,9 @@
 (use-package org
   :hook (org-mode . ublt/-prettify-org)
   :config
+  (defface org-checkbox-done-text
+    '((t (:foreground "#71696A" :strike-through t)))
+    "Face for the text part of a checked org-mode checkbox.")
 
   (defun ublt/-not-in-org-src-block (beg end)
     (notany (lambda (overlay)
@@ -464,7 +467,9 @@
                                   ("\\(->\\)"
                                    (0 (ublt/show-as ?⟶ ublt/-not-in-org-src-block)))
                                   ("\\(<-\\)"
-                                   (0 (ublt/show-as ?⟵ ublt/-not-in-org-src-block))))
+                                   (0 (ublt/show-as ?⟵ ublt/-not-in-org-src-block)))
+                                  ("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)"
+                                    1 'org-checkbox-done-text prepend))
                             'append)
     (setq-local prettify-symbols-alist '(("[ ]" . "☐")
                                          ("[X]" . "☑" )
