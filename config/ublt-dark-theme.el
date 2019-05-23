@@ -698,7 +698,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(org-block-end-line
      ((,class (:inherit org-block ,@dimmed :overline ,blue-d))))
    `(org-checkbox
-     ((,class (,@fw :weight bold :foreground ,fg+1 :box (:line-width 1 :style released-button :color ,bg)))))
+     ((,class (,@fw ,@bold ,@commitment :height 1.1))))
    `(org-time-grid
      ((,class (,@fw ,@context))))
    ;; `(org-agenda-structure               ;TODO

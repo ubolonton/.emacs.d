@@ -437,52 +437,10 @@
   $this⇾foo
   $this⤞foo)
 
-(defun ublt/show-as (how &optional pred)
-  (let* ((beg (match-beginning 1))
-         (end (match-end 1))
-         (ok (or (not pred) (funcall pred beg end))))
-    (when ok
-      (compose-region beg end how 'decompose-region))
-    nil))
-
-(defun ublt/-not-in-org-src-block (beg end)
-  (notany (lambda (overlay)
-            (eq (overlay-get overlay 'face) 'org-block-background))
-          (overlays-in beg end)))
-
 (defun ublt/-no-ligature-support (beg end)
   (not (and
         (eq window-system 'mac)
         mac-auto-operator-composition-mode)))
-
-(defun ublt/pretty-org (on)
-  (let ((f (if on #'font-lock-add-keywords
-             #'font-lock-remove-keywords)))
-    (funcall
-     f 'org-mode `(("\\(#\\+begin_src\\>\\)"
-                    (0 (ublt/show-as ?⌨)))
-                   ("\\(#\\+BEGIN_SRC\\>\\)"
-                    (0 (ublt/show-as ?⌨)))
-                   ("\\(#\\+end_src\\>\\)"
-                    (0 (ublt/show-as ?⌨)))
-                   ("\\(#\\+END_SRC\\>\\)"
-                    (0 (ublt/show-as ?⌨)))
-                   ("\\(\\[X\\]\\)"
-                    (0 (ublt/show-as ?☑)))
-                   ("\\(\\[ \\]\\)"
-                    (0 (ublt/show-as ?☐)))
-                   ;; ("\\[\\(X\\)\\]"
-                   ;;  (0 (ublt/show-as ?✓)))
-                   ;; Arrows
-                   ("\\(=>\\)"
-                    (0 (ublt/show-as ?⟹ #'ublt/-not-in-org-src-block)))
-                   ("\\(<=\\)"
-                    (0 (ublt/show-as ?⟸ #'ublt/-not-in-org-src-block)))
-                   ("\\(->\\)"
-                    (0 (ublt/show-as ?⟶ #'ublt/-not-in-org-src-block)))
-                   ("\\(<-\\)"
-                    (0 (ublt/show-as ?⟵ #'ublt/-not-in-org-src-block)))))))
-(ublt/pretty-org t)
 
 (font-lock-add-keywords
  'web-mode `(("\\(function\\)"

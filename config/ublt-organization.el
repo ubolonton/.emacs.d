@@ -447,5 +447,33 @@
                  ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
 
 
+(use-package org
+  :hook (org-mode . ublt/-prettify-org)
+  :config
+
+  (defun ublt/-not-in-org-src-block (beg end)
+    (notany (lambda (overlay)
+              (eq (overlay-get overlay 'face) 'org-block-background))
+            (overlays-in beg end)))
+
+  (defun ublt/-prettify-org ()
+    (font-lock-add-keywords nil '(("\\(=>\\)"
+                                   (0 (ublt/show-as ?⟹ ublt/-not-in-org-src-block)))
+                                  ("\\(<=\\)"
+                                   (0 (ublt/show-as ?⟸ ublt/-not-in-org-src-block)))
+                                  ("\\(->\\)"
+                                   (0 (ublt/show-as ?⟶ ublt/-not-in-org-src-block)))
+                                  ("\\(<-\\)"
+                                   (0 (ublt/show-as ?⟵ ublt/-not-in-org-src-block))))
+                            'append)
+    (setq-local prettify-symbols-alist '(("[ ]" . "☐")
+                                         ("[X]" . "☑" )
+                                         ("[-]" . "❍" )
+                                         ("+begin_src" . "⌨")
+                                         ("+BEGIN_SRC" . "⌨")
+                                         ("+end_src" . "⌨")
+                                         ("+END_SRC" . "⌨")))
+    (prettify-symbols-mode)))
+
 
 (provide 'ublt-organization)

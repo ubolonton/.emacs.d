@@ -254,6 +254,16 @@ not regular enough. Uh huh."
    '(helm-default-info-index-list (helm-get-info-files))))
 
 
+
+(defun ublt/show-as (how &optional pred)
+  (let* ((beg (match-beginning 1))
+         (end (match-end 1))
+         (ok (or (not pred) (funcall pred beg end))))
+    (when ok
+      (compose-region beg end how 'decompose-region))
+    nil))
+
+
 ;;; Tools to tweak theme.
 
 (defun ublt/theme-fontify-theme-buffer ()
