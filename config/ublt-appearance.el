@@ -8,7 +8,10 @@
 (pcase system-type
   ('darwin (modify-all-frames-parameters
             '((left-fringe . 8)
-              (right-fringe . 4))))
+              (right-fringe . 4)
+              ;; TODO: Make this work with Mac port.
+              (ns-transparent-titlebar . t)
+              (ns-appearance . dark)
   ('windows-nt (modify-all-frames-parameters
                 '((cursor-type . bar))))
   ;; In Linux the colors may be off. Use xrandr to tweak gamma system-wide.
