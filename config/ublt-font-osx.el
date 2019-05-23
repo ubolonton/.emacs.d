@@ -183,7 +183,10 @@
       (?☐ . ?☐))
     `(,(font-spec :family "Droid Sans Mono"
                   :weight 'normal)
-      (?λ . ?λ))))
+      (?λ . ?λ))
+    ;; Fallback.
+    `(,(font-spec :family "Arial Unicode MS")
+      nil)))
 
 (dolist (face '(default fixed-pitch))
   (set-face-attribute
