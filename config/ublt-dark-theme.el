@@ -962,6 +962,8 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (:inherit info-colors-ref-item-user-option ,@italic))))
    `(info-colors-lisp-code-block
      ((,class (:inherit org-block ,@dimmed-hl :weight normal))))
+   `(info-colors-ref-item-special-form
+     ((,class (:inherit info-colors-ref-item-macro :underline t))))
 
    ;; apropos
    `(apropos-symbol
