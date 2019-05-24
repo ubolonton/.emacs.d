@@ -454,11 +454,13 @@
   ("g" helm-info-magit)
   ("r" helm-info-emacs)
   ("s" info-lookup-symbol)
+  ("l" helm-info-cl)
 
   ("C-e" (info "elisp"))
   ("C-o" (info "org"))
   ("G"   (info "magit"))
   ("C-r" info-emacs-manual)
+  ("C-l" (info "cl"))
   ("C-u" (info "use-package"))
 
   ("C-v" (info "evil"))
