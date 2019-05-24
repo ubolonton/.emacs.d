@@ -9,6 +9,7 @@
 (setq custom-file "~/.emacs.d/custom.el")
 
 (add-to-list 'load-path "~/.emacs.d/lib")
+(add-to-list 'load-path "~/.emacs.d/config")
 
 (defvar ublt/packages
   '(use-package))
@@ -83,11 +84,7 @@
 
 (use-package dash)
 
-(add-to-list 'load-path "~/.emacs.d/config")
 (require 'ublt-util)
-
-;;; Path to stuffs that come from single files
-(ublt/add-path "single-file-modes")
 
 ;;; Uhm, f*ck shell
 (use-package exec-path-from-shell
