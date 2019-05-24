@@ -216,6 +216,9 @@
 
 (ublt/define-keys global-map
   "C-h"           'ublt/hydra-help/body
+  "C-M-k"         'hydra-pause-resume
+
+  "s-`"           'other-frame
 
   ;; Windows manipulation
   "s-1"           'delete-other-windows
