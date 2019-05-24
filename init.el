@@ -8,6 +8,8 @@
 
 (setq custom-file "~/.emacs.d/custom.el")
 
+(add-to-list 'load-path "~/.emacs.d/lib")
+
 (defvar ublt/packages
   '(use-package))
 
@@ -60,9 +62,11 @@
      ;; TODO: Remove this once https://github.com/raxod502/straight.el/issues/377 is fixed.
      (define-advice straight-use-package
          (:around (orig package &rest args) ignore-loaded)
-       (if (featurep package)
+       (if (and (symbolp package) (featurep package))
            t
          (apply orig package args)))
+
+     (require 'ublt-straight-recipes)
 
      (straight-use-package 'use-package)
      ;; We don't want to declare a package twice.
