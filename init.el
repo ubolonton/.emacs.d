@@ -82,7 +82,10 @@
 
 
 
-(use-package dash)
+;;; Modern Emacs Lisp.
+(use-package dash
+  ;; FIX: We cannot use :custom because `dash--enable-fontlock' is not autoloaded.
+  :config (custom-set-variables '(dash-enable-fontlock t)))
 
 (require 'ublt-util)
 
