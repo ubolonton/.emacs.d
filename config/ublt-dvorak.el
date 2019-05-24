@@ -235,7 +235,7 @@
   ;; "s-y"           '
   "s-h"           'ublt/helm
   ;; "C-s-h"         'helm-follow-mode
-  "s-f"           'swiper-helm
+  "s-f"           'helm-swoop
   "s-F"           'helm-projectile
   ;; "s-F"           'projectile-find-file
   "s-g"           'magit-status
@@ -258,7 +258,7 @@
   "s-u"           'revert-buffer        ; ⟲
   "s-k"           'ublt/kill-this-buffer
   ;; "s-l"           'goto-line
-  "s-l"           'swiper-helm
+  "s-l"           'helm-swoop
   "s-C"           'ublt/duplicate-line
   "s-+"           'text-scale-increase
   "s-="           'text-scale-increase
@@ -394,7 +394,8 @@
 
 (when window-system
   (ublt/define-keys global-map
-    "M-O" 'swiper-helm))
+    ;; TODO: Use hydra.
+    "M-O" 'helm-multi-swoop))
 
 
 
@@ -1026,7 +1027,7 @@
   "M-a"   'hs-toggle-hiding)
 
 (ublt/keys "isearch" isearch-mode-map
-  'swiper-helm 'swiper-helm-from-isearch
+  'helm-swoop  'helm-swoop-from-isearch
   "M-z"        'ublt/zap-to-isearch
   "C-<return>" 'ublt/isearch-exit-other-end
   "C-M-w"      'ublt/isearch-yank-symbol)

@@ -187,7 +187,7 @@ all of the sources."
   (when window-system
     (setq helm-display-function #'helm-display-buffer-in-own-frame)
 
-    (add-to-list 'helm-commands-using-frame #'swiper-helm)
+    (add-to-list 'helm-commands-using-frame #'helm-swoop)
 
     (defun ublt/make-transparent-maybe (&rest _)
       (set-frame-parameter helm-popup-frame 'alpha
@@ -256,6 +256,10 @@ all of the sources."
   :custom ((helm-ag-insert-at-point t)
            (helm-ag-command-option "--follow")))
 
-(use-package swiper-helm)
+(use-package helm-swoop
+  :custom ((helm-swoop-use-line-number-face t)
+           (helm-swoop-speed-or-color nil)
+           (helm-swoop-use-fuzzy-match t)
+           (helm-swoop-pre-input-function (lambda () nil))))
 
 (provide 'ublt-helm)

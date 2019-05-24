@@ -857,6 +857,14 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (,@dimmed))))
    `(helm-buffer-modified
      ((,class (,@commitment))))
+   `(helm-swoop-target-line-face
+     ((,class (,@special-hl))))
+   `(helm-swoop-target-line-block-face
+     ((,class (,@special-hl))))
+   `(helm-swoop-target-word-face
+     ((,class (:inherit isearch))))
+   `(helm-swoop-line-number-face
+     ((,class (,@number))))
 
    
    ;; dired
