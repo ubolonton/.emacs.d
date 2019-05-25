@@ -12,13 +12,13 @@
               ;; TODO: Make this work with Mac port.
               (ns-transparent-titlebar . t)
               (ns-appearance . dark)
+              (inhibit-double-buffering . nil))))
   ('windows-nt (modify-all-frames-parameters
                 '((cursor-type . bar))))
   ;; In Linux the colors may be off. Use xrandr to tweak gamma system-wide.
   ('gnu/linux (modify-all-frames-parameters
                '((top . 0) (left . 0) (width . 119)
-                 (fullscreen . fullheight) (cursor-type . bar)
-                 ))))
+                 (fullscreen . fullheight) (cursor-type . bar)))))
 
 ;;; This is needed when redshift is running, since it overwrites
 ;;; xrandr's gamma settings
