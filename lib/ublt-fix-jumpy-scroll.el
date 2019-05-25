@@ -85,7 +85,10 @@ of window's bottom part restricted by `scroll-margin' if needed."
 (ublt/fix-jumpy-scroll paredit-move-forward :bottom)
 (ublt/fix-jumpy-scroll paredit-move-backward :top)
 (ublt/fix-jumpy-scroll magit-diff-visit-file :bottom)
-(ublt/fix-jumpy-scroll highlight-symbol-prev :both) ; circular
+(ublt/fix-jumpy-scroll highlight-symbol-prev :both)
 (ublt/fix-jumpy-scroll highlight-symbol-next :both)
+(ublt/fix-jumpy-scroll evilmi-jump-items :both)
+
+(setq-default next-error-recenter '(4)) ; middle
 
 (provide 'ublt-fix-jumpy-scroll)
