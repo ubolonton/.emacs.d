@@ -6,10 +6,6 @@
   (dolist (f funcs)
     (put f 'disabled nil)))
 
-(defun ublt/add-path (path)
-  "Add to load-path a path relative to ~/.emacs.d/lib/"
-  (add-to-list 'load-path (concat "~/.emacs.d/lib/" path)))
-
 ;;; This is for stuff like
 ;;;
 ;;; (add-hook 'hexl-mode (ublt/off paredit-mode))
@@ -101,68 +97,7 @@ errors."
   (interactive)
   (prin1 (eval (read (thing-at-point 'sexp)))))
 
-;;; Source -
-;;; `http://sites.google.com/site/steveyegge2/my-dot-emacs-file'
-;;; TODO: Use
-(defun ublt/rename-file-and-buffer (new-name)
-  "Renames both current buffer and file it's visiting to NEW-NAME."
-  (interactive "sNew name: ")
-  (let ((name (buffer-name))
-        (filename (buffer-file-name)))
-    (if (not filename)
-        (message "Buffer '%s' is not visiting a file!" name)
-      (if (get-buffer new-name)
-          (message "A buffer named '%s' already exists!" new-name)
-        (progn (rename-file name new-name 1)
-               (rename-buffer new-name)
-               (set-visited-file-name new-name)
-               (set-buffer-modified-p nil))))))
-
-(defun ublt/move-buffer-file (dir)
-  "Moves both current buffer and file it's visiting to DIR."
-  (interactive "DNew directory: ")
-  (let* ((name (buffer-name))
-         (filename (buffer-file-name))
-         (dir
-          (if (string-match dir "\\(?:/\\|\\\\)$")
-              (substring dir 0 -1) dir))
-         (newname (concat dir "/" name)))
-    (if (not filename)
-        (message "Buffer '%s' is not visiting a file!" name)
-      (progn (copy-file filename newname 1)
-             (delete-file filename)
-             (set-visited-file-name newname)
-             (set-buffer-modified-p nil)
-             t))))
-
-;;; `http://www.emacswiki.org/emacs/ZapToISearch'
-(defun ublt/zap-to-isearch (rbeg rend)
-  "Kill the region between the mark and the closest portion of
-the isearch match string. The behaviour is meant to be analogous
-to zap-to-char; let's call it zap-to-isearch. The deleted region
-does not include the isearch word. This is meant to be bound only
-in isearch mode. The point of this function is that oftentimes
-you want to delete some portion of text, one end of which happens
-to be an active isearch word. The observation to make is that if
-you use isearch a lot to move the cursor around (as you should,
-it is much more efficient than using the arrows), it happens a
-lot that you could just delete the active region between the mark
-and the point, not include the isearch word."
-  (interactive "r")
-  (when (not mark-active)
-    (error "Mark is not active"))
-  (let* ((isearch-bounds (list isearch-other-end (point)))
-         (ismin (apply 'min isearch-bounds))
-         (ismax (apply 'max isearch-bounds))
-         )
-    (if (< (mark) ismin)
-        (kill-region (mark) ismin)
-      (if (> (mark) ismax)
-          (kill-region ismax (mark))
-        (error "Internal error in isearch kill function.")))
-    (isearch-exit)))
-
-(defun ublt/isearch-exit-other-end (rbeg rend)
+(defun ublt/isearch-exit-other-end (_rbeg _rend)
   "Exit isearch, but at the other end of the search string.
   This is useful when followed by an immediate kill."
   (interactive "r")
@@ -183,15 +118,6 @@ and the point, not include the isearch word."
       (ding)))
   (isearch-search-and-update))
 
-(defun ublt/maybe-unquote (s)
-  "XXX: This allow using both quoted and unquoted form (since a
-macro already has its parameters quoted). Because Lisp syntax is
-not regular enough. Uh huh."
-  (if (and (eq (type-of s) 'cons)
-           (eq (car s) 'quote))
-      (cadr s)
-    s))
-
 ;;; FIX: Use `dash' library
 (defun ublt/assoc! (list-var key val)
   (let* ((list (symbol-value list-var))
@@ -205,40 +131,6 @@ not regular enough. Uh huh."
   `(let ((c (or goal-column (current-column))))
      ,@body
      (move-to-column c)))
-
-;;; Turns out `font-lock-mode' already has similar functions
-;; ;;; XXX: This currently works only for `font-lock-face' and `face',
-;; ;;; because other props may have different structures
-;; (defun ublt/add-text-property (start end prop value)
-;;   (when (< start end)
-;;     (let ((pos start))
-;;       (while (< pos end)
-;;         (let* ((next (next-single-property-change pos prop nil end))
-;;                (cur (get-text-property pos prop)))
-;;           ;; TODO: How about the prop-list case?
-;;           (put-text-property pos next prop
-;;                              (cond
-;;                               ((listp cur) (cons value cur))
-;;                               (t (list value cur))))
-;;           (setq pos next))))))
-
-;; (defun ublt/add-face (start end face)
-;;   "Put `face' at the beginning of `face' property of text from
-;; `start' to `end'."
-;;   (ublt/add-text-property start end 'face face)
-;;   ;; (ublt/add-text-property start end 'font-lock-face face)
-;;   )
-
-(defun ublt/find-chars (str)
-  (mapc
-   (lambda (x)
-     (let ((nn (get-char-code-property x 'name)))
-       (when
-           (and (not (null nn))
-                (string-match str nn))
-         (insert-char x)
-         (insert " " nn "\n"))))
-   (number-sequence 0 (expt 2 16))))
 
 (defun ublt/get-string-from-file (path)
   (with-temp-buffer
@@ -301,9 +193,8 @@ not regular enough. Uh huh."
   (ublt/color-at-point-lighten (- percent)))
 
 (when nil
-  (ublt/define-keys global-map
-    "s-<up>" 'ublt/color-at-point-lighten
-    "s-<down>" 'ublt/color-at-point-darken))
+  (global-set-key (kbd "s-<up>") 'ublt/color-at-point-lighten)
+  (global-set-key (kbd "s-<down>") 'ublt/color-at-point-darken))
 
 
 (provide 'ublt-util)

@@ -1030,8 +1030,7 @@
 
 (ublt/keys "isearch" isearch-mode-map
   'helm-swoop  'helm-swoop-from-isearch
-  "M-z"        'ublt/zap-to-isearch
-  "C-<return>" 'ublt/isearch-exit-other-end
+  "M-<return>" 'ublt/isearch-exit-other-end
   "C-M-w"      'ublt/isearch-yank-symbol)
 
 (ublt/keys 'dired dired-mode-map
