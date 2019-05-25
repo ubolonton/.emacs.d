@@ -657,8 +657,7 @@
 %s
 " file style)))
 
-;; (use-package golden-ratio
-;;   (dolist (mode '(ediff-mode))
-;;     (add-to-list 'golden-ratio-exclude-modes mode)))
+(use-package rainbow-mode
+  :defer t)
 
 (provide 'ublt-appearance)
