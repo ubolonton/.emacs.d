@@ -441,11 +441,12 @@
   "
   Search ^^        Open manual ^^
 ^^^^^^───────────────────────────────────────────────────
-  _e_ elisp        _C-e_ elisp          _C-v_ evil
-  _o_ org-mode     _C-o_ org-mode       _C-t_ transient
-  _g_ magit          _G_ magit
+  _e_ elisp        _C-e_ elisp        _C-v_ evil
+  _o_ org-mode     _C-o_ org-mode     _C-t_ transient
+  _g_ magit          _G_ magit        _C-u_ use-package
   _r_ emacs        _C-r_ emacs
-  _s_ symbol       _C-u_ use-package
+  _l_ cl           _C-l_ cl
+  _s_ symbol
 
  [_h_] helm doc    [_C-i_] all info
 "
@@ -473,12 +474,12 @@
   "
   Describe ^^      Keys ^^              Go to ^^           Docs ^^
 ^^^^^^^^────────────────────────────────────────────────────────────────
-  _f_ function     _k_ key binding      _C-f_ function     _C-i_ info
-  _c_ command      _w_ where is         _C-v_ variable     _C-w_ woman
-  _v_ variable     _b_ all bindings     _C-l_ library
-  _s_ symbol       ^^                   _C-k_ key
-  _m_ mode         ^^                     _F_ face
-  _o_ at point     ^^                   _C-o_ at point
+  _f_ function     _k_ brief key      _C-f_ function     _C-i_ info
+  _c_ command      _K_ describe key   _C-v_ variable     _C-w_ woman
+  _v_ variable     _w_ where is cmd   _C-l_ library
+  _s_ symbol       _b_ all bindings   _C-k_ key
+  _m_ mode         ^^                   _F_ face
+  _o_ at point     ^^                 _C-o_ at point
 
  [_C-h_] use built-in help    [_l_] view lossage
 "
@@ -490,7 +491,8 @@
   ("o" helpful-at-point)
   ("p" describe-package)
 
-  ("k" helpful-key)
+  ("k" describe-key-briefly)
+  ("K" helpful-key)
   ("w" where-is)
   ("b" describe-bindings)
 
