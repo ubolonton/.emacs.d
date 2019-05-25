@@ -191,35 +191,6 @@ of line."
                        help-face-deff))
       (ublt/recenter-near-top))))
 
-;;; TODO: Test this extensively
-(defmacro ublt/save-window-view (&rest body)
-  `(let* ((window (get-buffer-window))
-          (pos (window-start window)))
-     ,@body
-     ;; TODO: Maybe just set this if we are still in the same buffer?
-     (set-window-start window pos)))
-
-;;; TODO: Are we sure magit-refresh is the one?
-;;; FIX: This doesn't fix window view jumping when changing hunk size
-;;; (I'm not sure if it's better or worse though). It does fix the
-;;; jumpiness when showing hunk for the first time after a refresh
-;;; though.
-(defadvice magit-refresh (around bring-into-view activate)
-  (ublt/save-window-view ad-do-it))
-
-;;; Try keeping window's view of the buffer the same
-(defadvice magit-status (around bring-into-view activate)
-  (let* ((buffer (current-buffer))
-         (window (get-buffer-window))
-         (pos (window-start window)))
-    ad-do-it
-    (when (eq buffer (current-buffer))
-      (set-window-start window pos))))
-
-;;; Seems like the above issues were fixed in magit?
-(ad-deactivate 'magit-refresh)
-(ad-deactivate 'magit-status)
-
 (defun ublt/narrow-or-widen ()
   (interactive)
   (if (buffer-narrowed-p)
