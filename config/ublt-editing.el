@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t; coding: utf-8 -*-
+
 (require 'ublt-util)
 
 
@@ -16,20 +18,6 @@
 
 ;;; Cycling and extending selection
 (use-package expand-region)
-
-
-;;; Toggle CUA mode, starting CUA rect if turning on
-(defun ublt/toggle-cua-rect (&optional reopen)
-  (interactive "P")
-  (if (not cua-mode)
-      (progn
-        (cua-mode +1)
-        ;; HACK: calling it directly does not seem to work even though
-        ;; the help is shown
-        (run-at-time "0 sec" nil 'cua-set-rectangle-mark))
-    (progn
-      (cua-clear-rectangle-mark)
-      (cua-mode -1))))
 
 
 (defun ublt/toggle-letter-case ()
@@ -73,7 +61,7 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
 
 ;;; Copy/cut/duplicate whole line if no region is selected
 (use-package whole-line-or-region
-  :config (defun ublt/duplicate-line (prefix)
+  :config (defun ublt/duplicate-line (_)
             (interactive "p")
             ;; FIX: This looks dirty
             (call-interactively 'whole-line-or-region-kill-ring-save)
@@ -192,21 +180,6 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
 
 ;;; ------------------------------------------------------------------
 ;;; Misc
-
-;;; TODO: Use this
-(defun ublt/remove-hard-wrap ()
-;;; TODO: Unfill paragraphs one-by-one, skipping those that should not
-;;; be unfilled
-  (interactive)
-  (read-only-mode -1)
-  (mark-whole-buffer)
-  (ublt/unfill-paragraph)
-  (read-only-mode +1)
-  (visual-line-mode +1))
-;; (add-hook 'help-mode-hook #'ublt/remove-hard-wrap)
-;;; Doesn't work well with summary node :(
-;; (defadvice Info-goto-node (after remove-hard-wrap activate)
-;;   (ublt/remove-hard-wrap))
 
 (defun ublt/cleanup-buffer ()
   (interactive)
