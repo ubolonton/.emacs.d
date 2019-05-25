@@ -1,4 +1,5 @@
 (require 'ublt-util)
+(require 'ublt-fix-jumpy-scroll)
 
 (use-package highlight-symbol)
 
