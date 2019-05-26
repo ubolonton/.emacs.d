@@ -62,12 +62,13 @@
 
      ;; TODO: Remove this once https://github.com/raxod502/straight.el/issues/377 is fixed.
      (define-advice straight-use-package
-         (:around (orig package &rest args) ignore-loaded)
-       (if (and (symbolp package) (featurep package))
+         (:around (orig recipe &rest args) ignore-loaded)
+       (if (and (symbolp recipe)
+                (featurep recipe))
            t
-         (apply orig package args)))
+         (apply orig recipe args)))
 
-     (require 'ublt-straight-recipes)
+     (load "ublt-straight-recipes")
 
      (straight-use-package 'use-package)
      ;; We don't want to declare a package twice.
