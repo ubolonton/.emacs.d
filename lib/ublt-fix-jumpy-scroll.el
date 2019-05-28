@@ -49,10 +49,18 @@ of window's bottom part restricted by `scroll-margin' if needed."
             ;; Fix window-cursor, move text up to meet the initial line
             (scroll-up-line (count-screen-lines now initial))))))))
 
+;;; What's the point of jumping to a section's start but putting it at
+;;; the bottom of the window? This somewhat fixes it
+(defun ublt/recenter-near-top (&rest _)
+  "Scroll the current line to the top part of the current window."
+  (recenter (max 5
+                 (round (* (window-body-height) 0.25))
+                 scroll-margin)))
+
 ;; ;;; FIX: Maybe advicing `scroll-up' or`goto-char' is better because
 ;; ;;; `scroll-margin' affects other scroll functions, and other things
 ;; ;;; as well. But they are low level, C functions!
-;; (defadvice scroll-up-command (after play-nice-with-scroll-margin activate)
+;; (define-advice scroll-up-command (:after (&rest _) ublt/play-nice-with-scroll-margin)
 ;;   "Fix window jumping when the buffer is scrolled while the
 ;; cursor is above the `scroll-margin' (e.g. when a buffer is first
 ;; created), caused by `scroll-preserve-screen-position' not taking
@@ -65,27 +73,65 @@ of window's bottom part restricted by `scroll-margin' if needed."
   (let* ((scroll-fn (ublt/maybe-unquote scroll-fn))
          (avoid-top 'ublt/avoid-top-scroll-margin)
          (avoid-bottom 'ublt/avoid-bottom-scroll-margin)
+         (recenter 'ublt/recenter-near-top)
          (add-top-advice `(advice-add ',scroll-fn :after #',avoid-top))
          (add-bottom-advice `(advice-add ',scroll-fn :after #',avoid-bottom))
+         (add-recenter-advice `(advice-add ',scroll-fn :after #',recenter))
          (remove-top-advice `(advice-remove ',scroll-fn #',avoid-top))
-         (remove-bottom-advice `(advice-remove ',scroll-fn #',avoid-bottom)))
+         (remove-bottom-advice `(advice-remove ',scroll-fn #',avoid-bottom))
+         (remove-recenter-advice `(advice-remove ',scroll-fn #',recenter)))
     (pcase (ublt/maybe-unquote where)
       (:top `(progn ,add-top-advice
-                    ,remove-bottom-advice))
+                    ,remove-bottom-advice
+                    ,remove-recenter-advice))
       (:bottom `(progn ,add-bottom-advice
-                       ,remove-top-advice))
+                       ,remove-top-advice
+                       ,remove-recenter-advice))
+      (:top-bottom `(progn ,add-top-advice
+                           ,add-bottom-advice
+                           ,remove-recenter-advice))
+      (:recenter `(progn ,add-recenter-advice
+                         ,remove-top-advice
+                         ,remove-bottom-advice))
       (:none `(progn ,remove-top-advice
-                     ,remove-bottom-advice))
-      (:both `(progn ,add-top-advice
-                     ,add-bottom-advice))
+                     ,remove-bottom-advice
+                     ,remove-recenter-advice))
       (where (error "Invalid where: %S" where)))))
+
+
 
 (ublt/fix-jumpy-scroll paredit-move-forward :bottom)
 (ublt/fix-jumpy-scroll paredit-move-backward :top)
+
 (ublt/fix-jumpy-scroll magit-diff-visit-file :bottom)
-(ublt/fix-jumpy-scroll highlight-symbol-prev :both)
-(ublt/fix-jumpy-scroll highlight-symbol-next :both)
-(ublt/fix-jumpy-scroll evilmi-jump-items :both)
+
+(ublt/fix-jumpy-scroll highlight-symbol-prev :top-bottom)
+(ublt/fix-jumpy-scroll highlight-symbol-next :top-bottom)
+
+(ublt/fix-jumpy-scroll evilmi-jump-items :top-bottom)
+
+
+
+(ublt/fix-jumpy-scroll find-function-do-it :recenter)
+(ublt/fix-jumpy-scroll racer--find-file :recenter)
+(ublt/fix-jumpy-scroll occur-mode-goto-occurrence :recenter)
+(ublt/fix-jumpy-scroll forward-page :recenter)
+(ublt/fix-jumpy-scroll magit-todos--goto-item :recenter)
+
+(define-advice forward-page (:after (&rest _) ublt/no-hscroll)
+  (beginning-of-line))
+
+;;; This is needed because the help buttons use `find-function'
+;;; library in a very weird way.
+(define-advice help-button-action (:around (f button &rest args) ublt/bring-into-view)
+  ;; Somehow button-get returns nil after the call, so "after" advice
+  ;; does not work.
+  (let* ((type (button-get button 'type)))
+    (apply f button args)
+    (when (memq type '(help-function-def
+                       help-variable-def
+                       help-face-deff))
+      (ublt/recenter-near-top))))
 
 (setq-default next-error-recenter '(4)) ; middle
 

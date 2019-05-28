@@ -77,10 +77,7 @@
   :config (add-to-list 'hl-todo-keyword-faces '("FIX"  . "#cc9393")))
 
 (use-package magit-todos
-  :config
-  (define-advice magit-todos--goto-item (:after (&rest _) ublt/recenter)
-    (ublt/recenter-near-top))
-  (magit-todos-mode +1))
+  :config (magit-todos-mode +1))
 
 (use-package magit-libgit2
   :disabled

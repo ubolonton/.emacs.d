@@ -68,14 +68,6 @@ of line."
   (switch-to-buffer (other-buffer (current-buffer) t)))
 
 
-(define-advice forward-page (:after (&rest _) ublt/recenter-top)
-  "Eliminate possible jumpiness (both vertical & horizontal)."
-  ;; Make ^L stay at the same place while scrolling by page
-  (ublt/recenter-near-top)
-  ;; To keep auto-hscroll from kicking in
-  (beginning-of-line))
-
-
 
 (defun ublt/browse-url-at-point ()
   (interactive)
@@ -164,32 +156,6 @@ of line."
 (use-package wgrep)
 
 
-;;; What's the point of jumping to a section's start but putting it at
-;;; the bottom of the window? This somewhat fixes it
-
-(defun ublt/recenter-near-top (&optional arg)
-  "Scroll the current line to the top part of the current window."
-  (recenter (max 5
-                 (round (* (window-body-height) 0.25))
-                 scroll-margin))
-  arg)
-
-(dolist (func '(find-function-do-it
-                racer--find-file
-                occur-mode-goto-occurrence))
-  (advice-add func :filter-return #'ublt/recenter-near-top))
-
-;;; This is needed because the help buttons use `find-function'
-;;; library in a very weird way.
-(define-advice help-button-action (:around (f button &rest args) ublt/bring-into-view)
-  ;; Somehow button-get returns nil after the call, so "after" advice
-  ;; does not work.
-  (let* ((type (button-get button 'type)))
-    (apply f button args)
-    (when (memq type '(help-function-def
-                       help-variable-def
-                       help-face-deff))
-      (ublt/recenter-near-top))))
 
 (defun ublt/narrow-or-widen ()
   (interactive)
