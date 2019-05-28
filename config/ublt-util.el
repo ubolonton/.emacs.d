@@ -2,6 +2,27 @@
 
 (require 'dash)
 
+(defun ublt/advice-remove-all (symbol)
+  (advice-mapc (lambda (f _)
+                 (advice-remove symbol f))
+               symbol))
+
+(defun ublt/advice-remove (symbol advice-symbol)
+  (advice-mapc (lambda (f _)
+                 (when (or (eq f advice-symbol)
+                           (eq f (intern (concat symbol "@" advice-symbol))))
+                   (advice-remove symbol f)))
+               symbol))
+
+(defun ublt/advice-list (symbol)
+  (let ((advices nil))
+    (advice-mapc (lambda (f _)
+                   (setq advices (append advices `(,f))))
+                 symbol)
+    advices))
+
+
+
 (defun ublt/enable (funcs)
   (dolist (f funcs)
     (put f 'disabled nil)))
