@@ -71,6 +71,8 @@
      (load "ublt-straight-recipes")
 
      (straight-use-package 'use-package)
+     (require 'use-package)
+
      ;; We don't want to declare a package twice.
      (setq straight-use-package-by-default t)
 

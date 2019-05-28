@@ -924,7 +924,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(comint-highlight-prompt
      ((,class (,@prompt))))
    `(comint-highlight-input
-     ((,class (:background ,bg+1 :foreground ,fg-1))))
+     ((,class (:background ,bg+1))))
 
    `(cider-repl-prompt-face
      ((,class (:inherit font-lock-constant-face))))

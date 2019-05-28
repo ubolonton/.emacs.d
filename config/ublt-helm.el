@@ -141,9 +141,10 @@ all of the sources."
     (when (ublt/helm-should-use-variable-pitch? helm-sources)
       (variable-pitch-mode +1))
     (setq line-spacing 0.3)
-    (visual-line-mode -1)
-    ;; (text-scale-increase 1)
-    ))
+    ;; FIX: This doesn't work. Find a way to hide the cursor.
+    (setq cursor-type 'bar)
+    ;; (text-scale-decrease 1)
+    (visual-line-mode -1)))
 
 (use-package helm
   :hook (helm-after-initialize . ublt/helm-tweak-appearance))

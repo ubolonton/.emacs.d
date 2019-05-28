@@ -508,8 +508,7 @@
 
 ;;; Bigger minibuffer text
 (defun ublt/minibuffer-setup ()
-  (set (make-local-variable 'face-remapping-alist)
-       '((default :height 1.0)))
+  (setq-local face-remapping-alist '((default :height 1.0)))
   (setq line-spacing 0.3))
 (add-hook 'minibuffer-setup-hook #'ublt/minibuffer-setup)
 

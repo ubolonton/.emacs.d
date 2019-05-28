@@ -27,9 +27,7 @@ of window's top part restricted by `scroll-margin' if needed."
           ;; Fix window-cursor, move text down to meet the initial line
           (scroll-down (count-screen-lines initial now)))))))
 
-;;; Note that we don't count the screen lines between the current
-;;; point and the window's bottom edge. That calculation would
-;;; probably be too involved.
+;;; FIX: This is slow.
 (defun ublt/avoid-bottom-scroll-margin (&rest _)
   "Scroll text together with cursor (i.e. preserving `point') out
 of window's bottom part restricted by `scroll-margin' if needed."

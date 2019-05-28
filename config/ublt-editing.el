@@ -170,6 +170,7 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
   :hook (pullover-mode . (lambda () (call-interactively 'evil-insert)))
   :bind (:map pullover-mode-map
               ([remap ublt/kill-this-buffer] . pullover-cancel)))
+
 (use-package markdown-mode
   :custom (pullover-major-mode 'gfm-mode))
 
