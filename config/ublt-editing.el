@@ -88,18 +88,6 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
 ;;; Structural editing with ()[]{}.
 (use-package paredit
   :config
-  ;; (defun ublt/enable-paredit-mode ()
-  ;;   "Enable paredit-mode without checking paren balance."
-  ;;   (let ((current-prefix-arg t))
-  ;;     (paredit-mode +1)))
-  ;; XXX: Seems unclean
-  (defadvice paredit-mode (around force activate)
-    "Force turning on for `python-mode'."
-    (if (eq major-mode 'python-mode)
-        (let ((current-prefix-arg t))
-          ad-do-it)
-      ad-do-it))
-
   ;; Making paredit work with delete-selection-mode
   ;; `http://whattheemacsd.com//setup-paredit.el-03.html'
   (put 'paredit-forward-delete 'delete-selection 'supersede)
@@ -119,11 +107,11 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
 
   ;; Since I use paredit in many modes, it's better to use its
   ;; comment-dwim only in lisp modes
-  (defadvice comment-dwim (around lisp-specific activate)
+  (define-advice comment-dwim (:around (f &rest args) ublt/use-paredit-maybe)
     "Use `paredit-comment-dwim', but only in lisp code."
     (if (member major-mode '(lisp-mode emacs-lisp-mode clojure-mode scheme-mode))
         (call-interactively 'paredit-comment-dwim)
-      ad-do-it)))
+      (apply f args))))
 
 
 ;;; Automatic completion

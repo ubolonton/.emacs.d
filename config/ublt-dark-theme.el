@@ -11,7 +11,7 @@
 (defvar ublt/text-scale-vw-remapping nil)
 (make-variable-buffer-local 'ublt/text-scale-vw-remapping)
 
-(defadvice text-scale-mode (after scale-base-faces activate)
+(define-advice text-scale-mode (:after (&rest _) ublt/scale-base-faces)
   "Additionally scale other base faces so that all faces are
 scaled. This \"base face\" trick is used by `ublt-themes'."
   (let ((ratio (car (last text-scale-mode-remapping))))

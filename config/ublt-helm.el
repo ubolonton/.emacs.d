@@ -159,16 +159,14 @@ all of the sources."
   (call-interactively 'helm-maybe-exit-minibuffer))
 
 ;;; For some reason combining them into a single around advice didn't work
-(defadvice helm-execute-selection-action-1
-    (before maybe-other-window activate)
+(define-advice helm-execute-selection-action-1 (:before (&rest _) ublt/maybe-other-window)
   (when ublt/helm-exit-other-window-p
     (when (= (count-windows) 1)
       (split-window-horizontally))
     (other-window 1)))
 
-(defadvice helm-execute-selection-action-1
-    (around maybe-other-window-cleanup activate)
-  (unwind-protect ad-do-it
+(define-advice helm-execute-selection-action-1 (:around (f &rest args) ublt/maybe-other-window-cleanup)
+  (unwind-protect (apply f args)
     (setq ublt/helm-exit-other-window-p nil)))
 
 ;;; TODO: Refine this.

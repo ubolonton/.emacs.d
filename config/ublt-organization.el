@@ -373,14 +373,14 @@
   (defvar ublt/org-capture-external nil)
 
   ;; Set the flag before capturing
-  (defadvice org-protocol-capture (around set-external-flag activate)
+  (define-advice org-protocol-capture (:around (f &rest args) ublt/set-external-flag)
     (setq ublt/org-capture-external t)
-    (condition-case err ad-do-it
+    (condition-case err (apply f args)
       (error (setq ublt/org-capture-external nil)
              (signal (car err) (cdr err)))))
   ;; Unset it afterward
-  (defadvice org-capture-finalize (around unset-external-flag activate)
-    (unwind-protect ad-do-it
+  (define-advice org-capture-finalize (:around (f &rest args) ublt/unset-external-flag)
+    (unwind-protect (apply f args)
       (setq ublt/org-capture-external nil)))
   ;; Kill Conkeror's current buffer if capture was confirmed. Switch
   ;; to Conkeror regardless.

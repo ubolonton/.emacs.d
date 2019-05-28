@@ -68,7 +68,7 @@ of line."
   (switch-to-buffer (other-buffer (current-buffer) t)))
 
 
-(defadvice forward-page (after advice-recenter-top activate)
+(define-advice forward-page (:after (&rest _) ublt/recenter-top)
   "Eliminate possible jumpiness (both vertical & horizontal)."
   ;; Make ^L stay at the same place while scrolling by page
   (ublt/recenter-near-top)
@@ -103,9 +103,9 @@ of line."
       next-screen-context-lines 5)
 
 
-(defadvice move-to-window-line-top-bottom (around keep-column activate)
+(define-advice move-to-window-line-top-bottom (:around (f &rest args) ublt/keep-column)
   "Try to keep the current column, or `goal-column'."
-  (ublt/save-column ad-do-it))
+  (ublt/save-column (apply f args)))
 
 
 (use-package grep
@@ -181,12 +181,11 @@ of line."
 
 ;;; This is needed because the help buttons use `find-function'
 ;;; library in a very weird way.
-(defadvice help-button-action (around bring-into-view activate)
+(define-advice help-button-action (:around (f button &rest args) ublt/bring-into-view)
   ;; Somehow button-get returns nil after the call, so "after" advice
   ;; does not work.
-  (let* ((button (ad-get-arg 0))
-         (type (button-get button 'type)))
-    ad-do-it
+  (let* ((type (button-get button 'type)))
+    (apply f button args)
     (when (memq type '(help-function-def
                        help-variable-def
                        help-face-deff))

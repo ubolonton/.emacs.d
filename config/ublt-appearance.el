@@ -152,10 +152,10 @@
   :when window-system
   :custom ((hs-hide-comments-when-hiding-all nil)
            (hs-isearch-open t))
-  :config (defadvice hs-toggle-hiding (around keep-point activate)
+  :config (define-advice hs-toggle-hiding (:around (f &rest args) ublt/keep-point)
             "Try to keep point after toggling."
             (save-excursion
-              ad-do-it)))
+              (apply f args))))
 
 ;; (ublt/set-up 'hideshowvis
 ;;   (define-fringe-bitmap 'hs-marker [0 24 24 126 126 24 24 0])
@@ -530,7 +530,7 @@
 ;;                            ;;             ;; For it to work with `variable-pitch-mode'
 ;;                            ;;             'face 'default)
 ;;                            ))))
-;;   (defadvice visual-line-mode (after adaptive-wrap activate)
+;;   (define-advice visual-line-mode (:after (&rest _) ublt/adaptive-wrap)
 ;;     (if (and visual-line-mode adaptive-fill-mode)
 ;;         (progn
 ;;           (adaptive-wrap-prefix-mode +1)
@@ -538,7 +538,7 @@
 ;;       (adaptive-wrap-prefix-mode -1))))
 
 ;;; TODO: Move to editing
-(defadvice visual-line-mode (after no-hard-wrapping activate)
+(define-advice visual-line-mode (:after (&rest _) ublt/no-hard-wrapping)
   "Turn off `auto-fill-mode' (automatic hard wrapping)."
   (when visual-line-mode
     (auto-fill-mode -1)))

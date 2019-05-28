@@ -109,10 +109,10 @@
 
   (with-eval-after-load 'paredit
     ;; FIX: This is too ad-hoc
-    (defadvice paredit-backward (before fix-evil-off-by-1 activate)
+    (define-advice paredit-backward (:before (&rest _) ublt/fix-evil-off-by-1)
       (when (member evil-state '(motion normal))
         (forward-char)))
-    (defadvice paredit-forward (after fix-evil-off-by-1 activate)
+    (define-advice paredit-forward (:after (&rest _) ublt/fix-evil-off-by-1)
       (when (member evil-state '(motion normal))
         (backward-char))))
 

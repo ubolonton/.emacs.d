@@ -34,9 +34,9 @@
 
 ;; `http://www.emacswiki.org/emacs/DeskTop#toc6'
 ;; (desktop-save-mode +1)
-(defadvice desktop-create-buffer (around ignore-errors activate)
+(define-advice desktop-create-buffer (:around (f &rest args) ublt/ignore-errors)
   (condition-case err
-      ad-do-it
+      (apply f args)
     (error (message "desktop-create-buffer: %s" err))))
 (setq desktop-restore-frames nil
       desktop-restore-eager 30)
@@ -177,15 +177,14 @@
 ;;; (opening a large PDF file can hang Emacs).
 (defvar ublt/find-file-externally-extensions
   '("pdf" "xls" "xlsx" "doc" "docx" "odt" "jpg" "png" "dmg" "pkg"))
-(defadvice find-file (around open-externally activate)
-  (let* ((file-name (ad-get-arg 0)))
-    (if (member (downcase (or (file-name-extension file-name) ""))
-                ublt/find-file-externally-extensions)
-        (call-process (pcase system-type
-                        ('darwin "open")
-                        ('gnu/linux "xdg-open"))
-                      nil 0 nil file-name)
-      ad-do-it)))
+(define-advice find-file (:around (f filename &rest args) ublt/open-externally-maybe)
+  (if (member (downcase (or (file-name-extension filename) ""))
+              ublt/find-file-externally-extensions)
+      (call-process (pcase system-type
+                      ('darwin "open")
+                      ('gnu/linux "xdg-open"))
+                    nil 0 nil filename)
+    (apply f filename args)))
 
 
 ;;; `http://www.masteringemacs.org/articles/2011/07/20/searching-buffers-occur-mode/'

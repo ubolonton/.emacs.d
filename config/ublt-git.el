@@ -58,19 +58,6 @@
   (add-hook 'git-commit-mode-hook
             (lambda () (setq fill-column 80)))
 
-  ;; ;; XXX: `magit-patch-id' calls out to shell, which suffers shell initialization delay. This is
-  ;; ;; a temporary workaround. The proper fix is probably writing a C extension or something that
-  ;; ;; calls git directly. The mid-term fix is probably calling git directly, not going through shell.
-  ;; ;; Either that, or going through shell without initialization.
-  ;; (defadvice magit-patch-id (around speed-up activate)
-  ;;   (let ((shell-file-name "sh"))
-  ;;     ad-do-it))
-
-  ;; ;; XXX
-  ;; (defadvice magit-process (around dont-switch activate)
-  ;;   (save-selected-window
-  ;;     ad-do-it))
-
   (with-eval-after-load 'helm-info
     (ublt/helm-info-reload)))
 
@@ -91,7 +78,7 @@
 
 (use-package magit-todos
   :config
-  (define-advice magit-todos--goto-item (:after (&rest _) recenter)
+  (define-advice magit-todos--goto-item (:after (&rest _) ublt/recenter)
     (ublt/recenter-near-top))
   (magit-todos-mode +1))
 

@@ -33,11 +33,11 @@
 
   :config
   ;; FIX: This is a bad hack
-  (defadvice web-mode-highlight-part (around tweak-jsx activate)
+  (define-advice web-mode-highlight-part (:around (f &rest args) ublt/tweak-jsx)
     (if (equal web-mode-content-type "jsx")
         (let ((web-mode-enable-part-face nil))
-          ad-do-it)
-      ad-do-it))
+          (apply f args))
+      (apply f args)))
   (defun ublt/web-mode-jsx ()
     (when (equal web-mode-content-type "jsx")
       (paredit-mode +1)))
