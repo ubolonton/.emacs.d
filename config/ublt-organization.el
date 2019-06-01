@@ -359,10 +359,14 @@
                             entry (file "~/org/gtd/journal.org")
                             "** %t Daily Review :Coach:\n%[~/org/gtd/templates/daily-review.txt]\n" )))
 
-  :config (defun ublt/org-capture-link-format-description (d)
-            (if (and (not (string-equal d "%:initial"))
+  :config (defun ublt/org-capture-link-format-selection (d)
+            (if (and (not (string-equal d "%i"))
                      (> (length d) 0))
-                (format "\n%s\n" d)
+                (format "
+#+BEGIN_QUOTE
+%s
+#+END_QUOTE
+" d)
               "")))
 
 (use-package org-protocol
