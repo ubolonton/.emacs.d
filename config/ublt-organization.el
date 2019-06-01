@@ -474,10 +474,10 @@
     (setq-local prettify-symbols-alist '(("[ ]" . "☐")
                                          ("[X]" . "☑" )
                                          ("[-]" . "❍" )
-                                         ("+begin_src" . "⌨")
-                                         ("+BEGIN_SRC" . "⌨")
-                                         ("+end_src" . "⌨")
-                                         ("+END_SRC" . "⌨")))
+                                         ("#+begin_src" . "⌨")
+                                         ("#+BEGIN_SRC" . "⌨")
+                                         ("#+end_src" . "⌨")
+                                         ("#+END_SRC" . "⌨")))
     (prettify-symbols-mode)))
 
 
