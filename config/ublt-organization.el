@@ -367,30 +367,57 @@
 
 (use-package org-protocol
   :ensure nil :straight nil
-  :hook (org-capture-after-finalize . ublt/org-capture-back-to-conkeror)
+  :hook (org-capture-after-finalize . ublt/org-capture-return-maybe)
   :config
-  ;; FIX: Distinguish Conkeror from other sources
-  (defvar ublt/org-capture-external nil)
+  (defvar ublt/org-capture-info nil)
 
   ;; Set the flag before capturing
-  (define-advice org-protocol-capture (:around (f &rest args) ublt/set-external-flag)
-    (setq ublt/org-capture-external t)
-    (condition-case err (apply f args)
-      (error (setq ublt/org-capture-external nil)
+  (define-advice org-protocol-capture (:around (f info &rest args) ublt/set-capture-info)
+    "Start temporarily tracking capture info."
+    (setq ublt/org-capture-info info)
+    (condition-case err
+        (apply f info args)
+      (error (setq ublt/org-capture-info nil)
              (signal (car err) (cdr err)))))
+
   ;; Unset it afterward
-  (define-advice org-capture-finalize (:around (f &rest args) ublt/unset-external-flag)
+  (define-advice org-capture-finalize (:around (f &rest args) ublt/unset-capture-info)
+    "Unset capture info after finishing capturing."
     (unwind-protect (apply f args)
-      (setq ublt/org-capture-external nil)))
-  ;; Kill Conkeror's current buffer if capture was confirmed. Switch
-  ;; to Conkeror regardless.
-  (defun ublt/org-capture-back-to-conkeror ()
-    (when ublt/org-capture-external
-      (start-process
-       "wmctrl" nil "wmctrl" "-x" "-a" "conkeror")
-      (unless org-note-abort
-        (start-process
-         "conkeror" nil "conkeror" "-f" "kill-current-buffer")))))
+      (setq ublt/org-capture-info nil)))
+
+  (define-advice org-capture (:around (f &rest args) ublt/handle-abort)
+    (condition-case err
+        (apply f args)
+      (error (let ((org-note-abort t)
+                   (err-data (cdr err)))
+               (when (string-equal (car err-data) "Capture abort: Quit")
+                 (ublt/org-capture-return-maybe))
+               (signal (car err) err-data)))))
+
+  (defun ublt/org-capture-return-maybe ()
+    (pcase system-type
+      ('darwin
+       (pcase (plist-get ublt/org-capture-info :template)
+         ("Lf"
+          ;; Emacs may activate itself later, so we defer this until returning to the command loop.
+          (run-with-idle-timer
+           0 nil
+           (lambda (abort)
+             (do-applescript "
+tell application \"System Events\" to tell first process whose bundle identifier is \"org.mozilla.Firefox\"
+    set frontmost to true
+end tell")
+             (unless abort
+               (do-applescript "
+tell application \"System Events\" to tell first process whose bundle identifier is \"org.mozilla.Firefox\"
+    tell menu 1 of menu bar item \"File\" of menu bar 1
+        click menu item \"Close Tab\"
+    end tell
+end tell")))
+           org-note-abort)))))))
+
+
 
 
 ;;; Slides for presentation
