@@ -1,6 +1,8 @@
 (unless (>= emacs-major-version 24)
   (error "Ublt dark theme requires Emacs 24 or later"))
 
+(defgroup ublt-dark nil "")
+
 (defface ublt/variable-pitch
   '((t (:inherit variable-pitch)))
   "Base face to inherit from instead of `variable-pitch'.
@@ -8,7 +10,8 @@
 `variable-pitch' do not. Therefore we need another variable-pitch base face, so
 that all faces can be scaled uniformly.
 
-Note that `fixed-pitch' doesn't suffer from this problem.")
+Note that `fixed-pitch' doesn't suffer from this problem."
+  :group 'ublt-dark)
 
 (defvar-local ublt/text-scale-fw-remapping nil
   "Scale remapping for `fixed-pitch' and its derived faces.")
@@ -32,6 +35,10 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
             (face-remap-add-relative 'fixed-pitch
                                      :height ratio)))
     (force-window-update (current-buffer))))
+
+(defcustom ublt/alt-fixed-pitch-font "Fantasque Sans Mono"
+  "Alternative fixed-pitch font to use for certain faces."
+  :group 'ublt-dark)
 
 (deftheme ublt-dark "Ubolonton's dark color theme")
 
@@ -263,14 +270,12 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
                               :fontset ,(face-attribute 'variable-pitch :fontset)))
        ;; Fixed-width (scalable)
        (fw             '(:inherit fixed-pitch))
-       (fw1            '(:inherit fixed-pitch :font "Fantasque Sans Mono"))
+       (fw-alt         `(:inherit fixed-pitch :font ,ublt/alt-fixed-pitch-font :height unspecified))
        ;; Variable-width (scalable)
        (vw             '(:inherit ublt/variable-pitch))
        (vw-italic      `(,@vw :weight light ,@italic))
 
-       (bold           `(:weight bold))
-
-       )
+       (bold           `(:weight bold)))
   (custom-theme-set-faces
    'ublt-dark
 
@@ -543,8 +548,7 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
    `(font-lock-comment-delimiter-face
      ((,class (:inherit font-lock-comment-face ,@dimmed))))
    `(font-lock-doc-face
-     ;; XXX: Create another fontset for this instead.
-     ((,class (,@fw1 ,@italic ,@string))))
+     ((,class (,@fw-alt ,@italic ,@string))))
    `(font-lock-function-name-face
      ((,class (,@fw ,@essence))))
    `(font-lock-keyword-face
