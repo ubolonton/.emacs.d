@@ -1,19 +1,24 @@
 (unless (>= emacs-major-version 24)
   (error "Ublt dark theme requires Emacs 24 or later"))
 
-(defface ublt/default-variable-width
+(defface ublt/variable-pitch
   '((t (:inherit variable-pitch)))
-  "")
+  "Base face to inherit from instead of `variable-pitch'.
+`variable-pitch' inherits scaling factor from `default', but faces that inherit
+`variable-pitch' do not. Therefore we need another variable-pitch base face, so
+that all faces can be scaled uniformly.
 
-(defvar ublt/text-scale-fw-remapping nil)
-(make-variable-buffer-local 'ublt/text-scale-fw-remapping)
+Note that `fixed-pitch' doesn't suffer from this problem.")
 
-(defvar ublt/text-scale-vw-remapping nil)
-(make-variable-buffer-local 'ublt/text-scale-vw-remapping)
+(defvar-local ublt/text-scale-fw-remapping nil
+  "Scale remapping for `fixed-pitch' and its derived faces.")
+
+(defvar-local ublt/text-scale-vw-remapping nil
+  "Scale remapping for `ublt/variable-pitch' and its derived faces.")
 
 (define-advice text-scale-mode (:after (&rest _) ublt/scale-base-faces)
   "Additionally scale other base faces so that all faces are
-scaled. This \"base face\" trick is used by `ublt-themes'."
+scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
   (let ((ratio (car (last text-scale-mode-remapping))))
     (when ublt/text-scale-fw-remapping
       (face-remap-remove-relative ublt/text-scale-fw-remapping))
@@ -21,12 +26,11 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
       (face-remap-remove-relative ublt/text-scale-vw-remapping))
     (when ratio
       (setq ublt/text-scale-vw-remapping
-            (face-remap-add-relative 'ublt/default-variable-width
+            (face-remap-add-relative 'ublt/variable-pitch
                                      :height ratio))
       (setq ublt/text-scale-fw-remapping
             (face-remap-add-relative 'fixed-pitch
-                                     :height ratio))
-      )
+                                     :height ratio)))
     (force-window-update (current-buffer))))
 
 (deftheme ublt-dark "Ubolonton's dark color theme")
@@ -261,7 +265,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
        (fw             '(:inherit fixed-pitch))
        (fw1            '(:inherit fixed-pitch :font "Fantasque Sans Mono"))
        ;; Variable-width (scalable)
-       (vw             '(:inherit ublt/default-variable-width))
+       (vw             '(:inherit ublt/variable-pitch))
        (vw-italic      `(,@vw :weight light ,@italic))
 
        (bold           `(:weight bold))
@@ -277,7 +281,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    ;; advised to scale them correctly.
    `(fixed-pitch
      ((,class (,@fw0))))
-   `(ublt/default-variable-width
+   `(ublt/variable-pitch
      ((,class (,@vw0))))
 
    `(bold
