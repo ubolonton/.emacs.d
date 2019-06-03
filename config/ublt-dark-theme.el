@@ -259,6 +259,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
                               :fontset ,(face-attribute 'variable-pitch :fontset)))
        ;; Fixed-width (scalable)
        (fw             '(:inherit fixed-pitch))
+       (fw1            '(:inherit fixed-pitch :font "Fantasque Sans Mono"))
        ;; Variable-width (scalable)
        (vw             '(:inherit ublt/default-variable-width))
        (vw-italic      `(,@vw :weight light ,@italic))
@@ -539,7 +540,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (:inherit font-lock-comment-face ,@dimmed))))
    `(font-lock-doc-face
      ;; XXX: Create another fontset for this instead.
-     ((,class (,@fw ,@italic ,@string :font "Fantasque Sans Mono"))))
+     ((,class (,@fw1 ,@italic ,@string))))
    `(font-lock-function-name-face
      ((,class (,@fw ,@essence))))
    `(font-lock-keyword-face
@@ -646,15 +647,16 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(org-document-title
      ((,class (,@string :height 2.0 :bold t))))
    `(org-special-keyword
-     ((,class (,@fw ,@constant))))
-   `(org-indent                         ;TODO
+     ((,class (,@fw ,@context))))
+   `(org-indent                                ;TODO
      ((,class (:inherit (org-hide fixed-pitch) ;; :foreground ,bg+2 :background ,bg+2
                         ))))
    ;; We use `normal' not `bold' for these because we use Fira Sans
    `(org-level-1
-     ((,class (,@vw ,@constant :weight normal :overline ,bg+2 :height 1.4 ,@dimmed-hl))))
+     ((,class (,@vw ,@constant :weight normal :height 1.4 ,@dimmed-hl
+                    :box (:line-width 1 :color ,bg :style released-button)))))
    `(org-level-2
-     ((,class (,@vw ,@subheader :weight normal :overline ,bg+1 :height 1.2))))
+     ((,class (,@vw ,@subheader :weight normal :height 1.2))))
    `(org-level-3
      ((,class (,@string :weight normal :height 1.1))))
    `(org-level-4
@@ -676,7 +678,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    `(org-code
      ((,class (:inherit font-lock-builtin-face))))
    `(org-verbatim
-     ((,class (:inherit font-lock-keyword-face))))
+     ((,class (:inherit font-lock-builtin-face))))
    `(org-meta-line
      ((,class (,@fw ,@context))))
    `(org-document-info-keyword
@@ -692,7 +694,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
    ;; `(org-done                           ;TODO
    ;;  ((,class (:foreground ,green-3))))
    `(org-block
-     ((,class (,@fw))))
+     ((,class (,@fw :foreground ,fg))))
    `(org-block-begin-line
      ((,class (:inherit org-block ,@dimmed :underline ,blue-d))))
    `(org-block-end-line
@@ -752,7 +754,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (:inherit org-level-6))))
    `(markdown-list-face
      ((,class (,@subheader :weight bold))))
-   `(markdown-pre-face             ;TODO: Make it similar to org-block
+   `(markdown-pre-face                  ;TODO: Make it similar to org-block
      ((,class (,@fw ,@dimmed-hl ,@string))))
    `(markdown-bold-face
      ((,class (,@mutable :weight bold))))
@@ -875,7 +877,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (,@number))))
 
    ;; Type
-   `(diredfl-file-name                   ;TODO
+   `(diredfl-file-name                  ;TODO
      ((,class (,@vw))))
    `(diredfl-dir-name
      ((,class (,@teleport))))
@@ -888,7 +890,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
 
    `(diredfl-file-suffix
      ((,class (,@context ,@italic))))
-   `(diredfl-compressed-file-suffix      ;TODO
+   `(diredfl-compressed-file-suffix     ;TODO
      ((,class (,@constant))))
 
    ;; Permission bits
@@ -906,7 +908,7 @@ scaled. This \"base face\" trick is used by `ublt-themes'."
      ((,class (,@special-hl ,@power ,@italic))))
 
    ;; Selection
-   `(diredfl-flag-mark-line              ;selected
+   `(diredfl-flag-mark-line             ;selected
      ((,class (,@special-hl))))
    `(diredfl-flag-mark
      ((,class (:inherit diredfl-flag-mark-line))))
