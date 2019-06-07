@@ -257,7 +257,7 @@ all of the sources."
 
 (use-package helm-swoop
   :custom ((helm-swoop-use-line-number-face t)
-           (helm-swoop-speed-or-color nil)
+           (helm-swoop-speed-or-color t)
            (helm-swoop-use-fuzzy-match nil)
            (helm-swoop-pre-input-function (lambda () nil))))
 
