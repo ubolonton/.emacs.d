@@ -768,6 +768,8 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
      ((,class (,@mutable :weight bold))))
    `(markdown-italic-face
      ((,class (,@mutable ,@italic))))
+   `(markdown-inline-code-face
+     ((,class (:inherit org-code))))
    `(markdown-code-face
      ((,class (:inherit org-block))))
    `(markdown-language-keyword-face
