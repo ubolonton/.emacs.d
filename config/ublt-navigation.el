@@ -82,7 +82,7 @@ of line."
 (setq redisplay-dont-pause t
 
       ;; Scroll early when scrolling off-screen
-      scroll-margin 4
+      scroll-margin 5
       ;; Don't center when scrolling off-screen
       scroll-conservatively 10000
       ;; 1-line-at-a-time when scrolling off-screen
@@ -92,7 +92,7 @@ of line."
       scroll-preserve-screen-position 'always
       ;; Number of overlapped lines to keep when scrolling by
       ;; screenfull
-      next-screen-context-lines 5)
+      next-screen-context-lines 15)
 
 
 (define-advice move-to-window-line-top-bottom (:around (f &rest args) ublt/keep-column)
