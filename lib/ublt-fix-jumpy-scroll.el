@@ -69,34 +69,20 @@ of window's bottom part restricted by `scroll-margin' if needed."
 ;;   ;; pair in window coordinate system and use that.
 ;;   (ublt/avoid-top-scroll-margin))
 
-(defmacro ublt/fix-jumpy-scroll (scroll-fn where)
-  (let* ((scroll-fn (ublt/maybe-unquote scroll-fn))
-         (avoid-top 'ublt/avoid-top-scroll-margin)
-         (avoid-bottom 'ublt/avoid-bottom-scroll-margin)
-         (recenter 'ublt/recenter-near-top)
-         (add-top-advice `(advice-add ',scroll-fn :after #',avoid-top))
-         (add-bottom-advice `(advice-add ',scroll-fn :after #',avoid-bottom))
-         (add-recenter-advice `(advice-add ',scroll-fn :after #',recenter))
-         (remove-top-advice `(advice-remove ',scroll-fn #',avoid-top))
-         (remove-bottom-advice `(advice-remove ',scroll-fn #',avoid-bottom))
-         (remove-recenter-advice `(advice-remove ',scroll-fn #',recenter)))
-    (pcase (ublt/maybe-unquote where)
-      (:top `(progn ,add-top-advice
-                    ,remove-bottom-advice
-                    ,remove-recenter-advice))
-      (:bottom `(progn ,add-bottom-advice
-                       ,remove-top-advice
-                       ,remove-recenter-advice))
-      (:top-bottom `(progn ,add-top-advice
-                           ,add-bottom-advice
-                           ,remove-recenter-advice))
-      (:recenter `(progn ,add-recenter-advice
-                         ,remove-top-advice
-                         ,remove-bottom-advice))
-      (:none `(progn ,remove-top-advice
-                     ,remove-bottom-advice
-                     ,remove-recenter-advice))
-      (where (error "Invalid where: %S" where)))))
+(defmacro ublt/fix-jumpy-scroll (scroll-fn &rest wheres)
+  (declare (indent 1))
+  (let ((scroll-fn (ublt/maybe-unquote scroll-fn)))
+    `(progn
+       (advice-remove ',scroll-fn #'ublt/avoid-top-scroll-margin)
+       (advice-remove ',scroll-fn #'ublt/avoid-bottom-scroll-margin)
+       (advice-remove ',scroll-fn #'ublt/recenter-near-top)
+       ,@(mapcar (lambda (where)
+                   (pcase (ublt/maybe-unquote where)
+                     (:top `(advice-add ',scroll-fn :after #'ublt/avoid-top-scroll-margin))
+                     (:bottom `(advice-add ',scroll-fn :after #'ublt/avoid-bottom-scroll-margin))
+                     (:recenter `(advice-add ',scroll-fn :after #'ublt/recenter-near-top))
+                     (where (error "Invalid where: %S" where))))
+                 wheres))))
 
 
 
@@ -105,10 +91,10 @@ of window's bottom part restricted by `scroll-margin' if needed."
 
 (ublt/fix-jumpy-scroll magit-diff-visit-file :bottom)
 
-(ublt/fix-jumpy-scroll highlight-symbol-prev :top-bottom)
-(ublt/fix-jumpy-scroll highlight-symbol-next :top-bottom)
+(ublt/fix-jumpy-scroll highlight-symbol-prev :top :bottom)
+(ublt/fix-jumpy-scroll highlight-symbol-next :top :bottom)
 
-(ublt/fix-jumpy-scroll evilmi-jump-items :top-bottom)
+(ublt/fix-jumpy-scroll evilmi-jump-items :top :bottom)
 
 
 
