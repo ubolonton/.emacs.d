@@ -762,7 +762,7 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
      ((,class (:inherit org-level-6))))
    `(markdown-list-face
      ((,class (,@subheader :weight bold))))
-   `(markdown-pre-face                  ;TODO: Make it similar to org-block
+   `(markdown-pre-face
      ((,class (,@fw ,@dimmed-hl ,@string))))
    `(markdown-bold-face
      ((,class (,@mutable :weight bold))))
@@ -776,6 +776,8 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
      ((,class (:inherit org-block-begin-line))))
    `(markdown-markup-face
      ((,class (,@dimmed))))
+   `(markdown-html-tag-delimiter-face
+     ((,class (,@fw ,@dimmed))))
 
    `(rst-level-1
      ((,class (:inherit org-level-1))))
@@ -789,9 +791,9 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
      ((,class (:inherit markdown-list-face))))
    `(rst-literal
      ((,class (:inherit org-code))))
-   `(rst-reference                      ;TODO
+   `(rst-reference
      ((,class (:inherit org-code))))
-   `(rst-definition                     ;TODO
+   `(rst-definition
      ((,class (:inherit org-link))))
    `(rst-emphasis1
      ((,class (:inherit markdown-italic-face))))
