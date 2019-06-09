@@ -34,22 +34,11 @@
          nil 2.7))))
 
 
-;;; Make frame title more useful: project + buffer names
+;;; TODO: Make frame title more useful: project + buffer names
+;;; XXX: https://github.com/syl20bnr/spacemacs/issues/10938
+;; https://www.reddit.com/r/emacs/comments/8gaoqu/help_on_debugging_performreplace_args_out_of_range/
 (defun ublt/frame-title ()
-  (if (and (featurep 'projectile) (projectile-project-p))
-      (let ((prj (projectile-project-name)))
-        (cond
-         (buffer-file-name
-          (format "[%s] %s" prj
-                  ;; TODO: Handle symlinks
-                  (car (projectile-make-relative-to-root (list buffer-file-name)))))
-         ((eq major-mode 'dired-mode)
-          (format "[%s] %s" prj
-                  ;; TODO: Handle symlinks
-                  (car (projectile-make-relative-to-root (list default-directory)))))
-         (t
-          (format "[%s] -- %s" prj (buffer-name)))))
-    (or buffer-file-name (buffer-name))))
+  (or buffer-file-name (buffer-name)))
 
 (setq frame-title-format '(:eval (ublt/frame-title)))
 
