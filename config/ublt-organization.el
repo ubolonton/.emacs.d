@@ -86,6 +86,7 @@
 
 (use-package org-indent
   :ensure nil :straight nil
+  :custom (org-indent-indentation-per-level 3)
   :hook (org-mode . org-indent-mode))
 
 (use-package org-bullets
@@ -114,11 +115,12 @@
 
 ;;; Status keywords
 (use-package org
+  :demand t
   :custom ((org-todo-keywords
             '((sequence "TODO(t)" "STARTED(s!)"
-                        "WAITING(w@)" "PAUSED(p)"
+                        "WAITING(w@/!)" "PAUSED(p@/!)"
                         "|"
-                        "DONE(d@)" "CANCELLED(c@)")))
+                        "DONE(d!)" "CANCELLED(c@)")))
 
            ;; TODO: Add more colors
            (org-todo-keyword-faces
@@ -203,19 +205,26 @@
            (org-agenda-persistent-marks t)
 
            ;; TODO: Maybe more
-           (org-agenda-files '("~/org/gtd/someday.org"
-                               "~/org/gtd/tasks.org"
-                               "~/org/gtd/projects.org"
-                               "~/org/gtd/journal.org"))
+           (org-agenda-files '("~/org/gtd/tasks.org"
+                               ;; "~/org/gtd/tasks.org"
+                               ;; "~/org/gtd/journal.org"
+                               ))
 
-           ;; TODO: Use another file, as this is meant for notes not actually tasks
-           (org-default-notes-file "~/org/gtd/someday.org")
+           ;; ;; TODO: Use another file, as this is meant for notes not actually tasks
+           ;; (org-default-notes-file "~/org/gtd/someday.org")
 
-           ;; TODO: Restructure
-           (org-refile-targets '((("~/org/gtd/someday.org") . (:maxlevel . 1))
-                                 (("~/org/gtd/tasks.org") . (:maxlevel . 1))
-                                 (("~/org/gtd/projects.org") . (:maxlevel . 2))
-                                 (("~/org/work/anduin/work-notes.org") . (:maxlevel . 3))))
+           ;; TODO: Make this context-aware (e.g. notes should go to journal.org or the appropriate
+           ;; note file, not tasks.org).
+           (org-refile-targets
+            '(;; Free-style tasks and backlog.
+              (("~/org/gtd/tasks.org") . (:level . 1))
+              (("~/org/gtd/someday.org") . (:maxlevel . 1))
+              ;; ;; TODO: Create date entry when necessary.
+              ;; (("~/org/journal.org") . (:level . 2))
+              ;; Projects contain both tasks/backlog and notes, thus are not under gtd/.
+              (("~/org/projects/emacs-module-rs.org") . (:regexp . "Tasks"))
+              (("~/org/projects/configure-emacs.org") . (:regexp . "Tasks"))
+              (nil . (:maxlevel . 2))))
 
            (org-refile-allow-creating-parent-nodes 'confirm)
            (org-refile-target-verify-function 'ublt/verify-refile-target)
@@ -223,30 +232,29 @@
            ;; org-columns-default-format "%TODO %50ITEM %TAGS %CATEGORY"
 
            ;; TODO: More
-           (org-agenda-custom-commands '(("P" "Projects summary"
-                                          ((tags "PROJECT"
-                                                 ((org-agenda-todo-list-sublevels nil)))))
-                                         ("p" "Projects details"
-                                          ((tags "PROJECT")))
-                                         ("w" "Work"
-                                          ((agenda "")
-                                           (tags-todo "SCHEDULED=\"\""))
-                                          ((org-agenda-files '("~/org/work/anduin/work-notes.org"))
-                                           (org-agenda-ndays 1)
-                                           (org-agenda-sorting-strategy
-                                            '((agenda todo-state-up time-up priority-down)))
-                                           (org-deadline-warning-days 0)
-                                           (org-agenda-prefix-format
-                                            '((agenda  . "%i %-9:c%?-12t%-12s")
-                                              (tags  . "%i %-9:c%?-12t")))))
+           (org-agenda-custom-commands '(;; ("P" "Projects summary"
+                                         ;;  ((tags "PROJECT"
+                                         ;;         ((org-agenda-todo-list-sublevels nil)))))
+                                         ;; ("p" "Projects details"
+                                         ;;  ((tags "PROJECT")))
+                                         ;; ("w" "Work"
+                                         ;;  ((agenda "")
+                                         ;;   (tags-todo "SCHEDULED=\"\""))
+                                         ;;  ((org-agenda-files '("~/org/work/arimo/work-notes.org"))
+                                         ;;   (org-agenda-ndays 1)
+                                         ;;   (org-agenda-sorting-strategy
+                                         ;;    '((agenda todo-state-up time-up priority-down)))
+                                         ;;   (org-deadline-warning-days 0)
+                                         ;;   (org-agenda-prefix-format
+                                         ;;    '((agenda  . "%i %-9:c%?-12t%-12s")
+                                         ;;      (tags  . "%i %-9:c%?-12t")))))
                                          ("D" "Daily action list"
                                           (
                                            ;; Tasks with a date (deadline, scheduled)
                                            (agenda "")
                                            ;; Unscheduled tasks
                                            (tags-todo "SCHEDULED=\"\""))
-                                          ((org-agenda-files '("~/org/gtd/tasks.org"
-                                                               "~/org/gtd/projects.org"))
+                                          ((org-agenda-files '("~/org/gtd/tasks.org"))
                                            (org-agenda-ndays 2)
                                            (org-agenda-sorting-strategy
                                             '((agenda todo-state-up time-up priority-down)))
@@ -256,12 +264,15 @@
                                               (tags  . "%i %-9:c%?-12t")))))
                                          ("c" "Tasks in progress (current)"
                                           ((todo "STARTED")))
-                                         ("S" "\"Someday\" task list"
-                                          ((todo "TODO" ((org-agenda-files '("~/org/gtd/someday.org"))
-                                                         (org-agenda-sorting-strategy
-                                                          '((todo . (category-down))))
-                                                         (org-agenda-prefix-format
-                                                          '((todo . "%-9:c"))))))))))
+
+                                         ;; TODO: Different views for different types, e.g. books, movies
+                                         ;; ("S" "\"Someday\" task list"
+                                         ;;  ((todo "TODO" ((org-agenda-files '("~/org/gtd/someday.org"))
+                                         ;;                 (org-agenda-sorting-strategy
+                                         ;;                  '((todo . (category-down))))
+                                         ;;                 (org-agenda-prefix-format
+                                         ;;                  '((todo . "%-9:c")))))))
+                                         )))
   :config
   (defun ublt/verify-refile-target ()
     (not (member (nth 2 (org-heading-components)) org-done-keywords)))
@@ -274,89 +285,31 @@
 (use-package org-capture
   :ensure nil :straight nil
   :custom
-  (org-capture-templates '(("n" "Note or todo to be reviewed at day's end"
-                            entry (file "~/org/gtd/daily.org")
+  (org-capture-templates '(("n" "Note"
+                            entry (file "~/org/gtd/daily-input.org")
                             (file "~/org/gtd/templates/quick-note.org")
                             :empty-lines-before 1)
+                           ("t" "Task"
+                            entry (file "~/org/gtd/daily-input.org")
+                            (file "~/org/gtd/templates/quick-task.org")
+                            :empty-lines-before 1)
+
                            ;; TODO: Capture link sent or clipboard content sent from other
                            ;; places
 
                            ;; Handle both internal invocation and external protocol handling
                            ;; org-protocol://capture://l/<url>/<title or " ">[/description]
 
-                           ("x" "Capture stuff sent from external sources")
-                           ("xl" "Link to check"
-                            entry (file "~/org/gtd/daily.org")
+                           ("L" "Link")
+                           ("Lf" "From Firefox"
+                            entry (file "~/org/gtd/daily-input.org")
                             (file "~/org/gtd/templates/quick-link.org")
                             :empty-lines-before 1)
-                           ("xt" "Talk to watch"
-                            entry (file+headline "~/org/gtd/someday.org" "Talks")
-                            (file "~/org/gtd/templates/someday-link.org")
-                            :empty-lines-before 1)
-                           ("xa" "Article to read"
-                            entry (file+headline "~/org/gtd/someday.org" "Articles")
-                            (file "~/org/gtd/templates/someday-link.org")
-                            :empty-lines-before 1)
-                           ("xp" "Paper to read"
-                            entry (file+headline "~/org/gtd/someday.org" "Papers")
-                            (file "~/org/gtd/templates/someday-link.org")
-                            :empty-lines-before 1)
-                           ("xb" "Book to read"
-                            entry (file+headline "~/org/gtd/someday.org" "Books")
-                            (file "~/org/gtd/templates/someday-link.org")
-                            :empty-lines-before 1)
-                           ("xm" "Movie to watch"
-                            entry (file+headline "~/org/gtd/someday.org" "Movies")
-                            (file "~/org/gtd/templates/someday-link.org")
-                            :empty-lines-before 1)
 
-                           ("t" "Task to review at the end of today"
-                            entry (file "~/org/gtd/daily.org")
-                            (file "~/org/gtd/templates/quick-task.org")
-                            :empty-lines-before 1)
+                           ;; TODO: Add project-specific task capturing.
 
-                           ("T" "Task that starts now"
-                            entry (file "~/org/gtd/daily.org")
-                            (file "~/org/gtd/templates/immediate-task.org")
-                            :empty-lines-before 1
-                            ;; FIX: Clocking in doesn't seem to work, sometimes
-                            :clock-in t)
-
-                           ;; TODO: Break this down by type
-                           ("s" "Someday, do this (task or project)!"
-                            entry (file+headline "~/org/gtd/someday.org" "Uncategorized")
-                            (file "~/org/gtd/templates/quick-task.org")
-                            :empty-lines-before 1)
-
-                           ("P" "New project to start soon (not someday)"
-                            entry (file+headline "~/org/gtd/projects.org" "Projects")
-                            (file "~/org/gtd/templates/quick-project.org")
-                            :empty-lines-before 1)
-
-                           ;; i Idea to be reviewed at day's end :IDEA:
-                           ;; n Note to be reviewed at day's end (saw, listened something)
-                           ;; t Task to be reviewed at day's end
-                           ;; T Task that will be started immediately
-                           ;; s Task for some day
-                           ;; d Daily review entry
-                           ;; w Weekly review entry
-                           ;; p Task belonging to a project (use file+function)
-                           ;; P New project
-                           ;; rt Talk review
-                           ;; rb Book review
-                           ;; rm Movie review
-
-                           ;; TODO: Add a project's task template that asks for a project
-                           ;; then put it under that project
-
-                           ;; ("d" "Diary"
-                           ;;  entry (file "~/org/gtd/journal.org")
-                           ;;  "** %U %^{Diary} :Diary:%^g\n%i%?")
-                           ("i" "Idea"
-                            entry (file "~/org/gtd/journal.org")
-                            "** %U %^{Thought} :Thought:%^g\n%i%?")
                            ("r" "Review"
-                            entry (file "~/org/gtd/journal.org")
+                            entry (file "~/org/journal.org")
                             "** %t Daily Review :Coach:\n%[~/org/gtd/templates/daily-review.txt]\n" )))
 
   :config (defun ublt/org-capture-link-format-selection (d)

@@ -63,6 +63,7 @@
                   cider-repl-mode
                   php-boris-mode))
     (add-to-list 'evil-insert-state-modes mode))
+  (add-hook 'org-capture-mode-hook #'evil-insert-state)
 
   (dolist (mode '(Info-mode
                   helpful-mode
