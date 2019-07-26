@@ -472,7 +472,7 @@
 
 (defhydra ublt/hydra-help (:hint nil :color teal)
   "
-  Describe ^^      Keys ^^              Go to ^^           Docs ^^
+  Describe ^^      Keys ^^            Go to ^^           Docs ^^
 ^^^^^^^^────────────────────────────────────────────────────────────────
   _f_ function     _k_ brief key      _C-f_ function     _C-i_ info
   _c_ command      _K_ describe key   _C-v_ variable     _C-w_ woman
@@ -480,7 +480,7 @@
   _s_ symbol       _b_ all bindings   _C-k_ key
   _m_ mode         ^^                   _F_ face
   _o_ at point     ^^                 _C-o_ at point
-
+  ^^               ^^                 _C-u_ config
  [_C-h_] use built-in help    [_l_] view lossage
 "
   ("f" helpful-callable)
@@ -501,6 +501,7 @@
   ("C-k" find-function-on-key)
   ("C-l" find-library)
   ("C-o" find-function-at-point)
+  ("C-u" use-package-jump-to-package-form)
   ("F"   find-face-definition)
 
   ("C-i" ublt/hydra-info/body)
