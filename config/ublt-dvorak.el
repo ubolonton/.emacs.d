@@ -511,6 +511,7 @@
   ("l" view-lossage))
 
 (use-package which-key
+  :disabled
   :custom (which-key-popup-type 'minibuffer)
   :config (which-key-mode))
 

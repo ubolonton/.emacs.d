@@ -77,6 +77,7 @@
   :config (add-to-list 'hl-todo-keyword-faces '("FIX"  . "#cc9393")))
 
 (use-package magit-todos
+  :disabled
   :config (magit-todos-mode +1))
 
 (use-package magit-libgit2
