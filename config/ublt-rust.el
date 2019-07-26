@@ -9,7 +9,10 @@
 (use-package cargo)
 
 (use-package lsp-mode
-  :hook (rust-mode . lsp))
+  :custom ((lsp-ui-doc-enable nil)
+           (lsp-ui-sideline-enable nil)
+           (lsp-log-io t))
+  :hook ((rust-mode . lsp)))
 
 (use-package company-lsp
   :after (company lsp-mode))
