@@ -402,7 +402,7 @@
 
 ;;; TODO: Put this in `ublt-appearance'.
 (use-package hydra
-  :custom (hydra-hint-display-type (if window-system 'posframe 'lv))
+  :custom (hydra-hint-display-type (if (memq window-system '(mac ns)) 'posframe 'lv))
   :config
   (setq-default hydra-posframe-show-params
                 (list :internal-border-width 1

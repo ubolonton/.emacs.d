@@ -1,6 +1,7 @@
 (require 'ublt-util)
 
 (use-package exec-path-from-shell
+  :when (memq system-type '(darwin gnu/linux))
   :config (exec-path-from-shell-copy-envs '("RUST_SRC_PATH" "RUSTC_WRAPPER")))
 
 (use-package rust-mode

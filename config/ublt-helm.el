@@ -183,7 +183,7 @@ all of the sources."
     (with-helm-buffer
       (setq-local helm-echo-input-in-header-line t)))
 
-  (when window-system
+  (when (memq window-system '(mac ns))
     (setq helm-display-function #'helm-display-buffer-in-own-frame)
 
     (add-to-list 'helm-commands-using-frame #'helm-swoop)

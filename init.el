@@ -94,6 +94,7 @@
 
 ;;; Uhm, f*ck shell
 (use-package exec-path-from-shell
+  :when (member system-type '(gnu/linux darwin))
   :config (exec-path-from-shell-initialize))
 
 ;;; General usability
