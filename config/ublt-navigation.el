@@ -115,6 +115,7 @@ of line."
 ;;; Jump around by finding textual anchors.
 (use-package avy
   :custom ((avy-background t)
+           (avy-all-windows 'all-frames)
            (avy-keys (list             ;Dvorak, stronger finger first, left hand first. TODO: Fewer?
                       ?u ?h            ;index
                       ?i ?d            ;index ←→
