@@ -154,7 +154,8 @@
            (org-log-reschedule 'time)
            (org-log-repeat 'time)
            (org-log-redeadline 'time)
-           (org-log-note-clock-out nil)))
+           (org-log-note-clock-out nil)
+           (org-log-into-drawer t)))
 
 (use-package org-clock
   :ensure nil :straight nil
@@ -223,6 +224,7 @@
               ;; (("~/org/journal.org") . (:level . 2))
               ;; Projects contain both tasks/backlog and notes, thus are not under gtd/.
               (("~/org/projects/emacs-module-rs.org") . (:regexp . "Tasks"))
+              (("~/org/projects/emacs-tree-sitter.org") . (:regexp . "Tasks"))
               (("~/org/projects/configure-emacs.org") . (:regexp . "Tasks"))
               (nil . (:maxlevel . 2))))
 
