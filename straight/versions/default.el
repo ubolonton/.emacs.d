@@ -37,7 +37,6 @@
  ("emacs-htmlize" . "8db0aa6aab77475a732b7363f0d57bd3933c18fd")
  ("emacs-memoize" . "9a561268ffb550b257a08710489a95cd087998b6")
  ("emacs-terraform-mode" . "6973d1acaba2835dfdf174f5a5e27de6366002e1")
- ("emacs-which-key" . "77586e62b6d306bae07e4e3e093ba488724f4131")
  ("emmet-mode" . "1acb821e0142136344ccf40c1e5fb664d7db2e70")
  ("epkgs" . "932c173480e505c40cb510ebaae4ccae6efdee3a")
  ("epl" . "78ab7a85c08222cd15582a298a364774e3282ce6")
@@ -55,6 +54,7 @@
  ("find-file-in-project" . "389251757643daffc58e46d195c48f880d4089d5")
  ("flycheck" . "76e24628239eade428d40b88745b209121a845c2")
  ("flycheck-pyflakes" . "61b045939e3743b2162b7e4e73249c66fc2b8f65")
+ ("git-modes" . "33c6a116a5b298e20eb39ebb154a51c4dd37c06d")
  ("git-timemachine" . "b97f93d66cffcd69281346845d3a1e32197eda29")
  ("gnu-elpa-mirror" . "e979b4211660a2cc4377ef04918979fe9b4323ed")
  ("goto-chg" . "1829a13026c597e358f716d2c7793202458120b5")
@@ -84,7 +84,6 @@
  ("lsp-mode" . "6a0b9b479fff38d32f3744d27d141469e3908526")
  ("lsp-ui" . "3ccc3e3386732c3ee22c151e6b5215a0e4c99173")
  ("magit" . "ebacda9ba361e89577a8fdc26f45b42d5c86e388")
- ("magit-todos" . "6d590872dab914908b539c54da2c68dc75491e93")
  ("markdown-mode" . "115f77df9755c6a453f3e5d9623ff885d207ea82")
  ("markup-faces" . "98a807ed82473eb41c6a201ed7ef816d6bcd67b0")
  ("melpa" . "fe8fe6af7826a4b73ac784fde8859130b9ad7096")
@@ -92,7 +91,7 @@
  ("move-text" . "7cbc941a9150468609010a93c429117da2523903")
  ("multiple-cursors.el" . "5ffb19af48bf8a76ddc9f81745be052f050bddef")
  ("nyan-mode" . "a85ac925367ddc542827182a2d9f0133b421c41b")
- ("org" . "262bcb4557f5162dd3f8feb7fbd2aada6773abc1")
+ ("org" . "a41e9950ae91c0711d93d5bf3e8ac07159876d89")
  ("org-bullets" . "b56f2e3812626f2c4ac1686073d102c71f4a8513")
  ("org-reveal" . "1cdd088ec5fab631c564dca7f9f74fd3e9b7d4d4")
  ("otp" . "40474905b2814f0a17d04a5cf91b0cb543e76653")
@@ -137,4 +136,4 @@
  ("yasnippet" . "fc33b2fbaee6c514c91e80f5b1c0210c776b03ed")
  ("yasnippet-snippets" . "69cc1c19c7d67780d9f0f910462b818e8c0a570e")
  ("zenburn-emacs" . "0f14f780420602da823271fb2eb6251ff4daab9e"))
-:saturn
+:pluto

@@ -88,4 +88,8 @@
 
 (use-package git-timemachine)
 
+(use-package gitconfig-mode)
+(use-package gitattributes-mode)
+(use-package gitignore-mode)
+
 (provide 'ublt-git)
