@@ -36,6 +36,7 @@
  ("emacs-helm-ag" . "2fc02c4ead29bf0db06fd70740cc7c364cb650ac")
  ("emacs-htmlize" . "8db0aa6aab77475a732b7363f0d57bd3933c18fd")
  ("emacs-memoize" . "9a561268ffb550b257a08710489a95cd087998b6")
+ ("emacs-scala-mode" . "56cba2903cf6e12c715dbb5c99b34c97b2679379")
  ("emacs-terraform-mode" . "6973d1acaba2835dfdf174f5a5e27de6366002e1")
  ("emmet-mode" . "1acb821e0142136344ccf40c1e5fb664d7db2e70")
  ("epkgs" . "932c173480e505c40cb510ebaae4ccae6efdee3a")

@@ -47,4 +47,6 @@
 (use-package applescript-mode
   :mode "\\.applescript$")
 
+(use-package scala-mode)
+
 (provide 'ublt-programming)
