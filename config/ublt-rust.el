@@ -5,7 +5,7 @@
   :config (exec-path-from-shell-copy-envs '("RUST_SRC_PATH" "RUSTC_WRAPPER")))
 
 (use-package rust-mode
-  :custom (rust-format-on-save t))
+  :custom (rust-format-on-save nil))
 
 (use-package cargo)
 
