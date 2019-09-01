@@ -154,7 +154,7 @@
 (dolist (rescale '((".*Fira Mono-.*" 1.00)
                    (".*Droid Sans Mono-.*" 1.00)
                    (".*DejaVu Sans Mono-.*" 1.00)
-                   (".*Fantasque Sans Mono.*" 1.10)
+                   (".*Fantasque Sans Mono.*" 1.12)
                    (".*Symbol-.*" 1.239)))
   (pcase-let ((`(,font ,size) rescale))
     (ublt/assoc! 'face-font-rescale-alist font size)))
