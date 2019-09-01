@@ -28,7 +28,7 @@
                                   ("~/Programming/Tools" . 1)
                                   ("~/.emacs.d/straight/repos" . 1)))
 
-  (magit-status-margin '(t age-abbreviated magit-log-margin-width t 10))
+  (magit-status-margin '(t age magit-log-margin-width t 10))
 
   ;; `all' would be nice, but it's too slow for large diffs
   (magit-diff-refine-hunk t)
@@ -36,7 +36,7 @@
   ;; Gravatars.
   (magit-revision-show-gravatars '("^Author:     " .  "^Commit:     "))
 
-  (magit-log-margin '(t age-abbreviated magit-log-margin-width t 10))
+  (magit-log-margin '(t age magit-log-margin-width t 10))
   (magit-log-show-refname-after-summary t)
 
   ;; Other
