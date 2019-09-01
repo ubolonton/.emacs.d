@@ -1,6 +1,7 @@
 (require 'ublt-util)
 
 (use-package js2-mode
+  :disabled t
   :mode ("\\.es6$" "\\.js$")
   :hook (js2-mode . auto-fill-mode)
   :custom
