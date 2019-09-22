@@ -131,6 +131,7 @@
  ("undo-tree" . "d54ef13e3c69655e39f977b8bf75399a6d2b5e42")
  ("use-package" . "0ee88b5cac41acf974c4bedb8859931ead8bfc79")
  ("volatile-highlights.el" . "9a20091f0ce7fc0a6b3e641a6a46d5f3ac4d8392")
+ ("wat-mode" . "f34fc84879a99130283a124cd196041b474213e1")
  ("web-mode" . "b286d682205f86b7fe878a92a5afb510a07cd132")
  ("whole-line-or-region" . "15f17488f98868f1628a3f9d91a812b1f89bc73a")
  ("with-editor" . "38df9bfc2227bcb7ac4899c83a03756d5f171450")

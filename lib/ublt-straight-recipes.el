@@ -36,4 +36,7 @@ Example:
           :remote "ubolonton"
           :branch ,branch))
 
+(straight-register-package
+ '(wat-mode :type git :host github :repo "devonsparks/wat-mode"))
+
 (provide 'ublt-straight-recipes)
