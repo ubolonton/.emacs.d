@@ -382,7 +382,6 @@ end tell")))
 ;;; Slides for presentation
 
 (use-package ox-reveal
-  :defer t
   :custom ((org-reveal-root "reveal.js/")
            (org-reveal-transition "linear")
            (org-reveal-transition-speed "fast")
