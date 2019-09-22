@@ -47,6 +47,13 @@
 (use-package applescript-mode
   :mode "\\.applescript$")
 
-(use-package scala-mode)
+(use-package scala-mode
+  :custom ((scala-indent:step 4)
+           (scala-indent:align-parameters t)))
+
+(use-package groovy-mode)
+
+(use-package powershell-mode
+  :mode "\\.ps1$")
 
 (provide 'ublt-programming)
