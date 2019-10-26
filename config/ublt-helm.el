@@ -80,7 +80,6 @@
   :custom (helm-M-x-fuzzy-match t))
 
 (use-package helm-org
-  :ensure nil :straight nil
   :custom ((helm-org-headings-fontify t)
            (helm-org-format-outline-path t)))
 
