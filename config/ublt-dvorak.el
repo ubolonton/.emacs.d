@@ -761,6 +761,12 @@
   'other-window               'ublt/helm-maybe-exit-minibuffer-other-window)
 (ublt/keys 'helm-buffers helm-buffer-map
   "s-k" 'helm-buffer-run-kill-buffers)
+(ublt/keys 'helm-files helm-find-files-map
+  "<left>" 'helm-find-files-up-one-level
+  "<right>" 'helm-execute-persistent-action)
+(ublt/keys 'helm-files helm-read-file-map
+  "<left>" 'helm-find-files-up-one-level
+  "<right>" 'helm-execute-persistent-action)
 (ublt/keys 'minibuffer minibuffer-local-map
   "C-c C-l"     'helm-minibuffer-history)
 
