@@ -95,7 +95,7 @@
  ("nyan-mode" . "a85ac925367ddc542827182a2d9f0133b421c41b")
  ("org" . "a41e9950ae91c0711d93d5bf3e8ac07159876d89")
  ("org-bullets" . "b56f2e3812626f2c4ac1686073d102c71f4a8513")
- ("org-reveal" . "1cdd088ec5fab631c564dca7f9f74fd3e9b7d4d4")
+ ("org-reveal" . "6d6e4b54537b7d6830e09d127bdca844c92de727")
  ("otp" . "40474905b2814f0a17d04a5cf91b0cb543e76653")
  ("packed" . "c41c3dfda86ae33832ffc146923e2a4675cbacfa")
  ("paredit" . "acbe10fdd85d2e91831adf70b6a828bc7e900da0")
