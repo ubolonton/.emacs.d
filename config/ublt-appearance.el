@@ -22,7 +22,7 @@
 
 ;;; This is needed when redshift is running, since it overwrites
 ;;; xrandr's gamma settings
-(ublt/in '(gnu/linux)
+(ublt/in '(gnu/linux darwin)
   (defun ublt/set-gamma (g)
     (modify-all-frames-parameters
      `((screen-gamma . ,g))))
