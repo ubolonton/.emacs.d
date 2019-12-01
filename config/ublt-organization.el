@@ -74,8 +74,6 @@
            (org-outline-path-complete-in-steps nil)
            (org-refile-use-outline-path t))
   :config
-  ;; Use external browser
-  (add-to-list 'org-file-apps '("\\.x?html?\\'" browse-url file))
   ;;; Evaluation of embedded code
   (org-babel-do-load-languages
    'org-babel-load-languages
