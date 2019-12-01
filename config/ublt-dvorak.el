@@ -757,6 +757,10 @@
   "C-x h"       'helm-mark-all
   "M-a"         'helm-toggle-all-marks
   "C-f"         'helm-follow-mode
+  "M-<right>"   'helm-next-source
+  "M-<left>"    'helm-previous-source
+  "M-<up>"      'helm-follow-action-backward
+  "M-<down>"    'helm-follow-action-forward
   'ublt/switch-to-last-buffer 'helm-select-action
   'other-window               'ublt/helm-maybe-exit-minibuffer-other-window)
 (ublt/keys 'helm-buffers helm-buffer-map
