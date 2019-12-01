@@ -30,7 +30,8 @@
 (use-package flycheck
   :hook (python-mode . ublt/python-maybe-flycheck)
   :config (defun ublt/python-maybe-flycheck ()
-            (when (member (file-name-extension buffer-file-name) '("py"))
+            (when (and buffer-file-name
+                       (member (file-name-extension buffer-file-name) '("py")))
               (flycheck-mode +1))))
 
 
