@@ -80,7 +80,8 @@
    '((emacs-lisp . t)
      (clojure . t)
      (plantuml . t)
-     (shell . t))))
+     (shell . t)
+     (python . t))))
 
 (use-package org-indent
   :ensure nil :straight nil
