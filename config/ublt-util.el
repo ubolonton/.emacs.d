@@ -1,25 +1,107 @@
 ;;; -*- lexical-binding: t; coding: utf-8 -*-
 
 (require 'dash)
+(require 'seq)
+
+(defmacro ublt/examples (&rest body)
+  nil)
+
+;;; FIX
+(defun ublt/advice-remove (symbol advice)
+  "Like `advice-remove', but also works on names specified in `defined-advice'."
+  (advice-remove symbol advice)
+  (advice-mapc (lambda (f _)
+                 (when (eq f (intern (format "%s@%s" symbol advice)))
+                   (advice-remove symbol f)))
+               symbol))
 
 (defun ublt/advice-remove-all (symbol)
+  "Remove all advices from SYMBOL, using `ublt/advice-remove'."
   (advice-mapc (lambda (f _)
                  (advice-remove symbol f))
                symbol))
 
-(defun ublt/advice-remove (symbol advice-symbol)
-  (advice-mapc (lambda (f _)
-                 (when (or (eq f advice-symbol)
-                           (eq f (intern (concat symbol "@" advice-symbol))))
-                   (advice-remove symbol f)))
-               symbol))
+(defun ublt/advice-remove-from-all (advice)
+  "Remove ADVICE from all symbols, using `ublt/advice-remove'."
+  (mapatoms (lambda (symbol)
+              (when (functionp symbol)
+                (ublt/advice-remove symbol advice)))))
 
 (defun ublt/advice-list (symbol)
   (let ((advices nil))
-    (advice-mapc (lambda (f _)
-                   (setq advices (append advices `(,f))))
+    (advice-mapc (lambda (f props)
+                   (setq advices
+                         (-snoc advices
+                                (if-let ((name (alist-get 'name props)))
+                                    name
+                                  f))))
                  symbol)
     advices))
+
+(defun ublt/advice-list-affected (advice)
+  (mapatoms (lambda (symbol)
+              (when (functionp symbol)
+                ()))))
+
+(defvar ublt/timing-threshold-for-command 0.1)
+
+(defvar ublt/-command-start)
+
+(defun ublt/log-slow (start threshold prefix name &optional face)
+  (let ((elapsed (float-time (time-subtract (current-time) start))))
+    (when (> elapsed threshold)
+      (message (propertize (format "%s: %s -> %s" prefix name elapsed)
+                           'face (or face 'font-lock-warning-face))))))
+
+(defun ublt/-pre-command-timing ()
+  (setq ublt/-command-start (current-time)))
+
+(defun ublt/-post-command-timing ()
+  (ublt/log-slow ublt/-command-start
+                  ublt/timing-threshold-for-command
+                  "ublt/slow-command" this-command))
+
+(ublt/examples
+ (progn
+   (add-hook 'pre-command-hook #'ublt/-pre-command-timing t)
+   (add-hook 'post-command-hook #'ublt/-post-command-timing))
+
+ (default-value 'pre-command-hook)
+ (default-value 'post-command-hook)
+
+ (progn
+   (remove-hook 'pre-command-hook #'ublt/-pre-command-timing)
+   (remove-hook 'post-command-hook #'ublt/-post-command-timing)))
+
+(defvar ublt/timing-threshold-for-hook 0.01)
+
+(defun ublt/-time-execution (name function &rest args)
+  "Apply FUNCTION to ARGS, printing a message for NAME if it takes more than
+`ublt/timing-threshold-for-hook'."
+  (let* ((start (current-time))
+         (result (apply function args)))
+    (ublt/log-slow start ublt/timing-threshold-for-hook
+                    "ublt/slow-hook" name)
+    result))
+
+(defun ublt/-make-timing-advice (name)
+  (lambda (f &rest args)
+    (apply #'ublt/-time-execution name f args)))
+
+(defun ublt/enable-timing (symbol)
+  (advice-add symbol :around (ublt/-make-timing-advice symbol)
+              '((name . "ublt/timing"))))
+
+(ublt/examples
+ ;; Turn on timing for frequently-run hooks.
+ (dolist (hook '(pre-command-hook
+                 post-command-hook
+                 after-change-functions))
+   (dolist (f (default-value hook))
+     (ublt/enable-timing f)))
+
+ ;; Turn off timing.
+ (ublt/advice-remove-from-all "ublt/timing"))
 
 
 
