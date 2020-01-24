@@ -65,6 +65,7 @@
  ("helm-cider" . "9363cc537f06233345aa3af5cd46aa5681ad607b")
  ("helm-org" . "542dda7bc9a3b9dfb439e4f8a1e5f60cfb6cc256")
  ("helm-projectile" . "5328b74dddcee8d1913803ca8167868831a07463")
+ ("helm-rg" . "785a80fe5cc87e27c5ea3d00a70049028d9e2847")
  ("helm-swoop" . "884d2f5840108f0171d38fa19ae2334560f5c2d9")
  ("helpful" . "53ae44bd2384de5e2513496ccf6ca2fce6767299")
  ("highlight-numbers" . "8b4744c7f46c72b1d3d599d4fb75ef8183dee307")

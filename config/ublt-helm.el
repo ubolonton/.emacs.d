@@ -250,6 +250,9 @@ all of the sources."
 (use-package helm-projectile
   :custom (projectile-enable-caching t))
 
+;;; TODO: Assign this to s-h when its flickering issue is fixed.
+(use-package helm-rg)
+
 (use-package helm-ag
   :custom ((helm-ag-insert-at-point t)
            (helm-ag-command-option "--follow")))
