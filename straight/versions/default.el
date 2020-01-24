@@ -38,6 +38,7 @@
  ("emacs-memoize" . "9a561268ffb550b257a08710489a95cd087998b6")
  ("emacs-scala-mode" . "56cba2903cf6e12c715dbb5c99b34c97b2679379")
  ("emacs-terraform-mode" . "6973d1acaba2835dfdf174f5a5e27de6366002e1")
+ ("emacsmirror-mirror" . "8c2ab320b0386d1d358e8070c0b7ab379259b4f7")
  ("emmet-mode" . "1acb821e0142136344ccf40c1e5fb664d7db2e70")
  ("epkgs" . "932c173480e505c40cb510ebaae4ccae6efdee3a")
  ("epl" . "78ab7a85c08222cd15582a298a364774e3282ce6")
