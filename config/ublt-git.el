@@ -16,6 +16,8 @@
 
   (magit-refresh-status-buffer nil)
 
+  (magit-status-show-hashes-in-headers t)
+
   ;; XXX: Doesn't work. WTF. https://github.com/magit/magit/issues/1743
   ;; ;; 2-way diff for staging is much more useful than 3-way.
   ;; magit-ediff-dwim-show-on-hunks t
