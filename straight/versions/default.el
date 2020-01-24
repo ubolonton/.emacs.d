@@ -88,7 +88,7 @@
  ("magit" . "6bfe8c0957fa178eb15007055b5197f17ab2632f")
  ("markdown-mode" . "f3c54e34cc5228001af36a5301883325319f21d4")
  ("markup-faces" . "98a807ed82473eb41c6a201ed7ef816d6bcd67b0")
- ("melpa" . "d1708e6fa8778a79cd2423a56497140e3302b579")
+ ("melpa" . "e8dc709d0ab2b4a68c59315f42858bcb86095f11")
  ("monokai-emacs" . "f4ef092129f4a35edaee0a9b2219c17e86309730")
  ("move-text" . "7cbc941a9150468609010a93c429117da2523903")
  ("multiple-cursors.el" . "5ffb19af48bf8a76ddc9f81745be052f050bddef")
