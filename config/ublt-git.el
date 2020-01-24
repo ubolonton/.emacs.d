@@ -52,7 +52,18 @@
   ;; TODO: Move this definition somewhere else.
   (defun ublt/disable-line-spacing ()
     (setq line-spacing 0))
+
   (add-hook 'magit-revision-mode-hook #'ublt/disable-line-spacing)
+
+  (defun ublt/magit-log-last-change (&optional args files)
+    "Show log for last change to HEAD (i.e. HEAD@{1}...HEAD)"
+    (interactive (magit-log-arguments))
+    (magit-log-setup-buffer '("HEAD@{1}...HEAD") args files))
+
+  ;; FIX: Improve `transient' modification APIs to support e.g. searching by description.
+  (dolist (addition '(("=m" ("-M" "Show merges only" "--merges"))
+                      ("h" ("c" "last change" ublt/magit-log-last-change))))
+    (apply #'transient-append-suffix 'magit-log addition))
 
   ;; Our default value for `fill-column' can be different.
   (add-hook 'git-commit-mode-hook
@@ -68,9 +79,8 @@
   :custom (git-commit-summary-max-length 70))
 
 (use-package transient
-  :custom (transient-default-level 7)
-  :config (dolist (addition '(("=m" ("-M" "Show merges only" "--merges"))))
-            (apply #'transient-append-suffix 'magit-log addition)))
+  ;; `transient' doesn't seem to have a runtime show-all toggle.
+  :custom (transient-default-level 7))
 
 ;;; We use this only for magit-todos, since we prefer our own coloring in code buffers.
 (use-package hl-todo
