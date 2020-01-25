@@ -75,7 +75,7 @@
  ("ht.el" . "66c5f9131242697fabaede5566d87ecda4c14b1f")
  ("hydra" . "74b32f3ff004cd2ad7707722ffa7f85e8233a845")
  ("inf-mongo" . "2e498d1c88bd1904eeec18ed06b1a0cf8bdc2a92")
- ("info-colors" . "f483da12052a18919091316623234ad38e15a5e8")
+ ("info-colors" . "47ee73cc19b1049eef32c9f3e264ea7ef2aaf8a5")
  ("json-mode" . "0e819e519ae17a2686e0881c4ca51fa873fa9b83")
  ("json-reformat" . "8eb6668ed447988aea06467ba8f42e1f2178246f")
  ("json-snatcher" . "c4cecc0a5051bd364373aa499c47a1bb7a5ac51c")
