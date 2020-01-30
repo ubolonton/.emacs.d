@@ -49,6 +49,9 @@
 (use-package ielm
   :hook (ielm-mode . (lambda () (setq comint-input-ring-file-name "~/.emacs.d/.ielm-input.hist"))))
 
+(use-package flycheck-package
+  :config (flycheck-package-setup))
+
 (ublt/with-defer
   (use-package cask-mode)
 
