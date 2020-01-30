@@ -445,13 +445,13 @@ end tell")))
 
   (defun ublt/-prettify-org ()
     (font-lock-add-keywords nil '(("\\(=>\\)"
-                                   (0 (ublt/show-as ?⟹ ublt/-not-in-org-src-block)))
+                                   (0 (ublt/show-as ?⟹ #'ublt/-not-in-org-src-block)))
                                   ("\\(<=\\)"
-                                   (0 (ublt/show-as ?⟸ ublt/-not-in-org-src-block)))
+                                   (0 (ublt/show-as ?⟸ #'ublt/-not-in-org-src-block)))
                                   ("\\(->\\)"
-                                   (0 (ublt/show-as ?⟶ ublt/-not-in-org-src-block)))
+                                   (0 (ublt/show-as ?⟶ #'ublt/-not-in-org-src-block)))
                                   ("\\(<-\\)"
-                                   (0 (ublt/show-as ?⟵ ublt/-not-in-org-src-block)))
+                                   (0 (ublt/show-as ?⟵ #'ublt/-not-in-org-src-block)))
                                   ("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)"
                                     1 'org-checkbox-done-text prepend))
                             'append)
