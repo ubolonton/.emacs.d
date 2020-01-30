@@ -472,6 +472,11 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
      ((,class (,@normal-hl))))
    `(magit-section-secondary-heading
      ((,class (,@vw ,@subheader ,@italic))))
+   ;; Revision.
+   `(magit-diff-revision-summary
+     ((,class (:inherit magit-section-heading :weight normal))))
+   `(magit-diff-revision-summary-highlight
+     ((,class (:inherit magit-diff-revision-summary ,@normal-hl))))
    ;; Files.
    `(magit-diff-file-heading
      ((,class (:inherit magit-filename))))
@@ -482,7 +487,7 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
      ((,class (:inherit diff-hunk-header :overline ,bg+3))))
    `(magit-diff-hunk-heading-highlight
      ((,class (:inherit magit-diff-hunk-heading ,@special-hl :overline ,fg ,@bold))))
-   ;; Diffs.
+   ;; Diff content.
    `(magit-diff-added
      ((,class (:inherit diff-added))))
    `(magit-diff-removed
