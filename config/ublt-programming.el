@@ -54,6 +54,7 @@
 (use-package groovy-mode)
 
 (use-package powershell-mode
-  :mode "\\.ps1$")
+  :mode "\\.ps1$"
+  :custom (powershell-indent 4))
 
 (provide 'ublt-programming)
