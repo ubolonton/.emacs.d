@@ -126,7 +126,7 @@
  ("shut-up" . "081d6b01e3ba0e60326558e545c4019219e046ce")
  ("solarized-emacs" . "74c6b5acd6892faeafd08029898663d81ab0a4d5")
  ("spinner" . "2daa167bec1c7566d662d48613a94453536b524a")
- ("straight.el" . "7cd0d88b0a1877536439ddd7c1d1b7f3206bedff")
+ ("straight.el" . "ed54b626b0faec36fdaff30c72351d5fb41a6786")
  ("swiper" . "0e62f0d1f61b825ca5eb4b55e47ecb37b3e2834e")
  ("systemd-mode" . "401d71c2dd24e424216ae5e4275c830f2a9c6b0c")
  ("textmate.el" . "350918b070148f0ace6d9d3cd4ebcaf15c1a8781")
