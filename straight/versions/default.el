@@ -112,7 +112,7 @@
  ("popwin" . "95dea14c60019d6cccf9a3b33e0dec4e1f22c304")
  ("posframe" . "11c2fa2d6e0236f20c83da86c37b005c64b8c5cb")
  ("powerline" . "6ef4a06c3c583045accbc957b6f449b7c0c57cd8")
- ("powershell-mode" . "759836de0bc703b573d80d6dfaa490d319616fc4")
+ ("powershell.el" . "87826777bd3ebd53740be99b4546bfc11ccc625d")
  ("projectile" . "cbdd0f071ca5cc2890738f08aa7223101ef2d032")
  ("pyvenv" . "fa6a028349733b0ecb407c4cfb3a715b71931eec")
  ("quack" . "2146805ce2b5a9b155d73929986f11e713787e26")

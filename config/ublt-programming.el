@@ -53,10 +53,7 @@
 
 (use-package groovy-mode)
 
-(use-package powershell-mode
-  :mode "\\.ps1$"
-  :custom (powershell-indent 4)
-  ;; XXX:
-  :config (setq-default debug-on-error nil))
+(use-package powershell
+  :custom (powershell-indent 4))
 
 (provide 'ublt-programming)
