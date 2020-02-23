@@ -152,16 +152,6 @@
          nil))
     (require feature filename)))
 
-(defvar ublt/package-errors ())
-(defun ublt/package-install (pkg)
-  (when (not (package-installed-p pkg))
-    (condition-case err
-        (package-install pkg nil)
-      (error
-       (setq ublt/package-errors (plist-put ublt/package-errors pkg err))
-       (message (propertize "Failed to install %s: %s" 'face 'font-lock-keyword-face)
-                pkg err)))))
-
 ;;; TODO: Use `use-package'.
 (defmacro ublt/set-up (feature &rest body)
   "Try loading the feature, running BODY afterward, notifying

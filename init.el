@@ -42,6 +42,16 @@
      (when (not package-archive-contents)
        (package-refresh-contents))
 
+     (defvar ublt/package-errors ())
+     (defun ublt/package-install (pkg)
+       (when (not (package-installed-p pkg))
+         (condition-case err
+             (package-install pkg nil)
+           (error
+            (setq ublt/package-errors (plist-put ublt/package-errors pkg err))
+            (message (propertize "Failed to install %s: %s" 'face 'font-lock-keyword-face)
+                     pkg err)))))
+
      (dolist (p ublt/packages)
        (ublt/package-install p))
 
