@@ -80,11 +80,10 @@
 
 (defmacro ublt/keys (package map &rest mappings)
   (declare (indent 2))
-  `(eval-after-load ,package
-     (quote (progn
-              (ublt/define-keys ,map
-                ,@mappings)
-              (message "Updated keymap `%s'" ',map)))))
+  `(with-eval-after-load ,package
+     (ublt/define-keys ,map
+       ,@mappings)
+     (message "Updated keymap `%s'" ',map)))
 
 
 ;;; Custom global bindings -------------------------------------------
