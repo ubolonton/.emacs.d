@@ -181,9 +181,6 @@
       (?⇐ . ?⇐)
       (?☑ . ?☑)
       (?☐ . ?☐))
-    `(,(font-spec :family "Droid Sans Mono"
-                  :weight 'normal)
-      (?λ . ?λ))
     ;; Fallback.
     `(,(font-spec :family "Arial Unicode MS")
       nil)))
