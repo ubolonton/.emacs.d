@@ -1159,6 +1159,16 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
                        "#009900"
                        "#007700"
                        "#005500"))
+
+   '(hl-todo-keyword-faces
+     '(("TODO" warning)
+       ("FAIL" compilation-error)
+       ("NOTE" font-lock-doc-face)
+       ("HACK" font-lock-warning-face)
+       ("FIXME" font-lock-warning-face)
+       ("FIX" font-lock-warning-face)
+       ("XXX+" font-lock-warning-face)
+       ("\\?\\?\\?+" font-lock-warning-face)))
    ))
 
 ;;;###autoload
