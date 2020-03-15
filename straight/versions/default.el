@@ -56,6 +56,7 @@
  ("flycheck" . "0eaf67211b83c062e598694d2ba4efb444dc1dc6")
  ("flycheck-package" . "d76e04009f2548581fc9e9a84f79f1a3112f1096")
  ("flycheck-pyflakes" . "61b045939e3743b2162b7e4e73249c66fc2b8f65")
+ ("fuz.el" . "0b6b64cebde5675be3a28520ee16234db48d3b8b")
  ("git-modes" . "55468314a5f6b77d2c96be62c7005ac94545e217")
  ("git-timemachine" . "391eb61050de321101e631fcf373fc70ec6e7700")
  ("gnu-elpa-mirror" . "e979b4211660a2cc4377ef04918979fe9b4323ed")
