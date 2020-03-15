@@ -4,7 +4,7 @@
   :after python)
 
 (use-package elpy
-  :defer 30
+  :disabled t
   :custom ((elpy-modules '(elpy-module-sane-defaults
                            elpy-module-company
                            elpy-module-eldoc
