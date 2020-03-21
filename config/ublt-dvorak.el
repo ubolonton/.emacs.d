@@ -384,7 +384,13 @@
   "S-<mouse-4>"   'backward-paragraph
   "S-<mouse-5>"   'forward-paragraph
   "M-<mouse-4>"   'scroll-down-line
-  "M-<mouse-5>"   'scroll-up-line)
+  "M-<mouse-5>"   'scroll-up-line
+
+  ;; Apparently it's system-dependent whether they are mouse-4/mouse-5 or wheel-down/wheel-up.
+  "s-<wheel-down>" 'text-scale-increase
+  "s-<wheel-up>"   'text-scale-decrease
+  "M-<wheel-down>" 'scroll-down-line
+  "M-<wheel-up>"   'scroll-up-line)
 
 ;;; Remapping some commands to their improved versions (keeping the key bindings).
 (ublt/define-keys global-map
