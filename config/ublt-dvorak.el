@@ -86,6 +86,15 @@
      (message "Updated keymap `%s'" ',map)))
 
 
+;; Mouse.
+(defun ublt/mouse-xref-find-definitions (event)
+  "Move point to mouse EVENT's location, then call the command bound to `M-.'."
+  (interactive "e")
+  (mouse-set-point event)
+  (when-let ((command (key-binding (kbd "M-."))))
+    (call-interactively command)))
+
+
 ;;; Custom global bindings -------------------------------------------
 ;; TODO:
 ;; M-y
@@ -390,7 +399,9 @@
   "s-<wheel-down>" 'text-scale-increase
   "s-<wheel-up>"   'text-scale-decrease
   "M-<wheel-down>" 'scroll-down-line
-  "M-<wheel-up>"   'scroll-up-line)
+  "M-<wheel-up>"   'scroll-up-line
+
+  "s-<mouse-1>"    'ublt/mouse-xref-find-definitions)
 
 ;;; Remapping some commands to their improved versions (keeping the key bindings).
 (ublt/define-keys global-map
