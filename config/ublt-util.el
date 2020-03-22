@@ -3,20 +3,27 @@
 (require 'dash)
 (require 'seq)
 
+(eval-when-compile
+  (require 'cl-lib)
+  (require 'subr-x))
+
 (defmacro ublt/examples (&rest body)
   nil)
+
+(defun ublt/-symbol-advice-p (symbol f advice)
+  (or (eq f advice)
+      (eq f (intern-soft (format "%s@%s" symbol advice)))))
 
 ;;; FIX
 (defun ublt/advice-remove (symbol advice)
   "Like `advice-remove', but also works on names specified in `defined-advice'."
-  (advice-remove symbol advice)
   (advice-mapc (lambda (f _)
-                 (when (eq f (intern (format "%s@%s" symbol advice)))
+                 (when (ublt/-symbol-advice-p symbol f advice)
                    (advice-remove symbol f)))
                symbol))
 
 (defun ublt/advice-remove-all (symbol)
-  "Remove all advices from SYMBOL, using `ublt/advice-remove'."
+  "Remove all advices from SYMBOL."
   (advice-mapc (lambda (f _)
                  (advice-remove symbol f))
                symbol))
@@ -28,6 +35,7 @@
                 (ublt/advice-remove symbol advice)))))
 
 (defun ublt/advice-list (symbol)
+  "Return the list of all advices attached to SYMBOL."
   (let ((advices nil))
     (advice-mapc (lambda (f props)
                    (setq advices
@@ -38,10 +46,16 @@
                  symbol)
     advices))
 
-(defun ublt/advice-list-affected (advice)
-  (mapatoms (lambda (symbol)
-              (when (functionp symbol)
-                ()))))
+(defun ublt/advice-list-symbols (advice)
+  "Return the list of all functions that ADVICE is attached to."
+  (let (symbols)
+    (mapatoms (lambda (symbol)
+                (when (functionp symbol)
+                  (advice-mapc (lambda (f _)
+                                 (when (ublt/-symbol-advice-p symbol f advice)
+                                   (cl-pushnew symbol symbols)))
+                               symbol))))
+    symbols))
 
 (defvar ublt/timing-threshold-for-command 0.1)
 
