@@ -576,14 +576,17 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
      ((,class (,@fw ,@constant))))
    `(highlight-numbers-number
      ((,class (,@fw ,@number))))
+   `(hl-todo
+     ((,class (:inherit font-lock-warning-face))))
+
    `(lisp-extra-font-lock-quoted
      ((,class (,@fw))))
    `(lisp-extra-font-lock-quoted-function
      ((,class (,@fw :inherit link))))
    `(lisp-extra-font-lock-backquote
      ((,class (:inherit font-lock-preprocessor-face))))
-   `(hl-todo
-     ((,class (:inherit font-lock-warning-face))))
+   `(highlight-function-calls-face
+     ((,class (,@fw :inherit link :underline nil))))
 
    `(js2-function-param
      ((,class (,@param))))

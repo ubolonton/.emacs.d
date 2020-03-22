@@ -46,6 +46,9 @@
 (use-package lisp-extra-font-lock
   :config (lisp-extra-font-lock-global-mode +1))
 
+(use-package highlight-function-calls
+  :hook (emacs-lisp-mode . highlight-function-calls-mode))
+
 (use-package ielm
   :hook (ielm-mode . (lambda () (setq comint-input-ring-file-name "~/.emacs.d/.ielm-input.hist"))))
 

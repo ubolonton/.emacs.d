@@ -66,6 +66,7 @@
  ("helm-rg" . "785a80fe5cc87e27c5ea3d00a70049028d9e2847")
  ("helm-swoop" . "884d2f5840108f0171d38fa19ae2334560f5c2d9")
  ("helpful" . "53ae44bd2384de5e2513496ccf6ca2fce6767299")
+ ("highlight-function-calls" . "f7a1eaf95fc64cc0db4d0567f9ff79ec4ae04787")
  ("highlight-numbers" . "8b4744c7f46c72b1d3d599d4fb75ef8183dee307")
  ("highlight-parentheses.el" . "f0bd58c8dadd2db703b7bfd09e911b5fda05b3df")
  ("highlight-symbol.el" . "7a789c779648c55b16e43278e51be5898c121b3a")
