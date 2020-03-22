@@ -94,6 +94,12 @@
   (when-let ((command (key-binding (kbd "M-."))))
     (call-interactively command)))
 
+(defun ublt/mouse-pop-tag-mark (event)
+  "Call the command bound to `M-\,'."
+  (interactive "e")
+  (when-let ((command (key-binding (kbd "M-,"))))
+    (call-interactively command)))
+
 
 ;;; Custom global bindings -------------------------------------------
 ;; TODO:
@@ -401,7 +407,8 @@
   "M-<wheel-down>" 'scroll-down-line
   "M-<wheel-up>"   'scroll-up-line
 
-  "s-<mouse-1>"    'ublt/mouse-xref-find-definitions)
+  "s-<mouse-1>"    'ublt/mouse-xref-find-definitions
+  "S-s-<mouse-1>"  'ublt/mouse-pop-tag-mark)
 
 ;;; Remapping some commands to their improved versions (keeping the key bindings).
 (ublt/define-keys global-map
