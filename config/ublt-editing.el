@@ -130,7 +130,8 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
 
 (use-package company-posframe
   :after company
-  :custom ((company-posframe-font "Fantasque Sans Mono"))
+  :custom ((company-posframe-font "Fantasque Sans Mono")
+           (company-posframe-quickhelp-delay nil))
   :config (company-posframe-mode +1))
 
 
