@@ -44,10 +44,13 @@
   :hook (emacs-lisp-mode . elisp-slime-nav-mode))
 
 (use-package lisp-extra-font-lock
-  :config (lisp-extra-font-lock-global-mode +1))
+  :config (lisp-extra-font-lock-global-mode +1)
+  :hook (ielm-mode . lisp-extra-font-lock-mode))
 
 (use-package highlight-function-calls
-  :hook (emacs-lisp-mode . highlight-function-calls-mode))
+  :hook ((emacs-lisp-mode ielm-mode)
+         . highlight-function-calls-mode)
+  :custom (highlight-function-calls-not t))
 
 (use-package ielm
   :hook (ielm-mode . (lambda () (setq comint-input-ring-file-name "~/.emacs.d/.ielm-input.hist"))))
