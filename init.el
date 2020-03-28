@@ -1,12 +1,16 @@
 ;;; For browsing Emacs's C source. This must be set early.
 (setq source-directory "~/Programming/Tools/emacs")
 
+;;; Prefer newly edited .el files over compiled .elc files.
 (setq load-prefer-newer t)
 
 ;;; Make package downloading a bit more secure.
 (setq tls-checktrust 'ask)
 
 (setq custom-file "~/.emacs.d/custom.el")
+(add-hook 'after-init-hook (lambda ()
+                             (with-demoted-errors "Error loading custom-file: %S"
+                               (load custom-file))))
 
 (add-to-list 'load-path "~/.emacs.d/lib")
 (add-to-list 'load-path "~/.emacs.d/config")
