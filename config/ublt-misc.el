@@ -114,11 +114,6 @@
 ;; Who the hell set it to t?
 (setq debug-on-error nil)
 
-(use-package tree-sitter
-  :ensure nil :straight nil
-  :demand t
-  :load-path "~/Programming/projects/emacs-tree-sitter/")
-
 
 ;;; Misc stuff I use -------------------------------------------------
 

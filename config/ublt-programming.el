@@ -56,4 +56,16 @@
 (use-package powershell
   :custom (powershell-indent 4))
 
+(use-package tree-sitter
+  :ensure nil :straight nil
+  :demand t
+  :hook ((rust-mode js-mode python-mode scala-mode c-mode c++-mode)
+         . tree-sitter-mode)
+  :config
+  (require 'tree-sitter-langs)
+  (require 'tree-sitter-debug)
+  (require 'tree-sitter-extras)
+  :load-path ("~/Programming/projects/emacs-tree-sitter/lisp/"
+              "~/Programming/projects/emacs-tree-sitter/langs/"))
+
 (provide 'ublt-programming)
