@@ -97,6 +97,7 @@
  ("org-bullets" . "b56f2e3812626f2c4ac1686073d102c71f4a8513")
  ("org-reveal" . "6d6e4b54537b7d6830e09d127bdca844c92de727")
  ("otp" . "40474905b2814f0a17d04a5cf91b0cb543e76653")
+ ("ox-hugo" . "1c1e3ec46785d93f4de2e71fc32604bd7c0fed40")
  ("package-lint" . "cf2ce871549bb816ecb7a9930bdfb77525468f5e")
  ("packed" . "c41c3dfda86ae33832ffc146923e2a4675cbacfa")
  ("paredit" . "acbe10fdd85d2e91831adf70b6a828bc7e900da0")

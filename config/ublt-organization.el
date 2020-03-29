@@ -376,6 +376,11 @@ end tell")))
            org-note-abort)))))))
 
 
+
+;;; Static HTML export
+
+(use-package ox-hugo
+  :after ox)
 
 
 ;;; Slides for presentation
