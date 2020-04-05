@@ -4,16 +4,45 @@
 (use-package org
   :hook ((org-mode . hl-line-mode)
          (org-mode . highlight-parentheses-mode))
-  :custom ((org-indirect-buffer-display 'current-window)
+
+  :custom (;; Appearance
+
+           ;; Show all headlines by default.
+           (org-startup-folded t)
+
+           ;; Don't show empty lines in collapsed view.
+           (org-cycle-separator-lines 0)
+
+           ;; List additional (on top of 2) indentation.
+           (org-list-indent-offset 1)
+
+           (org-fontify-whole-heading-line t)
+
+           ;; Hide / * _ ~ =
+           (org-hide-emphasis-markers t)
+
+           ;; Column-based aligning doesn't work with variable-pitch fonts.
+           (org-tags-column 0)
+
+           ;; Fontify code blocks.
+           (org-src-fontify-natively t))
+
+  :custom (;; Navigation
+
+           ;; Don't use isearch there, normal isearch is enough
+           (org-goto-auto-isearch nil)
+           ;; Don't use `outline-path-completion'. `helm-org-in-buffer-headings' is better
+           (org-goto-interface 'outline)
+           ;; Whole path instead of level-by-level navigation
+           (org-outline-path-complete-in-steps nil))
+
+
+  :custom (;; Other
+
+           (org-indirect-buffer-display 'current-window)
            ;; Intelligent (dwim) bindings
            (org-special-ctrl-a/e t)
            (org-special-ctrl-k t)
-
-           ;; Show all headlines by default
-           (org-startup-folded t)
-
-           ;; Don't show empty lines in collapsed view
-           (org-cycle-separator-lines 0)
 
            ;; Disallow editing folded content
            (org-catch-invisible-edits 'error)
@@ -26,25 +55,13 @@
 
            ;; org-show-entry-below t
 
-           ;; Don't use isearch there, normal isearch is enough
-           (org-goto-auto-isearch nil)
-           ;; Don't use `outline-path-completion'. `helm-org-in-buffer-headings' is better
-           (org-goto-interface 'outline)
-
            ;; Don't split current heading, create a new one
            (org-M-RET-may-split-line nil)
            ;; Create new heading after the current content
            (org-insert-heading-respect-content t)
 
-           ;; Heading visual indentation
-           (org-indent-indentation-per-level 2)
-           ;; List additional (on top of 2) indentation
-           (org-list-indent-offset 1)
-
-           (org-hide-emphasis-markers t)
-
            ;; Allow using alphabetical bullets
-           (org-alphabetical-lists t)
+           (org-list-allow-alphabetical t)
 
            ;; 2 lines to terminate lists
            (org-empty-line-terminates-plain-lists nil)
@@ -62,18 +79,8 @@
            ;; ;; Don't number headlines
            (org-export-with-section-numbers nil)
 
-           ;; Fontify code blocks
-           (org-src-fontify-natively t)
-
-           (org-fontify-whole-heading-line t)
-
-           (org-export-htmlize-output-type 'css)
-
-           (org-tags-column 0)
-
-           ;; Whole path instead of level-by-level navigation
-           (org-outline-path-complete-in-steps nil)
            (org-refile-use-outline-path t))
+
   :config
   ;;; Evaluation of embedded code
   (org-babel-do-load-languages
@@ -98,7 +105,7 @@
   :defer t
   :custom (org-plantuml-jar-path "~/bin/plantuml.jar"))
 
-
+;; ---------------------------------------------------------------------------
 ;;; Task management, GTD
 
 ;;; TODO: Define tags (upper-case: specific, lower-case: generic)
@@ -377,8 +384,12 @@ end tell")))
            org-note-abort)))))))
 
 
-
+;; ---------------------------------------------------------------------------
 ;;; Static HTML export
+
+(use-package ox-html
+  :ensure nil :straight nil
+  :custom (org-html-htmlize-output-type 'css))
 
 (use-package ox-hugo
   :after ox
@@ -389,7 +400,7 @@ end tell")))
       (map-put data 'weight weight)
       (apply f data args))))
 
-
+;; ---------------------------------------------------------------------------
 ;;; Slides for presentation
 
 (use-package ox-reveal
@@ -401,7 +412,7 @@ end tell")))
            (org-reveal-progress t)
            (org-reveal-rolling-links nil)))
 
-
+;; ---------------------------------------------------------------------------
 ;;; PDF export
 
 (use-package ox-latex
@@ -442,7 +453,8 @@ end tell")))
                  ("\\paragraph{%s}" . "\\paragraph*{%s}")
                  ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
 
-
+;; ---------------------------------------------------------------------------
+;;; TODO: Move this out into a separate file, allowing it to be byte-compiled.
 (use-package org
   :hook (org-mode . ublt/-prettify-org)
   :config

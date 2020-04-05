@@ -669,8 +669,7 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
                         ))))
    ;; We use `normal' not `bold' for these because we use Fira Sans
    `(org-level-1
-     ((,class (,@vw ,@constant :weight normal :height 1.4 ,@dimmed-hl
-                    :box (:line-width 1 :color ,bg :style released-button)))))
+     ((,class (,@vw ,@constant :weight normal :height 1.4 ,@dimmed-hl))))
    `(org-level-2
      ((,class (,@vw ,@subheader :weight normal :height 1.2))))
    `(org-level-3
