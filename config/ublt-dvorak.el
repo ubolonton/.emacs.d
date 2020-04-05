@@ -278,7 +278,10 @@
   "s-="           'text-scale-increase
   "s--"           'text-scale-decrease
 
-  ;; These should be translated
+  "C-s-n"         'forward-page
+  "C-s-h"         'backward-page
+
+  ;; TODO: These should be translated
   "s-["           'backward-page
   "s-]"           'forward-page
 
