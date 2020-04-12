@@ -534,9 +534,13 @@
 
 ;;; Change highlighting
 (use-package diff-hl
+  :disabled t
   :custom (diff-hl-draw-borders nil)
   :config
-  (global-diff-hl-mode +1)
+  (with-eval-after-load 'magit
+    (add-hook 'magit-pre-refresh-hook #'diff-hl-magit-pre-refresh)
+    (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh))
+  (global-diff-hl-mode)
   (if (display-graphic-p)
       (setq diff-hl-side 'right)
     (setq diff-hl-side 'left)

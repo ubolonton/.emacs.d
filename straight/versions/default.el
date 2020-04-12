@@ -18,7 +18,7 @@
  ("company-mode" . "955f80e6c911a818611887bc35658af9e925ed66")
  ("company-posframe" . "37a1f136f61bed4050dbeb182767c7e51cb73e1b")
  ("dash.el" . "721436b04da4e2795387cb48a98ac6de37ece0fd")
- ("diff-hl" . "84a5fe1900af2e5cc522f02749804f0d9f094bbf")
+ ("diff-hl" . "a625033fb1dde83f6e4c2fc21f632b22ec34b609")
  ("diminish.el" . "565a983a39d2e2cffab5df13b34f3b6116723208")
  ("dired-hacks" . "2c1234592aee91dcd9401bcd67213e6a4a464fd9")
  ("diredfl" . "9b2a89951cee8bdf5c0cb67f9c3ad6ac73abf9cb")

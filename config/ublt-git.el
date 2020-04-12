@@ -4,6 +4,8 @@
 (use-package magit
   :custom
 
+  ;; TODO: Figure out how make `diff-hl' work without 'Git in `vc-handled-backends'.
+  ;; This is for performance: https://magit.vc/manual/magit/Performance.html.
   (vc-handled-backends (delq 'Git vc-handled-backends))
 
   ;; ;; Show original windows when quitting magit.
@@ -73,9 +75,6 @@
 
   (with-eval-after-load 'helm-info
     (ublt/helm-info-reload)))
-
-(use-package diff-hl
-  :hook (magit-post-refresh . diff-hl-magit-post-refresh))
 
 (use-package git-commit
   :custom (git-commit-summary-max-length 70))

@@ -537,11 +537,11 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
 
    ;; Fringe highlights of diffs.
    `(diff-hl-insert
-     ((,class (:foreground ,bg :background ,forest))))
+     ((,class (:foreground ,forest :background ,forest))))
    `(diff-hl-delete
      ((,class (:foreground ,blush :background ,blush))))
    `(diff-hl-change
-     ((,class (:foreground ,cyan :background ,cyan))))
+     ((,class (:foreground ,orange :background ,orange))))
 
    
    ;; Programming languages
