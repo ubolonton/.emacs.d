@@ -940,17 +940,18 @@
   "C-c C-d" nil)
 (ublt/keys "lisp-mode" lisp-mode-shared-map
   "RET" 'reindent-then-newline-and-indent)
-(ublt/keys "lisp-mode" emacs-lisp-mode-map
+(ublt/keys 'elisp-mode emacs-lisp-mode-map
   "M-TAB"   nil
-  "C-c C-c" 'eval-defun
-  "C-c C-r" 'eval-region
+  "C-c C-c" 'ublt/eval-defun
+  "C-M-x"   'ublt/eval-defun
   "C-c C-l" 'eval-buffer
   "C-c C-s" 'ielm)
 (ublt/keys "lisp-mode" lisp-mode-map
   "C-c C-s" 'switch-to-lisp)
-(ublt/keys "lisp-mode" lisp-interaction-mode-map
+(ublt/keys 'elisp-mode lisp-interaction-mode-map
   "M-TAB"   nil
-  "C-c C-c" 'eval-defun
+  "C-c C-c" 'ublt/eval-defun
+  "C-M-x"   'ublt/eval-defun
   "C-c C-r" 'eval-region
   "C-c C-l" 'eval-buffer
   "C-c C-s" 'ielm)

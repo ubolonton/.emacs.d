@@ -7,6 +7,12 @@
   (require 'cl-lib)
   (require 'subr-x))
 
+(defun ublt/eval-defun (prefix)
+  (interactive "P")
+  (if (and (consp prefix) (= (car prefix) 16))
+      (compile-defun)
+    (call-interactively #'eval-defun)))
+
 (defmacro ublt/examples (&rest body)
   nil)
 
