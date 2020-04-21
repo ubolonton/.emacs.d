@@ -81,8 +81,14 @@ of line."
 ;;; Scrolling settings
 (setq redisplay-dont-pause t
 
-      ;; Scroll early when scrolling off-screen
-      scroll-margin 5
+      ;; TODO: Figure out how to make this work reliably with mixed-pitch themes, like
+      ;; `ublt-dark-theme'. `ublt-fix-jumpy-scroll' tries to do that, but the fixes have to be
+      ;; applied case-by-case, and I don't know how to handle file visiting yet, among some other
+      ;; special situtations.
+
+      ;; ;; Scroll early when scrolling off-screen.
+      ;; scroll-margin 5
+
       ;; Don't center when scrolling off-screen
       scroll-conservatively 10000
       ;; 1-line-at-a-time when scrolling off-screen
