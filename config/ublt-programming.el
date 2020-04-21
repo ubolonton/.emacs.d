@@ -59,13 +59,18 @@
 (use-package tree-sitter
   :ensure nil :straight nil
   :demand t
-  :hook ((rust-mode js-mode python-mode scala-mode c-mode c++-mode)
-         . tree-sitter-mode)
-  :config
-  (require 'tree-sitter-langs)
-  (require 'tree-sitter-debug)
-  (require 'tree-sitter-extras)
-  :load-path ("~/Programming/projects/emacs-tree-sitter/lisp/"
-              "~/Programming/projects/emacs-tree-sitter/langs/"))
+  :config (progn
+            (require 'tree-sitter-debug)
+            (require 'tree-sitter-extras)
+            (require 'tree-sitter-query)
+            (require 'tree-sitter-hl)
+            (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
+            (global-tree-sitter-mode))
+  :load-path "~/Programming/projects/emacs-tree-sitter/lisp/")
+
+(use-package tree-sitter-langs
+  :ensure nil :straight nil
+  :after tree-sitter
+  :load-path "~/Programming/projects/emacs-tree-sitter/langs/")
 
 (provide 'ublt-programming)
