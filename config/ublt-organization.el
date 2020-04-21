@@ -156,8 +156,7 @@
                             ("Movie" . m)
                             ("Book" . b)))
 
-           ;; Log a lot
-           (org-log-done 'time)
+           (org-log-done nil)
            (org-log-reschedule 'time)
            (org-log-repeat 'time)
            (org-log-redeadline 'time)
