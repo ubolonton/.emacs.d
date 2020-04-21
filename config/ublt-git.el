@@ -4,6 +4,9 @@
 (use-package magit
   :custom
 
+  ;; Mainly because I want `magit-status' to work after a `find-library'.
+  (vc-follow-symlinks t)
+
   ;; TODO: Figure out how make `diff-hl' work without 'Git in `vc-handled-backends'.
   ;; This is for performance: https://magit.vc/manual/magit/Performance.html.
   (vc-handled-backends (delq 'Git vc-handled-backends))
