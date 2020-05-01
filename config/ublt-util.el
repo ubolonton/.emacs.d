@@ -9,9 +9,11 @@
 
 (defun ublt/eval-defun (prefix)
   (interactive "P")
-  (if (and (consp prefix) (= (car prefix) 16))
-      (compile-defun)
-    (call-interactively #'eval-defun)))
+  (if prefix
+      (if (consp prefix)
+          (call-interactively #'eval-defun)
+        (eval-defun nil))
+    (compile-defun)))
 
 (defmacro ublt/examples (&rest body)
   nil)
