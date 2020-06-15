@@ -164,16 +164,6 @@ of line."
 
 
 
-(use-package fuz
-  :config (unless (require 'fuz-core nil t)
-            (fuz-build-and-load-dymod)))
-
-(use-package helm-fuz
-  :after (helm fuz)
-  :config (helm-fuz-mode))
-
-
-
 (defun ublt/narrow-or-widen ()
   (interactive)
   (if (buffer-narrowed-p)
