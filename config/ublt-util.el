@@ -28,7 +28,8 @@
   (advice-mapc (lambda (f _)
                  (when (ublt/-symbol-advice-p symbol f advice)
                    (advice-remove symbol f)))
-               symbol))
+               symbol)
+  (advice-remove symbol advice))
 
 (defun ublt/advice-remove-all (symbol)
   "Remove all advices from SYMBOL."
