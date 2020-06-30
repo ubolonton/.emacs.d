@@ -115,6 +115,9 @@
   (advice-add symbol :around (ublt/-make-timing-advice symbol)
               '((name . "ublt/timing"))))
 
+(defun ublt/disable-timing (symbol)
+  (advice-remove symbol "ublt/timing"))
+
 (ublt/examples
  ;; Turn on timing for frequently-run hooks.
  (dolist (hook '(pre-command-hook
