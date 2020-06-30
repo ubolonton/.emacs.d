@@ -129,6 +129,7 @@
  ("textmate.el" . "350918b070148f0ace6d9d3cd4ebcaf15c1a8781")
  ("transient" . "95389b31ec45984e3ff0849f4216adbd183d946f")
  ("twittering-mode" . "114891e8fdb4f06b1326a6cf795e49c205cf9e29")
+ ("typescript.el" . "0fc729787007b5111f3584034af0f3ef2389098f")
  ("undo-tree" . "d54ef13e3c69655e39f977b8bf75399a6d2b5e42")
  ("use-package" . "0ee88b5cac41acf974c4bedb8859931ead8bfc79")
  ("volatile-highlights.el" . "9a20091f0ce7fc0a6b3e641a6a46d5f3ac4d8392")
