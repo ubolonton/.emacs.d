@@ -48,7 +48,7 @@
   :mode "\\.applescript$")
 
 (use-package scala-mode
-  :custom ((scala-indent:step 4)
+  :custom ((scala-indent:step 2)
            (scala-indent:align-parameters t)))
 
 (use-package groovy-mode)
