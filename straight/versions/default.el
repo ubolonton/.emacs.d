@@ -117,7 +117,7 @@
  ("quack" . "2146805ce2b5a9b155d73929986f11e713787e26")
  ("queue" . "52206c0f78afc0dfb9a287cb928c1e725103336d")
  ("rainbow-mode" . "8059f1cb756d2b211af962f07c5e6aff958094d7")
- ("rg.el" . "acd8be6a1ee129fe8b3802bfcffe9b56bfa72320")
+ ("rg.el" . "853c1acaf999500d867180b9e71938366c8e1a7c")
  ("rust-mode" . "5ad9b599c6beea43d6262c3ad81d95512a7e53b8")
  ("s.el" . "43ba8b563bee3426cead0e6d4ddc09398e1a349d")
  ("scpaste" . "568faaa70fa0413e2d165ad232cd4c6ec2815197")
