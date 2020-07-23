@@ -67,13 +67,24 @@
 (use-package tree-sitter
   :ensure nil :straight nil
   :demand t
-  :config (progn
-            (require 'tree-sitter-debug)
-            (require 'tree-sitter-extras)
-            (require 'tree-sitter-query)
-            (require 'tree-sitter-hl)
-            (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
-            (global-tree-sitter-mode))
+  :config
+  (progn
+    (require 'tree-sitter-debug)
+    (require 'tree-sitter-extras)
+    (require 'tree-sitter-query)
+    (require 'tree-sitter-hl)
+    (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
+    (global-tree-sitter-mode)
+    (add-function :before-until tree-sitter-hl-face-mapping-function
+                  (lambda (capture-name)
+                    (pcase capture-name
+                      ("ublt.hidden" 'ublt/lisp-paren-face))))
+    (tree-sitter-hl-add-patterns 'python
+      [((string) @constant
+        (.match? @constant "^[bfru]*'"))
+       ["{" "}"] @ublt.hidden])
+    (tree-sitter-hl-add-patterns 'javascript
+      [["{" "}"] @ublt.hidden]))
   :load-path "~/Programming/projects/emacs-tree-sitter/lisp/")
 
 (use-package tree-sitter-langs
