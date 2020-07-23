@@ -23,6 +23,9 @@
   :mode ("\\.jsm$" . js-mode)
   :custom (js-indent-level 2))
 
+(use-package typescript-mode
+  :custom (typescript-indent-level 2))
+
 (use-package json-mode
   :mode "\\.json$")
 

@@ -58,7 +58,11 @@
 (use-package powershell
   :custom (powershell-indent 4))
 
+(use-package go-mode)
+
 (use-package ebnf-mode)
+
+(use-package lua-mode)
 
 (use-package tree-sitter
   :ensure nil :straight nil
