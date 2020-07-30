@@ -78,13 +78,16 @@
     (add-function :before-until tree-sitter-hl-face-mapping-function
                   (lambda (capture-name)
                     (pcase capture-name
-                      ("ublt.hidden" 'ublt/lisp-paren-face))))
+                      ("ublt.hidden" 'ublt/lisp-paren-face)
+                      ("ublt.unsafe" 'rust-unsafe-face))))
     (tree-sitter-hl-add-patterns 'python
       [((string) @constant
         (.match? @constant "^[bfru]*'"))
        ["{" "}"] @ublt.hidden])
     (tree-sitter-hl-add-patterns 'javascript
-      [["{" "}"] @ublt.hidden]))
+      [["{" "}"] @ublt.hidden])
+    (tree-sitter-hl-add-patterns 'rust
+      ["unsafe" @ublt.unsafe]))
   :load-path "~/Programming/projects/emacs-tree-sitter/lisp/")
 
 (use-package tree-sitter-langs
