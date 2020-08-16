@@ -87,12 +87,14 @@
 
 
 ;; Mouse.
-(defun ublt/mouse-xref-find-definitions (event)
-  "Move point to mouse EVENT's location, then call the command bound to `M-.'."
-  (interactive "e")
-  (mouse-set-point event)
-  (when-let ((command (key-binding (kbd "M-."))))
-    (call-interactively command)))
+(if (functionp 'xref-find-definitions-at-mouse)
+    (defalias 'ublt/mouse-xref-find-definitions #'xref-find-definitions-at-mouse)
+  (defun ublt/mouse-xref-find-definitions (event)
+    "Move point to mouse EVENT's location, then call the command bound to `M-.'."
+    (interactive "e")
+    (mouse-set-point event)
+    (when-let ((command (key-binding (kbd "M-."))))
+      (call-interactively command))))
 
 (defun ublt/mouse-pop-tag-mark (event)
   "Call the command bound to `M-\,'."
