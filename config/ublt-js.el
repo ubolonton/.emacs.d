@@ -35,6 +35,4 @@
   (js-mode . flycheck-mode)
   :custom (flycheck-jshintrc "~/.jshint.json"))
 
-(use-package typescript-mode)
-
 (provide 'ublt-js)
