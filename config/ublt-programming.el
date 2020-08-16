@@ -74,7 +74,15 @@
     (require 'tree-sitter-query)
     (require 'tree-sitter-hl)
     (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
-    (global-tree-sitter-mode)
+    (global-tree-sitter-mode))
+  :load-path "~/Programming/projects/emacs-tree-sitter/lisp/")
+
+(use-package tree-sitter-langs
+  :ensure nil :straight nil
+  :after tree-sitter
+  :load-path "~/Programming/projects/emacs-tree-sitter/langs/"
+  :config
+  (progn
     (add-function :before-until tree-sitter-hl-face-mapping-function
                   (lambda (capture-name)
                     (pcase capture-name
@@ -87,12 +95,6 @@
     (tree-sitter-hl-add-patterns 'javascript
       [["{" "}"] @ublt.hidden])
     (tree-sitter-hl-add-patterns 'rust
-      ["unsafe" @ublt.unsafe]))
-  :load-path "~/Programming/projects/emacs-tree-sitter/lisp/")
-
-(use-package tree-sitter-langs
-  :ensure nil :straight nil
-  :after tree-sitter
-  :load-path "~/Programming/projects/emacs-tree-sitter/langs/")
+      ["unsafe" @ublt.unsafe])))
 
 (provide 'ublt-programming)
