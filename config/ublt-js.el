@@ -2,16 +2,15 @@
 
 (use-package js2-mode
   :disabled t
-  :mode ("\\.es6$" "\\.js$")
+  :mode ("\\.es6\\'" "\\.m?js\\'")
   :hook (js2-mode . auto-fill-mode)
   :custom
-  (js2-highlight-level 3)
+  (js2-highlight-level 0 "Use tree-sitter-hl")
   (js2-concat-multiline-strings nil)
-  ;; Use jshint instead
-  (js2-mode-show-parse-errors t)
-  (js2-mode-show-strict-warnings nil)
-  (js2-strict-trailing-comma-warning nil)
-  (js2-strict-missing-semi-warning nil)
+  (js2-mode-show-parse-errors nil "Going to use tree-sitter")
+  (js2-mode-show-strict-warnings nil "Going to use flycheck")
+  (js2-strict-trailing-comma-warning nil "Going to use flycheck")
+  (js2-strict-missing-semi-warning nil "Going to use flycheck")
   (js2-basic-offset 2))
 
 (use-package paredit
