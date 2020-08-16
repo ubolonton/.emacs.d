@@ -204,7 +204,9 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
   :config (global-undo-tree-mode +1))
 
 ;; Automatically update files whose contents were changed
-(global-auto-revert-mode +1)
+(use-package autorevert
+  :custom ((auto-revert-avoid-polling t "Save power"))
+  :config (global-auto-revert-mode +1))
 ;; (setq auto-revert-check-vc-info t)
 
 (provide 'ublt-editing)
