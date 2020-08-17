@@ -8,6 +8,9 @@
 (setq tls-checktrust 'ask)
 
 (setq custom-file "~/.emacs.d/custom.el")
+(add-hook 'after-init-hook (lambda ()
+                             (with-demoted-errors "Error loading custom-file: %S"
+                               (load custom-file))))
 
 (add-to-list 'load-path "~/.emacs.d/lib")
 (add-to-list 'load-path "~/.emacs.d/config")

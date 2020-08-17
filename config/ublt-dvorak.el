@@ -430,11 +430,13 @@
 
 ;;; TODO: Put this in `ublt-appearance'.
 (use-package hydra
-  :custom (hydra-hint-display-type (if (memq window-system '(mac ns)) 'posframe 'lv))
   :config
-  (setq-default hydra-posframe-show-params
-                (list :internal-border-width 1
-                      :poshandler #'posframe-poshandler-point-bottom-left-corner))
+  (setq-default
+   ;; We don't use :custom, since this is dynamically set based on whether we are in a GUI.
+   hydra-hint-display-type (if (memq window-system '(mac ns)) 'posframe 'lv)
+   hydra-posframe-show-params
+   (list :internal-border-width 1
+         :poshandler #'posframe-poshandler-point-bottom-left-corner))
   ;; The advice is needed to use the current theme's color.
   (define-advice hydra-posframe-show (:around (f &rest args) ublt/tweak-appearance)
     (let ((hydra-posframe-show-params
