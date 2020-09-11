@@ -90,7 +90,7 @@
                       ("ublt.unsafe" 'rust-unsafe-face))))
     (tree-sitter-hl-add-patterns 'python
       [((string) @constant
-        (.match? @constant "^[bfru]*'"))
+        (.match? @constant "^[bru]*'"))
        ["{" "}"] @ublt.hidden])
     (tree-sitter-hl-add-patterns 'javascript
       [["{" "}"] @ublt.hidden])
