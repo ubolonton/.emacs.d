@@ -2,7 +2,7 @@
  ("a.el" . "18966975db7110d0aac726be95b593e2fc3d44ed")
  ("adoc-mode" . "745884359a1b8826ede2c4cfd2f0b5478953ac40")
  ("ag.el" . "77b4f50c5372bf219da496567b2b867261f0d354")
- ("aggressive-indent-mode" . "3803f24020ef0a656dc5345713c4964073aec9a8")
+ ("aggressive-indent-mode" . "b0ec0047aaae071ad1647159613166a253410a63")
  ("all-the-icons-dired" . "fc2dfa1e9eb8bf1c402a675e7089638d702a27a5")
  ("all-the-icons.el" . "6917b08f64dd8487e23769433d6cb9ba11f4152f")
  ("anzu" . "592f8ee6d0b1bc543943b36a30063c2d1aac4b22")
