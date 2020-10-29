@@ -65,22 +65,11 @@
 (use-package lua-mode)
 
 (use-package tree-sitter
-  :ensure nil :straight nil
-  :demand t
-  :config
-  (progn
-    (require 'tree-sitter-debug)
-    (require 'tree-sitter-extras)
-    (require 'tree-sitter-query)
-    (require 'tree-sitter-hl)
-    (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
-    (global-tree-sitter-mode))
-  :load-path "~/Programming/projects/emacs-tree-sitter/lisp/")
+  :hook (tree-sitter-after-on . tree-sitter-hl-mode)
+  :config (global-tree-sitter-mode))
 
 (use-package tree-sitter-langs
-  :ensure nil :straight nil
   :after tree-sitter
-  :load-path "~/Programming/projects/emacs-tree-sitter/langs/"
   :config
   (progn
     (add-function :before-until tree-sitter-hl-face-mapping-function
