@@ -126,7 +126,7 @@
  ("shut-up" . "081d6b01e3ba0e60326558e545c4019219e046ce")
  ("solarized-emacs" . "74c6b5acd6892faeafd08029898663d81ab0a4d5")
  ("spinner" . "2daa167bec1c7566d662d48613a94453536b524a")
- ("straight.el" . "ed54b626b0faec36fdaff30c72351d5fb41a6786")
+ ("straight.el" . "f6663b1de0fb5d9c64528e4f7f8bb914f49bb6d2")
  ("systemd-mode" . "401d71c2dd24e424216ae5e4275c830f2a9c6b0c")
  ("terraform-mode" . "2967e7bdc05d15617e121052f6e43c61439b9070")
  ("textmate.el" . "350918b070148f0ace6d9d3cd4ebcaf15c1a8781")
