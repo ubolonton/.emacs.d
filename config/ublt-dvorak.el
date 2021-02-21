@@ -1029,17 +1029,16 @@
 (ublt/keys "sql" sql-mode-map
   "C-c C-s" 'sql-product-interactive ; was sql-send-string
   "C-M-x"   'sql-send-paragraph
-  "C-c C-d" 'ublt/sql-describe-thing-at-point
-  )
+  "C-c C-d" 'ublt/sql-describe-thing-at-point)
 
-;; (eval-after-load "erlang"
+;; (with-eval-after-load "erlang"
 ;;   (add-hook 'erlang-mode-hook
 ;;             (lambda ()
-;;               (ublt/define-keys ;;                erlang-mode-map
-;;                "C-c v"   'erlang-compile
-;;                "C-c C-l" 'ublt/erlang-compile-and-display ; was erlang-compile-display
-;;                "C-c C-s" 'erlang-shell-display ; was erlang-show-syntactic-information
-;;                ))))
+;;               (ublt/define-keys erlang-mode-map
+;;                 "C-c v"   'erlang-compile
+;;                 "C-c C-l" 'ublt/erlang-compile-and-display ; was erlang-compile-display
+;;                 "C-c C-s" 'erlang-shell-display            ; was erlang-show-syntactic-information
+;;                 ))))
 (ublt/keys "erlang" erlang-mode-map
   "C-c C-l" 'ublt/erlang-compile-and-display ; was erlang-compile-display
   "C-c C-s" 'erlang-shell-display ; was erlang-show-syntactic-information
@@ -1127,12 +1126,10 @@
   "S-SPC" 'scroll-down-command)
 
 ;; NTA XXX: Their "yank" variations are not as good
-(with-eval-after-load "ess-mode"
-  (ublt/undefine-keys ess-mode-map
-     '("C-y")))
-(with-eval-after-load 'org
-  (ublt/undefine-keys org-mode-map
-     '("C-y")))
+(ublt/keys 'ess-mode ess-mode-map
+  "C-y" nil)
+(ublt/keys 'org org-mode-map
+  "C-y" nil)
 
 (ublt/keys 'org org-mode-map
   ;; "M-<return>" 'org-insert-heading-respect-content
