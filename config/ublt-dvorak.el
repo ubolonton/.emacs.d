@@ -880,26 +880,26 @@
 
 
 ;;; Paredit
-(with-eval-after-load "paredit"
-  (ublt/define-keys paredit-mode-map
-     "{"             'paredit-open-curly
-     "}"             'paredit-close-curly
-     "M-("           'paredit-wrap-round
-     "M-)"           'paredit-forward-slurp-sexp
-     "M-["           'paredit-wrap-square
-     "M-{"           'paredit-wrap-curly
-     "M-r"           nil              ; was paredit-raise-sexp
-     "M-<backspace>" 'paredit-backward-kill-word
-     "M-<kp-delete>" 'paredit-forward-kill-word
-     "<backspace>"   'paredit-backward-delete
-     "<kp-delete>"   'paredit-forward-delete
-     "C-<left>"      nil
-     "C-<right>"     nil
-     "M-<left>"      'paredit-backward
-     "M-<right>"     'paredit-forward
-     "C-M-s"         'paredit-splice-sexp
-     ;; TODO: advice comment-dwim instead
-     "M-;"           nil))
+(ublt/keys 'paredit paredit-mode-map
+  "{"             'paredit-open-curly
+  "}"             'paredit-close-curly
+  "M-("           'paredit-wrap-round
+  "M-)"           'paredit-forward-slurp-sexp
+  ;; XXX: Can't use this, since Terminal escape sequences start with it.
+  "M-["           nil
+  "M-{"           'paredit-wrap-curly
+  "M-r"           nil              ; was paredit-raise-sexp
+  "M-<backspace>" 'paredit-backward-kill-word
+  "M-<kp-delete>" 'paredit-forward-kill-word
+  "<backspace>"   'paredit-backward-delete
+  "<kp-delete>"   'paredit-forward-delete
+  "C-<left>"      nil
+  "C-<right>"     nil
+  "M-<left>"      'paredit-backward
+  "M-<right>"     'paredit-forward
+  "C-M-s"         'paredit-splice-sexp
+  ;; TODO: advice comment-dwim instead
+  "M-;"           nil)
 
 (ublt/keys "python-mode" py-mode-map
   "{"       'paredit-open-curly
