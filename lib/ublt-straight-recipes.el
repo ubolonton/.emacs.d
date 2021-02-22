@@ -42,11 +42,12 @@ Example:
           :remote "ubolonton"
           :branch ,branch))
 
+;; To use locally-built dynamic module.
 (ublt/straight-add-files 'tsc
   '("core/DYN-VERSION" "core/tsc-dyn.*"))
-
+;; To use locally-built grammar binaries.
 (ublt/straight-add-files 'tree-sitter-langs
-  '("langs/bin"))
+  '("bin"))
 
 (straight-register-package
  '(wat-mode :type git :host github :repo "devonsparks/wat-mode"))
