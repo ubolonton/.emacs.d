@@ -7,6 +7,9 @@
 
   :custom (;; Appearance
 
+           ;; Allow setting sizes for inline images.
+           (org-image-actual-width nil)
+
            ;; Show all headlines by default.
            (org-startup-folded t)
 
