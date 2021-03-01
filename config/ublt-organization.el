@@ -439,7 +439,8 @@ end tell")))
               ("" "marvosym" t)
               ("" "wasysym" t)
               ("" "amssymb" t)
-              ("" "hyperref" nil)
+              ("" "hyperref" t)
+              ("" "minted")
               "\\tolerance=1000")))
   :config
   ;; Use minted for code highlighting in exported pdf files
@@ -454,6 +455,10 @@ end tell")))
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                  ("\\paragraph{%s}" . "\\paragraph*{%s}")
                  ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
+
+(use-package ox-beamer
+  :ensure nil :straight nil
+  :after ox-latex)
 
 ;; ---------------------------------------------------------------------------
 ;;; TODO: Move this out into a separate file, allowing it to be byte-compiled.
