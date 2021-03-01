@@ -33,7 +33,7 @@
     "")
 
   (add-hook 'twittering-mode-hook #'hl-line-mode)
-  (add-hook 'twittering-mode-hook #'adaptive-wrap-prefix-mode)
+  ;; (add-hook 'twittering-mode-hook #'adaptive-wrap-prefix-mode)
   (add-hook 'twittering-edit-mode-hook (ublt/off auto-fill-mode))
   (add-hook 'twittering-edit-mode-hook #'visual-line-mode))
 
@@ -43,7 +43,7 @@
   :defer t
   :ensure nil :straight nil
   :custom ((erc-autojoin-channels-alist
-            '(("freenode.net" "#emacs" "#conkeror" "#clojure" "#concatenative" "#flink")))
+            '(("freenode.net" "#conkeror" "#clojure" "#concatenative")))
 
            (erc-server "irc.freenode.net")
            (erc-port 6667)
