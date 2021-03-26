@@ -13,11 +13,6 @@
   (js2-strict-missing-semi-warning nil "Going to use flycheck")
   (js2-basic-offset 2))
 
-(use-package paredit
-  :hook
-  (js2-mode . paredit-mode)
-  (js-mode . paredit-mode))
-
 (use-package js
   :mode ("\\.jsm$" . js-mode)
   :custom (js-indent-level 2))
