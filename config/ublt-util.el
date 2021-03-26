@@ -7,6 +7,23 @@
   (require 'cl-lib)
   (require 'subr-x))
 
+(defun ublt/error-symbols ()
+  (let (symbols)
+    (mapatoms (lambda (s)
+                (when (get s 'error-conditions)
+                  (cl-pushnew s symbols))))
+    (sort symbols (lambda (s1 s2) (string-lessp (symbol-name s1) (symbol-name s2))))))
+
+(defun ublt/print-error-symbols ()
+  (dolist (s (ublt/error-symbols))
+    (prin1 s) (princ " ")
+    (prin1 (get s 'error-message)) (princ " ")
+    (when-let ((parents (-filter
+                         (lambda (s) (not (eq 'error s)))
+                         (cdr (get s 'error-conditions)))))
+      (prin1 parents))
+    (princ "\n")))
+
 (defun ublt/eval-defun (prefix)
   (interactive "P")
   (if prefix
