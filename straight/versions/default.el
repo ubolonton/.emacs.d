@@ -81,7 +81,7 @@
  ("json-snatcher" . "c4cecc0a5051bd364373aa499c47a1bb7a5ac51c")
  ("jump.el" . "e4f1372cf22e811faca52fc86bdd5d817498a4d8")
  ("less-css-mode" . "c7fa3d56d83206b28657f2e56439dc62280a2bf2")
- ("let-alist" . "ef3c02fa292b6e32769945bbbfb7f2e5ac574b64")
+ ("let-alist" . "6708ec0b2e6dff80ff5b64698aa009d9070a2ed2")
  ("lisp-extra-font-lock" . "4605eccbe1a7fcbd3cacf5b71249435413b4db4f")
  ("loop.el" . "e22807f83a0890dc8a904c51ee0742c34efccc6c")
  ("lsp-mode" . "acc0531b7f7a04aeb8055c8ed5dc0fbfa0fe7fbb")
