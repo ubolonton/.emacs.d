@@ -15,7 +15,4 @@
            (lsp-log-io t))
   :hook ((rust-mode . lsp)))
 
-(use-package company-lsp
-  :after (company lsp-mode))
-
 (provide 'ublt-rust)

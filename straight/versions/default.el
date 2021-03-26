@@ -14,7 +14,6 @@
  ("cider" . "3d85b4dc9ce5e130b61186334bc8f732ebeeaada")
  ("clj-refactor.el" . "fd58583b4a27ed83e2bf9e4192f755003291d8ef")
  ("clojure-mode" . "0c6b3ec8f13a26bae77e4346d49bc52e7d8fd12e")
- ("company-lsp" . "f921ffa0cdc542c21dc3dd85f2c93df4288e83bd")
  ("company-mode" . "955f80e6c911a818611887bc35658af9e925ed66")
  ("company-posframe" . "37a1f136f61bed4050dbeb182767c7e51cb73e1b")
  ("dash.el" . "721436b04da4e2795387cb48a98ac6de37ece0fd")
