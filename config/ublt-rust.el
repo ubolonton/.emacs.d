@@ -15,4 +15,9 @@
            (lsp-log-io t))
   :hook ((rust-mode . lsp)))
 
+(use-package lsp-rust
+  :ensure nil :straight nil
+  :after lsp-mode
+  :custom ((lsp-rust-server 'rust-analyzer)))
+
 (provide 'ublt-rust)
