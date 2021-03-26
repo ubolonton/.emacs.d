@@ -26,7 +26,8 @@
 
 (use-package lisp-mode
   :ensure nil :straight nil
-  :custom (emacs-lisp-docstring-fill-column 80))
+  :custom (emacs-lisp-docstring-fill-column 80)
+  :config (put 'add-hook 'lisp-indent-function 1))
 
 (use-package eldoc
   :hook (emacs-lisp-mode . eldoc-mode))
