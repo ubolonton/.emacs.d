@@ -32,6 +32,20 @@
         (eval-defun nil))
     (compile-defun)))
 
+(defmacro ublt/with-cleanup (form &rest body)
+  "Execute FORM with BODY as cleanup code that is executed on error.
+
+Unlike `condition-case', any signal error is propagated.
+
+Unlike `unwind-protect', BODY is not executed if FORM does not signal an error."
+  (declare (indent 1))
+  `(let ((err t))
+     (unwind-protect
+         (prog1 ,form
+           (setq err nil))
+       (when err
+         ,@body))))
+
 (defmacro ublt/examples (&rest body)
   nil)
 
