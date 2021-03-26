@@ -68,7 +68,7 @@
  ("helpful" . "53ae44bd2384de5e2513496ccf6ca2fce6767299")
  ("highlight-function-calls" . "f7a1eaf95fc64cc0db4d0567f9ff79ec4ae04787")
  ("highlight-numbers" . "8b4744c7f46c72b1d3d599d4fb75ef8183dee307")
- ("highlight-parentheses.el" . "f0bd58c8dadd2db703b7bfd09e911b5fda05b3df")
+ ("highlight-parentheses" . "723abf9b6092d7e19548316de1f907ed0d67c780")
  ("highlight-symbol.el" . "7a789c779648c55b16e43278e51be5898c121b3a")
  ("hl-todo" . "487d349b7b8d6738223d5dd10957dd10b45eb9f3")
  ("ht.el" . "fff8c43f0e03d5b98deb9f988522b839ce2ca253")
