@@ -574,6 +574,12 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
      ((,class (,@fw ,@warning))))
    `(font-lock-constant-face
      ((,class (,@fw ,@constant))))
+
+   `(tree-sitter-hl-face:function.call
+     ((,class (:inherit link :underline nil :slant normal))))
+   `(tree-sitter-hl-face:method.call
+     ((,class (:inherit link :underline nil :slant normal))))
+
    `(highlight-numbers-number
      ((,class (,@fw ,@number))))
    `(hl-todo
@@ -587,6 +593,10 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
      ((,class (:inherit font-lock-preprocessor-face))))
    `(highlight-function-calls-face
      ((,class (,@fw :inherit link :underline nil))))
+   `(highlight-function-calls--not-face
+     ((,class (:inherit font-lock-keyword-face))))
+   `(highlight-function-calls-subr-face
+     ((,class (:inherit highlight-function-calls-face))))
 
    `(js2-function-param
      ((,class (,@param))))
@@ -618,6 +628,8 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
      ((,class (,@dimmed-hl))))
    `(web-mode-block-face
      ((,class (,@dimmed-hl))))
+   `(web-mode-block-control-face
+     ((,class (:inherit font-lock-keyword-face))))
    `(web-mode-block-delimiter-face
      ((,class (:inherit web-mode-block-face ,@dimmed))))
    `(web-mode-css-selector-face
@@ -664,6 +676,8 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
      ((,class (,@string :height 2.0 :bold t))))
    `(org-special-keyword
      ((,class (,@fw ,@context))))
+   `(org-drawer
+     ((,class (:inherit org-special-keyword))))
    `(org-indent                                ;TODO
      ((,class (:inherit (org-hide fixed-pitch) ;; :foreground ,bg+2 :background ,bg+2
                         ))))
