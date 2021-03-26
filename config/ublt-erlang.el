@@ -3,6 +3,8 @@
 (use-package erlang
   :mode ("\\.rel$" . erlang-mode))
 
+(use-package elixir-mode)
+
 (use-package flycheck
   :hook (erlang-mode . flycheck-mode))
 

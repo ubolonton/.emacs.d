@@ -30,6 +30,7 @@
  ("emacs" . "bf9897eb287ca47ced65d7d4e07ea61ea0aec39f")
  ("emacs-async" . "86aef2c38e7d35e8509b7feeee3e989d825eba91")
  ("emacs-company-terraform" . "9c1146bfe23d4c461f4a59577faf4e46fcca7fe9")
+ ("emacs-elixir" . "9de08c17d54e190d220aa03cca58bd41497f44b6")
  ("emacs-hcl-mode" . "0f2c5ec7e7bcf77c8548e8cac8721ea935ca1b5e")
  ("emacs-htmlize" . "8db0aa6aab77475a732b7363f0d57bd3933c18fd")
  ("emacs-memoize" . "9a561268ffb550b257a08710489a95cd087998b6")
