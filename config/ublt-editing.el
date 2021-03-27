@@ -143,7 +143,7 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
     ;; Don't, use a dedicate key binding for yas
     ;; (add-to-list 'hippie-expand-try-functions-list 'yas-hippie-try-expand)
     :config
-    (add-to-list 'yas-snippet-dirs "~/.emacs.d/data/yasnippet/snippets")
+    (add-to-list 'yas-snippet-dirs (ublt/init-rel-path "data/yasnippet/snippets"))
     (yas-global-mode +1))
 
   (use-package yasnippet-snippets))

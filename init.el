@@ -7,13 +7,16 @@
 ;;; Make package downloading a bit more secure.
 (setq tls-checktrust 'ask)
 
-(setq custom-file "~/.emacs.d/custom.el")
+(defun ublt/init-rel-path (path)
+  (expand-file-name path user-emacs-directory))
+
+(setq custom-file (ublt/init-rel-path "custom.el"))
 (add-hook 'after-init-hook (lambda ()
                              (with-demoted-errors "Error loading custom-file: %S"
                                (load custom-file))))
 
-(add-to-list 'load-path "~/.emacs.d/lib")
-(add-to-list 'load-path "~/.emacs.d/config")
+(add-to-list 'load-path (ublt/init-rel-path "lib"))
+(add-to-list 'load-path (ublt/init-rel-path "config"))
 
 (defvar ublt/packages
   '(use-package))

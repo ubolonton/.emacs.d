@@ -69,13 +69,13 @@
 
 ;; Save positions in visited files
 (use-package saveplace
-  :custom ((save-place-file "~/.emacs.d/.saveplace")
+  :custom ((save-place-file (ublt/init-rel-path ".saveplace"))
            (save-place-limit 3000))
   :config (save-place-mode +1))
 
 ;; Save history
 (use-package savehist
-  :custom (savehist-file "~/.emacs.d/.savehist")
+  :custom (savehist-file (ublt/init-rel-path ".savehist"))
   :config
   (dolist (var '(log-edit-comment-ring
                  regexp-search-ring
@@ -86,12 +86,12 @@
   (savehist-mode +1))
 
 (use-package bookmark
-  :custom ((bookmark-default-file "~/.emacs.d/.bookmarks")
+  :custom ((bookmark-default-file (ublt/init-rel-path ".bookmarks"))
            (bookmark-version-control t)
            (bookmark-sort-flag nil)))
 
 (use-package recentf
-  :custom (recentf-save-file "~/.emacs.d/.recentf" ))
+  :custom (recentf-save-file (ublt/init-rel-path ".recentf")))
 
 (setq ring-bell-function 'ignore)
 

@@ -28,12 +28,15 @@
   (magit-ediff-dwim-show-on-hunks t)
 
   ;; Git directories
-  (magit-repository-directories '(("~/dotfiles". 0)
-                                  ("~/.emacs.d". 0)
+  (magit-repository-directories `(("~/dotfiles". 0)
+                                  (,user-emacs-directory . 0)
                                   ("~/Programming/projects" . 1)
                                   ("~/Programming/lib" . 1)
                                   ("~/Programming/Tools" . 1)
-                                  ("~/.emacs.d/straight/repos" . 1)))
+                                  ("~/Programming/projects/emacs-tree-sitter/langs/repos" . 1)
+                                  ("~/Programming/pp/parcel-perform" . 1)
+                                  ("~/Programming/pp/ml-team" . 1)
+                                  (,(ublt/init-rel-path "straight/repos") . 1)))
 
   (magit-status-margin '(t age magit-log-margin-width t 10))
 

@@ -449,7 +449,7 @@ end tell")))
 
   (add-to-list 'org-latex-classes
                `("ublt-org-article"
-                 ,(ublt/get-string-from-file "~/.emacs.d/config/ublt-org-article.tex")
+                 ,(ublt/get-string-from-file (ublt/init-rel-path "config/ublt-org-article.tex"))
                  ("\\section{%s}" . "\\section*{%s}")
                  ("\\subsection{%s}" . "\\subsection*{%s}")
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")

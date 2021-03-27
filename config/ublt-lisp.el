@@ -54,7 +54,7 @@
   :custom (highlight-function-calls-not t))
 
 (use-package ielm
-  :hook (ielm-mode . (lambda () (setq comint-input-ring-file-name "~/.emacs.d/.ielm-input.hist"))))
+  :hook (ielm-mode . (lambda () (setq comint-input-ring-file-name (ublt/init-rel-path ".ielm-input.hist")))))
 
 (use-package flycheck-package
   :config (flycheck-package-setup))
@@ -96,7 +96,7 @@
              (cider-repl-popup-stacktraces t)
              (cider-repl-wrap-history t)
 
-             (cider-repl-history-file "~/.emacs.d/.nrepl.hist")
+             (cider-repl-history-file (ublt/init-rel-path ".nrepl.hist"))
              (cider-repl-history-highlight-current-entry t)
              (cider-repl-history-highlight-inserted-item 'pulse)
              (cider-repl-history-current-entry-face 'secondary-selection)
