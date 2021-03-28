@@ -197,20 +197,9 @@ all of the sources."
     (add-hook 'helm-minibuffer-set-up-hook #'ublt/make-transparent-maybe)
     (advice-add 'helm-follow-mode :after #'ublt/make-transparent-maybe)
 
-    (define-advice helm-display-buffer-popup-frame (:around (f buffer frame-alist) ublt/tweak-appearance)
-      (let ((current-frame (selected-frame)))
-        (funcall f buffer
-                 (-reduce-from (lambda (alist pair) (cons pair alist))
-                               frame-alist
-                               '((fullscreen . nil)
-                                 (left-fringe . 8)
-                                 (right-fringe . 8)
-                                 (border-width . 0)
-                                 (unsplittable . t)
-                                 (undecorated . t)
-                                 (cursor-type . bar))))
-
-        (when helm-popup-frame
+    ;; XXX: Find a better way, e.g. `helm-posframe' or something.
+    (defun ublt/helm--tweak-popup-frame (current-frame)
+      (when helm-popup-frame
           (let* ((display-w (x-display-pixel-width))
                  ;; External monitor (Dell).
                  (dell-w 2560)
@@ -243,9 +232,27 @@ all of the sources."
                             w h 'pixelwise)
             (set-frame-position helm-popup-frame
                                 x y))
+          ;; Mode line is not useful for the popup frame. TODO: Use posframe.
+          (set-window-parameter (frame-root-window helm-popup-frame)
+                                'mode-line-format 'none)
           ;; FIX: Make helm support dynamic sizing instead.
           (setq helm-display-buffer-width (frame-width helm-popup-frame)
-                helm-display-buffer-height (frame-height helm-popup-frame)))))))
+                helm-display-buffer-height (frame-height helm-popup-frame))))
+
+    (define-advice helm-display-buffer-popup-frame (:around (f buffer frame-alist) ublt/tweak-appearance)
+      (let ((current-frame (selected-frame)))
+        (ublt/helm--tweak-popup-frame current-frame)
+        (funcall f buffer
+                 (-reduce-from (lambda (alist pair) (cons pair alist))
+                               frame-alist
+                               '((fullscreen . nil)
+                                 (left-fringe . 8)
+                                 (right-fringe . 8)
+                                 (border-width . 0)
+                                 (unsplittable . t)
+                                 (undecorated . t)
+                                 (cursor-type . bar))))
+        (ublt/helm--tweak-popup-frame current-frame)))))
 
 (use-package helm-projectile
   :custom (projectile-enable-caching t))
