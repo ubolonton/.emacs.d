@@ -33,8 +33,8 @@
                                   ("~/Programming/projects" . 1)
                                   ("~/Programming/lib" . 1)
                                   ("~/Programming/Tools" . 1)
-                                  ("~/Programming/projects/emacs-tree-sitter/langs/repos" . 1)
                                   ("~/Programming/pp/parcel-perform" . 1)
+                                  ("~/Programming/projects/elisp-tree-sitter/langs/repos" . 1)
                                   ("~/Programming/pp/ml-team" . 1)
                                   (,(ublt/init-rel-path "straight/repos") . 1)))
 
