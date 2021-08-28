@@ -56,6 +56,15 @@
   (magit-refs-show-commit-count 'branch)
 
   :config
+  (define-advice magit-list-repos-1 (:override (directory depth) ublt/list-repos-in-repso)
+    (let ((sub-repos (when (and (> depth 0) (magit-file-accessible-directory-p directory))
+                       (--mapcat (and (file-directory-p it)
+                                      (magit-list-repos-1 it (1- depth)))
+                                 (directory-files directory t
+                                                  directory-files-no-dot-files-regexp t)))))
+      (if (file-readable-p (expand-file-name ".git" directory))
+          (cons (file-name-as-directory directory) sub-repos)
+        sub-repos)))
   ;; XXX: The initialization of this is icky. We use `global-auto-revert-mode' anyway, so disable it here.
   (magit-auto-revert-mode -1)
 
