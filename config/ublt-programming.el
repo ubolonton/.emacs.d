@@ -40,38 +40,19 @@
 (use-package cc-mode
   :mode ("\\.m$" . objc-mode))
 
-(use-package nxml-mode
-  :ensure nil :straight nil
-  :mode "\\.xml.jin$")
-
-(use-package applescript-mode
-  :mode "\\.applescript$")
-
-(use-package scala-mode
-  :custom ((scala-indent:step 2)
-           (scala-indent:align-parameters t)))
-
-(use-package groovy-mode)
-
-(use-package lua-mode)
-
-(use-package powershell
-  :custom (powershell-indent 4))
-
-(use-package go-mode)
-
-(use-package ebnf-mode)
-
-(use-package lua-mode)
-
 (use-package tree-sitter
+  :demand t
   :hook (tree-sitter-after-on . tree-sitter-hl-mode)
   :config (global-tree-sitter-mode))
 
 (use-package tree-sitter-langs
   :after tree-sitter
+  :hook (sh-mode . (lambda ()
+                     (setq-local tree-sitter-hl-use-font-lock-keywords t)))
   :config
   (progn
+    (setq tree-sitter-langs--dir "~/Programming/projects/elisp-tree-sitter/langs/"
+          tree-sitter-langs--repos-dir "~/Programming/projects/elisp-tree-sitter/langs/repos/")
     (add-function :before-until tree-sitter-hl-face-mapping-function
                   (lambda (capture-name)
                     (pcase capture-name
@@ -85,5 +66,33 @@
       [["{" "}"] @ublt.hidden])
     (tree-sitter-hl-add-patterns 'rust
       ["unsafe" @ublt.unsafe])))
+
+;; Some rarely-written, but sometimes-read languages
+
+(use-package nxml-mode
+  :ensure nil :straight nil
+  :mode "\\.xml.jin$")
+
+(use-package applescript-mode
+  :mode "\\.applescript$")
+
+(use-package scala-mode
+  :custom ((scala-indent:step 2)
+           (scala-indent:align-parameters t)))
+
+(use-package powershell
+  :custom (powershell-indent 4))
+
+;; (use-package csharp-mode)
+
+(use-package groovy-mode)
+
+(use-package lua-mode)
+
+(use-package go-mode)
+
+(use-package ebnf-mode)
+
+(use-package bazel)
 
 (provide 'ublt-programming)
