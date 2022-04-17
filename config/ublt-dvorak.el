@@ -430,8 +430,7 @@
   :config
   (setq-default
    ;; We don't use :custom, since this is dynamically set based on whether we are in a GUI.
-   hydra-hint-display-type (if (and (memq window-system '(mac ns))
-                                    (version< emacs-version "28"))
+   hydra-hint-display-type (if (memq window-system '(mac ns))
                                'posframe 'lv)
    hydra-posframe-show-params
    (list :internal-border-width 1
