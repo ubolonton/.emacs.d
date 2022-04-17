@@ -32,6 +32,9 @@
                  :fuzzy-match t))))))
 
 (use-package helm-for-files
+  ;; XXX
+  :init (when (version<= "28" emacs-version)
+          (setq browse-url-mosaic-program "xmosaic"))
   :ensure nil :straight nil
   :custom ((helm-ff-file-name-history-use-recentf t)
            ;; helm-ff-auto-update-initial-value t

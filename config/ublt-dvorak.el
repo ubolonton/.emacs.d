@@ -433,7 +433,9 @@
   :config
   (setq-default
    ;; We don't use :custom, since this is dynamically set based on whether we are in a GUI.
-   hydra-hint-display-type (if (memq window-system '(mac ns)) 'posframe 'lv)
+   hydra-hint-display-type (if (and (memq window-system '(mac ns))
+                                    (version< emacs-version "28"))
+                               'posframe 'lv)
    hydra-posframe-show-params
    (list :internal-border-width 1
          :poshandler #'posframe-poshandler-point-bottom-left-corner))
@@ -443,32 +445,15 @@
            (append `(:internal-border-color ,(face-attribute 'mode-line :background))
                    `(:background-color ,(face-attribute 'hl-line :background))
                    hydra-posframe-show-params)))
-      (apply f args))))
+      (apply f args)))
 
-(defhydra ublt/hydra-avy (:exit t :hint nil)
-  "
- ^Line^    ^Region^  ^Goto^
-^^^^^^^^──────────────────────────────────────────
- _y_ yank  _Y_ yank  _c_ 2 chars  _C_ char
- _m_ move  _M_ move  _w_ word     _W_ any word
- _k_ kill  _K_ kill  _l_ line     _L_ end of line
-"
-  ("c" avy-goto-char-2)
-  ("C" avy-goto-char)
-  ("w" avy-goto-word-1)
-  ("W" avy-goto-word-0)
-  ("l" avy-goto-line)
-  ("L" avy-goto-end-of-line)
-  ("m" avy-move-line)
-  ("M" avy-move-region)
-  ("k" avy-kill-whole-line)
-  ("K" avy-kill-region)
-  ("y" avy-copy-line)
-  ("Y" avy-copy-region))
+  (define-advice ublt/hydra-help/body (:around (f &rest args) ublt/center)
+    (let ((hydra-posframe-show-params (append '(:poshandler posframe-poshandler-frame-center)
+                                              hydra-posframe-show-params)))
+      (apply f args)))
 
-
-(defhydra ublt/hydra-info (:hint nil :color teal)
-  "
+  (defhydra ublt/hydra-info (:hint nil :color teal)
+    "
   Search ^^        Open manual ^^
 ^^^^^^───────────────────────────────────────────────────
   _e_ elisp        _C-e_ elisp        _C-v_ evil
@@ -480,28 +465,28 @@
 
  [_h_] helm doc    [_C-i_] all info
 "
-  ("e" helm-info-elisp)
-  ("o" helm-info-org)
-  ("g" helm-info-magit)
-  ("r" helm-info-emacs)
-  ("s" info-lookup-symbol)
-  ("l" helm-info-cl)
+    ("e" helm-info-elisp)
+    ("o" helm-info-org)
+    ("g" helm-info-magit)
+    ("r" helm-info-emacs)
+    ("s" info-lookup-symbol)
+    ("l" helm-info-cl)
 
-  ("C-e" (info "elisp"))
-  ("C-o" (info "org"))
-  ("G"   (info "magit"))
-  ("C-r" info-emacs-manual)
-  ("C-l" (info "cl"))
-  ("C-u" (info "use-package"))
+    ("C-e" (info "elisp"))
+    ("C-o" (info "org"))
+    ("G"   (info "magit"))
+    ("C-r" info-emacs-manual)
+    ("C-l" (info "cl"))
+    ("C-u" (info "use-package"))
 
-  ("C-v" (info "evil"))
-  ("C-t" (info "transient"))
+    ("C-v" (info "evil"))
+    ("C-t" (info "transient"))
 
-  ("C-i" info)
-  ("h" helm-documentation))
+    ("C-i" info)
+    ("h" helm-documentation))
 
-(defhydra ublt/hydra-help (:hint nil :color teal)
-  "
+  (defhydra ublt/hydra-help (:hint nil :color teal)
+    "
   Describe ^^      Keys ^^            Go to ^^           Docs ^^
 ^^^^^^^^────────────────────────────────────────────────────────────────
   _f_ function     _k_ brief key      _C-f_ function     _C-i_ info
@@ -513,32 +498,32 @@
   ^^               ^^                 _C-u_ config
  [_C-h_] use built-in help    [_l_] view lossage
 "
-  ("f" helpful-callable)
-  ("c" helpful-command)
-  ("v" helpful-variable)
-  ("s" helpful-symbol)
-  ("m" describe-mode)
-  ("o" helpful-at-point)
-  ("p" describe-package)
+    ("f" helpful-callable)
+    ("c" helpful-command)
+    ("v" helpful-variable)
+    ("s" helpful-symbol)
+    ("m" describe-mode)
+    ("o" helpful-at-point)
+    ("p" describe-package)
 
-  ("k" describe-key-briefly)
-  ("K" helpful-key)
-  ("w" where-is)
-  ("b" describe-bindings)
+    ("k" describe-key-briefly)
+    ("K" helpful-key)
+    ("w" where-is)
+    ("b" describe-bindings)
 
-  ("C-f" find-function)
-  ("C-v" find-variable)
-  ("C-k" find-function-on-key)
-  ("C-l" find-library)
-  ("C-o" find-function-at-point)
-  ("C-u" use-package-jump-to-package-form)
-  ("F"   find-face-definition)
+    ("C-f" find-function)
+    ("C-v" find-variable)
+    ("C-k" find-function-on-key)
+    ("C-l" find-library)
+    ("C-o" find-function-at-point)
+    ("C-u" use-package-jump-to-package-form)
+    ("F"   find-face-definition)
 
-  ("C-i" ublt/hydra-info/body)
-  ("C-w" helm-man-woman)
+    ("C-i" ublt/hydra-info/body)
+    ("C-w" helm-man-woman)
 
-  ("C-h" help-for-help)
-  ("l" view-lossage))
+    ("C-h" help-for-help)
+    ("l" view-lossage)))
 
 (use-package which-key
   :disabled

@@ -40,6 +40,7 @@
 (use-package cc-mode
   :mode ("\\.m$" . objc-mode))
 
+
 (use-package tree-sitter
   :demand t
   :hook (tree-sitter-after-on . tree-sitter-hl-mode)

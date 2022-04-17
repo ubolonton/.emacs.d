@@ -139,7 +139,7 @@
  ("volatile-highlights.el" . "9a20091f0ce7fc0a6b3e641a6a46d5f3ac4d8392")
  ("wat-mode" . "f34fc84879a99130283a124cd196041b474213e1")
  ("web-mode" . "b286d682205f86b7fe878a92a5afb510a07cd132")
- ("whole-line-or-region" . "15f17488f98868f1628a3f9d91a812b1f89bc73a")
+ ("whole-line-or-region" . "500ad90695e8a5a0cefabb7500158eab0835a0ce")
  ("with-editor" . "7e0bf753709f1775d2bbbb6edf4482fca7fd286a")
  ("yaml-mode" . "40067a10ac1360f0b9533f0bbbb2eea128e2574d")
  ("yasnippet" . "fc33b2fbaee6c514c91e80f5b1c0210c776b03ed")

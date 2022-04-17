@@ -21,6 +21,44 @@
 (defvar ublt/packages
   '(use-package))
 
+;;; XXX: Breaking change in Emacs 28. This doesn't work though.
+(when (version<= "28" emacs-version)
+  (eval-and-compile
+    (defmacro define-obsolete-function-alias (obsolete-name current-name
+                                                            &optional when docstring)
+      "Set OBSOLETE-NAME's function definition to CURRENT-NAME and mark it obsolete.
+
+\(define-obsolete-function-alias \\='old-fun \\='new-fun \"28.1\" \
+\"old-fun's doc.\")
+
+is equivalent to the following two lines of code:
+
+\(defalias \\='old-fun \\='new-fun \"old-fun's doc.\")
+\(make-obsolete \\='old-fun \\='new-fun \"28.1\")
+
+WHEN should be a string indicating when the function was first
+made obsolete, for example a date or a release number.
+
+See the docstrings of `defalias' and `make-obsolete' for more details."
+      (declare (doc-string 4))
+      `(progn
+         (defalias ,obsolete-name ,current-name ,docstring)
+         (make-obsolete ,obsolete-name ,current-name ,(or when "2022-04-17"))))))
+
+;; XXX: New load suffix for dynamic module is `.dylib', but `autoload' has not been updated.
+;;
+;; error: tsc-dyn.dylib:0:0: error: scan-error: (Containing expression ends prematurely 57524 57525)
+(when (version<= "28" emacs-version)
+  (defun ublt/-remove-dylib-suffixes (suffixes)
+    (cl-remove-if (lambda (s) (string-match-p "dylib" s))
+                  suffixes))
+
+  (define-advice make-directory-autoloads (:around (f &rest args) ublt/ignore-dylib)
+    (advice-add 'get-load-suffixes :filter-return #'ublt/-remove-dylib-suffixes)
+    (unwind-protect
+        (apply f args)
+      (advice-remove 'get-load-suffixes #'ublt/-remove-dylib-suffixes))))
+
 (pcase (getenv "EMACS_PACKAGE_MANAGER")
   ("package.el"
    (progn
