@@ -141,7 +141,7 @@
  ("wat-mode" . "f34fc84879a99130283a124cd196041b474213e1")
  ("web-mode" . "b286d682205f86b7fe878a92a5afb510a07cd132")
  ("whole-line-or-region" . "500ad90695e8a5a0cefabb7500158eab0835a0ce")
- ("with-editor" . "7e0bf753709f1775d2bbbb6edf4482fca7fd286a")
+ ("with-editor" . "3d1af157b466c689ae2c4d1ddc1562d613d84879")
  ("yaml-mode" . "40067a10ac1360f0b9533f0bbbb2eea128e2574d")
  ("yasnippet" . "fc33b2fbaee6c514c91e80f5b1c0210c776b03ed")
  ("yasnippet-snippets" . "69cc1c19c7d67780d9f0f910462b818e8c0a570e")
