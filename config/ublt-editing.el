@@ -61,12 +61,13 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
 
 ;;; Copy/cut/duplicate whole line if no region is selected
 (use-package whole-line-or-region
-  :disabled (version<= "28" emacs-version)
-  :config (defun ublt/duplicate-line (_)
-            (interactive "p")
-            ;; FIX: This looks dirty
-            (call-interactively 'whole-line-or-region-kill-ring-save)
-            (call-interactively 'whole-line-or-region-yank)))
+  :config
+  (defun ublt/duplicate-line (_)
+    (interactive "p")
+    ;; FIX: This looks dirty
+    (call-interactively 'whole-line-or-region-kill-ring-save)
+    (call-interactively 'yank))
+  (whole-line-or-region-global-mode))
 
 
 ;; Prefer UTF-8
