@@ -45,6 +45,7 @@
   :hook (emacs-lisp-mode . elisp-slime-nav-mode))
 
 (use-package lisp-extra-font-lock
+  :demand t
   :config (lisp-extra-font-lock-global-mode +1)
   :hook (ielm-mode . lisp-extra-font-lock-mode))
 
