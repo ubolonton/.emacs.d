@@ -339,11 +339,9 @@
 
             ;; Major mode
             (or (if active
-                    (ublt/buffer-icon :v-adjust -0.05
-                                      :face 'all-the-icons-dred
-                                      )
-                  (ublt/buffer-icon :v-adjust -0.05
-                                    ))
+                    (ublt/buffer-icon :v-adjust -0.1
+                                      :face 'all-the-icons-dred)
+                  (ublt/buffer-icon :v-adjust -0.1))
                 (powerline-major-mode 'ublt/mode-line-major-mode))
 
             (powerline-raw " ")
