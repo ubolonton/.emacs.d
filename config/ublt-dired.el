@@ -21,7 +21,6 @@
 (use-package dired-x
   :ensure nil :straight nil
   :custom ((dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\.")
-           (dired-omit-mode t)
            (dired-guess-shell-alist-user
             (list
              (list "\\.t\\(ar\\.bz2\\|bz\\)\\'"
@@ -32,7 +31,8 @@
                             "; bunzip2 -c * | tar -C "
                             (file-name-sans-extension file) " -xvf -")
                    ;; Optional decompression.
-                   "bunzip2")))))
+                   "bunzip2"))))
+  :hook (dired-mode . dired-omit-mode))
 
 (use-package dired-aux
   :ensure nil :straight nil
