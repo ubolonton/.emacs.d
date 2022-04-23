@@ -99,7 +99,8 @@
 
 (use-package transient
   ;; `transient' doesn't seem to have a runtime show-all toggle.
-  :custom (transient-default-level 7))
+  :custom ((transient-default-level 7)
+           (transient-display-buffer-action '(display-buffer-below-selected ()))))
 
 ;;; We use this only for magit-todos, since we prefer our own coloring in code buffers.
 (use-package hl-todo
