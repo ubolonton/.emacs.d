@@ -11,7 +11,7 @@
            (org-image-actual-width nil)
 
            ;; Show all headlines by default.
-           (org-startup-folded t)
+           (org-startup-folded 'showall)
 
            ;; Don't show empty lines in collapsed view.
            (org-cycle-separator-lines 0)
