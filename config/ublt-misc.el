@@ -35,10 +35,10 @@
 
 ;; `http://www.emacswiki.org/emacs/DeskTop#toc6'
 ;; (desktop-save-mode +1)
-(define-advice desktop-create-buffer (:around (f &rest args) ublt/ignore-errors)
+(define-advice desktop-create-buffer (:around (f file-version buffer-filename &rest args) ublt/ignore-errors)
   (condition-case err
-      (apply f args)
-    (error (message "desktop-create-buffer: %s" err))))
+      (apply f file-version buffer-filename args)
+    (error (message "desktop-create-buffer: %s %s" err buffer-filename))))
 (setq desktop-restore-frames nil
       desktop-restore-eager 30)
 (defun ublt/session-restore ()
