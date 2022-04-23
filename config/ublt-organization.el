@@ -440,12 +440,13 @@ end tell")))
               ("" "wasysym" t)
               ("" "amssymb" t)
               ("" "hyperref" t)
-              ("" "minted")
               "\\tolerance=1000")))
   :config
   ;; Use minted for code highlighting in exported pdf files
   ;; http://joat-programmer.blogspot.nl/2013/07/org-mode-version-8-and-pdf-export-with.html
-  (add-to-list 'org-latex-packages-alist '("" "minted"))
+  ;; https://tex.stackexchange.com/questions/367332/minted-error-undefined-control-sequence-pyg-with-texmaker
+  ;; https://github.com/gpoore/minted/issues/92
+  (add-to-list 'org-latex-packages-alist '("cache=false" "minted"))
 
   (add-to-list 'org-latex-classes
                `("ublt-org-article"
