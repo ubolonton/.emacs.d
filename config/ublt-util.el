@@ -53,6 +53,8 @@ Unlike `unwind-protect', BODY is not executed if FORM does not signal an error."
   (or (eq f advice)
       (eq f (intern-soft (format "%s@%s" symbol advice)))))
 
+
+
 ;;; FIX
 (defun ublt/advice-remove (symbol advice)
   "Like `advice-remove', but also works on names specified in `defined-advice'."
@@ -96,6 +98,8 @@ Unlike `unwind-protect', BODY is not executed if FORM does not signal an error."
                                    (cl-pushnew symbol symbols)))
                                symbol))))
     symbols))
+
+
 
 (defvar ublt/timing-threshold-for-command 0.1)
 

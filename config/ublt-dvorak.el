@@ -800,9 +800,7 @@
          "s-<right>" 'sgml-skip-tag-forward
          "s-<left>"  'sgml-skip-tag-backward
          "M-<right>" 'sgml-skip-tag-forward
-         "M-<left>"  'sgml-skip-tag-backward
-         ;; FIX: Hmm
-         ))))
+         "M-<left>"  'sgml-skip-tag-backward))))
 
 (ublt/keys 'emmet-mode emmet-mode-keymap
   "M-RET" 'emmet-expand-yas)
