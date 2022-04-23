@@ -47,7 +47,8 @@
 
 (use-package helm-buffers
   :ensure nil :straight nil
-  :custom (helm-buffers-fuzzy-matching t)
+  :custom ((helm-buffers-fuzzy-matching t)
+           (helm-buffer-max-length 50))
   :config (unless helm-source-buffers-list
             (setq helm-source-buffers-list
                   (helm-make-source "Buffers" 'helm-source-buffers))))
