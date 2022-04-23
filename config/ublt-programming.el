@@ -66,7 +66,10 @@
     (tree-sitter-hl-add-patterns 'javascript
       [["{" "}"] @ublt.hidden])
     (tree-sitter-hl-add-patterns 'rust
-      ["unsafe" @ublt.unsafe])))
+      ["unsafe" @ublt.unsafe])
+    (tree-sitter-hl-add-patterns 'bash
+      [(test_command
+        ["[[" "]]" "[" "]" "((" "))"] @ublt.hidden)])))
 
 ;; Some rarely-written, but sometimes-read languages
 
