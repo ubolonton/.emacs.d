@@ -23,11 +23,12 @@
 ;;; Old buffer clean up
 (use-package midnight
   :custom ((clean-buffer-list-delay-general 7)
-           (clean-buffer-list-delay-special (* 3 24 3600)))
-  :config
-  (with-eval-after-load 'desktop
-    (add-to-list 'desktop-locals-to-save 'buffer-display-time))
-  (midnight-mode +1))
+           (clean-buffer-list-delay-special (* 3 24 3600))
+           (midnight-delay (* 12 3600) "Midday instead of midnight"))
+  :config (midnight-mode +1))
+
+(with-eval-after-load 'desktop
+  (add-to-list 'desktop-locals-to-save 'buffer-display-time))
 
 (ublt/in '(gnu/linux)
   (setq find-ls-option '("-print0 | xargs -0 ls -ld" . "-ld")))
