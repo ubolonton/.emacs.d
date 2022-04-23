@@ -96,4 +96,6 @@
 
 (use-package bazel)
 
+(use-package just-mode)
+
 (provide 'ublt-programming)
