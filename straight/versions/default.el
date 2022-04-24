@@ -114,7 +114,7 @@
  ("popup-el" . "80829dd46381754639fb764da11c67235fe63282")
  ("popwin" . "95dea14c60019d6cccf9a3b33e0dec4e1f22c304")
  ("posframe" . "c15800a8388696474fe9f8466fce1b40735b9304")
- ("powerline" . "6ef4a06c3c583045accbc957b6f449b7c0c57cd8")
+ ("powerline" . "566c77844f053cb39fa7acdfbc143a855450f0b5")
  ("powershell.el" . "87826777bd3ebd53740be99b4546bfc11ccc625d")
  ("projectile" . "defce6e6bb504bdfab1e091550e2f709310327b9")
  ("quack" . "2146805ce2b5a9b155d73929986f11e713787e26")
