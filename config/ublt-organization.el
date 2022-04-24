@@ -398,9 +398,8 @@ end tell")))
   :config
   (define-advice org-hugo--gen-front-matter (:around (f data &rest args) ublt/inject-weight)
     "Add weight to front matter in a way that preserve org's tree ordering."
-    (let ((weight (line-number-at-pos nil :absolute)))
-      (map-put data 'weight weight)
-      (apply f data args))))
+    (setf (map-elt data 'weight) (line-number-at-pos nil :absolute))
+    (apply f data args)))
 
 ;; ---------------------------------------------------------------------------
 ;;; Slides for presentation
