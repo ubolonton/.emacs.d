@@ -76,8 +76,7 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 (set-selection-coding-system 'utf-8)
-(setq default-coding-system 'utf-8
-      locale-coding-system 'utf-8
+(setq locale-coding-system 'utf-8
       x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
 (define-coding-system-alias 'UTF-8 'utf-8)
 (use-package htmlize
