@@ -66,7 +66,7 @@
  ("helm-org" . "542dda7bc9a3b9dfb439e4f8a1e5f60cfb6cc256")
  ("helm-projectile" . "5328b74dddcee8d1913803ca8167868831a07463")
  ("helm-rg" . "785a80fe5cc87e27c5ea3d00a70049028d9e2847")
- ("helm-swoop" . "884d2f5840108f0171d38fa19ae2334560f5c2d9")
+ ("helm-swoop" . "1b3285791f1dc1fde548fe67aec07214d698fd57")
  ("helpful" . "c2729a236a84a1fbd3d184c163fbd10e0fd62077")
  ("highlight-function-calls" . "f7a1eaf95fc64cc0db4d0567f9ff79ec4ae04787")
  ("highlight-numbers" . "8b4744c7f46c72b1d3d599d4fb75ef8183dee307")
