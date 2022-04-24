@@ -1,6 +1,7 @@
 (require 'straight)
 
 (eval-and-compile
+  (require 'subr-x)
   (require 'cl-lib))
 
 (defun ublt/straight-recipe (package &rest plist)
@@ -51,13 +52,26 @@ Example:
     (lambda (props)
       (ublt/plist-append props :files files))))
 
-;; To use locally-built dynamic module.
-(ublt/straight-add-files 'tsc
-  '("core/DYN-VERSION" "core/tsc-dyn.*"))
+(defmacro ublt/straight-with-modifications (package &rest forms)
+  (declare (indent 1))
+  `(ublt/straight-modify-recipe ,package
+     (lambda (props)
+       (thread-first
+         props
+         ,@forms))))
 
-;; To use locally-built grammar binaries.
-(ublt/straight-add-files 'tree-sitter-langs
-  '("bin"))
+(ublt/straight-with-modifications 'tree-sitter
+  (plist-put :local-repo "~/Programming/projects/elisp-tree-sitter"))
+
+(ublt/straight-with-modifications 'tsc
+  ;; To use locally-built dynamic module.
+  (ublt/plist-append :files '("core/DYN-VERSION" "core/tsc-dyn.*"))
+  (plist-put :local-repo "~/Programming/projects/elisp-tree-sitter"))
+
+(ublt/straight-with-modifications 'tree-sitter-langs
+  ;; To use locally-built grammar binaries.
+  (ublt/plist-append :files '("bin"))
+  (plist-put :local-repo "~/Programming/projects/tree-sitter-langs"))
 
 (straight-register-package
  '(wat-mode :type git :host github :repo "devonsparks/wat-mode"))
