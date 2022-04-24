@@ -101,7 +101,6 @@
 (defun ublt/helm-sources ()
   (let ((base '(helm-source-buffers-list
                 helm-source-recentf
-                helm-source-ido-virtual-buffers
                 helm-source-buffer-not-found
                 helm-source-files-in-current-dir
                 helm-source-bookmarks
