@@ -40,13 +40,16 @@
 (use-package cc-mode
   :mode ("\\.m$" . objc-mode))
 
+(use-package tsc
+  :init (setq tsc-dyn-get-from '(:compilation :github)))
 
 (use-package tree-sitter
-  :demand t
+  :defer t
   :hook (tree-sitter-after-on . tree-sitter-hl-mode)
   :config (global-tree-sitter-mode))
 
 (use-package tree-sitter-langs
+  :defer t
   :after tree-sitter
   :hook (sh-mode . (lambda ()
                      (setq-local tree-sitter-hl-use-font-lock-keywords t)))
