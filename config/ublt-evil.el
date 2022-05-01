@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; coding: utf-8 -*-
 (require 'ublt-util)
 
 (require 'sgml-mode)
@@ -151,7 +152,7 @@
 (defun ublt/sgml-get-context (count)
   (save-excursion
     (let ((result))
-      (dotimes (i count result)
+      (dotimes (_ count result)
         (setq result (sgml-get-context))))))
 
 (defun ublt/sgml-get-tag (count)
@@ -166,9 +167,10 @@
 (defun ublt/evil-an-sgml-range (count)
   (let* ((tag (ublt/sgml-get-tag count))
          (start (sgml-tag-start tag))
-         (end (sgml-tag-end tag)))
-    (pcase (sgml-tag-type tag)
-      ((empty decl cdata) (list start end))
+         (end (sgml-tag-end tag))
+         (tag-type (sgml-tag-type tag)))
+    (pcase tag-type
+      ((or 'empty 'decl 'cdata) (list start end))
       ('open
        (save-excursion
          (goto-char start)
@@ -179,10 +181,8 @@
          (goto-char end)
          (sgml-skip-tag-backward 1)
          (list (point) end)))
-      ('comment (TODO))
-      ('pi (TODO))
-      ('jsp (TODO))                     ; WAT?
-      (t nil))))
+      ((or 'comment 'pi 'jsp) (user-error "Unknown tag type %s" tag-type))
+      (_ nil))))
 
 (evil-define-text-object evil-a-defun (count &optional beg end type)
   "Select a defun."
