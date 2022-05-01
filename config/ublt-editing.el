@@ -99,7 +99,7 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
   (put 'paredit-doublequote 'delete-selection t)
   (put 'paredit-newline 'delete-selection t)
 
-  (defun ublt/paredit-space-for-open? (endp delimiter)
+  (defun ublt/paredit-space-for-open? (_endp delimiter)
     "Don't insert space for ( [ \" in these modes."
     (not (and (member major-mode '(comint-mode python-mode javascript-mode js-mode js2-mode web-mode))
               (member delimiter '(?\( ?\[ ?\")))))
