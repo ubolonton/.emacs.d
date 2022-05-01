@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; coding: utf-8 -*-
 (require 'ublt-util)
 (require 'ublt-fix-jumpy-scroll)
 
@@ -79,8 +80,7 @@ of line."
 
 
 ;;; Scrolling settings
-(setq redisplay-dont-pause t
-
+(setq
       ;; TODO: Figure out how to make this work reliably with mixed-pitch themes, like
       ;; `ublt-dark-theme'. `ublt-fix-jumpy-scroll' tries to do that, but the fixes have to be
       ;; applied case-by-case, and I don't know how to handle file visiting yet, among some other
