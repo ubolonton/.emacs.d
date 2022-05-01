@@ -9,12 +9,6 @@
 
 (use-package cargo)
 
-(use-package lsp-mode
-  :custom ((lsp-ui-doc-enable nil)
-           (lsp-ui-sideline-enable nil)
-           (lsp-log-io t))
-  :hook ((rust-mode . lsp)))
-
 (use-package lsp-rust
   :ensure nil :straight nil
   :after lsp-mode

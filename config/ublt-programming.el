@@ -32,7 +32,10 @@
   :hook (prog-mode . highlight-parentheses-mode))
 
 (use-package lsp-mode
-  :custom (lsp-prefer-flymake :none))
+  :custom ((lsp-prefer-flymake :none)
+           (lsp-ui-doc-enable nil)
+           (lsp-ui-sideline-enable nil)
+           (lsp-log-io t)))
 
 (use-package lsp-ui
   :hook (lsp-mode . lsp-ui-mode))
