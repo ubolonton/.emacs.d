@@ -1169,6 +1169,13 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
   (custom-theme-set-variables
    'ublt-dark
 
+   ;; These work when switching theme after `evil' is loaded.
+   '(evil-motion-state-cursor '(box "Yellow"))
+   '(evil-normal-state-cursor '(box "Yellow"))
+   '(evil-insert-state-cursor '(bar "YellowGreen"))
+   '(evil-emacs-state-cursor  '(bar "YellowGreen"))
+   '(evil-visual-state-cursor '(box "#F86155"))
+
    `(hl-paren-colors '("#00FF00"
                        "#00DD00"
                        "#00BB00"
@@ -1184,8 +1191,7 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
        ("FIXME" font-lock-warning-face)
        ("FIX" font-lock-warning-face)
        ("XXX+" font-lock-warning-face)
-       ("\\?\\?\\?+" font-lock-warning-face)))
-   ))
+       ("\\?\\?\\?+" font-lock-warning-face)))))
 
 ;;;###autoload
 (when (and (boundp 'custom-theme-load-path) load-file-name)

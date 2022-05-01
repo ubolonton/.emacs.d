@@ -37,31 +37,38 @@
            (evil-insert-state-tag (propertize "( I )" 'face 'ublt/evil-insert-tag))
            (evil-emacs-state-tag  (propertize "( E )" 'face 'ublt/evil-emacs-tag))
            (evil-visual-state-tag (propertize "( V )" 'face 'ublt/evil-visual-tag))
-           (evil-motion-state-cursor '(box "Yellow"))
-           (evil-normal-state-cursor '(box "Yellow"))
-           (evil-insert-state-cursor '(bar "YellowGreen"))
-           (evil-emacs-state-cursor  '(bar "YellowGreen"))
-           (evil-visual-state-cursor '(box "#F86155"))
-
            (evil-move-cursor-back nil)
            (evil-want-visual-char-semi-exclusive t))
 
   :config
+
+  ;; XXX: Seems like these must be set after `evil' is loaded to take effect. FIX:
+  ;; Make `evil-define-state' respect the existing values instead.
+  (setq-default evil-motion-state-cursor '(box "Yellow")
+                evil-normal-state-cursor '(box "Yellow")
+                evil-insert-state-cursor '(bar "YellowGreen")
+                evil-emacs-state-cursor  '(bar "YellowGreen")
+                evil-visual-state-cursor '(box "#F86155"))
+
   ;; Modes that should be insert state by default
-  (dolist (mode '(sql-interactive-mode
-                  twittering-edit-mode
-                  magit-log-edit-mode
-                  git-commit-mode
+  (dolist (mode '(;; REPL
+                  cider-repl-mode
                   erlang-shell-mode
-                  dired-mode
-                  inferior-octave-mode
-                  inferior-ess-mode
-                  inferior-lisp-mode
-                  inferior-haskell-mode
                   haskell-interactive-mode
                   inf-mongo-mode
-                  cider-repl-mode
-                  php-boris-mode))
+                  inferior-ess-mode
+                  inferior-haskell-mode
+                  inferior-lisp-mode
+                  inferior-octave-mode
+                  php-boris-mode
+                  sql-interactive-mode
+                  ;; Prose composing UI
+                  git-commit-mode
+                  magit-log-edit-mode
+                  twittering-edit-mode
+                  ;; Other
+                  helm-major-mode
+                  dired-mode))
     (add-to-list 'evil-insert-state-modes mode))
   (add-hook 'org-capture-mode-hook #'evil-insert-state)
 
