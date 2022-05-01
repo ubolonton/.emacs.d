@@ -138,7 +138,7 @@
  ("use-package" . "a7422fb8ab1baee19adb2717b5b47b9c3812a84c")
  ("volatile-highlights.el" . "9a20091f0ce7fc0a6b3e641a6a46d5f3ac4d8392")
  ("wat-mode" . "f34fc84879a99130283a124cd196041b474213e1")
- ("web-mode" . "b286d682205f86b7fe878a92a5afb510a07cd132")
+ ("web-mode" . "efa853e5cfff8e0bcacbda9d1c6696b33da91b03")
  ("whole-line-or-region" . "500ad90695e8a5a0cefabb7500158eab0835a0ce")
  ("with-editor" . "3d1af157b466c689ae2c4d1ddc1562d613d84879")
  ("yaml-mode" . "40067a10ac1360f0b9533f0bbbb2eea128e2574d")
