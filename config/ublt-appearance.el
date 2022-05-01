@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; coding: utf-8 -*-
 (require 'ublt-util)
 
 ;;; Font, colors, text appearance
@@ -93,9 +94,9 @@
 
 ;;;Color theme
 (ublt/with-defer
-  (use-package monokai-theme)
   (use-package zenburn-theme)
   (use-package solarized-theme))
+(use-package monokai-theme)
 (when (y-or-n-p "Load theme?")
   (if (window-system)
       (ublt/set-up 'ublt-dark-theme
@@ -360,15 +361,15 @@
 ;;; XXX: This looks so weird
 (use-package diminish
   :config
-  (defun ublt/diminish (mode-name display-text &optional feature)
+  (defun ublt/diminish (mode display-text &optional feature)
     (condition-case err
         (if feature
             (eval-after-load feature
               `(condition-case err
-                   (diminish ',mode-name ,display-text)
-                 (error (message (format "Error diminishing \"%s\": %s" ,mode-name err)))))
-          (diminish mode-name display-text))
-      (error (message (format "Error diminishing \"%s\": %s" mode-name err)))))
+                   (diminish ',mode ,display-text)
+                 (error (message (format "Error diminishing \"%s\": %s" ,mode err)))))
+          (diminish mode display-text))
+      (error (message (format "Error diminishing \"%s\": %s" mode err)))))
   '(
     ъ 1 2 3 4 5   6 7 8 9 0 х
     э б ю з н   а п с к д \
@@ -427,7 +428,7 @@
   $this⇾foo
   $this⤞foo)
 
-(defun ublt/-no-ligature-support (beg end)
+(defun ublt/-no-ligature-support (_beg _end)
   (not (and
         (eq window-system 'mac)
         mac-auto-operator-composition-mode)))
