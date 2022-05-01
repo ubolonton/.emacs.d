@@ -89,7 +89,7 @@
  ("lsp-ui" . "242dfe859c3497c456eaacfd84942e12419529fe")
  ("lua-mode" . "35b6e4c20b8b4eaf783ccc8e613d0dd06dbd165c")
  ("magit" . "f44f6c14500476d918e9c01de8449edb20af4113")
- ("markdown-mode" . "051734091aba17a54af96b81beebdbfc84c26459")
+ ("markdown-mode" . "eecf2f20b097f9e6a0eaf938af967122fbec35dd")
  ("markup-faces" . "98a807ed82473eb41c6a201ed7ef816d6bcd67b0")
  ("melpa" . "125055719b7be14d8fd808ea48714108bd02d9e5")
  ("monokai-emacs" . "f4ef092129f4a35edaee0a9b2219c17e86309730")
