@@ -20,7 +20,7 @@
  ("diminish.el" . "565a983a39d2e2cffab5df13b34f3b6116723208")
  ("dired-hacks" . "2c1234592aee91dcd9401bcd67213e6a4a464fd9")
  ("diredfl" . "9b2a89951cee8bdf5c0cb67f9c3ad6ac73abf9cb")
- ("dockerfile-mode" . "7223d92718f78fa3ab15667cdb2ed90cfeb579e7")
+ ("dockerfile-mode" . "b63a3d12b7dea0cb9efc7f78d7ad5672ceab2a3f")
  ("ebnf-mode" . "73d6fb8b208fb1c158cb64f3b97828e6a98ee604")
  ("edit-indirect" . "de645d8144e8a08f039a9c88185121ec81d957ef")
  ("edn.el" . "be9e32d1b49e35247b263b0243df7cfdc8d413ab")
