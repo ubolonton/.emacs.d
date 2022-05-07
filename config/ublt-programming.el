@@ -66,7 +66,8 @@
                       ("ublt.hidden" 'ublt/lisp-paren-face)
                       ("ublt.unsafe" 'rust-unsafe-face))))
     (tree-sitter-hl-add-patterns 'python
-      [((string) @constant
+      [(pattern/subscript subscript: (string) @variable)
+       ((string) @constant
         (.match? @constant "^[bru]*'"))
        ["{" "}"] @ublt.hidden])
     (tree-sitter-hl-add-patterns 'javascript
