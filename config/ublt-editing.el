@@ -198,10 +198,10 @@ See `http://ergoemacs.org/emacs/modernization_upcase-word.html'
 ;; Don't understand why it's 8 by default
 (setq-default tab-width 4)
 
-;; Teh awesome
 (use-package undo-tree
   :custom ((undo-tree-visualizer-timestamps t)
-           (undo-tree-visualizer-diff t))
+           (undo-tree-visualizer-diff t)
+           (undo-tree-auto-save-history nil "Eliminate ~undo-tree~ files."))
   :config (global-undo-tree-mode +1))
 
 ;; Automatically update files whose contents were changed
