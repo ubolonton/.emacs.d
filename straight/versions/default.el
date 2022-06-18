@@ -87,7 +87,7 @@
  ("lisp-extra-font-lock" . "4605eccbe1a7fcbd3cacf5b71249435413b4db4f")
  ("lsp-mode" . "03ac31f352fdc07f770314404ccaffe52a640cbb")
  ("lsp-ui" . "6cd0409de6ca59c02d752b8e543bb5eaa61357e4")
- ("lua-mode" . "35b6e4c20b8b4eaf783ccc8e613d0dd06dbd165c")
+ ("lua-mode" . "5a9bee8d5fc978dc64fcb677167417010321ba65")
  ("magit" . "f44f6c14500476d918e9c01de8449edb20af4113")
  ("markdown-mode" . "eecf2f20b097f9e6a0eaf938af967122fbec35dd")
  ("markup-faces" . "98a807ed82473eb41c6a201ed7ef816d6bcd67b0")
