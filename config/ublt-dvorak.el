@@ -1066,7 +1066,9 @@
   "C-M-S-s"    'isearch-forward
   "M-l"        'move-to-window-line-top-bottom
   "C-c C-c"    'dired-toggle-read-only
-  "M-o"        'dired-omit-mode)
+  "M-o"        'dired-omit-mode
+  "M-p"        'ublt/dired-preview-previous
+  "M-n"        'ublt/dired-preview-next)
 
 (ublt/keys 'rg rg-mode-map
   "C-c C-c" 'wgrep-change-to-wgrep-mode)

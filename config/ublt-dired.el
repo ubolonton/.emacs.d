@@ -82,4 +82,16 @@
       (start-process "rsync" "*rsync*" "rsync"
                      "-rvz" file dest))))
 
+(defun ublt/dired-preview-next ()
+  (interactive)
+  (call-interactively #'dired-next-line)
+  (call-interactively #'dired-find-file-other-window)
+  (call-interactively #'other-window))
+
+(defun ublt/dired-preview-previous ()
+  (interactive)
+  (call-interactively #'dired-previous-line)
+  (call-interactively #'dired-find-file-other-window)
+  (call-interactively #'other-window))
+
 (provide 'ublt-dired)
