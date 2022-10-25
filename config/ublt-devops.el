@@ -1,6 +1,9 @@
 (require 'ublt-util)
 
 (ublt/with-defer
+  (use-package hcl-mode
+    :mode ("\\.spc\\'") ; Steampipe config files.
+    )
   (use-package terraform-mode)
   (use-package dockerfile-mode)
   (use-package systemd)

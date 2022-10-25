@@ -13,7 +13,8 @@
   :hook (markdown-mode . ublt/run-prog-mode-hook))
 
 (use-package yaml-mode
-  :mode "\\.yaml$"
+  :mode ("\\.yaml$"
+         "\\Chart.lock\\'")
   :hook ((yaml-mode . (lambda () (setq tab-width 2)))
          (yaml-mode . (lambda () (variable-pitch-mode -1)))
          (yaml-mode . ublt/run-prog-mode-hook)))
