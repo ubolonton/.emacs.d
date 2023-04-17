@@ -55,7 +55,18 @@
   :custom (highlight-function-calls-not t))
 
 (use-package ielm
-  :hook (ielm-mode . (lambda () (setq comint-input-ring-file-name (ublt/init-rel-path ".ielm-input.hist")))))
+  :hook (ielm-mode . ublt/-ielm-set-up-input-history)
+  :config
+  ;; https://www.n16f.net/blog/making-ielm-more-comfortable/
+  (defun ublt/-ielm-set-up-input-history ()
+    (setq-local comint-input-ring-file-name (ublt/init-rel-path ".ielm-input.hist")
+                comint-input-ring-size 1000
+                comint-input-ignoredups t)
+    (comint-read-input-ring))
+  (defun ublt/-ielm-record-input (&rest _args)
+    (with-file-modes #o600
+      (comint-write-input-ring)))
+  (advice-add 'ielm-send-input :after #'ublt/-ielm-record-input))
 
 (use-package flycheck-package
   :config (flycheck-package-setup))
