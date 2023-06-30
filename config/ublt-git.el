@@ -23,9 +23,9 @@
 
   (magit-status-show-hashes-in-headers t)
 
-  ;; NOTE: https://github.com/magit/magit/issues/1743
-  ;; 2-way diff for staging is much more useful than 3-way.
-  (magit-ediff-dwim-show-on-hunks t)
+  ;; ;; NOTE: https://github.com/magit/magit/issues/1743
+  ;; ;; 2-way diff for staging is much more useful than 3-way.
+  ;; (magit-ediff-dwim-show-on-hunks t)
 
   ;; Git directories
   (magit-repository-directories `(("~/dotfiles". 0)

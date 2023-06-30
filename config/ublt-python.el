@@ -24,8 +24,8 @@
            (python-shell-prompt-output-regexp "Out \\[[0-9]?\\]: ")
            (python-fill-docstring-style 'pep-257-nn)))
 
-(use-package paredit
-  :hook (python-mode . paredit-mode))
+;; (use-package paredit
+;;   :hook (python-mode . paredit-mode))
 
 (use-package flycheck
   :hook (python-mode . ublt/python-maybe-flycheck)
