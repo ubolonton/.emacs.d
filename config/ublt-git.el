@@ -35,10 +35,7 @@
                                   ("~/Programming/lib" . 1)
                                   ("~/Programming/Tools" . 1)
                                   ("~/Programming/projects/elisp-tree-sitter/langs/repos" . 1)
-                                  ("~/Programming/pp" . 1)
-                                  ("~/Programming/pp/devops" . 1)
-                                  ("~/Programming/pp/ml-team" . 1)
-                                  ("~/Programming/pp/parcel-perform" . 1)
+                                  ("~/Programming/pp" . 2)
                                   (,(ublt/init-rel-path "straight/repos") . 1)))
 
   (magit-status-margin '(t age magit-log-margin-width t 10))
