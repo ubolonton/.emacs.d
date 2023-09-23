@@ -17,7 +17,8 @@
            (org-cycle-separator-lines 0)
 
            ;; List additional (on top of 2) indentation.
-           (org-list-indent-offset 1)
+           ;; I use a variable-pitch font, and same bullet for sub-levels, so use a large value.
+           (org-list-indent-offset 2)
 
            (org-fontify-whole-heading-line t)
 
@@ -71,11 +72,11 @@
 
            (org-list-use-circular-motion t)
 
-           ;; Different list levels should use different bullets
-           (org-list-demote-modify-bullet '(("-" . "+")
-                                            ("+" . "-")
-                                            ("1." . "1)")
-                                            ("1)" . "1.")))
+           ;; ;; Different list levels should use different bullets
+           ;; (org-list-demote-modify-bullet '(("-" . "+")
+           ;;                                  ("+" . "-")
+           ;;                                  ("1." . "1)")
+           ;;                                  ("1)" . "1.")))
 
            ;; org-footnote-auto-adjust t
 
