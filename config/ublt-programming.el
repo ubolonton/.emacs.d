@@ -108,4 +108,6 @@
 
 (use-package just-mode)
 
+(use-package swift-mode)
+
 (provide 'ublt-programming)
