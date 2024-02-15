@@ -105,7 +105,7 @@
     :ensure nil :straight nil
     :custom ((cider-repl-display-help-banner nil)
              (cider-repl-use-pretty-printing t)
-             (cider-repl-popup-stacktraces t)
+             (cider-repl-popup-stacktraces t) ;TODO
              (cider-repl-wrap-history t)
 
              (cider-repl-history-file (ublt/init-rel-path ".nrepl.hist"))

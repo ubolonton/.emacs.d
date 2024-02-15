@@ -11,7 +11,7 @@
  ("avy" . "4d52b5cb7e1c565ca8dfe9c47b54330fd1a395bc")
  ("cargo.el" . "1f3bc0d10dbddabfe1974590847a1359aeb3c244")
  ("cask-mode" . "7c6719d3bb4fe552958634bd5a11abc56681f3a7")
- ("cider" . "3d85b4dc9ce5e130b61186334bc8f732ebeeaada")
+ ("cider" . "06dc45844ad05fe23fccb7dec1609404e3cda88e")
  ("clj-refactor.el" . "fd58583b4a27ed83e2bf9e4192f755003291d8ef")
  ("clojure-mode" . "0c6b3ec8f13a26bae77e4346d49bc52e7d8fd12e")
  ("company-mode" . "955f80e6c911a818611887bc35658af9e925ed66")
