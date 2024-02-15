@@ -13,7 +13,7 @@
  ("cask-mode" . "7c6719d3bb4fe552958634bd5a11abc56681f3a7")
  ("cider" . "06dc45844ad05fe23fccb7dec1609404e3cda88e")
  ("clj-refactor.el" . "fd58583b4a27ed83e2bf9e4192f755003291d8ef")
- ("clojure-mode" . "0c6b3ec8f13a26bae77e4346d49bc52e7d8fd12e")
+ ("clojure-mode" . "25d713a67d8e0209ee74bfc0153fdf677697b43f")
  ("company-mode" . "955f80e6c911a818611887bc35658af9e925ed66")
  ("company-posframe" . "37a1f136f61bed4050dbeb182767c7e51cb73e1b")
  ("dash.el" . "7fd71338dce041b352f84e7939f6966f4d379459")
