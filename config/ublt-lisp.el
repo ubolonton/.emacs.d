@@ -89,10 +89,11 @@
 
   (use-package cider
     :custom ((cider-prompt-for-symbol nil)
+             (cider-enrich-classpath t)
              (cider-font-lock-dynamically '(macro core var deprecated)))
 
     :config (ublt/in '(darwin)
-              (setq cider-jdk-src-paths (-> "find /Library/Java/JavaVirtualMachines -name src.zip | head -n 1"
+              (setq cider-jdk-src-paths (-> "find /Library/Java/JavaVirtualMachines -name src.zip | grep 'lib/src.zip' | head -n 1"
                                             shell-command-to-string string-trim list)))
 
     :hook ((cider-mode . cider-company-enable-fuzzy-completion)

@@ -87,7 +87,8 @@
       (add-hook hook 'ublt/variable-pitch-mode-maybe))
     (add-hook 'find-file-hook 'ublt/variable-pitch-mode-fundamental)
     (dolist (hook '(hexl-mode
-                    dns-mode-hook))
+                    dns-mode-hook
+                    cider-browse-spec-view-mode-hook))
       (add-hook hook (ublt/off variable-pitch-mode)))
     ))
 
