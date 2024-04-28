@@ -45,6 +45,10 @@ See the docstrings of `defalias' and `make-obsolete' for more details."
          (defalias ,obsolete-name ,current-name ,docstring)
          (make-obsolete ,obsolete-name ,current-name ,(or when "2022-04-17"))))))
 
+(unless (fboundp 'native-comp-deferred-compilation-deny-list)
+  (define-obsolete-variable-alias 'native-comp-deferred-compilation-deny-list 'native-comp-jit-compilation-deny-list
+    "did-they-make-it-obsolete-and-remove-it-within-the-same-major-version-like-wtf"))
+
 ;; XXX: New load suffix for dynamic module is `.dylib', but `autoload' has not been updated.
 ;;
 ;; error: tsc-dyn.dylib:0:0: error: scan-error: (Containing expression ends prematurely 57524 57525)
