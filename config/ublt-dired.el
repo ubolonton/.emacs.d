@@ -41,7 +41,10 @@
 ;; Directories first by default. "s d" to change locally
 (use-package dired-sort-map
   :ensure nil :straight nil
-  :custom (dired-listing-switches "--group-directories-first -alhG1v"))
+  :custom (dired-listing-switches
+           (pcase system-type
+             ('berkeley-unix "-alh")
+             (_ "--group-directories-first -alhG1v"))))
 
 (use-package all-the-icons-dired
   :hook (dired-mode . all-the-icons-dired-mode))
