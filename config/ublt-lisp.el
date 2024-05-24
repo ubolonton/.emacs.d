@@ -21,6 +21,7 @@
   :hook ((scheme-mode
           emacs-lisp-mode lisp-mode ielm-mode
           clojure-mode cider-repl-mode
+          sly-mrepl-mode
           cask-mode)
          . paredit-mode))
 
@@ -117,5 +118,7 @@
 
              (nrepl-log-messages t)
              (nrepl-hide-special-buffers t))))
+
+(use-package sly)
 
 (provide 'ublt-lisp)

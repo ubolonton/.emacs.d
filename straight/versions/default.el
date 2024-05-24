@@ -124,6 +124,7 @@
  ("s.el" . "08661efb075d1c6b4fa812184c1e5e90c08795a9")
  ("scpaste" . "568faaa70fa0413e2d165ad232cd4c6ec2815197")
  ("sesman" . "3df33018f1c42f09db21cebe39a25b389fe35f02")
+ ("sly" . "ba40c8f054ec3b7040a6c36a1ef3e9596b936421")
  ("solarized-emacs" . "74c6b5acd6892faeafd08029898663d81ab0a4d5")
  ("spinner" . "e19f3cfc0646c0e23c10c22df219fcf427054621")
  ("straight.el" . "af5437f2afd00936c883124d6d3098721c2d306c")
