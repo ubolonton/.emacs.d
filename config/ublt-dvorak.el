@@ -431,7 +431,7 @@
   :config
   (setq-default
    ;; We don't use :custom, since this is dynamically set based on whether we are in a GUI.
-   hydra-hint-display-type (if (memq window-system '(mac ns))
+   hydra-hint-display-type (if (memq window-system '(mac ns x))
                                'posframe 'lv)
    hydra-posframe-show-params
    (list :internal-border-width 1
