@@ -50,6 +50,7 @@
   (ublt/set-up
       (pcase system-type
         ('gnu/linux 'ublt-font)
+        ('berkeley-unix 'ublt-font)
         ('darwin 'ublt-font-osx))
     ;; Non-code text reads better in proportional font
     (defvar ublt/disable-variable-pitch-mode nil)

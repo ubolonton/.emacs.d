@@ -89,12 +89,10 @@
                 :weight 'normal
                 :size 13.0)
     ascii)
-  ;; Vietnamese charsets. TODO: Find a thinner font that fits Fira
-  ;; Sans better
-  `(,(font-spec :family "DejaVu Sans"
-                ;; :size 11.0              ; points
-                )
-    ;; ,(font-spec :family "Arial" :weight 'bold)
+  ;; Vietnamese charsets.
+  `(,(font-spec :family "Fira Sans"
+                :weight 'normal
+                :size 13.0)
     vietnamese-viscii-upper
     vietnamese-viscii-lower
     viscii
@@ -176,11 +174,11 @@
     cyrillic-iso8859-5)
   `(,(font-spec :family "DejaVu Sans Mono")
     (?▸ . ?▸))
-  `(,(font-spec :family "Symbol")
-    (?⇒ . ?⇒)
-    (?⇐ . ?⇐)
-    (?☑ . ?☑)
-    (?☐ . ?☐))
+  ;; `(,(font-spec :family "Symbol")
+  ;;   (?⇒ . ?⇒)
+  ;;   (?⇐ . ?⇐)
+  ;;   (?☑ . ?☑)
+  ;;   (?☐ . ?☐))
   `(,(font-spec :family "Droid Sans Mono"
                 :weight 'normal)
     (?λ . ?λ))
