@@ -63,7 +63,7 @@
  ("helm" . "5e035c9193bf1e1d4bb709794a154957544dcfc7")
  ("helm-ag" . "e24fb378c8d61e7c2bf12d99a41712126f9878cf")
  ("helm-cider" . "9363cc537f06233345aa3af5cd46aa5681ad607b")
- ("helm-org" . "542dda7bc9a3b9dfb439e4f8a1e5f60cfb6cc256")
+ ("helm-org" . "c80e53315ce6b096e2d0e630702df924bf00bf6a")
  ("helm-projectile" . "5328b74dddcee8d1913803ca8167868831a07463")
  ("helm-rg" . "785a80fe5cc87e27c5ea3d00a70049028d9e2847")
  ("helm-swoop" . "1b3285791f1dc1fde548fe67aec07214d698fd57")
