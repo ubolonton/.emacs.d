@@ -188,6 +188,18 @@
                     nil 0 nil filename)
     (apply f filename args)))
 
+;; https://stackoverflow.com/questions/77328174/how-can-emacs-preview-java-jmod-file-like-jar-file-from-dired
+(define-advice archive-find-type (:around (f &rest args) ublt/detect-jmod)
+  (let (case-fold-search)
+    (cond ((save-excursion
+             (save-restriction
+               (widen))
+             (goto-char (point-min))
+             (looking-at "JM\001\000")) 'zip)
+          (t (apply f args)))))
+(add-to-list 'auto-mode-alist '("\\.jmod\\'" . archive-mode))
+(add-to-list 'auto-coding-alist '("\\.jmod\\'" . no-conversion))
+
 
 ;;; `http://www.masteringemacs.org/articles/2011/07/20/searching-buffers-occur-mode/'
 
