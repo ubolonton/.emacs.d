@@ -51,6 +51,11 @@
   :hook (tree-sitter-after-on . tree-sitter-hl-mode)
   :config (global-tree-sitter-mode))
 
+;; XXX: `tree-sitter-langs' attempts to install grammars from GitHub, even for an unsupported OS
+;; like FreeBSD.
+(ublt/in '(berkeley-unix)
+ (setq tree-sitter-langs--testing t))
+
 (use-package tree-sitter-langs
   :defer t
   :after tree-sitter

@@ -77,6 +77,7 @@
                   helpful-mode
                   grep-mode
                   rg-mode
+                  sly-db-mode
                   cider-browse-ns-mode
                   cider-repl-history-mode
                   cider-classpath-mode

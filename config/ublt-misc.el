@@ -119,14 +119,15 @@
 
 ;;; Misc stuff I use -------------------------------------------------
 
-(ublt/in '(darwin)
-  (use-package woman
-    :config
-    (add-to-list 'woman-manpath '("/opt/local/bin" . "/opt/local/man"))
-    (dolist (path '("/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/share/man"
-                    "/Applications/Xcode.app/Contents/Developer/usr/share/man"
-                    "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man"))
-      (add-to-list 'woman-manpath path t))))
+(use-package woman
+  :config
+  (pcase system-type
+    ('darwin (add-to-list 'woman-manpath '("/opt/local/bin" . "/opt/local/man"))
+             (dolist (path '("/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/share/man"
+                             "/Applications/Xcode.app/Contents/Developer/usr/share/man"
+                             "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man"))
+               (add-to-list 'woman-manpath path t)))
+    ('berkeley-unix (add-to-list 'woman-manpath "/usr/local/share/man"))))
 
 ;; Devilspie's config
 (add-to-list 'auto-mode-alist '("\\.ds$" . lisp-mode))
@@ -178,15 +179,19 @@
 ;;; Open files with certain extensions using an external program
 ;;; (opening a large PDF file can hang Emacs).
 (defvar ublt/find-file-externally-extensions
-  '("pdf" "xls" "xlsx" "doc" "docx" "odt" "jpg" "png" "dmg" "pkg"))
+  (append '("pdf" "xls" "xlsx" "doc" "docx" "odt" "jpg" "png")
+          (pcase system-type
+            ('darwin '("dmg" "pkg")))))
 (define-advice find-file (:around (f filename &rest args) ublt/open-externally-maybe)
   (if (member (downcase (or (file-name-extension filename) ""))
               ublt/find-file-externally-extensions)
       (call-process (pcase system-type
                       ('darwin "open")
-                      ('gnu/linux "xdg-open"))
+                      ('gnu/linux "xdg-open")
+                      ('berkeley-unix "xdg-open"))
                     nil 0 nil filename)
     (apply f filename args)))
+
 
 ;; https://stackoverflow.com/questions/77328174/how-can-emacs-preview-java-jmod-file-like-jar-file-from-dired
 (define-advice archive-find-type (:around (f &rest args) ublt/detect-jmod)
@@ -199,6 +204,19 @@
           (t (apply f args)))))
 (add-to-list 'auto-mode-alist '("\\.jmod\\'" . archive-mode))
 (add-to-list 'auto-coding-alist '("\\.jmod\\'" . no-conversion))
+
+(ublt/in '(berkeley-unix)
+  (add-to-list 'jka-compr-mode-alist-additions '("\\.pkg\\'" . tar-mode))
+  ;; TODO: The doc says pkg files can be compressed using different algorithms. Figure out how we
+  ;; can handle that. Using magic bytes?
+  (add-to-list 'jka-compr-compression-info-list
+               ["\\.pkg\\'"
+                "pkg compressing"        "gzip"         ("-c" "-q")
+                "pkg uncompressing"      "gzip"         ("-c" "-q" "-d")
+                ;; XXX: These magic bytes may not be correct.
+                t nil "\037\213"
+                zlib-decompress-region])
+  (jka-compr-update))
 
 
 ;;; `http://www.masteringemacs.org/articles/2011/07/20/searching-buffers-occur-mode/'

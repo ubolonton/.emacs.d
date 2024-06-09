@@ -301,6 +301,10 @@
   "M-s-˜"         'textmate-shift-right ; OS X
   "M-s-ç"         'move-text-up    ; OS X
   "M-s-†"         'move-text-down  ; OS X
+  "s-<up>"        'move-text-up
+  "s-<down>"      'move-text-down
+  "s-<left>"      'textmate-shift-left
+  "s-<right>"     'textmate-shift-right
 
   "M-s-=" 'evil-numbers/inc-at-pt
   "M-s--" 'evil-numbers/dec-at-pt
@@ -431,7 +435,7 @@
   :config
   (setq-default
    ;; We don't use :custom, since this is dynamically set based on whether we are in a GUI.
-   hydra-hint-display-type (if (memq window-system '(mac ns))
+   hydra-hint-display-type (if (memq window-system '(mac ns x))
                                'posframe 'lv)
    hydra-posframe-show-params
    (list :internal-border-width 1
