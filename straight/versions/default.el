@@ -101,7 +101,7 @@
  ("org-reveal" . "862b41df7734f57019543f6bd82ff7dad7183358")
  ("otp" . "40474905b2814f0a17d04a5cf91b0cb543e76653")
  ("ox-hugo" . "1b8f2627cd63ac21b84c5abe3d5b607bc778670a")
- ("package-lint" . "cf2ce871549bb816ecb7a9930bdfb77525468f5e")
+ ("package-lint" . "972dd8403ac8d2d43f298ef89a6b118e49c7355f")
  ("packed" . "c41c3dfda86ae33832ffc146923e2a4675cbacfa")
  ("paredit" . "acbe10fdd85d2e91831adf70b6a828bc7e900da0")
  ("parent-mode" . "db692cf08deff2f0e973e6e86e26662b44813d1b")
