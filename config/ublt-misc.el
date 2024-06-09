@@ -179,15 +179,31 @@
 ;;; Open files with certain extensions using an external program
 ;;; (opening a large PDF file can hang Emacs).
 (defvar ublt/find-file-externally-extensions
-  '("pdf" "xls" "xlsx" "doc" "docx" "odt" "jpg" "png" "dmg" "pkg"))
+  (append '("pdf" "xls" "xlsx" "doc" "docx" "odt" "jpg" "png")
+          (pcase system-type
+            ('darwin '("dmg" "pkg")))))
 (define-advice find-file (:around (f filename &rest args) ublt/open-externally-maybe)
   (if (member (downcase (or (file-name-extension filename) ""))
               ublt/find-file-externally-extensions)
       (call-process (pcase system-type
                       ('darwin "open")
-                      ('gnu/linux "xdg-open"))
+                      ('gnu/linux "xdg-open")
+                      ('berkeley-unix "xdg-open"))
                     nil 0 nil filename)
     (apply f filename args)))
+
+(ublt/in '(berkeley-unix)
+  (add-to-list 'jka-compr-mode-alist-additions '("\\.pkg\\'" . tar-mode))
+  ;; TODO: The doc says pkg files can be compressed using different algorithms. Figure out how we
+  ;; can handle that. Using magic bytes?
+  (add-to-list 'jka-compr-compression-info-list
+               ["\\.pkg\\'"
+                "pkg compressing"        "gzip"         ("-c" "-q")
+                "pkg uncompressing"      "gzip"         ("-c" "-q" "-d")
+                ;; XXX: These magic bytes may not be correct.
+                t nil "\037\213"
+                zlib-decompress-region])
+  (jka-compr-update))
 
 
 ;;; `http://www.masteringemacs.org/articles/2011/07/20/searching-buffers-occur-mode/'
