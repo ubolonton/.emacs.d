@@ -1,0 +1,6 @@
+#name : #+begin_quote
+#key: >
+# --
+#+begin_quote
+$0
+#+end_quote
