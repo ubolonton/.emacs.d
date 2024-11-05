@@ -12,8 +12,8 @@
            ;; Offer the other window's path as default when copying
            (dired-dwim-target t)
 
-           ;; Make find-name-dired ignore case
-           (find-name-arg "-iname")
+           ;; Use case-ignoring regular expressions for `find-name-dired'.
+           (find-name-arg "-iregex")
 
            (dired-hide-details-hide-symlink-targets nil))
   :hook (dired-mode . dired-hide-details-mode))
