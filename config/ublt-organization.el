@@ -22,6 +22,8 @@
            (org-list-indent-offset 2)
 
            (org-fontify-whole-heading-line t)
+           (org-fontify-whole-block-delimiter-line nil)
+           (org-fontify-quote-and-verse-blocks t)
 
            ;; Hide / * _ ~ =
            (org-hide-emphasis-markers t)

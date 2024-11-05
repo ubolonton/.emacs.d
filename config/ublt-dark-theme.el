@@ -762,6 +762,8 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
      ((,class (:foreground ,radio))))
    `(org-headline-done
      ((,class (:inherit org-level-2 ,@context))))
+   `(org-quote
+     ((,class (:inherit (markdown-blockquote-face org-block)))))
 
    `(markdown-link-face
      ((,class (,@teleport))))
