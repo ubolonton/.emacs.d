@@ -132,11 +132,6 @@
 ;; Devilspie's config
 (add-to-list 'auto-mode-alist '("\\.ds$" . lisp-mode))
 
-;; Conkeror as default browser
-(ublt/in '(gnu/linux)
-  (setq browse-url-browser-function 'browse-url-generic
-        browse-url-generic-program "conkeror"))
-
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 (when window-system

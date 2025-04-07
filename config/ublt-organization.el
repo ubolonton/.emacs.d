@@ -159,7 +159,6 @@
                             ("@Home" . ?h) ("@Work" . ?w) ("@Road" . ?o)
                             (:endgroup . nil)
                             ("Emacs" . e)
-                            ("Conkeror" . c)
                             ("Movie" . m)
                             ("Book" . b)))
 
