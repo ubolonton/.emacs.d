@@ -349,6 +349,9 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
    `(linum ((,class (:inherit line-number))))
    `(linum-relative-current-face ((,class (:inherit line-number-current-line))))
 
+   `(minibuffer-prompt
+     ((,class (:foreground ,grass))))
+
    
    ;; Highlighting, flyspell, flycheck
 
