@@ -51,8 +51,8 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
 (let* ((class      '((class color) (min-colors 257)))
        ;; We don't rely on the number of colors to detect terminals, as modern terminals support 16
        ;; million colors (24-bit, TrueColor).
-       (class-tty  '(,@class (type tty)))
-       (class-grp  '(,@class (type graphic)))
+       (class-tty  `(,@class (type tty)))
+       (class-grp  `(,@class (type graphic)))
 
        (radio     "#9ACD32")
        (yellow    "#FFFF00")
@@ -298,7 +298,7 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
 
    ;; Bases
    `(default
-     ((,class (,@fw0 :foreground ,fg))
+     ((,class-grp (,@fw0 :foreground ,fg :background ,bg))
       ;; XXX: Through SSH, on certain terminals (Kitty, Konsole, iTerm), if the background color is
       ;; different from the terminal's background color (or is merely set?), Emacs experiences
       ;; screen tearing. Therefore, we don't set a default background color when in a terminal, and
@@ -309,7 +309,7 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
       ;;
       ;; This doesn't help:
       ;; https://www.reddit.com/r/emacs/comments/q2r3sc/cli_flickering_driving_you_mad_apply_this_small/
-      (,class-grp (,@fw0 :foreground ,fg :background ,bg))))
+      (,class (,@fw0 :foreground ,fg))))
    `(variable-pitch
      ((,class (,@vw0 :foreground ,fg-1))))
 
