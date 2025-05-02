@@ -97,13 +97,11 @@
 ;;;Color theme
 (ublt/with-defer
   (use-package zenburn-theme)
-  (use-package solarized-theme))
-(use-package monokai-theme)
+  (use-package solarized-theme)
+  (use-package monokai-theme))
 (when (y-or-n-p "Load theme?")
-  (if (window-system)
-      (ublt/set-up 'ublt-dark-theme
-        (load-theme 'ublt-dark t))
-    (load-theme 'monokai t)))
+  (ublt/set-up 'ublt-dark-theme
+    (load-theme 'ublt-dark t)))
 
 
 ;;; Whitespaces
