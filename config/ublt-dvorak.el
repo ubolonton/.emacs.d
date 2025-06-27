@@ -225,6 +225,32 @@
   "M-f"    "<escape>"                   ; evil's normal state
   )
 
+;; https://gemini.google.com/app/1de17d0b05a92e5b
+;; See also ~/.config/kitty/kitty.conf
+(defun ublt/undo-terminal-key-translations ()
+  "Revert some key translations by the terminal emulator.
+Most of those are to enable better zsh/readline shortcuts."
+  (ublt/define-keys input-decode-map
+    ;;  M-g <-> M-b
+    "\x1b\x62" "M-g"
+    "\x1b\x67" "M-b"
+    ;;  M-r <-> M-f
+    "\x1b\x66" "M-r"
+    "\x1b\x72" "M-f"
+    ;;  M-. <-> C-w
+    "\x17"     "M-."
+    "\x1b\x77" "C-w"
+    ;;  M-I <-> C-u
+    "\x15"     "M-I"
+    "\x1b\x49" "C-u"
+
+    ;;  M-d  -> M-p
+    "\x1b\x64" "M-p"
+    ;;  C-k  -> M-i
+    "\x0b"     "M-i"
+    ))
+(add-hook 'tty-setup-hook #'ublt/undo-terminal-key-translations)
+
 ;;; See the configuration files for zsh (`.zshrc'), readline
 ;;; (`.inputrc'), Konsole (`default.keytab')
 ;; (define-key local-function-key-map "[25~" (kbd "<backspace>"))
