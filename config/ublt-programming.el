@@ -65,6 +65,15 @@
   (progn
     (setq tree-sitter-langs--dir "~/Programming/projects/elisp-tree-sitter/langs/"
           tree-sitter-langs--repos-dir "~/Programming/projects/elisp-tree-sitter/langs/repos/")
+    ;; Disable low-quality languages from`tree-sitter-langs' bundle.
+    (dolist (mode '(yaml-mode
+                    dockerfile-mode
+                    makefile-bsdmake-mode
+                    gitignore-mode
+                    org-mode
+                    markdown-mode
+                    sql-mode))
+      (setf (map-elt tree-sitter-major-mode-language-alist mode) nil))
     (add-function :before-until tree-sitter-hl-face-mapping-function
                   (lambda (capture-name)
                     (pcase capture-name
