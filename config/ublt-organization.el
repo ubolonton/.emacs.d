@@ -451,6 +451,13 @@ end tell")))
   (add-to-list 'org-latex-packages-alist '("cache=false" "minted"))
 
   (add-to-list 'org-latex-classes
+               `("ublt-pp-beamer"
+                 ,(ublt/get-string-from-file "~/org/work/pp/ublt-pp-beamer.tex")
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
+
+  (add-to-list 'org-latex-classes
                `("ublt-org-article"
                  ,(ublt/get-string-from-file (ublt/init-rel-path "config/ublt-org-article.tex"))
                  ("\\section{%s}" . "\\section*{%s}")
