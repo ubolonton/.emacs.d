@@ -31,6 +31,8 @@
            ;; Column-based aligning doesn't work with variable-pitch fonts.
            (org-tags-column 0)
 
+           (org-edit-src-content-indentation 0)
+
            ;; Fontify code blocks.
            (org-src-fontify-natively t))
 
