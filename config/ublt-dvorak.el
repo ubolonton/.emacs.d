@@ -209,6 +209,11 @@
   "C-M-c"  "M-<up>"                  ; ⤂ paredit splice-kill, org up
   "C-M-t"  "M-<down>"                ; ⤃ paredit splice-kill, org down
 
+  "M-s-h" "s-<left>"
+  "M-s-n" "s-<right>"
+  "M-s-c" "s-<up>"
+  "M-s-t" "s-<down>"
+
   "M-M"    "C-M-u"                      ; ⬉( up list
   "M-V"    "C-M-d"                      ; ⬊( down list
 
@@ -225,11 +230,21 @@
   "M-f"    "<escape>"                   ; evil's normal state
   )
 
+(defun ublt/event-apply-meta-super-modifiers (_ignore-prompt)
+  (vector (event-apply-modifier
+           (event-apply-modifier
+            (read-event)
+            'meta 27 "M-")
+           'super 23 "s-")))
+
 ;; https://gemini.google.com/app/1de17d0b05a92e5b
 ;; See also ~/.config/kitty/kitty.conf
-(defun ublt/undo-terminal-key-translations ()
-  "Revert some key translations by the terminal emulator.
-Most of those are to enable better zsh/readline shortcuts."
+(defun ublt/setup-terminal-key-translations ()
+  (ublt/define-keys local-function-key-map
+    ;; M-s-
+    "C-x @ @ M s" #'ublt/event-apply-meta-super-modifiers)
+  ;; Revert some key translations by the terminal emulator. Most of those are to enable better
+  ;; zsh/readline shortcuts.
   (ublt/define-keys input-decode-map
     ;;  M-g <-> M-b
     "\x1b\x62" "M-g"
@@ -249,7 +264,7 @@ Most of those are to enable better zsh/readline shortcuts."
     ;;  C-k  -> M-i
     "\x0b"     "M-i"
     ))
-(add-hook 'tty-setup-hook #'ublt/undo-terminal-key-translations)
+(add-hook 'tty-setup-hook #'ublt/setup-terminal-key-translations)
 
 ;;; See the configuration files for zsh (`.zshrc'), readline
 ;;; (`.inputrc'), Konsole (`default.keytab')
@@ -566,16 +581,16 @@ Most of those are to enable better zsh/readline shortcuts."
 
 ;;; Help navigation
 (ublt/keys "help-mode" help-mode-map
-  "M-s-h" 'help-go-back
-  "M-s-n" 'help-go-forward
+  "s-<left>" 'help-go-back
+  "s-<right>" 'help-go-forward
   "C-f"   'help-follow-symbol
   "M-."   'elisp-slime-nav-find-elisp-thing-at-point)
 (ublt/keys 'apropos apropos-mode-map
   "M-."   'elisp-slime-nav-find-elisp-thing-at-point)
 
 (ublt/keys "info" Info-mode-map
-  "M-s-h" 'Info-history-back
-  "M-s-n" 'Info-history-forward
+  "s-<left>" 'Info-history-back
+  "s-<right>" 'Info-history-forward
   "C-M-x" 'ublt/eval-sexp-at-point
   "M-."   'elisp-slime-nav-find-elisp-thing-at-point)
 
