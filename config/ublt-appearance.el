@@ -99,9 +99,8 @@
   (use-package zenburn-theme)
   (use-package solarized-theme)
   (use-package monokai-theme))
-(when (y-or-n-p "Load theme?")
-  (ublt/set-up 'ublt-dark-theme
-    (load-theme 'ublt-dark t)))
+(ublt/set-up 'ublt-dark-theme
+  (load-theme 'ublt-dark t))
 
 
 ;;; Whitespaces
