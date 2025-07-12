@@ -68,7 +68,9 @@
     ;; Disable low-quality languages from`tree-sitter-langs' bundle.
     (dolist (mode '(yaml-mode
                     dockerfile-mode
+                    makefile-mode
                     makefile-bsdmake-mode
+                    makefile-gmake-mode
                     gitignore-mode
                     org-mode
                     markdown-mode
@@ -79,14 +81,6 @@
                     (pcase capture-name
                       ("ublt.hidden" 'ublt/lisp-paren-face)
                       ("ublt.unsafe" 'rust-unsafe-face))))
-    ;; Disable for languages that the bundle doesn't support well.
-    (dolist (mode '(yaml-mode
-                    sql-mode
-                    org-mode
-                    makefile-mode
-                    makefile-bsdmake-mode
-                    dockerfile-mode))
-      (setf (map-elt tree-sitter-major-mode-language-alist mode) nil))
     (tree-sitter-hl-add-patterns 'python
       [(pattern/subscript subscript: (string) @variable)
        ((string) @constant
