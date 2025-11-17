@@ -45,7 +45,8 @@
 (defun ublt/session-restore ()
   "Restore a saved emacs session."
   (interactive)
-  (if (y-or-n-p "Restore desktop? ")
+  (if (let ((use-dialog-box nil))
+        (y-or-n-p "Restore desktop? "))
       (desktop-read))
   (desktop-save-mode +1)
   (add-to-list 'desktop-modes-not-to-save 'highlight-parentheses-mode))
