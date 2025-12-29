@@ -7,6 +7,8 @@
   ;; Mainly because I want `magit-status' to work after a `find-library'.
   (vc-follow-symlinks t)
 
+  (git-commit-summary-max-length 70)
+
   ;; TODO: Figure out how make `diff-hl' work without 'Git in `vc-handled-backends'.
   ;; This is for performance: https://magit.vc/manual/magit/Performance.html.
   (vc-handled-backends (delq 'Git vc-handled-backends))
@@ -56,16 +58,7 @@
   (magit-refs-show-commit-count 'branch)
 
   :config
-  (define-advice magit-list-repos-1 (:override (directory depth) ublt/list-repos-in-repso)
-    (let ((sub-repos (when (and (> depth 0) (magit-file-accessible-directory-p directory))
-                       (--mapcat (and (file-directory-p it)
-                                      (magit-list-repos-1 it (1- depth)))
-                                 (directory-files directory t
-                                                  directory-files-no-dot-files-regexp t)))))
-      (if (file-readable-p (expand-file-name ".git" directory))
-          (cons (file-name-as-directory directory) sub-repos)
-        sub-repos)))
-  ;; XXX: The initialization of this is icky. We use `global-auto-revert-mode' anyway, so disable it here.
+   ;; XXX: The initialization of this is icky. We use `global-auto-revert-mode' anyway, so disable it here.
   (magit-auto-revert-mode -1)
 
   ;; TODO: Move this definition somewhere else.
@@ -90,9 +83,6 @@
 
   (with-eval-after-load 'helm-info
     (ublt/helm-info-reload)))
-
-(use-package git-commit
-  :custom (git-commit-summary-max-length 70))
 
 (use-package transient
   ;; `transient' doesn't seem to have a runtime show-all toggle.
