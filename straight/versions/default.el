@@ -131,7 +131,7 @@
  ("spinner" . "fa117f0893788f3fe24673715a6b83bb34d238dd")
  ("straight.el" . "b3760f5829dba37e855add7323304561eb57a3d4")
  ("swift-mode" . "cdd194cbadcee724a9813da386f0a612082b1ab1")
- ("systemd-mode" . "401d71c2dd24e424216ae5e4275c830f2a9c6b0c")
+ ("systemd-mode" . "8742607120fbc440821acbc351fda1e8e68a8806")
  ("terraform-mode" . "2967e7bdc05d15617e121052f6e43c61439b9070")
  ("textmate.el" . "350918b070148f0ace6d9d3cd4ebcaf15c1a8781")
  ("transient" . "0d3f8d4fb6d41b841126820a06ecc98579bd8265")
