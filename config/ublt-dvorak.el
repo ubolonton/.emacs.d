@@ -1185,4 +1185,7 @@
         expand-region-contract-fast-key "u"
         expand-region-reset-fast-key "e"))
 
+(ublt/keys 'agent-shell agent-shell-mode-map
+  "M-a" 'agent-shell-ui-toggle-fragment-at-point)
+
 (provide 'ublt-dvorak)

@@ -214,6 +214,15 @@
                 zlib-decompress-region])
   (jka-compr-update))
 
+(use-package auth-source
+  :custom (auth-sources '("~/org/.authinfo.gpg")))
+
+(use-package gptel
+  :custom ((gptel-model 'gemini-2.5-flash))
+  :config
+  (setq gptel-backend (gptel-make-gemini "Gemini"
+                        :stream t :key gptel-api-key)))
+
 
 ;;; `http://www.masteringemacs.org/articles/2011/07/20/searching-buffers-occur-mode/'
 
