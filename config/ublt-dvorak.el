@@ -179,8 +179,8 @@
   ;; Deletion (left hand)
   "M-e"    "DEL"                        ; ⌫
   "M-u"    "<kp-delete>"                ; ⌦
-  "M-."    "M-DEL"                      ; ⌫ delete word
-  "M-p"    "M-<kp-delete>"              ; ⌦ delete word
+  "M-."    "M-DEL"                      ; ⌥⌫ delete word
+  "M-p"    "M-<kp-delete>"              ; ⌥⌦ delete word
 
   ;; "Help" `autokey'
   "C-<backspace>" "M-DEL"
@@ -1083,6 +1083,7 @@
   "C-c n" 'slime-repl-set-package)
 
 (ublt/keys "markdown-mode" markdown-mode-map
+  "M-a"       'markdown-cycle
   "<M-down>"  'markdown-move-down
   "<M-up>"    'markdown-move-up
   "<M-right>" 'markdown-demote
