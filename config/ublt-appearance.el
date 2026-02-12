@@ -99,6 +99,8 @@
   (use-package zenburn-theme)
   (use-package solarized-theme)
   (use-package monokai-theme))
+(ublt/set-up 'ublt-pitch-theme
+  (load-theme 'ublt-pitch t))
 (ublt/set-up 'ublt-dark-theme
   (load-theme 'ublt-dark t))
 

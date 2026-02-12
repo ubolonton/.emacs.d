@@ -1,14 +1,14 @@
-* Header 1
-** Header 2
-*** Header 3
-**** Header 4
-***** Header 5
+# Header 1
+## Header 2
+### Header 3
+#### Header 4
+##### Header 5
 
 This is a piece of text.
 
-Formatting: /italic/, *bold*, _underline_, ~code~, =verbatim=.
+Formatting: _italic_, **bold**, `code`
 
-[[https://ubolonton.org][Link to ubolonton.org]]
+[Link to ubolonton.org](https://ubolonton.org)
 
 List:
 - a
@@ -31,35 +31,35 @@ Table:
 | Title | Summary |
 | X     | Y       |
 
-# A comment
+<!-- A comment -->
 
-* Code
-#+begin_src clojure
+# Code
+```clojure
 ; A function
 (defn foo [x]
   "A doc string."
   (:bar x))
-#+end_src
-#+begin_src elisp
+```
+```elisp
 (module-load 'abc)
 (require 'abc)
-#+end_src
+```
 
-#+begin_src org
+```org
  This is a piece of text.
 *This is a piece of text.*
 _This is a piece of text._
-#+end_src
+```
 
-#+begin_src markdown
+```markdown
  This is a piece of text.
 *This is a piece of text.*
 _This is a piece of text._
-#+end_src
+```
 
-#+begin_src python
+```python
 # A comment.
 def foo(x):
     """A doc string."""
     return str(x)
-#+end_src
+```

@@ -48,6 +48,15 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
 ;; A in [-86.185, 98,254]
 ;; B in [-107.863, 94.482]
 
+;; Principles:
+;; - If the `defface' definition uses `:inherit', consider using `:inherit'.
+;;
+;; - If the `defface' definition does not use `:inherit', prefer composition via mixins instead, as
+;;   `ublt-pitch-theme' may set `:inherit' to `fixed-pitch'/`variable-pitch'.
+;;
+;; - For `ublt-pitch-theme', it would be the opposite.
+;;
+;; TODO: Review the `:inherit' below, converting as much as possible to composition.
 (let* ((class      '((class color) (min-colors 257)))
        ;; We don't rely on the number of colors to detect terminals, as modern terminals support 16
        ;; million colors (24-bit, TrueColor).
@@ -240,6 +249,7 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
 
        (type         `(:foreground ,spring))
        (portal       `(:foreground ,blue-l))
+       (link         `(,@portal :underline ,bg+3))
        (teleport     `(:foreground ,cyan))
        (prompt       `(:foreground ,cyan))
 
@@ -264,41 +274,39 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
        ;; Mixins
 
        (italic         `(:slant italic))
+       ;; (italic         `(:slant oblique))
 
        ;; Fixed-width (unscalable)
        (fw0           `(:font ,(face-attribute 'fixed-pitch :font)
-                              :weight light
+                              ;; :weight light
                               :fontset ,(face-attribute 'fixed-pitch :fontset)))
        ;; Variable-width (unscalable)
        (vw0           `(:font ,(face-attribute 'variable-pitch :font)
                               :fontset ,(face-attribute 'variable-pitch :fontset)))
-       ;; Fixed-width (scalable)
-       (fw             '(:inherit fixed-pitch))
-       (fw-alt         `(:inherit fixed-pitch :font ,ublt/alt-fixed-pitch-font :height unspecified))
-       ;; Variable-width (scalable)
-       (vw             '(:inherit ublt/variable-pitch))
-       (vw-italic      `(,@vw :weight light ,@italic))
+       ;; Pitch assignment mixins removed: now handled by `ublt-pitch' theme.
+       ;; `fw0' and `vw0' are kept because they define what the pitch
+       ;; fonts ARE (for foundation faces), not pitch assignments.
 
        (bold           `(:weight bold)))
   (custom-theme-set-faces
    'ublt-dark
 
-   
-   ;; Mixin bases. Most faces that wish to always use
-   ;; fixed-width/variable-width font should inherit these, not
-   ;; `default', which gets font remapped. `text-scale-mode' is
-   ;; advised to scale them correctly.
-   `(fixed-pitch
-     ((,class (,@fw0))))
-   `(ublt/variable-pitch
-     ((,class (,@vw0))))
+   ;; 
+   ;; ;; Mixin bases. Most faces that wish to always use
+   ;; ;; fixed-width/variable-width font should inherit these, not
+   ;; ;; `default', which gets font remapped. `text-scale-mode' is
+   ;; ;; advised to scale them correctly.
+   ;; `(fixed-pitch
+   ;;   ((,class (,@fw0))))
+   ;; `(ublt/variable-pitch
+   ;;   ((,class (,@vw0))))
 
    `(bold
      ((,class (,@bold :foreground ,fg+1))))
 
    ;; Bases
    `(default
-     ((,class-grp (,@fw0 :foreground ,fg :background ,bg))
+     ((,class-grp (:foreground ,fg :background ,bg))
       ;; XXX: Through SSH, on certain terminals (Kitty, Konsole, iTerm), if the background color is
       ;; different from the terminal's background color (or is merely set?), Emacs experiences
       ;; screen tearing. Therefore, we don't set a default background color when in a terminal, and
@@ -309,24 +317,27 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
       ;;
       ;; This doesn't help:
       ;; https://www.reddit.com/r/emacs/comments/q2r3sc/cli_flickering_driving_you_mad_apply_this_small/
-      (,class (,@fw0 :foreground ,fg))))
+      (,class (:foreground ,fg))))
    `(variable-pitch
-     ((,class (,@vw0 :foreground ,fg-1))))
+     ((,class (:foreground ,fg-1))))
 
    `(shadow ((,class (,@context))))
-   `(link ((,class (,@portal :underline ,bg+3))))
+   `(link ((,class (,@link))))
    `(button
-     ((,class (,@fw ,@portal :underline ,bg+3))))
+     ((,class (,@portal :underline ,bg+3))))
    `(mouse
      ((,class (:background ,seaweed))))
 
    ;; mode-line
    `(mode-line
-     ((,class (,@fw ,@status :foreground ,bg+1))))
+     ((,class (,@status :foreground ,bg+1))))
+   ;; `(mode-line-active
+   ;;   ((,class (:inherit mode-line :foreground ,fg+1))))
    `(mode-line-inactive
      ((,class (:inherit mode-line ,@normal-hl ,@strong :foreground ,fg-1))))
    `(mode-line-buffer-id
-     ((,class (,@vw :weight bold :height 0.9))))
+     ((,class (:weight bold :height 0.9 :foreground ,blue-d ;; :background ,blue-l
+                       ))))
    `(mode-line-highlight
      ((,class (:inherit mode-line))))
    ;; `(which-func                          ;TODO
@@ -468,7 +479,7 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
      ((,class (,@doc ,@special-hl))))
 
    `(magit-hash
-     ((,class (,@fw ,@commitment))))
+     ((,class (,@commitment))))
 
    `(magit-popup-heading
      ((,class (:inherit font-lock-builtin-face))))
@@ -485,11 +496,11 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
 
    ;; Section.
    `(magit-section-heading
-     ((,class (,@vw ,@subheader ,@bold))))
+     ((,class (,@subheader ,@bold))))
    `(magit-section-highlight
      ((,class (,@normal-hl))))
    `(magit-section-secondary-heading
-     ((,class (,@vw ,@subheader ,@italic))))
+     ((,class (,@subheader ,@italic))))
    ;; Revision.
    `(magit-diff-revision-summary
      ((,class (:inherit magit-section-heading :weight normal))))
@@ -499,12 +510,14 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
    `(magit-diff-file-heading
      ((,class (:inherit magit-filename))))
    `(magit-diff-file-heading-highlight
-     ((,class (:inherit magit-diff-file-heading ,@normal-hl ,@bold))))
+     ((,class (:inherit magit-diff-file-heading ,@normal-hl ;; ,@bold
+                        ))))
    ;; Hunks.
    `(magit-diff-hunk-heading
      ((,class (:inherit diff-hunk-header :overline ,bg+3))))
    `(magit-diff-hunk-heading-highlight
-     ((,class (:inherit magit-diff-hunk-heading ,@special-hl :overline ,fg ,@bold))))
+     ((,class (:inherit magit-diff-hunk-heading ,@special-hl :overline ,fg ;; ,@bold
+                        ))))
    ;; Diff content.
    `(magit-diff-added
      ((,class (:inherit diff-added))))
@@ -521,15 +534,15 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
 
    ;; Logging.
    `(magit-log-author
-     ((,class (,@vw ,@context))))
+     ((,class (,@context))))
    `(magit-log-date
-     ((,class (,@vw ,@dimmed))))
+     ((,class (,@dimmed))))
    `(magit-log-graph
      ((,class (:inherit font-lock-doc-face))))
 
    ;; Blaming.
    `(magit-blame-heading
-     ((,class (,@vw ,@normal-hl :foreground ,fg-1 :overline ,fg-3 :height 0.85))))
+     ((,class (,@normal-hl :foreground ,fg-1 :overline ,fg-3 :height 0.85))))
    `(magit-blame-hash
      ((,class (:inherit (magit-hash magit-blame-heading) :height 0.85))))
    `(magit-blame-name
@@ -549,9 +562,9 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
    `(git-commit-comment-heading
      ((,class (:inherit magit-section-heading :weight normal))))
    `(git-commit-comment-action
-     ((,class (,@fw ,@commitment))))
+     ((,class (,@commitment))))
    `(git-commit-comment-file
-     ((,class (,@vw ,@string))))
+     ((,class (,@string))))
 
    ;; Fringe highlights of diffs.
    `(diff-hl-insert
@@ -565,33 +578,33 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
    ;; Programming languages
 
    `(font-lock-builtin-face
-     ((,class (,@fw ,@constant))))
+     ((,class (,@constant))))
    `(font-lock-comment-face
-     ((,class (,@vw-italic ,@note))))
+     ((,class (:weight light ,@italic ,@note))))
    `(font-lock-comment-delimiter-face
      ((,class (:inherit font-lock-comment-face ,@dimmed))))
    `(font-lock-doc-face
-     ((,class (,@fw-alt ,@italic ,@string))))
+     ((,class (:font ,ublt/alt-fixed-pitch-font :height unspecified ,@italic ,@string))))
    `(font-lock-function-name-face
-     ((,class (,@fw ,@essence))))
+     ((,class (,@essence))))
    `(font-lock-keyword-face
-     ((,class (,@fw ,@power))))
+     ((,class (,@power))))
    `(font-lock-regexp-grouping-backslash
-     ((,class (,@fw ,@dimmed))))
+     ((,class (,@dimmed))))
    `(font-lock-regexp-grouping-construct
-     ((,class (,@fw ,@constant ,@bold))))
+     ((,class (,@constant ,@bold))))
    `(font-lock-string-face
-     ((,class (,@fw ,@string))))
+     ((,class (,@string))))
    `(font-lock-type-face
-     ((,class (,@fw ,@type))))
+     ((,class (,@type))))
    `(font-lock-preprocessor-face
-     ((,class (,@fw ,@raw))))
+     ((,class (,@raw))))
    `(font-lock-variable-name-face
-     ((,class (,@fw ,@mutable))))
+     ((,class (,@mutable))))
    `(font-lock-warning-face
-     ((,class (,@fw ,@warning))))
+     ((,class (,@warning))))
    `(font-lock-constant-face
-     ((,class (,@fw ,@constant))))
+     ((,class (,@constant))))
 
    `(tree-sitter-hl-face:function.call
      ((,class (:inherit link :underline nil :slant normal))))
@@ -599,18 +612,22 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
      ((,class (:inherit link :underline nil :slant normal))))
 
    `(highlight-numbers-number
-     ((,class (,@fw ,@number))))
+     ((,class (,@number))))
    `(hl-todo
      ((,class (:inherit font-lock-warning-face))))
 
+   ;; The default inherits `font-lock-constant-face' , which is only a good idea for quoted symbols,
+   ;; not quoted lists...
    `(lisp-extra-font-lock-quoted
-     ((,class (,@fw))))
+     ((,class ())))
+   ;; `(lisp-extra-font-lock-quoted-function
+   ;;   ((,class (,@fw :inherit link))))
    `(lisp-extra-font-lock-quoted-function
-     ((,class (,@fw :inherit link))))
+     ((,class (,@link))))
    `(lisp-extra-font-lock-backquote
      ((,class (:inherit font-lock-preprocessor-face))))
    `(highlight-function-calls-face
-     ((,class (,@fw :inherit link :underline nil))))
+     ((,class (,@portal))))
    `(highlight-function-calls--not-face
      ((,class (:inherit font-lock-keyword-face))))
    `(highlight-function-calls-subr-face
@@ -657,22 +674,22 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
    `(web-mode-comment-keyword-face
      ((,class (:inherit font-lock-warning-face))))
    `(web-mode-html-tag-bracket-face
-     ((,class (,@fw ,@context))))
+     ((,class (,@context))))
    `(web-mode-folded-face
      ((,class (:underline t))))
 
    `(nxml-element-prefix
-     ((,class (,@fw ,@context))))
+     ((,class (,@context))))
    `(nxml-element-local-name
      ((,class (:inherit font-lock-builtin-face))))
    `(nxml-tag-delimiter
-     ((,class (,@fw ,@dimmed))))
+     ((,class (,@dimmed))))
    `(nxml-processing-instruction-delimiter
      ((,class (:inherit nxml-tag-delimiter))))
    `(nxml-markup-declaration-delimiter
      ((,class (:inherit nxml-tag-delimiter))))
    `(nxml-entity-ref-name
-     ((,class (,@fw :foreground ,skin))))
+     ((,class (:foreground ,skin))))
 
    `(sh-heredoc
      ((,class (,@doc ,@bold))))
@@ -693,7 +710,7 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
    `(org-document-title
      ((,class (,@string :height 2.0 :bold t))))
    `(org-special-keyword
-     ((,class (,@fw ,@context))))
+     ((,class (,@context))))
    `(org-drawer
      ((,class (:inherit org-special-keyword))))
    `(org-indent                                ;TODO
@@ -701,9 +718,9 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
                         ))))
    ;; We use `normal' not `bold' for these because we use Fira Sans
    `(org-level-1
-     ((,class (,@vw ,@constant :weight normal :height 1.4 ,@dimmed-hl))))
+     ((,class (,@constant :weight normal :height 1.4 ,@dimmed-hl))))
    `(org-level-2
-     ((,class (,@vw ,@subheader :weight normal :height 1.2))))
+     ((,class (,@subheader :weight normal :height 1.2))))
    `(org-level-3
      ((,class (,@string :weight normal :height 1.1))))
    `(org-level-4
@@ -717,9 +734,9 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
    `(org-level-8
      ((,class (,@note))))
    `(org-table                          ;TODO
-     ((,class (,@fw :overline ,bg+1 :foreground ,blue-l))))
+     ((,class (:overline ,bg+1 :foreground ,blue-l))))
    `(org-formula
-     ((,class (,@fw ,@param))))
+     ((,class (,@param))))
    `(org-hide
      ((,class (:foreground ,bg))))
    `(org-code
@@ -727,7 +744,7 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
    `(org-verbatim
      ((,class (:inherit font-lock-builtin-face))))
    `(org-meta-line
-     ((,class (,@fw ,@context))))
+     ((,class (,@context))))
    `(org-document-info-keyword
      ((,class (:inherit org-meta-line))))
    ;; `(org-mode-line-clock                ;TODO
@@ -735,47 +752,47 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
    `(org-link
      ((,class (:inherit link))))
    `(org-date                           ;TODO
-     ((,class (,@fw :foreground ,cyan :underline t))))
+     ((,class (:foreground ,cyan :underline t))))
    `(org-todo
      ((,class (,@commitment))))
    ;; `(org-done                           ;TODO
    ;;  ((,class (:foreground ,green-3))))
    `(org-block
-     ((,class (,@fw :foreground ,fg))))
+     ((,class (:foreground ,fg))))
    `(org-block-begin-line
      ((,class (:inherit org-block ,@dimmed :underline ,blue-d))))
    `(org-block-end-line
      ((,class (:inherit org-block ,@dimmed :overline ,blue-d))))
    `(org-checkbox
-     ((,class (,@fw ,@bold ,@commitment :height 1.1))))
+     ((,class (,@bold ,@commitment :height 1.1))))
    `(org-checkbox-done-text
      ((,class (:foreground ,fg-3 :strike-through t))))
    `(org-time-grid
-     ((,class (,@fw ,@context))))
+     ((,class (,@context))))
    ;; `(org-agenda-structure               ;TODO
-   ;;  ((,class (,@fw :foreground "LightSkyBlue"))))
+   ;;  ((,class (:foreground "LightSkyBlue"))))
    `(org-agenda-date-today
      ((,class (:inherit org-agenda-date :underline t))))
    `(org-agenda-date-weekend
      ((,class (:inherit org-agenda-date ,@italic))))
    `(org-agenda-current-time
-     ((,class (,@fw :inherit org-time-grid ,@header :background ,bg+2))))
+     ((,class (,@header :background ,bg+2))))
    `(org-scheduled-previously
-     ((,class (,@fw :foreground ,blue-l))))
+     ((,class (:foreground ,blue-l))))
    `(org-scheduled-today
-     ((,class (,@fw :foreground ,radio))))
+     ((,class (:foreground ,radio))))
    `(org-agenda-done
-     ((,class (,@fw :foreground ,seaweed))))
+     ((,class (:foreground ,seaweed))))
    `(org-tag
-     ((,class (,@fw ,@context))))
+     ((,class (,@context))))
    ;; `(org-scheduled                      ;TODO
-   ;;  ((,class (,@vw-italic :foreground ,green-2))))
+   ;;  ((,class (,@italic :foreground ,green-2))))
    ;; `(org-scheduled-previously           ;TODO
-   ;;  ((,class (,@fw :foreground "Chocolate1" ,@italic))))
+   ;;  ((,class (:foreground "Chocolate1" ,@italic))))
    ;; `(org-scheduled-today                ;TODO
-   ;;  ((,class (,@vw :foreground ,green-3))))
+   ;;  ((,class (:foreground ,green-3))))
    `(org-column
-     ((,class (,@fw :slant normal))))
+     ((,class (:slant normal))))
    `(org-priority
      ((,class (:foreground ,radio))))
    `(org-headline-done
@@ -789,6 +806,8 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
      ((,class (:inherit org-link))))
    `(markdown-header-delimiter-face
      ((,class (,@dimmed))))
+   `(markdown-table-face
+     ((,class (:inherit org-table))))
    `(markdown-header-face-1
      ((,class (:inherit org-level-1))))
    `(markdown-header-face-2
@@ -804,7 +823,7 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
    `(markdown-list-face
      ((,class (,@subheader :weight bold))))
    `(markdown-pre-face
-     ((,class (,@fw ,@dimmed-hl ,@string))))
+     ((,class (,@dimmed-hl ,@string))))
    `(markdown-bold-face
      ((,class (,@mutable :weight bold))))
    `(markdown-italic-face
@@ -818,7 +837,7 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
    `(markdown-markup-face
      ((,class (,@dimmed))))
    `(markdown-html-tag-delimiter-face
-     ((,class (,@fw ,@dimmed))))
+     ((,class (,@dimmed))))
 
    `(rst-level-1
      ((,class (:inherit org-level-1))))
@@ -867,9 +886,9 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
 
    ;; Base
    `(helm-header
-     ((,class (,@vw ,@header))))        ; TODO
+     ((,class (,@header))))             ; TODO
    `(helm-source-header
-     ((,class (,@vw ,@dimmed-hl ,@subheader ,@bold)))) ; TODO
+     ((,class (,@dimmed-hl ,@subheader ,@bold)))) ; TODO
    `(helm-separator
      ((,class (,@shadowed))))
    `(helm-match
@@ -879,14 +898,14 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
    `(helm-selection-line
      ((,class (:inherit secondary-selection))))
    `(helm-action
-     ((,class (,@vw :height 1.1))))
+     ((,class (:height 1.1))))
 
    `(helm-grep-match
      ((,class (:foreground ,yellow))))
    `(helm-ff-file
      ((,class (,@portal))))
    `(helm-ff-directory
-     ((,class (:inherit diredfl-dir-priv ,@fw ,dimmed-hl))))
+     ((,class (:inherit diredfl-dir-priv ,dimmed-hl))))
    `(helm-ff-symlink
      ((,class (:inherit diredfl-symlink))))
    `(helm-ff-executable
@@ -907,7 +926,7 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
    `(helm-buffer-directory
      ((,class (:inherit helm-ff-directory))))
    `(helm-buffer-process
-     ((,class (,@doc ,@vw-italic :height 0.85))))
+     ((,class (,@doc :weight light ,@italic :height 0.85))))
    `(helm-buffer-size
      ((,class (,@dimmed))))
    `(helm-buffer-modified
@@ -925,13 +944,11 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
    ;; dired
 
    `(diredfl-dir-heading
-     ((,class (,@header ,@vw))))
+     ((,class (,@header))))
    `(diredfl-number
      ((,class (,@number))))
 
    ;; Type
-   `(diredfl-file-name                  ;TODO
-     ((,class (,@vw))))
    `(diredfl-dir-name
      ((,class (,@teleport))))
    `(dired-symlink
@@ -1012,7 +1029,7 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
    `(info-header-node
      ((,class (:inherit info-title-4 ,@bold ,@italic))))
    `(Info-quoted
-     ((,class (,@fw ,@constant))))
+     ((,class (,@constant))))
    `(info-menu-star
      ((,class ())))
 
@@ -1039,9 +1056,9 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
      ((,class (:inherit info-constant-ref-item))))
 
    `(help-argument-name                 ;TODO
-     ((,class (,@fw :foreground ,blue))))
+     ((,class (:foreground ,blue))))
    `(describe-variable-value
-     ((,class (,@fw ,@doc))))
+     ((,class (,@doc))))
 
    `(helpful-heading
      ((,class (:inherit org-level-3))))
@@ -1084,7 +1101,7 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
    ;; Popups
 
    `(company-tooltip
-     ((,class (,@fw ,@strong-hl :foreground ,aqua))))
+     ((,class (,@strong-hl :foreground ,aqua))))
    `(company-tooltip-selection
      ((,class (:inherit company-tooltip :foreground ,cyan :background ,fg-3))))
    `(company-tooltip-common
@@ -1171,19 +1188,19 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
    `(ublt-twitter-meta-retweet
      ((,class (:height 0.8 :foreground ,blue))))
    `(ublt/flycheck-message-face         ;TODO
-     ((,class (,@vw ,@commitment))))
+     ((,class (,@commitment))))
    `(ublt/mode-line-major-mode
      ((,class (:bold t))))
    `(ublt/evil-emacs-tag
-     ((,class (,@fw ,@error-hl :foreground ,radio :weight bold))))
+     ((,class (,@error-hl :foreground ,radio :weight bold))))
    `(ublt/evil-motion-tag
-     ((,class (,@fw ,@exception-hl :foreground ,blue-d :weight bold))))
+     ((,class (,@exception-hl :foreground ,blue-d :weight bold))))
    `(ublt/evil-normal-tag
-     ((,class (,@fw :foreground ,blue-d :weight bold))))
+     ((,class (:foreground ,blue-d :weight bold))))
    `(ublt/evil-insert-tag
-     ((,class (,@fw ,@error-hl :foreground ,blue-l :weight bold))))
+     ((,class (,@error-hl :foreground ,blue-l :weight bold))))
    `(ublt/evil-visual-tag
-     ((,class (,@fw ,@special-hl :foreground ,blush :weight bold))))
+     ((,class (,@special-hl :foreground ,blush :weight bold))))
 
    )
   (custom-theme-set-variables
@@ -1241,3 +1258,4 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
   "#bdc3c7" "Silver"
   "#95a5a6" "Concrete"
   "#7f8c8d" "Asbestos")
+t
