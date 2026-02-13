@@ -44,6 +44,21 @@
 (setq frame-title-format '(:eval (ublt/frame-title)))
 
 
+;;;Color theme
+(ublt/with-defer
+  (use-package zenburn-theme)
+  (use-package solarized-theme)
+  (use-package monokai-theme))
+
+;; This is done before loading `ublt-font', since theme loading seems to (partially?) undo the
+;; changes. TODO: Figure out how to fix that. Maybe make `ublt-font' into a theme?
+(when load-file-name
+  (add-to-list 'custom-theme-load-path
+               (file-name-as-directory (file-name-directory load-file-name)))
+  (load-theme 'ublt-dark t)
+  (load-theme 'ublt-pitch t))
+
+
 ;; Fonts
 (when (display-graphic-p)
   ;; Font-mixing obsession
@@ -92,17 +107,6 @@
                     cider-browse-spec-view-mode-hook))
       (add-hook hook (ublt/off variable-pitch-mode)))
     ))
-
-
-;;;Color theme
-(ublt/with-defer
-  (use-package zenburn-theme)
-  (use-package solarized-theme)
-  (use-package monokai-theme))
-(ublt/set-up 'ublt-pitch-theme
-  (load-theme 'ublt-pitch t))
-(ublt/set-up 'ublt-dark-theme
-  (load-theme 'ublt-dark t))
 
 
 ;;; Whitespaces
