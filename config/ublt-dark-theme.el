@@ -24,7 +24,11 @@
 ;;
 ;; - For `ublt-pitch-theme', it would be the opposite.
 ;;
-;; TODO: Review the `:inherit' below, converting as much as possible to composition.
+;; TODO: Review the `:inherit' below, converting as much as possible to composition, then define
+;; semantic conventions, then build out a light theme.
+;;
+;; TODO: Alternatively, consider porting this theme to the `modus-themes' framework, and modify
+;; `modus-operandi-tinted' to suit my needs (plus taking ideas from `leuven'.
 (let* ((class      '((class color) (min-colors 257)))
        ;; We don't rely on the number of colors to detect terminals, as modern terminals support 16
        ;; million colors (24-bit, TrueColor).
@@ -445,12 +449,18 @@
      ((,class (:inherit font-lock-keyword-face))))
    `(magit-popup-argument
      ((,class (:inherit font-lock-variable-name-face))))
+   ;; `(transient-heading
+   ;;   ((,class (:inherit font-lock-builtin-face))))
    `(transient-heading
-     ((,class (:inherit font-lock-builtin-face))))
-   `(transient-key
-     ((,class (:inherit font-lock-keyword-face))))
+     ((,class (,@subheader ,@bold))))
+   `(transient-key-exit
+     ((,class (,@essence))))
+   `(transient-key-stack
+     ((,class (,@param))))
    `(transient-argument
-     ((,class (:inherit font-lock-variable-name-face))))
+     ((,class (,@param))))
+   `(transient-key-stay
+     ((,class (,@power))))
 
    ;; Section.
    `(magit-section-heading
