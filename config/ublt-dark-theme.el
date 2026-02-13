@@ -3,39 +3,7 @@
 
 (defgroup ublt-dark nil "")
 
-(defface ublt/variable-pitch
-  '((t (:inherit variable-pitch)))
-  "Base face to inherit from instead of `variable-pitch'.
-`variable-pitch' inherits scaling factor from `default', but faces that inherit
-`variable-pitch' do not. Therefore we need another variable-pitch base face, so
-that all faces can be scaled uniformly.
-
-Note that `fixed-pitch' doesn't suffer from this problem."
-  :group 'ublt-dark)
-
-(defvar-local ublt/text-scale-fw-remapping nil
-  "Scale remapping for `fixed-pitch' and its derived faces.")
-
-(defvar-local ublt/text-scale-vw-remapping nil
-  "Scale remapping for `ublt/variable-pitch' and its derived faces.")
-
-(define-advice text-scale-mode (:after (&rest _) ublt/scale-base-faces)
-  "Additionally scale other base faces so that all faces are
-scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
-  (let ((ratio (car (last text-scale-mode-remapping))))
-    (when ublt/text-scale-fw-remapping
-      (face-remap-remove-relative ublt/text-scale-fw-remapping))
-    (when ublt/text-scale-vw-remapping
-      (face-remap-remove-relative ublt/text-scale-vw-remapping))
-    (when ratio
-      (setq ublt/text-scale-vw-remapping
-            (face-remap-add-relative 'ublt/variable-pitch
-                                     :height ratio))
-      (setq ublt/text-scale-fw-remapping
-            (face-remap-add-relative 'fixed-pitch
-                                     :height ratio)))
-    (force-window-update (current-buffer))))
-
+;; TODO: Move this to `ublt-font-theme', after making that module into a theme.
 (defcustom ublt/alt-fixed-pitch-font "Fantasque Sans Mono"
   "Alternative fixed-pitch font to use for certain faces."
   :group 'ublt-dark)
@@ -290,16 +258,6 @@ scaled. This \"base face\" trick is used by `ublt-dark-theme.el'."
        (bold           `(:weight bold)))
   (custom-theme-set-faces
    'ublt-dark
-
-   ;; 
-   ;; ;; Mixin bases. Most faces that wish to always use
-   ;; ;; fixed-width/variable-width font should inherit these, not
-   ;; ;; `default', which gets font remapped. `text-scale-mode' is
-   ;; ;; advised to scale them correctly.
-   ;; `(fixed-pitch
-   ;;   ((,class (,@fw0))))
-   ;; `(ublt/variable-pitch
-   ;;   ((,class (,@vw0))))
 
    `(bold
      ((,class (,@bold :foreground ,fg+1))))
