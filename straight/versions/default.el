@@ -146,7 +146,6 @@
  ("twittering-mode" . "114891e8fdb4f06b1326a6cf795e49c205cf9e29")
  ("typescript.el" . "0fc729787007b5111f3584034af0f3ef2389098f")
  ("undo-tree" . "16f4121032d09ef44b3d7d02c4d02c3c2f18041f")
- ("use-package" . "817d8d308d7151b41938320ae430ad5db019b214")
  ("volatile-highlights.el" . "9a20091f0ce7fc0a6b3e641a6a46d5f3ac4d8392")
  ("wat-mode" . "f34fc84879a99130283a124cd196041b474213e1")
  ("web-mode" . "efa853e5cfff8e0bcacbda9d1c6696b33da91b03")
