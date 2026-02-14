@@ -873,7 +873,7 @@
    `(helm-ff-file
      ((,class (,@portal))))
    `(helm-ff-directory
-     ((,class (:inherit diredfl-dir-priv ,dimmed-hl))))
+     ((,class (,@teleport ,dimmed-hl))))
    `(helm-ff-symlink
      ((,class (:inherit diredfl-symlink))))
    `(helm-ff-executable
@@ -919,6 +919,8 @@
    ;; Type
    `(diredfl-dir-name
      ((,class (,@teleport))))
+   `(diredfl-file-name
+     ((,class ())))
    `(dired-symlink
      ((,class (,@portal ,@italic :underline ,bg+3))))
    `(diredfl-symlink
