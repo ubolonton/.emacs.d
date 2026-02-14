@@ -58,6 +58,20 @@
   (load-theme 'ublt-dark t)
   (load-theme 'ublt-pitch t))
 
+(use-package modus-themes
+  :custom ((modus-themes-bold-constructs nil)
+           (modus-themes-italic-constructs t)
+           (modus-themes-variable-pitch-ui t)
+           (modus-themes-mixed-fonts t)
+           (modus-themes-prompts '(bold))
+           (modus-themes-completions '((matches . (extrabold underline))))
+           (modus-themes-headings '((t . (variable-pitch))
+                                    (1 . (1.61))
+                                    (2 . (1.46))
+                                    (3 . (1.33))
+                                    (4 . (1.21))
+                                    (5 . (1.1))))))
+
 
 ;; Fonts
 (when (display-graphic-p)
