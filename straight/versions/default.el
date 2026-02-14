@@ -137,7 +137,7 @@
  ("sly" . "ba40c8f054ec3b7040a6c36a1ef3e9596b936421")
  ("solarized-emacs" . "5d136736f76c85a83fef737d10ecd32af4d493fd")
  ("spinner" . "fa117f0893788f3fe24673715a6b83bb34d238dd")
- ("straight.el" . "b3760f5829dba37e855add7323304561eb57a3d4")
+ ("straight.el" . "562639bd97cc3f62df24b168b8eb440bcd790650")
  ("swift-mode" . "cdd194cbadcee724a9813da386f0a612082b1ab1")
  ("systemd-mode" . "8742607120fbc440821acbc351fda1e8e68a8806")
  ("terraform-mode" . "2967e7bdc05d15617e121052f6e43c61439b9070")
