@@ -66,11 +66,10 @@
            (modus-themes-prompts '(bold))
            (modus-themes-completions '((matches . (extrabold underline))))
            (modus-themes-headings '((t . (variable-pitch))
-                                    (1 . (1.61))
-                                    (2 . (1.46))
-                                    (3 . (1.33))
-                                    (4 . (1.21))
-                                    (5 . (1.1))))))
+                                    (1 . (1.46))
+                                    (2 . (1.33))
+                                    (3 . (1.21))
+                                    (4 . (1.1))))))
 
 
 ;; Fonts
