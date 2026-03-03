@@ -103,8 +103,12 @@
   :config (claude-code-ide-emacs-tools-setup))
 
 (use-package agent-shell
+  :custom ((agent-shell-session-strategy 'prompt "I usually want to continue previous works")
+           (agent-shell-prefer-viewport-interaction t "Viewport is more focused")
+           (agent-shell-prefer-session-resume nil "Seems like loading is required to see history"))
   :config (setq agent-shell-preferred-agent-config
-	            (agent-shell-google-make-gemini-config)))
+	            ;; (agent-shell-google-make-gemini-config)
+                (agent-shell-anthropic-make-claude-code-config)))
 
 ;; Some rarely-written, but sometimes-read languages
 

@@ -81,6 +81,8 @@
                   cider-browse-ns-mode
                   cider-repl-history-mode
                   cider-classpath-mode
+                  agent-shell-viewport-view-mode
+                  agent-shell-viewport-edit-mode
                   cider-stacktrace-mode))
     (add-to-list 'evil-emacs-state-modes mode))
 

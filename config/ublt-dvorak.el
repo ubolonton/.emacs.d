@@ -290,7 +290,7 @@
   ;; Utilities, super-
   "s-i"           'helm-semantic-or-imenu
   "s-d"           'helm-command-prefix
-  ;; "s-y"           '
+  "s-y"           'agent-shell-help-menu
   "s-h"           'ublt/helm
   ;; "C-s-h"         'helm-follow-mode
   "s-f"           'helm-swoop
@@ -1187,6 +1187,9 @@
         expand-region-reset-fast-key "e"))
 
 (ublt/keys 'agent-shell agent-shell-mode-map
+  "M-a" 'agent-shell-ui-toggle-fragment-at-point)
+
+(ublt/keys 'agent-shell agent-shell-viewport-view-mode-map
   "M-a" 'agent-shell-ui-toggle-fragment-at-point)
 
 (provide 'ublt-dvorak)
