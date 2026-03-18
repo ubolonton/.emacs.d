@@ -71,6 +71,15 @@
                                     (3 . (1.21))
                                     (4 . (1.1))))))
 
+(defun ublt/switch-theme ()
+  (interactive)
+  (if (custom-theme-enabled-p 'ublt-dark)
+      (progn
+        (load-theme 'modus-operandi-tinted t)
+        (disable-theme 'ublt-dark))
+    (load-theme 'ublt-dark t)
+    (disable-theme 'modus-operandi-tinted)))
+
 
 ;; Fonts
 (when (display-graphic-p)
