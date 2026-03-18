@@ -123,7 +123,7 @@
  ("popwin" . "95dea14c60019d6cccf9a3b33e0dec4e1f22c304")
  ("posframe" . "12f540c9ad5da09673b2bca1132b41f94c134e82")
  ("powerline" . "566c77844f053cb39fa7acdfbc143a855450f0b5")
- ("powershell.el" . "87826777bd3ebd53740be99b4546bfc11ccc625d")
+ ("powershell.el" . "ae60e11c96cc1767f05ce0cab6a917240ce2e37a")
  ("projectile" . "defce6e6bb504bdfab1e091550e2f709310327b9")
  ("quack" . "2146805ce2b5a9b155d73929986f11e713787e26")
  ("queue" . "52206c0f78afc0dfb9a287cb928c1e725103336d")
