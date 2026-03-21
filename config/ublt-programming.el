@@ -105,7 +105,11 @@
 (use-package agent-shell
   :custom ((agent-shell-session-strategy 'prompt "I usually want to continue previous works")
            (agent-shell-prefer-viewport-interaction t "Viewport is more focused")
-           (agent-shell-prefer-session-resume nil "Seems like loading is required to see history"))
+           (agent-shell-prefer-session-resume nil "Seems like loading is required to see history")
+           (agent-shell-show-context-usage-indicator 'detailed)
+           (agent-shell-confirm-interrupt nil))
+  :hook ((agent-shell-viewport-view-mode . visual-line-mode)
+         (agent-shell-viewport-edit-mode . visual-line-mode))
   :config (setq agent-shell-preferred-agent-config
 	            ;; (agent-shell-google-make-gemini-config)
                 (agent-shell-anthropic-make-claude-code-config)))
