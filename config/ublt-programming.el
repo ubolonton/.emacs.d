@@ -75,7 +75,10 @@
                     org-mode
                     markdown-mode
                     sql-mode))
-      (setf (map-elt tree-sitter-major-mode-language-alist mode) nil))
+      (when (bound-and-true-p tree-sitter-major-mode-language-alist)
+        (setf (map-elt tree-sitter-major-mode-language-alist mode) nil))
+      (when (bound-and-true-p tree-sitter-major-mode-language-table)
+        (setf (map-elt tree-sitter-major-mode-language-table mode) nil)))
     (add-function :before-until tree-sitter-hl-face-mapping-function
                   (lambda (capture-name)
                     (pcase capture-name
