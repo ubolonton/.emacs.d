@@ -240,7 +240,9 @@
               (("~/org/projects/emacs-module-rs.org") . (:regexp . "Tasks"))
               (("~/org/projects/emacs-tree-sitter.org") . (:regexp . "Tasks"))
               (("~/org/projects/configure-emacs.org") . (:regexp . "Tasks"))
-              (nil . (:maxlevel . 2))))
+              (nil . (:maxlevel . 2))
+              ;; Visible org-mode buffers in other windows.
+              (ublt/org-visible-buffers . (:maxlevel . 2))))
 
            (org-refile-allow-creating-parent-nodes 'confirm)
            (org-refile-target-verify-function 'ublt/verify-refile-target)
@@ -290,6 +292,18 @@
                                          ;;                  '((todo . "%-9:c")))))))
                                          )))
   :config
+  (defun ublt/org-visible-buffers ()
+    "Return list of org-mode buffer files visible in other windows."
+    (let ((current (current-buffer)))
+      (seq-filter #'identity
+                  (mapcar (lambda (w)
+                            (let ((buf (window-buffer w)))
+                              (when (and (not (eq buf current))
+                                         (with-current-buffer buf
+                                           (derived-mode-p 'org-mode)))
+                                (buffer-file-name buf))))
+                          (window-list)))))
+
   (defun ublt/verify-refile-target ()
     (not (member (nth 2 (org-heading-components)) org-done-keywords)))
 
