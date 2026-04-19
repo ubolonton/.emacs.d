@@ -74,6 +74,8 @@
   (pcase-let ((`(,font ,size) rescale))
     (ublt/assoc! 'face-font-rescale-alist font size)))
 
+(defvar ublt-font/variable-width-size 13.0)
+
 ;;; XXX: Similar to the above. If a fontset is used, faces' attributes
 ;;; are ignored in favor of those specified in the fontset, except for
 ;;; characters displayed by the default font in the fontset (ascii
@@ -87,12 +89,12 @@
   ;; FONTSET-NAME blank (see `create-fontset-from-fontset-spec')
   `(,(font-spec :family "Fira Sans"
                 :weight 'normal
-                :size 13.0)
+                :size ublt-font/variable-width-size)
     ascii)
   ;; Vietnamese charsets.
   `(,(font-spec :family "Fira Sans"
                 :weight 'normal
-                :size 13.0)
+                :size ublt-font/variable-width-size)
     vietnamese-viscii-upper
     vietnamese-viscii-lower
     viscii
@@ -146,6 +148,8 @@
 ;;; TODO: More aggressive prettification and now that we get this
 ;;; thing and large unicode fonts (Quivira, Gentium, Doulos, Charis...)
 
+(defvar ublt-font/fixed-width-size 12.0)
+
 (defvar ublt/fixed-width-fontset
   "-unknown-Fantasque Sans Mono-normal-normal-normal-*-*-*-*-*-m-*-fontset-ubltf")
 (create-fontset-from-fontset-spec ublt/fixed-width-fontset)
@@ -161,7 +165,7 @@
 (ublt/assign-font ublt/fixed-width-fontset
   `(,(font-spec :family "Fantasque Sans Mono"
                 :weight 'normal
-                :size 12.0)
+                :size ublt-font/fixed-width-size)
     ascii)
   `(,(font-spec :family "Droid Sans Mono")
     vietnamese-viscii-upper
