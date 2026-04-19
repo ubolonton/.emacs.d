@@ -97,14 +97,6 @@
       [(test_command
         ["[[" "]]" "[" "]" "((" "))"] @ublt.hidden)])))
 
-(use-package vterm)
-
-(use-package claude-code-ide
-  :straight (:type git :host github :repo "manzaltu/claude-code-ide.el")
-  :custom ((claude-code-ide-window-side 'left)
-           (claude-code-ide-use-side-window nil))
-  :config (claude-code-ide-emacs-tools-setup))
-
 (use-package agent-shell
   :custom ((agent-shell-session-strategy 'prompt "I usually want to continue previous works")
            (agent-shell-prefer-viewport-interaction t "Viewport is more focused")
